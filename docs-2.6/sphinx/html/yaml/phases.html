@@ -84,7 +84,7 @@ lang="en">
                 <div class="body" role="main">
                   
   <section id="phase-definitions">
-<h1>Phase Definitions<a class="headerlink" href="#phase-definitions" title="Permalink to this headline">¶</a></h1>
+<span id="sec-yaml-phases"></span><h1>Phase Definitions<a class="headerlink" href="#phase-definitions" title="Permalink to this headline">¶</a></h1>
 <p>A <code class="docutils literal notranslate"><span class="pre">phase</span></code> is a mapping that contains definitions for the elements, species,
 and optionally reactions that can take place in that phase. The fields of a
 <code class="docutils literal notranslate"><span class="pre">phase</span></code> entry are:</p>
@@ -151,6 +151,7 @@ strings are:</p>
 <li><p><a class="reference internal" href="#sec-yaml-constant-density"><span class="std std-ref">constant-density</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-yaml-debye-huckel"><span class="std std-ref">Debye-Huckel</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-yaml-edge"><span class="std std-ref">edge</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-electron-cloud"><span class="std std-ref">electron-cloud</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-yaml-fixed-stoichiometry"><span class="std std-ref">fixed-stoichiometry</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-yaml-hmw-electrolyte"><span class="std std-ref">HMW-electrolyte</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-yaml-ideal-gas"><span class="std std-ref">ideal-gas</span></a></p></li>
@@ -163,7 +164,8 @@ strings are:</p>
 <li><p><a class="reference internal" href="#sec-yaml-liquid-water-iapws95"><span class="std std-ref">liquid-water-IAPWS95</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-yaml-margules"><span class="std std-ref">Margules</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-yaml-maskell-solid-solution"><span class="std std-ref">Maskell-solid-solution</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-electron-cloud"><span class="std std-ref">electron-cloud</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-peng-robinson"><span class="std std-ref">Peng-Robinson</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-plasma"><span class="std std-ref">plasma</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-yaml-pure-fluid"><span class="std std-ref">pure-fluid</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-yaml-redlich-kister"><span class="std std-ref">Redlich-Kister</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-yaml-redlich-kwong"><span class="std std-ref">Redlich-Kwong</span></a></p></li>
@@ -274,7 +276,7 @@ a binary solution, as <a class="reference external" href="https://cantera.org/do
 <dt><code class="docutils literal notranslate"><span class="pre">tabulated-species</span></code></dt><dd><p>The name of the species to which the tabulated enthalpy and entropy is
 added.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">tabulated-thermo</span></code></dt><dd><p>A mapping containing three lists of equal lengths:</p>
+<dt><code class="docutils literal notranslate"><span class="pre">tabulated-thermo</span></code></dt><dd><p>A mapping containing three (optionally four) lists of equal lengths:</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">mole-fractions</span></code></dt><dd><p>A list of mole fraction values for the tabulated species.</p>
 </dd>
@@ -283,6 +285,9 @@ mole fractions.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">entropy</span></code></dt><dd><p>The extra molar entropy to be added to the tabulated species at these
 mole fractions.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">molar-volume</span></code></dt><dd><p>The molar volume of the phase at these mole fractions. This input is
+optional.</p>
 </dd>
 </dl>
 </dd>
@@ -772,6 +777,73 @@ specified binary interaction</p>
 <p>The parameters for each species are contained in the corresponding species
 entries.</p>
 </section>
+<section id="peng-robinson">
+<span id="sec-yaml-peng-robinson"></span><h3><code class="docutils literal notranslate"><span class="pre">Peng-Robinson</span></code><a class="headerlink" href="#peng-robinson" title="Permalink to this headline">¶</a></h3>
+<p>A multi-species Peng-Robinson phase as
+<a class="reference external" href="https://cantera.org/documentation/dev/doxygen/html/d3/ddc/classCantera_1_1PengRobinson.html#details">described here</a>.</p>
+<p>The parameters for each species are contained in the corresponding species
+entries.</p>
+</section>
+<section id="plasma">
+<span id="sec-yaml-plasma"></span><h3><code class="docutils literal notranslate"><span class="pre">plasma</span></code><a class="headerlink" href="#plasma" title="Permalink to this headline">¶</a></h3>
+<p>A phase for plasma. This phase handles plasma properties such as the electron
+energy distribution and electron temperature with different models as
+<a class="reference external" href="https://cantera.org/documentation/dev/doxygen/html/d5/dd7/classCantera_1_1PlasmaPhase.html#details">described here</a>.</p>
+<p>Additional fields:</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">electron-energy-distribution</span></code></dt><dd><p>A mapping with the following fields:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">type</span></code></dt><dd><p>String specifying the type of the electron energy distribution to be used.
+Supported model strings are:</p>
+<ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">isotropic</span></code></p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">discretized</span></code></p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">shape-factor</span></code></dt><dd><p>A constant in the isotropic distribution, which is shown as x in the
+detailed description of this class. The value needs to be a positive
+number. This field is only used with <code class="xref py py-obj docutils literal notranslate"><span class="pre">isotropic</span></code>. Defaults to 2.0.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mean-electron-energy</span></code></dt><dd><p>Mean electron energy of the isotropic distribution. The default sets
+the electron temperature equal gas temperature and uses the
+corresponding electron energy as mean electron energy.  This field
+is only used with <code class="xref py py-obj docutils literal notranslate"><span class="pre">isotropic</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">energy-levels</span></code></dt><dd><p>A list of values specifying the electron energy levels. The default
+uses 1001 equal spaced points from 0 to 1 eV.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">distribution</span></code></dt><dd><p>A list of values specifying the discretized electron energy distribution.
+This field is only used with <code class="xref py py-obj docutils literal notranslate"><span class="pre">discretized</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">normalize</span></code></dt><dd><p>A flag specifying whether normalizing the discretized electron energy
+distribution or not. This field is only used with <code class="xref py py-obj docutils literal notranslate"><span class="pre">discretized</span></code>.
+Defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isotropic-electron-energy-plasma</span><span class="w"></span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plasma</span><span class="w"></span>
+<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gas</span><span class="w"></span>
+<span class="w">  </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ion</span><span class="w"></span>
+<span class="w">  </span><span class="nt">electron-energy-distribution</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isotropic</span><span class="w"></span>
+<span class="w">    </span><span class="nt">shape-factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span><span class="w"></span>
+<span class="w">    </span><span class="nt">mean-electron-energy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0 eV</span><span class="w"></span>
+<span class="w">    </span><span class="nt">energy-levels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">discretized-electron-energy-plasma</span><span class="w"></span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plasma</span><span class="w"></span>
+<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gas</span><span class="w"></span>
+<span class="w">  </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ion</span><span class="w"></span>
+<span class="w">  </span><span class="nt">electron-energy-distribution</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">discretized</span><span class="w"></span>
+<span class="w">    </span><span class="nt">energy-levels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">distribution</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.01</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">normalize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
@@ -809,6 +881,8 @@ entries.</p>
 <li><a class="reference internal" href="#pure-fluid"><code class="docutils literal notranslate"><span class="pre">pure-fluid</span></code></a></li>
 <li><a class="reference internal" href="#redlich-kister"><code class="docutils literal notranslate"><span class="pre">Redlich-Kister</span></code></a></li>
 <li><a class="reference internal" href="#redlich-kwong"><code class="docutils literal notranslate"><span class="pre">Redlich-Kwong</span></code></a></li>
+<li><a class="reference internal" href="#peng-robinson"><code class="docutils literal notranslate"><span class="pre">Peng-Robinson</span></code></a></li>
+<li><a class="reference internal" href="#plasma"><code class="docutils literal notranslate"><span class="pre">plasma</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Cantera<span id="projectnumber">&#160;2.6.0b1</span>
+   <div id="projectname">Cantera<span id="projectnumber">&#160;2.6.0</span>
    </div>
   </td>
  </tr>
@@ -253,11 +253,11 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p >Two temperature plasma reaction rate type depends on both gas temperature and electron temperature. </p>
 <p >The form of the two temperature plasma reaction rate coefficient is similar to an Arrhenius reaction rate coefficient. The temperature exponent (b) is applied to the electron temperature instead. In addition, the exponential term with activation energy for electron is included.</p>
 <p class="formulaDsp">
-\[ k_f = A T_e^b \exp (-E_a/RT) \exp (-E_{a,e}/RT_e) \]
+\[ k_f = A T_e^b \exp (-E_{a,g}/RT) \exp (E_{a,e} (T_e - T)/(R T T_e)) \]
 </p>
-<p >Ref.: Kossyi, I. A., Kostinsky, A. Y., Matveyev, A. A., &amp; Silakov, V. P. (1992). Kinetic scheme of the non-equilibrium discharge in nitrogen-oxygen mixtures. Plasma Sources Science and Technology, 1(3), 207. doi: 10.1088/0963-0252/1/3/011 </p>
+<p >where \( T_e \) is the electron temperature, \( E_{a,g} \) is the activation energy for gas, and \( E_{a,e} \) is the activation energy for electron. Ref.: Kossyi, I. A., Kostinsky, A. Y., Matveyev, A. A., &amp; Silakov, V. P. (1992). Kinetic scheme of the non-equilibrium discharge in nitrogen-oxygen mixtures. Plasma Sources Science and Technology, 1(3), 207. doi: 10.1088/0963-0252/1/3/011 </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00061">61</a> of file <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html">TwoTempPlasmaRate.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00063">63</a> of file <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html">TwoTempPlasmaRate.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad111a98b61552a8aa49d35baa9c54d4c" name="ad111a98b61552a8aa49d35baa9c54d4c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad111a98b61552a8aa49d35baa9c54d4c">&#9670;&nbsp;</a></span>TwoTempPlasmaRate() <span class="overload">[1/3]</span></h2>
@@ -365,7 +365,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00076">76</a> of file <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html">TwoTempPlasmaRate.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00078">78</a> of file <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html">TwoTempPlasmaRate.h</a>.</p>
 
 </div>
 </div>
@@ -397,12 +397,12 @@ Additional Inherited Members</h2></td></tr>
 <p >Derived classes usually implement this as:</p>
 <div class="fragment"><div class="line">unique_ptr&lt;MultiRateBase&gt; <a class="code hl_function" href="../../d9/daa/classCantera_1_1TwoTempPlasmaRate.html#a150ff9bee5603f17b84967922ef49a09">newMultiRate</a>()<span class="keyword"> const override </span>{</div>
 <div class="line">    <span class="keywordflow">return</span> unique_ptr&lt;MultiRateBase&gt;(<span class="keyword">new</span> MultiRate&lt;RateType, DataType&gt;);</div>
-<div class="ttc" id="aclassCantera_1_1TwoTempPlasmaRate_html_a150ff9bee5603f17b84967922ef49a09"><div class="ttname"><a href="../../d9/daa/classCantera_1_1TwoTempPlasmaRate.html#a150ff9bee5603f17b84967922ef49a09">Cantera::TwoTempPlasmaRate::newMultiRate</a></div><div class="ttdeci">unique_ptr&lt; MultiRateBase &gt; newMultiRate() const override</div><div class="ttdoc">Create a rate evaluator for reactions of a particular derived type.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00080">TwoTempPlasmaRate.h:80</a></div></div>
+<div class="ttc" id="aclassCantera_1_1TwoTempPlasmaRate_html_a150ff9bee5603f17b84967922ef49a09"><div class="ttname"><a href="../../d9/daa/classCantera_1_1TwoTempPlasmaRate.html#a150ff9bee5603f17b84967922ef49a09">Cantera::TwoTempPlasmaRate::newMultiRate</a></div><div class="ttdeci">unique_ptr&lt; MultiRateBase &gt; newMultiRate() const override</div><div class="ttdoc">Create a rate evaluator for reactions of a particular derived type.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00082">TwoTempPlasmaRate.h:82</a></div></div>
 </div><!-- fragment --><p >where <code>RateType</code> is the derived class name and <code>DataType</code> is the corresponding container for parameters needed to evaluate reactions of that type. </p>
 
 <p>Reimplemented from <a class="el" href="../../d0/d19/classCantera_1_1ReactionRate.html#a8fe2a668ebf3b573fa31d6d77fd09733">ReactionRate</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00080">80</a> of file <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html">TwoTempPlasmaRate.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00082">82</a> of file <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html">TwoTempPlasmaRate.h</a>.</p>
 
 </div>
 </div>
@@ -433,7 +433,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d0/d19/classCantera_1_1ReactionRate.html#a158a37dbca9bfb1f1f0793bcb402ce45">ReactionRate</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00085">85</a> of file <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html">TwoTempPlasmaRate.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00087">87</a> of file <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html">TwoTempPlasmaRate.h</a>.</p>
 
 </div>
 </div>
@@ -520,7 +520,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00095">95</a> of file <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html">TwoTempPlasmaRate.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00097">97</a> of file <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html">TwoTempPlasmaRate.h</a>.</p>
 
 <p class="reference">References <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00036">TwoTempPlasmaData::electronTemp</a>, <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00037">TwoTempPlasmaData::logTe</a>, <a class="el" href="../../d6/dd6/Arrhenius_8h_source.html#l00164">ArrheniusBase::m_A</a>, <a class="el" href="../../d6/dd6/Arrhenius_8h_source.html#l00165">ArrheniusBase::m_b</a>, <a class="el" href="../../d6/dd6/Arrhenius_8h_source.html#l00167">ArrheniusBase::m_E4_R</a>, <a class="el" href="../../d6/dd6/Arrhenius_8h_source.html#l00166">ArrheniusBase::m_Ea_R</a>, <a class="el" href="../../d6/d4a/ReactionData_8h_source.html#l00111">ReactionData::recipT</a>, <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00038">TwoTempPlasmaData::recipTe</a>, and <a class="el" href="../../d6/d4a/ReactionData_8h_source.html#l00109">ReactionData::temperature</a>.</p>
 
@@ -581,7 +581,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return the electron activation energy <em>Ea</em> [J/kmol]. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00113">113</a> of file <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html">TwoTempPlasmaRate.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html#l00115">115</a> of file <a class="el" href="../../d6/d27/TwoTempPlasmaRate_8h_source.html">TwoTempPlasmaRate.h</a>.</p>
 
 <p class="reference">References <a class="el" href="../../d9/ddc/ct__defs_8h_source.html#l00113">Cantera::GasConstant</a>, and <a class="el" href="../../d6/dd6/Arrhenius_8h_source.html#l00167">ArrheniusBase::m_E4_R</a>.</p>
 

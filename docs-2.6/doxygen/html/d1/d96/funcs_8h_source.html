@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Cantera<span id="projectnumber">&#160;2.6.0b1</span>
+   <div id="projectname">Cantera<span id="projectnumber">&#160;2.6.0</span>
    </div>
   </td>
  </tr>
@@ -88,31 +88,73 @@ $(function() {
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define CT_FUNCS_H</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="../../d9/ddc/ct__defs_8h.html">cantera/base/ct_defs.h</a>&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../df/db0/namespaceCantera.html">Cantera</a></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">//! Linearly interpolate a function defined on a discrete grid.</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"></span><span class="comment">/*!</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * Vector xpts contains a monotonic sequence of grid points, and vector fpts</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * contains function values defined at these points. The value returned is the</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * linear interpolate at point x. If x is outside the range of xpts, the value</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * of fpts at the nearest end is returned.</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * @param x value of the x coordinate</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * @param xpts value of the grid points</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> * @param fpts value of the interpolant at the grid points</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> * @returns the value of of the interpolated function at x.</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>doublereal <a class="code hl_function" href="../../df/db0/namespaceCantera.html#a10672fcaae28ee805365ae784b0177af">linearInterp</a>(doublereal x, <span class="keyword">const</span> <a class="code hl_typedef" href="../../df/db0/namespaceCantera.html#a8a71f536c7e45bda27ec0f1df26e6420">vector_fp</a>&amp; xpts,</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                        <span class="keyword">const</span> <a class="code hl_typedef" href="../../df/db0/namespaceCantera.html#a8a71f536c7e45bda27ec0f1df26e6420">vector_fp</a>&amp; fpts);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;cantera/numerics/eigen_sparse.h&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../df/db0/namespaceCantera.html">Cantera</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"></span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">//! Linearly interpolate a function defined on a discrete grid.</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"></span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * Vector xpts contains a monotonic sequence of grid points, and vector fpts</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * contains function values defined at these points. The value returned is the</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * linear interpolate at point x. If x is outside the range of xpts, the value</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * of fpts at the nearest end is returned.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * @param x value of the x coordinate</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> * @param xpts value of the grid points</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> * @param fpts value of the interpolant at the grid points</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> * @returns the value of of the interpolated function at x.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>doublereal <a class="code hl_function" href="../../df/db0/namespaceCantera.html#a10672fcaae28ee805365ae784b0177af">linearInterp</a>(doublereal x, <span class="keyword">const</span> <a class="code hl_typedef" href="../../df/db0/namespaceCantera.html#a8a71f536c7e45bda27ec0f1df26e6420">vector_fp</a>&amp; xpts,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                        <span class="keyword">const</span> <a class="code hl_typedef" href="../../df/db0/namespaceCantera.html#a8a71f536c7e45bda27ec0f1df26e6420">vector_fp</a>&amp; fpts);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"></span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">//! Numerical integration of a function using the trapezoidal rule.</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"></span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> * Vector x contanins a monotonic sequence of grid points, and</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> * Vector f contains function values defined at these points.</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> * The size of x and f must be the same.</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"> * @param  f vector of function value</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"> * @param  x vector of function coordinate</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keywordtype">double</span> <a class="code hl_function" href="../../df/db0/namespaceCantera.html#a7aad274ec72c4386c1e3c4c2de47cb11">trapezoidal</a>(<span class="keyword">const</span> Eigen::ArrayXd&amp; f, <span class="keyword">const</span> Eigen::ArrayXd&amp; x);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"></span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">//! Numerical integration of a function using Simpson&#39;s rule</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">//! with flexibility of taking odd and even number of points.</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">//! For even number, Simpson&#39;s rule is used for the first</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">//! N-2 intervals with a trapezoidal rule on the last interval.</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"></span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment"> * Vector x contanins a monotonic sequence of grid points, and</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment"> * Vector f contains function values defined at these points.</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"> * The size of x and f must be the same.</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"> * @param  f vector of function value</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"> * @param  x vector of function coordinate</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keywordtype">double</span> <a class="code hl_function" href="../../df/db0/namespaceCantera.html#ac7493800974147f773c289844bc63468">simpson</a>(<span class="keyword">const</span> Eigen::ArrayXd&amp; f, <span class="keyword">const</span> Eigen::ArrayXd&amp; x);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"></span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">//! Numerical integration of a function.</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"></span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment"> * Vector x contanins a monotonic sequence of grid points, and</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment"> * Vector f contains function values defined at these points.</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment"> * The size of x and f must be the same.</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"> * @param  method method name</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"> * @param  f vector of function value</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"> * @param  x vector of function coordinate</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keywordtype">double</span> <a class="code hl_function" href="../../df/db0/namespaceCantera.html#a96b23e5895e348d5e78c97cb70a4ce91">numericalQuadrature</a>(<span class="keyword">const</span> std::string&amp; method,</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                           <span class="keyword">const</span> Eigen::ArrayXd&amp; f,</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                           <span class="keyword">const</span> Eigen::ArrayXd&amp; x);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="act__defs_8h_html"><div class="ttname"><a href="../../d9/ddc/ct__defs_8h.html">ct_defs.h</a></div><div class="ttdoc">This file contains definitions of constants, types and terms that are used in internal routines and a...</div></div>
 <div class="ttc" id="anamespaceCantera_html"><div class="ttname"><a href="../../df/db0/namespaceCantera.html">Cantera</a></div><div class="ttdoc">Namespace for the Cantera kernel.</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d2a/AnyMap_8h_source.html#l00028">AnyMap.h:29</a></div></div>
-<div class="ttc" id="anamespaceCantera_html_a10672fcaae28ee805365ae784b0177af"><div class="ttname"><a href="../../df/db0/namespaceCantera.html#a10672fcaae28ee805365ae784b0177af">Cantera::linearInterp</a></div><div class="ttdeci">doublereal linearInterp(doublereal x, const vector_fp &amp;xpts, const vector_fp &amp;fpts)</div><div class="ttdoc">Linearly interpolate a function defined on a discrete grid.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dc7/funcs_8cpp_source.html#l00013">funcs.cpp:13</a></div></div>
+<div class="ttc" id="anamespaceCantera_html_a10672fcaae28ee805365ae784b0177af"><div class="ttname"><a href="../../df/db0/namespaceCantera.html#a10672fcaae28ee805365ae784b0177af">Cantera::linearInterp</a></div><div class="ttdeci">doublereal linearInterp(doublereal x, const vector_fp &amp;xpts, const vector_fp &amp;fpts)</div><div class="ttdoc">Linearly interpolate a function defined on a discrete grid.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dc7/funcs_8cpp_source.html#l00015">funcs.cpp:15</a></div></div>
+<div class="ttc" id="anamespaceCantera_html_a7aad274ec72c4386c1e3c4c2de47cb11"><div class="ttname"><a href="../../df/db0/namespaceCantera.html#a7aad274ec72c4386c1e3c4c2de47cb11">Cantera::trapezoidal</a></div><div class="ttdeci">double trapezoidal(const Eigen::ArrayXd &amp;f, const Eigen::ArrayXd &amp;x)</div><div class="ttdoc">Numerical integration of a function using the trapezoidal rule.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dc7/funcs_8cpp_source.html#l00032">funcs.cpp:32</a></div></div>
 <div class="ttc" id="anamespaceCantera_html_a8a71f536c7e45bda27ec0f1df26e6420"><div class="ttname"><a href="../../df/db0/namespaceCantera.html#a8a71f536c7e45bda27ec0f1df26e6420">Cantera::vector_fp</a></div><div class="ttdeci">std::vector&lt; double &gt; vector_fp</div><div class="ttdoc">Turn on the use of stl vectors for the basic array type within cantera Vector of doubles.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/ddc/ct__defs_8h_source.html#l00184">ct_defs.h:184</a></div></div>
+<div class="ttc" id="anamespaceCantera_html_a96b23e5895e348d5e78c97cb70a4ce91"><div class="ttname"><a href="../../df/db0/namespaceCantera.html#a96b23e5895e348d5e78c97cb70a4ce91">Cantera::numericalQuadrature</a></div><div class="ttdeci">double numericalQuadrature(const std::string &amp;method, const Eigen::ArrayXd &amp;f, const Eigen::ArrayXd &amp;x)</div><div class="ttdoc">Numerical integration of a function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dc7/funcs_8cpp_source.html#l00115">funcs.cpp:115</a></div></div>
+<div class="ttc" id="anamespaceCantera_html_ac7493800974147f773c289844bc63468"><div class="ttname"><a href="../../df/db0/namespaceCantera.html#ac7493800974147f773c289844bc63468">Cantera::simpson</a></div><div class="ttdeci">double simpson(const Eigen::ArrayXd &amp;f, const Eigen::ArrayXd &amp;x)</div><div class="ttdoc">Numerical integration of a function using Simpson's rule with flexibility of taking odd and even numb...</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dc7/funcs_8cpp_source.html#l00090">funcs.cpp:90</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

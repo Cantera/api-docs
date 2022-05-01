@@ -20,12 +20,14 @@ var searchData=
   ['pengrobinson_2eh_17',['PengRobinson.h',['../de/d01/PengRobinson_8h.html',1,'']]],
   ['phase_2ecpp_18',['Phase.cpp',['../de/dd9/Phase_8cpp.html',1,'']]],
   ['phase_2eh_19',['Phase.h',['../da/d84/Phase_8h.html',1,'']]],
-  ['plograte_2ecpp_20',['PlogRate.cpp',['../d8/dcf/PlogRate_8cpp.html',1,'']]],
-  ['plograte_2eh_21',['PlogRate.h',['../dd/d3a/PlogRate_8h.html',1,'']]],
-  ['plots_2ecpp_22',['plots.cpp',['../df/da4/plots_8cpp.html',1,'']]],
-  ['plots_2eh_23',['plots.h',['../d7/dab/plots_8h.html',1,'']]],
-  ['polyfit_2ecpp_24',['polyfit.cpp',['../d0/de1/polyfit_8cpp.html',1,'']]],
-  ['polyfit_2eh_25',['polyfit.h',['../d7/dcd/polyfit_8h.html',1,'']]],
-  ['purefluidphase_2ecpp_26',['PureFluidPhase.cpp',['../d8/d53/PureFluidPhase_8cpp.html',1,'']]],
-  ['purefluidphase_2eh_27',['PureFluidPhase.h',['../dd/d2d/PureFluidPhase_8h.html',1,'']]]
+  ['plasmaphase_2ecpp_20',['PlasmaPhase.cpp',['../da/dc4/PlasmaPhase_8cpp.html',1,'']]],
+  ['plasmaphase_2eh_21',['PlasmaPhase.h',['../d6/ded/PlasmaPhase_8h.html',1,'']]],
+  ['plograte_2ecpp_22',['PlogRate.cpp',['../d8/dcf/PlogRate_8cpp.html',1,'']]],
+  ['plograte_2eh_23',['PlogRate.h',['../dd/d3a/PlogRate_8h.html',1,'']]],
+  ['plots_2ecpp_24',['plots.cpp',['../df/da4/plots_8cpp.html',1,'']]],
+  ['plots_2eh_25',['plots.h',['../d7/dab/plots_8h.html',1,'']]],
+  ['polyfit_2ecpp_26',['polyfit.cpp',['../d0/de1/polyfit_8cpp.html',1,'']]],
+  ['polyfit_2eh_27',['polyfit.h',['../d7/dcd/polyfit_8h.html',1,'']]],
+  ['purefluidphase_2ecpp_28',['PureFluidPhase.cpp',['../d8/d53/PureFluidPhase_8cpp.html',1,'']]],
+  ['purefluidphase_2eh_29',['PureFluidPhase.h',['../dd/d2d/PureFluidPhase_8h.html',1,'']]]
 ];

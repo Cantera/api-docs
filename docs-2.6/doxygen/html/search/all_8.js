@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['h_0',['H',['../df/d0a/classtpx_1_1Heptane.html#ac4d9e8cde43646415e3b6cef79d54437',1,'tpx::Heptane::H()'],['../de/d67/classtpx_1_1CarbonDioxide.html#ac4d9e8cde43646415e3b6cef79d54437',1,'tpx::CarbonDioxide::H()']]],
-  ['h_1',['h',['../d4/df4/classtpx_1_1Substance.html#a39d6d8ad0a51a776083a8d10d4dba5e5',1,'tpx::Substance']]],
+  ['h_0',['h',['../d4/df4/classtpx_1_1Substance.html#a39d6d8ad0a51a776083a8d10d4dba5e5',1,'tpx::Substance']]],
+  ['h_1',['H',['../df/d0a/classtpx_1_1Heptane.html#ac4d9e8cde43646415e3b6cef79d54437',1,'tpx::Heptane::H()'],['../de/d67/classtpx_1_1CarbonDioxide.html#ac4d9e8cde43646415e3b6cef79d54437',1,'tpx::CarbonDioxide::H()']]],
   ['h_5fmixing_2',['h_mixing',['../dd/d3a/classCantera_1_1MaskellSolidSolnPhase.html#a159bae19d2beda2a6e62eb518f4d8778',1,'Cantera::MaskellSolidSolnPhase']]],
   ['hasadvancelimits_3',['hasAdvanceLimits',['../d7/def/classCantera_1_1ReactorNet.html#aa02f4d0645d667a13af8ac430a1adf55',1,'Cantera::ReactorNet::hasAdvanceLimits()'],['../dc/d5e/classCantera_1_1Reactor.html#aa02f4d0645d667a13af8ac430a1adf55',1,'Cantera::Reactor::hasAdvanceLimits()']]],
   ['hasattrib_4',['hasAttrib',['../d1/d98/classCantera_1_1XML__Node.html#af96f099ba3f3b795ca5794cd24da94f8',1,'Cantera::XML_Node']]],

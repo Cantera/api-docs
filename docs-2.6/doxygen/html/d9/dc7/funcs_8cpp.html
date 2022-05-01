@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Cantera<span id="projectnumber">&#160;2.6.0b1</span>
+   <div id="projectname">Cantera<span id="projectnumber">&#160;2.6.0</span>
    </div>
   </td>
  </tr>
@@ -83,10 +83,12 @@ $(function() {
 <p>file containing miscellaneous numerical functions.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="../../d1/d96/funcs_8h_source.html">cantera/numerics/funcs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d7/dcd/polyfit_8h_source.html">cantera/numerics/polyfit.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../db/d98/ctexceptions_8h_source.html">cantera/base/ctexceptions.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for funcs.cpp:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="../../d0/d9c/funcs_8cpp__incl.svg" width="100%" height="496"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="../../d0/d9c/funcs_8cpp__incl.svg" width="100%" height="563"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 </div>
@@ -103,6 +105,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a10672fcaae28ee805365ae784b0177af"><td class="memItemLeft" align="right" valign="top">doublereal&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/db0/namespaceCantera.html#a10672fcaae28ee805365ae784b0177af">linearInterp</a> (doublereal x, const vector_fp &amp;xpts, const vector_fp &amp;fpts)</td></tr>
 <tr class="memdesc:a10672fcaae28ee805365ae784b0177af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linearly interpolate a function defined on a discrete grid.  <a href="../../df/db0/namespaceCantera.html#a10672fcaae28ee805365ae784b0177af">More...</a><br /></td></tr>
 <tr class="separator:a10672fcaae28ee805365ae784b0177af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aad274ec72c4386c1e3c4c2de47cb11"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/db0/namespaceCantera.html#a7aad274ec72c4386c1e3c4c2de47cb11">trapezoidal</a> (const Eigen::ArrayXd &amp;f, const Eigen::ArrayXd &amp;x)</td></tr>
+<tr class="memdesc:a7aad274ec72c4386c1e3c4c2de47cb11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numerical integration of a function using the trapezoidal rule.  <a href="../../df/db0/namespaceCantera.html#a7aad274ec72c4386c1e3c4c2de47cb11">More...</a><br /></td></tr>
+<tr class="separator:a7aad274ec72c4386c1e3c4c2de47cb11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c3a4a749baf9b7044e449b3a371b1b6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/db0/namespaceCantera.html#a9c3a4a749baf9b7044e449b3a371b1b6">basicSimpson</a> (const Eigen::ArrayXd &amp;f, const Eigen::ArrayXd &amp;x)</td></tr>
+<tr class="memdesc:a9c3a4a749baf9b7044e449b3a371b1b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numerical integration of a function using Simpson's rule.  <a href="../../df/db0/namespaceCantera.html#a9c3a4a749baf9b7044e449b3a371b1b6">More...</a><br /></td></tr>
+<tr class="separator:a9c3a4a749baf9b7044e449b3a371b1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7493800974147f773c289844bc63468"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/db0/namespaceCantera.html#ac7493800974147f773c289844bc63468">simpson</a> (const Eigen::ArrayXd &amp;f, const Eigen::ArrayXd &amp;x)</td></tr>
+<tr class="memdesc:ac7493800974147f773c289844bc63468"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numerical integration of a function using Simpson's rule with flexibility of taking odd and even number of points.  <a href="../../df/db0/namespaceCantera.html#ac7493800974147f773c289844bc63468">More...</a><br /></td></tr>
+<tr class="separator:ac7493800974147f773c289844bc63468"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96b23e5895e348d5e78c97cb70a4ce91"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/db0/namespaceCantera.html#a96b23e5895e348d5e78c97cb70a4ce91">numericalQuadrature</a> (const std::string &amp;method, const Eigen::ArrayXd &amp;f, const Eigen::ArrayXd &amp;x)</td></tr>
+<tr class="memdesc:a96b23e5895e348d5e78c97cb70a4ce91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numerical integration of a function.  <a href="../../df/db0/namespaceCantera.html#a96b23e5895e348d5e78c97cb70a4ce91">More...</a><br /></td></tr>
+<tr class="separator:a96b23e5895e348d5e78c97cb70a4ce91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >file containing miscellaneous numerical functions. </p>

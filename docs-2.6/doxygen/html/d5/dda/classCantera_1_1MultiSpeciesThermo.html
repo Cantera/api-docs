@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Cantera<span id="projectnumber">&#160;2.6.0b1</span>
+   <div id="projectname">Cantera<span id="projectnumber">&#160;2.6.0</span>
    </div>
   </td>
  </tr>
@@ -107,7 +107,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a7cdfcab470abdcd3a572312e538dabae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modify the species thermodynamic property parameterization for a species.  <a href="../../d5/dda/classCantera_1_1MultiSpeciesThermo.html#a7cdfcab470abdcd3a572312e538dabae">More...</a><br /></td></tr>
 <tr class="separator:a7cdfcab470abdcd3a572312e538dabae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0daa8939245028bfb5f88ae87a1eef2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dda/classCantera_1_1MultiSpeciesThermo.html#ad0daa8939245028bfb5f88ae87a1eef2">update_single</a> (size_t k, double T, double *cp_R, double *h_RT, double *s_R) const</td></tr>
-<tr class="memdesc:ad0daa8939245028bfb5f88ae87a1eef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Like update_one, but without applying offsets to the output pointers.  <a href="../../d5/dda/classCantera_1_1MultiSpeciesThermo.html#ad0daa8939245028bfb5f88ae87a1eef2">More...</a><br /></td></tr>
+<tr class="memdesc:ad0daa8939245028bfb5f88ae87a1eef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get reference-state properties for a single species.  <a href="../../d5/dda/classCantera_1_1MultiSpeciesThermo.html#ad0daa8939245028bfb5f88ae87a1eef2">More...</a><br /></td></tr>
 <tr class="separator:ad0daa8939245028bfb5f88ae87a1eef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8aa2bca5d24220acad1b82f5b51b21a7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dda/classCantera_1_1MultiSpeciesThermo.html#a8aa2bca5d24220acad1b82f5b51b21a7">update</a> (doublereal T, doublereal *cp_R, doublereal *h_RT, doublereal *s_R) const</td></tr>
 <tr class="memdesc:a8aa2bca5d24220acad1b82f5b51b21a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the reference-state properties for all species.  <a href="../../d5/dda/classCantera_1_1MultiSpeciesThermo.html#a8aa2bca5d24220acad1b82f5b51b21a7">More...</a><br /></td></tr>
@@ -189,7 +189,7 @@ Private Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >A species thermodynamic property manager for a phase. </p>
-<p >This is a general manager that can handle a wide variety of species thermodynamic polynomials for individual species and compute their nondimensional, reference-state thermodynamic properties (i.e. as a function of temperature only).</p>
+<p >This is a general manager that can handle a wide variety of species thermodynamic polynomials for individual species and compute their nondimensional, reference-state thermodynamic properties (that is, as a function of temperature only).</p>
 <p >The <a class="el" href="../../dc/d38/classCantera_1_1ThermoPhase.html" title="Base class for a phase with thermodynamic properties.">ThermoPhase</a> object relies on <a class="el" href="../../d5/dda/classCantera_1_1MultiSpeciesThermo.html" title="A species thermodynamic property manager for a phase.">MultiSpeciesThermo</a> to calculate the thermodynamic properties of the reference state for all of the species in the phase, for a range of temperatures. Note, the pressure dependence of the species thermodynamic functions is not handled at this level. <a class="el" href="../../d1/d8c/classCantera_1_1Species.html" title="Contains data about a single chemical species.">Species</a> using the same parameterization are grouped together in order to minimize the operation count and achieve better efficiency.</p>
 <p >The most important member function for the <a class="el" href="../../d5/dda/classCantera_1_1MultiSpeciesThermo.html" title="A species thermodynamic property manager for a phase.">MultiSpeciesThermo</a> class is the member function <a class="el" href="../../d5/dda/classCantera_1_1MultiSpeciesThermo.html#a8aa2bca5d24220acad1b82f5b51b21a7" title="Compute the reference-state properties for all species.">MultiSpeciesThermo::update()</a>. The function calculates the values of Cp/R, H/RT, and S/R for all of the species at once at the specified temperature.</p>
 <p >Usually, all of the species in a phase are installed into a <a class="el" href="../../d5/dda/classCantera_1_1MultiSpeciesThermo.html" title="A species thermodynamic property manager for a phase.">MultiSpeciesThermo</a> object. However, there is no requirement that a <a class="el" href="../../d5/dda/classCantera_1_1MultiSpeciesThermo.html" title="A species thermodynamic property manager for a phase.">MultiSpeciesThermo</a> object handles all of the species in a phase. The member function <a class="el" href="../../d5/dda/classCantera_1_1MultiSpeciesThermo.html#a2e4832c0163d1bc7ee91c1b8fb9f2fde">install_STIT()</a> is called to install each species into the <a class="el" href="../../d5/dda/classCantera_1_1MultiSpeciesThermo.html" title="A species thermodynamic property manager for a phase.">MultiSpeciesThermo</a> object. </p>
@@ -472,7 +472,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Like update_one, but without applying offsets to the output pointers. </p>
+<p>Get reference-state properties for a single species. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">k</td><td>species index </td></tr>
@@ -487,6 +487,8 @@ Private Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../dd/de9/MultiSpeciesThermo_8cpp_source.html#l00081">81</a> of file <a class="el" href="../../dd/de9/MultiSpeciesThermo_8cpp_source.html">MultiSpeciesThermo.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="../../dd/de9/MultiSpeciesThermo_8cpp_source.html#l00162">MultiSpeciesThermo::provideSTIT()</a>, and <a class="el" href="../../d1/dea/SpeciesThermoInterpType_8cpp_source.html#l00037">SpeciesThermoInterpType::updatePropertiesTemp()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/dc4/PlasmaPhase_8cpp_source.html#l00251">PlasmaPhase::updateThermo()</a>.</p>
 
 </div>
 </div>
@@ -552,7 +554,7 @@ Private Member Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="../../d6/d7a/MultiSpeciesThermo_8h_source.html#l00212">MultiSpeciesThermo::m_sp</a>, and <a class="el" href="../../d6/d7a/MultiSpeciesThermo_8h_source.html#l00215">MultiSpeciesThermo::m_tpoly</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../db/d86/MixtureFugacityTP_8cpp_source.html#l00770">MixtureFugacityTP::_updateReferenceStateThermo()</a>, <a class="el" href="../../d4/d20/BinarySolutionTabulatedThermo_8cpp_source.html#l00045">BinarySolutionTabulatedThermo::_updateThermo()</a>, <a class="el" href="../../d7/dd4/IdealGasPhase_8cpp_source.html#l00273">IdealGasPhase::_updateThermo()</a>, <a class="el" href="../../de/d05/IdealSolidSolnPhase_8cpp_source.html#l00553">IdealSolidSolnPhase::_updateThermo()</a>, <a class="el" href="../../da/d5f/LatticePhase_8cpp_source.html#l00280">LatticePhase::_updateThermo()</a>, <a class="el" href="../../d4/df7/SingleSpeciesTP_8cpp_source.html#l00259">SingleSpeciesTP::_updateThermo()</a>, and <a class="el" href="../../d4/d7e/SurfPhase_8cpp_source.html#l00319">SurfPhase::_updateThermo()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../db/d86/MixtureFugacityTP_8cpp_source.html#l00770">MixtureFugacityTP::_updateReferenceStateThermo()</a>, <a class="el" href="../../d4/d20/BinarySolutionTabulatedThermo_8cpp_source.html#l00046">BinarySolutionTabulatedThermo::_updateThermo()</a>, <a class="el" href="../../de/d05/IdealSolidSolnPhase_8cpp_source.html#l00555">IdealSolidSolnPhase::_updateThermo()</a>, <a class="el" href="../../da/d5f/LatticePhase_8cpp_source.html#l00280">LatticePhase::_updateThermo()</a>, <a class="el" href="../../d4/df7/SingleSpeciesTP_8cpp_source.html#l00259">SingleSpeciesTP::_updateThermo()</a>, <a class="el" href="../../d4/d7e/SurfPhase_8cpp_source.html#l00319">SurfPhase::_updateThermo()</a>, and <a class="el" href="../../d7/dd4/IdealGasPhase_8cpp_source.html#l00273">IdealGasPhase::updateThermo()</a>.</p>
 
 </div>
 </div>

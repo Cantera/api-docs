@@ -1,0 +1,2234 @@
+
+
+<!DOCTYPE html>
+
+<html prefix="
+og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+"
+lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Thermodynamic Properties | Cantera </title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" media="none" onload="this.media='all'" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../_static/cantera.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" media="none" onload="this.media='all'" type="text/css" />
+  <link rel="stylesheet" href="../_static/cantera.css" media="none" onload="this.media='all'" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" media="none" onload="this.media='all'" type="text/css" />
+  <link rel="stylesheet" href="../_static/katex-math.css" media="none" onload="this.media='all'" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/katex.min.js"></script>
+        <script type="text/javascript" src="../_static/auto-render.min.js"></script>
+        <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" sizes="16x16"/>
+    
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body>
+  <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+  <!-- Menubar -->
+
+  <nav class="navbar navbar-expand-md navbar-light bg-light static-top mb-4">
+      <div class="container"><!-- This keeps the margins nice -->
+          <a class="navbar-brand" href="/index.html">
+          <img src="/assets/img/cantera-logo.png" alt="Cantera" id="logo" class="d-inline-block align-top">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a href="/install/index.html" class="nav-link">Install</a>
+              </li>
+              <li class="nav-item">
+                <a href="/tutorials/index.html" class="nav-link">Tutorials</a>
+              </li>
+              <li class="nav-item">
+                <a href="/examples/index.html" class="nav-link">Examples</a>
+              </li>
+              <li class="nav-item">
+                <a href="/community.html" class="nav-link">Community</a>
+              </li>
+              <li class="nav-item">
+                <a href="/science/index.html" class="nav-link">Science</a>
+              </li>
+              <li class="nav-item">
+                <a href="/documentation/index.html" class="nav-link">Documentation</a>
+              </li>
+              <li class="nav-item">
+                <a href="/blog/index.html" class="nav-link">Blog</a>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+  </nav>
+  <!-- End of Menubar -->
+
+  <div class="container" id="content">
+      <div class="body-content">
+          <!--Body content-->
+          
+          <div class="document">
+            
+            <div class="documentwrapper">
+                <div class="bodywrapper">
+                <div class="body" role="main">
+                  
+  <section id="thermodynamic-properties">
+<h1>Thermodynamic Properties<a class="headerlink" href="#thermodynamic-properties" title="Permalink to this heading">¶</a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#phases" id="id4">Phases</a></p>
+<ul>
+<li><p><a class="reference internal" href="#thermophase" id="id5">ThermoPhase</a></p></li>
+<li><p><a class="reference internal" href="#interfacephase" id="id6">InterfacePhase</a></p></li>
+<li><p><a class="reference internal" href="#purefluid" id="id7">PureFluid</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#mixture" id="id8">Mixture</a></p></li>
+<li><p><a class="reference internal" href="#species" id="id9">Species</a></p></li>
+<li><p><a class="reference internal" href="#species-thermodynamic-properties" id="id10">Species Thermodynamic Properties</a></p>
+<ul>
+<li><p><a class="reference internal" href="#speciesthermo" id="id11">SpeciesThermo</a></p></li>
+<li><p><a class="reference internal" href="#constantcp" id="id12">ConstantCp</a></p></li>
+<li><p><a class="reference internal" href="#mu0poly" id="id13">Mu0Poly</a></p></li>
+<li><p><a class="reference internal" href="#nasapoly2" id="id14">NasaPoly2</a></p></li>
+<li><p><a class="reference internal" href="#nasa9polymultitempregion" id="id15">Nasa9PolyMultiTempRegion</a></p></li>
+<li><p><a class="reference internal" href="#shomatepoly2" id="id16">ShomatePoly2</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#element" id="id17">Element</a></p></li>
+</ul>
+</nav>
+<section id="phases">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Phases</a><a class="headerlink" href="#phases" title="Permalink to this heading">¶</a></h2>
+<p>These classes are used to describe the thermodynamic state of a system.</p>
+<section id="thermophase">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">ThermoPhase</a><a class="headerlink" href="#thermophase" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ThermoPhase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">ThermoPhase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaml</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thermo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="importing.html#cantera.solutionbase._SolutionBase" title="cantera.solutionbase._SolutionBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">_SolutionBase</span></code></a></p>
+<p>A phase with an equation of state.</p>
+<p>Class <a class="reference internal" href="#cantera.ThermoPhase" title="cantera.ThermoPhase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ThermoPhase</span></code></a> may be used to represent the intensive thermodynamic
+state of a phase of matter, which might be a gas, liquid, or solid.</p>
+<p>Class <a class="reference internal" href="#cantera.ThermoPhase" title="cantera.ThermoPhase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ThermoPhase</span></code></a> is not usually instantiated directly. It is used
+as a base class for classes <a class="reference internal" href="importing.html#cantera.Solution" title="cantera.Solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution</span></code></a> and <a class="reference internal" href="importing.html#cantera.Interface" title="cantera.Interface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Interface</span></code></a>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.DP">
+<span class="sig-name descname"><span class="pre">DP</span></span><a class="headerlink" href="#cantera.ThermoPhase.DP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set density [kg/m^3] and pressure [Pa].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.DPX">
+<span class="sig-name descname"><span class="pre">DPX</span></span><a class="headerlink" href="#cantera.ThermoPhase.DPX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set density [kg/m^3], pressure [Pa], and mole fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.DPY">
+<span class="sig-name descname"><span class="pre">DPY</span></span><a class="headerlink" href="#cantera.ThermoPhase.DPY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set density [kg/m^3], pressure [Pa], and mass fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.HP">
+<span class="sig-name descname"><span class="pre">HP</span></span><a class="headerlink" href="#cantera.ThermoPhase.HP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set enthalpy [J/kg or J/kmol] and pressure [Pa].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.HPX">
+<span class="sig-name descname"><span class="pre">HPX</span></span><a class="headerlink" href="#cantera.ThermoPhase.HPX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set enthalpy [J/kg or J/kmol], pressure [Pa] and mole fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.HPY">
+<span class="sig-name descname"><span class="pre">HPY</span></span><a class="headerlink" href="#cantera.ThermoPhase.HPY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set enthalpy [J/kg or J/kmol], pressure [Pa] and mass fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.P">
+<span class="sig-name descname"><span class="pre">P</span></span><a class="headerlink" href="#cantera.ThermoPhase.P" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pressure [Pa].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.P_sat">
+<span class="sig-name descname"><span class="pre">P_sat</span></span><a class="headerlink" href="#cantera.ThermoPhase.P_sat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saturation pressure [Pa] at the current temperature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.Pe">
+<span class="sig-name descname"><span class="pre">Pe</span></span><a class="headerlink" href="#cantera.ThermoPhase.Pe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get electron Pressure [Pa].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.SP">
+<span class="sig-name descname"><span class="pre">SP</span></span><a class="headerlink" href="#cantera.ThermoPhase.SP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K] and pressure [Pa].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.SPX">
+<span class="sig-name descname"><span class="pre">SPX</span></span><a class="headerlink" href="#cantera.ThermoPhase.SPX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K], pressure [Pa], and mole fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.SPY">
+<span class="sig-name descname"><span class="pre">SPY</span></span><a class="headerlink" href="#cantera.ThermoPhase.SPY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K], pressure [Pa], and mass fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.SV">
+<span class="sig-name descname"><span class="pre">SV</span></span><a class="headerlink" href="#cantera.ThermoPhase.SV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K] and specific volume [m^3/kg or
+m^3/kmol].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.SVX">
+<span class="sig-name descname"><span class="pre">SVX</span></span><a class="headerlink" href="#cantera.ThermoPhase.SVX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K], specific volume [m^3/kg or
+m^3/kmol], and mole fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.SVY">
+<span class="sig-name descname"><span class="pre">SVY</span></span><a class="headerlink" href="#cantera.ThermoPhase.SVY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K], specific volume [m^3/kg or
+m^3/kmol], and mass fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.T">
+<span class="sig-name descname"><span class="pre">T</span></span><a class="headerlink" href="#cantera.ThermoPhase.T" title="Permalink to this definition">¶</a></dt>
+<dd><p>Temperature [K].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.TD">
+<span class="sig-name descname"><span class="pre">TD</span></span><a class="headerlink" href="#cantera.ThermoPhase.TD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set temperature [K] and density [kg/m^3 or kmol/m^3].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.TDX">
+<span class="sig-name descname"><span class="pre">TDX</span></span><a class="headerlink" href="#cantera.ThermoPhase.TDX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set temperature [K], density [kg/m^3 or kmol/m^3], and mole
+fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.TDY">
+<span class="sig-name descname"><span class="pre">TDY</span></span><a class="headerlink" href="#cantera.ThermoPhase.TDY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set temperature [K] and density [kg/m^3 or kmol/m^3], and mass
+fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.TP">
+<span class="sig-name descname"><span class="pre">TP</span></span><a class="headerlink" href="#cantera.ThermoPhase.TP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set temperature [K] and pressure [Pa].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.TPX">
+<span class="sig-name descname"><span class="pre">TPX</span></span><a class="headerlink" href="#cantera.ThermoPhase.TPX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set temperature [K], pressure [Pa], and mole fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.TPY">
+<span class="sig-name descname"><span class="pre">TPY</span></span><a class="headerlink" href="#cantera.ThermoPhase.TPY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set temperature [K], pressure [Pa], and mass fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.T_sat">
+<span class="sig-name descname"><span class="pre">T_sat</span></span><a class="headerlink" href="#cantera.ThermoPhase.T_sat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saturation temperature [K] at the current pressure.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.Te">
+<span class="sig-name descname"><span class="pre">Te</span></span><a class="headerlink" href="#cantera.ThermoPhase.Te" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set electron Temperature [K].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.UV">
+<span class="sig-name descname"><span class="pre">UV</span></span><a class="headerlink" href="#cantera.ThermoPhase.UV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set internal energy [J/kg or J/kmol] and specific volume
+[m^3/kg or m^3/kmol].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.UVX">
+<span class="sig-name descname"><span class="pre">UVX</span></span><a class="headerlink" href="#cantera.ThermoPhase.UVX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set internal energy [J/kg or J/kmol], specific volume
+[m^3/kg or m^3/kmol], and mole fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.UVY">
+<span class="sig-name descname"><span class="pre">UVY</span></span><a class="headerlink" href="#cantera.ThermoPhase.UVY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set internal energy [J/kg or J/kmol], specific volume
+[m^3/kg or m^3/kmol], and mass fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.X">
+<span class="sig-name descname"><span class="pre">X</span></span><a class="headerlink" href="#cantera.ThermoPhase.X" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the species mole fractions. Can be set as an array, as a dictionary,
+or as a string. Always returns an array:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">phase</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phase</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;H2&#39;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;O2&#39;</span><span class="p">:</span><span class="mf">0.4</span><span class="p">,</span> <span class="s1">&#39;AR&#39;</span><span class="p">:</span><span class="mf">0.5</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phase</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="s1">&#39;H2:0.1, O2:0.4, AR:0.5&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phase</span><span class="o">.</span><span class="n">X</span>
+<span class="go">array([0.1, 0, 0, 0.4, 0, 0, 0, 0, 0.5])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.Y">
+<span class="sig-name descname"><span class="pre">Y</span></span><a class="headerlink" href="#cantera.ThermoPhase.Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the species mass fractions. Can be set as an array, as a dictionary,
+or as a string. Always returns an array:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">phase</span><span class="o">.</span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phase</span><span class="o">.</span><span class="n">Y</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;H2&#39;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;O2&#39;</span><span class="p">:</span><span class="mf">0.4</span><span class="p">,</span> <span class="s1">&#39;AR&#39;</span><span class="p">:</span><span class="mf">0.5</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phase</span><span class="o">.</span><span class="n">Y</span> <span class="o">=</span> <span class="s1">&#39;H2:0.1, O2:0.4, AR:0.5&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phase</span><span class="o">.</span><span class="n">Y</span>
+<span class="go">array([0.1, 0, 0, 0.4, 0, 0, 0, 0, 0.5])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.activities">
+<span class="sig-name descname"><span class="pre">activities</span></span><a class="headerlink" href="#cantera.ThermoPhase.activities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of nondimensional activities. Returns either molar or molal
+activities depending on the convention of the thermodynamic model.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.activity_coefficients">
+<span class="sig-name descname"><span class="pre">activity_coefficients</span></span><a class="headerlink" href="#cantera.ThermoPhase.activity_coefficients" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of nondimensional, molar activity coefficients.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.add_species">
+<span class="sig-name descname"><span class="pre">add_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">species</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.add_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new species to this phase. Missing elements will be added
+automatically.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.add_species_alias">
+<span class="sig-name descname"><span class="pre">add_species_alias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alias</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.add_species_alias" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the alternate species name <code class="docutils literal notranslate"><span class="pre">alias</span></code> for an original species <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.atomic_weight">
+<span class="sig-name descname"><span class="pre">atomic_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.atomic_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Atomic weight [kg/kmol] of element <code class="docutils literal notranslate"><span class="pre">m</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.atomic_weights">
+<span class="sig-name descname"><span class="pre">atomic_weights</span></span><a class="headerlink" href="#cantera.ThermoPhase.atomic_weights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of atomic weight [kg/kmol] for each element in the mixture.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.basis">
+<span class="sig-name descname"><span class="pre">basis</span></span><a class="headerlink" href="#cantera.ThermoPhase.basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines whether intensive thermodynamic properties are treated on a
+<code class="docutils literal notranslate"><span class="pre">mass</span></code> (per kg) or <code class="docutils literal notranslate"><span class="pre">molar</span></code> (per kmol) basis. This affects the values
+returned by the properties <a class="reference internal" href="#cantera.ThermoPhase.h" title="cantera.ThermoPhase.h"><code class="xref py py-obj docutils literal notranslate"><span class="pre">h</span></code></a>, <a class="reference internal" href="#cantera.ThermoPhase.u" title="cantera.ThermoPhase.u"><code class="xref py py-obj docutils literal notranslate"><span class="pre">u</span></code></a>, <a class="reference internal" href="#cantera.ThermoPhase.s" title="cantera.ThermoPhase.s"><code class="xref py py-obj docutils literal notranslate"><span class="pre">s</span></code></a>, <a class="reference internal" href="#cantera.ThermoPhase.g" title="cantera.ThermoPhase.g"><code class="xref py py-obj docutils literal notranslate"><span class="pre">g</span></code></a>, <a class="reference internal" href="#cantera.ThermoPhase.v" title="cantera.ThermoPhase.v"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v</span></code></a>, <a class="reference internal" href="#cantera.ThermoPhase.density" title="cantera.ThermoPhase.density"><code class="xref py py-obj docutils literal notranslate"><span class="pre">density</span></code></a>, <a class="reference internal" href="#cantera.ThermoPhase.cv" title="cantera.ThermoPhase.cv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cv</span></code></a>,
+and <a class="reference internal" href="#cantera.ThermoPhase.cp" title="cantera.ThermoPhase.cp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cp</span></code></a>, as well as the values used with the state-setting properties
+such as <a class="reference internal" href="#cantera.ThermoPhase.HPX" title="cantera.ThermoPhase.HPX"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HPX</span></code></a> and <a class="reference internal" href="#cantera.ThermoPhase.UV" title="cantera.ThermoPhase.UV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UV</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.case_sensitive_species_names">
+<span class="sig-name descname"><span class="pre">case_sensitive_species_names</span></span><a class="headerlink" href="#cantera.ThermoPhase.case_sensitive_species_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enforce case-sensitivity for look up of species names</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.charges">
+<span class="sig-name descname"><span class="pre">charges</span></span><a class="headerlink" href="#cantera.ThermoPhase.charges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of species charges [elem. charge].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.chemical_potentials">
+<span class="sig-name descname"><span class="pre">chemical_potentials</span></span><a class="headerlink" href="#cantera.ThermoPhase.chemical_potentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of species chemical potentials [J/kmol].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.concentrations">
+<span class="sig-name descname"><span class="pre">concentrations</span></span><a class="headerlink" href="#cantera.ThermoPhase.concentrations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the species concentrations. Units are kmol/m^3 for bulk phases, kmol/m^2
+for surface phases, and kmol/m for edge phases.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.cp">
+<span class="sig-name descname"><span class="pre">cp</span></span><a class="headerlink" href="#cantera.ThermoPhase.cp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat capacity at constant pressure [J/kg/K or J/kmol/K] depending
+on <a class="reference internal" href="#cantera.ThermoPhase.basis" title="cantera.ThermoPhase.basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basis</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.cp_mass">
+<span class="sig-name descname"><span class="pre">cp_mass</span></span><a class="headerlink" href="#cantera.ThermoPhase.cp_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specific heat capacity at constant pressure [J/kg/K].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.cp_mole">
+<span class="sig-name descname"><span class="pre">cp_mole</span></span><a class="headerlink" href="#cantera.ThermoPhase.cp_mole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molar heat capacity at constant pressure [J/kmol/K].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.critical_density">
+<span class="sig-name descname"><span class="pre">critical_density</span></span><a class="headerlink" href="#cantera.ThermoPhase.critical_density" title="Permalink to this definition">¶</a></dt>
+<dd><p>Critical density [kg/m^3 or kmol/m^3] depending on <a class="reference internal" href="#cantera.ThermoPhase.basis" title="cantera.ThermoPhase.basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basis</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.critical_pressure">
+<span class="sig-name descname"><span class="pre">critical_pressure</span></span><a class="headerlink" href="#cantera.ThermoPhase.critical_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Critical pressure [Pa].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.critical_temperature">
+<span class="sig-name descname"><span class="pre">critical_temperature</span></span><a class="headerlink" href="#cantera.ThermoPhase.critical_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Critical temperature [K].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.cv">
+<span class="sig-name descname"><span class="pre">cv</span></span><a class="headerlink" href="#cantera.ThermoPhase.cv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat capacity at constant volume [J/kg/K or J/kmol/K] depending on
+<a class="reference internal" href="#cantera.ThermoPhase.basis" title="cantera.ThermoPhase.basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basis</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.cv_mass">
+<span class="sig-name descname"><span class="pre">cv_mass</span></span><a class="headerlink" href="#cantera.ThermoPhase.cv_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specific heat capacity at constant volume [J/kg/K].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.cv_mole">
+<span class="sig-name descname"><span class="pre">cv_mole</span></span><a class="headerlink" href="#cantera.ThermoPhase.cv_mole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molar heat capacity at constant volume [J/kmol/K].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.density">
+<span class="sig-name descname"><span class="pre">density</span></span><a class="headerlink" href="#cantera.ThermoPhase.density" title="Permalink to this definition">¶</a></dt>
+<dd><p>Density [kg/m^3 or kmol/m^3] depending on <a class="reference internal" href="#cantera.ThermoPhase.basis" title="cantera.ThermoPhase.basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basis</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.density_mass">
+<span class="sig-name descname"><span class="pre">density_mass</span></span><a class="headerlink" href="#cantera.ThermoPhase.density_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Mass) density [kg/m^3].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.density_mole">
+<span class="sig-name descname"><span class="pre">density_mole</span></span><a class="headerlink" href="#cantera.ThermoPhase.density_mole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molar density [kmol/m^3].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.electric_potential">
+<span class="sig-name descname"><span class="pre">electric_potential</span></span><a class="headerlink" href="#cantera.ThermoPhase.electric_potential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the electric potential [V] for this phase.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.electrochemical_potentials">
+<span class="sig-name descname"><span class="pre">electrochemical_potentials</span></span><a class="headerlink" href="#cantera.ThermoPhase.electrochemical_potentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of species electrochemical potentials [J/kmol].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.electron_energy_distribution">
+<span class="sig-name descname"><span class="pre">electron_energy_distribution</span></span><a class="headerlink" href="#cantera.ThermoPhase.electron_energy_distribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electron energy distribution</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.electron_energy_distribution_type">
+<span class="sig-name descname"><span class="pre">electron_energy_distribution_type</span></span><a class="headerlink" href="#cantera.ThermoPhase.electron_energy_distribution_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electron energy distribution type</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.electron_energy_levels">
+<span class="sig-name descname"><span class="pre">electron_energy_levels</span></span><a class="headerlink" href="#cantera.ThermoPhase.electron_energy_levels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electron energy levels [eV]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.element_index">
+<span class="sig-name descname"><span class="pre">element_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.element_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>The index of element <code class="docutils literal notranslate"><span class="pre">element</span></code>, which may be specified as a string or
+an integer. In the latter case, the index is checked for validity and
+returned. If no such element is present, an exception is thrown.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.element_name">
+<span class="sig-name descname"><span class="pre">element_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.element_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the element with index <code class="docutils literal notranslate"><span class="pre">m</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.element_names">
+<span class="sig-name descname"><span class="pre">element_names</span></span><a class="headerlink" href="#cantera.ThermoPhase.element_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of all the element names.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.elemental_mass_fraction">
+<span class="sig-name descname"><span class="pre">elemental_mass_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.elemental_mass_fraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the elemental mass fraction <span class="math">\(Z_{\mathrm{mass},m}\)</span> of element
+<span class="math">\(m\)</span> as defined by:</p>
+<div class="math">
+\[Z_{\mathrm{mass},m} = \sum_k \frac{a_{m,k} M_m}{M_k} Y_k
+
+\]</div>
+<p>with <span class="math">\(a_{m,k}\)</span> being the number of atoms of element <span class="math">\(m\)</span> in
+species <span class="math">\(k\)</span>, <span class="math">\(M_m\)</span> the atomic weight of element <span class="math">\(m\)</span>,
+<span class="math">\(M_k\)</span> the molecular weight of species <span class="math">\(k\)</span>, and <span class="math">\(Y_k\)</span>
+the mass fraction of species <span class="math">\(k\)</span>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">phase</span><span class="o">.</span><span class="n">elemental_mass_fraction</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>m</strong> – Base element, may be specified by name or by index.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.elemental_mole_fraction">
+<span class="sig-name descname"><span class="pre">elemental_mole_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.elemental_mole_fraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the elemental mole fraction <span class="math">\(Z_{\mathrm{mole},m}\)</span> of element
+<span class="math">\(m\)</span> (the number of atoms of element m divided by the total number
+of atoms) as defined by:</p>
+<div class="math">
+\[Z_{\mathrm{mole},m} = \frac{\sum_k a_{m,k} X_k}
+{\sum_k \sum_j a_{j,k} X_k}
+
+\]</div>
+<p>with <span class="math">\(a_{m,k}\)</span> being the number of atoms of element <span class="math">\(m\)</span> in
+species <span class="math">\(k\)</span>, <span class="math">\(\sum_j\)</span> being a sum over all elements, and
+<span class="math">\(X_k\)</span> being the mole fraction of species <span class="math">\(k\)</span>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">phase</span><span class="o">.</span><span class="n">elemental_mole_fraction</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>m</strong> – Base element, may be specified by name or by index.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.enthalpy_mass">
+<span class="sig-name descname"><span class="pre">enthalpy_mass</span></span><a class="headerlink" href="#cantera.ThermoPhase.enthalpy_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specific enthalpy [J/kg].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.enthalpy_mole">
+<span class="sig-name descname"><span class="pre">enthalpy_mole</span></span><a class="headerlink" href="#cantera.ThermoPhase.enthalpy_mole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molar enthalpy [J/kmol].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.entropy_mass">
+<span class="sig-name descname"><span class="pre">entropy_mass</span></span><a class="headerlink" href="#cantera.ThermoPhase.entropy_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specific entropy [J/kg/K].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.entropy_mole">
+<span class="sig-name descname"><span class="pre">entropy_mole</span></span><a class="headerlink" href="#cantera.ThermoPhase.entropy_mole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molar entropy [J/kmol/K].</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.equilibrate">
+<span class="sig-name descname"><span class="pre">equilibrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">XY</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solver</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rtol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimate_equil</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_level</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.equilibrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set to a state of chemical equilibrium holding property pair
+<code class="docutils literal notranslate"><span class="pre">XY</span></code> constant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>XY</strong> – <p>A two-letter string, which must be one of the set:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;TP&#39;</span><span class="p">,</span><span class="s1">&#39;TV&#39;</span><span class="p">,</span><span class="s1">&#39;HP&#39;</span><span class="p">,</span><span class="s1">&#39;SP&#39;</span><span class="p">,</span><span class="s1">&#39;SV&#39;</span><span class="p">,</span><span class="s1">&#39;UV&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>solver</strong> – <p>Specifies the equilibrium solver to use. May be one of the following:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">'element_potential'</span></code> - a fast solver using the element potential
+method</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'gibbs'</span></code> - a slower but more robust Gibbs minimization solver</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'vcs'</span></code> - the VCS non-ideal equilibrium solver</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'auto'</span></code> - The element potential solver will be tried first, then
+if it fails the Gibbs solver will be tried.</p></li>
+</ul>
+</p></li>
+<li><p><strong>rtol</strong> – The relative error tolerance.</p></li>
+<li><p><strong>max_steps</strong> – The maximum number of steps in composition to take to find a converged
+solution.</p></li>
+<li><p><strong>max_iter</strong> – For the Gibbs minimization solver, this specifies the number of
+outer iterations on T or P when some property pair other
+than TP is specified.</p></li>
+<li><p><strong>estimate_equil</strong> – Integer indicating whether the solver should estimate its own
+initial condition. If 0, the initial mole fraction vector in the
+<a class="reference internal" href="#cantera.ThermoPhase" title="cantera.ThermoPhase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ThermoPhase</span></code></a> object is used as the initial condition. If 1, the
+initial mole fraction vector is used if the element abundances are
+satisfied. If -1, the initial mole fraction vector is thrown out,
+and an estimate is formulated.</p></li>
+<li><p><strong>log_level</strong> – Set to a value greater than 0 to write diagnostic output.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.equivalence_ratio">
+<span class="sig-name descname"><span class="pre">equivalence_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fuel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oxidizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_species</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.equivalence_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the equivalence ratio <span class="math">\(\phi\)</span> of the current mixture, which is a
+conserved quantity. Considers the oxidation of C to CO2, H to H2O
+and S to SO2. Other elements are assumed not to participate in oxidation
+(that is, N ends up as N2). If fuel and oxidizer are not specified, the
+equivalence ratio is computed from the available oxygen and the
+required oxygen for complete oxidation:</p>
+<div class="math">
+\[\phi = \frac{Z_{\mathrm{mole},C} + Z_{\mathrm{mole},S}
++ \frac{1}{4}Z_{\mathrm{mole},H}} {\frac{1}{2}Z_{\mathrm{mole},O}}
+
+\]</div>
+<p>where <span class="math">\(Z_{\mathrm{mole},e}\)</span> is the elemental mole fraction of element
+<span class="math">\(e\)</span>. If the fuel and oxidizer compositions are specified, <span class="math">\(\phi\)</span> is
+computed from:</p>
+<div class="math">
+\[\phi = \frac{Z}{1-Z}\frac{1-Z_{\mathrm{st}}}{Z_{\mathrm{st}}}
+
+\]</div>
+<p>where <span class="math">\(Z\)</span> is the Bilger mixture fraction and <span class="math">\(Z_{\mathrm{st}}\)</span>
+the Bilger mixture fraction at stoichiometric conditions.
+The <code class="docutils literal notranslate"><span class="pre">basis</span></code> determines the composition of fuel and oxidizer:
+<code class="docutils literal notranslate"><span class="pre">basis='mole'</span></code> (default) means mole fractions, <code class="docutils literal notranslate"><span class="pre">basis='mass'</span></code> means
+mass fractions. Note that this definition takes all species into account.
+In case certain species like inert diluents should be ignored, a
+list of species can be provided with <code class="docutils literal notranslate"><span class="pre">include_species</span></code>. This means that
+only these species are considered for the computation of the equivalence
+ratio. For more information, see <a class="reference external" href="https://cantera.org/examples/python/thermo/equivalenceRatio.py.html">Python example</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">set_equivalence_ratio</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">fuel</span><span class="o">=</span><span class="s1">&#39;CH3:0.5, CH3OH:.5, N2:0.125&#39;</span><span class="p">,</span> <span class="n">oxidizer</span><span class="o">=</span><span class="s1">&#39;O2:0.21, N2:0.79, NO:0.01&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">equivalence_ratio</span><span class="p">(</span><span class="n">fuel</span><span class="o">=</span><span class="s1">&#39;CH3:0.5, CH3OH:.5, N2:0.125&#39;</span><span class="p">,</span> <span class="n">oxidizer</span><span class="o">=</span><span class="s1">&#39;O2:0.21, N2:0.79, NO:0.01&#39;</span><span class="p">)</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fuel</strong> – Fuel species name or mole/mass fractions as string, array, or dict.</p></li>
+<li><p><strong>oxidizer</strong> – Oxidizer species name or mole/mass fractions as a string, array, or dict.</p></li>
+<li><p><strong>basis</strong> – Determines if <code class="docutils literal notranslate"><span class="pre">fuel</span></code> and <code class="docutils literal notranslate"><span class="pre">oxidizer</span></code> are given in mole fractions
+(<code class="docutils literal notranslate"><span class="pre">basis=&quot;mole&quot;</span></code>) or mass fractions (<code class="docutils literal notranslate"><span class="pre">basis=&quot;mass&quot;</span></code>)</p></li>
+<li><p><strong>include_species</strong> – List of species names (optional). Only these species are considered for the
+computation of the equivalence ratio. By default, all species are considered</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.find_isomers">
+<span class="sig-name descname"><span class="pre">find_isomers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.find_isomers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find species/isomers matching a composition specified by <code class="docutils literal notranslate"><span class="pre">comp</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.g">
+<span class="sig-name descname"><span class="pre">g</span></span><a class="headerlink" href="#cantera.ThermoPhase.g" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gibbs free energy [J/kg or J/kmol] depending on <a class="reference internal" href="#cantera.ThermoPhase.basis" title="cantera.ThermoPhase.basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basis</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.gibbs_mass">
+<span class="sig-name descname"><span class="pre">gibbs_mass</span></span><a class="headerlink" href="#cantera.ThermoPhase.gibbs_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specific Gibbs free energy [J/kg].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.gibbs_mole">
+<span class="sig-name descname"><span class="pre">gibbs_mole</span></span><a class="headerlink" href="#cantera.ThermoPhase.gibbs_mole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molar Gibbs free energy [J/kmol].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.h">
+<span class="sig-name descname"><span class="pre">h</span></span><a class="headerlink" href="#cantera.ThermoPhase.h" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enthalpy [J/kg or J/kmol] depending on <a class="reference internal" href="#cantera.ThermoPhase.basis" title="cantera.ThermoPhase.basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basis</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.has_phase_transition">
+<span class="sig-name descname"><span class="pre">has_phase_transition</span></span><a class="headerlink" href="#cantera.ThermoPhase.has_phase_transition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if the phase represents a substance with phase transitions</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.int_energy_mass">
+<span class="sig-name descname"><span class="pre">int_energy_mass</span></span><a class="headerlink" href="#cantera.ThermoPhase.int_energy_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specific internal energy [J/kg].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.int_energy_mole">
+<span class="sig-name descname"><span class="pre">int_energy_mole</span></span><a class="headerlink" href="#cantera.ThermoPhase.int_energy_mole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molar internal energy [J/kmol].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.is_compressible">
+<span class="sig-name descname"><span class="pre">is_compressible</span></span><a class="headerlink" href="#cantera.ThermoPhase.is_compressible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if the density of the phase is an independent variable defining
+the thermodynamic state of a substance</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.is_pure">
+<span class="sig-name descname"><span class="pre">is_pure</span></span><a class="headerlink" href="#cantera.ThermoPhase.is_pure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if the phase represents a pure (fixed composition) substance</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.isothermal_compressibility">
+<span class="sig-name descname"><span class="pre">isothermal_compressibility</span></span><a class="headerlink" href="#cantera.ThermoPhase.isothermal_compressibility" title="Permalink to this definition">¶</a></dt>
+<dd><p>Isothermal compressibility [1/Pa].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.isotropic_shape_factor">
+<span class="sig-name descname"><span class="pre">isotropic_shape_factor</span></span><a class="headerlink" href="#cantera.ThermoPhase.isotropic_shape_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shape factor of isotropic-velocity distribution for electron energy</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.mass_fraction_dict">
+<span class="sig-name descname"><span class="pre">mass_fraction_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.mass_fraction_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary giving the mass fraction for each species by name where the
+mass fraction is greater than <code class="docutils literal notranslate"><span class="pre">threshold</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.max_temp">
+<span class="sig-name descname"><span class="pre">max_temp</span></span><a class="headerlink" href="#cantera.ThermoPhase.max_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum temperature for which the thermodynamic data for the phase are
+valid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.mean_electron_energy">
+<span class="sig-name descname"><span class="pre">mean_electron_energy</span></span><a class="headerlink" href="#cantera.ThermoPhase.mean_electron_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mean electron energy [eV]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.mean_molecular_weight">
+<span class="sig-name descname"><span class="pre">mean_molecular_weight</span></span><a class="headerlink" href="#cantera.ThermoPhase.mean_molecular_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mean molecular weight (molar mass) [kg/kmol].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.min_temp">
+<span class="sig-name descname"><span class="pre">min_temp</span></span><a class="headerlink" href="#cantera.ThermoPhase.min_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum temperature for which the thermodynamic data for the phase are
+valid.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.mixture_fraction">
+<span class="sig-name descname"><span class="pre">mixture_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fuel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oxidizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.mixture_fraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the mixture fraction of the current mixture in
+(kg fuel / (kg oxidizer + kg fuel)). This is a quantity that is conserved after
+oxidation. Considers the oxidation of C to CO2, H to H2O and S to SO2. Other
+elements are assumed not to participate in oxidation (that is, N ends up as N2).
+The <code class="docutils literal notranslate"><span class="pre">basis</span></code> determines the composition of fuel and oxidizer:
+<code class="docutils literal notranslate"><span class="pre">basis=&quot;mole&quot;</span></code> (default) means mole fractions, <code class="docutils literal notranslate"><span class="pre">basis=&quot;mass&quot;</span></code> means mass
+fractions. The mixture fraction can be computed from a single element (for
+example, carbon with <code class="docutils literal notranslate"><span class="pre">element=&quot;C&quot;</span></code>)</p>
+<div class="math">
+\[Z_m = \frac{Z_{\mathrm{mass},m}-Z_{\mathrm{mass},m,\mathrm{ox}}}
+{Z_{\mathrm{mass},\mathrm{fuel}}-Z_{\mathrm{mass},m,\mathrm{ox}}}
+
+\]</div>
+<p>where <span class="math">\(Z_{\mathrm{mass},m}\)</span> is the elemental mass fraction of
+element <span class="math">\(m\)</span> in the mixture, and <span class="math">\(Z_{\mathrm{mass},m,\mathrm{ox}}\)</span>
+and <span class="math">\(Z_{\mathrm{mass},\mathrm{fuel}}\)</span> are the elemental mass fractions of
+the oxidizer and fuel, or from the Bilger mixture fraction
+(<code class="docutils literal notranslate"><span class="pre">element=&quot;Bilger&quot;</span></code>), which considers the elements C, S, H and O
+(R. W. Bilger, “Turbulent jet diffusion flames,” Prog. Energy Combust. Sci.,
+109-131 (1979)). The Bilger mixture fraction is computed by default:</p>
+<div class="math">
+\[Z_m = Z_{\mathrm{Bilger}} = \frac{\beta-\beta_{\mathrm{ox}}}
+{\beta_{\mathrm{fuel}}-\beta_{\mathrm{ox}}}
+
+\]</div>
+<p>with</p>
+<div class="math">
+\[\beta = 2\frac{Z_C}{M_C}+2\frac{Z_S}{M_S}+\frac{1}{2}\frac{Z_H}{M_H}
+- \frac{Z_O}{M_O}
+
+\]</div>
+<p>and <span class="math">\(M_m\)</span> the atomic weight of element <span class="math">\(m\)</span>.
+For more information, see <a class="reference external" href="https://cantera.org/examples/python/thermo/equivalenceRatio.py.html">Python example</a>.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">set_mixture_fraction</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;CH3:0.5, CH3OH:0.5, N2:0.125&#39;</span><span class="p">,</span> <span class="s1">&#39;O2:0.21, N2:0.79, NO:0.01&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">mixture_fraction</span><span class="p">(</span><span class="s1">&#39;CH3:0.5, CH3OH:0.5, N2:0.125&#39;</span><span class="p">,</span> <span class="s1">&#39;O2:0.21, N2:0.79, NO:.01&#39;</span><span class="p">)</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fuel</strong> – Fuel species name or mole/mass fractions as string, array, or dict.</p></li>
+<li><p><strong>oxidizer</strong> – Oxidizer species name or mole/mass fractions as a string, array, or
+dict.</p></li>
+<li><p><strong>basis</strong> – Determines if <code class="docutils literal notranslate"><span class="pre">fuel</span></code> and <code class="docutils literal notranslate"><span class="pre">oxidizer</span></code> are given in mole
+fractions (<code class="docutils literal notranslate"><span class="pre">basis='mole'</span></code>) or mass fractions (<code class="docutils literal notranslate"><span class="pre">basis='mass'</span></code>)</p></li>
+<li><p><strong>element</strong> – Computes the mixture fraction from the specified elemental
+mass fraction (given by element name or element index) or as
+the Bilger mixture fraction (default)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.modify_species">
+<span class="sig-name descname"><span class="pre">modify_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.modify_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modify the thermodynamic data associated with a species. The species name,
+elemental composition, and type of thermo parameterization must be unchanged.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.mole_fraction_dict">
+<span class="sig-name descname"><span class="pre">mole_fraction_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.mole_fraction_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary giving the mole fraction for each species by name where the
+mole fraction is greater than <code class="docutils literal notranslate"><span class="pre">threshold</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.molecular_weights">
+<span class="sig-name descname"><span class="pre">molecular_weights</span></span><a class="headerlink" href="#cantera.ThermoPhase.molecular_weights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of species molecular weights (molar masses) [kg/kmol].</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.n_atoms">
+<span class="sig-name descname"><span class="pre">n_atoms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">species</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.n_atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of atoms of element <code class="docutils literal notranslate"><span class="pre">element</span></code> in species <code class="docutils literal notranslate"><span class="pre">species</span></code>. The element
+and species may be specified by name or by index.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">phase</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">(</span><span class="s1">&#39;CH4&#39;</span><span class="p">,</span><span class="s1">&#39;H&#39;</span><span class="p">)</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.n_electron_energy_levels">
+<span class="sig-name descname"><span class="pre">n_electron_energy_levels</span></span><a class="headerlink" href="#cantera.ThermoPhase.n_electron_energy_levels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of electron energy levels</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.n_elements">
+<span class="sig-name descname"><span class="pre">n_elements</span></span><a class="headerlink" href="#cantera.ThermoPhase.n_elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of elements.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.n_selected_species">
+<span class="sig-name descname"><span class="pre">n_selected_species</span></span><a class="headerlink" href="#cantera.ThermoPhase.n_selected_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of species selected for output (by slicing of Solution object)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.n_species">
+<span class="sig-name descname"><span class="pre">n_species</span></span><a class="headerlink" href="#cantera.ThermoPhase.n_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of species.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.normalize_electron_energy_distribution_enabled">
+<span class="sig-name descname"><span class="pre">normalize_electron_energy_distribution_enabled</span></span><a class="headerlink" href="#cantera.ThermoPhase.normalize_electron_energy_distribution_enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Automatically normalize electron energy distribution</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.partial_molar_cp">
+<span class="sig-name descname"><span class="pre">partial_molar_cp</span></span><a class="headerlink" href="#cantera.ThermoPhase.partial_molar_cp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of species partial molar specific heat capacities at constant
+pressure [J/kmol/K].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.partial_molar_enthalpies">
+<span class="sig-name descname"><span class="pre">partial_molar_enthalpies</span></span><a class="headerlink" href="#cantera.ThermoPhase.partial_molar_enthalpies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of species partial molar enthalpies [J/kmol].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.partial_molar_entropies">
+<span class="sig-name descname"><span class="pre">partial_molar_entropies</span></span><a class="headerlink" href="#cantera.ThermoPhase.partial_molar_entropies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of species partial molar entropies [J/kmol/K].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.partial_molar_int_energies">
+<span class="sig-name descname"><span class="pre">partial_molar_int_energies</span></span><a class="headerlink" href="#cantera.ThermoPhase.partial_molar_int_energies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of species partial molar internal energies [J/kmol].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.partial_molar_volumes">
+<span class="sig-name descname"><span class="pre">partial_molar_volumes</span></span><a class="headerlink" href="#cantera.ThermoPhase.partial_molar_volumes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of species partial molar volumes [m^3/kmol].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.phase_of_matter">
+<span class="sig-name descname"><span class="pre">phase_of_matter</span></span><a class="headerlink" href="#cantera.ThermoPhase.phase_of_matter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the thermodynamic phase (gas, liquid, etc.) at the current conditions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.quadrature_method">
+<span class="sig-name descname"><span class="pre">quadrature_method</span></span><a class="headerlink" href="#cantera.ThermoPhase.quadrature_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Quadrature method</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.reference_pressure">
+<span class="sig-name descname"><span class="pre">reference_pressure</span></span><a class="headerlink" href="#cantera.ThermoPhase.reference_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference state pressure [Pa].</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.report">
+<span class="sig-name descname"><span class="pre">report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">show_thermo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a report describing the thermodynamic state of this phase. To
+print the report to the terminal, simply call the phase object. The
+following two statements are equivalent:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">phase</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">phase</span><span class="o">.</span><span class="n">report</span><span class="p">())</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.s">
+<span class="sig-name descname"><span class="pre">s</span></span><a class="headerlink" href="#cantera.ThermoPhase.s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Entropy [J/kg/K or J/kmol/K] depending on <a class="reference internal" href="#cantera.ThermoPhase.basis" title="cantera.ThermoPhase.basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basis</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.set_discretized_electron_energy_distribution">
+<span class="sig-name descname"><span class="pre">set_discretized_electron_energy_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">levels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distribution</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.set_discretized_electron_energy_distribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set electron energy distribution. When this method is used, electron
+temperature is calculated from the distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>levels</strong> – vector of electron energy levels [eV]</p></li>
+<li><p><strong>distribution</strong> – vector of distribution</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.set_equivalence_ratio">
+<span class="sig-name descname"><span class="pre">set_equivalence_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oxidizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diluent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fraction</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.set_equivalence_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the composition to a mixture of <code class="docutils literal notranslate"><span class="pre">fuel</span></code> and <code class="docutils literal notranslate"><span class="pre">oxidizer</span></code> at the
+specified equivalence ratio <code class="docutils literal notranslate"><span class="pre">phi</span></code>, holding temperature and pressure
+constant. Considers the oxidation of C to CO2, H to H2O and S to SO2.
+Other elements are assumed not to participate in oxidation (that is,
+N ends up as N2). The <code class="docutils literal notranslate"><span class="pre">basis</span></code> determines the fuel and oxidizer
+compositions: <code class="docutils literal notranslate"><span class="pre">basis='mole'</span></code> means mole fractions (default),
+<code class="docutils literal notranslate"><span class="pre">basis='mass'</span></code> means mass fractions. The fuel/oxidizer mixture can be
+be diluted by a <code class="docutils literal notranslate"><span class="pre">diluent</span></code> based on a mixing <code class="docutils literal notranslate"><span class="pre">fraction</span></code>. The amount of
+diluent is quantified as a fraction of fuel, oxidizer or the fuel/oxidizer
+mixture. For more information, see <a class="reference external" href="https://cantera.org/examples/python/thermo/equivalenceRatio.py.html">Python example</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">set_equivalence_ratio</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;CH4&#39;</span><span class="p">,</span> <span class="s1">&#39;O2:1.0, N2:3.76&#39;</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;mole&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">mass_fraction_dict</span><span class="p">()</span>
+<span class="go">{&#39;CH4&#39;: 0.02837633052851, &#39;N2&#39;: 0.7452356312613, &#39;O2&#39;: 0.22638803821018}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">set_equivalence_ratio</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="s1">&#39;NH3:0.8,CO:0.2&#39;</span><span class="p">,</span> <span class="s1">&#39;O2:1&#39;</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;mole&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">mass_fraction_dict</span><span class="p">()</span>
+<span class="go">{&#39;CO&#39;: 0.14784006249290, &#39;NH3&#39;: 0.35956645545401, &#39;O2&#39;: 0.49259348205308}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phi</strong> – Equivalence ratio</p></li>
+<li><p><strong>fuel</strong> – Fuel species name or mole/mass fractions as string, array, or dict.</p></li>
+<li><p><strong>oxidizer</strong> – Oxidizer species name or mole/mass fractions as a string, array, or dict.</p></li>
+<li><p><strong>basis</strong> – Determines if <code class="docutils literal notranslate"><span class="pre">fuel</span></code> and <code class="docutils literal notranslate"><span class="pre">oxidizer</span></code> are given in mole
+fractions (<code class="docutils literal notranslate"><span class="pre">basis='mole'</span></code>) or mass fractions (<code class="docutils literal notranslate"><span class="pre">basis='mass'</span></code>).</p></li>
+<li><p><strong>diluent</strong> – Optional parameter. Required if dilution is used. Specifies the composition
+of the diluent in mole/mass fractions as a string, array or dict.</p></li>
+<li><p><strong>fraction</strong> – Optional parameter. Dilutes the fuel/oxidizer mixture with the diluent
+according to <code class="docutils literal notranslate"><span class="pre">fraction</span></code>. Fraction can refer to the fraction of diluent in
+the  mixture (for example <code class="docutils literal notranslate"><span class="pre">fraction=&quot;diluent:0.7&quot;</span></code> will create a mixture
+with 30 % fuel/oxidizer and 70 % diluent), the fraction of fuel in the
+mixture (for example <code class="docutils literal notranslate"><span class="pre">fraction=&quot;fuel:0.1&quot;</span></code> means that the mixture contains
+10 % fuel. The amount of oxidizer is determined from the equivalence ratio
+and the remaining mixture is the diluent) or fraction of oxidizer in the
+mixture (for example <code class="docutils literal notranslate"><span class="pre">fraction=&quot;oxidizer:0.1&quot;</span></code>). The fraction itself is
+interpreted as mole or mass fraction based on <code class="docutils literal notranslate"><span class="pre">basis</span></code>. The diluent is not
+considered in the computation of the equivalence ratio. Default is no
+dilution or <code class="docutils literal notranslate"><span class="pre">fraction=None</span></code>. May be given as string or dictionary (for
+example <code class="docutils literal notranslate"><span class="pre">fraction={&quot;fuel&quot;:0.7}</span></code>).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.set_mixture_fraction">
+<span class="sig-name descname"><span class="pre">set_mixture_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mixture_fraction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oxidizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.set_mixture_fraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the composition to a mixture of <code class="docutils literal notranslate"><span class="pre">fuel</span></code> and <code class="docutils literal notranslate"><span class="pre">oxidizer</span></code> at the
+specified mixture fraction <code class="docutils literal notranslate"><span class="pre">mixture_fraction</span></code> (kg fuel / kg mixture), holding
+temperature and pressure constant. Considers the oxidation of C to CO2,
+H to H2O and S to SO2. Other elements are assumed not to participate in
+oxidation (that is, N ends up as N2). The <code class="docutils literal notranslate"><span class="pre">basis</span></code> determines the composition
+of fuel and oxidizer: <code class="docutils literal notranslate"><span class="pre">basis='mole'</span></code> (default) means mole fractions,
+<code class="docutils literal notranslate"><span class="pre">basis='mass'</span></code> means mass fractions. For more information, see <a class="reference external" href="https://cantera.org/examples/python/thermo/equivalenceRatio.py.html">Python
+example</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">set_mixture_fraction</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;CH4&#39;</span><span class="p">,</span> <span class="s1">&#39;O2:1.0, N2:3.76&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">mass_fraction_dict</span><span class="p">()</span>
+<span class="go">{&#39;CH4&#39;: 0.5, &#39;N2&#39;: 0.38350014242997776, &#39;O2&#39;: 0.11649985757002226}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">set_mixture_fraction</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;NH3&#39;</span><span class="p">:</span><span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;CO&#39;</span><span class="p">:</span><span class="mf">0.2</span><span class="p">},</span> <span class="s1">&#39;O2:1.0&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">mass_fraction_dict</span><span class="p">()</span>
+<span class="go">{&#39;CO&#39;: 0.145682068778996, &#39;NH3&#39;: 0.354317931221004, &#39;O2&#39;: 0.5}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mixture_fraction</strong> – Mixture fraction (kg fuel / kg mixture)</p></li>
+<li><p><strong>fuel</strong> – Fuel species name or mole/mass fractions as string, array, or dict.</p></li>
+<li><p><strong>oxidizer</strong> – Oxidizer species name or mole/mass fractions as a string, array, or
+dict.</p></li>
+<li><p><strong>basis</strong> – determines if <code class="docutils literal notranslate"><span class="pre">fuel</span></code> and <code class="docutils literal notranslate"><span class="pre">oxidizer</span></code> are given in mole
+fractions (<code class="docutils literal notranslate"><span class="pre">basis='mole'</span></code>) or mass fractions (<code class="docutils literal notranslate"><span class="pre">basis='mass'</span></code>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.set_unnormalized_mass_fractions">
+<span class="sig-name descname"><span class="pre">set_unnormalized_mass_fractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.set_unnormalized_mass_fractions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the mass fractions without normalizing to force <code class="docutils literal notranslate"><span class="pre">sum(Y)</span> <span class="pre">==</span> <span class="pre">1.0</span></code>.
+Useful primarily when calculating derivatives with respect to <code class="docutils literal notranslate"><span class="pre">Y[k]</span></code> by
+finite difference.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.set_unnormalized_mole_fractions">
+<span class="sig-name descname"><span class="pre">set_unnormalized_mole_fractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.set_unnormalized_mole_fractions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the mole fractions without normalizing to force <code class="docutils literal notranslate"><span class="pre">sum(X)</span> <span class="pre">==</span> <span class="pre">1.0</span></code>.
+Useful primarily when calculating derivatives with respect to <code class="docutils literal notranslate"><span class="pre">X[k]</span></code>
+by finite difference.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.sound_speed">
+<span class="sig-name descname"><span class="pre">sound_speed</span></span><a class="headerlink" href="#cantera.ThermoPhase.sound_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Speed of sound [m/s].</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.species">
+<span class="sig-name descname"><span class="pre">species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.species" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the <a class="reference internal" href="#cantera.Species" title="cantera.Species"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Species</span></code></a> object for species <code class="docutils literal notranslate"><span class="pre">k</span></code>, where <code class="docutils literal notranslate"><span class="pre">k</span></code> is either the
+species index or the species name. If <code class="docutils literal notranslate"><span class="pre">k</span></code> is not specified, a list of
+all species objects is returned. Changes to this object do not affect
+the <a class="reference internal" href="#cantera.ThermoPhase" title="cantera.ThermoPhase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ThermoPhase</span></code></a> or <a class="reference internal" href="importing.html#cantera.Solution" title="cantera.Solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution</span></code></a> object until the <a class="reference internal" href="#cantera.ThermoPhase.modify_species" title="cantera.ThermoPhase.modify_species"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modify_species</span></code></a>
+function is called.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.species_index">
+<span class="sig-name descname"><span class="pre">species_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">species</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.species_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>The index of species <code class="docutils literal notranslate"><span class="pre">species</span></code>, which may be specified as a string or
+an integer. In the latter case, the index is checked for validity and
+returned. If no such species is present, an exception is thrown.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.species_name">
+<span class="sig-name descname"><span class="pre">species_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.species_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the species with index <code class="docutils literal notranslate"><span class="pre">k</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.species_names">
+<span class="sig-name descname"><span class="pre">species_names</span></span><a class="headerlink" href="#cantera.ThermoPhase.species_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of all the species names.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.standard_concentration_units">
+<span class="sig-name descname"><span class="pre">standard_concentration_units</span></span><a class="headerlink" href="#cantera.ThermoPhase.standard_concentration_units" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get standard concentration units for this phase.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.standard_cp_R">
+<span class="sig-name descname"><span class="pre">standard_cp_R</span></span><a class="headerlink" href="#cantera.ThermoPhase.standard_cp_R" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of nondimensional species standard-state specific heat capacities
+at constant pressure at the current temperature and pressure.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.standard_enthalpies_RT">
+<span class="sig-name descname"><span class="pre">standard_enthalpies_RT</span></span><a class="headerlink" href="#cantera.ThermoPhase.standard_enthalpies_RT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of nondimensional species standard-state enthalpies at the
+current temperature and pressure.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.standard_entropies_R">
+<span class="sig-name descname"><span class="pre">standard_entropies_R</span></span><a class="headerlink" href="#cantera.ThermoPhase.standard_entropies_R" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of nondimensional species standard-state entropies at the
+current temperature and pressure.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.standard_gibbs_RT">
+<span class="sig-name descname"><span class="pre">standard_gibbs_RT</span></span><a class="headerlink" href="#cantera.ThermoPhase.standard_gibbs_RT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of nondimensional species standard-state Gibbs free energies at
+the current temperature and pressure.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.standard_int_energies_RT">
+<span class="sig-name descname"><span class="pre">standard_int_energies_RT</span></span><a class="headerlink" href="#cantera.ThermoPhase.standard_int_energies_RT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of nondimensional species standard-state internal energies at the
+current temperature and pressure.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.state">
+<span class="sig-name descname"><span class="pre">state</span></span><a class="headerlink" href="#cantera.ThermoPhase.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the full thermodynamic state as a single array, arranged as
+[temperature, density, mass fractions] for most phases. Useful mainly
+in cases where it is desired to store many states in a multidimensional
+array.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.state_size">
+<span class="sig-name descname"><span class="pre">state_size</span></span><a class="headerlink" href="#cantera.ThermoPhase.state_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return size of vector defining internal state of the phase.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.stoich_air_fuel_ratio">
+<span class="sig-name descname"><span class="pre">stoich_air_fuel_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fuel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oxidizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoPhase.stoich_air_fuel_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the stoichiometric air to fuel ratio (kg oxidizer / kg fuel). Considers the
+oxidation of C to CO2, H to H2O and S to SO2. Other elements are assumed
+not to participate in oxidation (that is, N ends up as N2).
+The <code class="docutils literal notranslate"><span class="pre">basis</span></code> determines the composition of fuel and oxidizer: <code class="docutils literal notranslate"><span class="pre">basis='mole'</span></code> (default)
+means mole fractions, <code class="docutils literal notranslate"><span class="pre">basis='mass'</span></code> means mass fractions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">set_mixture_fraction</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;CH3:0.5, CH3OH:.5, N2:0.125&#39;</span><span class="p">,</span> <span class="s1">&#39;O2:0.21, N2:0.79, NO:0.01&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">stoich_air_fuel_ratio</span><span class="p">(</span><span class="s1">&#39;CH3:0.5, CH3OH:.5, N2:0.125&#39;</span><span class="p">,</span> <span class="s1">&#39;O2:0.21, N2:0.79, NO:0.01&#39;</span><span class="p">)</span>
+<span class="go">8.148040722239438</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fuel</strong> – Fuel species name or mole/mass fractions as string, array, or dict.</p></li>
+<li><p><strong>oxidizer</strong> – Oxidizer species name or mole/mass fractions as a string, array, or
+dict.</p></li>
+<li><p><strong>basis</strong> – Determines if <code class="docutils literal notranslate"><span class="pre">fuel</span></code> and <code class="docutils literal notranslate"><span class="pre">oxidizer</span></code> are given in mole
+fractions (<code class="docutils literal notranslate"><span class="pre">basis='mole'</span></code>) or mass fractions (<code class="docutils literal notranslate"><span class="pre">basis='mass'</span></code>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.thermal_expansion_coeff">
+<span class="sig-name descname"><span class="pre">thermal_expansion_coeff</span></span><a class="headerlink" href="#cantera.ThermoPhase.thermal_expansion_coeff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thermal expansion coefficient [1/K].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.thermo_model">
+<span class="sig-name descname"><span class="pre">thermo_model</span></span><a class="headerlink" href="#cantera.ThermoPhase.thermo_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return thermodynamic model describing phase.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.u">
+<span class="sig-name descname"><span class="pre">u</span></span><a class="headerlink" href="#cantera.ThermoPhase.u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal energy in [J/kg or J/kmol].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.v">
+<span class="sig-name descname"><span class="pre">v</span></span><a class="headerlink" href="#cantera.ThermoPhase.v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specific volume [m^3/kg or m^3/kmol] depending on <a class="reference internal" href="#cantera.ThermoPhase.basis" title="cantera.ThermoPhase.basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basis</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.volume_mass">
+<span class="sig-name descname"><span class="pre">volume_mass</span></span><a class="headerlink" href="#cantera.ThermoPhase.volume_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specific volume [m^3/kg].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ThermoPhase.volume_mole">
+<span class="sig-name descname"><span class="pre">volume_mole</span></span><a class="headerlink" href="#cantera.ThermoPhase.volume_mole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molar volume [m^3/kmol].</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="interfacephase">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">InterfacePhase</a><a class="headerlink" href="#interfacephase" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.InterfacePhase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">InterfacePhase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjacent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaml</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thermo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.InterfacePhase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.ThermoPhase" title="cantera.thermo.ThermoPhase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThermoPhase</span></code></a></p>
+<p>A class representing a surface, edge phase</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.InterfacePhase.adjacent">
+<span class="sig-name descname"><span class="pre">adjacent</span></span><a class="headerlink" href="#cantera.InterfacePhase.adjacent" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary containing higher-dimensional phases adjacent to this interface,
+for example bulk phases adjacent to a surface.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.InterfacePhase.coverages">
+<span class="sig-name descname"><span class="pre">coverages</span></span><a class="headerlink" href="#cantera.InterfacePhase.coverages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the fraction of sites covered by each species.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.InterfacePhase.set_unnormalized_coverages">
+<span class="sig-name descname"><span class="pre">set_unnormalized_coverages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cov</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.InterfacePhase.set_unnormalized_coverages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the surface coverages without normalizing to force sum(cov) == 1.0.
+Useful primarily when calculating derivatives with respect to cov[k] by
+finite difference.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.InterfacePhase.site_density">
+<span class="sig-name descname"><span class="pre">site_density</span></span><a class="headerlink" href="#cantera.InterfacePhase.site_density" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the site density. [kmol/m^2] for surface phases; [kmol/m] for
+edge phases.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="purefluid">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">PureFluid</a><a class="headerlink" href="#purefluid" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.PureFluid">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">PureFluid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.PureFluid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.ThermoPhase" title="cantera.thermo.ThermoPhase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThermoPhase</span></code></a></p>
+<p>A pure substance that can  be a gas, a liquid, a mixed gas-liquid fluid,
+or a fluid beyond its critical point.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.DPQ">
+<span class="sig-name descname"><span class="pre">DPQ</span></span><a class="headerlink" href="#cantera.PureFluid.DPQ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the density [kg/m^3], pressure [Pa], and vapor fraction.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.HPQ">
+<span class="sig-name descname"><span class="pre">HPQ</span></span><a class="headerlink" href="#cantera.PureFluid.HPQ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the enthalpy [J/kg or J/kmol], pressure [Pa] and vapor fraction.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.PQ">
+<span class="sig-name descname"><span class="pre">PQ</span></span><a class="headerlink" href="#cantera.PureFluid.PQ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the pressure [Pa] and vapor fraction of a two-phase state.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.PV">
+<span class="sig-name descname"><span class="pre">PV</span></span><a class="headerlink" href="#cantera.PureFluid.PV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the pressure [Pa] and specific volume [m^3/kg] of
+a PureFluid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.Q">
+<span class="sig-name descname"><span class="pre">Q</span></span><a class="headerlink" href="#cantera.PureFluid.Q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set vapor fraction (quality). Can be set only when in the two-phase
+region.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.SH">
+<span class="sig-name descname"><span class="pre">SH</span></span><a class="headerlink" href="#cantera.PureFluid.SH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the specific entropy [J/kg/K] and the specific
+enthalpy [J/kg] of a PureFluid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.SPQ">
+<span class="sig-name descname"><span class="pre">SPQ</span></span><a class="headerlink" href="#cantera.PureFluid.SPQ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the entropy [J/kg/K or J/kmol/K], pressure [Pa], and vapor fraction.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.ST">
+<span class="sig-name descname"><span class="pre">ST</span></span><a class="headerlink" href="#cantera.PureFluid.ST" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the entropy [J/kg/K] and temperature [K] of a PureFluid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.SVQ">
+<span class="sig-name descname"><span class="pre">SVQ</span></span><a class="headerlink" href="#cantera.PureFluid.SVQ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the entropy [J/kg/K or J/kmol/K], specific volume [m^3/kg or
+m^3/kmol], and vapor fraction.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.TDQ">
+<span class="sig-name descname"><span class="pre">TDQ</span></span><a class="headerlink" href="#cantera.PureFluid.TDQ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the temperature [K], density [kg/m^3 or kmol/m^3], and vapor
+fraction.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.TH">
+<span class="sig-name descname"><span class="pre">TH</span></span><a class="headerlink" href="#cantera.PureFluid.TH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the temperature [K] and the specific enthalpy [J/kg]
+of a PureFluid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.TPQ">
+<span class="sig-name descname"><span class="pre">TPQ</span></span><a class="headerlink" href="#cantera.PureFluid.TPQ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the temperature [K], pressure [Pa], and vapor fraction of a
+PureFluid.</p>
+<p>An Exception is raised if the thermodynamic state is not consistent.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.TQ">
+<span class="sig-name descname"><span class="pre">TQ</span></span><a class="headerlink" href="#cantera.PureFluid.TQ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the temperature [K] and vapor fraction of a two-phase state.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.TV">
+<span class="sig-name descname"><span class="pre">TV</span></span><a class="headerlink" href="#cantera.PureFluid.TV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the temperature [K] and specific volume [m^3/kg] of
+a PureFluid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.UP">
+<span class="sig-name descname"><span class="pre">UP</span></span><a class="headerlink" href="#cantera.PureFluid.UP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the specific internal energy [J/kg] and the
+pressure [Pa] of a PureFluid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.UVQ">
+<span class="sig-name descname"><span class="pre">UVQ</span></span><a class="headerlink" href="#cantera.PureFluid.UVQ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the internal energy [J/kg or J/kmol], specific volume
+[m^3/kg or m^3/kmol], and vapor fraction.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.PureFluid.VH">
+<span class="sig-name descname"><span class="pre">VH</span></span><a class="headerlink" href="#cantera.PureFluid.VH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the specific volume [m^3/kg] and the specific
+enthalpy [J/kg] of a PureFluid.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="mixture">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Mixture</a><a class="headerlink" href="#mixture" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.Mixture">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">Mixture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phases</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Mixture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class Mixture represents mixtures of one or more phases of matter.  To
+construct a mixture, supply a list of phases to the constructor, each
+paired with the number of moles for that phase:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span> <span class="o">=</span> <span class="n">cantera</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s2">&quot;gas.yaml&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gas</span><span class="o">.</span><span class="n">species_names</span>
+<span class="go">[&#39;H2&#39;, &#39;H&#39;, &#39;O2&#39;, &#39;O&#39;, &#39;OH&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graphite</span> <span class="o">=</span> <span class="n">cantera</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s2">&quot;graphite.yaml&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graphite</span><span class="o">.</span><span class="n">species_names</span>
+<span class="go">[&#39;C(g)&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mix</span> <span class="o">=</span> <span class="n">cantera</span><span class="o">.</span><span class="n">Mixture</span><span class="p">([(</span><span class="n">gas</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="n">graphite</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mix</span><span class="o">.</span><span class="n">species_names</span>
+<span class="go">[&#39;H2&#39;, &#39;H&#39;, &#39;O2&#39;, &#39;O&#39;, &#39;OH&#39;, &#39;C(g)&#39;]</span>
+</pre></div>
+</div>
+<p>Note that the objects representing each phase compute only the intensive
+state of the phase – they do not store any information on the amount of
+this phase. Mixture objects, on the other hand, represent the full
+extensive state.</p>
+<p>Mixture objects are ‘lightweight’ in the sense that they do not store
+parameters needed to compute thermodynamic or kinetic properties of the
+phases. These are contained in the (‘heavyweight’) phase objects. Multiple
+mixture objects may be constructed using the same set of phase objects.
+Each one stores its own state information locally, and synchronizes the
+phases objects whenever it requires phase properties.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Mixture.P">
+<span class="sig-name descname"><span class="pre">P</span></span><a class="headerlink" href="#cantera.Mixture.P" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the Pressure [Pa] of all phases in the mixture. When set,
+the temperature of the mixture is held fixed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Mixture.T">
+<span class="sig-name descname"><span class="pre">T</span></span><a class="headerlink" href="#cantera.Mixture.T" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the Temperature [K] of all phases in the mixture. When set,
+the pressure of the mixture is held fixed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Mixture.charge">
+<span class="sig-name descname"><span class="pre">charge</span></span><a class="headerlink" href="#cantera.Mixture.charge" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total charge in Coulombs, summed over all phases.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Mixture.chemical_potentials">
+<span class="sig-name descname"><span class="pre">chemical_potentials</span></span><a class="headerlink" href="#cantera.Mixture.chemical_potentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>The chemical potentials of all species [J/kmol].</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Mixture.element_index">
+<span class="sig-name descname"><span class="pre">element_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Mixture.element_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index of element with name ‘element’.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mix</span><span class="o">.</span><span class="n">element_index</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Mixture.element_moles">
+<span class="sig-name descname"><span class="pre">element_moles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Mixture.element_moles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total number of moles of element <code class="docutils literal notranslate"><span class="pre">e</span></code>, summed over all species.
+The element may be referenced either by index number or by name.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Mixture.equilibrate">
+<span class="sig-name descname"><span class="pre">equilibrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">XY</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solver</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rtol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimate_equil</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_level</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Mixture.equilibrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set to a state of chemical equilibrium holding property pair <code class="docutils literal notranslate"><span class="pre">XY</span></code>
+constant. This method uses a version of the VCS algorithm to find the
+composition that minimizes the total Gibbs free energy of the mixture,
+subject to element conservation constraints. For a description of the
+theory, see Smith and Missen, “Chemical Reaction Equilibrium.”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>XY</strong> – <p>A two-letter string, which must be one of the set:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;TP&#39;</span><span class="p">,</span> <span class="s1">&#39;HP&#39;</span><span class="p">,</span> <span class="s1">&#39;SP&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>solver</strong> – Set to either ‘auto’, ‘vcs’, or ‘gibbs’ to choose
+implementation of the solver to use. ‘vcs’ uses the solver
+implemented in the C++ class ‘VCSnonideal’, ‘gibbs’ uses the one
+implemented in class ‘MultiPhaseEquil’. ‘auto’ will try the ‘vcs’
+solver first and then the ‘gibbs’ solver if that fails.</p></li>
+<li><p><strong>rtol</strong> – Error tolerance. Iteration will continue until (Delta mu)/RT is
+less than this value for each reaction. Note that this default is
+very conservative, and good equilibrium solutions may be obtained
+with larger error tolerances.</p></li>
+<li><p><strong>max_steps</strong> – Maximum number of steps to take while solving the equilibrium
+problem for specified <em>T</em> and <em>P</em>.</p></li>
+<li><p><strong>max_iter</strong> – Maximum number of temperature and/or pressure iterations.
+This is only relevant if a property pair other than (T,P) is
+specified.</p></li>
+<li><p><strong>estimate_equil</strong> – Flag indicating whether the solver should estimate its own initial
+condition. If 0, the initial mole fraction vector in the phase
+objects are used as the initial condition. If 1, the initial mole
+fraction vector is used if the element abundances are satisfied.
+if -1, the initial mole fraction vector is thrown out, and an
+estimate is formulated.</p></li>
+<li><p><strong>log_level</strong> – Determines the amount of output displayed during the solution
+process. 0 indicates no output, while larger numbers produce
+successively more verbose information.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Mixture.max_temp">
+<span class="sig-name descname"><span class="pre">max_temp</span></span><a class="headerlink" href="#cantera.Mixture.max_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>The maximum temperature for which all species in multi-species
+solutions have valid thermo data. Stoichiometric phases are not
+considered in determining max_temp.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Mixture.min_temp">
+<span class="sig-name descname"><span class="pre">min_temp</span></span><a class="headerlink" href="#cantera.Mixture.min_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>The minimum temperature for which all species in multi-species
+solutions have valid thermo data. Stoichiometric phases are not
+considered in determining min_temp.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Mixture.n_atoms">
+<span class="sig-name descname"><span class="pre">n_atoms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Mixture.n_atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of atoms of element <code class="docutils literal notranslate"><span class="pre">m</span></code> in the species with global index <code class="docutils literal notranslate"><span class="pre">k</span></code>.
+The element may be referenced either by name or by index.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">mix</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">)</span>
+<span class="go">4.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Mixture.n_elements">
+<span class="sig-name descname"><span class="pre">n_elements</span></span><a class="headerlink" href="#cantera.Mixture.n_elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total number of elements present in the mixture.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Mixture.n_phases">
+<span class="sig-name descname"><span class="pre">n_phases</span></span><a class="headerlink" href="#cantera.Mixture.n_phases" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of phases</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Mixture.n_species">
+<span class="sig-name descname"><span class="pre">n_species</span></span><a class="headerlink" href="#cantera.Mixture.n_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of species.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Mixture.phase">
+<span class="sig-name descname"><span class="pre">phase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Mixture.phase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the ThermoPhase object for phase number <code class="docutils literal notranslate"><span class="pre">n</span></code> in the mixture.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Mixture.phase_charge">
+<span class="sig-name descname"><span class="pre">phase_charge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Mixture.phase_charge" title="Permalink to this definition">¶</a></dt>
+<dd><p>The charge of phase <code class="docutils literal notranslate"><span class="pre">p</span></code> in Coulombs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Mixture.phase_index">
+<span class="sig-name descname"><span class="pre">phase_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Mixture.phase_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index of the phase named <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Mixture.phase_moles">
+<span class="sig-name descname"><span class="pre">phase_moles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Mixture.phase_moles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moles in phase <code class="docutils literal notranslate"><span class="pre">p</span></code>, if <code class="docutils literal notranslate"><span class="pre">p</span></code> is specified, otherwise the number of
+moles in all phases.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Mixture.phase_names">
+<span class="sig-name descname"><span class="pre">phase_names</span></span><a class="headerlink" href="#cantera.Mixture.phase_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Names of all phases in the order added.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Mixture.report">
+<span class="sig-name descname"><span class="pre">report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Mixture.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a report describing the thermodynamic state of this mixture. To
+print the report to the screen, simply call the mixture object. The
+following two statements are equivalent:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mix</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mix</span><span class="o">.</span><span class="n">report</span><span class="p">())</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Mixture.set_phase_moles">
+<span class="sig-name descname"><span class="pre">set_phase_moles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moles</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Mixture.set_phase_moles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number of moles of phase <code class="docutils literal notranslate"><span class="pre">p</span></code> to <code class="docutils literal notranslate"><span class="pre">moles</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Mixture.species_index">
+<span class="sig-name descname"><span class="pre">species_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phase</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Mixture.species_index" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Phase object, index or name</p></li>
+<li><p><strong>species</strong> – Species name or index</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns the global index of species <code class="docutils literal notranslate"><span class="pre">species</span></code> in phase <code class="docutils literal notranslate"><span class="pre">phase</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Mixture.species_moles">
+<span class="sig-name descname"><span class="pre">species_moles</span></span><a class="headerlink" href="#cantera.Mixture.species_moles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the number of moles of each species. May be set either as a
+string or as an array. If an array is used, it must be dimensioned at
+least as large as the total number of species in the mixture. Note that
+the species may belong to any phase, and unspecified species are set to
+zero.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mix</span><span class="o">.</span><span class="n">species_moles</span> <span class="o">=</span> <span class="s1">&#39;C(s):1.0, CH4:2.0, O2:0.2&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Mixture.species_name">
+<span class="sig-name descname"><span class="pre">species_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Mixture.species_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the species with index <code class="docutils literal notranslate"><span class="pre">k</span></code>. Note that index numbers
+are assigned in order as phases are added.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Mixture.species_names">
+<span class="sig-name descname"><span class="pre">species_names</span></span><a class="headerlink" href="#cantera.Mixture.species_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the names of the species from all phases in the mixture</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="species">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Species</a><a class="headerlink" href="#species" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.Species">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">Species</span></span><a class="headerlink" href="#cantera.Species" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A class which stores data about a single chemical species that may be
+needed to add it to a <a class="reference internal" href="importing.html#cantera.Solution" title="cantera.Solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution</span></code></a> or <a class="reference internal" href="importing.html#cantera.Interface" title="cantera.Interface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Interface</span></code></a> object (and to the
+underlying <a class="reference internal" href="#cantera.ThermoPhase" title="cantera.ThermoPhase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ThermoPhase</span></code></a> and <a class="reference internal" href="transport.html#cantera.Transport" title="cantera.Transport"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Transport</span></code></a> objects).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – A string giving the name of the species, such as <code class="docutils literal notranslate"><span class="pre">'CH4'</span></code></p></li>
+<li><p><strong>composition</strong> – The elemental composition of the species, given either as a dict or a
+composition string, such as <code class="docutils literal notranslate"><span class="pre">{'C':1,</span> <span class="pre">'H':4}</span></code> or <code class="docutils literal notranslate"><span class="pre">'C:1,</span> <span class="pre">H:4'</span></code>.</p></li>
+<li><p><strong>charge</strong> – The electrical charge, in units of the elementary charge. Default 0.0.</p></li>
+<li><p><strong>size</strong> – The effective size [m] of the species. Default 1.0.</p></li>
+<li><p><strong>init</strong> – Used internally when wrapping <a class="reference external" href="../../../doxygen/html/d1/d8c/classCantera_1_1Species.html">Species</a> objects returned from C++</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example: creating an ideal gas phase with a single species:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ch4</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="s1">&#39;CH4&#39;</span><span class="p">,</span> <span class="s1">&#39;C:1, H:4&#39;</span><span class="p">)</span>
+<span class="n">ch4</span><span class="o">.</span><span class="n">thermo</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ConstantCp</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">101325</span><span class="p">,</span>
+                           <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.453347e7</span><span class="p">,</span> <span class="mf">1.865912e5</span><span class="p">,</span> <span class="mf">3.576053e4</span><span class="p">))</span>
+<span class="n">tran</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">GasTransportData</span><span class="p">()</span>
+<span class="n">tran</span><span class="o">.</span><span class="n">set_customary_units</span><span class="p">(</span><span class="s1">&#39;nonlinear&#39;</span><span class="p">,</span> <span class="mf">3.75</span><span class="p">,</span> <span class="mf">141.40</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.60</span><span class="p">,</span> <span class="mf">13.00</span><span class="p">)</span>
+<span class="n">ch4</span><span class="o">.</span><span class="n">transport</span> <span class="o">=</span> <span class="n">tran</span>
+<span class="n">gas</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="n">thermo</span><span class="o">=</span><span class="s1">&#39;ideal-gas&#39;</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="p">[</span><span class="n">ch4</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The static methods <a class="reference internal" href="#cantera.Species.list_from_file" title="cantera.Species.list_from_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_from_file</span></code></a> and <a class="reference internal" href="#cantera.Species.list_from_yaml" title="cantera.Species.list_from_yaml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_from_yaml</span></code></a> can be used to create
+<a class="reference internal" href="#cantera.Species" title="cantera.Species"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Species</span></code></a> objects from existing definitions in the YAML format. Either of the
+following will produce a list of 53 <a class="reference internal" href="#cantera.Species" title="cantera.Species"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Species</span></code></a> objects containing the species defined
+in the GRI 3.0 mechanism:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Species</span><span class="o">.</span><span class="n">list_from_file</span><span class="p">(</span><span class="s2">&quot;gri30.yaml&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Species</span><span class="o">.</span><span class="n">list_from_yaml</span><span class="p">(</span>
+    <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;path/to/gri30.yaml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(),</span>
+    <span class="n">section</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Species.charge">
+<span class="sig-name descname"><span class="pre">charge</span></span><a class="headerlink" href="#cantera.Species.charge" title="Permalink to this definition">¶</a></dt>
+<dd><p>The electrical charge on the species, in units of the elementary charge.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Species.clear_user_data">
+<span class="sig-name descname"><span class="pre">clear_user_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Species.clear_user_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear all saved input data, so that the data given by <a class="reference internal" href="#cantera.Species.input_data" title="cantera.Species.input_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_data</span></code></a> or
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution.write_yaml</span></code> will only include values generated by Cantera based on
+the current object state.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Species.composition">
+<span class="sig-name descname"><span class="pre">composition</span></span><a class="headerlink" href="#cantera.Species.composition" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dict containing the elemental composition of the species. Keys are
+element names; values are the corresponding atomicities.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Species.from_dict">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Species.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <a class="reference internal" href="#cantera.Species" title="cantera.Species"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Species</span></code></a> object from a dictionary corresponding to its YAML
+representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – A dictionary corresponding to the YAML representation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Species.from_yaml">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Species.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <a class="reference internal" href="#cantera.Species" title="cantera.Species"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Species</span></code></a> object from its YAML string representation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Species.input_data">
+<span class="sig-name descname"><span class="pre">input_data</span></span><a class="headerlink" href="#cantera.Species.input_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get input data defining this Species, along with any user-specified data
+provided with its input (YAML) definition.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Species.list_from_file">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">list_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">section</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Species.list_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a list of Species objects from all of the species defined in the section
+<code class="docutils literal notranslate"><span class="pre">section</span></code> of a YAML file. Directories on Cantera’s input file path will be
+searched for the specified file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Species.list_from_yaml">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">list_from_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">section</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Species.list_from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a list of Species objects from all the species defined in a YAML
+string. If <code class="docutils literal notranslate"><span class="pre">text</span></code> is a YAML mapping, the <code class="docutils literal notranslate"><span class="pre">section</span></code> name of the list
+to be read must be specified. If <code class="docutils literal notranslate"><span class="pre">text</span></code> is a YAML list, no <code class="docutils literal notranslate"><span class="pre">section</span></code>
+name should be supplied.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Species.molecular_weight">
+<span class="sig-name descname"><span class="pre">molecular_weight</span></span><a class="headerlink" href="#cantera.Species.molecular_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>The molecular weight [amu] of the species.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Species.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#cantera.Species.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the species.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Species.size">
+<span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#cantera.Species.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The effective size [m] of the species.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Species.thermo">
+<span class="sig-name descname"><span class="pre">thermo</span></span><a class="headerlink" href="#cantera.Species.thermo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the species reference-state thermodynamic data, as an instance
+of class <a class="reference internal" href="#cantera.SpeciesThermo" title="cantera.SpeciesThermo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpeciesThermo</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Species.transport">
+<span class="sig-name descname"><span class="pre">transport</span></span><a class="headerlink" href="#cantera.Species.transport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get/Set the species transport parameters, as an instance of class
+<a class="reference internal" href="transport.html#cantera.GasTransportData" title="cantera.GasTransportData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GasTransportData</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Species.update_user_data">
+<span class="sig-name descname"><span class="pre">update_user_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Species.update_user_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the contents of the provided <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> as additional fields when generating
+YAML phase definition files with <code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution.write_yaml</span></code> or in the data returned
+by <a class="reference internal" href="#cantera.Species.input_data" title="cantera.Species.input_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_data</span></code></a>. Existing keys with matching names are overwritten.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="species-thermodynamic-properties">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Species Thermodynamic Properties</a><a class="headerlink" href="#species-thermodynamic-properties" title="Permalink to this heading">¶</a></h2>
+<p>These classes are used to describe the reference-state thermodynamic properties
+of a pure species.</p>
+<section id="speciesthermo">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">SpeciesThermo</a><a class="headerlink" href="#speciesthermo" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.SpeciesThermo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">SpeciesThermo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_high</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P_ref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coeffs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.SpeciesThermo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Base class for representing the reference-state thermodynamic properties of
+a pure species. These properties are a function of temperature. Derived
+classes implement a parameterization of this temperature dependence. This is
+a wrapper for the C++ class <a class="reference external" href="../../../doxygen/html/dc/de2/classCantera_1_1SpeciesThermoInterpType.html">SpeciesThermoInterpType</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T_low</strong> – The minimum temperature [K] at which the parameterization is valid</p></li>
+<li><p><strong>T_high</strong> – The maximum temperature [K] at which the parameterization is valid</p></li>
+<li><p><strong>P_ref</strong> – The reference pressure [Pa] for the parameterization</p></li>
+<li><p><strong>coeffs</strong> – An array of coefficients for the parameterization. The length of this
+array and the meaning of each element depends on the specific
+parameterization.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.SpeciesThermo.clear_user_data">
+<span class="sig-name descname"><span class="pre">clear_user_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cantera.SpeciesThermo.clear_user_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear all saved input data, so that the data given by <a class="reference internal" href="#cantera.SpeciesThermo.input_data" title="cantera.SpeciesThermo.input_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_data</span></code></a> or
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution.write_yaml</span></code> will only include values generated by Cantera based on
+the current object state.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.SpeciesThermo.coeffs">
+<span class="sig-name descname"><span class="pre">coeffs</span></span><a class="headerlink" href="#cantera.SpeciesThermo.coeffs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of coefficients for the parameterization. The length of this
+array and the meaning of each element depends on the specific
+parameterization.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.SpeciesThermo.cp">
+<span class="sig-name descname"><span class="pre">cp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.SpeciesThermo.cp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molar heat capacity at constant pressure [J/kmol/K] at temperature <em>T</em>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.SpeciesThermo.h">
+<span class="sig-name descname"><span class="pre">h</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.SpeciesThermo.h" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molar enthalpy [J/kmol] at temperature <em>T</em></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.SpeciesThermo.input_data">
+<span class="sig-name descname"><span class="pre">input_data</span></span><a class="headerlink" href="#cantera.SpeciesThermo.input_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get input data defining this SpeciesThermo object, along with any user-specified
+data provided with its input (YAML) definition.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.SpeciesThermo.max_temp">
+<span class="sig-name descname"><span class="pre">max_temp</span></span><a class="headerlink" href="#cantera.SpeciesThermo.max_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum temperature [K] at which the parameterization is valid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.SpeciesThermo.min_temp">
+<span class="sig-name descname"><span class="pre">min_temp</span></span><a class="headerlink" href="#cantera.SpeciesThermo.min_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum temperature [K] at which the parameterization is valid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.SpeciesThermo.n_coeffs">
+<span class="sig-name descname"><span class="pre">n_coeffs</span></span><a class="headerlink" href="#cantera.SpeciesThermo.n_coeffs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of parameters for the parameterization.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.SpeciesThermo.reference_pressure">
+<span class="sig-name descname"><span class="pre">reference_pressure</span></span><a class="headerlink" href="#cantera.SpeciesThermo.reference_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference pressure [Pa] for the parameterization.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.SpeciesThermo.s">
+<span class="sig-name descname"><span class="pre">s</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.SpeciesThermo.s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molar entropy [J/kmol/K] at temperature <em>T</em></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.SpeciesThermo.update_user_data">
+<span class="sig-name descname"><span class="pre">update_user_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.SpeciesThermo.update_user_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the contents of the provided <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> as additional fields when generating
+YAML phase definition files with <code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution.write_yaml</span></code> or in the data returned
+by <a class="reference internal" href="#cantera.SpeciesThermo.input_data" title="cantera.SpeciesThermo.input_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_data</span></code></a>. Existing keys with matching names are overwritten.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="constantcp">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">ConstantCp</a><a class="headerlink" href="#constantcp" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ConstantCp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">ConstantCp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_high</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P_ref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coeffs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ConstantCp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.SpeciesThermo" title="cantera.speciesthermo.SpeciesThermo"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeciesThermo</span></code></a></p>
+<p>Thermodynamic properties for a species that has a constant specific heat
+capacity. This is a wrapper for the C++ class <a class="reference external" href="../../../doxygen/html/df/d7e/classCantera_1_1ConstCpPoly.html">ConstCpPoly</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>coeffs</strong> – <p>An array of 4 elements:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[0]</span></code> = <span class="math">\(T_0\)</span> [K]</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[1]</span></code> = <span class="math">\(H^o(T_0, p_{ref})\)</span> [J/kmol]</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[2]</span></code> = <span class="math">\(S^o(T_0, p_{ref})\)</span> [J/kmol-K]</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[3]</span></code> = <span class="math">\(c_p^o(T_0, p_{ref})\)</span> [J/kmol-K]</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="mu0poly">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Mu0Poly</a><a class="headerlink" href="#mu0poly" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.Mu0Poly">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">Mu0Poly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_high</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P_ref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coeffs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Mu0Poly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.SpeciesThermo" title="cantera.speciesthermo.SpeciesThermo"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeciesThermo</span></code></a></p>
+<p>Thermodynamic properties for a species which is parameterized using an
+interpolation of the Gibbs free energy based on a piecewise constant heat
+capacity approximation. This is a wrapper for the C++ class <a class="reference external" href="../../../doxygen/html/d4/d9e/classCantera_1_1Mu0Poly.html">Mu0Poly</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>coeffs</strong> – <p>An array of 2+2*npoints elements, in the following order:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[0]</span></code>: number of points (integer)</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[1]</span></code>: h^o(298.15 K) [J/kmol]</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[2]</span></code>: T_1 [Kelvin]</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[3]</span></code>: mu^o(T_1) [J/kmol]</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[4]</span></code>: T_2 [Kelvin]</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[5]</span></code>: mu^o(T_2) [J/kmol]</p></li>
+<li><p>…</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="nasapoly2">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">NasaPoly2</a><a class="headerlink" href="#nasapoly2" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.NasaPoly2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">NasaPoly2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_high</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P_ref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coeffs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.NasaPoly2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.SpeciesThermo" title="cantera.speciesthermo.SpeciesThermo"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeciesThermo</span></code></a></p>
+<p>Thermodynamic properties for a species which is parameterized using the
+7-coefficient NASA polynomial form in two temperature ranges. This is a
+wrapper for the C++ class <a class="reference external" href="../../../doxygen/html/db/ddd/classCantera_1_1NasaPoly2.html">NasaPoly2</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>coeffs</strong> – <p>An array of 15 elements, in the following order:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[0]</span></code>: The mid-point temperature [K] between the two
+parameterizations</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[1:8]</span></code>: The 7 coefficients of the high-temperature
+parameterization</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[8:15]</span></code>: The 7 coefficients of the low-temperature
+parameterization</p></li>
+</ul>
+</div></blockquote>
+<p>This is the coefficient order used in the standard fixed-format NASA
+input files.</p>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="nasa9polymultitempregion">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">Nasa9PolyMultiTempRegion</a><a class="headerlink" href="#nasa9polymultitempregion" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.Nasa9PolyMultiTempRegion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">Nasa9PolyMultiTempRegion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_high</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P_ref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coeffs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Nasa9PolyMultiTempRegion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.SpeciesThermo" title="cantera.speciesthermo.SpeciesThermo"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeciesThermo</span></code></a></p>
+<p>Thermodynamic properties for a species which is parameterized using the
+9-coefficient NASA polynomial form encompassing multiple temperature ranges.
+This is a wrapper for the C++ class <a class="reference external" href="../../../doxygen/html/d9/de8/classCantera_1_1Nasa9PolyMultiTempRegion.html">Nasa9PolyMultiTempRegion</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>coeffs</strong> – <p>An array of 1 + 11*`nzones` elements, in the following order:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[0]</span></code>: Number of zones (<code class="xref py py-obj docutils literal notranslate"><span class="pre">nzones</span></code>)</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[1</span> <span class="pre">+</span> <span class="pre">11*zone]</span></code>: minimum temperature within zone</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[2</span> <span class="pre">+</span> <span class="pre">11*zone]</span></code>: maximum temperature within zone</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[3:11</span> <span class="pre">+</span> <span class="pre">11*zone]</span></code>: 9 coefficients of the parameterization</p></li>
+</ul>
+</div></blockquote>
+<p>where <code class="xref py py-obj docutils literal notranslate"><span class="pre">zone</span></code> runs from zero to <code class="xref py py-obj docutils literal notranslate"><span class="pre">nzones</span></code>-1.</p>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="shomatepoly2">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">ShomatePoly2</a><a class="headerlink" href="#shomatepoly2" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ShomatePoly2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">ShomatePoly2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_high</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P_ref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coeffs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ShomatePoly2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.SpeciesThermo" title="cantera.speciesthermo.SpeciesThermo"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeciesThermo</span></code></a></p>
+<p>Thermodynamic properties for a species which is parameterized using the
+Shomate equation in two temperature ranges. This is a wrapper for the C++
+class <a class="reference external" href="../../../doxygen/html/da/d9a/classCantera_1_1ShomatePoly2.html">ShomatePoly2</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>coeffs</strong> – <p>An array of 15 elements, in the following order:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[0]</span></code>: The mid-point temperature [K] between the two
+parameterizations</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[1:8]</span></code>: The 7 coefficients of the low-temperature
+parameterization</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeffs[8:15]</span></code>: The 7 coefficients of the high-temperature
+parameterization</p></li>
+</ul>
+</div></blockquote>
+<p>These coefficients should be provided in their customary units (that is,
+such that <span class="math">\(c_p^o\)</span> is in J/gmol-K and <span class="math">\(H^o\)</span> is in kJ/gmol,
+as in the NIST Chemistry WebBook).</p>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="element">
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">Element</a><a class="headerlink" href="#element" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.Element">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">Element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>An element or a named isotope defined in Cantera.</p>
+<p>Class <a class="reference internal" href="#cantera.Element" title="cantera.Element"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Element</span></code></a> gets data for the elements and isotopes defined in
+<a class="reference external" href="../../../doxygen/html/de/dfb/Elements_8cpp.html">Elements.cpp</a>. This class can be used in two ways. The
+first way is to get information about all of the elements stored in
+Cantera. The three attributes <a class="reference internal" href="#cantera.Element.num_elements_defined" title="cantera.Element.num_elements_defined"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_elements_defined</span></code></a>,
+<a class="reference internal" href="#cantera.Element.element_symbols" title="cantera.Element.element_symbols"><code class="xref py py-obj docutils literal notranslate"><span class="pre">element_symbols</span></code></a>, and <a class="reference internal" href="#cantera.Element.element_names" title="cantera.Element.element_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">element_names</span></code></a> can be accessed by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ct</span><span class="o">.</span><span class="n">Element</span><span class="o">.</span><span class="n">num_elements_defined</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ct</span><span class="o">.</span><span class="n">Element</span><span class="o">.</span><span class="n">element_symbols</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ct</span><span class="o">.</span><span class="n">Element</span><span class="o">.</span><span class="n">element_names</span>
+</pre></div>
+</div>
+<p>Otherwise, if the class <a class="reference internal" href="#cantera.Element" title="cantera.Element"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Element</span></code></a> is called with an argument, it
+stores the data about that particular element. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ar_sym</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s1">&#39;Ar&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar_name</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s1">&#39;argon&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar_num</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>would all create instances with the information for argon. The
+available argument options to create an instance of the <a class="reference internal" href="#cantera.Element" title="cantera.Element"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Element</span></code></a>
+class with the element information are the <a class="reference internal" href="#cantera.Element.name" title="cantera.Element.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a>, <a class="reference internal" href="#cantera.Element.symbol" title="cantera.Element.symbol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symbol</span></code></a>, and
+<a class="reference internal" href="#cantera.Element.atomic_number" title="cantera.Element.atomic_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">atomic_number</span></code></a>. Once an instance of the class is made, the <a class="reference internal" href="#cantera.Element.name" title="cantera.Element.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a>,
+<a class="reference internal" href="#cantera.Element.atomic_number" title="cantera.Element.atomic_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">atomic_number</span></code></a>, <a class="reference internal" href="#cantera.Element.symbol" title="cantera.Element.symbol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symbol</span></code></a>, and atomic <a class="reference internal" href="#cantera.Element.weight" title="cantera.Element.weight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weight</span></code></a> can be accessed as
+attributes of the instance of the <a class="reference internal" href="#cantera.Element" title="cantera.Element"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Element</span></code></a> class.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ar_sym</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;argon&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar_sym</span><span class="o">.</span><span class="n">weight</span>
+<span class="go">39.948</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar_sym</span><span class="o">.</span><span class="n">atomic_number</span>
+<span class="go">18</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar_sym</span><span class="o">.</span><span class="n">symbol</span>
+<span class="go">&#39;Ar&#39;</span>
+</pre></div>
+</div>
+<p>The elements available are listed below, in the <a class="reference internal" href="#cantera.Element.element_symbols" title="cantera.Element.element_symbols"><code class="xref py py-obj docutils literal notranslate"><span class="pre">element_symbols</span></code></a>
+and <a class="reference internal" href="#cantera.Element.element_names" title="cantera.Element.element_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">element_names</span></code></a> attribute documentation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Element.num_elements_defined">
+<span class="sig-name descname"><span class="pre">num_elements_defined</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">118</span></em><a class="headerlink" href="#cantera.Element.num_elements_defined" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Element.element_symbols">
+<span class="sig-name descname"><span class="pre">element_symbols</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('H',</span> <span class="pre">'He',</span> <span class="pre">'Li',</span> <span class="pre">'Be',</span> <span class="pre">'B',</span> <span class="pre">'C',</span> <span class="pre">'N',</span> <span class="pre">'O',</span> <span class="pre">'F',</span> <span class="pre">'Ne',</span> <span class="pre">'Na',</span> <span class="pre">'Mg',</span> <span class="pre">'Al',</span> <span class="pre">'Si',</span> <span class="pre">'P',</span> <span class="pre">'S',</span> <span class="pre">'Cl',</span> <span class="pre">'Ar',</span> <span class="pre">'K',</span> <span class="pre">'Ca',</span> <span class="pre">'Sc',</span> <span class="pre">'Ti',</span> <span class="pre">'V',</span> <span class="pre">'Cr',</span> <span class="pre">'Mn',</span> <span class="pre">'Fe',</span> <span class="pre">'Co',</span> <span class="pre">'Ni',</span> <span class="pre">'Cu',</span> <span class="pre">'Zn',</span> <span class="pre">'Ga',</span> <span class="pre">'Ge',</span> <span class="pre">'As',</span> <span class="pre">'Se',</span> <span class="pre">'Br',</span> <span class="pre">'Kr',</span> <span class="pre">'Rb',</span> <span class="pre">'Sr',</span> <span class="pre">'Y',</span> <span class="pre">'Zr',</span> <span class="pre">'Nb',</span> <span class="pre">'Mo',</span> <span class="pre">'Tc',</span> <span class="pre">'Ru',</span> <span class="pre">'Rh',</span> <span class="pre">'Pd',</span> <span class="pre">'Ag',</span> <span class="pre">'Cd',</span> <span class="pre">'In',</span> <span class="pre">'Sn',</span> <span class="pre">'Sb',</span> <span class="pre">'Te',</span> <span class="pre">'I',</span> <span class="pre">'Xe',</span> <span class="pre">'Cs',</span> <span class="pre">'Ba',</span> <span class="pre">'La',</span> <span class="pre">'Ce',</span> <span class="pre">'Pr',</span> <span class="pre">'Nd',</span> <span class="pre">'Pm',</span> <span class="pre">'Sm',</span> <span class="pre">'Eu',</span> <span class="pre">'Gd',</span> <span class="pre">'Tb',</span> <span class="pre">'Dy',</span> <span class="pre">'Ho',</span> <span class="pre">'Er',</span> <span class="pre">'Tm',</span> <span class="pre">'Yb',</span> <span class="pre">'Lu',</span> <span class="pre">'Hf',</span> <span class="pre">'Ta',</span> <span class="pre">'W',</span> <span class="pre">'Re',</span> <span class="pre">'Os',</span> <span class="pre">'Ir',</span> <span class="pre">'Pt',</span> <span class="pre">'Au',</span> <span class="pre">'Hg',</span> <span class="pre">'Tl',</span> <span class="pre">'Pb',</span> <span class="pre">'Bi',</span> <span class="pre">'Po',</span> <span class="pre">'At',</span> <span class="pre">'Rn',</span> <span class="pre">'Fr',</span> <span class="pre">'Ra',</span> <span class="pre">'Ac',</span> <span class="pre">'Th',</span> <span class="pre">'Pa',</span> <span class="pre">'U',</span> <span class="pre">'Np',</span> <span class="pre">'Pu',</span> <span class="pre">'Am',</span> <span class="pre">'Cm',</span> <span class="pre">'Bk',</span> <span class="pre">'Cf',</span> <span class="pre">'Es',</span> <span class="pre">'Fm',</span> <span class="pre">'Md',</span> <span class="pre">'No',</span> <span class="pre">'Lr',</span> <span class="pre">'Rf',</span> <span class="pre">'Db',</span> <span class="pre">'Sg',</span> <span class="pre">'Bh',</span> <span class="pre">'Hs',</span> <span class="pre">'Mt',</span> <span class="pre">'Ds',</span> <span class="pre">'Rg',</span> <span class="pre">'Cn',</span> <span class="pre">'Nh',</span> <span class="pre">'Gl',</span> <span class="pre">'Mc',</span> <span class="pre">'Lv',</span> <span class="pre">'Ts',</span> <span class="pre">'Og')</span></em><a class="headerlink" href="#cantera.Element.element_symbols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Element.element_names">
+<span class="sig-name descname"><span class="pre">element_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('hydrogen',</span> <span class="pre">'helium',</span> <span class="pre">'lithium',</span> <span class="pre">'beryllium',</span> <span class="pre">'boron',</span> <span class="pre">'carbon',</span> <span class="pre">'nitrogen',</span> <span class="pre">'oxygen',</span> <span class="pre">'fluorine',</span> <span class="pre">'neon',</span> <span class="pre">'sodium',</span> <span class="pre">'magnesium',</span> <span class="pre">'aluminum',</span> <span class="pre">'silicon',</span> <span class="pre">'phosphorus',</span> <span class="pre">'sulfur',</span> <span class="pre">'chlorine',</span> <span class="pre">'argon',</span> <span class="pre">'potassium',</span> <span class="pre">'calcium',</span> <span class="pre">'scandium',</span> <span class="pre">'titanium',</span> <span class="pre">'vanadium',</span> <span class="pre">'chromium',</span> <span class="pre">'manganese',</span> <span class="pre">'iron',</span> <span class="pre">'cobalt',</span> <span class="pre">'nickel',</span> <span class="pre">'copper',</span> <span class="pre">'zinc',</span> <span class="pre">'gallium',</span> <span class="pre">'germanium',</span> <span class="pre">'arsenic',</span> <span class="pre">'selenium',</span> <span class="pre">'bromine',</span> <span class="pre">'krypton',</span> <span class="pre">'rubidium',</span> <span class="pre">'strontium',</span> <span class="pre">'yttrium',</span> <span class="pre">'zirconium',</span> <span class="pre">'nobelium',</span> <span class="pre">'molybdenum',</span> <span class="pre">'technetium',</span> <span class="pre">'ruthenium',</span> <span class="pre">'rhodium',</span> <span class="pre">'palladium',</span> <span class="pre">'silver',</span> <span class="pre">'cadmium',</span> <span class="pre">'indium',</span> <span class="pre">'tin',</span> <span class="pre">'antimony',</span> <span class="pre">'tellurium',</span> <span class="pre">'iodine',</span> <span class="pre">'xenon',</span> <span class="pre">'cesium',</span> <span class="pre">'barium',</span> <span class="pre">'lanthanum',</span> <span class="pre">'cerium',</span> <span class="pre">'praseodymium',</span> <span class="pre">'neodymium',</span> <span class="pre">'promethium',</span> <span class="pre">'samarium',</span> <span class="pre">'europium',</span> <span class="pre">'gadolinium',</span> <span class="pre">'terbium',</span> <span class="pre">'dysprosium',</span> <span class="pre">'holmium',</span> <span class="pre">'erbium',</span> <span class="pre">'thulium',</span> <span class="pre">'ytterbium',</span> <span class="pre">'lutetium',</span> <span class="pre">'hafnium',</span> <span class="pre">'tantalum',</span> <span class="pre">'tungsten',</span> <span class="pre">'rhenium',</span> <span class="pre">'osmium',</span> <span class="pre">'iridium',</span> <span class="pre">'platinum',</span> <span class="pre">'gold',</span> <span class="pre">'mercury',</span> <span class="pre">'thallium',</span> <span class="pre">'lead',</span> <span class="pre">'bismuth',</span> <span class="pre">'polonium',</span> <span class="pre">'astatine',</span> <span class="pre">'radon',</span> <span class="pre">'francium',</span> <span class="pre">'radium',</span> <span class="pre">'actinium',</span> <span class="pre">'thorium',</span> <span class="pre">'protactinium',</span> <span class="pre">'uranium',</span> <span class="pre">'neptunium',</span> <span class="pre">'plutonium',</span> <span class="pre">'americium',</span> <span class="pre">'curium',</span> <span class="pre">'berkelium',</span> <span class="pre">'californium',</span> <span class="pre">'einsteinium',</span> <span class="pre">'fermium',</span> <span class="pre">'mendelevium',</span> <span class="pre">'nobelium',</span> <span class="pre">'lawrencium',</span> <span class="pre">'rutherfordium',</span> <span class="pre">'dubnium',</span> <span class="pre">'seaborgium',</span> <span class="pre">'bohrium',</span> <span class="pre">'hassium',</span> <span class="pre">'meitnerium',</span> <span class="pre">'darmstadtium',</span> <span class="pre">'roentgenium',</span> <span class="pre">'copernicium',</span> <span class="pre">'nihonium',</span> <span class="pre">'flerovium',</span> <span class="pre">'moscovium',</span> <span class="pre">'livermorium',</span> <span class="pre">'tennessine',</span> <span class="pre">'oganesson')</span></em><a class="headerlink" href="#cantera.Element.element_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cantera.Element.atomic_number">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">atomic_number</span></span><a class="headerlink" href="#cantera.Element.atomic_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>The atomic number of the element or isotope.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cantera.Element.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#cantera.Element.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the element or isotope.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cantera.Element.symbol">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">symbol</span></span><a class="headerlink" href="#cantera.Element.symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>The symbol of the element or isotope.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cantera.Element.weight">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weight</span></span><a class="headerlink" href="#cantera.Element.weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>The atomic weight of the element or isotope.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+                </div>
+                </div>
+            </div>
+             <!-- end of block document -->
+  <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+    <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Thermodynamic Properties</a><ul>
+<li><a class="reference internal" href="#phases">Phases</a><ul>
+<li><a class="reference internal" href="#thermophase">ThermoPhase</a></li>
+<li><a class="reference internal" href="#interfacephase">InterfacePhase</a></li>
+<li><a class="reference internal" href="#purefluid">PureFluid</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mixture">Mixture</a></li>
+<li><a class="reference internal" href="#species">Species</a></li>
+<li><a class="reference internal" href="#species-thermodynamic-properties">Species Thermodynamic Properties</a><ul>
+<li><a class="reference internal" href="#speciesthermo">SpeciesThermo</a></li>
+<li><a class="reference internal" href="#constantcp">ConstantCp</a></li>
+<li><a class="reference internal" href="#mu0poly">Mu0Poly</a></li>
+<li><a class="reference internal" href="#nasapoly2">NasaPoly2</a></li>
+<li><a class="reference internal" href="#nasa9polymultitempregion">Nasa9PolyMultiTempRegion</a></li>
+<li><a class="reference internal" href="#shomatepoly2">ShomatePoly2</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#element">Element</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Python Module Documentation</a><ul>
+      <li>Previous: <a href="importing.html" title="previous chapter">Objects Representing Phases</a></li>
+      <li>Next: <a href="kinetics.html" title="next chapter">Chemical Kinetics</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/cython/thermo.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script><div id="numfocus">
+<h3>Donate to Cantera</h3>
+<a href="https://numfocus.salsalabs.org/donate-to-cantera/index.html">
+<img src="../_static/powered_by_NumFOCUS.png" border="0" alt="NumFOCUS"/></a>
+</div>
+    </div>
+  </div>
+                <div class="clearer"></div>
+          </div>
+           <!--End of block content-->
+
+          <div class="footer">
+            &copy;2001-2023, Cantera Developers.
+            
+            |
+            Powered by <a href="http://sphinx-doc.org/">Sphinx 5.1.1</a>
+            &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+            
+            |
+            <a href="../_sources/cython/thermo.rst.txt"
+                rel="nofollow">Page source</a>
+          </div>
+      </div>
+  </div>
+
+  <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
+  <script async="async" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+</body>
+</html>

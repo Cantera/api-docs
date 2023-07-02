@@ -1,0 +1,456 @@
+
+
+<!DOCTYPE html>
+
+<html prefix="
+og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+"
+lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Python Interface With Units | Cantera </title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" media="none" onload="this.media='all'" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../_static/cantera.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" media="none" onload="this.media='all'" type="text/css" />
+  <link rel="stylesheet" href="../_static/cantera.css" media="none" onload="this.media='all'" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" media="none" onload="this.media='all'" type="text/css" />
+  <link rel="stylesheet" href="../_static/katex-math.css" media="none" onload="this.media='all'" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/katex.min.js"></script>
+        <script type="text/javascript" src="../_static/auto-render.min.js"></script>
+        <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" sizes="16x16"/>
+    
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body>
+  <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+  <!-- Menubar -->
+
+  <nav class="navbar navbar-expand-md navbar-light bg-light static-top mb-4">
+      <div class="container"><!-- This keeps the margins nice -->
+          <a class="navbar-brand" href="/index.html">
+          <img src="/assets/img/cantera-logo.png" alt="Cantera" id="logo" class="d-inline-block align-top">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a href="/install/index.html" class="nav-link">Install</a>
+              </li>
+              <li class="nav-item">
+                <a href="/tutorials/index.html" class="nav-link">Tutorials</a>
+              </li>
+              <li class="nav-item">
+                <a href="/examples/index.html" class="nav-link">Examples</a>
+              </li>
+              <li class="nav-item">
+                <a href="/community.html" class="nav-link">Community</a>
+              </li>
+              <li class="nav-item">
+                <a href="/science/index.html" class="nav-link">Science</a>
+              </li>
+              <li class="nav-item">
+                <a href="/documentation/index.html" class="nav-link">Documentation</a>
+              </li>
+              <li class="nav-item">
+                <a href="/blog/index.html" class="nav-link">Blog</a>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+  </nav>
+  <!-- End of Menubar -->
+
+  <div class="container" id="content">
+      <div class="body-content">
+          <!--Body content-->
+          
+          <div class="document">
+            
+            <div class="documentwrapper">
+                <div class="bodywrapper">
+                <div class="body" role="main">
+                  
+  <section id="python-interface-with-units">
+<h1>Python Interface With Units<a class="headerlink" href="#python-interface-with-units" title="Permalink to this heading">¶</a></h1>
+<p>This interface allows users to specify physical units associated with quantities.
+To do so, this interface leverages the <a class="reference external" href="https://pint.readthedocs.io/en/stable/">pint</a>
+library to provide consistent unit conversion. Several examples of this interface can
+be found in the <code class="docutils literal notranslate"><span class="pre">samples/python</span></code> folder in the
+<a class="reference external" href="https://github.com/Cantera/cantera/tree/main/samples/python">root of the repository</a>.
+Examples that use this interface are suffixed with <code class="xref py py-obj docutils literal notranslate"><span class="pre">_units</span></code>.</p>
+<p>The overall goal is to provide a compatible implementation of the <a class="reference internal" href="importing.html#cantera.Solution" title="cantera.Solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cantera.Solution</span></code></a> and
+<a class="reference internal" href="thermo.html#cantera.PureFluid" title="cantera.PureFluid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cantera.PureFluid</span></code></a> interfaces. Please see those pages for further documentation of the
+available properties.</p>
+<section id="solution-with-units">
+<h2>Solution with Units<a class="headerlink" href="#solution-with-units" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.with_units.Solution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.with_units.</span></span><span class="sig-name descname"><span class="pre">Solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaml</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.with_units.Solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This implementation of <a class="reference internal" href="#cantera.with_units.Solution" title="cantera.with_units.Solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution</span></code></a> operates with
+units by using the <code class="xref py py-obj docutils literal notranslate"><span class="pre">pint</span></code> library to convert between unit systems. All properties
+are assigned units in the standard MKS system that Cantera uses, substituting kmol
+instead of mol. Each property is an instance of the <a class="reference external" href="https://pint.readthedocs.io/en/stable/api/base.html#pint.Quantity" title="(in pint v0.22)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pint.Quantity</span></code></a> class.</p>
+<p>Similarly, properties must be instances of <a class="reference external" href="https://pint.readthedocs.io/en/stable/api/base.html#pint.Quantity" title="(in pint v0.22)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pint.Quantity</span></code></a> classes when they are
+used for assignment to set the state. The properties may have any units, so long
+as the dimensions for the quantity are consistent. For example, temperatures can
+be provided in K, degC, degF, or degR; conversion will be done internally to
+Cantera’s consistent unit system.</p>
+<p>See the <a class="reference external" href="https://pint.readthedocs.io">pint documentation</a> for more information
+about using pint’s <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> classes.</p>
+<p><strong>Note:</strong> This class is experimental. It only implements methods from <code class="xref py py-obj docutils literal notranslate"><span class="pre">ThermoPhase</span></code>.
+Methods from other classes are not yet supported. If you are interested in contributing
+to this feature, please chime in on our enhancements issue:
+<a class="reference external" href="https://github.com/Cantera/enhancements/issues/174">https://github.com/Cantera/enhancements/issues/174</a>.</p>
+<p>A class for chemically-reacting solutions. Instances can be created to
+represent any type of solution – a mixture of gases, a liquid solution, or
+a solid solution, for example.</p>
+<p>Class <a class="reference internal" href="#cantera.with_units.Solution" title="cantera.with_units.Solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution</span></code></a> derives from classes <code class="xref py py-obj docutils literal notranslate"><span class="pre">ThermoPhase</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">Kinetics</span></code>, and
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">Transport</span></code>.  It defines no methods of its own, and is provided so that a
+single object can be used to compute thermodynamic, kinetic, and transport
+properties of a solution.</p>
+<p>To skip initialization of the Transport object, pass the keyword argument
+<code class="docutils literal notranslate"><span class="pre">transport_model=None</span></code> to the <a class="reference internal" href="#cantera.with_units.Solution" title="cantera.with_units.Solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution</span></code></a> constructor.</p>
+<p>The most common way to instantiate <a class="reference internal" href="#cantera.with_units.Solution" title="cantera.with_units.Solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution</span></code></a> objects is by using a phase
+definition, species and reactions defined in an input file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gas</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s1">&#39;gri30.yaml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If an input file defines multiple phases, the corresponding key in the
+<code class="docutils literal notranslate"><span class="pre">phases</span></code> map can be used to specify the desired phase via the <code class="docutils literal notranslate"><span class="pre">name</span></code> keyword
+argument of the constructor:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gas</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s1">&#39;diamond.yaml&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;gas&#39;</span><span class="p">)</span>
+<span class="n">diamond</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s1">&#39;diamond.yaml&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;diamond&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The name of the <a class="reference internal" href="#cantera.with_units.Solution" title="cantera.with_units.Solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution</span></code></a> object defaults to the <em>phase</em> identifier
+specified in the input file. Upon initialization of a <a class="reference internal" href="#cantera.with_units.Solution" title="cantera.with_units.Solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution</span></code></a> object,
+a custom name can assigned via:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gas</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;my_custom_name&#39;</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#cantera.with_units.Solution" title="cantera.with_units.Solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution</span></code></a> objects can also be constructed using <code class="xref py py-obj docutils literal notranslate"><span class="pre">Species</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">Reaction</span></code>
+objects which can themselves either be imported from input files or defined
+directly in Python:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Species</span><span class="o">.</span><span class="n">list_from_file</span><span class="p">(</span><span class="s2">&quot;gri30.yaml&quot;</span><span class="p">)</span>
+<span class="n">spec_gas</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="n">thermo</span><span class="o">=</span><span class="s1">&#39;ideal-gas&#39;</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">spec</span><span class="p">)</span>
+<span class="n">rxns</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Reaction</span><span class="o">.</span><span class="n">list_from_file</span><span class="p">(</span><span class="s2">&quot;gri30.yaml&quot;</span><span class="p">,</span> <span class="n">spec_gas</span><span class="p">)</span>
+<span class="n">gas</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="n">thermo</span><span class="o">=</span><span class="s1">&#39;ideal-tas&#39;</span><span class="p">,</span> <span class="n">kinetics</span><span class="o">=</span><span class="s1">&#39;gas&#39;</span><span class="p">,</span>
+                  <span class="n">species</span><span class="o">=</span><span class="n">spec</span><span class="p">,</span> <span class="n">reactions</span><span class="o">=</span><span class="n">rxns</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;my_custom_name&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where the <code class="docutils literal notranslate"><span class="pre">thermo</span></code> and <code class="docutils literal notranslate"><span class="pre">kinetics</span></code> keyword arguments are strings
+specifying the thermodynamic and kinetics model, respectively, and
+<code class="docutils literal notranslate"><span class="pre">species</span></code> and <code class="docutils literal notranslate"><span class="pre">reactions</span></code> keyword arguments are lists of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Species</span></code> and
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">Reaction</span></code> objects, respectively. Note that importing the reactions from a
+YAML input file requires a <code class="xref py py-obj docutils literal notranslate"><span class="pre">Kinetics</span></code> object containing the species, as
+shown.</p>
+<p>Types of underlying models that form the composite <a class="reference internal" href="#cantera.with_units.Solution" title="cantera.with_units.Solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution</span></code></a> object are
+queried using the <code class="docutils literal notranslate"><span class="pre">thermo_model</span></code>, <code class="docutils literal notranslate"><span class="pre">kinetics_model</span></code> and
+<code class="docutils literal notranslate"><span class="pre">transport_model</span></code> attributes; further, the <code class="docutils literal notranslate"><span class="pre">composite</span></code> attribute is a
+shorthand returning a tuple containing the types of the three constitutive
+models.</p>
+<p>For non-trivial uses cases of this functionality, see the examples
+<a class="reference external" href="https://cantera.org/examples/python/kinetics/extract_submechanism.py.html">extract_submechanism.py</a>
+and <a class="reference external" href="https://cantera.org/examples/python/kinetics/mechanism_reduction.py.html">mechanism_reduction.py</a>.</p>
+<p>In addition, <a class="reference internal" href="#cantera.with_units.Solution" title="cantera.with_units.Solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution</span></code></a> objects can be constructed by passing the text of
+the YAML phase definition in directly, using the <code class="docutils literal notranslate"><span class="pre">yaml</span></code> keyword
+argument:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yaml_def</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">phases:</span>
+<span class="s1">- name: gas</span>
+<span class="s1">  thermo: ideal-gas</span>
+<span class="s1">  kinetics: gas</span>
+<span class="s1">  elements: [O, H, Ar]</span>
+<span class="s1">  species:</span>
+<span class="s1">  - gri30.yaml/species: all</span>
+<span class="s1">  reactions:</span>
+<span class="s1">  - gri30.yaml/reactions: declared-species</span>
+<span class="s1">  skip-undeclared-elements: true</span>
+<span class="s1">  skip-undeclared-third-bodies: true</span>
+<span class="s1">  state: {T: 300, P: 1 atm}</span>
+<span class="s1">&#39;&#39;&#39;</span>
+<span class="n">gas</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="n">yaml</span><span class="o">=</span><span class="n">yaml_def</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="purefluid-phases-with-units">
+<h2>PureFluid Phases With Units<a class="headerlink" href="#purefluid-phases-with-units" title="Permalink to this heading">¶</a></h2>
+<p>The following convenience classes are available to create <a class="reference internal" href="#cantera.with_units.PureFluid" title="cantera.with_units.PureFluid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PureFluid</span></code></a>
+objects with the indicated equation of state:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.with_units.CarbonDioxide">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.with_units.</span></span><span class="sig-name descname"><span class="pre">CarbonDioxide</span></span><a class="headerlink" href="#cantera.with_units.CarbonDioxide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases:</p>
+<p>Create a <a class="reference internal" href="#cantera.with_units.PureFluid" title="cantera.with_units.PureFluid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PureFluid</span></code></a> object using the equation of state for carbon dioxide.</p>
+<p>The object returned by this method implements an accurate equation of
+state for carbon dioxide that can be used in the liquid, vapor, saturated
+liquid/vapor, and supercritical regions of the phase diagram. The
+equation of state is taken from</p>
+<blockquote>
+<div><p>W. C. Reynolds, <em>Thermodynamic Properties in SI: graphs, tables, and
+computational equations for forty substances.</em> Stanford: Stanford
+University, 1979. Print.</p>
+</div></blockquote>
+<p>For more details, see classes <a class="reference external" href="../../../doxygen/html/d1/d29/classCantera_1_1PureFluidPhase.html">PureFluidPhase</a> and <a class="reference external" href="../../../doxygen/html/de/d67/classtpx_1_1CarbonDioxide.html">tpx::CarbonDioxide</a> in
+the Cantera C++ source code documentation.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.with_units.Heptane">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.with_units.</span></span><span class="sig-name descname"><span class="pre">Heptane</span></span><a class="headerlink" href="#cantera.with_units.Heptane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases:</p>
+<p>Create a <a class="reference internal" href="#cantera.with_units.PureFluid" title="cantera.with_units.PureFluid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PureFluid</span></code></a> object using the equation of state for heptane.</p>
+<p>The object returned by this method implements an accurate equation of
+state for n-heptane that can be used in the liquid, vapor, saturated
+liquid/vapor, and supercritical regions of the phase diagram. The
+equation of state is taken from</p>
+<blockquote>
+<div><p>W. C. Reynolds, <em>Thermodynamic Properties in SI: graphs, tables, and
+computational equations for forty substances.</em> Stanford: Stanford
+University, 1979. Print.</p>
+</div></blockquote>
+<p>For more details, see classes <a class="reference external" href="../../../doxygen/html/d1/d29/classCantera_1_1PureFluidPhase.html">PureFluidPhase</a> and <a class="reference external" href="../../../doxygen/html/df/d0a/classtpx_1_1Heptane.html">tpx::Heptane</a> in the
+Cantera C++ source code documentation.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.with_units.Hfc134a">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.with_units.</span></span><span class="sig-name descname"><span class="pre">Hfc134a</span></span><a class="headerlink" href="#cantera.with_units.Hfc134a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases:</p>
+<p>Create a <a class="reference internal" href="#cantera.with_units.PureFluid" title="cantera.with_units.PureFluid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PureFluid</span></code></a> object using the equation of state for HFC-134a.</p>
+<p>The object returned by this method implements an accurate equation of
+state for refrigerant HFC134a (R134a) that can be used in the liquid,
+vapor, saturated liquid/vapor, and supercritical regions of the phase
+diagram. Implements the equation of state given in:</p>
+<blockquote>
+<div><p>R. Tillner-Roth, H. D. Baehr. <em>An International Standard Formulation for
+The Thermodynamic Properties of 1,1,1,2-Tetrafluoroethane (HFC-134a) for
+Temperatures From 170 K to 455 K and Pressures up to 70 MPa.</em> J. Phys.
+Chem. Ref. Data, Vol. 23, No. 5, 1994. pp. 657–729.
+<a class="reference external" href="http://dx.doi.org/10.1063/1.555958">http://dx.doi.org/10.1063/1.555958</a></p>
+</div></blockquote>
+<p>For more details, see classes <a class="reference external" href="../../../doxygen/html/d1/d29/classCantera_1_1PureFluidPhase.html">PureFluidPhase</a> and <a class="reference external" href="../../../doxygen/html/df/df3/classtpx_1_1HFC134a.html">tpx::HFC134a</a> in the
+Cantera C++ source code documentation.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.with_units.Hydrogen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.with_units.</span></span><span class="sig-name descname"><span class="pre">Hydrogen</span></span><a class="headerlink" href="#cantera.with_units.Hydrogen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases:</p>
+<p>Create a <a class="reference internal" href="#cantera.with_units.PureFluid" title="cantera.with_units.PureFluid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PureFluid</span></code></a> object using the equation of state for hydrogen.</p>
+<p>The object returned by this method implements an accurate equation of
+state for hydrogen that can be used in the liquid, vapor, saturated
+liquid/vapor, and supercritical regions of the phase diagram. The
+equation of state is taken from</p>
+<blockquote>
+<div><p>W. C. Reynolds, <em>Thermodynamic Properties in SI: graphs, tables, and
+computational equations for forty substances</em> Stanford: Stanford
+University, 1979. Print.</p>
+</div></blockquote>
+<p>For more details, see classes <a class="reference external" href="../../../doxygen/html/d1/d29/classCantera_1_1PureFluidPhase.html">PureFluidPhase</a> and <a class="reference external" href="../../../doxygen/html/d8/d7e/classtpx_1_1hydrogen.html">tpx::hydrogen</a> in the
+Cantera C++ source code documentation.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.with_units.Methane">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.with_units.</span></span><span class="sig-name descname"><span class="pre">Methane</span></span><a class="headerlink" href="#cantera.with_units.Methane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases:</p>
+<p>Create a <a class="reference internal" href="#cantera.with_units.PureFluid" title="cantera.with_units.PureFluid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PureFluid</span></code></a> object using the equation of state for methane.</p>
+<p>The object returned by this method implements an accurate equation of
+state for methane that can be used in the liquid, vapor, saturated
+liquid/vapor, and supercritical regions of the phase diagram.  The
+equation of state is taken from</p>
+<blockquote>
+<div><p>W. C. Reynolds, <em>Thermodynamic Properties in SI: graphs, tables, and
+computational equations for forty substances</em> Stanford: Stanford
+University, 1979. Print.</p>
+</div></blockquote>
+<p>For more details, see classes <a class="reference external" href="../../../doxygen/html/d1/d29/classCantera_1_1PureFluidPhase.html">PureFluidPhase</a> and <a class="reference external" href="../../../doxygen/html/dc/d51/classtpx_1_1methane.html">tpx::methane</a> in the
+Cantera C++ source code documentation.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.with_units.Nitrogen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.with_units.</span></span><span class="sig-name descname"><span class="pre">Nitrogen</span></span><a class="headerlink" href="#cantera.with_units.Nitrogen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases:</p>
+<p>Create a <a class="reference internal" href="#cantera.with_units.PureFluid" title="cantera.with_units.PureFluid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PureFluid</span></code></a> object using the equation of state for nitrogen.</p>
+<p>The object returned by this method implements an accurate equation of
+state for nitrogen that can be used in the liquid, vapor, saturated
+liquid/vapor, and supercritical regions of the phase diagram. The
+equation of state is taken from</p>
+<blockquote>
+<div><p>W. C. Reynolds, <em>Thermodynamic Properties in SI: graphs, tables, and
+computational equations for forty substances</em> Stanford: Stanford
+University, 1979. Print.</p>
+</div></blockquote>
+<p>For more details, see classes <a class="reference external" href="../../../doxygen/html/d1/d29/classCantera_1_1PureFluidPhase.html">PureFluidPhase</a> and <a class="reference external" href="../../../doxygen/html/d9/d26/classtpx_1_1nitrogen.html">tpx::nitrogen</a> in the
+Cantera C++ source code documentation.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.with_units.Oxygen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.with_units.</span></span><span class="sig-name descname"><span class="pre">Oxygen</span></span><a class="headerlink" href="#cantera.with_units.Oxygen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases:</p>
+<p>Create a <a class="reference internal" href="#cantera.with_units.PureFluid" title="cantera.with_units.PureFluid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PureFluid</span></code></a> object using the equation of state for oxygen.</p>
+<p>The object returned by this method implements an accurate equation of
+state for oxygen that can be used in the liquid, vapor, saturated
+liquid/vapor, and supercritical regions of the phase diagram.  The
+equation of state is taken from</p>
+<blockquote>
+<div><p>W. C. Reynolds, <em>Thermodynamic Properties in SI: graphs, tables, and
+computational equations for forty substances</em> Stanford: Stanford
+University, 1979. Print.</p>
+</div></blockquote>
+<p>For more details, see classes <a class="reference external" href="../../../doxygen/html/d1/d29/classCantera_1_1PureFluidPhase.html">PureFluidPhase</a> and <a class="reference external" href="../../../doxygen/html/da/de8/classtpx_1_1oxygen.html">tpx::oxygen</a> in the
+Cantera C++ source code documentation.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.with_units.Water">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.with_units.</span></span><span class="sig-name descname"><span class="pre">Water</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Reynolds'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.with_units.Water" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases:</p>
+<p>Create a <a class="reference internal" href="#cantera.with_units.PureFluid" title="cantera.with_units.PureFluid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PureFluid</span></code></a> object using the equation of state for water and the
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">WaterTransport</span></code> class for viscosity and thermal conductivity.</p>
+<p>The object returned by this method implements an accurate equation of state
+for water, where implementations are selected using the <code class="docutils literal notranslate"><span class="pre">backend</span></code> switch.</p>
+<p>For the <code class="docutils literal notranslate"><span class="pre">Reynolds</span></code> backend, the equation of state is taken from</p>
+<blockquote>
+<div><p>W. C. Reynolds, <em>Thermodynamic Properties in SI: graphs, tables, and
+computational equations for forty substances.</em> Stanford: Stanford
+University, 1979. Print.</p>
+</div></blockquote>
+<p>which can be used in the liquid, vapor, saturated liquid/vapor, and
+supercritical regions of the phase diagram.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">IAPWS95</span></code> backend implements an IAPWS (International Association for
+the Properties of Water and Steam) formulation for thermodynamic properties
+taken from</p>
+<blockquote>
+<div><p>W. Wagner, A. Pruss, <em>The IAPWS Formulation 1995 for the Thermodynamic
+Properties of Ordinary Water Substance for General and Scientific Use,</em>
+J. Phys. Chem. Ref. Dat, 31, 387, 2002.</p>
+</div></blockquote>
+<p>which currently only implements liquid and supercritical regions.</p>
+<p>In both cases, formulas for transport are taken from</p>
+<blockquote>
+<div><p>J. V. Sengers, J. T. R. Watson, <em>Improved International Formulations for
+the Viscosity and Thermal Conductivity of Water Substance,</em> J. Phys.
+Chem. Ref. Data, 15, 1291, 1986.</p>
+</div></blockquote>
+<p>For more details, see classes <a class="reference external" href="../../../doxygen/html/d1/d29/classCantera_1_1PureFluidPhase.html">PureFluidPhase</a>, <a class="reference external" href="../../../doxygen/html/dc/d9d/classtpx_1_1water.html">tpx::water</a>,
+<a class="reference external" href="../../../doxygen/html/dc/d86/classCantera_1_1WaterSSTP.html">WaterSSTP</a> and <a class="reference external" href="../../../doxygen/html/df/d1f/classCantera_1_1WaterTransport.html">WaterTransport</a> in the Cantera C++ source
+code documentation.</p>
+</dd></dl>
+
+<p>The full documentation for the <a class="reference internal" href="#cantera.with_units.PureFluid" title="cantera.with_units.PureFluid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PureFluid</span></code></a> class and its properties is here:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.with_units.PureFluid">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.with_units.</span></span><span class="sig-name descname"><span class="pre">PureFluid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaml</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.with_units.PureFluid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This implementation of <a class="reference internal" href="#cantera.with_units.PureFluid" title="cantera.with_units.PureFluid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PureFluid</span></code></a> operates with
+units by using the <code class="xref py py-obj docutils literal notranslate"><span class="pre">pint</span></code> library to convert between unit systems. All properties
+are assigned units in the standard MKS system that Cantera uses, substituting kmol
+instead of mol. Each property is an instance of the <a class="reference external" href="https://pint.readthedocs.io/en/stable/api/base.html#pint.Quantity" title="(in pint v0.22)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pint.Quantity</span></code></a> class.</p>
+<p>Similarly, properties must be instances of <a class="reference external" href="https://pint.readthedocs.io/en/stable/api/base.html#pint.Quantity" title="(in pint v0.22)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pint.Quantity</span></code></a> classes when they are
+used for assignment to set the state. The properties may have any units, so long
+as the dimensions for the quantity are consistent. For example, temperatures can
+be provided in K, degC, degF, or degR; conversion will be done internally to
+Cantera’s consistent unit system.</p>
+<p>See the <a class="reference external" href="https://pint.readthedocs.io">pint documentation</a> for more information
+about using pint’s <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> classes.</p>
+<p>A pure substance that can  be a gas, a liquid, a mixed gas-liquid fluid,
+or a fluid beyond its critical point.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </div>
+                </div>
+            </div>
+             <!-- end of block document -->
+  <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+    <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Python Interface With Units</a><ul>
+<li><a class="reference internal" href="#solution-with-units">Solution with Units</a></li>
+<li><a class="reference internal" href="#purefluid-phases-with-units">PureFluid Phases With Units</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Python Module Documentation</a><ul>
+      <li>Previous: <a href="constants.html" title="previous chapter">Physical Constants</a></li>
+      <li>Next: <a href="utilities.html" title="next chapter">Utilities</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/cython/units.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script><div id="numfocus">
+<h3>Donate to Cantera</h3>
+<a href="https://numfocus.salsalabs.org/donate-to-cantera/index.html">
+<img src="../_static/powered_by_NumFOCUS.png" border="0" alt="NumFOCUS"/></a>
+</div>
+    </div>
+  </div>
+                <div class="clearer"></div>
+          </div>
+           <!--End of block content-->
+
+          <div class="footer">
+            &copy;2001-2023, Cantera Developers.
+            
+            |
+            Powered by <a href="http://sphinx-doc.org/">Sphinx 5.1.1</a>
+            &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+            
+            |
+            <a href="../_sources/cython/units.rst.txt"
+                rel="nofollow">Page source</a>
+          </div>
+      </div>
+  </div>
+
+  <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
+  <script async="async" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,1137 @@
+
+
+<!DOCTYPE html>
+
+<html prefix="
+og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+"
+lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>One-Dimensional Reacting Flows | Cantera </title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" media="none" onload="this.media='all'" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../_static/cantera.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" media="none" onload="this.media='all'" type="text/css" />
+  <link rel="stylesheet" href="../_static/cantera.css" media="none" onload="this.media='all'" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" media="none" onload="this.media='all'" type="text/css" />
+  <link rel="stylesheet" href="../_static/katex-math.css" media="none" onload="this.media='all'" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/katex.min.js"></script>
+        <script type="text/javascript" src="../_static/auto-render.min.js"></script>
+        <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" sizes="16x16"/>
+    
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body>
+  <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+  <!-- Menubar -->
+
+  <nav class="navbar navbar-expand-md navbar-light bg-light static-top mb-4">
+      <div class="container"><!-- This keeps the margins nice -->
+          <a class="navbar-brand" href="/index.html">
+          <img src="/assets/img/cantera-logo.png" alt="Cantera" id="logo" class="d-inline-block align-top">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a href="/install/index.html" class="nav-link">Install</a>
+              </li>
+              <li class="nav-item">
+                <a href="/tutorials/index.html" class="nav-link">Tutorials</a>
+              </li>
+              <li class="nav-item">
+                <a href="/examples/index.html" class="nav-link">Examples</a>
+              </li>
+              <li class="nav-item">
+                <a href="/community.html" class="nav-link">Community</a>
+              </li>
+              <li class="nav-item">
+                <a href="/science/index.html" class="nav-link">Science</a>
+              </li>
+              <li class="nav-item">
+                <a href="/documentation/index.html" class="nav-link">Documentation</a>
+              </li>
+              <li class="nav-item">
+                <a href="/blog/index.html" class="nav-link">Blog</a>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+  </nav>
+  <!-- End of Menubar -->
+
+  <div class="container" id="content">
+      <div class="body-content">
+          <!--Body content-->
+          
+          <div class="document">
+            
+            <div class="documentwrapper">
+                <div class="bodywrapper">
+                <div class="body" role="main">
+                  
+  <section id="one-dimensional-reacting-flows">
+<h1>One-Dimensional Reacting Flows<a class="headerlink" href="#one-dimensional-reacting-flows" title="Permalink to this heading">¶</a></h1>
+<section id="domain1d">
+<h2>Domain1D<a class="headerlink" href="#domain1d" title="Permalink to this heading">¶</a></h2>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="Domain1D">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Domain1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">b</span></em>, <em class="sig-param"><span class="pre">c</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Domain1D class constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – <p>Integer type of domain. Possible values are</p>
+<ul>
+<li><p>1 - Stagnation Flow</p></li>
+<li><p>2 - Inlet1D</p></li>
+<li><p>3 - Surf1D</p></li>
+<li><p>4 - Symm1D</p></li>
+<li><p>5 - Outlet1D</p></li>
+<li><p>6 - Reacting Surface</p></li>
+<li><p>8 - Sim1D</p></li>
+<li><p>-2 - OutletRes</p></li>
+</ul>
+</p></li>
+<li><p><strong>b</strong> – Instance of class <a class="reference internal" href="importing.html#Solution" title="Solution"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Solution()</span></code></a> (for <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">1</span></code>)
+or <a class="reference internal" href="importing.html#Interface" title="Interface"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Interface()</span></code></a> (for <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">6</span></code>). Not used for
+all other valid values of <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></li>
+<li><p><strong>c</strong> – Integer, either 1 or 2, indicating whether an axisymmetric
+stagnation flow or a free flame should be created. If not
+specified, defaults to 1. Ignored if <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">!=</span> <span class="pre">1</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.AxiStagnFlow">
+<span class="sig-name descname"><span class="pre">AxiStagnFlow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">gas</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.AxiStagnFlow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an axisymmetric stagnation flow domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gas</strong> – Instance of class <a class="reference internal" href="importing.html#Solution" title="Solution"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Solution()</span></code></a></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Domain1D instance representing an axisymmetric
+stagnation flow.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.AxisymmetricFlow">
+<span class="sig-name descname"><span class="pre">AxisymmetricFlow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">gas</span></em>, <em class="sig-param"><span class="pre">id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.AxisymmetricFlow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an axisymmetric flow domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gas</strong> – Instance of class <a class="reference internal" href="importing.html#Solution" title="Solution"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Solution()</span></code></a></p></li>
+<li><p><strong>id</strong> – String, ID of the flow</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Domain1D instance representing an axisymmetric flow.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.Inlet">
+<span class="sig-name descname"><span class="pre">Inlet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.Inlet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an inlet domain.</p>
+<p>Note that an inlet can only be a terminal domain - it must be
+either the leftmost or rightmost domain in a stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> – String name of the inlet.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a> representing an inlet.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.Outlet">
+<span class="sig-name descname"><span class="pre">Outlet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.Outlet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an outlet domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> – String ID of the outlet.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a> representing an outlet.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.OutletRes">
+<span class="sig-name descname"><span class="pre">OutletRes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.OutletRes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an outlet reservoir domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a> representing an outlet
+reservoir.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.Surface">
+<span class="sig-name descname"><span class="pre">Surface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id</span></em>, <em class="sig-param"><span class="pre">surface_mech</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.Surface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a surface domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – String ID of surface</p></li>
+<li><p><strong>surface_mech</strong> – Instance of class <a class="reference internal" href="importing.html#Interface" title="Interface"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Interface()</span></code></a> defining
+the surface reaction mechanism to be used. Optional.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a> representing a
+non-reacting or reacting surface.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.SymmPlane">
+<span class="sig-name descname"><span class="pre">SymmPlane</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.SymmPlane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a symmetry plane domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> – String ID of the symmetry plane.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a> representing a symmetry
+plane.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.componentIndex">
+<span class="sig-name descname"><span class="pre">componentIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.componentIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the index of a component given its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>name</strong> – String name of the component to look up. If a numeric value
+is passed, it will be returned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Index of the component, or input numeric value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.componentName">
+<span class="sig-name descname"><span class="pre">componentName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">n</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.componentName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the name of a component given its index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>n</strong> – Integer or vector of integers of components’ names
+to get.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cell array of component names.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.disableEnergy">
+<span class="sig-name descname"><span class="pre">disableEnergy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.disableEnergy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disable the energy equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.domainIndex">
+<span class="sig-name descname"><span class="pre">domainIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.domainIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the domain index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>This function returns an integer flag denoting the location
+of the domain, beginning with 1 at the left.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.domainType">
+<span class="sig-name descname"><span class="pre">domainType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.domainType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the type of domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>This function returns a string describing the domain type.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.enableEnergy">
+<span class="sig-name descname"><span class="pre">enableEnergy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.enableEnergy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable the energy equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.gridPoints">
+<span class="sig-name descname"><span class="pre">gridPoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">n</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.gridPoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get grid points from a domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>n</strong> – Optional, vector of grid points to be retrieved.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Vector of grid points. Length of <code class="docutils literal notranslate"><span class="pre">n</span></code> or <a class="reference internal" href="#Domain1D.nPoints" title="Domain1D.nPoints"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">nPoints()</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.isFlow">
+<span class="sig-name descname"><span class="pre">isFlow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.isFlow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine whether a domain is a flow.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 if the domain is a flow domain, and 0 otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.isInlet">
+<span class="sig-name descname"><span class="pre">isInlet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.isInlet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine whether a domain is an inlet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 if the domain is an inlet, and 0 otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.isSurface">
+<span class="sig-name descname"><span class="pre">isSurface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.isSurface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a domain is a surface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 if the domain is a surface, and 0 otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.massFlux">
+<span class="sig-name descname"><span class="pre">massFlux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.massFlux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the mass flux.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The mass flux in the domain.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.massFraction">
+<span class="sig-name descname"><span class="pre">massFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.massFraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the mass fraction of a species given its integer index.</p>
+<p>This method returns the mass fraction of species <code class="docutils literal notranslate"><span class="pre">k</span></code>, where
+k is the integer index of the species in the flow domain
+to which the boundary domain is attached.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>k</strong> – Integer species index</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mass fraction of species</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.nComponents">
+<span class="sig-name descname"><span class="pre">nComponents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.nComponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Number of variables at each grid point</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.nPoints">
+<span class="sig-name descname"><span class="pre">nPoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.nPoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of grid points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Integer number of grid points.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set properties of a Domain1D.</p>
+<p>The properties that may be set are</p>
+<ul class="simple">
+<li><p>Temperature     (T)</p></li>
+<li><p>Pressure        (P)</p></li>
+<li><p>Mole Fractions  (X)</p></li>
+<li><p>Mass Flux       (mdot)</p></li>
+<li><p>tol</p></li>
+<li><p>tol-time</p></li>
+<li><p>grid</p></li>
+<li><p>bounds</p></li>
+<li><p>T_fixed</p></li>
+<li><p>ID</p></li>
+</ul>
+<p>Either the full property name or the symbol may be
+specified. Mole and mass
+fractions must be input as vectors (either row or column) with
+length equal to the number of species.</p>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="nb">set</span><span class="p">(</span><span class="n">gas</span><span class="p">,</span><span class="s1">&#39;Temperature&#39;</span><span class="p">,</span><span class="mf">600.0</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="nb">set</span><span class="p">(</span><span class="n">gas</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mf">600.0</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="nb">set</span><span class="p">(</span><span class="n">gas</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mf">600.0</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">oneatm</span><span class="p">,</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="n">massfracs</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="nb">set</span><span class="p">(</span><span class="n">gas</span><span class="p">,</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">ones</span><span class="p">(</span><span class="n">nSpecies</span><span class="p">(</span><span class="n">gas</span><span class="p">),</span><span class="mi">1</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Alternatively, individual methods to set properties may be
+called (setTemperature, setMoleFractions, etc.)</p>
+<p>See also: <a class="reference internal" href="#Domain1D.setBounds" title="Domain1D.setBounds"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">setBounds()</span></code></a>, <a class="reference internal" href="#Domain1D.setFixedTempProfile" title="Domain1D.setFixedTempProfile"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">setFixedTempProfile()</span></code></a> <a class="reference internal" href="#Domain1D.setID" title="Domain1D.setID"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">setID()</span></code></a>,
+<a class="reference internal" href="#Domain1D.setMdot" title="Domain1D.setMdot"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">setMdot()</span></code></a>, <a class="reference internal" href="#Domain1D.setMoleFractions" title="Domain1D.setMoleFractions"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">setMoleFractions()</span></code></a>, <a class="reference internal" href="#Domain1D.setPressure" title="Domain1D.setPressure"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">setPressure()</span></code></a>,
+<a class="reference internal" href="#Domain1D.setProfile" title="Domain1D.setProfile"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">setProfile()</span></code></a>, <a class="reference internal" href="#Domain1D.setSteadyTolerances" title="Domain1D.setSteadyTolerances"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">setSteadyTolerances()</span></code></a>, <a class="reference internal" href="#Domain1D.setTemperature" title="Domain1D.setTemperature"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">setTemperature()</span></code></a>,
+<a class="reference internal" href="#Domain1D.setTransientTolerances" title="Domain1D.setTransientTolerances"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">setTransientTolerances()</span></code></a>, <a class="reference internal" href="#Domain1D.setupGrid" title="Domain1D.setupGrid"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">setupGrid()</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>varargin</strong> – Comma separated list of <code class="docutils literal notranslate"><span class="pre">property,</span> <span class="pre">value</span></code> pairs to be set</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.setBounds">
+<span class="sig-name descname"><span class="pre">setBounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">component</span></em>, <em class="sig-param"><span class="pre">lower</span></em>, <em class="sig-param"><span class="pre">upper</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.setBounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set bounds on the solution components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>component</strong> – String, component to set the bounds on</p></li>
+<li><p><strong>lower</strong> – Lower bound</p></li>
+<li><p><strong>upper</strong> – Upper bound</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.setCoverageEqs">
+<span class="sig-name descname"><span class="pre">setCoverageEqs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">onoff</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.setCoverageEqs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable or disable solving the coverage equations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>onoff</strong> – String, one of <code class="docutils literal notranslate"><span class="pre">'on'</span></code> or <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> to turn solving
+the coverage equations on. One of <code class="docutils literal notranslate"><span class="pre">'off'</span></code> or <code class="docutils literal notranslate"><span class="pre">'no'</span></code>
+to turn off the coverage equations.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.setFixedTempProfile">
+<span class="sig-name descname"><span class="pre">setFixedTempProfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">profile</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.setFixedTempProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a fixed temperature profile.</p>
+<p>Set the temperature profile to use when the
+energy equation is not being solved. The profile must be entered
+as an array of positions / temperatures, which may be in rows or
+columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>profile</strong> – n x 2 or 2 x n array of <code class="docutils literal notranslate"><span class="pre">n</span></code> points at which the temperature
+is specified.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.setID">
+<span class="sig-name descname"><span class="pre">setID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.setID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the ID tag for a domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>id</strong> – String ID to assign</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.setMdot">
+<span class="sig-name descname"><span class="pre">setMdot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">mdot</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.setMdot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the mass flow rate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>mdot</strong> – Mass flow rate</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.setMoleFractions">
+<span class="sig-name descname"><span class="pre">setMoleFractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.setMoleFractions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the mole fractions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>x</strong> – String specifying the species and mole fractions in
+the format <code class="docutils literal notranslate"><span class="pre">'SPEC:X,SPEC2:X2'</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.setPressure">
+<span class="sig-name descname"><span class="pre">setPressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.setPressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the pressure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>p</strong> – Pressure to be set. Units: Pa</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.setProfile">
+<span class="sig-name descname"><span class="pre">setProfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">n</span></em>, <em class="sig-param"><span class="pre">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.setProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the profile of a component.</p>
+<p>Convenience function to allow an instance of <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a> to
+have a profile of its components set when it is part of a <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>n</strong> – Integer index of component, vector of component indices, string
+of component name, or cell array of strings of component names.</p></li>
+<li><p><strong>p</strong> – n x 2 array, whose columns are the relative (normalized) positions
+and the component values at those points. The number of positions
+<code class="docutils literal notranslate"><span class="pre">n</span></code> is arbitrary.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.setSteadyTolerances">
+<span class="sig-name descname"><span class="pre">setSteadyTolerances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">component</span></em>, <em class="sig-param"><span class="pre">rtol</span></em>, <em class="sig-param"><span class="pre">atol</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.setSteadyTolerances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the steady-state tolerances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>component</strong> – String or cell array of strings of component values
+whose tolerances should be set. If <code class="docutils literal notranslate"><span class="pre">'default'</span></code> is
+specified, the tolerance of all components will be set.</p></li>
+<li><p><strong>rtol</strong> – Relative tolerance</p></li>
+<li><p><strong>atol</strong> – Absolute tolerance</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.setTemperature">
+<span class="sig-name descname"><span class="pre">setTemperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.setTemperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the temperature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>t</strong> – Temperature to be set. Units: K</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.setTransientTolerances">
+<span class="sig-name descname"><span class="pre">setTransientTolerances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">component</span></em>, <em class="sig-param"><span class="pre">rtol</span></em>, <em class="sig-param"><span class="pre">atol</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.setTransientTolerances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the transient tolerances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>component</strong> – String or cell array of strings of component values
+whose tolerances should be set. If <code class="docutils literal notranslate"><span class="pre">'default'</span></code> is
+specified, the tolerance of all components will be set.</p></li>
+<li><p><strong>rtol</strong> – Relative tolerance</p></li>
+<li><p><strong>atol</strong> – Absolute tolerance</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.setupGrid">
+<span class="sig-name descname"><span class="pre">setupGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">grid</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.setupGrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set up the solution grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p></li>
+<li><p><strong>grid</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Domain1D.temperature">
+<span class="sig-name descname"><span class="pre">temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Domain1D.temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the boundary temperature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – Instance of class <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Temperature. Units: K</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="stack">
+<h2>Stack<a class="headerlink" href="#stack" title="Permalink to this heading">¶</a></h2>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="Stack">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Stack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">domains</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stack class constructor.</p>
+<p>A stack object is a container for one-dimensional domains,
+which are instances of class Domain1D. The domains are of two
+types - extended domains, and connector domains.</p>
+<p>See also: <a class="reference internal" href="#Domain1D" title="Domain1D"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Domain1D()</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>domains</strong> – Vector of domain instances</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p>
+</dd>
+</dl>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.CounterFlowDiffusionFlame">
+<span class="sig-name descname"><span class="pre">CounterFlowDiffusionFlame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">left</span></em>, <em class="sig-param"><span class="pre">flow</span></em>, <em class="sig-param"><span class="pre">right</span></em>, <em class="sig-param"><span class="pre">tp_f</span></em>, <em class="sig-param"><span class="pre">tp_o</span></em>, <em class="sig-param"><span class="pre">oxidizer</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.CounterFlowDiffusionFlame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a counter flow diffusion flame stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>left</strong> – Object representing the left inlet, which must be
+created using function <code class="xref mat mat-func docutils literal notranslate"><span class="pre">Inlet()</span></code>.</p></li>
+<li><p><strong>flow</strong> – Object representing the flow, created with
+function <code class="xref mat mat-func docutils literal notranslate"><span class="pre">AxisymmetricFlow()</span></code>.</p></li>
+<li><p><strong>right</strong> – Object representing the right inlet, which must be
+created using function <code class="xref mat mat-func docutils literal notranslate"><span class="pre">Inlet()</span></code>.</p></li>
+<li><p><strong>tp_f</strong> – Object representing the fuel inlet gas, instance of class
+<a class="reference internal" href="importing.html#Solution" title="Solution"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Solution()</span></code></a>, and an ideal gas.</p></li>
+<li><p><strong>tp_o</strong> – Object representing the oxidizer inlet gas, instance of class
+<a class="reference internal" href="importing.html#Solution" title="Solution"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Solution()</span></code></a>, and an ideal gas.</p></li>
+<li><p><strong>oxidizer</strong> – String representing the oxidizer species. Most commonly O2.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a> object representing the left
+inlet, flow, and right inlet.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.FreeFlame">
+<span class="sig-name descname"><span class="pre">FreeFlame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">gas</span></em>, <em class="sig-param"><span class="pre">id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.FreeFlame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a freely-propagating flat flame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gas</strong> – Instance of class <a class="reference internal" href="importing.html#Solution" title="Solution"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Solution()</span></code></a></p></li>
+<li><p><strong>id</strong> – String, ID of the flow</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Domain1D instance representing a freely propagating,
+adiabatic flame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.domainIndex">
+<span class="sig-name descname"><span class="pre">domainIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.domainIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the index of a domain in a stack given its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p></li>
+<li><p><strong>name</strong> – If double, the value is returned. Otherwise,
+the name is looked up and its index is returned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Index of domain</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the grid in one domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p></li>
+<li><p><strong>name</strong> – Name of the domain for which the grid
+should be retrieved.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The grid in domain name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.plotSolution">
+<span class="sig-name descname"><span class="pre">plotSolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">domain</span></em>, <em class="sig-param"><span class="pre">component</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.plotSolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a specified solution component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p></li>
+<li><p><strong>domain</strong> – Name of domain from which the component should be
+retrieved</p></li>
+<li><p><strong>component</strong> – Name of the component to be plotted</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.resid">
+<span class="sig-name descname"><span class="pre">resid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">domain</span></em>, <em class="sig-param"><span class="pre">rdt</span></em>, <em class="sig-param"><span class="pre">count</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.resid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the residuals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p></li>
+<li><p><strong>domain</strong> – Name of the domain</p></li>
+<li><p><strong>rdt</strong> – </p></li>
+<li><p><strong>count</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.restore">
+<span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">fname</span></em>, <em class="sig-param"><span class="pre">id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.restore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore a previously-saved solution.</p>
+<p>This method can be used to provide an initial guess for the solution.</p>
+<p>See also: <a class="reference internal" href="#Stack.save" title="Stack.save"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">save()</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p></li>
+<li><p><strong>fname</strong> – File name of a YAML file containing solution information</p></li>
+<li><p><strong>id</strong> – ID of the element that should be restored</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">fname</span></em>, <em class="sig-param"><span class="pre">id</span></em>, <em class="sig-param"><span class="pre">desc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save a solution to a file.</p>
+<p>The output file is in a format that
+can be used by <a class="reference internal" href="#Stack.restore" title="Stack.restore"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">restore()</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p></li>
+<li><p><strong>fname</strong> – File name where YAML file should be written</p></li>
+<li><p><strong>id</strong> – ID to be assigned to the YAML element when it is
+written</p></li>
+<li><p><strong>desc</strong> – Description to be written to the output file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.saveSoln">
+<span class="sig-name descname"><span class="pre">saveSoln</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">fname</span></em>, <em class="sig-param"><span class="pre">id</span></em>, <em class="sig-param"><span class="pre">desc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.saveSoln" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save a solution to a file.</p>
+<p>The output file is in a format that
+can be used by <a class="reference internal" href="#Stack.restore" title="Stack.restore"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">restore()</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p></li>
+<li><p><strong>fname</strong> – File name where YAML file should be written</p></li>
+<li><p><strong>id</strong> – ID to be assigned to the YAML element when it is
+written</p></li>
+<li><p><strong>desc</strong> – Description to be written to the output file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.setFlatProfile">
+<span class="sig-name descname"><span class="pre">setFlatProfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">domain</span></em>, <em class="sig-param"><span class="pre">comp</span></em>, <em class="sig-param"><span class="pre">v</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.setFlatProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a component to a value across the entire domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p></li>
+<li><p><strong>domain</strong> – Integer ID of the domain</p></li>
+<li><p><strong>comp</strong> – Component to be set</p></li>
+<li><p><strong>v</strong> – Double, value to be set</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.setMaxJacAge">
+<span class="sig-name descname"><span class="pre">setMaxJacAge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">ss_age</span></em>, <em class="sig-param"><span class="pre">ts_age</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.setMaxJacAge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number of times the Jacobian will be used before it is recomputed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p></li>
+<li><p><strong>ss_age</strong> – Maximum age of the Jacobian for steady state analysis</p></li>
+<li><p><strong>ts_age</strong> – Maximum age of the Jacobian for transient analysis. If
+not specified, defaults to <code class="docutils literal notranslate"><span class="pre">ss_age</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.setProfile">
+<span class="sig-name descname"><span class="pre">setProfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">name</span></em>, <em class="sig-param"><span class="pre">comp</span></em>, <em class="sig-param"><span class="pre">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.setProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify a profile for one component.</p>
+<p>The solution vector values for this component will be linearly
+interpolated from the discrete function defined by p(:,1) vs. p(:,2).
+Note that <code class="docutils literal notranslate"><span class="pre">p(1,1)</span> <span class="pre">=</span> <span class="pre">0.0</span></code> corresponds to the leftmost grid point in
+the specified domain, and <code class="docutils literal notranslate"><span class="pre">p(1,n)</span> <span class="pre">=</span> <span class="pre">1.0</span></code> corresponds to the rightmost
+grid point. This method can be called at any time, but is
+usually used to set the initial guess for the solution.</p>
+<p>Example (assuming <code class="docutils literal notranslate"><span class="pre">s</span></code> is an instance of <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">zr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mf">0.1</span> <span class="mf">0.2</span> <span class="mf">0.4</span> <span class="mf">0.8</span> <span class="mi">1</span><span class="p">];</span>
+<span class="o">&gt;&gt;</span> <span class="n">v</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">500</span> <span class="mi">650</span> <span class="mi">700</span> <span class="mi">730</span> <span class="mi">800</span> <span class="mi">900</span><span class="p">];</span>
+<span class="o">&gt;&gt;</span> <span class="n">setProfile</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="n">zr</span><span class="p">,</span> <span class="n">v</span><span class="p">]);</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p></li>
+<li><p><strong>name</strong> – Domain name</p></li>
+<li><p><strong>comp</strong> – component number</p></li>
+<li><p><strong>p</strong> – n x 2 array, whose columns are the relative (normalized) positions
+and the component values at those points. The number of positions
+<code class="docutils literal notranslate"><span class="pre">n</span></code> is arbitrary.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.setRefineCriteria">
+<span class="sig-name descname"><span class="pre">setRefineCriteria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">n</span></em>, <em class="sig-param"><span class="pre">ratio</span></em>, <em class="sig-param"><span class="pre">slope</span></em>, <em class="sig-param"><span class="pre">curve</span></em>, <em class="sig-param"><span class="pre">prune</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.setRefineCriteria" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the criteria used to refine the grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p></li>
+<li><p><strong>n</strong> – Domain number</p></li>
+<li><p><strong>ratio</strong> – Maximum size ratio between adjacent cells</p></li>
+<li><p><strong>slope</strong> – Maximum relative difference in value between
+adjacent points</p></li>
+<li><p><strong>curve</strong> – Maximum relative difference in slope between
+adjacent cells</p></li>
+<li><p><strong>prune</strong> – Minimum value for slope or curve for which points
+will be retained in the grid. If the computed
+slope or curve value is below prune for all
+components, it will be deleted, unless either
+neighboring point is already marked for deletion.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.setTimeStep">
+<span class="sig-name descname"><span class="pre">setTimeStep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">stepsize</span></em>, <em class="sig-param"><span class="pre">steps</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.setTimeStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify a sequence of time steps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stepsize</strong> – Initial step size (s)</p></li>
+<li><p><strong>steps</strong> – Vector of number of steps to take before
+re-attempting solution of steady-state problem. For
+example, steps = [1, 2, 5, 10] would cause one time
+step to be taken first the the steady-state
+solution attempted. If this failed, two time steps
+would be taken, etc.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.setValue">
+<span class="sig-name descname"><span class="pre">setValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">n</span></em>, <em class="sig-param"><span class="pre">comp</span></em>, <em class="sig-param"><span class="pre">localPoint</span></em>, <em class="sig-param"><span class="pre">v</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.setValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of a single entry in the solution vector.</p>
+<p>Example (assuming <code class="docutils literal notranslate"><span class="pre">s</span></code> is an instance of <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">setValue</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">5.6</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This sets component 5 at the leftmost point (local point 1) in domain 3
+to the value 5.6. Note that the local index always begins at 1
+at the left of each domain, independent of the global index of
+the point, which depends on the location of this domain in the
+stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p></li>
+<li><p><strong>n</strong> – Domain number</p></li>
+<li><p><strong>comp</strong> – Component number</p></li>
+<li><p><strong>localPoint</strong> – Local index of the grid point in the domain</p></li>
+<li><p><strong>v</strong> – Value</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.solution">
+<span class="sig-name descname"><span class="pre">solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">domain</span></em>, <em class="sig-param"><span class="pre">component</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a solution component in one domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p></li>
+<li><p><strong>domain</strong> – String, name of the domain from which the solution is desired</p></li>
+<li><p><strong>component</strong> – String, component for which the solution is desired. If omitted,
+solutions for all of the components will be returned in an
+<code class="xref mat mat-func docutils literal notranslate"><span class="pre">nPoints()</span></code> x <code class="xref mat mat-func docutils literal notranslate"><span class="pre">nComponents()</span></code> array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Either an <code class="xref mat mat-func docutils literal notranslate"><span class="pre">nPoints()</span></code> x 1 vector, or
+<code class="xref mat mat-func docutils literal notranslate"><span class="pre">nPoints()</span></code> x <code class="xref mat mat-func docutils literal notranslate"><span class="pre">nComponents()</span></code> array.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.solve">
+<span class="sig-name descname"><span class="pre">solve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">loglevel</span></em>, <em class="sig-param"><span class="pre">refine_grid</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solve the problem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p></li>
+<li><p><strong>loglevel</strong> – Integer flag controlling the amount of diagnostic
+output. Zero supresses all output, and 5 produces
+very verbose output.</p></li>
+<li><p><strong>refine_grid</strong> – Integer, 1 to allow grid refinement, 0 to disallow.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="Stack.writeStats">
+<span class="sig-name descname"><span class="pre">writeStats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Stack.writeStats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print statistics for the current solution.</p>
+<p>Prints a summary of the number of function and
+Jacobian evaluations for each grid, and the CPU time spent on
+each one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> – Instance of class <a class="reference internal" href="#Stack" title="Stack"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Stack()</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+                </div>
+                </div>
+            </div>
+             <!-- end of block document -->
+  <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+    <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">One-Dimensional Reacting Flows</a><ul>
+<li><a class="reference internal" href="#domain1d">Domain1D</a></li>
+<li><a class="reference internal" href="#stack">Stack</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Matlab Interface User’s Guide</a><ul>
+      <li>Previous: <a href="zero-dim.html" title="previous chapter">Zero-Dimensional Reactor Networks</a></li>
+      <li>Next: <a href="data.html" title="next chapter">Physical Constants</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/matlab/one-dim.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script><div id="numfocus">
+<h3>Donate to Cantera</h3>
+<a href="https://numfocus.salsalabs.org/donate-to-cantera/index.html">
+<img src="../_static/powered_by_NumFOCUS.png" border="0" alt="NumFOCUS"/></a>
+</div>
+    </div>
+  </div>
+                <div class="clearer"></div>
+          </div>
+           <!--End of block content-->
+
+          <div class="footer">
+            &copy;2001-2023, Cantera Developers.
+            
+            |
+            Powered by <a href="http://sphinx-doc.org/">Sphinx 5.1.1</a>
+            &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+            
+            |
+            <a href="../_sources/matlab/one-dim.rst.txt"
+                rel="nofollow">Page source</a>
+          </div>
+      </div>
+  </div>
+
+  <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
+  <script async="async" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+</body>
+</html>

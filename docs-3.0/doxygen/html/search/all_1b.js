@@ -1,12 +1,7 @@
 var searchData=
 [
-  ['_7eapplication_0',['~Application',['../d6/d9a/classCantera_1_1Application.html#add76bdcd4a9a0b7b27c3dacadf5a66fe',1,'Cantera::Application']]],
-  ['_7ecanteraerror_1',['~CanteraError',['../db/ddf/classCantera_1_1CanteraError.html#ad2cd8e4faf96a47789319675db78d46d',1,'Cantera::CanteraError']]],
-  ['_7efactorybase_2',['~FactoryBase',['../da/dac/classCantera_1_1FactoryBase.html#a47c984f07dd2116c9d2b64ef615fbe23',1,'Cantera::FactoryBase']]],
-  ['_7eintegrator_3',['~Integrator',['../d8/d6f/classCantera_1_1Integrator.html#ac13ff1f4b36510ac4bcd076d4c1773ab',1,'Cantera::Integrator']]],
-  ['_7elogger_4',['~Logger',['../d3/d0f/classCantera_1_1Logger.html#a7a62719474beac5f447b376e0c9d5b44',1,'Cantera::Logger']]],
-  ['_7emultiphase_5',['~MultiPhase',['../d1/d4b/classCantera_1_1MultiPhase.html#a56107881469f06d33f16d4f55ea69225',1,'Cantera::MultiPhase']]],
-  ['_7ereactionpathdiagram_6',['~ReactionPathDiagram',['../d9/d54/classCantera_1_1ReactionPathDiagram.html#aa9d1a8c873fb03cb670004198662b3fb',1,'Cantera::ReactionPathDiagram']]],
-  ['_7esolvesp_7',['~solveSP',['../d7/def/classCantera_1_1solveSP.html#a594e4c5ee60ed2b54f18e2971c496ca3',1,'Cantera::solveSP']]],
-  ['_7especiesnode_8',['~SpeciesNode',['../d6/df4/classCantera_1_1SpeciesNode.html#a3a6a452711a68180bdce78a8edf1a5fd',1,'Cantera::SpeciesNode']]]
+  ['z_3673',['z',['../dc/d01/classCantera_1_1MixtureFugacityTP.html#ae7bc7213001e326be4d4eb2d8a035c34',1,'Cantera::MixtureFugacityTP']]],
+  ['zero_3674',['zero',['../d1/dcf/classCantera_1_1Array2D.html#a0c4493a5d4723940d60164428f11adc3',1,'Cantera::Array2D::zero()'],['../d3/d8d/classCantera_1_1BandMatrix.html#a0c4493a5d4723940d60164428f11adc3',1,'Cantera::BandMatrix::zero()'],['../de/d6e/classCantera_1_1GeneralMatrix.html#adc97ef01b93ab09f32bf9a3bd07e6342',1,'Cantera::GeneralMatrix::zero()']]],
+  ['zero_2ddimensional_20reactor_20networks_3675',['Zero-Dimensional Reactor Networks',['../d9/de1/group__zerodGroup.html',1,'']]],
+  ['zerodim_2eh_3676',['zerodim.h',['../dd/d2e/zerodim_8h.html',1,'']]]
 ];

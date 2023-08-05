@@ -2,95 +2,450 @@
 
 <!DOCTYPE html>
 
-<html prefix="
-og: http://ogp.me/ns# article: http://ogp.me/ns/article#
-"
-lang="en">
+
+<html lang="en" >
 
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Thermodynamic Properties | Cantera </title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" media="none" onload="this.media='all'" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../_static/cantera.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" media="none" onload="this.media='all'" type="text/css" />
-  <link rel="stylesheet" href="../_static/cantera.css" media="none" onload="this.media='all'" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" media="none" onload="this.media='all'" type="text/css" />
-  <link rel="stylesheet" href="../_static/katex-math.css" media="none" onload="this.media='all'" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/katex.min.js"></script>
-        <script type="text/javascript" src="../_static/auto-render.min.js"></script>
-        <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
-    <link rel="shortcut icon" href="/assets/img/favicon.ico" sizes="16x16"/>
-    
-    <link rel="search" title="Search" href="../search.html" /> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Thermodynamic Properties &#8212; Cantera 3.0.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'matlab/thermodynamics';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/documentation/dev/sphinx/html/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.0';
+        </script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Chemical Kinetics" href="kinetics.html" />
+    <link rel="prev" title="Objects Representing Phases" href="importing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body>
-  <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-  <!-- Menubar -->
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+   
 
-  <nav class="navbar navbar-expand-md navbar-light bg-light static-top mb-4">
-      <div class="container"><!-- This keeps the margins nice -->
-          <a class="navbar-brand" href="/index.html">
-          <img src="/assets/img/cantera-logo.png" alt="Cantera" id="logo" class="d-inline-block align-top">
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><ul class="bd-navbar-elements navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/install/index.html">
+            Install
+        </a>
+    </li>
 
-          <div class="collapse navbar-collapse" id="bs-navbar">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a href="/install/index.html" class="nav-link">Install</a>
-              </li>
-              <li class="nav-item">
-                <a href="/tutorials/index.html" class="nav-link">Tutorials</a>
-              </li>
-              <li class="nav-item">
-                <a href="/examples/index.html" class="nav-link">Examples</a>
-              </li>
-              <li class="nav-item">
-                <a href="/community.html" class="nav-link">Community</a>
-              </li>
-              <li class="nav-item">
-                <a href="/science/index.html" class="nav-link">Science</a>
-              </li>
-              <li class="nav-item">
-                <a href="/documentation/index.html" class="nav-link">Documentation</a>
-              </li>
-              <li class="nav-item">
-                <a href="/blog/index.html" class="nav-link">Blog</a>
-              </li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-      </div><!-- /.container -->
-  </nav>
-  <!-- End of Menubar -->
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/tutorials/index.html">
+            Tutorials
+        </a>
+    </li>
 
-  <div class="container" id="content">
-      <div class="body-content">
-          <!--Body content-->
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/examples/index.html">
+            Examples
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/community.html">
+            Community
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/science/index.html">
+            Science
+        </a>
+    </li>
+
+    <li class="nav-item current active">
+        <a class="nav-link nav-internal" href="/documentation/index.html">
+            Documentation
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/blog/index.html">
+            Blog
+        </a>
+    </li>
+</ul></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
           
-          <div class="document">
-            
-            <div class="documentwrapper">
-                <div class="bodywrapper">
-                <div class="body" role="main">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      3.0  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><ul class="bd-navbar-elements navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/install/index.html">
+            Install
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/tutorials/index.html">
+            Tutorials
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/examples/index.html">
+            Examples
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/community.html">
+            Community
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/science/index.html">
+            Science
+        </a>
+    </li>
+
+    <li class="nav-item current active">
+        <a class="nav-link nav-internal" href="/documentation/index.html">
+            Documentation
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/blog/index.html">
+            Blog
+        </a>
+    </li>
+</ul></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      3.0  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Thermodynamic Properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transport.html">Transport Properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zero-dim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one-dim.html">One-Dimensional Reacting Flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">Physical Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utility Functions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.salsalabs.org/donate-to-cantera/index.html" class="btn btn-secondary" type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Matlab Interface User’s Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Thermodynamic Properties</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
                   
   <section id="thermodynamic-properties">
-<h1>Thermodynamic Properties<a class="headerlink" href="#thermodynamic-properties" title="Permalink to this heading">¶</a></h1>
+<h1>Thermodynamic Properties<a class="headerlink" href="#thermodynamic-properties" title="Permalink to this heading">#</a></h1>
 <section id="thermophase">
-<h2>ThermoPhase<a class="headerlink" href="#thermophase" title="Permalink to this heading">¶</a></h2>
+<h2>ThermoPhase<a class="headerlink" href="#thermophase" title="Permalink to this heading">#</a></h2>
 <dl class="mat class">
 <dt class="sig sig-object mat" id="ThermoPhase">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ThermoPhase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">src</span></em>, <em class="sig-param"><span class="pre">id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ThermoPhase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">src</span></em>, <em class="sig-param"><span class="pre">id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase" title="Permalink to this definition">#</a></dt>
 <dd><p>ThermoPhase class constructor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -105,7 +460,7 @@ lang="en">
 </dl>
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.atomicMasses">
-<span class="sig-name descname"><span class="pre">atomicMasses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.atomicMasses" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">atomicMasses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.atomicMasses" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the atomic masses of the elements.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -120,7 +475,7 @@ object that derives from ThermoPhase).</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.charges">
-<span class="sig-name descname"><span class="pre">charges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.charges" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">charges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.charges" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the array of species charges</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -135,7 +490,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.chemPotentials">
-<span class="sig-name descname"><span class="pre">chemPotentials</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.chemPotentials" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">chemPotentials</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.chemPotentials" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the chemical potentials of the species.</p>
 <p>The expressions used to compute the chemical potential
 depend on the model implemented by the underlying kernel
@@ -160,7 +515,7 @@ underlying kernel thermo manager.”””</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.cp_R">
-<span class="sig-name descname"><span class="pre">cp_R</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.cp_R" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">cp_R</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.cp_R" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the non-dimensional specific heats at constant pressure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -176,7 +531,7 @@ constant pressure, non-dimensional basis</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.cp_mass">
-<span class="sig-name descname"><span class="pre">cp_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.cp_mass" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">cp_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.cp_mass" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mass-basis specific heat at constant pressure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -192,7 +547,7 @@ constant pressure. Units: J/kg-K</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.cp_mole">
-<span class="sig-name descname"><span class="pre">cp_mole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.cp_mole" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">cp_mole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.cp_mole" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the molar-basis specific heat at constant pressure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -208,7 +563,7 @@ constant pressure. Units: J/kmol-K</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.critDensity">
-<span class="sig-name descname"><span class="pre">critDensity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.critDensity" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">critDensity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.critDensity" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the critical density.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -223,7 +578,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.critPressure">
-<span class="sig-name descname"><span class="pre">critPressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.critPressure" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">critPressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.critPressure" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the critical pressure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -238,7 +593,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.critTemperature">
-<span class="sig-name descname"><span class="pre">critTemperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.critTemperature" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">critTemperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.critTemperature" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the critical temperature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -253,7 +608,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.cv_mass">
-<span class="sig-name descname"><span class="pre">cv_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.cv_mass" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">cv_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.cv_mass" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mass-basis specific heat at constant volume.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -269,7 +624,7 @@ constant volume. Units: J/kg-K</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.cv_mole">
-<span class="sig-name descname"><span class="pre">cv_mole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.cv_mole" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">cv_mole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.cv_mole" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the molar-basis specific heat at constant volume.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -285,7 +640,7 @@ constant volume. Units: J/kmol-K</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.density">
-<span class="sig-name descname"><span class="pre">density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.density" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.density" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the density.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -300,7 +655,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.electricPotential">
-<span class="sig-name descname"><span class="pre">electricPotential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.electricPotential" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">electricPotential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.electricPotential" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the electric potential.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -315,7 +670,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.elementIndex">
-<span class="sig-name descname"><span class="pre">elementIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.elementIndex" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">elementIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.elementIndex" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the index of an element given its name.</p>
 <p>The index is an integer assigned to each element in sequence as it
 is read in from the input file.</p>
@@ -347,7 +702,7 @@ object that derives from ThermoPhase)</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.elementName">
-<span class="sig-name descname"><span class="pre">elementName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">m</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.elementName" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">elementName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">m</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.elementName" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the name of an element given its index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -368,7 +723,7 @@ the same shape containing the name strings.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.elementalMassFraction">
-<span class="sig-name descname"><span class="pre">elementalMassFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.elementalMassFraction" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">elementalMassFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.elementalMassFraction" title="Permalink to this definition">#</a></dt>
 <dd><p>Determine the elemental mass fraction in gas object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -387,7 +742,7 @@ estimate of the gas state before calling elementalMassFraction.</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.enthalpies_RT">
-<span class="sig-name descname"><span class="pre">enthalpies_RT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.enthalpies_RT" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">enthalpies_RT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.enthalpies_RT" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the non-dimensional enthalpies.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -405,7 +760,7 @@ values are ideal gas enthalpies.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.enthalpy_mass">
-<span class="sig-name descname"><span class="pre">enthalpy_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.enthalpy_mass" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">enthalpy_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.enthalpy_mass" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mass specific enthalpy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -420,7 +775,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.enthalpy_mole">
-<span class="sig-name descname"><span class="pre">enthalpy_mole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.enthalpy_mole" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">enthalpy_mole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.enthalpy_mole" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mole specific enthalpy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -435,7 +790,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.entropies_R">
-<span class="sig-name descname"><span class="pre">entropies_R</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.entropies_R" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">entropies_R</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.entropies_R" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the non-dimensional entropy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -450,7 +805,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.entropy_mass">
-<span class="sig-name descname"><span class="pre">entropy_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.entropy_mass" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">entropy_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.entropy_mass" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mass specific entropy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -465,7 +820,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.entropy_mole">
-<span class="sig-name descname"><span class="pre">entropy_mole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.entropy_mole" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">entropy_mole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.entropy_mole" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mole specific entropy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -480,7 +835,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.eosType">
-<span class="sig-name descname"><span class="pre">eosType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.eosType" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eosType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.eosType" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the type of the equation of state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -495,7 +850,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.equilibrate">
-<span class="sig-name descname"><span class="pre">equilibrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">xy</span></em>, <em class="sig-param"><span class="pre">solver</span></em>, <em class="sig-param"><span class="pre">rtol</span></em>, <em class="sig-param"><span class="pre">maxsteps</span></em>, <em class="sig-param"><span class="pre">maxiter</span></em>, <em class="sig-param"><span class="pre">loglevel</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.equilibrate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">equilibrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">xy</span></em>, <em class="sig-param"><span class="pre">solver</span></em>, <em class="sig-param"><span class="pre">rtol</span></em>, <em class="sig-param"><span class="pre">maxsteps</span></em>, <em class="sig-param"><span class="pre">maxiter</span></em>, <em class="sig-param"><span class="pre">loglevel</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.equilibrate" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the phase to a state of chemical equilibrium.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -527,7 +882,7 @@ generate more detailed information.</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.gibbs_RT">
-<span class="sig-name descname"><span class="pre">gibbs_RT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.gibbs_RT" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gibbs_RT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.gibbs_RT" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the non-dimensional Gibbs function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -542,7 +897,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.gibbs_mass">
-<span class="sig-name descname"><span class="pre">gibbs_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.gibbs_mass" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gibbs_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.gibbs_mass" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mass specific Gibbs function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -557,7 +912,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.gibbs_mole">
-<span class="sig-name descname"><span class="pre">gibbs_mole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.gibbs_mole" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gibbs_mole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.gibbs_mole" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mole specific Gibbs function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -572,7 +927,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.intEnergy_mass">
-<span class="sig-name descname"><span class="pre">intEnergy_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.intEnergy_mass" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">intEnergy_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.intEnergy_mass" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mass specific internal energy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -587,7 +942,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.intEnergy_mole">
-<span class="sig-name descname"><span class="pre">intEnergy_mole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.intEnergy_mole" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">intEnergy_mole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.intEnergy_mole" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mole specific internal energy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -602,7 +957,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.isIdealGas">
-<span class="sig-name descname"><span class="pre">isIdealGas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.isIdealGas" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">isIdealGas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.isIdealGas" title="Permalink to this definition">#</a></dt>
 <dd><p>Get a flag indicating whether the phase is an ideal gas.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -618,7 +973,7 @@ mixture, and false (0) otherwise.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.isothermalCompressibility">
-<span class="sig-name descname"><span class="pre">isothermalCompressibility</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.isothermalCompressibility" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">isothermalCompressibility</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.isothermalCompressibility" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the isothermal compressibility.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -633,7 +988,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.massFraction">
-<span class="sig-name descname"><span class="pre">massFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">species</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.massFraction" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">massFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">species</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.massFraction" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mass fraction of a species.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -652,7 +1007,7 @@ fraction is desired</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.massFractions">
-<span class="sig-name descname"><span class="pre">massFractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.massFractions" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">massFractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.massFractions" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mass fractions of all species.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -668,7 +1023,7 @@ no output argument is specified, a bar plot is produced.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.maxTemp">
-<span class="sig-name descname"><span class="pre">maxTemp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.maxTemp" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">maxTemp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.maxTemp" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the maximum temperature of the parameter fits.</p>
 <p>The parameterizations used to represent the temperature-dependent
 species thermodynamic properties are generally only valid in some
@@ -688,7 +1043,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.meanMolecularWeight">
-<span class="sig-name descname"><span class="pre">meanMolecularWeight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.meanMolecularWeight" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">meanMolecularWeight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.meanMolecularWeight" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mean molecular weight.</p>
 <p>The mean molecular weight is the mole-fraction-weighted sum of the
 molar masses of the individual species in the phase.</p>
@@ -705,7 +1060,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.minTemp">
-<span class="sig-name descname"><span class="pre">minTemp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.minTemp" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">minTemp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.minTemp" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the minimum temperature of the parameter fits.</p>
 <p>The parameterizations used to represent the temperature-dependent
 species thermodynamic properties are generally only valid in some
@@ -725,7 +1080,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.molarDensity">
-<span class="sig-name descname"><span class="pre">molarDensity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.molarDensity" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">molarDensity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.molarDensity" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the molar density.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -740,7 +1095,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.moleFraction">
-<span class="sig-name descname"><span class="pre">moleFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">species</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.moleFraction" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">moleFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">species</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.moleFraction" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mole fraction of a species.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -759,7 +1114,7 @@ fraction is desired</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.moleFractions">
-<span class="sig-name descname"><span class="pre">moleFractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.moleFractions" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">moleFractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.moleFractions" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mole fractions of all species.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -775,7 +1130,7 @@ no output argument is specified, a bar plot is produced.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.molecularWeights">
-<span class="sig-name descname"><span class="pre">molecularWeights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.molecularWeights" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">molecularWeights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.molecularWeights" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the molecular weights of the species.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -790,7 +1145,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.nAtoms">
-<span class="sig-name descname"><span class="pre">nAtoms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">k</span></em>, <em class="sig-param"><span class="pre">m</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.nAtoms" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">nAtoms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">k</span></em>, <em class="sig-param"><span class="pre">m</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.nAtoms" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the number of atoms of an element in a species.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -809,7 +1164,7 @@ object that derives from ThermoPhase)</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.nElements">
-<span class="sig-name descname"><span class="pre">nElements</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.nElements" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">nElements</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.nElements" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the number of elements.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -824,7 +1179,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.nSpecies">
-<span class="sig-name descname"><span class="pre">nSpecies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.nSpecies" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">nSpecies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.nSpecies" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the number of species.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -839,7 +1194,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.name">
-<span class="sig-name descname"><span class="pre">name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.name" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.name" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the name of the phase.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -854,7 +1209,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.pressure">
-<span class="sig-name descname"><span class="pre">pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.pressure" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.pressure" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the pressure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -869,7 +1224,7 @@ object that derives from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.refPressure">
-<span class="sig-name descname"><span class="pre">refPressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.refPressure" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">refPressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.refPressure" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the reference pressure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -885,7 +1240,7 @@ thermodynamic properties are for this pressure.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.satPressure">
-<span class="sig-name descname"><span class="pre">satPressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">T</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.satPressure" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">satPressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">T</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.satPressure" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the saturation pressure for a given temperature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -903,7 +1258,7 @@ object that derives from ThermoPhase)</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.satTemperature">
-<span class="sig-name descname"><span class="pre">satTemperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.satTemperature" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">satTemperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.satTemperature" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the saturation temperature for a given pressure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -921,7 +1276,7 @@ object that derives from ThermoPhase)</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.set">
-<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.set" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.set" title="Permalink to this definition">#</a></dt>
 <dd><p>Set properties of a phase.</p>
 <p>The properties that may be set are</p>
 <ul class="simple">
@@ -974,7 +1329,7 @@ object that derives from ThermoPhase)</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setDensity">
-<span class="sig-name descname"><span class="pre">setDensity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">rho</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setDensity" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setDensity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">rho</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setDensity" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the density.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -989,7 +1344,7 @@ class derived from ThermoPhase)</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setElectricPotential">
-<span class="sig-name descname"><span class="pre">setElectricPotential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">phi</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setElectricPotential" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setElectricPotential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">phi</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setElectricPotential" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the electric potential.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1004,7 +1359,7 @@ class derived from ThermoPhase)</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setMassFractions">
-<span class="sig-name descname"><span class="pre">setMassFractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">y</span></em>, <em class="sig-param"><span class="pre">norm</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setMassFractions" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setMassFractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">y</span></em>, <em class="sig-param"><span class="pre">norm</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setMassFractions" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the species mass fractions.</p>
 <p>Note that calling <a class="reference internal" href="#ThermoPhase.setMassFractions" title="ThermoPhase.setMassFractions"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">setMassFractions()</span></code></a> leaves the temperature and
 density unchanged, and therefore the pressure changes if the new
@@ -1034,7 +1389,7 @@ derivatives with respect to a species mass fraction.</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setMoleFractions">
-<span class="sig-name descname"><span class="pre">setMoleFractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">x</span></em>, <em class="sig-param"><span class="pre">norm</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setMoleFractions" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setMoleFractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">x</span></em>, <em class="sig-param"><span class="pre">norm</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setMoleFractions" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the species mole fractions.</p>
 <p>Note that calling <a class="reference internal" href="#ThermoPhase.setMoleFractions" title="ThermoPhase.setMoleFractions"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">setMoleFractions()</span></code></a> leaves the temperature and
 density unchanged, and therefore the pressure changes if the new
@@ -1064,7 +1419,7 @@ derivatives with respect to a species mole fraction.</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setName">
-<span class="sig-name descname"><span class="pre">setName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setName" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setName" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the name of the phase.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1079,7 +1434,7 @@ class derived from ThermoPhase)</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setPressure">
-<span class="sig-name descname"><span class="pre">setPressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setPressure" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setPressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setPressure" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the pressure.</p>
 <p>The pressure is set by changing the density holding the
 temperature and chemical composition fixed.</p>
@@ -1096,7 +1451,7 @@ class derived from ThermoPhase)</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_DP">
-<span class="sig-name descname"><span class="pre">setState_DP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">dp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_DP" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_DP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">dp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_DP" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the density and pressure.</p>
 <p>The density is set first, then the pressure is set by
 changing the temperature holding the density and
@@ -1115,7 +1470,7 @@ and pressure (Pa)</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_HP">
-<span class="sig-name descname"><span class="pre">setState_HP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">hp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_HP" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_HP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">hp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_HP" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the specific enthalpy and pressure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1131,7 +1486,7 @@ enthalpy (J/kg) and pressure (Pa).</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_PV">
-<span class="sig-name descname"><span class="pre">setState_PV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">pv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_PV" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_PV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">pv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_PV" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the pressure and specific volume.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1147,7 +1502,7 @@ pressure (Pa) and specific volume (m^3/kg).</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_Psat">
-<span class="sig-name descname"><span class="pre">setState_Psat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">px</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_Psat" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_Psat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">px</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_Psat" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the fluid state using the given pressure and quality.</p>
 <p>The fluid state will be set to a saturated liquid-vapor state using the
 input pressure and vapor fraction (quality) as the independent,
@@ -1166,7 +1521,7 @@ and the vapor fraction</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_RP">
-<span class="sig-name descname"><span class="pre">setState_RP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">rp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_RP" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_RP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">rp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_RP" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the density and pressure.</p>
 <p>The density is set first, then the pressure is set by
 changing the temperature holding the density and
@@ -1185,7 +1540,7 @@ and pressure (Pa)</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_SH">
-<span class="sig-name descname"><span class="pre">setState_SH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">sh</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_SH" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_SH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">sh</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_SH" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the specific entropy and specific enthalpy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1201,7 +1556,7 @@ entropy (J/kg/K) and specific enthalpy (J/kg).</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_SP">
-<span class="sig-name descname"><span class="pre">setState_SP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">sp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_SP" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_SP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">sp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_SP" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the specific entropy and pressure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1217,7 +1572,7 @@ entropy (J/kg-K) and pressure (Pa).</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_ST">
-<span class="sig-name descname"><span class="pre">setState_ST</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">st</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_ST" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_ST</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">st</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_ST" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the specific entropy and temperature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1233,7 +1588,7 @@ entropy (J/kg-K) and temperature (K).</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_SV">
-<span class="sig-name descname"><span class="pre">setState_SV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">sv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_SV" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_SV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">sv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_SV" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the specific entropy and specific volume.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1249,7 +1604,7 @@ entropy (J/kg-K) and specific volume (m**3/kg).</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_TH">
-<span class="sig-name descname"><span class="pre">setState_TH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">th</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_TH" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_TH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">th</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_TH" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the temperature and specific enthalpy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1265,7 +1620,7 @@ temperature (K) and specific enthalpy (J/kg).</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_TV">
-<span class="sig-name descname"><span class="pre">setState_TV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">tv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_TV" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_TV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">tv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_TV" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the temperature and specific volume.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1281,7 +1636,7 @@ temperature (K) and specific volume (m^3/kg).</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_Tsat">
-<span class="sig-name descname"><span class="pre">setState_Tsat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">tx</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_Tsat" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_Tsat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">tx</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_Tsat" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the fluid state using the given temperature and quality.</p>
 <p>The fluid state will be set to a saturated liquid-vapor state using the
 input temperature and vapor fraction (quality) as the independent,
@@ -1300,7 +1655,7 @@ and the vapor fraction (quality)</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_UP">
-<span class="sig-name descname"><span class="pre">setState_UP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">up</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_UP" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_UP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">up</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_UP" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the specific internal energy and pressure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1316,7 +1671,7 @@ internal energy (J/kg) and pressure (Pa).</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_UV">
-<span class="sig-name descname"><span class="pre">setState_UV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">uv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_UV" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_UV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">uv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_UV" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the specific internal energy and specific volume.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1333,7 +1688,7 @@ specific volume (m**3/kg).</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_VH">
-<span class="sig-name descname"><span class="pre">setState_VH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">vh</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_VH" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_VH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">vh</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_VH" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the specific volume and specific enthalpy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1349,7 +1704,7 @@ volume (m^3/kg) and specific enthalpy (J/kg).</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_satLiquid">
-<span class="sig-name descname"><span class="pre">setState_satLiquid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_satLiquid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_satLiquid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_satLiquid" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the fluid to the saturated liquid state at the current temperature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1361,7 +1716,7 @@ class derived from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setState_satVapor">
-<span class="sig-name descname"><span class="pre">setState_satVapor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_satVapor" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setState_satVapor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setState_satVapor" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the fluid to the saturated vapor state at the current temperature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1373,7 +1728,7 @@ class derived from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.setTemperature">
-<span class="sig-name descname"><span class="pre">setTemperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setTemperature" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setTemperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.setTemperature" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the temperature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1388,29 +1743,23 @@ class derived from ThermoPhase)</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.soundspeed">
-<span class="sig-name descname"><span class="pre">soundspeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.soundspeed" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">soundspeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.soundspeed" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the speed of sound.</p>
 <p>If the phase is an ideal gas, the speed of sound
 is calculated by:</p>
-<div class="math">
-\[c = \sqrt{\gamma * R * T}
-
-\]</div>
-<p>where <span class="math">\(\gamma\)</span> is the ratio of specific heats, <span class="math">\(R\)</span> is
-the specific gas constant, and <span class="math">\(T\)</span> is the temperature. If the
+<div class="math notranslate nohighlight">
+\[c = \sqrt{\gamma * R * T}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\gamma\)</span> is the ratio of specific heats, <span class="math notranslate nohighlight">\(R\)</span> is
+the specific gas constant, and <span class="math notranslate nohighlight">\(T\)</span> is the temperature. If the
 phase is not an ideal gas, the speed of sound is calculated by</p>
-<div class="math">
-\[c = \sqrt{\left(\frac{\partial p}{\partial \rho}\right)_s}
-
-\]</div>
-<p>where <span class="math">\(p\)</span> is the pressure and <span class="math">\(\rho\)</span> is the density,
-and the subscript <span class="math">\(s\)</span> indicates constant entropy. This is
+<div class="math notranslate nohighlight">
+\[c = \sqrt{\left(\frac{\partial p}{\partial \rho}\right)_s}\]</div>
+<p>where <span class="math notranslate nohighlight">\(p\)</span> is the pressure and <span class="math notranslate nohighlight">\(\rho\)</span> is the density,
+and the subscript <span class="math notranslate nohighlight">\(s\)</span> indicates constant entropy. This is
 approximated by slightly increasing the density at constant entropy
 and computing the change in pressure.</p>
-<div class="math">
-\[c = \sqrt{\frac{p_1 - p_0}{\rho_1-\rho_0}}
-
-\]</div>
+<div class="math notranslate nohighlight">
+\[c = \sqrt{\frac{p_1 - p_0}{\rho_1-\rho_0}}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>tp</strong> – Instance of class <a class="reference internal" href="#ThermoPhase" title="ThermoPhase"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ThermoPhase()</span></code></a> (or another
@@ -1424,7 +1773,7 @@ class derived from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.speciesIndex">
-<span class="sig-name descname"><span class="pre">speciesIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.speciesIndex" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">speciesIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.speciesIndex" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the index of a species given the name.</p>
 <p>The index is an integer assigned to each species in sequence as it
 is read in from the input file.</p>
@@ -1456,7 +1805,7 @@ containing the indices.</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.speciesName">
-<span class="sig-name descname"><span class="pre">speciesName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.speciesName" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">speciesName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em>, <em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.speciesName" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the name of a species given the index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1474,7 +1823,7 @@ class derived from ThermoPhase)</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.speciesNames">
-<span class="sig-name descname"><span class="pre">speciesNames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.speciesNames" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">speciesNames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.speciesNames" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the species names.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1489,7 +1838,7 @@ class derived from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.temperature">
-<span class="sig-name descname"><span class="pre">temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.temperature" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.temperature" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the temperature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1504,7 +1853,7 @@ class derived from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.thermalExpansionCoeff">
-<span class="sig-name descname"><span class="pre">thermalExpansionCoeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.thermalExpansionCoeff" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">thermalExpansionCoeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.thermalExpansionCoeff" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the thermal expansion coefficient.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1519,7 +1868,7 @@ class derived from ThermoPhase)</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ThermoPhase.vaporFraction">
-<span class="sig-name descname"><span class="pre">vaporFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.vaporFraction" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">vaporFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ThermoPhase.vaporFraction" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the vapor fraction.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1538,74 +1887,114 @@ class derived from ThermoPhase)</p>
 </section>
 
 
-                </div>
-                </div>
-            </div>
-             <!-- end of block document -->
-  <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-    <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="../index.html">Table of Contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Thermodynamic Properties</a><ul>
-<li><a class="reference internal" href="#thermophase">ThermoPhase</a></li>
-</ul>
-</li>
-</ul>
-
-  </div><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="index.html">Matlab Interface User’s Guide</a><ul>
-      <li>Previous: <a href="importing.html" title="previous chapter">Objects Representing Phases</a></li>
-      <li>Next: <a href="kinetics.html" title="next chapter">Chemical Kinetics</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/matlab/thermodynamics.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script><div id="numfocus">
-<h3>Donate to Cantera</h3>
-<a href="https://numfocus.salsalabs.org/donate-to-cantera/index.html">
-<img src="../_static/powered_by_NumFOCUS.png" border="0" alt="NumFOCUS"/></a>
-</div>
-    </div>
-  </div>
-                <div class="clearer"></div>
-          </div>
-           <!--End of block content-->
-
-          <div class="footer">
-            &copy;2001-2023, Cantera Developers.
-            
-            |
-            Powered by <a href="http://sphinx-doc.org/">Sphinx 5.1.1</a>
-            &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-            
-            |
-            <a href="../_sources/matlab/thermodynamics.rst.txt"
-                rel="nofollow">Page source</a>
-          </div>
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="importing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Objects Representing Phases</p>
       </div>
-  </div>
+    </a>
+    <a class="right-next"
+       href="kinetics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chemical Kinetics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
 
-  <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
-  <script async="async" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-</body>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermophase">ThermoPhase</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/matlab/thermodynamics.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2001-2023, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

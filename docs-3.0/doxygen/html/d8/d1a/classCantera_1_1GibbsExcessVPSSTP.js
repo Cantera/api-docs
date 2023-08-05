@@ -1,0 +1,26 @@
+var classCantera_1_1GibbsExcessVPSSTP =
+[
+    [ "GibbsExcessVPSSTP", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#a4c9bc0e2cee7268974b2450917291628", null ],
+    [ "calcDensity", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#afac1b45437d49cc161e7ca2d5c00906a", null ],
+    [ "standardConcentrationUnits", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#abc5b975427d1e4f85908c08169c40b86", null ],
+    [ "getActivityConcentrations", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#ad219f1982cfa892a38b70afce928cb8f", null ],
+    [ "standardConcentration", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#a1bc9e2f11e4fe90fa352f3677aabdcbe", null ],
+    [ "logStandardConc", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#a2ce7244812aa630886111707c2daeb07", null ],
+    [ "getActivities", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#aab07ba94dbf87698cc8a51446b1e0900", null ],
+    [ "getActivityCoefficients", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#a521abbd2bc483ff9fdf9a741a8ea9437", null ],
+    [ "getdlnActCoeffdT", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#aac4295a33bf49022e122166375157cec", null ],
+    [ "getdlnActCoeffdlnN", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#a6fec78988eee5cb51ce8350795f8f181", null ],
+    [ "getdlnActCoeffdlnX", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#af76df2c7077de82a4115f0c5aaf93333", null ],
+    [ "getPartialMolarVolumes", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#aab1fd3b7e89a12f08575dad79efa878a", null ],
+    [ "getPartialMolarVolumesVector", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#a3df952a82d2e5025795f3dc80c061f94", null ],
+    [ "addSpecies", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#a1345257537abafa7ccde0fe431abae62", null ],
+    [ "compositionChanged", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#ac901f42e1d2a9513f06eacccf09e11a3", null ],
+    [ "checkMFSum", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#a41d07ffae2e57f5816ef2b24b55da043", null ],
+    [ "moleFractions_", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#a85e2ae513f025ba65a264bd270eb70f1", null ],
+    [ "lnActCoeff_Scaled_", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#a52e06e5f75d013a370504a79478dd467", null ],
+    [ "dlnActCoeffdT_Scaled_", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#a977aabe481ec5cdf59adb28dd7302a7c", null ],
+    [ "d2lnActCoeffdT2_Scaled_", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#a0925074bc3f7249373f8265b7648cfdd", null ],
+    [ "dlnActCoeffdlnN_diag_", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#aec7f0d91422f202cefc4e819d8cb71bd", null ],
+    [ "dlnActCoeffdlnX_diag_", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#a711d0e55b3925f8888cebf636486c0f0", null ],
+    [ "dlnActCoeffdlnN_", "d8/d1a/classCantera_1_1GibbsExcessVPSSTP.html#a1a29919ad2caac88f25773303cfea39f", null ]
+];

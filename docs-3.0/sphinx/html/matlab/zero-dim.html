@@ -2,95 +2,450 @@
 
 <!DOCTYPE html>
 
-<html prefix="
-og: http://ogp.me/ns# article: http://ogp.me/ns/article#
-"
-lang="en">
+
+<html lang="en" >
 
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Zero-Dimensional Reactor Networks | Cantera </title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" media="none" onload="this.media='all'" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../_static/cantera.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" media="none" onload="this.media='all'" type="text/css" />
-  <link rel="stylesheet" href="../_static/cantera.css" media="none" onload="this.media='all'" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" media="none" onload="this.media='all'" type="text/css" />
-  <link rel="stylesheet" href="../_static/katex-math.css" media="none" onload="this.media='all'" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/katex.min.js"></script>
-        <script type="text/javascript" src="../_static/auto-render.min.js"></script>
-        <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
-    <link rel="shortcut icon" href="/assets/img/favicon.ico" sizes="16x16"/>
-    
-    <link rel="search" title="Search" href="../search.html" /> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Zero-Dimensional Reactor Networks &#8212; Cantera 3.0.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'matlab/zero-dim';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/documentation/dev/sphinx/html/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.0';
+        </script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="One-Dimensional Reacting Flows" href="one-dim.html" />
+    <link rel="prev" title="Transport Properties" href="transport.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body>
-  <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-  <!-- Menubar -->
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+   
 
-  <nav class="navbar navbar-expand-md navbar-light bg-light static-top mb-4">
-      <div class="container"><!-- This keeps the margins nice -->
-          <a class="navbar-brand" href="/index.html">
-          <img src="/assets/img/cantera-logo.png" alt="Cantera" id="logo" class="d-inline-block align-top">
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><ul class="bd-navbar-elements navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/install/index.html">
+            Install
+        </a>
+    </li>
 
-          <div class="collapse navbar-collapse" id="bs-navbar">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a href="/install/index.html" class="nav-link">Install</a>
-              </li>
-              <li class="nav-item">
-                <a href="/tutorials/index.html" class="nav-link">Tutorials</a>
-              </li>
-              <li class="nav-item">
-                <a href="/examples/index.html" class="nav-link">Examples</a>
-              </li>
-              <li class="nav-item">
-                <a href="/community.html" class="nav-link">Community</a>
-              </li>
-              <li class="nav-item">
-                <a href="/science/index.html" class="nav-link">Science</a>
-              </li>
-              <li class="nav-item">
-                <a href="/documentation/index.html" class="nav-link">Documentation</a>
-              </li>
-              <li class="nav-item">
-                <a href="/blog/index.html" class="nav-link">Blog</a>
-              </li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-      </div><!-- /.container -->
-  </nav>
-  <!-- End of Menubar -->
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/tutorials/index.html">
+            Tutorials
+        </a>
+    </li>
 
-  <div class="container" id="content">
-      <div class="body-content">
-          <!--Body content-->
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/examples/index.html">
+            Examples
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/community.html">
+            Community
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/science/index.html">
+            Science
+        </a>
+    </li>
+
+    <li class="nav-item current active">
+        <a class="nav-link nav-internal" href="/documentation/index.html">
+            Documentation
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/blog/index.html">
+            Blog
+        </a>
+    </li>
+</ul></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
           
-          <div class="document">
-            
-            <div class="documentwrapper">
-                <div class="bodywrapper">
-                <div class="body" role="main">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      3.0  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><ul class="bd-navbar-elements navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/install/index.html">
+            Install
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/tutorials/index.html">
+            Tutorials
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/examples/index.html">
+            Examples
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/community.html">
+            Community
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/science/index.html">
+            Science
+        </a>
+    </li>
+
+    <li class="nav-item current active">
+        <a class="nav-link nav-internal" href="/documentation/index.html">
+            Documentation
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/blog/index.html">
+            Blog
+        </a>
+    </li>
+</ul></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      3.0  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermodynamics.html">Thermodynamic Properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transport.html">Transport Properties</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one-dim.html">One-Dimensional Reacting Flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">Physical Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utility Functions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.salsalabs.org/donate-to-cantera/index.html" class="btn btn-secondary" type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Matlab Interface User’s Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Zero-Dimensional Reactor Networks</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
                   
   <section id="zero-dimensional-reactor-networks">
-<h1>Zero-Dimensional Reactor Networks<a class="headerlink" href="#zero-dimensional-reactor-networks" title="Permalink to this heading">¶</a></h1>
+<h1>Zero-Dimensional Reactor Networks<a class="headerlink" href="#zero-dimensional-reactor-networks" title="Permalink to this heading">#</a></h1>
 <section id="func">
-<h2>Func<a class="headerlink" href="#func" title="Permalink to this heading">¶</a></h2>
+<h2>Func<a class="headerlink" href="#func" title="Permalink to this heading">#</a></h2>
 <dl class="mat class">
 <dt class="sig sig-object mat" id="Func">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">typ</span></em>, <em class="sig-param"><span class="pre">n</span></em>, <em class="sig-param"><span class="pre">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Func" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">typ</span></em>, <em class="sig-param"><span class="pre">n</span></em>, <em class="sig-param"><span class="pre">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Func" title="Permalink to this definition">#</a></dt>
 <dd><p>Func class constructor.</p>
 <p>A class for functors.
 A functor is an object that behaves like a function. Cantera
@@ -100,7 +455,7 @@ network simulations. Of course, they can be used for other things
 too.</p>
 <p>The main feature of a functor class is that it overloads the <code class="docutils literal notranslate"><span class="pre">()</span></code>
 operator to evaluate the function. For example, suppose object
-<code class="docutils literal notranslate"><span class="pre">f</span></code> is a functor that evaluates the polynomial <span class="math">\(2x^2 - 3x + 1\)</span>.
+<code class="docutils literal notranslate"><span class="pre">f</span></code> is a functor that evaluates the polynomial <span class="math notranslate nohighlight">\(2x^2 - 3x + 1\)</span>.
 Then writing <code class="docutils literal notranslate"><span class="pre">f(2)</span></code> would cause the method that evaluates the
 function to be invoked, and would pass it the argument <code class="docutils literal notranslate"><span class="pre">2</span></code>. The
 return value would of course be 3.</p>
@@ -143,7 +498,7 @@ dividing these basic functors, or other composite functors.</p>
 </dl>
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Func.char">
-<span class="sig-name descname"><span class="pre">char</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Func.char" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">char</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Func.char" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the formatted string to display the function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -157,7 +512,7 @@ dividing these basic functors, or other composite functors.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Func.gaussian">
-<span class="sig-name descname"><span class="pre">gaussian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">peak</span></em>, <em class="sig-param"><span class="pre">center</span></em>, <em class="sig-param"><span class="pre">width</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Func.gaussian" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gaussian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">peak</span></em>, <em class="sig-param"><span class="pre">center</span></em>, <em class="sig-param"><span class="pre">width</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Func.gaussian" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a Gaussian <a class="reference internal" href="#Func" title="Func"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Func()</span></code></a> instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -174,7 +529,7 @@ the peak value.</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Func.plus">
-<span class="sig-name descname"><span class="pre">plus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Func.plus" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">plus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Func.plus" title="Permalink to this definition">#</a></dt>
 <dd><p>Get a functor representing the sum of two input functors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -193,12 +548,12 @@ and b.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Func.polynom">
-<span class="sig-name descname"><span class="pre">polynom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">coeffs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Func.polynom" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">polynom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">coeffs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Func.polynom" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a polynomial <a class="reference internal" href="#Func" title="Func"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Func()</span></code></a> instance.</p>
 <p>The polynomial coefficients are specified by a vector
 <code class="docutils literal notranslate"><span class="pre">[a0</span> <span class="pre">a1</span> <span class="pre">....</span> <span class="pre">aN]</span></code>. Examples:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">polynom</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span><span class="w">          </span><span class="c">%3x^2 + 6.0x - 2</span><span class="w"></span>
-<span class="n">polynom</span><span class="p">([</span><span class="mf">1.0</span><span class="w"> </span><span class="o">-</span><span class="mf">2.5</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="p">])</span><span class="w">  </span><span class="c">%2x^4 - 2.5x + 1</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">polynom</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span><span class="w">          </span><span class="c">%3x^2 + 6.0x - 2</span>
+<span class="n">polynom</span><span class="p">([</span><span class="mf">1.0</span><span class="w"> </span><span class="o">-</span><span class="mf">2.5</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="p">])</span><span class="w">  </span><span class="c">%2x^4 - 2.5x + 1</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -213,7 +568,7 @@ and b.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Func.rdivide">
-<span class="sig-name descname"><span class="pre">rdivide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Func.rdivide" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">rdivide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Func.rdivide" title="Permalink to this definition">#</a></dt>
 <dd><p>Get a functor that is the ratio of the input functors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -230,7 +585,7 @@ and b.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Func.times">
-<span class="sig-name descname"><span class="pre">times</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Func.times" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">times</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Func.times" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a functor that multiplies two other functors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -249,17 +604,17 @@ and b.</p>
 
 </section>
 <section id="reactor">
-<h2>Reactor<a class="headerlink" href="#reactor" title="Permalink to this heading">¶</a></h2>
+<h2>Reactor<a class="headerlink" href="#reactor" title="Permalink to this heading">#</a></h2>
 <dl class="mat class">
 <dt class="sig sig-object mat" id="Reactor">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Reactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">contents</span></em>, <em class="sig-param"><span class="pre">typ</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Reactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">contents</span></em>, <em class="sig-param"><span class="pre">typ</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor" title="Permalink to this definition">#</a></dt>
 <dd><p>Reactor class constructor.</p>
 <p>A <a class="reference internal" href="#Reactor" title="Reactor"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Reactor()</span></code></a> object simulates a perfectly-stirred reactor.
 It has a time-dependent state, and may be coupled to other reactors
 through flow lines or through walls that may expand or
 contract and/or conduct heat.</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Reactor</span><span class="w">      </span><span class="c">% an empty reactor</span><span class="w"></span>
-<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Reactor</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="w"> </span><span class="c">% a reactor containing a phase</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Reactor</span><span class="w">      </span><span class="c">% an empty reactor</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Reactor</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="w"> </span><span class="c">% a reactor containing a phase</span>
 </pre></div>
 </div>
 <p>See also: <a class="reference internal" href="#Reactor.Reservoir" title="Reactor.Reservoir"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Reservoir()</span></code></a>, <a class="reference internal" href="#Reactor.IdealGasReactor" title="Reactor.IdealGasReactor"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">IdealGasReactor()</span></code></a>,
@@ -285,14 +640,14 @@ reactor</p></li>
 </dl>
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.ConstPressureReactor">
-<span class="sig-name descname"><span class="pre">ConstPressureReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">contents</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.ConstPressureReactor" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ConstPressureReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">contents</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.ConstPressureReactor" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a constant pressure reactor object.</p>
 <p>A <a class="reference internal" href="#Reactor.ConstPressureReactor" title="Reactor.ConstPressureReactor"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ConstPressureReactor()</span></code></a> is an instance of class
 <a class="reference internal" href="#Reactor" title="Reactor"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Reactor()</span></code></a> where the pressure is held constant. The volume
 is not a state variable, but instead takes on whatever value is
 consistent with holding the pressure constant. Examples:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">r1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ConstPressureReactor</span><span class="w">         </span><span class="c">% an empty reactor</span><span class="w"></span>
-<span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ConstPressureReactor</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="w">    </span><span class="c">% a reactor containing contents</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">r1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ConstPressureReactor</span><span class="w">         </span><span class="c">% an empty reactor</span>
+<span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ConstPressureReactor</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="w">    </span><span class="c">% a reactor containing contents</span>
 </pre></div>
 </div>
 <p>See also: <a class="reference internal" href="#Reactor" title="Reactor"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Reactor()</span></code></a></p>
@@ -309,12 +664,12 @@ reactor</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.FlowReactor">
-<span class="sig-name descname"><span class="pre">FlowReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">contents</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.FlowReactor" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">FlowReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">contents</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.FlowReactor" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a flow reactor object.</p>
 <p>A reactor representing adiabatic plug flow in a constant-area
 duct. Examples:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">r1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">FlowReactor</span><span class="w">         </span><span class="c">% an empty reactor</span><span class="w"></span>
-<span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">FlowReactor</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="w">    </span><span class="c">% a reactor containing a gas</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">r1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">FlowReactor</span><span class="w">         </span><span class="c">% an empty reactor</span>
+<span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">FlowReactor</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="w">    </span><span class="c">% a reactor containing a gas</span>
 </pre></div>
 </div>
 <p>See also: <a class="reference internal" href="#Reactor" title="Reactor"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Reactor()</span></code></a></p>
@@ -331,7 +686,7 @@ reactor</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.IdealGasConstPressureReactor">
-<span class="sig-name descname"><span class="pre">IdealGasConstPressureReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">contents</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.IdealGasConstPressureReactor" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">IdealGasConstPressureReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">contents</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.IdealGasConstPressureReactor" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a constant pressure reactor with an ideal gas.</p>
 <p>An IdealGasConstPressureReactor is an instance of class Reactor where the
 pressure is held constant. The volume is not a state variable, but
@@ -339,10 +694,10 @@ instead takes on whatever value is consistent with holding the pressure
 constant. Additionally, its governing equations are specialized for the
 ideal gas equation of state (and do not work correctly with other
 thermodynamic models). Examples:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">r1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">IdealGasConstPressureReactor</span><span class="w">      </span><span class="c">% an empty reactor</span><span class="w"></span>
-<span class="w">  </span><span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">IdealGasConstPressureReactor</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="w"> </span><span class="c">% a reactor containing a gas</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">r1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">IdealGasConstPressureReactor</span><span class="w">      </span><span class="c">% an empty reactor</span>
+<span class="w">  </span><span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">IdealGasConstPressureReactor</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="w"> </span><span class="c">% a reactor containing a gas</span>
 
-<span class="n">See</span><span class="w"> </span><span class="s">also:</span><span class="w"> </span><span class="s">:mat:func:`Reactor`</span><span class="w"></span>
+<span class="n">See</span><span class="w"> </span><span class="s">also:</span><span class="w"> </span><span class="s">:mat:func:`Reactor`</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -358,13 +713,13 @@ reactor</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.IdealGasReactor">
-<span class="sig-name descname"><span class="pre">IdealGasReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">contents</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.IdealGasReactor" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">IdealGasReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">contents</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.IdealGasReactor" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a reactor with an ideal gas.</p>
 <p>An IdealGasReactor is an instance of class Reactor where the governing
 equations are specialized for the ideal gas equation of state (and do not
 work correctly with other thermodynamic models). Examples:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">r1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">IdealGasReactor</span><span class="w">         </span><span class="c">% an empty reactor</span><span class="w"></span>
-<span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">IdealGasReactor</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="w">    </span><span class="c">% a reactor containing a gas</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">r1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">IdealGasReactor</span><span class="w">         </span><span class="c">% an empty reactor</span>
+<span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">IdealGasReactor</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="w">    </span><span class="c">% a reactor containing a gas</span>
 </pre></div>
 </div>
 <p>See also: <a class="reference internal" href="#Reactor" title="Reactor"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Reactor()</span></code></a></p>
@@ -381,7 +736,7 @@ reactor</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.Reservoir">
-<span class="sig-name descname"><span class="pre">Reservoir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">contents</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.Reservoir" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">Reservoir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">contents</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.Reservoir" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a Reservoir object.</p>
 <p>A <a class="reference internal" href="#Reactor.Reservoir" title="Reactor.Reservoir"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Reservoir()</span></code></a> is an instance of class <a class="reference internal" href="#Reactor" title="Reactor"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Reactor()</span></code></a>
 configured so that its intensive state is constant in time. A
@@ -391,8 +746,8 @@ changing the composition or thermodynamic state. Note that even
 if the reaction mechanism associated with the fluid in the
 reactor defines reactions, they are disabled within
 reservoirs. Examples:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">r1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Reservoir</span><span class="w">         </span><span class="c">% an empty reservoir</span><span class="w"></span>
-<span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Reservoir</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="w">    </span><span class="c">% a reservoir containing a gas</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">r1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Reservoir</span><span class="w">         </span><span class="c">% an empty reservoir</span>
+<span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Reservoir</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="w">    </span><span class="c">% a reservoir containing a gas</span>
 </pre></div>
 </div>
 <p>See also: <a class="reference internal" href="#Reactor" title="Reactor"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Reactor()</span></code></a></p>
@@ -409,7 +764,7 @@ reactor</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.density">
-<span class="sig-name descname"><span class="pre">density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.density" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.density" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the density of the reactor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -423,7 +778,7 @@ reactor</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.enthalpy_mass">
-<span class="sig-name descname"><span class="pre">enthalpy_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.enthalpy_mass" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">enthalpy_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.enthalpy_mass" title="Permalink to this definition">#</a></dt>
 <dd><p>The specific enthalpy of the reactor.</p>
 <p>See also: <a class="reference internal" href="#Reactor.intEnergy_mass" title="Reactor.intEnergy_mass"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">intEnergy_mass()</span></code></a></p>
 <dl class="field-list simple">
@@ -440,7 +795,7 @@ The enthalpy is retrieved from the solution vector. Units: J/kg</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.insert">
-<span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">gas</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.insert" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">gas</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.insert" title="Permalink to this definition">#</a></dt>
 <dd><p>Insert a solution or mixture into a reactor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -454,7 +809,7 @@ The enthalpy is retrieved from the solution vector. Units: J/kg</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.intEnergy_mass">
-<span class="sig-name descname"><span class="pre">intEnergy_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.intEnergy_mass" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">intEnergy_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.intEnergy_mass" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the specific internal energy.</p>
 <p>See also: <a class="reference internal" href="#Reactor.enthalpy_mass" title="Reactor.enthalpy_mass"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">enthalpy_mass()</span></code></a></p>
 <dl class="field-list simple">
@@ -472,7 +827,7 @@ Units: J/kg</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.mass">
-<span class="sig-name descname"><span class="pre">mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.mass" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.mass" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mass of the reactor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -488,7 +843,7 @@ The mass is retrieved from the solution vector. Units: kg</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.massFraction">
-<span class="sig-name descname"><span class="pre">massFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">species</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.massFraction" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">massFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">species</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.massFraction" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mass fraction of a species.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -506,7 +861,7 @@ end of the last call to <code class="xref mat mat-func docutils literal notransl
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.massFractions">
-<span class="sig-name descname"><span class="pre">massFractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.massFractions" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">massFractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.massFractions" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mass fractions of the species.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -521,7 +876,7 @@ end of the last call to <code class="xref mat mat-func docutils literal notransl
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.pressure">
-<span class="sig-name descname"><span class="pre">pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.pressure" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.pressure" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the pressure of the reactor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -537,7 +892,7 @@ Units: Pa</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.setChemistry">
-<span class="sig-name descname"><span class="pre">setChemistry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">flag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.setChemistry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setChemistry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">flag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.setChemistry" title="Permalink to this definition">#</a></dt>
 <dd><p>Enable or disable changing reactor composition by reactions.</p>
 <p>If the chemistry is disabled, then the reactor composition is
 constant. The parameter should be the string <code class="docutils literal notranslate"><span class="pre">'on'</span></code> to enable the
@@ -562,7 +917,7 @@ solving the energy equation, respectively</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.setEnergy">
-<span class="sig-name descname"><span class="pre">setEnergy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">flag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.setEnergy" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setEnergy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">flag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.setEnergy" title="Permalink to this definition">#</a></dt>
 <dd><p>Enable or disable solving the energy equation.</p>
 <p>If the energy equation is disabled, then the reactor temperature is
 constant. The parameter should be the string <code class="docutils literal notranslate"><span class="pre">'on'</span></code> to enable the
@@ -587,7 +942,7 @@ solving the energy equation, respectively</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.setInitialVolume">
-<span class="sig-name descname"><span class="pre">setInitialVolume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">v0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.setInitialVolume" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setInitialVolume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">v0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.setInitialVolume" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the initial reactor volume.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -601,7 +956,7 @@ solving the energy equation, respectively</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.setKineticsMgr">
-<span class="sig-name descname"><span class="pre">setKineticsMgr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.setKineticsMgr" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setKineticsMgr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.setKineticsMgr" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the kinetics manager.</p>
 <p>This method is used internally during Reactor initialization, but
 is usually not called by users.</p>
@@ -618,7 +973,7 @@ containing an instance of that class.</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.setMassFlowRate">
-<span class="sig-name descname"><span class="pre">setMassFlowRate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">mdot</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.setMassFlowRate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setMassFlowRate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">mdot</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.setMassFlowRate" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the mass flow rate.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -632,7 +987,7 @@ containing an instance of that class.</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.setThermoMgr">
-<span class="sig-name descname"><span class="pre">setThermoMgr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.setThermoMgr" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setThermoMgr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.setThermoMgr" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the thermodynamics manager.</p>
 <p>This method is used internally during Reactor initialization, but
 is usually not called by users.</p>
@@ -649,7 +1004,7 @@ containing an instance of that class.</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.temperature">
-<span class="sig-name descname"><span class="pre">temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.temperature" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.temperature" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the temperature of the reactor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -665,7 +1020,7 @@ Units: K</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Reactor.volume">
-<span class="sig-name descname"><span class="pre">volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.volume" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Reactor.volume" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the volume of the reactor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -683,10 +1038,10 @@ Units: m**3</p>
 
 </section>
 <section id="reactornet">
-<h2>ReactorNet<a class="headerlink" href="#reactornet" title="Permalink to this heading">¶</a></h2>
+<h2>ReactorNet<a class="headerlink" href="#reactornet" title="Permalink to this heading">#</a></h2>
 <dl class="mat class">
 <dt class="sig sig-object mat" id="ReactorNet">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ReactorNet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">reactors</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ReactorNet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">reactors</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet" title="Permalink to this definition">#</a></dt>
 <dd><p>ReactorNet class constructor.</p>
 <p>A <a class="reference internal" href="#ReactorNet" title="ReactorNet"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ReactorNet()</span></code></a> object is a container that holds one
 or more <a class="reference internal" href="#Reactor" title="Reactor"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Reactor()</span></code></a> objects in a network. <a class="reference internal" href="#ReactorNet" title="ReactorNet"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ReactorNet()</span></code></a>
@@ -713,7 +1068,7 @@ of instances of <a class="reference internal" href="#Reactor" title="Reactor"><c
 </dl>
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ReactorNet.addReactor">
-<span class="sig-name descname"><span class="pre">addReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">net</span></em>, <em class="sig-param"><span class="pre">reactor</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.addReactor" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">addReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">net</span></em>, <em class="sig-param"><span class="pre">reactor</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.addReactor" title="Permalink to this definition">#</a></dt>
 <dd><p>Add a reactor to a network.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -727,7 +1082,7 @@ of instances of <a class="reference internal" href="#Reactor" title="Reactor"><c
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ReactorNet.advance">
-<span class="sig-name descname"><span class="pre">advance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">n</span></em>, <em class="sig-param"><span class="pre">tout</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.advance" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">advance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">n</span></em>, <em class="sig-param"><span class="pre">tout</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.advance" title="Permalink to this definition">#</a></dt>
 <dd><p>Advance the state of the reactor network in time.</p>
 <p>Method <a class="reference internal" href="#ReactorNet.advance" title="ReactorNet.advance"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">advance()</span></code></a> integrates the system of ordinary differential
 equations that determine the rate of change of the volume, the
@@ -736,13 +1091,13 @@ integration is carried out from the current time to time
 <code class="docutils literal notranslate"><span class="pre">tout</span></code>. (Note <code class="docutils literal notranslate"><span class="pre">tout</span></code> is an absolute time, not a time interval.)
 The integrator may take many internal time steps before reaching
 tout.</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="w"></span>
-<span class="w">   </span><span class="n">tout</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.1</span><span class="o">*</span><span class="nb">i</span><span class="w"></span>
-<span class="w">   </span><span class="n">advance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">tout</span><span class="p">)</span><span class="w"></span>
-<span class="w">   </span><span class="k">...</span><span class="w"></span>
-<span class="w">   </span><span class="o">&lt;</span><span class="nb">add</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="n">commands</span><span class="w"> </span><span class="n">here</span><span class="o">&gt;</span><span class="w"></span>
-<span class="w">   </span><span class="k">...</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span>
+<span class="w">   </span><span class="n">tout</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.1</span><span class="o">*</span><span class="nb">i</span>
+<span class="w">   </span><span class="n">advance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">tout</span><span class="p">)</span>
+<span class="w">   </span><span class="k">...</span>
+<span class="w">   </span><span class="o">&lt;</span><span class="nb">add</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="n">commands</span><span class="w"> </span><span class="n">here</span><span class="o">&gt;</span>
+<span class="w">   </span><span class="k">...</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <p>See also: <a class="reference internal" href="#ReactorNet.step" title="ReactorNet.step"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">step()</span></code></a></p>
@@ -759,7 +1114,7 @@ time steps to reach <code class="docutils literal notranslate"><span class="pre"
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ReactorNet.atol">
-<span class="sig-name descname"><span class="pre">atol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.atol" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">atol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.atol" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the absolute error tolerance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -773,7 +1128,7 @@ time steps to reach <code class="docutils literal notranslate"><span class="pre"
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ReactorNet.rtol">
-<span class="sig-name descname"><span class="pre">rtol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.rtol" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">rtol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.rtol" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the relative error tolerance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -787,7 +1142,7 @@ time steps to reach <code class="docutils literal notranslate"><span class="pre"
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ReactorNet.setInitialTime">
-<span class="sig-name descname"><span class="pre">setInitialTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.setInitialTime" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setInitialTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.setInitialTime" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the initial time of the integration.</p>
 <p>If the time integration has already begun, this restarts the
 integrator using the current solution as the initial condition,
@@ -805,7 +1160,7 @@ current state as the initial condition. Units: s</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ReactorNet.setMaxTimeStep">
-<span class="sig-name descname"><span class="pre">setMaxTimeStep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">maxstep</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.setMaxTimeStep" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setMaxTimeStep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">maxstep</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.setMaxTimeStep" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the maximum time step.</p>
 <p>The integrator chooses a step size based on the desired error
 tolerances and the rate at which the solution is changing. In
@@ -826,7 +1181,7 @@ timestep.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ReactorNet.setTolerances">
-<span class="sig-name descname"><span class="pre">setTolerances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">rtol</span></em>, <em class="sig-param"><span class="pre">atol</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.setTolerances" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setTolerances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">rtol</span></em>, <em class="sig-param"><span class="pre">atol</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.setTolerances" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the error tolerances.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -841,7 +1196,7 @@ timestep.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ReactorNet.step">
-<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.step" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.step" title="Permalink to this definition">#</a></dt>
 <dd><p>Take one internal time step.</p>
 <p>The integrator used to integrate the ODEs (CVODE) takes
 variable-size steps, chosen so that a specified error
@@ -853,14 +1208,14 @@ the network time after taking that step. This
 can be useful when it is desired to resolve a rapidly-changing
 solution.</p>
 <p>This method can be used as follows:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
-<span class="n">tout</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.1</span><span class="w"></span>
-<span class="k">while</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tout</span><span class="w"></span>
-<span class="w">   </span><span class="n">t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">step</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"></span>
-<span class="w">   </span><span class="p">,,,</span><span class="w"></span>
-<span class="w">   </span><span class="o">&lt;</span><span class="n">commands</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="nb">save</span><span class="w"> </span><span class="n">desired</span><span class="w"> </span><span class="n">variables</span><span class="o">&gt;</span><span class="w"></span>
-<span class="w">   </span><span class="k">...</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="n">tout</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.1</span>
+<span class="k">while</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tout</span>
+<span class="w">   </span><span class="n">t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">step</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="w">   </span><span class="p">,,,</span>
+<span class="w">   </span><span class="o">&lt;</span><span class="n">commands</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="nb">save</span><span class="w"> </span><span class="n">desired</span><span class="w"> </span><span class="n">variables</span><span class="o">&gt;</span>
+<span class="w">   </span><span class="k">...</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <p>See also: <a class="reference internal" href="#ReactorNet.advance" title="ReactorNet.advance"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">advance()</span></code></a></p>
@@ -876,7 +1231,7 @@ solution.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="ReactorNet.time">
-<span class="sig-name descname"><span class="pre">time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.time" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ReactorNet.time" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the current value of the time.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -892,10 +1247,10 @@ solution.</p>
 
 </section>
 <section id="flowdevice">
-<h2>FlowDevice<a class="headerlink" href="#flowdevice" title="Permalink to this heading">¶</a></h2>
+<h2>FlowDevice<a class="headerlink" href="#flowdevice" title="Permalink to this heading">#</a></h2>
 <dl class="mat class">
 <dt class="sig sig-object mat" id="FlowDevice">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">FlowDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">typ</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">FlowDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">typ</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice" title="Permalink to this definition">#</a></dt>
 <dd><p>FlowDevice class constructor.</p>
 <p>Base class for devices that allow flow between reactors.
 <a class="reference internal" href="#FlowDevice" title="FlowDevice"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">FlowDevice()</span></code></a> objects are assumed to be adiabatic,
@@ -919,7 +1274,7 @@ for <a class="reference internal" href="#FlowDevice.MassFlowController" title="F
 </dl>
 <dl class="mat function">
 <dt class="sig sig-object mat" id="FlowDevice.MassFlowController">
-<span class="sig-name descname"><span class="pre">MassFlowController</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">upstream</span></em>, <em class="sig-param"><span class="pre">downstream</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice.MassFlowController" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">MassFlowController</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">upstream</span></em>, <em class="sig-param"><span class="pre">downstream</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice.MassFlowController" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a mass flow controller.</p>
 <p>Creates an instance of class <a class="reference internal" href="#FlowDevice" title="FlowDevice"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">FlowDevice()</span></code></a> configured to
 simulate a mass flow controller that maintains a constant mass flow
@@ -944,16 +1299,14 @@ reactors.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="FlowDevice.Valve">
-<span class="sig-name descname"><span class="pre">Valve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">upstream</span></em>, <em class="sig-param"><span class="pre">downstream</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice.Valve" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">Valve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">upstream</span></em>, <em class="sig-param"><span class="pre">downstream</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice.Valve" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a valve.</p>
 <p>Create an instance of class <a class="reference internal" href="#FlowDevice" title="FlowDevice"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">FlowDevice()</span></code></a> configured to
 simulate a valve that produces a flow rate proportional to the
 pressure difference between the upstream and downstream reactors.</p>
 <p>The mass flow rate [kg/s] is computed from the expression</p>
-<div class="math">
-\[\dot{m} = K(P_{upstream} - P_{downstream})
-
-\]</div>
+<div class="math notranslate nohighlight">
+\[\dot{m} = K(P_{upstream} - P_{downstream})\]</div>
 <p>as long as this produces a positive value.  If this expression is
 negative, zero is returned. Therefore, the <a class="reference internal" href="#FlowDevice.Valve" title="FlowDevice.Valve"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Valve()</span></code></a> object
 acts as a check valve - flow is always from the upstream reactor to
@@ -979,7 +1332,7 @@ RELEASE.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="FlowDevice.install">
-<span class="sig-name descname"><span class="pre">install</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">upstream</span></em>, <em class="sig-param"><span class="pre">downstream</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice.install" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">install</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">upstream</span></em>, <em class="sig-param"><span class="pre">downstream</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice.install" title="Permalink to this definition">#</a></dt>
 <dd><p>Install a flow device between reactors or reservoirs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -997,7 +1350,7 @@ RELEASE.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="FlowDevice.massFlowRate">
-<span class="sig-name descname"><span class="pre">massFlowRate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice.massFlowRate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">massFlowRate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice.massFlowRate" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mass flow rate.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1011,7 +1364,7 @@ RELEASE.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="FlowDevice.setFunction">
-<span class="sig-name descname"><span class="pre">setFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">mf</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice.setFunction" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">mf</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice.setFunction" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the mass flow rate with class <a class="reference internal" href="#Func" title="Func"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Func()</span></code></a>.</p>
 <p>See also: <a class="reference internal" href="#FlowDevice.MassFlowController" title="FlowDevice.MassFlowController"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">MassFlowController()</span></code></a>, <a class="reference internal" href="#Func" title="Func"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Func()</span></code></a></p>
 <dl class="field-list simple">
@@ -1026,7 +1379,7 @@ RELEASE.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="FlowDevice.setMassFlowRate">
-<span class="sig-name descname"><span class="pre">setMassFlowRate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">mdot</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice.setMassFlowRate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setMassFlowRate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">mdot</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice.setMassFlowRate" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the mass flow rate to a constant value.</p>
 <p>See also: <a class="reference internal" href="#FlowDevice.MassFlowController" title="FlowDevice.MassFlowController"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">MassFlowController()</span></code></a></p>
 <dl class="field-list simple">
@@ -1041,13 +1394,11 @@ RELEASE.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="FlowDevice.setValveCoeff">
-<span class="sig-name descname"><span class="pre">setValveCoeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice.setValveCoeff" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the valve coefficient <span class="math">\(K\)</span>.</p>
+<span class="sig-name descname"><span class="pre">setValveCoeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FlowDevice.setValveCoeff" title="Permalink to this definition">#</a></dt>
+<dd><p>Set the valve coefficient <span class="math notranslate nohighlight">\(K\)</span>.</p>
 <p>The mass flow rate [kg/s] is computed from the expression</p>
-<div class="math">
-\[\dot{m} = K(P_{upstream} - P_{downstream})
-
-\]</div>
+<div class="math notranslate nohighlight">
+\[\dot{m} = K(P_{upstream} - P_{downstream})\]</div>
 <p>as long as this produces a positive value.  If this expression is
 negative, zero is returned.</p>
 <p>See also: <a class="reference internal" href="#FlowDevice.Valve" title="FlowDevice.Valve"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Valve()</span></code></a></p>
@@ -1065,10 +1416,10 @@ negative, zero is returned.</p>
 
 </section>
 <section id="wall">
-<h2>Wall<a class="headerlink" href="#wall" title="Permalink to this heading">¶</a></h2>
+<h2>Wall<a class="headerlink" href="#wall" title="Permalink to this heading">#</a></h2>
 <dl class="mat class">
 <dt class="sig sig-object mat" id="Wall">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">left</span></em>, <em class="sig-param"><span class="pre">right</span></em>, <em class="sig-param"><span class="pre">area</span></em>, <em class="sig-param"><span class="pre">k</span></em>, <em class="sig-param"><span class="pre">u</span></em>, <em class="sig-param"><span class="pre">q</span></em>, <em class="sig-param"><span class="pre">v</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">left</span></em>, <em class="sig-param"><span class="pre">right</span></em>, <em class="sig-param"><span class="pre">area</span></em>, <em class="sig-param"><span class="pre">k</span></em>, <em class="sig-param"><span class="pre">u</span></em>, <em class="sig-param"><span class="pre">q</span></em>, <em class="sig-param"><span class="pre">v</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall" title="Permalink to this definition">#</a></dt>
 <dd><p>Wall class constructor.</p>
 <p>A Wall separates two reactors, or a reactor and a reservoir. A wall has a
 finite area, may conduct heat between the two reactors on either
@@ -1078,21 +1429,17 @@ equation is integrated to determine any wall property. Since it is the wall
 (piston) velocity that enters the energy equation, this means that it is
 the velocity, not the acceleration or displacement, that is specified.
 The wall velocity is computed from</p>
-<div class="math">
-\[v = K(P_{\rm left} - P_{\rm right}) + v_0(t),
-
-\]</div>
-<p>where <span class="math">\(K\)</span> is a non-negative constant, and <span class="math">\(v_0(t)\)</span> is a
+<div class="math notranslate nohighlight">
+\[v = K(P_{\rm left} - P_{\rm right}) + v_0(t),\]</div>
+<p>where <span class="math notranslate nohighlight">\(K\)</span> is a non-negative constant, and <span class="math notranslate nohighlight">\(v_0(t)\)</span> is a
 specified function of time. The velocity is positive if the wall is
 moving to the right.</p>
 <p>The heat flux through the wall is computed from</p>
-<div class="math">
-\[q = U(T_{\rm left} - T_{\rm right}) + q_0(t),
-
-\]</div>
-<p>where <span class="math">\(U\)</span> is the overall heat transfer coefficient for
+<div class="math notranslate nohighlight">
+\[q = U(T_{\rm left} - T_{\rm right}) + q_0(t),\]</div>
+<p>where <span class="math notranslate nohighlight">\(U\)</span> is the overall heat transfer coefficient for
 conduction/convection. The function
-<span class="math">\(q_0(t)\)</span> is a specified function of time. The heat flux is positive
+<span class="math notranslate nohighlight">\(q_0(t)\)</span> is a specified function of time. The heat flux is positive
 when heat flows from the reactor on the left to the reactor on the right.</p>
 <p>Note: all of the arguments are optional and can be activated after initial
 construction by using the various methods of the <a class="reference internal" href="#Wall" title="Wall"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Wall()</span></code></a> class.
@@ -1125,7 +1472,7 @@ and <a class="reference internal" href="#Wall.qdot" title="Wall.qdot"><code clas
 </dl>
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Wall.area">
-<span class="sig-name descname"><span class="pre">area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.area" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.area" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the area of the wall.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1139,7 +1486,7 @@ and <a class="reference internal" href="#Wall.qdot" title="Wall.qdot"><code clas
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Wall.install">
-<span class="sig-name descname"><span class="pre">install</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">left</span></em>, <em class="sig-param"><span class="pre">right</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.install" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">install</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">left</span></em>, <em class="sig-param"><span class="pre">right</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.install" title="Permalink to this definition">#</a></dt>
 <dd><p>Install a wall between two reactors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1156,7 +1503,7 @@ and <a class="reference internal" href="#Wall.qdot" title="Wall.qdot"><code clas
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Wall.qdot">
-<span class="sig-name descname"><span class="pre">qdot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.qdot" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">qdot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.qdot" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the total heat transfer through a wall given a time.</p>
 <p>A positive value corresponds to heat flowing from the left-hand
 reactor to the right-hand one.</p>
@@ -1175,7 +1522,7 @@ reactor to the right-hand one.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Wall.ready">
-<span class="sig-name descname"><span class="pre">ready</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.ready" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ready</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.ready" title="Permalink to this definition">#</a></dt>
 <dd><p>Check whether a wall is ready.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1189,7 +1536,7 @@ reactor to the right-hand one.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Wall.setArea">
-<span class="sig-name descname"><span class="pre">setArea</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.setArea" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setArea</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.setArea" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the area of a wall.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1203,18 +1550,16 @@ reactor to the right-hand one.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Wall.setExpansionRateCoeff">
-<span class="sig-name descname"><span class="pre">setExpansionRateCoeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.setExpansionRateCoeff" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setExpansionRateCoeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.setExpansionRateCoeff" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the expansion rate coefficient.</p>
 <p>The expansion rate coefficient
 determines the velocity of the wall for a given pressure
 differential between the left and right reactors, according to the
 formula</p>
-<div class="math">
-\[v = K(P_{left}-P_{right})
-
-\]</div>
-<p>where <span class="math">\(v\)</span> is velocity, <span class="math">\(K\)</span> is the expansion rate
-coefficient, and <span class="math">\(P\)</span> is the pressure.</p>
+<div class="math notranslate nohighlight">
+\[v = K(P_{left}-P_{right})\]</div>
+<p>where <span class="math notranslate nohighlight">\(v\)</span> is velocity, <span class="math notranslate nohighlight">\(K\)</span> is the expansion rate
+coefficient, and <span class="math notranslate nohighlight">\(P\)</span> is the pressure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1227,16 +1572,16 @@ coefficient, and <span class="math">\(P\)</span> is the pressure.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Wall.setHeatFlux">
-<span class="sig-name descname"><span class="pre">setHeatFlux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.setHeatFlux" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setHeatFlux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.setHeatFlux" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the heat flux using <a class="reference internal" href="#Func" title="Func"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Func()</span></code></a></p>
 <p>Must be set by an instance of
 class <a class="reference internal" href="#Func" title="Func"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Func()</span></code></a>, which allows the heat flux to be an
 arbitrary function of time. It is possible to specify
 a constant heat flux by using the polynomial functor with
 only the first term specified:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Wall</span><span class="p">()</span><span class="w"></span>
-<span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Func</span><span class="p">(</span><span class="s">&#39;polynomial&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="c">% Or f = polynom(10);</span><span class="w"></span>
-<span class="n">setHeatFlux</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Wall</span><span class="p">()</span>
+<span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Func</span><span class="p">(</span><span class="s">&#39;polynomial&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="c">% Or f = polynom(10);</span>
+<span class="n">setHeatFlux</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>sets the heat flux through the wall to 10 W/m**2.</p>
@@ -1252,7 +1597,7 @@ only the first term specified:</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Wall.setHeatTransferCoeff">
-<span class="sig-name descname"><span class="pre">setHeatTransferCoeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">u</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.setHeatTransferCoeff" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setHeatTransferCoeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">u</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.setHeatTransferCoeff" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the heat transfer coefficient.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1266,7 +1611,7 @@ only the first term specified:</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Wall.setThermalResistance">
-<span class="sig-name descname"><span class="pre">setThermalResistance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.setThermalResistance" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setThermalResistance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.setThermalResistance" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the thermal resistance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1280,15 +1625,15 @@ only the first term specified:</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Wall.setVelocity">
-<span class="sig-name descname"><span class="pre">setVelocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.setVelocity" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setVelocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.setVelocity" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the velocity of the wall using <a class="reference internal" href="#Func" title="Func"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Func()</span></code></a>.</p>
 <p>Must be set by an instance of class <a class="reference internal" href="#Func" title="Func"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Func()</span></code></a>, which allows
 the velocity to be an arbitrary function of time. It is possible
 to specify a constant velocity by using the polynomial functor with
 only the first term specified:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Wall</span><span class="p">()</span><span class="w"></span>
-<span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Func</span><span class="p">(</span><span class="s">&#39;polynomial&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="c">% Or f = polynom(10);</span><span class="w"></span>
-<span class="n">setVelocity</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Wall</span><span class="p">()</span>
+<span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Func</span><span class="p">(</span><span class="s">&#39;polynomial&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="c">% Or f = polynom(10);</span>
+<span class="n">setVelocity</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>sets the velocity of the wall to 10 m/s.</p>
@@ -1304,7 +1649,7 @@ only the first term specified:</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Wall.vdot">
-<span class="sig-name descname"><span class="pre">vdot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.vdot" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">vdot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Wall.vdot" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the rate of volumetric change at a given time.</p>
 <p>A positive value corresponds to the left-hand reactor volume
 increasing, and the right-hand reactor volume decreasing.</p>
@@ -1327,78 +1672,118 @@ increasing, and the right-hand reactor volume decreasing.</p>
 </section>
 
 
-                </div>
-                </div>
-            </div>
-             <!-- end of block document -->
-  <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-    <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="../index.html">Table of Contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Zero-Dimensional Reactor Networks</a><ul>
-<li><a class="reference internal" href="#func">Func</a></li>
-<li><a class="reference internal" href="#reactor">Reactor</a></li>
-<li><a class="reference internal" href="#reactornet">ReactorNet</a></li>
-<li><a class="reference internal" href="#flowdevice">FlowDevice</a></li>
-<li><a class="reference internal" href="#wall">Wall</a></li>
-</ul>
-</li>
-</ul>
-
-  </div><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="index.html">Matlab Interface User’s Guide</a><ul>
-      <li>Previous: <a href="transport.html" title="previous chapter">Transport Properties</a></li>
-      <li>Next: <a href="one-dim.html" title="next chapter">One-Dimensional Reacting Flows</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/matlab/zero-dim.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script><div id="numfocus">
-<h3>Donate to Cantera</h3>
-<a href="https://numfocus.salsalabs.org/donate-to-cantera/index.html">
-<img src="../_static/powered_by_NumFOCUS.png" border="0" alt="NumFOCUS"/></a>
-</div>
-    </div>
-  </div>
-                <div class="clearer"></div>
-          </div>
-           <!--End of block content-->
-
-          <div class="footer">
-            &copy;2001-2023, Cantera Developers.
-            
-            |
-            Powered by <a href="http://sphinx-doc.org/">Sphinx 5.1.1</a>
-            &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-            
-            |
-            <a href="../_sources/matlab/zero-dim.rst.txt"
-                rel="nofollow">Page source</a>
-          </div>
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="transport.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Transport Properties</p>
       </div>
-  </div>
+    </a>
+    <a class="right-next"
+       href="one-dim.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">One-Dimensional Reacting Flows</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
 
-  <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
-  <script async="async" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-</body>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#func">Func</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reactor">Reactor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reactornet">ReactorNet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowdevice">FlowDevice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wall">Wall</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/matlab/zero-dim.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2001-2023, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

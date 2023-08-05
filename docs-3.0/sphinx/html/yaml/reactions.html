@@ -2,90 +2,445 @@
 
 <!DOCTYPE html>
 
-<html prefix="
-og: http://ogp.me/ns# article: http://ogp.me/ns/article#
-"
-lang="en">
+
+<html lang="en" >
 
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Reactions | Cantera </title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" media="none" onload="this.media='all'" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../_static/cantera.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" media="none" onload="this.media='all'" type="text/css" />
-  <link rel="stylesheet" href="../_static/cantera.css" media="none" onload="this.media='all'" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" media="none" onload="this.media='all'" type="text/css" />
-  <link rel="stylesheet" href="../_static/katex-math.css" media="none" onload="this.media='all'" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/katex.min.js"></script>
-        <script type="text/javascript" src="../_static/auto-render.min.js"></script>
-        <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
-    <link rel="shortcut icon" href="/assets/img/favicon.ico" sizes="16x16"/>
-    
-    <link rel="search" title="Search" href="../search.html" /> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Reactions &#8212; Cantera 3.0.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'yaml/reactions';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/documentation/dev/sphinx/html/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.0';
+        </script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CTI to YAML conversion" href="cti_conversion.html" />
+    <link rel="prev" title="Species" href="species.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body>
-  <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-  <!-- Menubar -->
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+   
 
-  <nav class="navbar navbar-expand-md navbar-light bg-light static-top mb-4">
-      <div class="container"><!-- This keeps the margins nice -->
-          <a class="navbar-brand" href="/index.html">
-          <img src="/assets/img/cantera-logo.png" alt="Cantera" id="logo" class="d-inline-block align-top">
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><ul class="bd-navbar-elements navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/install/index.html">
+            Install
+        </a>
+    </li>
 
-          <div class="collapse navbar-collapse" id="bs-navbar">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a href="/install/index.html" class="nav-link">Install</a>
-              </li>
-              <li class="nav-item">
-                <a href="/tutorials/index.html" class="nav-link">Tutorials</a>
-              </li>
-              <li class="nav-item">
-                <a href="/examples/index.html" class="nav-link">Examples</a>
-              </li>
-              <li class="nav-item">
-                <a href="/community.html" class="nav-link">Community</a>
-              </li>
-              <li class="nav-item">
-                <a href="/science/index.html" class="nav-link">Science</a>
-              </li>
-              <li class="nav-item">
-                <a href="/documentation/index.html" class="nav-link">Documentation</a>
-              </li>
-              <li class="nav-item">
-                <a href="/blog/index.html" class="nav-link">Blog</a>
-              </li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-      </div><!-- /.container -->
-  </nav>
-  <!-- End of Menubar -->
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/tutorials/index.html">
+            Tutorials
+        </a>
+    </li>
 
-  <div class="container" id="content">
-      <div class="body-content">
-          <!--Body content-->
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/examples/index.html">
+            Examples
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/community.html">
+            Community
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/science/index.html">
+            Science
+        </a>
+    </li>
+
+    <li class="nav-item current active">
+        <a class="nav-link nav-internal" href="/documentation/index.html">
+            Documentation
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/blog/index.html">
+            Blog
+        </a>
+    </li>
+</ul></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
           
-          <div class="document">
-            
-            <div class="documentwrapper">
-                <div class="bodywrapper">
-                <div class="body" role="main">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      3.0  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><ul class="bd-navbar-elements navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/install/index.html">
+            Install
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/tutorials/index.html">
+            Tutorials
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/examples/index.html">
+            Examples
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/community.html">
+            Community
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/science/index.html">
+            Science
+        </a>
+    </li>
+
+    <li class="nav-item current active">
+        <a class="nav-link nav-internal" href="/documentation/index.html">
+            Documentation
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/blog/index.html">
+            Blog
+        </a>
+    </li>
+</ul></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      3.0  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="general.html">General Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phases.html">Phase Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elements.html">Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="species.html">Species</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ck_conversion.html">YAML to Chemkin conversion</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.salsalabs.org/donate-to-cantera/index.html" class="btn btn-secondary" type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">YAML Input File Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Reactions</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
                   
   <section id="reactions">
-<span id="sec-yaml-reactions"></span><h1>Reactions<a class="headerlink" href="#reactions" title="Permalink to this heading">¶</a></h1>
+<span id="sec-yaml-reactions"></span><h1>Reactions<a class="headerlink" href="#reactions" title="Permalink to this heading">#</a></h1>
 <p>The fields common to all <code class="docutils literal notranslate"><span class="pre">reaction</span></code> entries are:</p>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">equation</span></code></dt><dd><p>The stoichiometric equation for the reaction. Each term (that is,
@@ -135,49 +490,49 @@ The default is <code class="docutils literal notranslate"><span class="pre">fals
 <p>Depending on the reaction <code class="docutils literal notranslate"><span class="pre">type</span></code>, other fields may be necessary to specify
 the rate of the reaction.</p>
 <section id="reaction-rate-expressions">
-<h2>Reaction rate expressions<a class="headerlink" href="#reaction-rate-expressions" title="Permalink to this heading">¶</a></h2>
+<h2>Reaction rate expressions<a class="headerlink" href="#reaction-rate-expressions" title="Permalink to this heading">#</a></h2>
 <section id="arrhenius">
-<span id="sec-yaml-arrhenius-rate"></span><h3>Arrhenius<a class="headerlink" href="#arrhenius" title="Permalink to this heading">¶</a></h3>
+<span id="sec-yaml-arrhenius-rate"></span><h3>Arrhenius<a class="headerlink" href="#arrhenius" title="Permalink to this heading">#</a></h3>
 <p>Arrhenius rate expressions are specified as a mapping with fields:</p>
 <dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">A</span></code></dt><dd><p>The pre-exponential factor <span class="math">\(A\)</span></p>
+<dt><code class="docutils literal notranslate"><span class="pre">A</span></code></dt><dd><p>The pre-exponential factor <span class="math notranslate nohighlight">\(A\)</span></p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">b</span></code></dt><dd><p>The temperature exponent <span class="math">\(b\)</span></p>
+<dt><code class="docutils literal notranslate"><span class="pre">b</span></code></dt><dd><p>The temperature exponent <span class="math notranslate nohighlight">\(b\)</span></p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Ea</span></code></dt><dd><p>The activation energy <span class="math">\(E_a\)</span></p>
+<dt><code class="docutils literal notranslate"><span class="pre">Ea</span></code></dt><dd><p>The activation energy <span class="math notranslate nohighlight">\(E_a\)</span></p>
 </dd>
 </dl>
 <p>or a corresponding three-element list. The following are equivalent:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">-2.70000E+13 cm^3/mol/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">355 cal/mol</span><span class="p p-Indicator">}</span><span class="w"></span>
-<span class="p p-Indicator">[</span><span class="nv">-2.70000E+13 cm^3/mol/s</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">355 cal/mol</span><span class="p p-Indicator">]</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">-2.70000E+13 cm^3/mol/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">355 cal/mol</span><span class="p p-Indicator">}</span>
+<span class="p p-Indicator">[</span><span class="nv">-2.70000E+13 cm^3/mol/s</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">355 cal/mol</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 </section>
 <section id="blowers-masel">
-<span id="sec-yaml-blowers-masel-rate"></span><h3>Blowers-Masel<a class="headerlink" href="#blowers-masel" title="Permalink to this heading">¶</a></h3>
+<span id="sec-yaml-blowers-masel-rate"></span><h3>Blowers-Masel<a class="headerlink" href="#blowers-masel" title="Permalink to this heading">#</a></h3>
 <p>Blowers-Masel rate expressions calculate the rate constant based on the Blowers Masel
 approximation as
 <a class="reference external" href="https://cantera.org/science/kinetics.html#sec-blowers-masel">described here</a>.
 The rate parameters are specified as a mapping with fields:</p>
 <dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">A</span></code></dt><dd><p>The pre-exponential factor <span class="math">\(A\)</span></p>
+<dt><code class="docutils literal notranslate"><span class="pre">A</span></code></dt><dd><p>The pre-exponential factor <span class="math notranslate nohighlight">\(A\)</span></p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">b</span></code></dt><dd><p>The temperature exponent <span class="math">\(b\)</span></p>
+<dt><code class="docutils literal notranslate"><span class="pre">b</span></code></dt><dd><p>The temperature exponent <span class="math notranslate nohighlight">\(b\)</span></p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Ea0</span></code></dt><dd><p>The intrinsic activation energy <span class="math">\(E_{a0}\)</span></p>
+<dt><code class="docutils literal notranslate"><span class="pre">Ea0</span></code></dt><dd><p>The intrinsic activation energy <span class="math notranslate nohighlight">\(E_{a0}\)</span></p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">w</span></code></dt><dd><p>The average of the bond dissociation energy of the bond breaking and that being
-formed in the reaction <span class="math">\(w\)</span></p>
+formed in the reaction <span class="math notranslate nohighlight">\(w\)</span></p>
 </dd>
 </dl>
 <p>or a corresponding four-element list. The following are equivalent:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">3.87e+04 cm^3/mol/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">2.7</span><span class="p p-Indicator">,</span><span class="nt"> Ea0</span><span class="p">:</span><span class="w"> </span><span class="nv">6260.0 cal/mol</span><span class="p p-Indicator">,</span><span class="nt"> w</span><span class="p">:</span><span class="w"> </span><span class="nv">1e9 cal/mol</span><span class="p p-Indicator">}</span><span class="w"></span>
-<span class="p p-Indicator">[</span><span class="nv">3.87e+04 cm^3/mol/s</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6260.0 cal/mol</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1e9 cal/mol</span><span class="p p-Indicator">]</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">3.87e+04 cm^3/mol/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">2.7</span><span class="p p-Indicator">,</span><span class="nt"> Ea0</span><span class="p">:</span><span class="w"> </span><span class="nv">6260.0 cal/mol</span><span class="p p-Indicator">,</span><span class="nt"> w</span><span class="p">:</span><span class="w"> </span><span class="nv">1e9 cal/mol</span><span class="p p-Indicator">}</span>
+<span class="p p-Indicator">[</span><span class="nv">3.87e+04 cm^3/mol/s</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6260.0 cal/mol</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1e9 cal/mol</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 </section>
 <section id="two-temperature-plasma">
-<span id="sec-yaml-two-temperature-plasma-rate"></span><h3>Two-Temperature Plasma<a class="headerlink" href="#two-temperature-plasma" title="Permalink to this heading">¶</a></h3>
+<span id="sec-yaml-two-temperature-plasma-rate"></span><h3>Two-Temperature Plasma<a class="headerlink" href="#two-temperature-plasma" title="Permalink to this heading">#</a></h3>
 <p>Two-temperature plasma reactions involve an electron as one of the reactants, where the
 electron temperature may differ from the gas temperature as
 <a class="reference external" href="https://cantera.org/science/kinetics.html#two-temperature-plasma-reactions">described here</a>.
@@ -187,21 +542,21 @@ The rate parameters are specified as a mapping with fields:</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">b</span></code></dt><dd><p>The temperature exponent, which is applied to the electron temperature</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Ea-gas</span></code></dt><dd><p>The activation energy term <span class="math">\(E_{a,g}\)</span> that is related to the gas temperature</p>
+<dt><code class="docutils literal notranslate"><span class="pre">Ea-gas</span></code></dt><dd><p>The activation energy term <span class="math notranslate nohighlight">\(E_{a,g}\)</span> that is related to the gas temperature</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Ea-electron</span></code></dt><dd><p>The activation energy term <span class="math">\(E_{a,e}\)</span> that is related to the electron
+<dt><code class="docutils literal notranslate"><span class="pre">Ea-electron</span></code></dt><dd><p>The activation energy term <span class="math notranslate nohighlight">\(E_{a,e}\)</span> that is related to the electron
 temperature</p>
 </dd>
 </dl>
 <p>or a corresponding four-element list. The following are equivalent:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">17283</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">-3.1</span><span class="p p-Indicator">,</span><span class="nt"> Ea-gas</span><span class="p">:</span><span class="w"> </span><span class="nv">-5820 J/mol</span><span class="p p-Indicator">,</span><span class="nt"> Ea-electron</span><span class="p">:</span><span class="w"> </span><span class="nv">1081 J/mol</span><span class="p p-Indicator">}</span><span class="w"></span>
-<span class="p p-Indicator">[</span><span class="nv">17283</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-5820 J/mol</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1081 J/mol</span><span class="p p-Indicator">]</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">17283</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">-3.1</span><span class="p p-Indicator">,</span><span class="nt"> Ea-gas</span><span class="p">:</span><span class="w"> </span><span class="nv">-5820 J/mol</span><span class="p p-Indicator">,</span><span class="nt"> Ea-electron</span><span class="p">:</span><span class="w"> </span><span class="nv">1081 J/mol</span><span class="p p-Indicator">}</span>
+<span class="p p-Indicator">[</span><span class="nv">17283</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-5820 J/mol</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1081 J/mol</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="efficiencies">
-<span id="sec-yaml-efficiencies"></span><h2>Efficiencies<a class="headerlink" href="#efficiencies" title="Permalink to this heading">¶</a></h2>
+<span id="sec-yaml-efficiencies"></span><h2>Efficiencies<a class="headerlink" href="#efficiencies" title="Permalink to this heading">#</a></h2>
 <p>Some reaction types include parameters for the “efficiency” of different species
 as third-body colliders. For these reactions, the following additional fields
 are supported:</p>
@@ -214,9 +569,9 @@ mapping. Defaults to 1.0.</p>
 </dl>
 </section>
 <section id="reaction-types">
-<h2>Reaction types<a class="headerlink" href="#reaction-types" title="Permalink to this heading">¶</a></h2>
+<h2>Reaction types<a class="headerlink" href="#reaction-types" title="Permalink to this heading">#</a></h2>
 <section id="elementary">
-<span id="sec-yaml-elementary"></span><h3><code class="docutils literal notranslate"><span class="pre">elementary</span></code><a class="headerlink" href="#elementary" title="Permalink to this heading">¶</a></h3>
+<span id="sec-yaml-elementary"></span><h3><code class="docutils literal notranslate"><span class="pre">elementary</span></code><a class="headerlink" href="#elementary" title="Permalink to this heading">#</a></h3>
 <p>A homogeneous reaction with a pressure-independent rate coefficient and mass
 action kinetics, as
 <a class="reference external" href="https://cantera.org/science/kinetics.html#reactions-with-a-pressure-independent-rate">described here</a>.</p>
@@ -229,54 +584,54 @@ is allowed. The default is <code class="docutils literal notranslate"><span clas
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">N + NO &lt;=&gt; N2 + O</span><span class="w"></span>
-<span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">-2.70000E+13 cm^3/mol/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">355 cal/mol</span><span class="p p-Indicator">}</span><span class="w"></span>
-<span class="nt">negative-A</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">N + NO &lt;=&gt; N2 + O</span>
+<span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">-2.70000E+13 cm^3/mol/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">355 cal/mol</span><span class="p p-Indicator">}</span>
+<span class="nt">negative-A</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
 </section>
 <section id="three-body">
-<span id="sec-yaml-three-body"></span><h3><code class="docutils literal notranslate"><span class="pre">three-body</span></code><a class="headerlink" href="#three-body" title="Permalink to this heading">¶</a></h3>
+<span id="sec-yaml-three-body"></span><h3><code class="docutils literal notranslate"><span class="pre">three-body</span></code><a class="headerlink" href="#three-body" title="Permalink to this heading">#</a></h3>
 <p>A three body reaction as
 <a class="reference external" href="https://cantera.org/science/kinetics.html#three-body-reactions">described here</a>.</p>
 <p>The reaction equation should include the third body collision partner <code class="docutils literal notranslate"><span class="pre">M</span></code>.</p>
 <p>Includes the fields of an <code class="docutils literal notranslate"><span class="pre">elementary</span></code> reaction, plus the fields for
 specifying <a class="reference internal" href="#sec-yaml-efficiencies"><span class="std std-ref">efficiencies</span></a>.</p>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2 O + M = O2 + M</span><span class="w"></span>
-<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">three-body</span><span class="w"></span>
-<span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.20000E+17 cm^6/mol^2/s</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">]</span><span class="w"></span>
-<span class="nt">efficiencies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">AR</span><span class="p">:</span><span class="w"> </span><span class="nv">0.83</span><span class="p p-Indicator">,</span><span class="nt"> H2O</span><span class="p">:</span><span class="w"> </span><span class="nv">5</span><span class="p p-Indicator">}</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2 O + M = O2 + M</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">three-body</span>
+<span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.20000E+17 cm^6/mol^2/s</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">]</span>
+<span class="nt">efficiencies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">AR</span><span class="p">:</span><span class="w"> </span><span class="nv">0.83</span><span class="p p-Indicator">,</span><span class="nt"> H2O</span><span class="p">:</span><span class="w"> </span><span class="nv">5</span><span class="p p-Indicator">}</span>
 </pre></div>
 </div>
 </section>
 <section id="sec-yaml-blowers-masel">
-<span id="id1"></span><h3><code class="docutils literal notranslate"><span class="pre">Blowers-Masel</span></code><a class="headerlink" href="#sec-yaml-blowers-masel" title="Permalink to this heading">¶</a></h3>
-<p>Includes the fields of an <a class="reference internal" href="#sec-yaml-elementary"><span class="std std-ref">elemntary</span></a> reaction, except that
+<span id="id1"></span><h3><code class="docutils literal notranslate"><span class="pre">Blowers-Masel</span></code><a class="headerlink" href="#sec-yaml-blowers-masel" title="Permalink to this heading">#</a></h3>
+<p>Includes the fields of an <a class="reference internal" href="#sec-yaml-elementary"><span class="std std-ref">elementary</span></a> reaction, except that
 the <code class="docutils literal notranslate"><span class="pre">rate-constant</span></code> field is a
 <a class="reference internal" href="#sec-yaml-blowers-masel-rate"><span class="std std-ref">Blowers-Masel-type</span></a> list or mapping.</p>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">O + H2 &lt;=&gt; H + OH</span><span class="w"></span>
-<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Blowers-Masel</span><span class="w"></span>
-<span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">3.87e+04 cm^2/mol/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">2.7</span><span class="p p-Indicator">,</span><span class="nt"> Ea0</span><span class="p">:</span><span class="w"> </span><span class="nv">6260.0 cal/mol</span><span class="p p-Indicator">,</span><span class="nt"> w</span><span class="p">:</span><span class="w"> </span><span class="nv">1e9 cal/mol</span><span class="p p-Indicator">}</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">O + H2 &lt;=&gt; H + OH</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Blowers-Masel</span>
+<span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">3.87e+04 cm^2/mol/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">2.7</span><span class="p p-Indicator">,</span><span class="nt"> Ea0</span><span class="p">:</span><span class="w"> </span><span class="nv">6260.0 cal/mol</span><span class="p p-Indicator">,</span><span class="nt"> w</span><span class="p">:</span><span class="w"> </span><span class="nv">1e9 cal/mol</span><span class="p p-Indicator">}</span>
 </pre></div>
 </div>
 </section>
 <section id="sec-yaml-two-temperature-plasma">
-<span id="id2"></span><h3><code class="docutils literal notranslate"><span class="pre">two-temperature-plasma</span></code><a class="headerlink" href="#sec-yaml-two-temperature-plasma" title="Permalink to this heading">¶</a></h3>
+<span id="id2"></span><h3><code class="docutils literal notranslate"><span class="pre">two-temperature-plasma</span></code><a class="headerlink" href="#sec-yaml-two-temperature-plasma" title="Permalink to this heading">#</a></h3>
 <p>Includes the fields of an <a class="reference internal" href="#sec-yaml-elementary"><span class="std std-ref">elementary</span></a> reaction, except that
 the <code class="docutils literal notranslate"><span class="pre">rate-constant</span></code> field is a
 <a class="reference internal" href="#sec-yaml-two-temperature-plasma-rate"><span class="std std-ref">Two-temperature-plasma-type</span></a> list or
 mapping.</p>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">O + H =&gt; O + H</span><span class="w"></span>
-<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">two-temperature-plasma</span><span class="w"></span>
-<span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">17283</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">-3.1</span><span class="p p-Indicator">,</span><span class="nt"> Ea-gas</span><span class="p">:</span><span class="w"> </span><span class="nv">-5820 J/mol</span><span class="p p-Indicator">,</span><span class="nt"> Ea-electron</span><span class="p">:</span><span class="w"> </span><span class="nv">1081 J/mol</span><span class="p p-Indicator">}</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">O + H =&gt; O + H</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">two-temperature-plasma</span>
+<span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">17283</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">-3.1</span><span class="p p-Indicator">,</span><span class="nt"> Ea-gas</span><span class="p">:</span><span class="w"> </span><span class="nv">-5820 J/mol</span><span class="p p-Indicator">,</span><span class="nt"> Ea-electron</span><span class="p">:</span><span class="w"> </span><span class="nv">1081 J/mol</span><span class="p p-Indicator">}</span>
 </pre></div>
 </div>
 </section>
 <section id="falloff">
-<span id="sec-yaml-falloff"></span><h3><code class="docutils literal notranslate"><span class="pre">falloff</span></code><a class="headerlink" href="#falloff" title="Permalink to this heading">¶</a></h3>
+<span id="sec-yaml-falloff"></span><h3><code class="docutils literal notranslate"><span class="pre">falloff</span></code><a class="headerlink" href="#falloff" title="Permalink to this heading">#</a></h3>
 <p>A falloff reaction as
 <a class="reference external" href="https://cantera.org/science/kinetics.html#falloff-reactions">described here</a>.</p>
 <p>The reaction equation should include the pressure-dependent third body collision
@@ -308,29 +663,29 @@ for <code class="docutils literal notranslate"><span class="pre">B</span></code>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H + CH2 (+ N2) &lt;=&gt; CH3 (+N2)</span><span class="w"></span>
-<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">falloff</span><span class="w"></span>
-<span class="nt">high-P-rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">6.00000E+14 cm^3/mol/s</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">]</span><span class="w"></span>
-<span class="nt">low-P-rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.04000E+26 cm^6/mol^2/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">-2.76</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">1600</span><span class="p p-Indicator">}</span><span class="w"></span>
-<span class="nt">Troe</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">0.562</span><span class="p p-Indicator">,</span><span class="nt"> T3</span><span class="p">:</span><span class="w"> </span><span class="nv">91</span><span class="p p-Indicator">,</span><span class="nt"> T1</span><span class="p">:</span><span class="w"> </span><span class="nv">5836</span><span class="p p-Indicator">}</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H + CH2 (+ N2) &lt;=&gt; CH3 (+N2)</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">falloff</span>
+<span class="nt">high-P-rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">6.00000E+14 cm^3/mol/s</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">]</span>
+<span class="nt">low-P-rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.04000E+26 cm^6/mol^2/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">-2.76</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">1600</span><span class="p p-Indicator">}</span>
+<span class="nt">Troe</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">0.562</span><span class="p p-Indicator">,</span><span class="nt"> T3</span><span class="p">:</span><span class="w"> </span><span class="nv">91</span><span class="p p-Indicator">,</span><span class="nt"> T1</span><span class="p">:</span><span class="w"> </span><span class="nv">5836</span><span class="p p-Indicator">}</span>
 </pre></div>
 </div>
 </section>
 <section id="chemically-activated">
-<span id="sec-yaml-chemically-activated"></span><h3><code class="docutils literal notranslate"><span class="pre">chemically-activated</span></code><a class="headerlink" href="#chemically-activated" title="Permalink to this heading">¶</a></h3>
+<span id="sec-yaml-chemically-activated"></span><h3><code class="docutils literal notranslate"><span class="pre">chemically-activated</span></code><a class="headerlink" href="#chemically-activated" title="Permalink to this heading">#</a></h3>
 <p>A chemically activated reaction as
 <a class="reference external" href="https://cantera.org/science/kinetics.html#chemically-activated-reactions">described here</a>.</p>
 <p>The parameters are the same as for <a class="reference internal" href="#sec-yaml-falloff"><span class="std std-ref">falloff</span></a> reactions.</p>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CH3 + OH (+M) &lt;=&gt; CH2O + H2 (+M)</span><span class="w"></span>
-<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chemically-activated</span><span class="w"></span>
-<span class="nt">high-P-rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5.88E-14</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.721</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3022.227</span><span class="p p-Indicator">]</span><span class="w"></span>
-<span class="nt">low-P-rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">282320.078</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.46878</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3270.56495</span><span class="p p-Indicator">]</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CH3 + OH (+M) &lt;=&gt; CH2O + H2 (+M)</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chemically-activated</span>
+<span class="nt">high-P-rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5.88E-14</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.721</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3022.227</span><span class="p p-Indicator">]</span>
+<span class="nt">low-P-rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">282320.078</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.46878</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3270.56495</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 </section>
 <section id="pressure-dependent-arrhenius">
-<span id="sec-yaml-pressure-dependent-arrhenius"></span><h3><code class="docutils literal notranslate"><span class="pre">pressure-dependent-Arrhenius</span></code><a class="headerlink" href="#pressure-dependent-arrhenius" title="Permalink to this heading">¶</a></h3>
+<span id="sec-yaml-pressure-dependent-arrhenius"></span><h3><code class="docutils literal notranslate"><span class="pre">pressure-dependent-Arrhenius</span></code><a class="headerlink" href="#pressure-dependent-arrhenius" title="Permalink to this heading">#</a></h3>
 <p>A pressure-dependent reaction using multiple Arrhenius expressions as
 <a class="reference external" href="https://cantera.org/science/kinetics.html#pressure-dependent-arrhenius-rate-expressions-p-log">described here</a>.</p>
 <p>The only additional field in this reaction type is:</p>
@@ -340,18 +695,18 @@ for <code class="docutils literal notranslate"><span class="pre">B</span></code>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H + CH4 &lt;=&gt; H2 + CH3</span><span class="w"></span>
-<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pressure-dependent-Arrhenius</span><span class="w"></span>
-<span class="nt">rate-constants</span><span class="p">:</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">P</span><span class="p">:</span><span class="w"> </span><span class="nv">0.039474 atm</span><span class="p p-Indicator">,</span><span class="nt"> A</span><span class="p">:</span><span class="w"> </span><span class="nv">2.720000e+09 cm^3/mol/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">1.2</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">6834.0</span><span class="p p-Indicator">}</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">P</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0 atm</span><span class="p p-Indicator">,</span><span class="nt"> A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.260000e+20</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">-1.83</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">15003.0</span><span class="p p-Indicator">}</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">P</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0 atm</span><span class="p p-Indicator">,</span><span class="nt"> A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.230000e+04</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">2.68</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">6335.0</span><span class="p p-Indicator">}</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">P</span><span class="p">:</span><span class="w"> </span><span class="nv">1.01325 MPa</span><span class="p p-Indicator">,</span><span class="nt"> A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.680000e+16</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">-0.6</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">14754.0</span><span class="p p-Indicator">}</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H + CH4 &lt;=&gt; H2 + CH3</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pressure-dependent-Arrhenius</span>
+<span class="nt">rate-constants</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">P</span><span class="p">:</span><span class="w"> </span><span class="nv">0.039474 atm</span><span class="p p-Indicator">,</span><span class="nt"> A</span><span class="p">:</span><span class="w"> </span><span class="nv">2.720000e+09 cm^3/mol/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">1.2</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">6834.0</span><span class="p p-Indicator">}</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">P</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0 atm</span><span class="p p-Indicator">,</span><span class="nt"> A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.260000e+20</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">-1.83</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">15003.0</span><span class="p p-Indicator">}</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">P</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0 atm</span><span class="p p-Indicator">,</span><span class="nt"> A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.230000e+04</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">2.68</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">6335.0</span><span class="p p-Indicator">}</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">P</span><span class="p">:</span><span class="w"> </span><span class="nv">1.01325 MPa</span><span class="p p-Indicator">,</span><span class="nt"> A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.680000e+16</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">-0.6</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">14754.0</span><span class="p p-Indicator">}</span>
 </pre></div>
 </div>
 </section>
 <section id="chebyshev">
-<span id="sec-yaml-chebyshev"></span><h3><code class="docutils literal notranslate"><span class="pre">Chebyshev</span></code><a class="headerlink" href="#chebyshev" title="Permalink to this heading">¶</a></h3>
+<span id="sec-yaml-chebyshev"></span><h3><code class="docutils literal notranslate"><span class="pre">Chebyshev</span></code><a class="headerlink" href="#chebyshev" title="Permalink to this heading">#</a></h3>
 <p>A reaction parameterized as a bivariate Chebyshev polynomial as
 <a class="reference external" href="https://cantera.org/science/kinetics.html#chebyshev-reaction-rate-expressions">described here</a>.</p>
 <p>Additional fields are:</p>
@@ -366,21 +721,21 @@ which the rate constant is valid</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CH4 &lt;=&gt; CH3 + H</span><span class="w"></span>
-<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Chebyshev</span><span class="w"></span>
-<span class="nt">temperature-range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">290</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3000</span><span class="p p-Indicator">]</span><span class="w"></span>
-<span class="nt">pressure-range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0098692326671601278 atm</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">98.692326671601279 atm</span><span class="p p-Indicator">]</span><span class="w"></span>
-<span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[[</span><span class="nv">-1.44280e+01</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">2.59970e-01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.24320e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.78700e-03</span><span class="p p-Indicator">],</span><span class="w"></span>
-<span class="w">       </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">2.20630e+01</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">4.88090e-01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.96430e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-5.48110e-03</span><span class="p p-Indicator">],</span><span class="w"></span>
-<span class="w">       </span><span class="p p-Indicator">[</span><span class="nv">-2.32940e-01</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">4.01900e-01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.60730e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-5.04860e-03</span><span class="p p-Indicator">],</span><span class="w"></span>
-<span class="w">       </span><span class="p p-Indicator">[</span><span class="nv">-2.93660e-01</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">2.85680e-01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-9.33730e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-4.01020e-03</span><span class="p p-Indicator">],</span><span class="w"></span>
-<span class="w">       </span><span class="p p-Indicator">[</span><span class="nv">-2.26210e-01</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">1.69190e-01</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">4.85810e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.38030e-03</span><span class="p p-Indicator">],</span><span class="w"></span>
-<span class="w">       </span><span class="p p-Indicator">[</span><span class="nv">-1.43220e-01</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">7.71110e-02</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">1.27080e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-6.41540e-04</span><span class="p p-Indicator">]]</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CH4 &lt;=&gt; CH3 + H</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Chebyshev</span>
+<span class="nt">temperature-range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">290</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3000</span><span class="p p-Indicator">]</span>
+<span class="nt">pressure-range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0098692326671601278 atm</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">98.692326671601279 atm</span><span class="p p-Indicator">]</span>
+<span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[[</span><span class="nv">-1.44280e+01</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">2.59970e-01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.24320e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.78700e-03</span><span class="p p-Indicator">],</span>
+<span class="w">       </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">2.20630e+01</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">4.88090e-01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.96430e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-5.48110e-03</span><span class="p p-Indicator">],</span>
+<span class="w">       </span><span class="p p-Indicator">[</span><span class="nv">-2.32940e-01</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">4.01900e-01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.60730e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-5.04860e-03</span><span class="p p-Indicator">],</span>
+<span class="w">       </span><span class="p p-Indicator">[</span><span class="nv">-2.93660e-01</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">2.85680e-01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-9.33730e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-4.01020e-03</span><span class="p p-Indicator">],</span>
+<span class="w">       </span><span class="p p-Indicator">[</span><span class="nv">-2.26210e-01</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">1.69190e-01</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">4.85810e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.38030e-03</span><span class="p p-Indicator">],</span>
+<span class="w">       </span><span class="p p-Indicator">[</span><span class="nv">-1.43220e-01</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">7.71110e-02</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">1.27080e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-6.41540e-04</span><span class="p p-Indicator">]]</span>
 </pre></div>
 </div>
 </section>
 <section id="interface-arrhenius">
-<span id="sec-yaml-interface-arrhenius"></span><h3><code class="docutils literal notranslate"><span class="pre">interface-Arrhenius</span></code><a class="headerlink" href="#interface-arrhenius" title="Permalink to this heading">¶</a></h3>
+<span id="sec-yaml-interface-arrhenius"></span><h3><code class="docutils literal notranslate"><span class="pre">interface-Arrhenius</span></code><a class="headerlink" href="#interface-arrhenius" title="Permalink to this heading">#</a></h3>
 <p>A reaction occurring on a surface between two bulk phases, or along an edge
 at the intersection of two surfaces, as
 <a class="reference external" href="https://cantera.org/science/kinetics.html#sec-surface">described here</a>.</p>
@@ -401,49 +756,49 @@ given in the order of 1st, 2nd, 3rd, and 4th-order coefficients</p>
 </dl>
 <p>or a list containing the three elements above, in the given order.</p>
 <p>Note that parameters <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">m</span></code> and <code class="docutils literal notranslate"><span class="pre">E</span></code> correspond to parameters
-<span class="math">\(\eta_{ki}\)</span>, <span class="math">\(\mu_{ki}\)</span> and <span class="math">\(\epsilon_{ki}\)</span> in Eq 11.113 of
+<span class="math notranslate nohighlight">\(\eta_{ki}\)</span>, <span class="math notranslate nohighlight">\(\mu_{ki}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{ki}\)</span> in Eq 11.113 of
 [Kee, R. J., Coltrin, M. E., &amp; Glarborg, P.(2003). Chemically reacting flow:
 theory and practice. John Wiley &amp; Sons], respectively.</p>
 </dd>
 </dl>
 <p>Examples:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2 H(s) =&gt; H2 + 2 Pt(s)</span><span class="w"></span>
-<span class="w">  </span><span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">3.7e21 cm^2/mol/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">67400 J/mol</span><span class="p p-Indicator">}</span><span class="w"></span>
-<span class="w">  </span><span class="nt">coverage-dependencies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">H(s)</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">a</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> m</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> E</span><span class="p">:</span><span class="w"> </span><span class="nv">-6000 J/mol</span><span class="p p-Indicator">}}</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2 H(s) =&gt; H2 + 2 Pt(s)</span>
+<span class="w">  </span><span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">3.7e21 cm^2/mol/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">67400 J/mol</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">coverage-dependencies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">H(s)</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">a</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> m</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> E</span><span class="p">:</span><span class="w"> </span><span class="nv">-6000 J/mol</span><span class="p p-Indicator">}}</span>
 
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2 O(S) =&gt; O2 + 2 Pt(S)</span><span class="w"></span>
-<span class="w">  </span><span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">3.7e+21</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">213200 J/mol</span><span class="p p-Indicator">}</span><span class="w"></span>
-<span class="w">  </span><span class="nt">coverage-dependencies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">O(S)</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">a</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> m</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"></span>
-<span class="nt">    E</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.0e3 J/mol</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.0e3 J/mol</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-7.0e4 J/mol</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.0e3 J/mol</span><span class="p p-Indicator">]}</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2 O(S) =&gt; O2 + 2 Pt(S)</span>
+<span class="w">  </span><span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">3.7e+21</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">213200 J/mol</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">coverage-dependencies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">O(S)</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">a</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> m</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span>
+<span class="nt">    E</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.0e3 J/mol</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.0e3 J/mol</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-7.0e4 J/mol</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.0e3 J/mol</span><span class="p p-Indicator">]}</span>
 
-<span class="nt">- equation</span><span class="p">:</span><span class="w"> </span><span class="nv">CH4 + PT(S) + O(S) =&gt; CH3(S) + OH(S)</span><span class="w"></span>
-<span class="w">  </span><span class="nv">rate-constant</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">5.0e+18</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0.7</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">4.2e+04</span><span class="p p-Indicator">}</span><span class="w"></span>
-<span class="nt">  coverage-dependencies</span><span class="p">:</span><span class="w"></span>
-<span class="nt">    O(S)</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8000</span><span class="p p-Indicator">]</span><span class="w"></span>
-<span class="nt">    PT(S)</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="nt">- equation</span><span class="p">:</span><span class="w"> </span><span class="nv">CH4 + PT(S) + O(S) =&gt; CH3(S) + OH(S)</span>
+<span class="w">  </span><span class="nv">rate-constant</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">5.0e+18</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0.7</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">4.2e+04</span><span class="p p-Indicator">}</span>
+<span class="nt">  coverage-dependencies</span><span class="p">:</span>
+<span class="nt">    O(S)</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8000</span><span class="p p-Indicator">]</span>
+<span class="nt">    PT(S)</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">]</span>
 
-<span class="nt">- equation</span><span class="p">:</span><span class="w"> </span><span class="nv">2 O(S) =&gt; O2 + 2 Pt(S)</span><span class="w"></span>
-<span class="w">  </span><span class="nv">rate-constant</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">3.7e+21</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">213200 J/mol</span><span class="p p-Indicator">}</span><span class="w"></span>
-<span class="nt">  coverage-dependencies</span><span class="p">:</span><span class="w"></span>
-<span class="nt">    O(S)</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.0e6</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.0e6</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-7.0e7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.0e6</span><span class="p p-Indicator">]]</span><span class="w"></span>
+<span class="nt">- equation</span><span class="p">:</span><span class="w"> </span><span class="nv">2 O(S) =&gt; O2 + 2 Pt(S)</span>
+<span class="w">  </span><span class="nv">rate-constant</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">3.7e+21</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">213200 J/mol</span><span class="p p-Indicator">}</span>
+<span class="nt">  coverage-dependencies</span><span class="p">:</span>
+<span class="nt">    O(S)</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.0e6</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.0e6</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-7.0e7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.0e6</span><span class="p p-Indicator">]]</span>
 </pre></div>
 </div>
 </section>
 <section id="interface-blowers-masel">
-<span id="sec-yaml-interface-blowers-masel"></span><h3><code class="docutils literal notranslate"><span class="pre">interface-Blowers-Masel</span></code><a class="headerlink" href="#interface-blowers-masel" title="Permalink to this heading">¶</a></h3>
+<span id="sec-yaml-interface-blowers-masel"></span><h3><code class="docutils literal notranslate"><span class="pre">interface-Blowers-Masel</span></code><a class="headerlink" href="#interface-blowers-masel" title="Permalink to this heading">#</a></h3>
 <p>Includes the same fields as <a class="reference internal" href="#sec-yaml-interface-arrhenius"><span class="std std-ref">interface-Arrhenius</span></a>,
 while using the <a class="reference internal" href="#sec-yaml-blowers-masel-rate"><span class="std std-ref">Blowers-Masel</span></a> parameterization
 for the rate constant.</p>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2 H(s) =&gt; H2 + 2 Pt(s)</span><span class="w"></span>
-<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Blowers-Masel</span><span class="w"></span>
-<span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">3.7e21 cm^2/mol/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea0</span><span class="p">:</span><span class="w"> </span><span class="nv">67400 J/mol</span><span class="p p-Indicator">,</span><span class="nt"> w</span><span class="p">:</span><span class="w"> </span><span class="nv">1000000 J/mol</span><span class="p p-Indicator">}</span><span class="w"></span>
-<span class="nt">coverage-dependencies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">H(s)</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">a</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> m</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> E</span><span class="p">:</span><span class="w"> </span><span class="nv">-6000 J/mol</span><span class="p p-Indicator">}}</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2 H(s) =&gt; H2 + 2 Pt(s)</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Blowers-Masel</span>
+<span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">3.7e21 cm^2/mol/s</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea0</span><span class="p">:</span><span class="w"> </span><span class="nv">67400 J/mol</span><span class="p p-Indicator">,</span><span class="nt"> w</span><span class="p">:</span><span class="w"> </span><span class="nv">1000000 J/mol</span><span class="p p-Indicator">}</span>
+<span class="nt">coverage-dependencies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">H(s)</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">a</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> m</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> E</span><span class="p">:</span><span class="w"> </span><span class="nv">-6000 J/mol</span><span class="p p-Indicator">}}</span>
 </pre></div>
 </div>
 </section>
 <section id="sticking-arrhenius">
-<span id="sec-yaml-sticking-arrhenius"></span><h3><code class="docutils literal notranslate"><span class="pre">sticking-Arrhenius</span></code><a class="headerlink" href="#sticking-arrhenius" title="Permalink to this heading">¶</a></h3>
+<span id="sec-yaml-sticking-arrhenius"></span><h3><code class="docutils literal notranslate"><span class="pre">sticking-Arrhenius</span></code><a class="headerlink" href="#sticking-arrhenius" title="Permalink to this heading">#</a></h3>
 <p>A sticking reaction occurring on a surface adjacent to a bulk phase, as
 <a class="reference external" href="https://cantera.org/science/kinetics.html#sec-sticking">described here</a>.</p>
 <p>Includes the fields of an <a class="reference internal" href="#sec-yaml-interface-arrhenius"><span class="std std-ref">interface-Arrhenius</span></a> reaction plus:</p>
@@ -459,28 +814,27 @@ non-surface species.</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OH + PT(S) =&gt; OH(S)</span><span class="w"></span>
-<span class="nt">sticking-coefficient</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">}</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OH + PT(S) =&gt; OH(S)</span>
+<span class="nt">sticking-coefficient</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">}</span>
 </pre></div>
 </div>
 </section>
 <section id="sticking-blowers-masel">
-<span id="sec-yaml-sticking-blowers-masel"></span><h3><code class="docutils literal notranslate"><span class="pre">sticking-Blowers-Masel</span></code><a class="headerlink" href="#sticking-blowers-masel" title="Permalink to this heading">¶</a></h3>
+<span id="sec-yaml-sticking-blowers-masel"></span><h3><code class="docutils literal notranslate"><span class="pre">sticking-Blowers-Masel</span></code><a class="headerlink" href="#sticking-blowers-masel" title="Permalink to this heading">#</a></h3>
 <p>Includes the same fields as <a class="reference internal" href="#sec-yaml-sticking-arrhenius"><span class="std std-ref">sticking-Arrhenius</span></a>,
 while using the <a class="reference internal" href="#sec-yaml-blowers-masel-rate"><span class="std std-ref">Blowers-Masel</span></a> parameterization
 for the sticking coefficient.</p>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OH + PT(S) =&gt; OH(S)</span><span class="w"></span>
-<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Blowers-Masel</span><span class="w"></span>
-<span class="nt">sticking-coefficient</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea0</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> w</span><span class="p">:</span><span class="w"> </span><span class="nv">100000</span><span class="p p-Indicator">}</span><span class="w"></span>
-<span class="nt">Motz-Wise</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OH + PT(S) =&gt; OH(S)</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Blowers-Masel</span>
+<span class="nt">sticking-coefficient</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea0</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> w</span><span class="p">:</span><span class="w"> </span><span class="nv">100000</span><span class="p p-Indicator">}</span>
+<span class="nt">Motz-Wise</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
 </section>
 <section id="electrochemical">
-<span id="sec-yaml-electrochemical-reaction"></span><h3><code class="docutils literal notranslate"><span class="pre">electrochemical</span></code><a class="headerlink" href="#electrochemical" title="Permalink to this heading">¶</a></h3>
-<p>Interface reactions involving charge transfer between phases,
-as <a class="reference external" href="https://cantera.org/documentation/dev/doxygen/html/d6/ddd/classCantera_1_1ElectrochemicalReaction.html#details">described here</a>.</p>
+<span id="sec-yaml-electrochemical-reaction"></span><h3><code class="docutils literal notranslate"><span class="pre">electrochemical</span></code><a class="headerlink" href="#electrochemical" title="Permalink to this heading">#</a></h3>
+<p>Interface reactions involving charge transfer between phases.</p>
 <p>Includes the fields of an <a class="reference internal" href="#sec-yaml-interface-arrhenius"><span class="std std-ref">interface-Arrhenius</span></a> reaction, plus:</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">beta</span></code></dt><dd><p>The symmetry factor for the reaction. Default is 0.5.</p>
@@ -490,9 +844,9 @@ density. Default is <code class="docutils literal notranslate"><span class="pre"
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LiC6 &lt;=&gt; Li+(e) + C6</span><span class="w"></span>
-<span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5.74</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span><span class="w"></span>
-<span class="nt">beta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.4</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LiC6 &lt;=&gt; Li+(e) + C6</span>
+<span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5.74</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
+<span class="nt">beta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.4</span>
 </pre></div>
 </div>
 </section>
@@ -500,96 +854,136 @@ density. Default is <code class="docutils literal notranslate"><span class="pre"
 </section>
 
 
-                </div>
-                </div>
-            </div>
-             <!-- end of block document -->
-  <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-    <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="../index.html">Table of Contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Reactions</a><ul>
-<li><a class="reference internal" href="#reaction-rate-expressions">Reaction rate expressions</a><ul>
-<li><a class="reference internal" href="#arrhenius">Arrhenius</a></li>
-<li><a class="reference internal" href="#blowers-masel">Blowers-Masel</a></li>
-<li><a class="reference internal" href="#two-temperature-plasma">Two-Temperature Plasma</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#efficiencies">Efficiencies</a></li>
-<li><a class="reference internal" href="#reaction-types">Reaction types</a><ul>
-<li><a class="reference internal" href="#elementary"><code class="docutils literal notranslate"><span class="pre">elementary</span></code></a></li>
-<li><a class="reference internal" href="#three-body"><code class="docutils literal notranslate"><span class="pre">three-body</span></code></a></li>
-<li><a class="reference internal" href="#sec-yaml-blowers-masel"><code class="docutils literal notranslate"><span class="pre">Blowers-Masel</span></code></a></li>
-<li><a class="reference internal" href="#sec-yaml-two-temperature-plasma"><code class="docutils literal notranslate"><span class="pre">two-temperature-plasma</span></code></a></li>
-<li><a class="reference internal" href="#falloff"><code class="docutils literal notranslate"><span class="pre">falloff</span></code></a></li>
-<li><a class="reference internal" href="#chemically-activated"><code class="docutils literal notranslate"><span class="pre">chemically-activated</span></code></a></li>
-<li><a class="reference internal" href="#pressure-dependent-arrhenius"><code class="docutils literal notranslate"><span class="pre">pressure-dependent-Arrhenius</span></code></a></li>
-<li><a class="reference internal" href="#chebyshev"><code class="docutils literal notranslate"><span class="pre">Chebyshev</span></code></a></li>
-<li><a class="reference internal" href="#interface-arrhenius"><code class="docutils literal notranslate"><span class="pre">interface-Arrhenius</span></code></a></li>
-<li><a class="reference internal" href="#interface-blowers-masel"><code class="docutils literal notranslate"><span class="pre">interface-Blowers-Masel</span></code></a></li>
-<li><a class="reference internal" href="#sticking-arrhenius"><code class="docutils literal notranslate"><span class="pre">sticking-Arrhenius</span></code></a></li>
-<li><a class="reference internal" href="#sticking-blowers-masel"><code class="docutils literal notranslate"><span class="pre">sticking-Blowers-Masel</span></code></a></li>
-<li><a class="reference internal" href="#electrochemical"><code class="docutils literal notranslate"><span class="pre">electrochemical</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="index.html">YAML Input File Reference</a><ul>
-      <li>Previous: <a href="species.html" title="previous chapter">Species</a></li>
-      <li>Next: <a href="cti_conversion.html" title="next chapter">CTI to YAML conversion</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/yaml/reactions.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script><div id="numfocus">
-<h3>Donate to Cantera</h3>
-<a href="https://numfocus.salsalabs.org/donate-to-cantera/index.html">
-<img src="../_static/powered_by_NumFOCUS.png" border="0" alt="NumFOCUS"/></a>
-</div>
-    </div>
-  </div>
-                <div class="clearer"></div>
-          </div>
-           <!--End of block content-->
-
-          <div class="footer">
-            &copy;2001-2023, Cantera Developers.
-            
-            |
-            Powered by <a href="http://sphinx-doc.org/">Sphinx 5.1.1</a>
-            &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-            
-            |
-            <a href="../_sources/yaml/reactions.rst.txt"
-                rel="nofollow">Page source</a>
-          </div>
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="species.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Species</p>
       </div>
-  </div>
+    </a>
+    <a class="right-next"
+       href="cti_conversion.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">CTI to YAML conversion</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
 
-  <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
-  <script async="async" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-</body>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reaction-rate-expressions">Reaction rate expressions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrhenius">Arrhenius</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blowers-masel">Blowers-Masel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-temperature-plasma">Two-Temperature Plasma</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#efficiencies">Efficiencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reaction-types">Reaction types</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elementary"><code class="docutils literal notranslate"><span class="pre">elementary</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-body"><code class="docutils literal notranslate"><span class="pre">three-body</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-yaml-blowers-masel"><code class="docutils literal notranslate"><span class="pre">Blowers-Masel</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-yaml-two-temperature-plasma"><code class="docutils literal notranslate"><span class="pre">two-temperature-plasma</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#falloff"><code class="docutils literal notranslate"><span class="pre">falloff</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemically-activated"><code class="docutils literal notranslate"><span class="pre">chemically-activated</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pressure-dependent-arrhenius"><code class="docutils literal notranslate"><span class="pre">pressure-dependent-Arrhenius</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chebyshev"><code class="docutils literal notranslate"><span class="pre">Chebyshev</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interface-arrhenius"><code class="docutils literal notranslate"><span class="pre">interface-Arrhenius</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interface-blowers-masel"><code class="docutils literal notranslate"><span class="pre">interface-Blowers-Masel</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sticking-arrhenius"><code class="docutils literal notranslate"><span class="pre">sticking-Arrhenius</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sticking-blowers-masel"><code class="docutils literal notranslate"><span class="pre">sticking-Blowers-Masel</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electrochemical"><code class="docutils literal notranslate"><span class="pre">electrochemical</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/yaml/reactions.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2001-2023, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

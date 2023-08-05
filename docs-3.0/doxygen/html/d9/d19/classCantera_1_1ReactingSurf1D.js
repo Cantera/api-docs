@@ -1,0 +1,26 @@
+var classCantera_1_1ReactingSurf1D =
+[
+    [ "ReactingSurf1D", "d9/d19/classCantera_1_1ReactingSurf1D.html#a3efc1452e94ebe948dad3b9b728f4ab8", null ],
+    [ "ReactingSurf1D", "d9/d19/classCantera_1_1ReactingSurf1D.html#a4a6ee7015670ab4c7cb8744f85e2f518", null ],
+    [ "type", "d9/d19/classCantera_1_1ReactingSurf1D.html#a3fd7546c6fe10a8af9e23c4a3e611caf", null ],
+    [ "setKinetics", "d9/d19/classCantera_1_1ReactingSurf1D.html#ad20238482cb856146a7b3ab1a77b9abf", null ],
+    [ "setKineticsMgr", "d9/d19/classCantera_1_1ReactingSurf1D.html#a9618dba81f0890543cf06bd622eb6d99", null ],
+    [ "enableCoverageEquations", "d9/d19/classCantera_1_1ReactingSurf1D.html#ab4b326759779b92ce43aafbe3513410b", null ],
+    [ "coverageEnabled", "d9/d19/classCantera_1_1ReactingSurf1D.html#ad5efc5ad76169808cfb97d1441665e27", null ],
+    [ "componentName", "d9/d19/classCantera_1_1ReactingSurf1D.html#a8b0c3fc1d7eb037a7e987fef3b74baa7", null ],
+    [ "init", "d9/d19/classCantera_1_1ReactingSurf1D.html#a02fd73d861ef2e4aabb38c0c9ff82947", null ],
+    [ "resetBadValues", "d9/d19/classCantera_1_1ReactingSurf1D.html#ac62a6125038fdf0ccce236710017c0de", null ],
+    [ "eval", "d9/d19/classCantera_1_1ReactingSurf1D.html#abe083a37c122f28a25b88161bd8c07e9", null ],
+    [ "asArray", "d9/d19/classCantera_1_1ReactingSurf1D.html#a99fc962249c1088a71731e84526101af", null ],
+    [ "fromArray", "d9/d19/classCantera_1_1ReactingSurf1D.html#a858256704e91d3ad1b8a4b0766634eca", null ],
+    [ "_getInitialSoln", "d9/d19/classCantera_1_1ReactingSurf1D.html#ad5043dc8a6b34f03de05987cac185108", null ],
+    [ "_finalize", "d9/d19/classCantera_1_1ReactingSurf1D.html#a3dccdd95ed670ddc52ad68265af8dc36", null ],
+    [ "show", "d9/d19/classCantera_1_1ReactingSurf1D.html#a7e9e1221a4f95bc6d8d465a8e3f6fb89", null ],
+    [ "m_kin", "d9/d19/classCantera_1_1ReactingSurf1D.html#a327817b5fe31fd5c6dd0f3be8762ab04", null ],
+    [ "m_sphase", "d9/d19/classCantera_1_1ReactingSurf1D.html#a167803b2863ff9707915142c3041c4c8", null ],
+    [ "m_surfindex", "d9/d19/classCantera_1_1ReactingSurf1D.html#a44317b3f0c84cb1a76be0647ff6d61ec", null ],
+    [ "m_nsp", "d9/d19/classCantera_1_1ReactingSurf1D.html#ab3e6c2c66c42af05f67bbe604928bd21", null ],
+    [ "m_enabled", "d9/d19/classCantera_1_1ReactingSurf1D.html#a34a97a069b6bae0160fc4d19394ee0b1", null ],
+    [ "m_work", "d9/d19/classCantera_1_1ReactingSurf1D.html#a4da1dada96db5e1f39c5507f040591e4", null ],
+    [ "m_fixed_cov", "d9/d19/classCantera_1_1ReactingSurf1D.html#a3b082f149c417fe3d34c5b75690e45aa", null ]
+];

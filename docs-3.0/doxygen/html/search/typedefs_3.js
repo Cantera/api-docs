@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logcallback_0',['LogCallback',['../dd/d7b/clib__defs_8h.html#a001952e8276b9ec4f7664b556efc6776',1,'clib_defs.h']]]
+  ['pmessages_5ft_7344',['pMessages_t',['../d6/d9a/classCantera_1_1Application.html#ac9c83d8d85333434b606be6de4284d93',1,'Cantera::Application']]]
 ];

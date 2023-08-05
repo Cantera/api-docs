@@ -2,95 +2,450 @@
 
 <!DOCTYPE html>
 
-<html prefix="
-og: http://ogp.me/ns# article: http://ogp.me/ns/article#
-"
-lang="en">
+
+<html lang="en" >
 
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Chemical Kinetics | Cantera </title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" media="none" onload="this.media='all'" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../_static/cantera.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" media="none" onload="this.media='all'" type="text/css" />
-  <link rel="stylesheet" href="../_static/cantera.css" media="none" onload="this.media='all'" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" media="none" onload="this.media='all'" type="text/css" />
-  <link rel="stylesheet" href="../_static/katex-math.css" media="none" onload="this.media='all'" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/katex.min.js"></script>
-        <script type="text/javascript" src="../_static/auto-render.min.js"></script>
-        <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
-    <link rel="shortcut icon" href="/assets/img/favicon.ico" sizes="16x16"/>
-    
-    <link rel="search" title="Search" href="../search.html" /> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Chemical Kinetics &#8212; Cantera 3.0.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'matlab/kinetics';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/documentation/dev/sphinx/html/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.0';
+        </script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Transport Properties" href="transport.html" />
+    <link rel="prev" title="Thermodynamic Properties" href="thermodynamics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body>
-  <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-  <!-- Menubar -->
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+   
 
-  <nav class="navbar navbar-expand-md navbar-light bg-light static-top mb-4">
-      <div class="container"><!-- This keeps the margins nice -->
-          <a class="navbar-brand" href="/index.html">
-          <img src="/assets/img/cantera-logo.png" alt="Cantera" id="logo" class="d-inline-block align-top">
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><ul class="bd-navbar-elements navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/install/index.html">
+            Install
+        </a>
+    </li>
 
-          <div class="collapse navbar-collapse" id="bs-navbar">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a href="/install/index.html" class="nav-link">Install</a>
-              </li>
-              <li class="nav-item">
-                <a href="/tutorials/index.html" class="nav-link">Tutorials</a>
-              </li>
-              <li class="nav-item">
-                <a href="/examples/index.html" class="nav-link">Examples</a>
-              </li>
-              <li class="nav-item">
-                <a href="/community.html" class="nav-link">Community</a>
-              </li>
-              <li class="nav-item">
-                <a href="/science/index.html" class="nav-link">Science</a>
-              </li>
-              <li class="nav-item">
-                <a href="/documentation/index.html" class="nav-link">Documentation</a>
-              </li>
-              <li class="nav-item">
-                <a href="/blog/index.html" class="nav-link">Blog</a>
-              </li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-      </div><!-- /.container -->
-  </nav>
-  <!-- End of Menubar -->
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/tutorials/index.html">
+            Tutorials
+        </a>
+    </li>
 
-  <div class="container" id="content">
-      <div class="body-content">
-          <!--Body content-->
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/examples/index.html">
+            Examples
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/community.html">
+            Community
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/science/index.html">
+            Science
+        </a>
+    </li>
+
+    <li class="nav-item current active">
+        <a class="nav-link nav-internal" href="/documentation/index.html">
+            Documentation
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/blog/index.html">
+            Blog
+        </a>
+    </li>
+</ul></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
           
-          <div class="document">
-            
-            <div class="documentwrapper">
-                <div class="bodywrapper">
-                <div class="body" role="main">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      3.0  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><ul class="bd-navbar-elements navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/install/index.html">
+            Install
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/tutorials/index.html">
+            Tutorials
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/examples/index.html">
+            Examples
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/community.html">
+            Community
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/science/index.html">
+            Science
+        </a>
+    </li>
+
+    <li class="nav-item current active">
+        <a class="nav-link nav-internal" href="/documentation/index.html">
+            Documentation
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/blog/index.html">
+            Blog
+        </a>
+    </li>
+</ul></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      3.0  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermodynamics.html">Thermodynamic Properties</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chemical Kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transport.html">Transport Properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zero-dim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one-dim.html">One-Dimensional Reacting Flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">Physical Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utility Functions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.salsalabs.org/donate-to-cantera/index.html" class="btn btn-secondary" type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Matlab Interface User’s Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Chemical Kinetics</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
                   
   <section id="chemical-kinetics">
-<h1>Chemical Kinetics<a class="headerlink" href="#chemical-kinetics" title="Permalink to this heading">¶</a></h1>
+<h1>Chemical Kinetics<a class="headerlink" href="#chemical-kinetics" title="Permalink to this heading">#</a></h1>
 <section id="kinetics">
-<h2>Kinetics<a class="headerlink" href="#kinetics" title="Permalink to this heading">¶</a></h2>
+<h2>Kinetics<a class="headerlink" href="#kinetics" title="Permalink to this heading">#</a></h2>
 <dl class="mat class">
 <dt class="sig sig-object mat" id="Kinetics">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Kinetics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ph</span></em>, <em class="sig-param"><span class="pre">src</span></em>, <em class="sig-param"><span class="pre">id</span></em>, <em class="sig-param"><span class="pre">neighbor1</span></em>, <em class="sig-param"><span class="pre">neighbor2</span></em>, <em class="sig-param"><span class="pre">neighbor3</span></em>, <em class="sig-param"><span class="pre">neighbor4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Kinetics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ph</span></em>, <em class="sig-param"><span class="pre">src</span></em>, <em class="sig-param"><span class="pre">id</span></em>, <em class="sig-param"><span class="pre">neighbor1</span></em>, <em class="sig-param"><span class="pre">neighbor2</span></em>, <em class="sig-param"><span class="pre">neighbor3</span></em>, <em class="sig-param"><span class="pre">neighbor4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics" title="Permalink to this definition">#</a></dt>
 <dd><p>Kinetics class constructor.</p>
 <p>Class Kinetics represents kinetics managers, which are classes
 that manage reaction mechanisms.  The reaction mechanism
@@ -121,7 +476,7 @@ neighboring phase.</p></li>
 </dl>
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.advanceCoverages">
-<span class="sig-name descname"><span class="pre">advanceCoverages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">k</span></em>, <em class="sig-param"><span class="pre">dt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.advanceCoverages" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">advanceCoverages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">k</span></em>, <em class="sig-param"><span class="pre">dt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.advanceCoverages" title="Permalink to this definition">#</a></dt>
 <dd><p>Advance the surface coverages forward in time.</p>
 <p>The bulk phase concentrations are held fixed during this operation.</p>
 <dl class="field-list simple">
@@ -137,7 +492,7 @@ neighboring phase.</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.creationRates">
-<span class="sig-name descname"><span class="pre">creationRates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.creationRates" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">creationRates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.creationRates" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the chemical creation rates.</p>
 <p>See also: <a class="reference internal" href="#Kinetics.destructionRates" title="Kinetics.destructionRates"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">destructionRates()</span></code></a>, <a class="reference internal" href="#Kinetics.netProdRates" title="Kinetics.netProdRates"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">netProdRates()</span></code></a></p>
 <dl class="field-list simple">
@@ -156,7 +511,7 @@ bar graph is produced. Units: kmol/m**3-s</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.destructionRates">
-<span class="sig-name descname"><span class="pre">destructionRates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.destructionRates" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">destructionRates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.destructionRates" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the chemical destruction rates.</p>
 <p>See also: <a class="reference internal" href="#Kinetics.creationRates" title="Kinetics.creationRates"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">creationRates()</span></code></a>, <a class="reference internal" href="#Kinetics.netProdRates" title="Kinetics.netProdRates"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">netProdRates()</span></code></a></p>
 <dl class="field-list simple">
@@ -175,7 +530,7 @@ bar graph is produced. Units: kmol/m**3-s</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.equil_Kc">
-<span class="sig-name descname"><span class="pre">equil_Kc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.equil_Kc" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">equil_Kc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.equil_Kc" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the equilibrium constants for all reactions</p>
 <p>See also: <a class="reference internal" href="#Kinetics.fwdRateConstants" title="Kinetics.fwdRateConstants"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fwdRateConstants()</span></code></a>, <a class="reference internal" href="#Kinetics.revRateConstants" title="Kinetics.revRateConstants"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">revRateConstants()</span></code></a></p>
 <dl class="field-list simple">
@@ -196,7 +551,7 @@ not assigned to a variable, a bar graph is produced instead.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.fwdRateConstants">
-<span class="sig-name descname"><span class="pre">fwdRateConstants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.fwdRateConstants" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fwdRateConstants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.fwdRateConstants" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the forward reaction rate constants.</p>
 <p>The computed values include all temperature-dependent and pressure-dependent
 contributions. By default, third-body concentrations are only considered if
@@ -220,7 +575,7 @@ all of the reactions.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.getDeltaEnthalpies">
-<span class="sig-name descname"><span class="pre">getDeltaEnthalpies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.getDeltaEnthalpies" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getDeltaEnthalpies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.getDeltaEnthalpies" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the enthalpy of reaction for each reaction.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -237,7 +592,7 @@ reaction. Units: J/kmol</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.getDeltaEntropies">
-<span class="sig-name descname"><span class="pre">getDeltaEntropies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.getDeltaEntropies" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getDeltaEntropies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.getDeltaEntropies" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the entropy of reaction for each reaction.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -254,7 +609,7 @@ reaction. Units: J/kmol-K</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.getDeltaGibbs">
-<span class="sig-name descname"><span class="pre">getDeltaGibbs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.getDeltaGibbs" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getDeltaGibbs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.getDeltaGibbs" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the Gibbs free energy of reaction for each reaction.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -271,7 +626,7 @@ for each reaction. Units: J/kmol</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.isReversible">
-<span class="sig-name descname"><span class="pre">isReversible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">i</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.isReversible" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">isReversible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">i</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.isReversible" title="Permalink to this definition">#</a></dt>
 <dd><p>Get an array of flags indicating reversibility of a reaction.</p>
 <p>A reversible reaction is one that runs in both the forward
 direction (reactants -&gt; products) and in the reverse direction
@@ -300,7 +655,7 @@ reversible, and 0 if it is irreversible.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.multiplier">
-<span class="sig-name descname"><span class="pre">multiplier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">irxn</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.multiplier" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">multiplier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">irxn</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.multiplier" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the multiplier for reaction rate of progress.</p>
 <p>The multiplier multiplies the reaction rate of progress. It may
 be used to implement sensitivity analysis, or to selectively
@@ -325,7 +680,7 @@ for which the multipliers are desired.</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.nReactions">
-<span class="sig-name descname"><span class="pre">nReactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.nReactions" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">nReactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.nReactions" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the number of reactions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -341,7 +696,7 @@ for which the number of reactions is desired.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.nTotalSpecies">
-<span class="sig-name descname"><span class="pre">nTotalSpecies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.nTotalSpecies" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">nTotalSpecies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.nTotalSpecies" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the total number of species.</p>
 <p>The total number of species, summed over all
 participating phases.</p>
@@ -359,7 +714,7 @@ for which the number of species is desired.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.netProdRates">
-<span class="sig-name descname"><span class="pre">netProdRates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.netProdRates" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">netProdRates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.netProdRates" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the net chemical production rates for all species.</p>
 <p>See also: <a class="reference internal" href="#Kinetics.creationRates" title="Kinetics.creationRates"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">creationRates()</span></code></a>, <a class="reference internal" href="#Kinetics.destructionRates" title="Kinetics.destructionRates"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">destructionRates()</span></code></a></p>
 <dl class="field-list simple">
@@ -378,7 +733,7 @@ assigned to a variable, a bar plot is produced.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.reactionEqn">
-<span class="sig-name descname"><span class="pre">reactionEqn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">irxn</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.reactionEqn" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">reactionEqn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">irxn</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.reactionEqn" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the reaction equation of a reaction.</p>
 <p>If only the first argument
 is given, the reaction equations of all of the reactions are
@@ -401,7 +756,7 @@ for which the reaction equations are desired.</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.revRateConstants">
-<span class="sig-name descname"><span class="pre">revRateConstants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.revRateConstants" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">revRateConstants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.revRateConstants" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the reverse reaction rate constants.</p>
 <p>The computed values include all temperature-dependent and pressure-dependent
 contributions. By default, third-body concentrations are only considered if
@@ -425,7 +780,7 @@ all of the reactions.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.rop">
-<span class="sig-name descname"><span class="pre">rop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.rop" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">rop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.rop" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the forward and reverse rates of progress.</p>
 <p>See also: <a class="reference internal" href="#Kinetics.rop_f" title="Kinetics.rop_f"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">rop_f()</span></code></a>, <a class="reference internal" href="#Kinetics.rop_r" title="Kinetics.rop_r"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">rop_r()</span></code></a>, <a class="reference internal" href="#Kinetics.rop_net" title="Kinetics.rop_net"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">rop_net()</span></code></a></p>
 <dl class="field-list simple">
@@ -446,7 +801,7 @@ is called with no output argument, a bar graph is produced.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.rop_f">
-<span class="sig-name descname"><span class="pre">rop_f</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.rop_f" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">rop_f</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.rop_f" title="Permalink to this definition">#</a></dt>
 <dd><p>Forward rates of progress for all reactions.</p>
 <blockquote>
 <div><p>See also: <a class="reference internal" href="#Kinetics.rop_r" title="Kinetics.rop_r"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">rop_r()</span></code></a>, <a class="reference internal" href="#Kinetics.rop_net" title="Kinetics.rop_net"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">rop_net()</span></code></a>, <a class="reference internal" href="#Kinetics.rop" title="Kinetics.rop"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">rop()</span></code></a></p>
@@ -467,7 +822,7 @@ is called with no output argument, a bar graph is produced.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.rop_net">
-<span class="sig-name descname"><span class="pre">rop_net</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.rop_net" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">rop_net</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.rop_net" title="Permalink to this definition">#</a></dt>
 <dd><p>Net rates of progress for all reactions.</p>
 <p>See also: <a class="reference internal" href="#Kinetics.rop_f" title="Kinetics.rop_f"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">rop_f()</span></code></a>, <a class="reference internal" href="#Kinetics.rop_r" title="Kinetics.rop_r"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">rop_r()</span></code></a>, <a class="reference internal" href="#Kinetics.rop" title="Kinetics.rop"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">rop()</span></code></a></p>
 <dl class="field-list simple">
@@ -486,7 +841,7 @@ is called with no output argument, a bar graph is produced.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.rop_r">
-<span class="sig-name descname"><span class="pre">rop_r</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.rop_r" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">rop_r</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.rop_r" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the reverse rates of progress for all reactions.</p>
 <blockquote>
 <div><p>See also: <a class="reference internal" href="#Kinetics.rop_f" title="Kinetics.rop_f"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">rop_f()</span></code></a>, <a class="reference internal" href="#Kinetics.rop_net" title="Kinetics.rop_net"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">rop_net()</span></code></a>, <a class="reference internal" href="#Kinetics.rop" title="Kinetics.rop"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">rop()</span></code></a></p>
@@ -507,7 +862,7 @@ is called with no output argument, a bar graph is produced.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.setMultiplier">
-<span class="sig-name descname"><span class="pre">setMultiplier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">irxn</span></em>, <em class="sig-param"><span class="pre">v</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.setMultiplier" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setMultiplier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">irxn</span></em>, <em class="sig-param"><span class="pre">v</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.setMultiplier" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the multiplier for the reaction rate of progress.</p>
 <p>The multiplier multiplies the reaction rate of progress. It may
 be used to implement sensitivity analysis, or to selectively
@@ -533,7 +888,7 @@ the multiplier should be set. Optional.</p></li>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.stoich_net">
-<span class="sig-name descname"><span class="pre">stoich_net</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">species</span></em>, <em class="sig-param"><span class="pre">rxns</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.stoich_net" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">stoich_net</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">species</span></em>, <em class="sig-param"><span class="pre">rxns</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.stoich_net" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the net stoichiometric coefficients.</p>
 <p>See also: <a class="reference internal" href="#Kinetics.stoich_r" title="Kinetics.stoich_r"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">stoich_r()</span></code></a>, <a class="reference internal" href="#Kinetics.stoich_p" title="Kinetics.stoich_p"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">stoich_p()</span></code></a></p>
 <dl class="field-list simple">
@@ -565,7 +920,7 @@ in reactions 1, 3, 5, and 7.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.stoich_p">
-<span class="sig-name descname"><span class="pre">stoich_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">species</span></em>, <em class="sig-param"><span class="pre">rxns</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.stoich_p" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">stoich_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">species</span></em>, <em class="sig-param"><span class="pre">rxns</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.stoich_p" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the product stoichiometric coefficients.</p>
 <p>See also: <a class="reference internal" href="#Kinetics.stoich_r" title="Kinetics.stoich_r"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">stoich_r()</span></code></a>, <a class="reference internal" href="#Kinetics.stoich_net" title="Kinetics.stoich_net"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">stoich_net()</span></code></a></p>
 <dl class="field-list simple">
@@ -597,7 +952,7 @@ in reactions 1, 3, 5, and 7.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.stoich_r">
-<span class="sig-name descname"><span class="pre">stoich_r</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">species</span></em>, <em class="sig-param"><span class="pre">rxns</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.stoich_r" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">stoich_r</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">species</span></em>, <em class="sig-param"><span class="pre">rxns</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.stoich_r" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the reactant stoichiometric coefficients.</p>
 <p>See also: <a class="reference internal" href="#Kinetics.stoich_p" title="Kinetics.stoich_p"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">stoich_p()</span></code></a>, <a class="reference internal" href="#Kinetics.stoich_net" title="Kinetics.stoich_net"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">stoich_net()</span></code></a></p>
 <dl class="field-list simple">
@@ -629,9 +984,9 @@ in reactions 1, 3, 5, and 7.</p>
 
 <dl class="mat function">
 <dt class="sig sig-object mat" id="Kinetics.ydot">
-<span class="sig-name descname"><span class="pre">ydot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.ydot" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ydot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kinetics.ydot" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the mass production rates of the species.</p>
-<p>Evaluates the source term <span class="math">\(\dot{\omega}_k M_k /\rho\)</span></p>
+<p>Evaluates the source term <span class="math notranslate nohighlight">\(\dot{\omega}_k M_k /\rho\)</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>a</strong> – Instance of class <a class="reference internal" href="#Kinetics" title="Kinetics"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Kinetics()</span></code></a> (or another
@@ -650,74 +1005,114 @@ for which the ydots are desired.</p>
 </section>
 
 
-                </div>
-                </div>
-            </div>
-             <!-- end of block document -->
-  <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-    <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="../index.html">Table of Contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Chemical Kinetics</a><ul>
-<li><a class="reference internal" href="#kinetics">Kinetics</a></li>
-</ul>
-</li>
-</ul>
-
-  </div><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="index.html">Matlab Interface User’s Guide</a><ul>
-      <li>Previous: <a href="thermodynamics.html" title="previous chapter">Thermodynamic Properties</a></li>
-      <li>Next: <a href="transport.html" title="next chapter">Transport Properties</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/matlab/kinetics.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script><div id="numfocus">
-<h3>Donate to Cantera</h3>
-<a href="https://numfocus.salsalabs.org/donate-to-cantera/index.html">
-<img src="../_static/powered_by_NumFOCUS.png" border="0" alt="NumFOCUS"/></a>
-</div>
-    </div>
-  </div>
-                <div class="clearer"></div>
-          </div>
-           <!--End of block content-->
-
-          <div class="footer">
-            &copy;2001-2023, Cantera Developers.
-            
-            |
-            Powered by <a href="http://sphinx-doc.org/">Sphinx 5.1.1</a>
-            &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-            
-            |
-            <a href="../_sources/matlab/kinetics.rst.txt"
-                rel="nofollow">Page source</a>
-          </div>
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="thermodynamics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Thermodynamic Properties</p>
       </div>
-  </div>
+    </a>
+    <a class="right-next"
+       href="transport.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Transport Properties</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
 
-  <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
-  <script async="async" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-</body>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetics">Kinetics</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/matlab/kinetics.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2001-2023, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

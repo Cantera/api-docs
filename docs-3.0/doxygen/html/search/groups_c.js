@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['physical_20constants_0',['Physical Constants',['../db/d22/group__physConstants.html',1,'']]]
+  ['numerical_20integration_20and_20interpolation_7480',['Numerical Integration and Interpolation',['../d7/d06/group__mathUtils.html',1,'']]],
+  ['numerical_20utilities_7481',['Numerical Utilities',['../dc/db9/group__numerics.html',1,'']]]
 ];

@@ -1,0 +1,28 @@
+var classCantera_1_1ReactorSurface =
+[
+    [ "ReactorSurface", "d4/def/classCantera_1_1ReactorSurface.html#a3aa8da02b941f54088e619e641fbd94e", null ],
+    [ "~ReactorSurface", "d4/def/classCantera_1_1ReactorSurface.html#aa865e86b30290dabfcf43d541a1bd4ca", null ],
+    [ "ReactorSurface", "d4/def/classCantera_1_1ReactorSurface.html#ab88709e98f739578ac69952547987371", null ],
+    [ "operator=", "d4/def/classCantera_1_1ReactorSurface.html#a0ce83c9deb4c61ee4415366fb560dd78", null ],
+    [ "area", "d4/def/classCantera_1_1ReactorSurface.html#a26f0bb964a0ade10f21f7b392e98a238", null ],
+    [ "setArea", "d4/def/classCantera_1_1ReactorSurface.html#a89bd4cd4360df8eda11d6de0417514b3", null ],
+    [ "thermo", "d4/def/classCantera_1_1ReactorSurface.html#a21b40f2035f10d2b3fced285a012f4e0", null ],
+    [ "kinetics", "d4/def/classCantera_1_1ReactorSurface.html#ac10e66d12c97ba58ce1aeaca196a553e", null ],
+    [ "setKinetics", "d4/def/classCantera_1_1ReactorSurface.html#ad4d6ee52174ac80f4fd029ac64d72ce5", null ],
+    [ "setReactor", "d4/def/classCantera_1_1ReactorSurface.html#a27a42e427f8bc7f6c5be9bdcab7fcb5d", null ],
+    [ "nSensParams", "d4/def/classCantera_1_1ReactorSurface.html#a776edaf5d4ce49cfc68b672898477fa5", null ],
+    [ "setCoverages", "d4/def/classCantera_1_1ReactorSurface.html#ad09ef02bc1d7955548243d099281a7ca", null ],
+    [ "setCoverages", "d4/def/classCantera_1_1ReactorSurface.html#afcf42c7fa498c5131781794d1363cedd", null ],
+    [ "setCoverages", "d4/def/classCantera_1_1ReactorSurface.html#a5cc7b226d36bb85e9bef5a62b9e4458b", null ],
+    [ "getCoverages", "d4/def/classCantera_1_1ReactorSurface.html#a79e575febaec80e182e2bb4a2246ab53", null ],
+    [ "syncState", "d4/def/classCantera_1_1ReactorSurface.html#a9c77f6ac25536bbe5e4923f338932b63", null ],
+    [ "addSensitivityReaction", "d4/def/classCantera_1_1ReactorSurface.html#aea6f8e195bf8b5b55a231d105f0a5f9c", null ],
+    [ "setSensitivityParameters", "d4/def/classCantera_1_1ReactorSurface.html#a36b23dd4109d8523ce822ec8a28b6238", null ],
+    [ "resetSensitivityParameters", "d4/def/classCantera_1_1ReactorSurface.html#a9496a9ed56f1096c3796febd7e2fbfcf", null ],
+    [ "m_area", "d4/def/classCantera_1_1ReactorSurface.html#a08580796099f73df36e298ac5be7f5d9", null ],
+    [ "m_thermo", "d4/def/classCantera_1_1ReactorSurface.html#a6a9014e887d4918aa30f1445ef3eb445", null ],
+    [ "m_kinetics", "d4/def/classCantera_1_1ReactorSurface.html#a62486fcfdaad143cde8228414bb20297", null ],
+    [ "m_reactor", "d4/def/classCantera_1_1ReactorSurface.html#a65f97e41d1ba6387af511049b154bc6a", null ],
+    [ "m_cov", "d4/def/classCantera_1_1ReactorSurface.html#abf5238b57b2ee7923df47084057ff0fa", null ],
+    [ "m_params", "d4/def/classCantera_1_1ReactorSurface.html#a04910ad8e3b0cb5cab3d9778fac16b90", null ]
+];

@@ -5,11 +5,7 @@ var group__reactionGroup =
     [ "Interface Rate Parameterizations", "d2/d1c/group__surfaceGroup.html", "d2/d1c/group__surfaceGroup" ],
     [ "Other Reaction Rate Parameterizations", "df/da5/group__otherRateGroup.html", "df/da5/group__otherRateGroup" ],
     [ "Reaction", "d5/d66/classCantera_1_1Reaction.html", [
-      [ "Reaction", "d5/d66/classCantera_1_1Reaction.html#a18f8b5bfcff47e68a600902199852c0c", null ],
-      [ "Reaction", "d5/d66/classCantera_1_1Reaction.html#a54cb8a3430497ed0937e64a0e197d5e3", null ],
-      [ "Reaction", "d5/d66/classCantera_1_1Reaction.html#af58e8db6cea1b0347d84baf0153e2710", null ],
       [ "Reaction", "d5/d66/classCantera_1_1Reaction.html#af8f612646729e0a4c7e9a10b4be73f5b", null ],
-      [ "~Reaction", "d5/d66/classCantera_1_1Reaction.html#ac3b086991383b38bb29c0d07a837745a", null ],
       [ "reactantString", "d5/d66/classCantera_1_1Reaction.html#a72d606fec579483dca40c66bcb321b1d", null ],
       [ "productString", "d5/d66/classCantera_1_1Reaction.html#a76855b83993104e3b9b3dc17793a77ff", null ],
       [ "equation", "d5/d66/classCantera_1_1Reaction.html#ab431750fd0a88c58a4bfa8ed12c3e435", null ],
@@ -27,9 +23,9 @@ var group__reactionGroup =
       [ "checkBalance", "d5/d66/classCantera_1_1Reaction.html#a28cb22e323eda674a6efe912e978ab60", null ],
       [ "checkSpecies", "d5/d66/classCantera_1_1Reaction.html#a438836c6a44f55f5cdcd452a46b663eb", null ],
       [ "usesElectrochemistry", "d5/d66/classCantera_1_1Reaction.html#ab7ae96230023a7643bbb61c96b231454", null ],
-      [ "rate", "d5/d66/classCantera_1_1Reaction.html#a95616198145b5bbea6b676b2303371ad", null ],
+      [ "rate", "d5/d66/classCantera_1_1Reaction.html#a364f3101ecc28e70ad6776902e9162bb", null ],
       [ "setRate", "d5/d66/classCantera_1_1Reaction.html#a4e143eef7c76e7a60e56db3b6a24f566", null ],
-      [ "thirdBody", "d5/d66/classCantera_1_1Reaction.html#ac28af9bfc9e641cc3ffa1397a2809c39", null ],
+      [ "thirdBody", "d5/d66/classCantera_1_1Reaction.html#a7c95c06a8ab1292d97fcb9f9fb483317", null ],
       [ "usesThirdBody", "d5/d66/classCantera_1_1Reaction.html#a71707405005505ab8ff4e6e5d8affa93", null ],
       [ "getParameters", "d5/d66/classCantera_1_1Reaction.html#ac02817e12f38643a6f9a9bd38539478b", null ],
       [ "reactants", "d5/d66/classCantera_1_1Reaction.html#ad52a8bceda6b7c2911cae98f603751fc", null ],
@@ -49,9 +45,6 @@ var group__reactionGroup =
       [ "m_third_body", "d5/d66/classCantera_1_1Reaction.html#a4f4f0d09ec2de0670e813d7eda024715", null ]
     ] ],
     [ "ThirdBody", "de/d5e/classCantera_1_1ThirdBody.html", [
-      [ "ThirdBody", "de/d5e/classCantera_1_1ThirdBody.html#a9e746e361bd08a4ab996d8423ac381f5", null ],
-      [ "ThirdBody", "de/d5e/classCantera_1_1ThirdBody.html#a0b2f5addc1e5dc1f6ae66580285b08cd", null ],
-      [ "ThirdBody", "de/d5e/classCantera_1_1ThirdBody.html#ae7a93a31e4a718e183dc28526d3172ec", null ],
       [ "ThirdBody", "de/d5e/classCantera_1_1ThirdBody.html#a0012864c9cac67c6fd0fad51edb69569", null ],
       [ "name", "de/d5e/classCantera_1_1ThirdBody.html#afa7a10b4b56522f03c698ac514b0f844", null ],
       [ "setName", "de/d5e/classCantera_1_1ThirdBody.html#acc1dc8bdb34199df4de0f529d76c8c4f", null ],
@@ -68,7 +61,6 @@ var group__reactionGroup =
       [ "m_name", "de/d5e/classCantera_1_1ThirdBody.html#ab76434042ddfc9d5e703e038f0ad0b1f", null ]
     ] ],
     [ "ReactionData", "d4/d9a/structCantera_1_1ReactionData.html", [
-      [ "ReactionData", "d4/d9a/structCantera_1_1ReactionData.html#a7c6fb6518b866531d89ab678a0081764", null ],
       [ "update", "d4/d9a/structCantera_1_1ReactionData.html#a7ab12baf406993645ef688298a276500", null ],
       [ "update", "d4/d9a/structCantera_1_1ReactionData.html#a4045277efd847ff814c9d2821eb1a6f3", null ],
       [ "update", "d4/d9a/structCantera_1_1ReactionData.html#adcdb618bb24d0d9f3eaa98fd07efb754", null ],
@@ -83,16 +75,12 @@ var group__reactionGroup =
       [ "m_temperature_buf", "d4/d9a/structCantera_1_1ReactionData.html#a24507ba1f6958fc072fe3663a4965f4c", null ]
     ] ],
     [ "ReactionRate", "d0/d19/classCantera_1_1ReactionRate.html", [
-      [ "ReactionRate", "d0/d19/classCantera_1_1ReactionRate.html#a9bd241b284ce7e57eb7635610ced0712", null ],
-      [ "ReactionRate", "d0/d19/classCantera_1_1ReactionRate.html#ab37c5207cbbf2cee3e2c57bc7617a6e1", null ],
-      [ "~ReactionRate", "d0/d19/classCantera_1_1ReactionRate.html#a98a4bc30dd09c46bdfe399d047ee5c65", null ],
-      [ "operator=", "d0/d19/classCantera_1_1ReactionRate.html#a3916ecdc9b0ffc5a2b09b6112f9cace9", null ],
-      [ "newMultiRate", "d0/d19/classCantera_1_1ReactionRate.html#a9b53b28d47fa1ca4e3057109260c4437", null ],
+      [ "newMultiRate", "d0/d19/classCantera_1_1ReactionRate.html#a8fe2a668ebf3b573fa31d6d77fd09733", null ],
       [ "type", "d0/d19/classCantera_1_1ReactionRate.html#abcd0b94b0bb247ed61023df2e12b45e4", null ],
       [ "subType", "d0/d19/classCantera_1_1ReactionRate.html#a95be722e77bb5d9097aca418edf643cc", null ],
       [ "setParameters", "d0/d19/classCantera_1_1ReactionRate.html#a145c971e93f6dedf25b016c280ce62d1", null ],
       [ "parameters", "d0/d19/classCantera_1_1ReactionRate.html#a719985fafb56ee92560361b99b3d1d0a", null ],
-      [ "conversionUnits", "d0/d19/classCantera_1_1ReactionRate.html#a85ce4a4e6d5b11c2ebea217b1f422539", null ],
+      [ "conversionUnits", "d0/d19/classCantera_1_1ReactionRate.html#a30abda896570ca55a78101ee44fcf220", null ],
       [ "setRateUnits", "d0/d19/classCantera_1_1ReactionRate.html#a4729f7ab59be3f2a592c70bf886c538e", null ],
       [ "check", "d0/d19/classCantera_1_1ReactionRate.html#aa00d9ff1855d4350b113c6ea43714aba", null ],
       [ "check", "d0/d19/classCantera_1_1ReactionRate.html#a9e0bca1588f084e0a970d7ac23e5caa9", null ],
@@ -108,13 +96,12 @@ var group__reactionGroup =
       [ "compositionDependent", "d0/d19/classCantera_1_1ReactionRate.html#a1d534a4c215e65d1e1b70a6826aa589e", null ],
       [ "setCompositionDependence", "d0/d19/classCantera_1_1ReactionRate.html#a0b54f2f5871088a1dcb60587d498f154", null ],
       [ "getParameters", "d0/d19/classCantera_1_1ReactionRate.html#adcd32bf303af355def0ff56f3c0ff341", null ],
-      [ "_evaluator", "d0/d19/classCantera_1_1ReactionRate.html#accf44b2896d493519f85f21e20109803", null ],
+      [ "_evaluator", "d0/d19/classCantera_1_1ReactionRate.html#ae38ff0d85394128acc766a96ae8835d7", null ],
       [ "m_input", "d0/d19/classCantera_1_1ReactionRate.html#ad99f7a99d03ef1dc32d1949996a9edc1", null ],
       [ "m_rate_index", "d0/d19/classCantera_1_1ReactionRate.html#ae3b162c1f6fde403f3ec75473f38647b", null ],
       [ "m_valid", "d0/d19/classCantera_1_1ReactionRate.html#a8a503ea8b57d562480e866d19f1ee484", null ],
       [ "m_composition_dependent_rate", "d0/d19/classCantera_1_1ReactionRate.html#acd2e00f5e4b3b7249f4cc1afaf6927b2", null ],
-      [ "m_conversion_units", "d0/d19/classCantera_1_1ReactionRate.html#a2a97a189d3e7c07abefce5d32b64689b", null ],
-      [ "m_evaluator", "d0/d19/classCantera_1_1ReactionRate.html#acd01cad8a4933771cf7332f2959c6ee1", null ]
+      [ "m_conversion_units", "d0/d19/classCantera_1_1ReactionRate.html#a2a97a189d3e7c07abefce5d32b64689b", null ]
     ] ],
     [ "newReactionRate", "dc/d58/group__reactionGroup.html#ga60084645ddde8dbd6f78f695ff073094", null ],
     [ "newReactionRate", "dc/d58/group__reactionGroup.html#gaf6cfe51022c72aefbf47be70a6274d37", null ],

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Chemical Kinetics &#8212; Cantera 3.0.0b1 documentation</title>
+    <title>Chemical Kinetics &#8212; Cantera 3.0.0 documentation</title>
   
   
   
@@ -41,6 +41,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'cython/kinetics';</script>
     <script>
@@ -379,6 +380,13 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Physical Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="units.html">Python Interface With Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="scripts.html">Mechanism Conversion</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml_conversion.html">YAML to Chemkin conversion</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </nav></div>
@@ -526,8 +534,11 @@ a reaction mechanism.</p>
 <span class="sig-name descname"><span class="pre">creation_rates_ddC</span></span><a class="headerlink" href="#cantera.Kinetics.creation_rates_ddC" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate derivatives of species creation rates with respect to molar
 concentration at constant temperature, pressure and mole fractions.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -540,8 +551,11 @@ species. For sparse output, set <code class="docutils literal notranslate"><span
 columns.</p>
 <p>For a derivative with respect to :math: <code class="xref py py-obj docutils literal notranslate"><span class="pre">c_i</span></code>, all other :math: <code class="xref py py-obj docutils literal notranslate"><span class="pre">c_i</span></code> are
 held constant.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.0.</span></p>
 </div>
@@ -569,8 +583,11 @@ concentrations at constant temperature, pressure and molar concentration.
 For sparse output, set <code class="docutils literal notranslate"><span class="pre">ct.use_sparse(True)</span></code>.</p>
 <p>Note that for derivatives with respect to <span class="math notranslate nohighlight">\(X_i\)</span>, all other <span class="math notranslate nohighlight">\(X_j\)</span>
 are held constant, rather than enforcing <span class="math notranslate nohighlight">\(\sum X_j = 1\)</span>.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -644,8 +661,11 @@ when calculating numerical derivatives. The default value is 1e-8.</p></li>
 <span class="sig-name descname"><span class="pre">destruction_rates_ddC</span></span><a class="headerlink" href="#cantera.Kinetics.destruction_rates_ddC" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate derivatives of species destruction rates with respect to molar
 concentration at constant temperature, pressure and mole fractions.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -657,8 +677,11 @@ species. For sparse output, set <code class="docutils literal notranslate"><span
 <p>The method returns a matrix with <a class="reference internal" href="#cantera.Kinetics.n_total_species" title="cantera.Kinetics.n_total_species"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_total_species</span></code></a> rows and <a class="reference internal" href="#cantera.Kinetics.n_total_species" title="cantera.Kinetics.n_total_species"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_total_species</span></code></a> columns.
 For a derivative with respect to :math: <code class="xref py py-obj docutils literal notranslate"><span class="pre">c_i</span></code>, all other :math: <code class="xref py py-obj docutils literal notranslate"><span class="pre">c_i</span></code> are
 held constant.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.0.</span></p>
 </div>
@@ -686,8 +709,11 @@ concentrations at constant temperature, pressure and molar concentration.
 For sparse output, set <code class="docutils literal notranslate"><span class="pre">ct.use_sparse(True)</span></code>.</p>
 <p>Note that for derivatives with respect to <span class="math notranslate nohighlight">\(X_i\)</span>, all other <span class="math notranslate nohighlight">\(X_j\)</span>
 are held constant, rather than enforcing <span class="math notranslate nohighlight">\(\sum X_j = 1\)</span>.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -711,8 +737,11 @@ includes third-body concentrations, see <a class="reference internal" href="util
 <span class="sig-name descname"><span class="pre">forward_rate_constants_ddC</span></span><a class="headerlink" href="#cantera.Kinetics.forward_rate_constants_ddC" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate derivatives for forward rate constants with respect to molar
 concentration at constant temperature, pressure and mole fractions.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -741,8 +770,11 @@ phases or [kmol/m^2/s] for surface phases.</p>
 <span class="sig-name descname"><span class="pre">forward_rates_of_progress_ddC</span></span><a class="headerlink" href="#cantera.Kinetics.forward_rates_of_progress_ddC" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate derivatives for forward rates-of-progress with respect to molar
 concentration at constant temperature, pressure and mole fractions.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -754,8 +786,11 @@ concentrations.
 For sparse output, set <code class="docutils literal notranslate"><span class="pre">ct.use_sparse(True)</span></code>.</p>
 <p>Note that for derivatives with respect to <span class="math notranslate nohighlight">\(c_i\)</span>, all other <span class="math notranslate nohighlight">\(c_j\)</span>
 are held constant.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.0.</span></p>
 </div>
@@ -783,8 +818,11 @@ concentrations at constant temperature, pressure and molar concentration.
 For sparse output, set <code class="docutils literal notranslate"><span class="pre">ct.use_sparse(True)</span></code>.</p>
 <p>Note that for derivatives with respect to <span class="math notranslate nohighlight">\(X_i\)</span>, all other <span class="math notranslate nohighlight">\(X_j\)</span>
 are held constant, rather than enforcing <span class="math notranslate nohighlight">\(\sum X_j = 1\)</span>.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -883,8 +921,11 @@ mechanism.</p>
 <span class="sig-name descname"><span class="pre">net_production_rates_ddC</span></span><a class="headerlink" href="#cantera.Kinetics.net_production_rates_ddC" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate derivatives of species net production rates with respect to molar
 density at constant temperature, pressure and mole fractions.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -896,8 +937,11 @@ species. For sparse output, set <code class="docutils literal notranslate"><span
 <p>The method returns a matrix with <a class="reference internal" href="#cantera.Kinetics.n_total_species" title="cantera.Kinetics.n_total_species"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_total_species</span></code></a> rows and <a class="reference internal" href="#cantera.Kinetics.n_total_species" title="cantera.Kinetics.n_total_species"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_total_species</span></code></a> columns.
 For a derivative with respect to :math: <code class="xref py py-obj docutils literal notranslate"><span class="pre">c_i</span></code>, all other :math: <code class="xref py py-obj docutils literal notranslate"><span class="pre">c_i</span></code> are
 held constant.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.0.</span></p>
 </div>
@@ -925,8 +969,11 @@ concentrations at constant temperature, pressure and molar concentration.
 For sparse output, set <code class="docutils literal notranslate"><span class="pre">ct.use_sparse(True)</span></code>.</p>
 <p>Note that for derivatives with respect to <span class="math notranslate nohighlight">\(X_i\)</span>, all other <span class="math notranslate nohighlight">\(X_j\)</span>
 are held constant, rather than enforcing <span class="math notranslate nohighlight">\(\sum X_j = 1\)</span>.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -941,8 +988,11 @@ or [kmol/m^2/s] for surface phases.</p>
 <span class="sig-name descname"><span class="pre">net_rates_of_progress_ddC</span></span><a class="headerlink" href="#cantera.Kinetics.net_rates_of_progress_ddC" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate derivatives for net rates-of-progress with respect to molar
 concentration at constant temperature, pressure and mole fractions.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -953,8 +1003,11 @@ concentrations at constant temperature, pressure and remaining species
 concentrations. For sparse output, set <code class="docutils literal notranslate"><span class="pre">ct.use_sparse(True)</span></code>.</p>
 <p>Note that for derivatives with respect to <span class="math notranslate nohighlight">\(c_i\)</span>, all other <span class="math notranslate nohighlight">\(c_j\)</span>
 are held constant.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.0.</span></p>
 </div>
@@ -982,8 +1035,11 @@ concentrations at constant temperature, pressure and molar concentration.
 For sparse output, set <code class="docutils literal notranslate"><span class="pre">ct.use_sparse(True)</span></code>.</p>
 <p>Note that for derivatives with respect to <span class="math notranslate nohighlight">\(X_i\)</span>, all other <span class="math notranslate nohighlight">\(X_j\)</span>
 are held constant, rather than enforcing <span class="math notranslate nohighlight">\(\sum X_j = 1\)</span>.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1122,8 +1178,11 @@ phases or [kmol/m^2/s] for surface phases.</p>
 <span class="sig-name descname"><span class="pre">reverse_rates_of_progress_ddC</span></span><a class="headerlink" href="#cantera.Kinetics.reverse_rates_of_progress_ddC" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate derivatives for reverse rates-of-progress with respect to molar
 concentration at constant temperature, pressure and mole fractions.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1135,8 +1194,11 @@ concentrations.
 For sparse output, set <code class="docutils literal notranslate"><span class="pre">ct.use_sparse(True)</span></code>.</p>
 <p>Note that for derivatives with respect to <span class="math notranslate nohighlight">\(c_i\)</span>, all other <span class="math notranslate nohighlight">\(c_j\)</span>
 are held constant.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.0.</span></p>
 </div>
@@ -1164,8 +1226,11 @@ concentrations at constant temperature, pressure and molar concentration.
 For sparse output, set <code class="docutils literal notranslate"><span class="pre">ct.use_sparse(True)</span></code>.</p>
 <p>Note that for derivatives with respect to <span class="math notranslate nohighlight">\(X_i\)</span>, all other <span class="math notranslate nohighlight">\(X_j\)</span>
 are held constant, rather than enforcing <span class="math notranslate nohighlight">\(\sum X_j = 1\)</span>.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1496,6 +1561,10 @@ this reaction. Determined automatically based on <a class="reference internal" h
 species names and the values, are the stoichiometric coefficients, for example
 <code class="docutils literal notranslate"><span class="pre">{'CH3':1,</span> <span class="pre">'H2O':1}</span></code>, or as a composition string, for example
 <code class="docutils literal notranslate"><span class="pre">'CH3:1,</span> <span class="pre">H2O:1'</span></code>.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 3.0: </span>Setter for products is deprecated and will be removed after Cantera 3.0.
+Use constructor instead.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1524,6 +1593,10 @@ this reaction. Determined automatically based on <a class="reference internal" h
 species names and the values, are the stoichiometric coefficients, for example
 <code class="docutils literal notranslate"><span class="pre">{'CH4':1,</span> <span class="pre">'OH':1}</span></code>, or as a composition string, for example
 <code class="docutils literal notranslate"><span class="pre">'CH4:1,</span> <span class="pre">OH:1'</span></code>.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 3.0: </span>Setter for reactants is deprecated and will be removed after Cantera 3.0.
+Use constructor instead.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1544,6 +1617,16 @@ otherwise.</p>
 <span class="sig-name descname"><span class="pre">third_body</span></span><a class="headerlink" href="#cantera.Reaction.third_body" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns a <a class="reference internal" href="#cantera.ThirdBody" title="cantera.ThirdBody"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ThirdBody</span></code></a> object if <a class="reference internal" href="#cantera.Reaction" title="cantera.Reaction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Reaction</span></code></a> uses a third body collider, and
 <code class="docutils literal notranslate"><span class="pre">None</span></code> otherwise.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Reaction.third_body_name">
+<span class="sig-name descname"><span class="pre">third_body_name</span></span><a class="headerlink" href="#cantera.Reaction.third_body_name" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns name of <a class="reference internal" href="#cantera.ThirdBody" title="cantera.ThirdBody"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ThirdBody</span></code></a> collider if <a class="reference internal" href="#cantera.Reaction" title="cantera.Reaction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Reaction</span></code></a> uses a third body collider,
+and <code class="docutils literal notranslate"><span class="pre">None</span></code> otherwise.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.0.</span></p>
 </div>
@@ -1809,8 +1892,11 @@ in the reaction <code class="docutils literal notranslate"><span class="pre">E</
 an independent property. Accordingly, the setter should be only used for
 testing purposes, as any value will be overwritten by an update of the
 thermodynamic state.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -2021,8 +2107,11 @@ for example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rr</span> <span class="o">=</span> <span class="n">CustomRate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">T</span><span class="p">:</span> <span class="mf">38.7</span> <span class="o">*</span> <span class="n">T</span><span class="o">**</span><span class="mf">2.7</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">3150.15</span><span class="o">/</span><span class="n">T</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><strong>Warning:</strong> this class is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This class is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="cantera.CustomRate.set_rate_function">
 <span class="sig-name descname"><span class="pre">set_rate_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.CustomRate.set_rate_function" title="Permalink to this definition">#</a></dt>
@@ -2049,8 +2138,11 @@ rates constructible through factory functions and input files.</p>
 <p>Classes derived from <a class="reference internal" href="#cantera.ExtensibleRate" title="cantera.ExtensibleRate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExtensibleRate</span></code></a> should implement the <a class="reference internal" href="#cantera.ExtensibleRate.set_parameters" title="cantera.ExtensibleRate.set_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_parameters</span></code></a>,
 <a class="reference internal" href="#cantera.ExtensibleRate.get_parameters" title="cantera.ExtensibleRate.get_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parameters</span></code></a>, <a class="reference internal" href="#cantera.ExtensibleRate.eval" title="cantera.ExtensibleRate.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>, and (optionally) <a class="reference internal" href="#cantera.ExtensibleRate.validate" title="cantera.ExtensibleRate.validate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate</span></code></a> methods, which will be called
 as delegates from the C++ <a class="reference external" href="../../../doxygen/html/d0/d19/classCantera_1_1ReactionRate.html">ReactionRate</a> class.</p>
-<p><strong>Warning:</strong> The delegatable methods defined here are an experimental part of the
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The delegatable methods defined here are an experimental part of the
 Cantera API and may change without notice.</p>
+</div>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.0.</span></p>
 </div>
@@ -2138,8 +2230,11 @@ and the activation energy [J/kmol], respectively.</p>
 <a class="reference internal" href="#cantera.InterfaceKinetics" title="cantera.InterfaceKinetics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InterfaceKinetics</span></code></a> object. Accordingly, the setter should be only used for
 testing purposes, as the value will be overwritten by an update of the
 thermodynamic state.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -2185,8 +2280,11 @@ in the reaction <code class="docutils literal notranslate"><span class="pre">E</
 an independent property. Accordingly, the setter should be only used for
 testing purposes, as any value will be overwritten by an update of the
 thermodynamic state.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -2214,8 +2312,11 @@ converting the sticking coefficient to a rate coefficient.</p>
 <dd><p>The exponent applied to site density (sticking order).</p>
 <p>The sticking order is not an independent property and is detected automatically
 by Cantera. Accordingly, the setter should be only used for testing purposes.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -2232,8 +2333,11 @@ ambiguous.</p>
 <dd><p>The molecular weight of the sticking species.</p>
 <p>The sticking weight is not an independent property and is detected automatically
 by Cantera. Accordingly, the setter should be only used for testing purposes.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -2271,8 +2375,11 @@ in the reaction <code class="docutils literal notranslate"><span class="pre">E</
 an independent property. Accordingly, the setter should be only used for
 testing purposes, as any value will be overwritten by an update of the
 thermodynamic state.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -2605,49 +2712,363 @@ program to the file named <code class="docutils literal notranslate"><span class
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetics-managers">Kinetics Managers</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetics">Kinetics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfacekinetics">InterfaceKinetics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetics">Kinetics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics"><code class="docutils literal notranslate"><span class="pre">Kinetics</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.add_reaction"><code class="docutils literal notranslate"><span class="pre">Kinetics.add_reaction()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.creation_rates"><code class="docutils literal notranslate"><span class="pre">Kinetics.creation_rates</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.creation_rates_ddC"><code class="docutils literal notranslate"><span class="pre">Kinetics.creation_rates_ddC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.creation_rates_ddCi"><code class="docutils literal notranslate"><span class="pre">Kinetics.creation_rates_ddCi</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.creation_rates_ddP"><code class="docutils literal notranslate"><span class="pre">Kinetics.creation_rates_ddP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.creation_rates_ddT"><code class="docutils literal notranslate"><span class="pre">Kinetics.creation_rates_ddT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.creation_rates_ddX"><code class="docutils literal notranslate"><span class="pre">Kinetics.creation_rates_ddX</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.delta_enthalpy"><code class="docutils literal notranslate"><span class="pre">Kinetics.delta_enthalpy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.delta_entropy"><code class="docutils literal notranslate"><span class="pre">Kinetics.delta_entropy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.delta_gibbs"><code class="docutils literal notranslate"><span class="pre">Kinetics.delta_gibbs</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.delta_standard_enthalpy"><code class="docutils literal notranslate"><span class="pre">Kinetics.delta_standard_enthalpy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.delta_standard_entropy"><code class="docutils literal notranslate"><span class="pre">Kinetics.delta_standard_entropy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.delta_standard_gibbs"><code class="docutils literal notranslate"><span class="pre">Kinetics.delta_standard_gibbs</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.derivative_settings"><code class="docutils literal notranslate"><span class="pre">Kinetics.derivative_settings</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.destruction_rates"><code class="docutils literal notranslate"><span class="pre">Kinetics.destruction_rates</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.destruction_rates_ddC"><code class="docutils literal notranslate"><span class="pre">Kinetics.destruction_rates_ddC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.destruction_rates_ddCi"><code class="docutils literal notranslate"><span class="pre">Kinetics.destruction_rates_ddCi</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.destruction_rates_ddP"><code class="docutils literal notranslate"><span class="pre">Kinetics.destruction_rates_ddP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.destruction_rates_ddT"><code class="docutils literal notranslate"><span class="pre">Kinetics.destruction_rates_ddT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.destruction_rates_ddX"><code class="docutils literal notranslate"><span class="pre">Kinetics.destruction_rates_ddX</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.equilibrium_constants"><code class="docutils literal notranslate"><span class="pre">Kinetics.equilibrium_constants</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.forward_rate_constants"><code class="docutils literal notranslate"><span class="pre">Kinetics.forward_rate_constants</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.forward_rate_constants_ddC"><code class="docutils literal notranslate"><span class="pre">Kinetics.forward_rate_constants_ddC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.forward_rate_constants_ddP"><code class="docutils literal notranslate"><span class="pre">Kinetics.forward_rate_constants_ddP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.forward_rate_constants_ddT"><code class="docutils literal notranslate"><span class="pre">Kinetics.forward_rate_constants_ddT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.forward_rates_of_progress"><code class="docutils literal notranslate"><span class="pre">Kinetics.forward_rates_of_progress</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.forward_rates_of_progress_ddC"><code class="docutils literal notranslate"><span class="pre">Kinetics.forward_rates_of_progress_ddC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.forward_rates_of_progress_ddCi"><code class="docutils literal notranslate"><span class="pre">Kinetics.forward_rates_of_progress_ddCi</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.forward_rates_of_progress_ddP"><code class="docutils literal notranslate"><span class="pre">Kinetics.forward_rates_of_progress_ddP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.forward_rates_of_progress_ddT"><code class="docutils literal notranslate"><span class="pre">Kinetics.forward_rates_of_progress_ddT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.forward_rates_of_progress_ddX"><code class="docutils literal notranslate"><span class="pre">Kinetics.forward_rates_of_progress_ddX</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.heat_production_rates"><code class="docutils literal notranslate"><span class="pre">Kinetics.heat_production_rates</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.heat_release_rate"><code class="docutils literal notranslate"><span class="pre">Kinetics.heat_release_rate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.kinetics_model"><code class="docutils literal notranslate"><span class="pre">Kinetics.kinetics_model</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.kinetics_species_index"><code class="docutils literal notranslate"><span class="pre">Kinetics.kinetics_species_index()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.kinetics_species_name"><code class="docutils literal notranslate"><span class="pre">Kinetics.kinetics_species_name()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.kinetics_species_names"><code class="docutils literal notranslate"><span class="pre">Kinetics.kinetics_species_names</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.modify_reaction"><code class="docutils literal notranslate"><span class="pre">Kinetics.modify_reaction()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.multiplier"><code class="docutils literal notranslate"><span class="pre">Kinetics.multiplier()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.n_phases"><code class="docutils literal notranslate"><span class="pre">Kinetics.n_phases</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.n_reactions"><code class="docutils literal notranslate"><span class="pre">Kinetics.n_reactions</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.n_total_species"><code class="docutils literal notranslate"><span class="pre">Kinetics.n_total_species</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.net_production_rates"><code class="docutils literal notranslate"><span class="pre">Kinetics.net_production_rates</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.net_production_rates_ddC"><code class="docutils literal notranslate"><span class="pre">Kinetics.net_production_rates_ddC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.net_production_rates_ddCi"><code class="docutils literal notranslate"><span class="pre">Kinetics.net_production_rates_ddCi</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.net_production_rates_ddP"><code class="docutils literal notranslate"><span class="pre">Kinetics.net_production_rates_ddP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.net_production_rates_ddT"><code class="docutils literal notranslate"><span class="pre">Kinetics.net_production_rates_ddT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.net_production_rates_ddX"><code class="docutils literal notranslate"><span class="pre">Kinetics.net_production_rates_ddX</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.net_rates_of_progress"><code class="docutils literal notranslate"><span class="pre">Kinetics.net_rates_of_progress</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.net_rates_of_progress_ddC"><code class="docutils literal notranslate"><span class="pre">Kinetics.net_rates_of_progress_ddC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.net_rates_of_progress_ddCi"><code class="docutils literal notranslate"><span class="pre">Kinetics.net_rates_of_progress_ddCi</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.net_rates_of_progress_ddP"><code class="docutils literal notranslate"><span class="pre">Kinetics.net_rates_of_progress_ddP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.net_rates_of_progress_ddT"><code class="docutils literal notranslate"><span class="pre">Kinetics.net_rates_of_progress_ddT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.net_rates_of_progress_ddX"><code class="docutils literal notranslate"><span class="pre">Kinetics.net_rates_of_progress_ddX</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.product_stoich_coeff"><code class="docutils literal notranslate"><span class="pre">Kinetics.product_stoich_coeff()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.product_stoich_coeffs"><code class="docutils literal notranslate"><span class="pre">Kinetics.product_stoich_coeffs</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.product_stoich_coeffs3"><code class="docutils literal notranslate"><span class="pre">Kinetics.product_stoich_coeffs3</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.product_stoich_coeffs_reversible"><code class="docutils literal notranslate"><span class="pre">Kinetics.product_stoich_coeffs_reversible</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.reactant_stoich_coeff"><code class="docutils literal notranslate"><span class="pre">Kinetics.reactant_stoich_coeff()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.reactant_stoich_coeffs"><code class="docutils literal notranslate"><span class="pre">Kinetics.reactant_stoich_coeffs</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.reactant_stoich_coeffs3"><code class="docutils literal notranslate"><span class="pre">Kinetics.reactant_stoich_coeffs3</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.reaction"><code class="docutils literal notranslate"><span class="pre">Kinetics.reaction()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.reaction_equations"><code class="docutils literal notranslate"><span class="pre">Kinetics.reaction_equations()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.reaction_phase_index"><code class="docutils literal notranslate"><span class="pre">Kinetics.reaction_phase_index</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.reactions"><code class="docutils literal notranslate"><span class="pre">Kinetics.reactions()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.reverse_rate_constants"><code class="docutils literal notranslate"><span class="pre">Kinetics.reverse_rate_constants</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.reverse_rates_of_progress"><code class="docutils literal notranslate"><span class="pre">Kinetics.reverse_rates_of_progress</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.reverse_rates_of_progress_ddC"><code class="docutils literal notranslate"><span class="pre">Kinetics.reverse_rates_of_progress_ddC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.reverse_rates_of_progress_ddCi"><code class="docutils literal notranslate"><span class="pre">Kinetics.reverse_rates_of_progress_ddCi</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.reverse_rates_of_progress_ddP"><code class="docutils literal notranslate"><span class="pre">Kinetics.reverse_rates_of_progress_ddP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.reverse_rates_of_progress_ddT"><code class="docutils literal notranslate"><span class="pre">Kinetics.reverse_rates_of_progress_ddT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.reverse_rates_of_progress_ddX"><code class="docutils literal notranslate"><span class="pre">Kinetics.reverse_rates_of_progress_ddX</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.set_multiplier"><code class="docutils literal notranslate"><span class="pre">Kinetics.set_multiplier()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Kinetics.third_body_concentrations"><code class="docutils literal notranslate"><span class="pre">Kinetics.third_body_concentrations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfacekinetics">InterfaceKinetics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceKinetics"><code class="docutils literal notranslate"><span class="pre">InterfaceKinetics</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceKinetics.advance_coverages"><code class="docutils literal notranslate"><span class="pre">InterfaceKinetics.advance_coverages()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceKinetics.advance_coverages_to_steady_state"><code class="docutils literal notranslate"><span class="pre">InterfaceKinetics.advance_coverages_to_steady_state()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceKinetics.get_creation_rates"><code class="docutils literal notranslate"><span class="pre">InterfaceKinetics.get_creation_rates()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceKinetics.get_destruction_rates"><code class="docutils literal notranslate"><span class="pre">InterfaceKinetics.get_destruction_rates()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceKinetics.get_net_production_rates"><code class="docutils literal notranslate"><span class="pre">InterfaceKinetics.get_net_production_rates()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceKinetics.interface_current"><code class="docutils literal notranslate"><span class="pre">InterfaceKinetics.interface_current()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceKinetics.phase_index"><code class="docutils literal notranslate"><span class="pre">InterfaceKinetics.phase_index()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceKinetics.write_yaml"><code class="docutils literal notranslate"><span class="pre">InterfaceKinetics.write_yaml()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reactions">Reactions</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reaction">Reaction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#threebodyreaction">ThreeBodyReaction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#falloffreaction">FalloffReaction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemicallyactivatedreaction">ChemicallyActivatedReaction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customreaction">CustomReaction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reaction">Reaction</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction"><code class="docutils literal notranslate"><span class="pre">Reaction</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.ID"><code class="docutils literal notranslate"><span class="pre">Reaction.ID</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.allow_negative_orders"><code class="docutils literal notranslate"><span class="pre">Reaction.allow_negative_orders</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.allow_nonreactant_orders"><code class="docutils literal notranslate"><span class="pre">Reaction.allow_nonreactant_orders</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.clear_user_data"><code class="docutils literal notranslate"><span class="pre">Reaction.clear_user_data()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.default_efficiency"><code class="docutils literal notranslate"><span class="pre">Reaction.default_efficiency</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.duplicate"><code class="docutils literal notranslate"><span class="pre">Reaction.duplicate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.efficiencies"><code class="docutils literal notranslate"><span class="pre">Reaction.efficiencies</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.efficiency"><code class="docutils literal notranslate"><span class="pre">Reaction.efficiency()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.equation"><code class="docutils literal notranslate"><span class="pre">Reaction.equation</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.from_dict"><code class="docutils literal notranslate"><span class="pre">Reaction.from_dict()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.from_yaml"><code class="docutils literal notranslate"><span class="pre">Reaction.from_yaml()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.input_data"><code class="docutils literal notranslate"><span class="pre">Reaction.input_data</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.list_from_file"><code class="docutils literal notranslate"><span class="pre">Reaction.list_from_file()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.list_from_yaml"><code class="docutils literal notranslate"><span class="pre">Reaction.list_from_yaml()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.orders"><code class="docutils literal notranslate"><span class="pre">Reaction.orders</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.product_string"><code class="docutils literal notranslate"><span class="pre">Reaction.product_string</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.products"><code class="docutils literal notranslate"><span class="pre">Reaction.products</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.rate"><code class="docutils literal notranslate"><span class="pre">Reaction.rate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.rate_coeff_units"><code class="docutils literal notranslate"><span class="pre">Reaction.rate_coeff_units</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.reactant_string"><code class="docutils literal notranslate"><span class="pre">Reaction.reactant_string</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.reactants"><code class="docutils literal notranslate"><span class="pre">Reaction.reactants</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.reaction_type"><code class="docutils literal notranslate"><span class="pre">Reaction.reaction_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.reversible"><code class="docutils literal notranslate"><span class="pre">Reaction.reversible</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.third_body"><code class="docutils literal notranslate"><span class="pre">Reaction.third_body</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.third_body_name"><code class="docutils literal notranslate"><span class="pre">Reaction.third_body_name</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reaction.update_user_data"><code class="docutils literal notranslate"><span class="pre">Reaction.update_user_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#threebodyreaction">ThreeBodyReaction</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThreeBodyReaction"><code class="docutils literal notranslate"><span class="pre">ThreeBodyReaction</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#falloffreaction">FalloffReaction</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FalloffReaction"><code class="docutils literal notranslate"><span class="pre">FalloffReaction</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemicallyactivatedreaction">ChemicallyActivatedReaction</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ChemicallyActivatedReaction"><code class="docutils literal notranslate"><span class="pre">ChemicallyActivatedReaction</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customreaction">CustomReaction</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CustomReaction"><code class="docutils literal notranslate"><span class="pre">CustomReaction</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reaction-rates">Reaction Rates</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactionrate">ReactionRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrheniusratebase">ArrheniusRateBase</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrheniusrate">ArrheniusRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blowersmaselrate">BlowersMaselRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#twotempplasmarate">TwoTempPlasmaRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#falloffrate">FalloffRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lindemannrate">LindemannRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#troerate">TroeRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#srirate">SriRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tsangrate">TsangRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plograte">PlogRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chebyshevrate">ChebyshevRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customrate">CustomRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensiblerate">ExtensibleRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaceratebase">InterfaceRateBase</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfacearrheniusrate">InterfaceArrheniusRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaceblowersmaselrate">InterfaceBlowersMaselRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stickratebase">StickRateBase</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stickingarrheniusrate">StickingArrheniusRate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stickingblowersmaselrate">StickingBlowersMaselRate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactionrate">ReactionRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionRate"><code class="docutils literal notranslate"><span class="pre">ReactionRate</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionRate.conversion_units"><code class="docutils literal notranslate"><span class="pre">ReactionRate.conversion_units</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionRate.from_dict"><code class="docutils literal notranslate"><span class="pre">ReactionRate.from_dict()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionRate.from_yaml"><code class="docutils literal notranslate"><span class="pre">ReactionRate.from_yaml()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionRate.input_data"><code class="docutils literal notranslate"><span class="pre">ReactionRate.input_data</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionRate.sub_type"><code class="docutils literal notranslate"><span class="pre">ReactionRate.sub_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionRate.type"><code class="docutils literal notranslate"><span class="pre">ReactionRate.type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrheniusratebase">ArrheniusRateBase</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ArrheniusRateBase"><code class="docutils literal notranslate"><span class="pre">ArrheniusRateBase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ArrheniusRateBase.activation_energy"><code class="docutils literal notranslate"><span class="pre">ArrheniusRateBase.activation_energy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ArrheniusRateBase.allow_negative_pre_exponential_factor"><code class="docutils literal notranslate"><span class="pre">ArrheniusRateBase.allow_negative_pre_exponential_factor</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ArrheniusRateBase.pre_exponential_factor"><code class="docutils literal notranslate"><span class="pre">ArrheniusRateBase.pre_exponential_factor</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ArrheniusRateBase.temperature_exponent"><code class="docutils literal notranslate"><span class="pre">ArrheniusRateBase.temperature_exponent</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrheniusrate">ArrheniusRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ArrheniusRate"><code class="docutils literal notranslate"><span class="pre">ArrheniusRate</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blowersmaselrate">BlowersMaselRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.BlowersMaselRate"><code class="docutils literal notranslate"><span class="pre">BlowersMaselRate</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.BlowersMaselRate.bond_energy"><code class="docutils literal notranslate"><span class="pre">BlowersMaselRate.bond_energy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.BlowersMaselRate.delta_enthalpy"><code class="docutils literal notranslate"><span class="pre">BlowersMaselRate.delta_enthalpy</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#twotempplasmarate">TwoTempPlasmaRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.TwoTempPlasmaRate"><code class="docutils literal notranslate"><span class="pre">TwoTempPlasmaRate</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.TwoTempPlasmaRate.activation_electron_energy"><code class="docutils literal notranslate"><span class="pre">TwoTempPlasmaRate.activation_electron_energy</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#falloffrate">FalloffRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FalloffRate"><code class="docutils literal notranslate"><span class="pre">FalloffRate</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FalloffRate.allow_negative_pre_exponential_factor"><code class="docutils literal notranslate"><span class="pre">FalloffRate.allow_negative_pre_exponential_factor</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FalloffRate.chemically_activated"><code class="docutils literal notranslate"><span class="pre">FalloffRate.chemically_activated</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FalloffRate.falloff_coeffs"><code class="docutils literal notranslate"><span class="pre">FalloffRate.falloff_coeffs</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FalloffRate.falloff_function"><code class="docutils literal notranslate"><span class="pre">FalloffRate.falloff_function()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FalloffRate.high_rate"><code class="docutils literal notranslate"><span class="pre">FalloffRate.high_rate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FalloffRate.low_rate"><code class="docutils literal notranslate"><span class="pre">FalloffRate.low_rate</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lindemannrate">LindemannRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.LindemannRate"><code class="docutils literal notranslate"><span class="pre">LindemannRate</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#troerate">TroeRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.TroeRate"><code class="docutils literal notranslate"><span class="pre">TroeRate</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#srirate">SriRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.SriRate"><code class="docutils literal notranslate"><span class="pre">SriRate</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tsangrate">TsangRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.TsangRate"><code class="docutils literal notranslate"><span class="pre">TsangRate</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plograte">PlogRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PlogRate"><code class="docutils literal notranslate"><span class="pre">PlogRate</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PlogRate.rates"><code class="docutils literal notranslate"><span class="pre">PlogRate.rates</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chebyshevrate">ChebyshevRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ChebyshevRate"><code class="docutils literal notranslate"><span class="pre">ChebyshevRate</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ChebyshevRate.data"><code class="docutils literal notranslate"><span class="pre">ChebyshevRate.data</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ChebyshevRate.n_pressure"><code class="docutils literal notranslate"><span class="pre">ChebyshevRate.n_pressure</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ChebyshevRate.n_temperature"><code class="docutils literal notranslate"><span class="pre">ChebyshevRate.n_temperature</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ChebyshevRate.pressure_range"><code class="docutils literal notranslate"><span class="pre">ChebyshevRate.pressure_range</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ChebyshevRate.temperature_range"><code class="docutils literal notranslate"><span class="pre">ChebyshevRate.temperature_range</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customrate">CustomRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CustomRate"><code class="docutils literal notranslate"><span class="pre">CustomRate</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CustomRate.set_rate_function"><code class="docutils literal notranslate"><span class="pre">CustomRate.set_rate_function()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensiblerate">ExtensibleRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleRate"><code class="docutils literal notranslate"><span class="pre">ExtensibleRate</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleRate.eval"><code class="docutils literal notranslate"><span class="pre">ExtensibleRate.eval()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleRate.get_parameters"><code class="docutils literal notranslate"><span class="pre">ExtensibleRate.get_parameters()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleRate.set_parameters"><code class="docutils literal notranslate"><span class="pre">ExtensibleRate.set_parameters()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleRate.validate"><code class="docutils literal notranslate"><span class="pre">ExtensibleRate.validate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaceratebase">InterfaceRateBase</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceRateBase"><code class="docutils literal notranslate"><span class="pre">InterfaceRateBase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceRateBase.beta"><code class="docutils literal notranslate"><span class="pre">InterfaceRateBase.beta</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceRateBase.coverage_dependencies"><code class="docutils literal notranslate"><span class="pre">InterfaceRateBase.coverage_dependencies</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceRateBase.set_species"><code class="docutils literal notranslate"><span class="pre">InterfaceRateBase.set_species()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceRateBase.site_density"><code class="docutils literal notranslate"><span class="pre">InterfaceRateBase.site_density</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceRateBase.uses_electrochemistry"><code class="docutils literal notranslate"><span class="pre">InterfaceRateBase.uses_electrochemistry</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfacearrheniusrate">InterfaceArrheniusRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceArrheniusRate"><code class="docutils literal notranslate"><span class="pre">InterfaceArrheniusRate</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaceblowersmaselrate">InterfaceBlowersMaselRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceBlowersMaselRate"><code class="docutils literal notranslate"><span class="pre">InterfaceBlowersMaselRate</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceBlowersMaselRate.bond_energy"><code class="docutils literal notranslate"><span class="pre">InterfaceBlowersMaselRate.bond_energy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfaceBlowersMaselRate.delta_enthalpy"><code class="docutils literal notranslate"><span class="pre">InterfaceBlowersMaselRate.delta_enthalpy</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stickratebase">StickRateBase</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.StickRateBase"><code class="docutils literal notranslate"><span class="pre">StickRateBase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.StickRateBase.motz_wise_correction"><code class="docutils literal notranslate"><span class="pre">StickRateBase.motz_wise_correction</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.StickRateBase.sticking_order"><code class="docutils literal notranslate"><span class="pre">StickRateBase.sticking_order</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.StickRateBase.sticking_species"><code class="docutils literal notranslate"><span class="pre">StickRateBase.sticking_species</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.StickRateBase.sticking_weight"><code class="docutils literal notranslate"><span class="pre">StickRateBase.sticking_weight</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stickingarrheniusrate">StickingArrheniusRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.StickingArrheniusRate"><code class="docutils literal notranslate"><span class="pre">StickingArrheniusRate</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stickingblowersmaselrate">StickingBlowersMaselRate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.StickingBlowersMaselRate"><code class="docutils literal notranslate"><span class="pre">StickingBlowersMaselRate</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.StickingBlowersMaselRate.bond_energy"><code class="docutils literal notranslate"><span class="pre">StickingBlowersMaselRate.bond_energy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.StickingBlowersMaselRate.delta_enthalpy"><code class="docutils literal notranslate"><span class="pre">StickingBlowersMaselRate.delta_enthalpy</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#auxiliary-reaction-data">Auxiliary Reaction Data</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibleratedata">ExtensibleRateData</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thirdbody">ThirdBody</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrhenius">Arrhenius</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibleratedata">ExtensibleRateData</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleRateData"><code class="docutils literal notranslate"><span class="pre">ExtensibleRateData</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleRateData.update"><code class="docutils literal notranslate"><span class="pre">ExtensibleRateData.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thirdbody">ThirdBody</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThirdBody"><code class="docutils literal notranslate"><span class="pre">ThirdBody</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThirdBody.default_efficiency"><code class="docutils literal notranslate"><span class="pre">ThirdBody.default_efficiency</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThirdBody.efficiencies"><code class="docutils literal notranslate"><span class="pre">ThirdBody.efficiencies</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThirdBody.efficiency"><code class="docutils literal notranslate"><span class="pre">ThirdBody.efficiency()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThirdBody.mass_action"><code class="docutils literal notranslate"><span class="pre">ThirdBody.mass_action</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThirdBody.name"><code class="docutils literal notranslate"><span class="pre">ThirdBody.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrhenius">Arrhenius</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Arrhenius"><code class="docutils literal notranslate"><span class="pre">Arrhenius</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Arrhenius.activation_energy"><code class="docutils literal notranslate"><span class="pre">Arrhenius.activation_energy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Arrhenius.pre_exponential_factor"><code class="docutils literal notranslate"><span class="pre">Arrhenius.pre_exponential_factor</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Arrhenius.temperature_exponent"><code class="docutils literal notranslate"><span class="pre">Arrhenius.temperature_exponent</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reaction-path-analysis">Reaction Path Analysis</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactionpathdiagram">ReactionPathDiagram</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactionpathdiagram">ReactionPathDiagram</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.add"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.add()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.arrow_width"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.arrow_width</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.bold_color"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.bold_color</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.bold_threshold"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.bold_threshold</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.build"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.build()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.dashed_color"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.dashed_color</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.display_only"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.display_only()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.dot_options"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.dot_options</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.flow_type"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.flow_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.font"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.font</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.get_data"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.get_data()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.get_dot"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.get_dot()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.label_threshold"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.label_threshold</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.log"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.log</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.normal_color"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.normal_color</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.normal_threshold"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.normal_threshold</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.scale"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.scale</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.show_details"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.show_details</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.threshold"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.threshold</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.title"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.title</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactionPathDiagram.write_dot"><code class="docutils literal notranslate"><span class="pre">ReactionPathDiagram.write_dot()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -2693,7 +3114,7 @@ program to the file named <code class="docutils literal notranslate"><span class
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     <br/>
   </p>
 </div>

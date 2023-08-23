@@ -1,11 +1,9 @@
 var structCantera_1_1TwoTempPlasmaData =
 [
-    [ "TwoTempPlasmaData", "d5/df9/structCantera_1_1TwoTempPlasmaData.html#aeb81ec848c22cdbd886f189474842314", null ],
     [ "update", "d5/df9/structCantera_1_1TwoTempPlasmaData.html#a321d2e7029e3ea277d6810407ce69464", null ],
     [ "update", "d5/df9/structCantera_1_1TwoTempPlasmaData.html#a5647f86a7cf7224f4822ffe07e2f9fe6", null ],
     [ "update", "d5/df9/structCantera_1_1TwoTempPlasmaData.html#a82f0d1bea303035f0522a8273eda1e14", null ],
-    [ "updateTe", "d5/df9/structCantera_1_1TwoTempPlasmaData.html#a65890469a609a2047afdb2a73e622026", null ],
-    [ "invalidateCache", "d5/df9/structCantera_1_1TwoTempPlasmaData.html#a950125a9f540d36669bd2802201b1b1d", null ],
+    [ "invalidateCache", "d5/df9/structCantera_1_1TwoTempPlasmaData.html#aa3ce068e8f4d3b1052bad4e953c79355", null ],
     [ "update", "d5/df9/structCantera_1_1TwoTempPlasmaData.html#a7ab12baf406993645ef688298a276500", null ],
     [ "update", "d5/df9/structCantera_1_1TwoTempPlasmaData.html#a4045277efd847ff814c9d2821eb1a6f3", null ],
     [ "update", "d5/df9/structCantera_1_1TwoTempPlasmaData.html#adcdb618bb24d0d9f3eaa98fd07efb754", null ],

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Thermodynamic Properties &#8212; Cantera 3.0.0b1 documentation</title>
+    <title>Thermodynamic Properties &#8212; Cantera 3.0.0 documentation</title>
   
   
   
@@ -41,6 +41,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'cython/thermo';</script>
     <script>
@@ -379,6 +380,13 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Physical Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="units.html">Python Interface With Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="scripts.html">Mechanism Conversion</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml_conversion.html">YAML to Chemkin conversion</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </nav></div>
@@ -2533,23 +2541,280 @@ and <a class="reference internal" href="#cantera.Element.element_names" title="c
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phases">Phases</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermophase">ThermoPhase</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfacephase">InterfacePhase</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purefluid">PureFluid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermophase">ThermoPhase</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase"><code class="docutils literal notranslate"><span class="pre">ThermoPhase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.DP"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.DP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.DPX"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.DPX</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.DPY"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.DPY</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.HP"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.HP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.HPX"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.HPX</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.HPY"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.HPY</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.P"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.P</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.P_sat"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.P_sat</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.Pe"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.Pe</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.SP"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.SP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.SPX"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.SPX</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.SPY"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.SPY</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.SV"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.SV</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.SVX"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.SVX</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.SVY"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.SVY</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.T"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.T</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.TD"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.TD</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.TDX"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.TDX</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.TDY"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.TDY</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.TP"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.TP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.TPX"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.TPX</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.TPY"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.TPY</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.T_sat"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.T_sat</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.Te"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.Te</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.UV"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.UV</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.UVX"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.UVX</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.UVY"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.UVY</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.X"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.X</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.Y"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.Y</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.activities"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.activities</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.activity_coefficients"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.activity_coefficients</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.add_species"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.add_species()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.add_species_alias"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.add_species_alias()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.atomic_weight"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.atomic_weight()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.atomic_weights"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.atomic_weights</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.basis"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.basis</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.case_sensitive_species_names"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.case_sensitive_species_names</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.charges"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.charges</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.chemical_potentials"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.chemical_potentials</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.concentrations"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.concentrations</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.cp"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.cp</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.cp_mass"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.cp_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.cp_mole"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.cp_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.critical_density"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.critical_density</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.critical_pressure"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.critical_pressure</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.critical_temperature"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.critical_temperature</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.cv"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.cv</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.cv_mass"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.cv_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.cv_mole"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.cv_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.density"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.density</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.density_mass"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.density_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.density_mole"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.density_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.electric_potential"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.electric_potential</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.electrochemical_potentials"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.electrochemical_potentials</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.electron_energy_distribution"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.electron_energy_distribution</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.electron_energy_distribution_type"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.electron_energy_distribution_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.electron_energy_levels"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.electron_energy_levels</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.element_index"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.element_index()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.element_name"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.element_name()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.element_names"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.element_names</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.elemental_mass_fraction"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.elemental_mass_fraction()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.elemental_mole_fraction"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.elemental_mole_fraction()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.enthalpy_mass"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.enthalpy_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.enthalpy_mole"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.enthalpy_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.entropy_mass"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.entropy_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.entropy_mole"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.entropy_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.equilibrate"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.equilibrate()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.equivalence_ratio"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.equivalence_ratio()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.find_isomers"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.find_isomers()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.g"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.g</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.gibbs_mass"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.gibbs_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.gibbs_mole"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.gibbs_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.h"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.h</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.has_phase_transition"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.has_phase_transition</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.int_energy_mass"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.int_energy_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.int_energy_mole"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.int_energy_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.is_compressible"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.is_compressible</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.is_pure"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.is_pure</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.isothermal_compressibility"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.isothermal_compressibility</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.isotropic_shape_factor"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.isotropic_shape_factor</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.mass_fraction_dict"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.mass_fraction_dict()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.max_temp"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.max_temp</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.mean_electron_energy"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.mean_electron_energy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.mean_molecular_weight"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.mean_molecular_weight</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.min_temp"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.min_temp</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.mixture_fraction"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.mixture_fraction()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.modify_species"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.modify_species()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.mole_fraction_dict"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.mole_fraction_dict()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.molecular_weights"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.molecular_weights</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.n_atoms"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.n_atoms()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.n_electron_energy_levels"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.n_electron_energy_levels</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.n_elements"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.n_elements</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.n_selected_species"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.n_selected_species</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.n_species"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.n_species</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.normalize_electron_energy_distribution_enabled"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.normalize_electron_energy_distribution_enabled</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.partial_molar_cp"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.partial_molar_cp</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.partial_molar_enthalpies"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.partial_molar_enthalpies</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.partial_molar_entropies"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.partial_molar_entropies</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.partial_molar_int_energies"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.partial_molar_int_energies</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.partial_molar_volumes"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.partial_molar_volumes</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.phase_of_matter"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.phase_of_matter</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.quadrature_method"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.quadrature_method</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.reference_pressure"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.reference_pressure</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.report"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.report()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.s"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.s</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.set_discretized_electron_energy_distribution"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.set_discretized_electron_energy_distribution()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.set_equivalence_ratio"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.set_equivalence_ratio()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.set_mixture_fraction"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.set_mixture_fraction()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.set_unnormalized_mass_fractions"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.set_unnormalized_mass_fractions()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.set_unnormalized_mole_fractions"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.set_unnormalized_mole_fractions()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.sound_speed"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.sound_speed</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.species"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.species()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.species_index"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.species_index()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.species_name"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.species_name()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.species_names"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.species_names</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.standard_concentration_units"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.standard_concentration_units</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.standard_cp_R"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.standard_cp_R</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.standard_enthalpies_RT"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.standard_enthalpies_RT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.standard_entropies_R"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.standard_entropies_R</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.standard_gibbs_RT"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.standard_gibbs_RT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.standard_int_energies_RT"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.standard_int_energies_RT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.state"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.state</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.state_size"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.state_size</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.stoich_air_fuel_ratio"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.stoich_air_fuel_ratio()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.thermal_expansion_coeff"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.thermal_expansion_coeff</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.thermo_model"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.thermo_model</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.u"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.u</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.v"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.v</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.volume_mass"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.volume_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoPhase.volume_mole"><code class="docutils literal notranslate"><span class="pre">ThermoPhase.volume_mole</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mixture">Mixture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#species">Species</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfacephase">InterfacePhase</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfacePhase"><code class="docutils literal notranslate"><span class="pre">InterfacePhase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfacePhase.adjacent"><code class="docutils literal notranslate"><span class="pre">InterfacePhase.adjacent</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfacePhase.coverages"><code class="docutils literal notranslate"><span class="pre">InterfacePhase.coverages</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfacePhase.set_unnormalized_coverages"><code class="docutils literal notranslate"><span class="pre">InterfacePhase.set_unnormalized_coverages()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.InterfacePhase.site_density"><code class="docutils literal notranslate"><span class="pre">InterfacePhase.site_density</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purefluid">PureFluid</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid"><code class="docutils literal notranslate"><span class="pre">PureFluid</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.DPQ"><code class="docutils literal notranslate"><span class="pre">PureFluid.DPQ</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.HPQ"><code class="docutils literal notranslate"><span class="pre">PureFluid.HPQ</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.PQ"><code class="docutils literal notranslate"><span class="pre">PureFluid.PQ</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.PV"><code class="docutils literal notranslate"><span class="pre">PureFluid.PV</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.Q"><code class="docutils literal notranslate"><span class="pre">PureFluid.Q</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.SH"><code class="docutils literal notranslate"><span class="pre">PureFluid.SH</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.SPQ"><code class="docutils literal notranslate"><span class="pre">PureFluid.SPQ</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.ST"><code class="docutils literal notranslate"><span class="pre">PureFluid.ST</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.SVQ"><code class="docutils literal notranslate"><span class="pre">PureFluid.SVQ</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.TDQ"><code class="docutils literal notranslate"><span class="pre">PureFluid.TDQ</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.TH"><code class="docutils literal notranslate"><span class="pre">PureFluid.TH</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.TPQ"><code class="docutils literal notranslate"><span class="pre">PureFluid.TPQ</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.TQ"><code class="docutils literal notranslate"><span class="pre">PureFluid.TQ</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.TV"><code class="docutils literal notranslate"><span class="pre">PureFluid.TV</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.UP"><code class="docutils literal notranslate"><span class="pre">PureFluid.UP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.UVQ"><code class="docutils literal notranslate"><span class="pre">PureFluid.UVQ</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PureFluid.VH"><code class="docutils literal notranslate"><span class="pre">PureFluid.VH</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mixture">Mixture</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture"><code class="docutils literal notranslate"><span class="pre">Mixture</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.P"><code class="docutils literal notranslate"><span class="pre">Mixture.P</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.T"><code class="docutils literal notranslate"><span class="pre">Mixture.T</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.charge"><code class="docutils literal notranslate"><span class="pre">Mixture.charge</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.chemical_potentials"><code class="docutils literal notranslate"><span class="pre">Mixture.chemical_potentials</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.element_index"><code class="docutils literal notranslate"><span class="pre">Mixture.element_index()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.element_moles"><code class="docutils literal notranslate"><span class="pre">Mixture.element_moles()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.equilibrate"><code class="docutils literal notranslate"><span class="pre">Mixture.equilibrate()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.max_temp"><code class="docutils literal notranslate"><span class="pre">Mixture.max_temp</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.min_temp"><code class="docutils literal notranslate"><span class="pre">Mixture.min_temp</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.n_atoms"><code class="docutils literal notranslate"><span class="pre">Mixture.n_atoms()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.n_elements"><code class="docutils literal notranslate"><span class="pre">Mixture.n_elements</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.n_phases"><code class="docutils literal notranslate"><span class="pre">Mixture.n_phases</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.n_species"><code class="docutils literal notranslate"><span class="pre">Mixture.n_species</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.phase"><code class="docutils literal notranslate"><span class="pre">Mixture.phase()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.phase_charge"><code class="docutils literal notranslate"><span class="pre">Mixture.phase_charge()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.phase_index"><code class="docutils literal notranslate"><span class="pre">Mixture.phase_index()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.phase_moles"><code class="docutils literal notranslate"><span class="pre">Mixture.phase_moles()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.phase_names"><code class="docutils literal notranslate"><span class="pre">Mixture.phase_names</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.report"><code class="docutils literal notranslate"><span class="pre">Mixture.report()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.set_phase_moles"><code class="docutils literal notranslate"><span class="pre">Mixture.set_phase_moles()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.species_index"><code class="docutils literal notranslate"><span class="pre">Mixture.species_index()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.species_moles"><code class="docutils literal notranslate"><span class="pre">Mixture.species_moles</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.species_name"><code class="docutils literal notranslate"><span class="pre">Mixture.species_name()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mixture.species_names"><code class="docutils literal notranslate"><span class="pre">Mixture.species_names</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#species">Species</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species"><code class="docutils literal notranslate"><span class="pre">Species</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species.charge"><code class="docutils literal notranslate"><span class="pre">Species.charge</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species.clear_user_data"><code class="docutils literal notranslate"><span class="pre">Species.clear_user_data()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species.composition"><code class="docutils literal notranslate"><span class="pre">Species.composition</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species.from_dict"><code class="docutils literal notranslate"><span class="pre">Species.from_dict()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species.from_yaml"><code class="docutils literal notranslate"><span class="pre">Species.from_yaml()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species.input_data"><code class="docutils literal notranslate"><span class="pre">Species.input_data</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species.list_from_file"><code class="docutils literal notranslate"><span class="pre">Species.list_from_file()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species.list_from_yaml"><code class="docutils literal notranslate"><span class="pre">Species.list_from_yaml()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species.molecular_weight"><code class="docutils literal notranslate"><span class="pre">Species.molecular_weight</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species.name"><code class="docutils literal notranslate"><span class="pre">Species.name</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species.size"><code class="docutils literal notranslate"><span class="pre">Species.size</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species.thermo"><code class="docutils literal notranslate"><span class="pre">Species.thermo</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species.transport"><code class="docutils literal notranslate"><span class="pre">Species.transport</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Species.update_user_data"><code class="docutils literal notranslate"><span class="pre">Species.update_user_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#species-thermodynamic-properties">Species Thermodynamic Properties</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#speciesthermo">SpeciesThermo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constantcp">ConstantCp</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mu0poly">Mu0Poly</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nasapoly2">NasaPoly2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nasa9polymultitempregion">Nasa9PolyMultiTempRegion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shomatepoly2">ShomatePoly2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#speciesthermo">SpeciesThermo</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.SpeciesThermo"><code class="docutils literal notranslate"><span class="pre">SpeciesThermo</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.SpeciesThermo.clear_user_data"><code class="docutils literal notranslate"><span class="pre">SpeciesThermo.clear_user_data()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.SpeciesThermo.coeffs"><code class="docutils literal notranslate"><span class="pre">SpeciesThermo.coeffs</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.SpeciesThermo.cp"><code class="docutils literal notranslate"><span class="pre">SpeciesThermo.cp()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.SpeciesThermo.h"><code class="docutils literal notranslate"><span class="pre">SpeciesThermo.h()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.SpeciesThermo.input_data"><code class="docutils literal notranslate"><span class="pre">SpeciesThermo.input_data</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.SpeciesThermo.max_temp"><code class="docutils literal notranslate"><span class="pre">SpeciesThermo.max_temp</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.SpeciesThermo.min_temp"><code class="docutils literal notranslate"><span class="pre">SpeciesThermo.min_temp</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.SpeciesThermo.n_coeffs"><code class="docutils literal notranslate"><span class="pre">SpeciesThermo.n_coeffs</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.SpeciesThermo.reference_pressure"><code class="docutils literal notranslate"><span class="pre">SpeciesThermo.reference_pressure</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.SpeciesThermo.s"><code class="docutils literal notranslate"><span class="pre">SpeciesThermo.s()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.SpeciesThermo.update_user_data"><code class="docutils literal notranslate"><span class="pre">SpeciesThermo.update_user_data()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#element">Element</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constantcp">ConstantCp</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ConstantCp"><code class="docutils literal notranslate"><span class="pre">ConstantCp</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mu0poly">Mu0Poly</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Mu0Poly"><code class="docutils literal notranslate"><span class="pre">Mu0Poly</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nasapoly2">NasaPoly2</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.NasaPoly2"><code class="docutils literal notranslate"><span class="pre">NasaPoly2</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nasa9polymultitempregion">Nasa9PolyMultiTempRegion</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Nasa9PolyMultiTempRegion"><code class="docutils literal notranslate"><span class="pre">Nasa9PolyMultiTempRegion</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shomatepoly2">ShomatePoly2</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ShomatePoly2"><code class="docutils literal notranslate"><span class="pre">ShomatePoly2</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#element">Element</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Element"><code class="docutils literal notranslate"><span class="pre">Element</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Element.num_elements_defined"><code class="docutils literal notranslate"><span class="pre">Element.num_elements_defined</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Element.element_symbols"><code class="docutils literal notranslate"><span class="pre">Element.element_symbols</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Element.element_names"><code class="docutils literal notranslate"><span class="pre">Element.element_names</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Element.atomic_number"><code class="docutils literal notranslate"><span class="pre">Element.atomic_number</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Element.name"><code class="docutils literal notranslate"><span class="pre">Element.name</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Element.symbol"><code class="docutils literal notranslate"><span class="pre">Element.symbol</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Element.weight"><code class="docutils literal notranslate"><span class="pre">Element.weight</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
@@ -2593,7 +2858,7 @@ and <a class="reference internal" href="#cantera.Element.element_names" title="c
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     <br/>
   </p>
 </div>

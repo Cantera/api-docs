@@ -1,15 +1,7 @@
 var vcs__defs_8h =
 [
     [ "VCS_SUCCESS", "da/d80/vcs__defs_8h.html#adcfdf84a50a578cec01daaf9edbc602b", null ],
-    [ "VCS_NOMEMORY", "da/d80/vcs__defs_8h.html#ab05a88aa93877340cd5bddaa28a0fed8", null ],
-    [ "VCS_FAILED_CONVERGENCE", "da/d80/vcs__defs_8h.html#a6390c18d6e95b9c6b90065b133c15dff", null ],
-    [ "VCS_SHOULDNT_BE_HERE", "da/d80/vcs__defs_8h.html#ab05ef843491a46db219f9c50a6df6acb", null ],
-    [ "VCS_PUB_BAD", "da/d80/vcs__defs_8h.html#a9f69908e92cb2a31df893c9b971a7d61", null ],
-    [ "VCS_THERMO_OUTOFRANGE", "da/d80/vcs__defs_8h.html#a749b80af8d1beb2adc222f6a62721e9d", null ],
-    [ "VCS_FAILED_LOOKUP", "da/d80/vcs__defs_8h.html#a7c24b58a5b8a8ecf74c3e09a726377f8", null ],
-    [ "VCS_MP_FAIL", "da/d80/vcs__defs_8h.html#a65e76b76fc160a1dd298df84aa3727de", null ],
     [ "VCS_SSVOL_IDEALGAS", "da/d80/vcs__defs_8h.html#a3f3f063454676216eaf862ee017968da", null ],
-    [ "VCS_SSVOL_CONSTANT", "da/d80/vcs__defs_8h.html#ad763382e4637a38153f465d70d354e6d", null ],
     [ "VCS_RELDELETE_SPECIES_CUTOFF", "da/d80/vcs__defs_8h.html#a3d5f9f53a3ceb72caee139bca2c277c1", null ],
     [ "VCS_DELETE_MINORSPECIES_CUTOFF", "da/d80/vcs__defs_8h.html#a2a2fe316d8c37ff40038fef4f172e141", null ],
     [ "VCS_SMALL_MULTIPHASE_SPECIES", "da/d80/vcs__defs_8h.html#ac23eb86929ff15fcfba78d287d1aa677", null ],

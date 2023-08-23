@@ -38,13 +38,5 @@ var classCantera_1_1Application =
     [ "inputDirs", "d6/d9a/classCantera_1_1Application.html#aa15c3d0d57451829563069b0c59f2bb7", null ],
     [ "m_pythonSearchVersions", "d6/d9a/classCantera_1_1Application.html#a2c38ec4444db2b24bd1a14669feeee96", null ],
     [ "warnings", "d6/d9a/classCantera_1_1Application.html#abdfdb56fbd167b24de3497a1d682bab0", null ],
-    [ "m_suppress_deprecation_warnings", "d6/d9a/classCantera_1_1Application.html#ac54b5e69038a3d82a5c8d19ac5812203", null ],
-    [ "m_fatal_deprecation_warnings", "d6/d9a/classCantera_1_1Application.html#abac4c4d5b76d210c39b92996da9baf81", null ],
-    [ "m_suppress_thermo_warnings", "d6/d9a/classCantera_1_1Application.html#a6248210f80240d8b37583f159db581a5", null ],
-    [ "m_suppress_warnings", "d6/d9a/classCantera_1_1Application.html#a46c4bf539a0b64289ace1681058c2102", null ],
-    [ "m_fatal_warnings", "d6/d9a/classCantera_1_1Application.html#a63ff84b90fb5ef527e4d7af018744a08", null ],
-    [ "m_use_legacy_rate_constants", "d6/d9a/classCantera_1_1Application.html#aea27a111a0215b6c958932982fa7c573", null ],
-    [ "m_loaded_extensions", "d6/d9a/classCantera_1_1Application.html#abe5b81c05618ad11648fd3836e4d5e0a", null ],
-    [ "pMessenger", "d6/d9a/classCantera_1_1Application.html#aee3a1baeb535d6562ca1eaff34edc0f5", null ],
     [ "s_app", "d6/d9a/classCantera_1_1Application.html#a2778098f84e697b8c087057a561ff2c6", null ]
 ];

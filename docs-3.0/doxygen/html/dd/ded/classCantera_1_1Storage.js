@@ -1,7 +1,5 @@
 var classCantera_1_1Storage =
 [
-    [ "Storage", "dd/ded/classCantera_1_1Storage.html#a5b466401f3379ce3f3dfb5a26f457675", null ],
-    [ "~Storage", "dd/ded/classCantera_1_1Storage.html#a9bfeae0dd0b46739f6bb72055cbcf504", null ],
     [ "setCompressionLevel", "dd/ded/classCantera_1_1Storage.html#abce6237f23aeb954ce00f51d2a6f1bc7", null ],
     [ "hasGroup", "dd/ded/classCantera_1_1Storage.html#a07535848d2bd94c454810e3bc260d170", null ],
     [ "checkGroup", "dd/ded/classCantera_1_1Storage.html#a9fcd0d7927caeede07b20d56d4ba480e", null ],

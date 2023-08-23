@@ -1,6 +1,5 @@
 var classCantera_1_1MultiRateBase =
 [
-    [ "~MultiRateBase", "dc/d71/classCantera_1_1MultiRateBase.html#af18568cb24a4d7144c16df34abf1ac8c", null ],
     [ "type", "dc/d71/classCantera_1_1MultiRateBase.html#a7a68582efbb7ac05f73c98dbad60609d", null ],
     [ "add", "dc/d71/classCantera_1_1MultiRateBase.html#a937abf3c1c5de27ac337c9df999a257c", null ],
     [ "replace", "dc/d71/classCantera_1_1MultiRateBase.html#a813afd881998b3d88d2557555dc70b01", null ],

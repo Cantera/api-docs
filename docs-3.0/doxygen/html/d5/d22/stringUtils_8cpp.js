@@ -1,6 +1,5 @@
 var stringUtils_8cpp =
 [
-    [ "SNPRINTF", "d5/d22/stringUtils_8cpp.html#a770571e12ff9370899184528f4b4626d", null ],
     [ "vec2str", "d5/d22/stringUtils_8cpp.html#ga515a49b79ebc7ea6b22b0ade12460f7f", null ],
     [ "stripnonprint", "d5/d22/stringUtils_8cpp.html#ga404dd380ac3277a06cb2031d0f94ed2e", null ],
     [ "parseCompString", "d5/d22/stringUtils_8cpp.html#gac7e96967866a0f9914ab3020f1180e04", null ],

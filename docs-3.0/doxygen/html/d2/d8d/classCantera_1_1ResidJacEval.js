@@ -1,10 +1,10 @@
 var classCantera_1_1ResidJacEval =
 [
     [ "ResidJacEval", "d2/d8d/classCantera_1_1ResidJacEval.html#a9518d60df88f053e2f3265066aef1730", null ],
-    [ "nEquations", "d2/d8d/classCantera_1_1ResidJacEval.html#a453750169345df044faeca9e5cf16ae9", null ],
+    [ "nEquations", "d2/d8d/classCantera_1_1ResidJacEval.html#a34558420b283f598ef4cd2e23ec6072c", null ],
     [ "evalResidNJ", "d2/d8d/classCantera_1_1ResidJacEval.html#a153d22098b3a59d5431f6224ffb3a144", null ],
-    [ "eval", "d2/d8d/classCantera_1_1ResidJacEval.html#a07a5228a78398f771461011ea68f0cdc", null ],
-    [ "getInitialConditions", "d2/d8d/classCantera_1_1ResidJacEval.html#ae21224c92be27d740644b7bdb3510ba8", null ],
+    [ "eval", "d2/d8d/classCantera_1_1ResidJacEval.html#aaffe8b115248f21e4c7b832f2b24b923", null ],
+    [ "getInitialConditions", "d2/d8d/classCantera_1_1ResidJacEval.html#ad05b26aa94b629f1325c418922563459", null ],
     [ "filterNewStep", "d2/d8d/classCantera_1_1ResidJacEval.html#a0e5276d642d803873cf1affba1f6ec5b", null ],
     [ "filterSolnPrediction", "d2/d8d/classCantera_1_1ResidJacEval.html#aa4c25d553257234f51c45e9340c0069e", null ],
     [ "setAtol", "d2/d8d/classCantera_1_1ResidJacEval.html#a16d8b72d773ed756efe753d5b85e6e2d", null ],

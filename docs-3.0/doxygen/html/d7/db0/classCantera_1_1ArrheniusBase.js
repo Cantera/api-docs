@@ -3,7 +3,6 @@ var classCantera_1_1ArrheniusBase =
     [ "ArrheniusBase", "d7/db0/classCantera_1_1ArrheniusBase.html#ac31349fecdd7571c44579ad0f6cec8c3", null ],
     [ "ArrheniusBase", "d7/db0/classCantera_1_1ArrheniusBase.html#aa0f94fae9deb9ef5005cffcdd016fe8f", null ],
     [ "ArrheniusBase", "d7/db0/classCantera_1_1ArrheniusBase.html#abd03818d9154dc7423eb97a0e7b5ba58", null ],
-    [ "ArrheniusBase", "d7/db0/classCantera_1_1ArrheniusBase.html#ae6221a5e9132ff86e38bf84c7d5d6955", null ],
     [ "setRateParameters", "d7/db0/classCantera_1_1ArrheniusBase.html#a9bc9337e936300a25be527d44b9ebd17", null ],
     [ "getRateParameters", "d7/db0/classCantera_1_1ArrheniusBase.html#a4eadf93337f22fd12bffd546414cbfbb", null ],
     [ "setParameters", "d7/db0/classCantera_1_1ArrheniusBase.html#a30cea4414ceda6e149e2f89c62315902", null ],

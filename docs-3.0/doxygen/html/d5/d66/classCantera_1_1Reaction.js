@@ -1,10 +1,6 @@
 var classCantera_1_1Reaction =
 [
-    [ "Reaction", "d5/d66/classCantera_1_1Reaction.html#a18f8b5bfcff47e68a600902199852c0c", null ],
-    [ "Reaction", "d5/d66/classCantera_1_1Reaction.html#a54cb8a3430497ed0937e64a0e197d5e3", null ],
-    [ "Reaction", "d5/d66/classCantera_1_1Reaction.html#af58e8db6cea1b0347d84baf0153e2710", null ],
     [ "Reaction", "d5/d66/classCantera_1_1Reaction.html#af8f612646729e0a4c7e9a10b4be73f5b", null ],
-    [ "~Reaction", "d5/d66/classCantera_1_1Reaction.html#ac3b086991383b38bb29c0d07a837745a", null ],
     [ "reactantString", "d5/d66/classCantera_1_1Reaction.html#a72d606fec579483dca40c66bcb321b1d", null ],
     [ "productString", "d5/d66/classCantera_1_1Reaction.html#a76855b83993104e3b9b3dc17793a77ff", null ],
     [ "equation", "d5/d66/classCantera_1_1Reaction.html#ab431750fd0a88c58a4bfa8ed12c3e435", null ],
@@ -22,9 +18,9 @@ var classCantera_1_1Reaction =
     [ "checkBalance", "d5/d66/classCantera_1_1Reaction.html#a28cb22e323eda674a6efe912e978ab60", null ],
     [ "checkSpecies", "d5/d66/classCantera_1_1Reaction.html#a438836c6a44f55f5cdcd452a46b663eb", null ],
     [ "usesElectrochemistry", "d5/d66/classCantera_1_1Reaction.html#ab7ae96230023a7643bbb61c96b231454", null ],
-    [ "rate", "d5/d66/classCantera_1_1Reaction.html#a95616198145b5bbea6b676b2303371ad", null ],
+    [ "rate", "d5/d66/classCantera_1_1Reaction.html#a364f3101ecc28e70ad6776902e9162bb", null ],
     [ "setRate", "d5/d66/classCantera_1_1Reaction.html#a4e143eef7c76e7a60e56db3b6a24f566", null ],
-    [ "thirdBody", "d5/d66/classCantera_1_1Reaction.html#ac28af9bfc9e641cc3ffa1397a2809c39", null ],
+    [ "thirdBody", "d5/d66/classCantera_1_1Reaction.html#a7c95c06a8ab1292d97fcb9f9fb483317", null ],
     [ "usesThirdBody", "d5/d66/classCantera_1_1Reaction.html#a71707405005505ab8ff4e6e5d8affa93", null ],
     [ "getParameters", "d5/d66/classCantera_1_1Reaction.html#ac02817e12f38643a6f9a9bd38539478b", null ],
     [ "reactants", "d5/d66/classCantera_1_1Reaction.html#ad52a8bceda6b7c2911cae98f603751fc", null ],

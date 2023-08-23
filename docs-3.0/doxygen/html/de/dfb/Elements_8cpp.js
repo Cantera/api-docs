@@ -2,11 +2,8 @@ var Elements_8cpp =
 [
     [ "atomicWeightData", "d2/d26/structCantera_1_1atomicWeightData.html", "d2/d26/structCantera_1_1atomicWeightData" ],
     [ "isotopeWeightData", "d1/de0/structCantera_1_1isotopeWeightData.html", "d1/de0/structCantera_1_1isotopeWeightData" ],
-    [ "elementVectorsFromSymbols", "de/dfb/Elements_8cpp.html#a81632d4e7e5bcfdfd4101302469986ca", null ],
     [ "elementSymbols", "de/dfb/Elements_8cpp.html#aaa49b2e34f4c34f670ee8ddd72a58cc4", null ],
-    [ "elementVectorsFromNames", "de/dfb/Elements_8cpp.html#a105f1a4d1eb4ca403944847c0cd9f098", null ],
     [ "elementNames", "de/dfb/Elements_8cpp.html#a349628c0f8714ffeb02fcfa97fd6316b", null ],
-    [ "mapAtomicWeights", "de/dfb/Elements_8cpp.html#a5b7b3268a3eee5dc8e855f53c7253416", null ],
     [ "elementWeights", "de/dfb/Elements_8cpp.html#a8267e158bf0bed5b5ecd0f1373bd6da9", null ],
     [ "getElementWeight", "de/dfb/Elements_8cpp.html#a052456ffdeb8c61c27bf53e089cebd34", null ],
     [ "getElementWeight", "de/dfb/Elements_8cpp.html#ab77920c3d049a6277ca3504593da062f", null ],

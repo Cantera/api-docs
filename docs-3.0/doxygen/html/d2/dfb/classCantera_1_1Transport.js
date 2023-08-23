@@ -1,12 +1,9 @@
 var classCantera_1_1Transport =
 [
     [ "Transport", "d2/dfb/classCantera_1_1Transport.html#afa4da84bf7b4dd3c00421174aea39305", null ],
-    [ "~Transport", "d2/dfb/classCantera_1_1Transport.html#acf2d3c106a6eeb6b22ce98ac5ee998a2", null ],
-    [ "Transport", "d2/dfb/classCantera_1_1Transport.html#adaa4c0953629c6f2780286f5d36c8bc3", null ],
-    [ "operator=", "d2/dfb/classCantera_1_1Transport.html#aa238375974319c694b4076531dadb456", null ],
     [ "transportModel", "d2/dfb/classCantera_1_1Transport.html#a7118b3f7b374dab1b7618db08743644c", null ],
     [ "transportType", "d2/dfb/classCantera_1_1Transport.html#ae1fda9cbae14b2061664803278170c85", null ],
-    [ "thermo", "d2/dfb/classCantera_1_1Transport.html#ac425e90baf34e592ea24fc3967efeb51", null ],
+    [ "thermo", "d2/dfb/classCantera_1_1Transport.html#ac815500c1a2cfb3745a9f6109505018e", null ],
     [ "ready", "d2/dfb/classCantera_1_1Transport.html#ae90016cb52feed44a68aa3004189e0e4", null ],
     [ "setNDim", "d2/dfb/classCantera_1_1Transport.html#a0c3b6a174aea2bc8652f7adfc32b1349", null ],
     [ "nDim", "d2/dfb/classCantera_1_1Transport.html#a5783610f13bff957c2e70f55a289b6e9", null ],

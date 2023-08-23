@@ -26,22 +26,7 @@ var NAVTREE =
 [
   [ "Cantera", "index.html", [
     [ "Cantera C++ Reference", "index.html", null ],
-    [ "Previous Versions", "d9/d9b/previous-versions.html", null ],
-    [ "Deprecated List", "da/d58/deprecated.html", null ],
-    [ "Todo List", "dd/da0/todo.html", null ],
-    [ "Bibliography", "d0/de3/citelist.html", null ],
     [ "Modules", "modules.html", "modules" ],
-    [ "Namespaces", "namespaces.html", [
-      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
-      [ "Namespace Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", "namespacemembers_dup" ],
-        [ "Functions", "namespacemembers_func.html", null ],
-        [ "Variables", "namespacemembers_vars.html", null ],
-        [ "Typedefs", "namespacemembers_type.html", null ],
-        [ "Enumerations", "namespacemembers_enum.html", null ],
-        [ "Enumerator", "namespacemembers_eval.html", null ]
-      ] ]
-    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -52,7 +37,18 @@ var NAVTREE =
         [ "Variables", "functions_vars.html", "functions_vars" ],
         [ "Typedefs", "functions_type.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
-        [ "Related Functions", "functions_rela.html", null ]
+        [ "Related Symbols", "functions_rela.html", null ]
+      ] ]
+    ] ],
+    [ "Namespaces", "namespaces.html", [
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
+      [ "Namespace Members", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", "namespacemembers_dup" ],
+        [ "Functions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ],
+        [ "Typedefs", "namespacemembers_type.html", null ],
+        [ "Enumerations", "namespacemembers_enum.html", null ],
+        [ "Enumerator", "namespacemembers_eval.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -65,54 +61,50 @@ var NAVTREE =
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ],
+    [ "Previous Versions", "d9/d9b/previous-versions.html", null ],
+    [ "Deprecated List", "da/d58/deprecated.html", null ],
+    [ "Todo List", "dd/da0/todo.html", null ],
+    [ "Bibliography", "d0/de3/citelist.html", null ],
     [ "cantera.org", "^https://cantera.org", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"",
-"d0/db6/ctonedim_8h.html#a71e7348979855d6fe1c3eb1f94dd40ff",
-"d1/d4b/classCantera_1_1MultiPhase.html#a64405435dd8fb04097d842fd3253ad7c",
-"d1/d96/funcs_8h.html",
-"d1/dea/group__kineticsmgr.html#ga5155a5569206fbbee49e3e0bdf22ea08",
-"d2/d3f/classCantera_1_1Func1.html#add413b6d193ee81507d1b6c2e6a7077e",
-"d2/da3/classCantera_1_1BlowersMaselRate.html#a0ed4679ce61a4bf98885ba8dc9040602",
-"d3/d1d/ReactorBase_8cpp.html",
-"d3/dc1/ct_8h.html#a36b889f8a1083c02edd40a5c15ed03a7",
-"d3/df8/group__errGroup.html#gad5a293ded33c6e62971e30a3910f49ab",
-"d4/d7e/classCantera_1_1VCS__SOLVE.html#a8a5d40dc389c9d4ef962fbdd064ae8f5",
-"d4/dc4/classCantera_1_1Kinetics.html#ad02be42e0156dabe7759174ae0c788a4",
-"d5/d0f/classCantera_1_1BulkKinetics.html#a620613532688b6abf397f0b86b726289",
-"d5/d5e/Methane_8cpp.html#a523d6f25e8fc001c8285daf87ae097ca",
-"d5/dd7/classCantera_1_1PlasmaPhase.html#a356c2f6256e083fca5591aad77646bf6",
-"d6/d0e/classCantera_1_1Phase.html#abbed83027cec401c68ddb30169ffdc13",
-"d6/d9a/classCantera_1_1Application.html#a1e02dad026010287d680a8486c87642e",
-"d7/d0d/InterfaceKinetics_8h_source.html",
-"d7/dc9/classCantera_1_1Sim1D.html#ac25d533c54f89d94eafa5e5730933211",
-"d7/def/classCantera_1_1solveSP.html#a220c7378ed1c5eb515ec0649894b5f79",
-"d8/d14/classCantera_1_1AnyValue.html#ad47b02025106dde18b2a0faa06fe8c04",
-"d8/d97/Integrator_8h.html#a3f50315a33fc6e4fa4345073e72bbd9a",
-"d9/d08/group__derivGroup.html",
-"d9/d1a/classCantera_1_1StFlow.html#a2c081a20630ead1f9ae21e3b2a90b0fb",
-"d9/d54/classCantera_1_1ReactionPathDiagram.html#ae6ddc156bb1a87f707400748131af67a",
-"d9/dda/Elements_8h.html#a8267e158bf0bed5b5ecd0f1373bd6da9",
-"da/d0e/classCantera_1_1ChemEquil.html#a92974fdcfd4cd67eb3d938f5e4ce15a8",
-"da/d80/vcs__defs_8h.html#aae62bc22c6c0ea16485658520b237ab3",
-"db/d22/group__physConstants.html#ga7cedc49ad167169e538c9a19d4255d53",
-"db/da8/classCantera_1_1StickingCoverage.html#aab99947f7f1699a30d9f4c2880710f8b",
-"dc/d38/classCantera_1_1ThermoPhase.html#a0a3008167c90beb62a304b399765e5cb",
-"dc/d38/classCantera_1_1ThermoPhase.html#ad385ba336e558bba3eddb339aab32800",
-"dc/d8e/ThermoFactory_8h.html#ga8f794785c5ebd37b9314973fbb22ee10",
-"dd/d23/classPyFuncInfo.html#a5713442f4ddfd61485f617edabf7f800",
-"dd/db1/group__thermoprops.html#ga6790a1a3d722d0a5c65e9c5b363d8aef",
-"de/d1d/classCantera_1_1HMWSoln.html#ad0ac3c1be36b98775a2dea59567a92e4",
-"de/d7e/classCantera_1_1ReactorDelegator.html#aa981f3cd4317393ca426da64ac58402c",
-"de/dbe/classCantera_1_1PDSS.html#a614e29e44c6c88028b100292f5d74ad2",
-"df/d0a/classtpx_1_1Heptane.html#ad48d7e7b63eb737fb8142a7872955679",
-"df/d63/ctreactor_8h.html#a204b9265b9210ac4b3800ff8785b385c",
-"df/db0/namespaceCantera.html#a479ade5d7e52065cda7cad35b6f37f20",
-"df/dc0/Nitrogen_8cpp.html#aea69f0325091359ce926f389279d7cb5"
+"annotated.html",
+"d1/d29/classCantera_1_1PureFluidPhase.html#a55ae91f3bc8bc4c1329df9f305d61ee6",
+"d1/d72/classCantera_1_1InterfaceKinetics.html#adf134c05a2052833cd960cc7ea78987b",
+"d1/dd7/classCantera_1_1VCS__COUNTERS.html",
+"d2/d40/classCantera_1_1WaterPropsIAPWSphi.html#a61eee0279fa18ec1ac81deb6b75fb579",
+"d2/db3/classCantera_1_1MolalityVPSSTP.html#a18ea3657ccbf07aa26de228e9d34def3",
+"d3/d4c/classCantera_1_1IdealSolidSolnPhase.html#a3c1da731d13ce445a04e30103e4ad3b7",
+"d3/df8/KineticsFactory_8cpp_source.html",
+"d4/d7e/classCantera_1_1VCS__SOLVE.html#a7f7e80cf9908aa6ca71c24eb6d30d762",
+"d4/dc4/classCantera_1_1Kinetics.html#a7a91abd90d71d3558e8fa1dbfd84c9e3",
+"d5/d0f/classCantera_1_1BulkKinetics.html#a932648864ac2181739c4cad93512ea6f",
+"d5/d6e/structCantera_1_1PlogData.html#a51933720a26945bae5870612fc4dd69d",
+"d5/dfb/classCantera_1_1ConstPressureReactor.html#a5ddfda3364cf860f92aafcb02f8665a8",
+"d6/d3b/classCantera_1_1Cos1.html#a073f1f677bb06caa597abb4e025b4b24",
+"d6/dd6/Arrhenius_8h_source.html",
+"d7/da6/classCantera_1_1VCS__SPECIES__THERMO.html",
+"d7/de0/classCantera_1_1vcs__VolPhase.html#a8f198f6c54510a436d4a065a3e995c7e",
+"d7/dfb/vcs__VolPhase_8h_source.html",
+"d8/d6f/classCantera_1_1Integrator.html#a266cdcea76e14c41df4e00888155cadf",
+"d8/dfa/classCantera_1_1WallFactory.html#a8c5a3b89286f7ddbadb5cb9185be7676",
+"d9/d1a/classCantera_1_1StFlow.html#aa3ee7ef6872e36cc09a7492553b6b605",
+"d9/db4/MargulesVPSSTP_8h.html",
+"da/d0e/classCantera_1_1ChemEquil.html#ae73e1bd414b9afaa361953541c2369f1",
+"da/dac/classCantera_1_1FactoryBase.html#adc78e2a6a1f8ef2c1ad682e5fa824495",
+"db/d25/classCantera_1_1CoverageDependentSurfPhase.html#ae0f6adbfbca73feccc24db5757f262cb",
+"dc/d01/classCantera_1_1MixtureFugacityTP.html#a2962eb7f3e735d2a719f46ce5e9fa16b",
+"dc/d58/group__reactionGroup.html#gaf6cfe51022c72aefbf47be70a6274d37",
+"dc/de2/classCantera_1_1SpeciesThermoInterpType.html",
+"dd/de9/MultiSpeciesThermo_8cpp.html",
+"de/d52/classCantera_1_1YamlWriter.html#ad06e810f2d0c14f7dac8c1310e272164",
+"de/dbe/classCantera_1_1PDSS.html#a3eb336b6fbf66035a870430ac5f8e163",
+"de/dfc/AnyMap_8cpp.html#ae6292bdb647c7e99d7161befcf743003",
+"df/da3/vcs__internal_8h.html#a6f00f524246c2f92384c26b247972995",
+"functions_func_n.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,8 +1,5 @@
 var classCantera_1_1Reservoir =
 [
-    [ "Reservoir", "d3/dd9/classCantera_1_1Reservoir.html#aaf6b20a30614fc3f695f6d91824cac08", null ],
-    [ "type", "d3/dd9/classCantera_1_1Reservoir.html#a3fd7546c6fe10a8af9e23c4a3e611caf", null ],
-    [ "initialize", "d3/dd9/classCantera_1_1Reservoir.html#ad2f70ad960f791012726c0fda73dd093", null ],
-    [ "insert", "d3/dd9/classCantera_1_1Reservoir.html#aee944c249757d83c716d72644252acd8", null ],
-    [ "insert", "d3/dd9/classCantera_1_1Reservoir.html#a445849749e861466b4fcac7bb1ecf727", null ]
+    [ "type", "d3/dd9/classCantera_1_1Reservoir.html#a5094b6f3d574dc173727f57ef3827056", null ],
+    [ "initialize", "d3/dd9/classCantera_1_1Reservoir.html#acb4765d051f0e1b6ebb9d358a3d530c0", null ]
 ];

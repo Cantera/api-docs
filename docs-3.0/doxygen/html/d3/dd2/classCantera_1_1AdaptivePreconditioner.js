@@ -1,6 +1,5 @@
 var classCantera_1_1AdaptivePreconditioner =
 [
-    [ "AdaptivePreconditioner", "d3/dd2/classCantera_1_1AdaptivePreconditioner.html#af5b65d0eb0b169ce76e2343cc1d860e0", null ],
     [ "initialize", "d3/dd2/classCantera_1_1AdaptivePreconditioner.html#a99f3958c52fd72571ec3726b49753907", null ],
     [ "reset", "d3/dd2/classCantera_1_1AdaptivePreconditioner.html#aebfcdbbd0fe4efbff10b180be50ca6bc", null ],
     [ "setup", "d3/dd2/classCantera_1_1AdaptivePreconditioner.html#ac0b73dc40ca33ff933c1f351578a00d0", null ],
@@ -9,8 +8,8 @@ var classCantera_1_1AdaptivePreconditioner =
     [ "stateAdjustment", "d3/dd2/classCantera_1_1AdaptivePreconditioner.html#ac85d13e40a3b7ce78bfefced38f6ecee", null ],
     [ "updatePreconditioner", "d3/dd2/classCantera_1_1AdaptivePreconditioner.html#ad0a84df972e9809ce59569b87231e8bc", null ],
     [ "prunePreconditioner", "d3/dd2/classCantera_1_1AdaptivePreconditioner.html#ad4865f2aa3a4837dcd8030014fdcaf62", null ],
-    [ "jacobian", "d9/d08/group__derivGroup.html#gad02ce2f8ce5c441f64bf3cf0f22582b9", null ],
-    [ "matrix", "d3/dd2/classCantera_1_1AdaptivePreconditioner.html#a2477234ea22866cdc25c852435ee99a8", null ],
+    [ "jacobian", "d9/d08/group__derivGroup.html#ga43c00de38095b7f2a50ba5f69be6e092", null ],
+    [ "matrix", "d3/dd2/classCantera_1_1AdaptivePreconditioner.html#a2156cc66fd98759f267d2bfd27f78be9", null ],
     [ "threshold", "d3/dd2/classCantera_1_1AdaptivePreconditioner.html#a0ab884776e56a3315177ec5eef874ab2", null ],
     [ "ilutFillFactor", "d3/dd2/classCantera_1_1AdaptivePreconditioner.html#afe93b0747508e54a151e80881acaf979", null ],
     [ "ilutDropTol", "d3/dd2/classCantera_1_1AdaptivePreconditioner.html#a133a9277e971d3b7885446e997717ba1", null ],

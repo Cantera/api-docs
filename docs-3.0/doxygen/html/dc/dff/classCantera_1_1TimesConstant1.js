@@ -1,18 +1,11 @@
 var classCantera_1_1TimesConstant1 =
 [
-    [ "TimesConstant1", "dc/dff/classCantera_1_1TimesConstant1.html#a275d40fb73257d5296d876159ad62277", null ],
-    [ "TimesConstant1", "dc/dff/classCantera_1_1TimesConstant1.html#ad499a3145fd046f3bee30fcd7277ee70", null ],
-    [ "~TimesConstant1", "dc/dff/classCantera_1_1TimesConstant1.html#af7a096bd507825f1eb67c922e2e02595", null ],
-    [ "TimesConstant1", "dc/dff/classCantera_1_1TimesConstant1.html#af9b8d3791f27ed14f2791a28db14c819", null ],
-    [ "operator=", "dc/dff/classCantera_1_1TimesConstant1.html#a669d1fb9d4535efc25b1172a6e7b0657", null ],
-    [ "ID", "dc/dff/classCantera_1_1TimesConstant1.html#a447a205ad07c8cbe03337a7bb1be3351", null ],
-    [ "type", "dc/dff/classCantera_1_1TimesConstant1.html#a3fd7546c6fe10a8af9e23c4a3e611caf", null ],
-    [ "isProportional", "dc/dff/classCantera_1_1TimesConstant1.html#a918dd89e18c80244a0df7d8023191b01", null ],
-    [ "isProportional", "dc/dff/classCantera_1_1TimesConstant1.html#afdea63207f521e20e7bf84050a258c0a", null ],
-    [ "eval", "dc/dff/classCantera_1_1TimesConstant1.html#a1c81c0b17045846f58e6805fc28a892d", null ],
-    [ "duplicate", "dc/dff/classCantera_1_1TimesConstant1.html#ad26a36abcf05f4ed5cd96ecafd52312a", null ],
-    [ "derivative", "dc/dff/classCantera_1_1TimesConstant1.html#add413b6d193ee81507d1b6c2e6a7077e", null ],
-    [ "derivative3", "dc/dff/classCantera_1_1TimesConstant1.html#a439d753be3fe09a3fbd975da689709ff", null ],
-    [ "write", "dc/dff/classCantera_1_1TimesConstant1.html#aa00c35a668fe313e4c2cbb92f051ddd4", null ],
-    [ "order", "dc/dff/classCantera_1_1TimesConstant1.html#a177cd31efbfb81626a24dea53fcabfe8", null ]
+    [ "ID", "dc/dff/classCantera_1_1TimesConstant1.html#a9a78e16d7b94411ad62938e795ddcad1", null ],
+    [ "type", "dc/dff/classCantera_1_1TimesConstant1.html#a5094b6f3d574dc173727f57ef3827056", null ],
+    [ "eval", "dc/dff/classCantera_1_1TimesConstant1.html#a315bfb070c6aae13f4b5d58fcca8da63", null ],
+    [ "duplicate", "dc/dff/classCantera_1_1TimesConstant1.html#ac531103ebfd7064e8856a6099c474550", null ],
+    [ "derivative", "dc/dff/classCantera_1_1TimesConstant1.html#a073f1f677bb06caa597abb4e025b4b24", null ],
+    [ "derivative3", "dc/dff/classCantera_1_1TimesConstant1.html#ab29bcb8e0bef4174c1e17e6ee0e4eaba", null ],
+    [ "write", "dc/dff/classCantera_1_1TimesConstant1.html#a84177badb8030c21d0b4878ced332bd2", null ],
+    [ "order", "dc/dff/classCantera_1_1TimesConstant1.html#a6b02056b9a85fb4395f012634d4eaed6", null ]
 ];

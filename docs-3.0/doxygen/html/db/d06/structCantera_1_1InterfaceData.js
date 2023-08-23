@@ -1,11 +1,9 @@
 var structCantera_1_1InterfaceData =
 [
-    [ "InterfaceData", "db/d06/structCantera_1_1InterfaceData.html#a7aa3cf47deb0909393ac3699526c60dc", null ],
     [ "update", "db/d06/structCantera_1_1InterfaceData.html#a4d0d405e4bd724742169c86188f0fb90", null ],
     [ "update", "db/d06/structCantera_1_1InterfaceData.html#a5647f86a7cf7224f4822ffe07e2f9fe6", null ],
     [ "update", "db/d06/structCantera_1_1InterfaceData.html#ad52105d726ca7efa183d5d684b91b7ed", null ],
-    [ "perturbTemperature", "db/d06/structCantera_1_1InterfaceData.html#a79abd2515dc89c9e3304540ea02660d8", null ],
-    [ "resize", "db/d06/structCantera_1_1InterfaceData.html#a18a6ec5da62ab28d5d2fa5d24c45037d", null ],
+    [ "resize", "db/d06/structCantera_1_1InterfaceData.html#a651d35c1817e23f57a34101a53dfbb28", null ],
     [ "update", "db/d06/structCantera_1_1InterfaceData.html#a5647f86a7cf7224f4822ffe07e2f9fe6", null ],
     [ "update", "db/d06/structCantera_1_1InterfaceData.html#a321d2e7029e3ea277d6810407ce69464", null ],
     [ "update", "db/d06/structCantera_1_1InterfaceData.html#a7ab12baf406993645ef688298a276500", null ],

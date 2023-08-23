@@ -1,6 +1,5 @@
 var classCantera_1_1InterfaceRateBase =
 [
-    [ "InterfaceRateBase", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a8e8a6ccf426845fa4052ae9e98441731", null ],
     [ "setParameters", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a3c98e20f2c74902641a868a6fc75bbc5", null ],
     [ "getParameters", "dd/d4c/classCantera_1_1InterfaceRateBase.html#ac770256e0f2a4f209f01525f6efd9a3c", null ],
     [ "setCoverageDependencies", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a14df35749daefc00301fc8ae1a0068b8", null ],
@@ -20,7 +19,6 @@ var classCantera_1_1InterfaceRateBase =
     [ "m_ecov", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a1b201bed97fdf19c78cabfe90fd206d0", null ],
     [ "m_mcov", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a022b217305ac828a61460fcc83a08ab3", null ],
     [ "m_chargeTransfer", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a830d1aa3d70a948fb731f9c7ddd467f1", null ],
-    [ "m_exchangeCurrentDensityFormulation", "dd/d4c/classCantera_1_1InterfaceRateBase.html#aaae8fa4129f49b09f8eda3a3213b2d48", null ],
     [ "m_beta", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a18c413a52e6391d131cff0bc1bd92a58", null ],
     [ "m_deltaPotential_RT", "dd/d4c/classCantera_1_1InterfaceRateBase.html#afbd21cec516276d0b190e6d0e873e82f", null ],
     [ "m_deltaGibbs0_RT", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a579cec9232d90acb11f3c8276264dd99", null ],

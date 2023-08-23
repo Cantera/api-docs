@@ -1,8 +1,7 @@
 var classCantera_1_1UnityLewisTransport =
 [
-    [ "UnityLewisTransport", "d3/dd6/classCantera_1_1UnityLewisTransport.html#a787d4b399152f0049680371022e38510", null ],
-    [ "transportModel", "d3/dd6/classCantera_1_1UnityLewisTransport.html#a7118b3f7b374dab1b7618db08743644c", null ],
-    [ "getMixDiffCoeffs", "d3/dd6/classCantera_1_1UnityLewisTransport.html#a8222fc315c438ce509381bff365ce492", null ],
-    [ "getMixDiffCoeffsMole", "d3/dd6/classCantera_1_1UnityLewisTransport.html#a59f424457d330a2799979095faf6715c", null ],
-    [ "getMixDiffCoeffsMass", "d3/dd6/classCantera_1_1UnityLewisTransport.html#ac514a032995efd50f2944169850af836", null ]
+    [ "transportModel", "d3/dd6/classCantera_1_1UnityLewisTransport.html#ab6e282e59b2a823363ca1a9c0e7dc735", null ],
+    [ "getMixDiffCoeffs", "d3/dd6/classCantera_1_1UnityLewisTransport.html#a33a3dea2259f798b937540b6f1319f10", null ],
+    [ "getMixDiffCoeffsMole", "d3/dd6/classCantera_1_1UnityLewisTransport.html#a52917163d2ba7148cc914b36296a2891", null ],
+    [ "getMixDiffCoeffsMass", "d3/dd6/classCantera_1_1UnityLewisTransport.html#af4440b779e4b2b22e53a4d5e994dc5c3", null ]
 ];

@@ -1,6 +1,5 @@
 var structCantera_1_1CachedValue =
 [
-    [ "CachedValue", "d2/d34/structCantera_1_1CachedValue.html#a050e4355e1ecde47a5b416fb412633c8", null ],
     [ "validate", "d2/d34/structCantera_1_1CachedValue.html#aa29235f9aaaca70109fa7cea2ddbff00", null ],
     [ "validate", "d2/d34/structCantera_1_1CachedValue.html#a2e78cddc8730b646fe1be7c5d712a2d6", null ],
     [ "validate", "d2/d34/structCantera_1_1CachedValue.html#a444cc040da7d8573745b917b85b5d148", null ],

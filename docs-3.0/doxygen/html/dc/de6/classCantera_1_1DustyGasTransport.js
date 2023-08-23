@@ -1,10 +1,10 @@
 var classCantera_1_1DustyGasTransport =
 [
     [ "DustyGasTransport", "dc/de6/classCantera_1_1DustyGasTransport.html#a32fbc0bd03dad11513141f24af6089b7", null ],
-    [ "setThermo", "dc/de6/classCantera_1_1DustyGasTransport.html#a059aac7299258ec11213e1a1f4b479c1", null ],
-    [ "transportModel", "dc/de6/classCantera_1_1DustyGasTransport.html#a7118b3f7b374dab1b7618db08743644c", null ],
-    [ "getMultiDiffCoeffs", "dc/de6/classCantera_1_1DustyGasTransport.html#aed0263e2b9ea4126c61e7c476e0e247e", null ],
-    [ "getMolarFluxes", "dc/de6/classCantera_1_1DustyGasTransport.html#aa3d72530bd664151c7654053a449a3f0", null ],
+    [ "setThermo", "dc/de6/classCantera_1_1DustyGasTransport.html#abffd59e0b7eba2b316a1a74d65a1b264", null ],
+    [ "transportModel", "dc/de6/classCantera_1_1DustyGasTransport.html#ab6e282e59b2a823363ca1a9c0e7dc735", null ],
+    [ "getMultiDiffCoeffs", "dc/de6/classCantera_1_1DustyGasTransport.html#ad0ae3603f3d5f6ec795c6f4a05857041", null ],
+    [ "getMolarFluxes", "dc/de6/classCantera_1_1DustyGasTransport.html#a1ae848ca4f94a7df1f94e8b03b2f51ee", null ],
     [ "setPorosity", "dc/de6/classCantera_1_1DustyGasTransport.html#a95219f3d7261dcfe18ad88f4276656e2", null ],
     [ "setTortuosity", "dc/de6/classCantera_1_1DustyGasTransport.html#a8f30e68fa2e35ec88934b50efa032ba0", null ],
     [ "setMeanPoreRadius", "dc/de6/classCantera_1_1DustyGasTransport.html#ad8b736d9d078043770ae3f504f51ea57", null ],

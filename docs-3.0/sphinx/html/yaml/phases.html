@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Phase Definitions &#8212; Cantera 3.0.0b1 documentation</title>
+    <title>Phase Definitions &#8212; Cantera 3.0.0 documentation</title>
   
   
   
@@ -41,6 +41,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'yaml/phases';</script>
     <script>
@@ -375,9 +376,10 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="elements.html">Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="species.html">Species</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reactions.html">Reactions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ck_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="yaml2ck.html">YAML to Chemkin conversion</a></li>
 </ul>
 </div>
 </nav></div>
@@ -502,38 +504,38 @@ Cantera data path.</p></li>
 <dt><code class="docutils literal notranslate"><span class="pre">thermo</span></code></dt><dd><p>String specifying the phase thermodynamic model to be used. Supported model
 strings are:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#sec-yaml-binary-solution-tabulated"><span class="std std-ref">binary-solution-tabulated</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-compound-lattice"><span class="std std-ref">compound-lattice</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-coverage-dependent-surface"><span class="std std-ref">coverage-dependent-surface</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-debye-huckel"><span class="std std-ref">Debye-Huckel</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-edge"><span class="std std-ref">edge</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-electron-cloud"><span class="std std-ref">electron-cloud</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-fixed-stoichiometry"><span class="std std-ref">fixed-stoichiometry</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-hmw-electrolyte"><span class="std std-ref">HMW-electrolyte</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-ideal-gas"><span class="std std-ref">ideal-gas</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-ideal-molal-solution"><span class="std std-ref">ideal-molal-solution</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-ideal-condensed"><span class="std std-ref">ideal-condensed</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-ideal-solution-vpss"><span class="std std-ref">ideal-solution-VPSS</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-ideal-surface"><span class="std std-ref">ideal-surface</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-ions-from-neutral-molecule"><span class="std std-ref">ions-from-neutral-molecule</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-lattice"><span class="std std-ref">lattice</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-liquid-water-iapws95"><span class="std std-ref">liquid-water-IAPWS95</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-margules"><span class="std std-ref">Margules</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-maskell-solid-solution"><span class="std std-ref">Maskell-solid-solution</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-peng-robinson"><span class="std std-ref">Peng-Robinson</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-plasma"><span class="std std-ref">plasma</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-pure-fluid"><span class="std std-ref">pure-fluid</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-redlich-kister"><span class="std std-ref">Redlich-Kister</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-redlich-kwong"><span class="std std-ref">Redlich-Kwong</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">binary-solution-tabulated</span></code> (<a class="reference internal" href="#sec-yaml-binary-solution-tabulated"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compound-lattice</span></code> (<a class="reference internal" href="#sec-yaml-compound-lattice"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coverage-dependent-surface</span></code> (<a class="reference internal" href="#sec-yaml-coverage-dependent-surface"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Debye-Huckel</span></code> (<a class="reference internal" href="#sec-yaml-debye-huckel"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edge</span></code> (<a class="reference internal" href="#sec-yaml-edge"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">electron-cloud</span></code> (<a class="reference internal" href="#sec-yaml-electron-cloud"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fixed-stoichiometry</span></code> (<a class="reference internal" href="#sec-yaml-fixed-stoichiometry"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HMW-electrolyte</span></code> (<a class="reference internal" href="#sec-yaml-hmw-electrolyte"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ideal-gas</span></code> (<a class="reference internal" href="#sec-yaml-ideal-gas"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ideal-molal-solution</span></code> (<a class="reference internal" href="#sec-yaml-ideal-molal-solution"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ideal-condensed</span></code> (<a class="reference internal" href="#sec-yaml-ideal-condensed"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ideal-solution-VPSS</span></code> (<a class="reference internal" href="#sec-yaml-ideal-solution-vpss"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ideal-surface</span></code> (<a class="reference internal" href="#sec-yaml-ideal-surface"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ions-from-neutral-molecule</span></code> (<a class="reference internal" href="#sec-yaml-ions-from-neutral-molecule"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lattice</span></code> (<a class="reference internal" href="#sec-yaml-lattice"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">liquid-water-IAPWS95</span></code> (<a class="reference internal" href="#sec-yaml-liquid-water-iapws95"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Margules</span></code> (<a class="reference internal" href="#sec-yaml-margules"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Maskell-solid-solution</span></code> (<a class="reference internal" href="#sec-yaml-maskell-solid-solution"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Peng-Robinson</span></code> (<a class="reference internal" href="#sec-yaml-peng-robinson"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plasma</span></code> (<a class="reference internal" href="#sec-yaml-plasma"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pure-fluid</span></code> (<a class="reference internal" href="#sec-yaml-pure-fluid"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Redlich-Kister</span></code> (<a class="reference internal" href="#sec-yaml-redlich-kister"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Redlich-Kwong</span></code> (<a class="reference internal" href="#sec-yaml-redlich-kwong"><span class="std std-ref">details</span></a>)</p></li>
 </ul>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">kinetics</span></code></dt><dd><p>String specifying the kinetics model to be used. Supported model strings
 are:</p>
 <ul class="simple">
-<li><p>none</p></li>
-<li><p><a class="reference external" href="../../../doxygen/html/de/dae/classCantera_1_1GasKinetics.html">gas</a></p></li>
-<li><p><a class="reference external" href="../../../doxygen/html/d1/d72/classCantera_1_1InterfaceKinetics.html">surface</a></p></li>
-<li><p><a class="reference external" href="../../../doxygen/html/d0/df0/classCantera_1_1EdgeKinetics.html">edge</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">none</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gas</span></code> (<a class="reference external" href="../../../doxygen/html/de/dae/classCantera_1_1GasKinetics.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">surface</span></code> (<a class="reference external" href="../../../doxygen/html/d1/d72/classCantera_1_1InterfaceKinetics.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edge</span></code> (<a class="reference external" href="../../../doxygen/html/d0/df0/classCantera_1_1EdgeKinetics.html">details</a>)</p></li>
 </ul>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">reactions</span></code></dt><dd><p>Source of reactions to include in the phase, if a kinetics model has been
@@ -566,15 +568,15 @@ reactions.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">transport</span></code></dt><dd><p>String specifying the transport model to be used. Supported model strings
 are:</p>
 <ul class="simple">
-<li><p>none</p></li>
-<li><p><a class="reference external" href="../../../doxygen/html/d9/d63/classCantera_1_1HighPressureGasTransport.html">high-pressure</a></p></li>
-<li><p><a class="reference external" href="../../../doxygen/html/d4/d65/classCantera_1_1IonGasTransport.html">ionized-gas</a></p></li>
-<li><p><a class="reference external" href="../../../doxygen/html/d9/d17/classCantera_1_1MixTransport.html">mixture-averaged</a></p></li>
-<li><p><a class="reference external" href="../../../doxygen/html/d9/d17/classCantera_1_1MixTransport.html">mixture-averaged-CK</a></p></li>
-<li><p><a class="reference external" href="../../../doxygen/html/df/d7c/classCantera_1_1MultiTransport.html">multicomponent</a></p></li>
-<li><p><a class="reference external" href="../../../doxygen/html/df/d7c/classCantera_1_1MultiTransport.html">multicomponent-CK</a></p></li>
-<li><p><a class="reference external" href="../../../doxygen/html/d3/dd6/classCantera_1_1UnityLewisTransport.html">unity-Lewis-number</a></p></li>
-<li><p><a class="reference external" href="../../../doxygen/html/df/d1f/classCantera_1_1WaterTransport.html">water</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">none</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">high-pressure</span></code> (<a class="reference external" href="../../../doxygen/html/d9/d63/classCantera_1_1HighPressureGasTransport.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ionized-gas</span></code> (<a class="reference external" href="../../../doxygen/html/d4/d65/classCantera_1_1IonGasTransport.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mixture-averaged</span></code> (<a class="reference external" href="../../../doxygen/html/d9/d17/classCantera_1_1MixTransport.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mixture-averaged-CK</span></code> (<a class="reference external" href="../../../doxygen/html/d9/d17/classCantera_1_1MixTransport.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multicomponent</span></code> (<a class="reference external" href="../../../doxygen/html/df/d7c/classCantera_1_1MultiTransport.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multicomponent-CK</span></code> (<a class="reference external" href="../../../doxygen/html/df/d7c/classCantera_1_1MultiTransport.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unity-Lewis-number</span></code> (<a class="reference external" href="../../../doxygen/html/d3/dd6/classCantera_1_1UnityLewisTransport.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">water</span></code> (<a class="reference external" href="../../../doxygen/html/df/d1f/classCantera_1_1WaterTransport.html">details</a>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -662,8 +664,8 @@ phases, as <a class="reference external" href="../../../doxygen/html/de/de1/clas
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">compound-lattice</span>
-<span class="nt">composition</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">Li7Si3(s)</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> Li7Si3-interstitial</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">compound-lattice</span><span class="w"></span>
+<span class="nt">composition</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">Li7Si3(s)</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> Li7Si3-interstitial</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">}</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -674,7 +676,7 @@ entropy, and heat capacity of each species may depend on its coverage and the
 coverage of other species in the phase.
 Full details are <a class="reference external" href="../../../doxygen/html/db/d25/classCantera_1_1CoverageDependentSurfPhase.html">described here</a>.
 The majority of coverage dependency parameters are provided in the species entry as
-<a class="reference internal" href="species.html#sec-yaml-coverage-dependent-surface-species"><span class="std std-ref">described here</span></a>.</p>
+<a class="reference internal" href="species.html#sec-yaml-species-coverage"><span class="std std-ref">described here</span></a>.</p>
 <p>Additional fields:</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">site-density</span></code></dt><dd><p>The molar density of surface sites.</p>
@@ -684,15 +686,15 @@ thermodynamic properties.</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">covdep</span>
-<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coverage-dependent-surface</span>
-<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OC_Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CO2_Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">C_Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O_Pt</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">state</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500.0</span>
-<span class="w">    </span><span class="nt">P</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.01325e+05</span>
-<span class="w">    </span><span class="nt">coverages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="nt"> OC_Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="nt"> CO2_Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> C_Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> O_Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">}</span>
-<span class="w">  </span><span class="nt">site-density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.72e-09</span>
-<span class="w">  </span><span class="nt">reference-state-coverage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.22</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">covdep</span><span class="w"></span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coverage-dependent-surface</span><span class="w"></span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OC_Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CO2_Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">C_Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O_Pt</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500.0</span><span class="w"></span>
+<span class="w">    </span><span class="nt">P</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.01325e+05</span><span class="w"></span>
+<span class="w">    </span><span class="nt">coverages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="nt"> OC_Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="nt"> CO2_Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> C_Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> O_Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">}</span><span class="w"></span>
+<span class="w">  </span><span class="nt">site-density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.72e-09</span><span class="w"></span>
+<span class="w">  </span><span class="nt">reference-state-coverage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.22</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="versionadded">
@@ -735,19 +737,19 @@ corresponding value of <span class="math notranslate nohighlight">\(\beta_{ij}\)
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Debye-Huckel</span>
-<span class="nt">activity-data</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">beta_ij</span>
-<span class="w">  </span><span class="nt">max-ionic-strength</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0</span>
-<span class="w">  </span><span class="nt">use-Helgeson-fixed-form</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">default-ionic-radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.042843 angstrom</span>
-<span class="w">  </span><span class="nt">beta</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">H+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">beta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.27</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">beta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.15</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">beta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.06</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Debye-Huckel</span><span class="w"></span>
+<span class="nt">activity-data</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">beta_ij</span><span class="w"></span>
+<span class="w">  </span><span class="nt">max-ionic-strength</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0</span><span class="w"></span>
+<span class="w">  </span><span class="nt">use-Helgeson-fixed-form</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="nt">default-ionic-radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.042843 angstrom</span><span class="w"></span>
+<span class="w">  </span><span class="nt">beta</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">H+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">beta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.27</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">beta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.15</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">beta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.06</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In addition, the Debye-Hückel model uses several species-specific properties
@@ -766,20 +768,20 @@ Otherwise, the default is and <code class="docutils literal notranslate"><span c
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NaCl(aq)</span>
-<span class="nt">composition</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">Na</span><span class="p">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="nt"> Cl</span><span class="p">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">}</span>
-<span class="nt">thermo</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">piecewise-Gibbs</span>
-<span class="w">  </span><span class="nt">h0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-96.03E3 cal/mol</span>
-<span class="w">  </span><span class="nt">dimensionless</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">298.15</span><span class="p">:</span><span class="w"> </span><span class="nv">-174.5057463</span><span class="p p-Indicator">,</span><span class="nt"> 333.15</span><span class="p">:</span><span class="w"> </span><span class="nv">-174.5057463</span><span class="p p-Indicator">}</span>
-<span class="nt">equation-of-state</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">constant-volume</span>
-<span class="w">  </span><span class="nt">molar-volume</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3</span>
-<span class="nt">Debye-Huckel</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">ionic-radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4 angstrom</span>
-<span class="w">  </span><span class="nt">electrolyte-species-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">weak-acid-associated</span>
-<span class="w">  </span><span class="nt">weak-acid-charge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1.0</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NaCl(aq)</span><span class="w"></span>
+<span class="nt">composition</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">Na</span><span class="p">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="nt"> Cl</span><span class="p">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">}</span><span class="w"></span>
+<span class="nt">thermo</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">piecewise-Gibbs</span><span class="w"></span>
+<span class="w">  </span><span class="nt">h0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-96.03E3 cal/mol</span><span class="w"></span>
+<span class="w">  </span><span class="nt">dimensionless</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">298.15</span><span class="p">:</span><span class="w"> </span><span class="nv">-174.5057463</span><span class="p p-Indicator">,</span><span class="nt"> 333.15</span><span class="p">:</span><span class="w"> </span><span class="nv">-174.5057463</span><span class="p p-Indicator">}</span><span class="w"></span>
+<span class="nt">equation-of-state</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">constant-volume</span><span class="w"></span>
+<span class="w">  </span><span class="nt">molar-volume</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3</span><span class="w"></span>
+<span class="nt">Debye-Huckel</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">ionic-radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4 angstrom</span><span class="w"></span>
+<span class="w">  </span><span class="nt">electrolyte-species-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">weak-acid-associated</span><span class="w"></span>
+<span class="w">  </span><span class="nt">weak-acid-charge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1.0</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -792,8 +794,8 @@ Otherwise, the default is and <code class="docutils literal notranslate"><span c
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">edge</span>
-<span class="nt">site-density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0e-17 mol/cm</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">edge</span><span class="w"></span>
+<span class="nt">site-density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0e-17 mol/cm</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -887,34 +889,34 @@ neutral species. 1, 2, or 5 values depending on the value of
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HMW-electrolyte</span>
-<span class="nt">activity-data</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">temperature-model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">complex</span>
-<span class="w">  </span><span class="nt">A_Debye</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.175930 kg^0.5/gmol^0.5</span>
-<span class="w">  </span><span class="nt">interactions</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">beta0</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0765</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.008946</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.3158E-6</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-777.03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-4.4706</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">beta1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.2664</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.1608E-5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0715E-6</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">beta2</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">Cphi</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.00127</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-4.655E-5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">33.317</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.09421</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">alpha1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">H+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">beta0</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.1775</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">beta1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.2945</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">beta2</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">Cphi</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0008</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">alpha1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">beta0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0864</span>
-<span class="w">    </span><span class="nt">beta1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.253</span>
-<span class="w">    </span><span class="nt">beta2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
-<span class="w">    </span><span class="nt">Cphi</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0044</span>
-<span class="w">    </span><span class="nt">alpha1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
-<span class="w">    </span><span class="nt">alpha2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Cl-</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">],</span><span class="nt"> theta</span><span class="p">:</span><span class="w"> </span><span class="nv">-0.05</span><span class="p p-Indicator">}</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">],</span><span class="nt"> psi</span><span class="p">:</span><span class="w"> </span><span class="nv">-0.006</span><span class="p p-Indicator">}</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H+</span><span class="p p-Indicator">],</span><span class="nt"> theta</span><span class="p">:</span><span class="w"> </span><span class="nv">0.036</span><span class="p p-Indicator">}</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Cl-</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H+</span><span class="p p-Indicator">],</span><span class="nt"> psi</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-0.004</span><span class="p p-Indicator">]}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HMW-electrolyte</span><span class="w"></span>
+<span class="nt">activity-data</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">temperature-model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">complex</span><span class="w"></span>
+<span class="w">  </span><span class="nt">A_Debye</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.175930 kg^0.5/gmol^0.5</span><span class="w"></span>
+<span class="w">  </span><span class="nt">interactions</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">beta0</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0765</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.008946</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.3158E-6</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-777.03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-4.4706</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">beta1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.2664</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.1608E-5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0715E-6</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">beta2</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Cphi</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.00127</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-4.655E-5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">33.317</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.09421</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">alpha1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">H+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">beta0</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.1775</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">beta1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.2945</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">beta2</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Cphi</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0008</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">alpha1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">beta0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0864</span><span class="w"></span>
+<span class="w">    </span><span class="nt">beta1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.253</span><span class="w"></span>
+<span class="w">    </span><span class="nt">beta2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Cphi</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0044</span><span class="w"></span>
+<span class="w">    </span><span class="nt">alpha1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span><span class="w"></span>
+<span class="w">    </span><span class="nt">alpha2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Cl-</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">],</span><span class="nt"> theta</span><span class="p">:</span><span class="w"> </span><span class="nv">-0.05</span><span class="p p-Indicator">}</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">],</span><span class="nt"> psi</span><span class="p">:</span><span class="w"> </span><span class="nv">-0.006</span><span class="p p-Indicator">}</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H+</span><span class="p p-Indicator">],</span><span class="nt"> theta</span><span class="p">:</span><span class="w"> </span><span class="nv">0.036</span><span class="p p-Indicator">}</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Cl-</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H+</span><span class="p p-Indicator">],</span><span class="nt"> psi</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-0.004</span><span class="p p-Indicator">]}</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -922,13 +924,13 @@ neutral species. 1, 2, or 5 values depending on the value of
 <span id="ideal-gas"></span><h3><code class="docutils literal notranslate"><span class="pre">ideal-gas</span></code><a class="headerlink" href="#sec-yaml-ideal-gas" title="Permalink to this heading">#</a></h3>
 <p>The ideal gas model as <a class="reference external" href="../../../doxygen/html/d7/dfa/classCantera_1_1IdealGasPhase.html">described here</a>.</p>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ohmech</span>
-<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ideal-gas</span>
-<span class="w">  </span><span class="nt">elements</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">O</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Ar</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">N</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">H2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H2O</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">HO2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H2O2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">AR</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">N2</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gas</span>
-<span class="w">  </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mixture-averaged</span>
-<span class="w">  </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="nv">300.0</span><span class="p p-Indicator">,</span><span class="nt"> P</span><span class="p">:</span><span class="w"> </span><span class="nv">1 atm</span><span class="p p-Indicator">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ohmech</span><span class="w"></span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ideal-gas</span><span class="w"></span>
+<span class="w">  </span><span class="nt">elements</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">O</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Ar</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">N</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">H2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H2O</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">HO2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H2O2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">AR</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">N2</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gas</span><span class="w"></span>
+<span class="w">  </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mixture-averaged</span><span class="w"></span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="nv">300.0</span><span class="p p-Indicator">,</span><span class="nt"> P</span><span class="p">:</span><span class="w"> </span><span class="nv">1 atm</span><span class="p p-Indicator">}</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -963,16 +965,16 @@ exponential decay</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ideal-molal-solution</span>
-<span class="nt">standard-concentration-basis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solvent-molar-volume</span>
-<span class="nt">cutoff</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">polyexp</span>
-<span class="w">  </span><span class="nt">gamma_o</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0001</span>
-<span class="w">  </span><span class="nt">gamma_k</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
-<span class="w">  </span><span class="nt">X_o</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span>
-<span class="w">  </span><span class="nt">c_0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
-<span class="w">  </span><span class="nt">slope_f</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span>
-<span class="w">  </span><span class="nt">slope_g</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ideal-molal-solution</span><span class="w"></span>
+<span class="nt">standard-concentration-basis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solvent-molar-volume</span><span class="w"></span>
+<span class="nt">cutoff</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">polyexp</span><span class="w"></span>
+<span class="w">  </span><span class="nt">gamma_o</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0001</span><span class="w"></span>
+<span class="w">  </span><span class="nt">gamma_k</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span><span class="w"></span>
+<span class="w">  </span><span class="nt">X_o</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span><span class="w"></span>
+<span class="w">  </span><span class="nt">c_0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span><span class="w"></span>
+<span class="w">  </span><span class="nt">slope_f</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span><span class="w"></span>
+<span class="w">  </span><span class="nt">slope_g</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -1006,18 +1008,18 @@ exponential decay</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pt_surf</span>
-<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ideal-surface</span>
-<span class="w">  </span><span class="nt">adjacent-phases</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">gas</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">elements</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">C</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">PT(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H2O(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CO(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CO2(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CH3(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CH2(S)s</span><span class="p p-Indicator">,</span>
-<span class="w">    </span><span class="nv">CH(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">C(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O(S)</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">surface</span>
-<span class="w">  </span><span class="nt">reactions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
-<span class="w">  </span><span class="nt">state</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">900.0</span>
-<span class="w">    </span><span class="nt">coverages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">O(S)</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> PT(S)</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="nt"> H(S)</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">}</span>
-<span class="w">  </span><span class="nt">site-density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.7063e-09</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pt_surf</span><span class="w"></span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ideal-surface</span><span class="w"></span>
+<span class="w">  </span><span class="nt">adjacent-phases</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">gas</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">elements</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">C</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">PT(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H2O(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CO(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CO2(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CH3(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CH2(S)s</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">    </span><span class="nv">CH(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">C(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O(S)</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">surface</span><span class="w"></span>
+<span class="w">  </span><span class="nt">reactions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span><span class="w"></span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">900.0</span><span class="w"></span>
+<span class="w">    </span><span class="nt">coverages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">O(S)</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> PT(S)</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="nt"> H(S)</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">}</span><span class="w"></span>
+<span class="w">  </span><span class="nt">site-density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.7063e-09</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -1037,13 +1039,13 @@ molecules.</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">KCl-ions</span>
-<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ions-from-neutral-molecule</span>
-<span class="w">  </span><span class="nt">neutral-phase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">KCl-neutral</span>
-<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">K+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">]</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">KCl-neutral</span>
-<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">KCl(l)</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Margules</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">KCl-ions</span><span class="w"></span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ions-from-neutral-molecule</span><span class="w"></span>
+<span class="w">  </span><span class="nt">neutral-phase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">KCl-neutral</span><span class="w"></span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">K+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">KCl-neutral</span><span class="w"></span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">KCl(l)</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Margules</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -1091,11 +1093,11 @@ Defaults to [0, 0].</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Margules</span>
-<span class="nt">interactions</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">KCl(l)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">LiCl(l)</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">excess-enthalpy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-17570</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-377</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">excess-entropy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-7.627</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.958</span><span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Margules</span><span class="w"></span>
+<span class="nt">interactions</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">KCl(l)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">LiCl(l)</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">excess-enthalpy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-17570</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-377</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">excess-entropy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-7.627</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.958</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -1114,9 +1116,9 @@ Defaults to [0, 0].</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Maskell-solid-solution</span>
-<span class="nt">excess-enthalpy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5 J/mol</span>
-<span class="nt">product-species</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H(s)</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Maskell-solid-solution</span><span class="w"></span>
+<span class="nt">excess-enthalpy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5 J/mol</span><span class="w"></span>
+<span class="nt">product-species</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H(s)</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -1168,24 +1170,24 @@ Defaults to <code class="docutils literal notranslate"><span class="pre">true</s
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isotropic-electron-energy-plasma</span>
-<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plasma</span>
-<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gas</span>
-<span class="w">  </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ionized-gas</span>
-<span class="w">  </span><span class="nt">electron-energy-distribution</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isotropic</span>
-<span class="w">    </span><span class="nt">shape-factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
-<span class="w">    </span><span class="nt">mean-electron-energy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0 eV</span>
-<span class="w">    </span><span class="nt">energy-levels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">]</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">discretized-electron-energy-plasma</span>
-<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plasma</span>
-<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gas</span>
-<span class="w">  </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ionized-gas</span>
-<span class="w">  </span><span class="nt">electron-energy-distribution</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">discretized</span>
-<span class="w">    </span><span class="nt">energy-levels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">distribution</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.01</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">normalize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isotropic-electron-energy-plasma</span><span class="w"></span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plasma</span><span class="w"></span>
+<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gas</span><span class="w"></span>
+<span class="w">  </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ionized-gas</span><span class="w"></span>
+<span class="w">  </span><span class="nt">electron-energy-distribution</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isotropic</span><span class="w"></span>
+<span class="w">    </span><span class="nt">shape-factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span><span class="w"></span>
+<span class="w">    </span><span class="nt">mean-electron-energy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0 eV</span><span class="w"></span>
+<span class="w">    </span><span class="nt">energy-levels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">discretized-electron-energy-plasma</span><span class="w"></span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plasma</span><span class="w"></span>
+<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gas</span><span class="w"></span>
+<span class="w">  </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ionized-gas</span><span class="w"></span>
+<span class="w">  </span><span class="nt">electron-energy-distribution</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">discretized</span><span class="w"></span>
+<span class="w">    </span><span class="nt">energy-levels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">distribution</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.01</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">normalize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="versionadded">
@@ -1230,13 +1232,13 @@ specified binary interaction</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Redlich-Kister</span>
-<span class="nt">interactions</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Li(C6)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">V(C6)</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">excess-enthalpy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-3.268e+06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.955e+06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-4.573e+06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.147e+06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.339e+06</span><span class="p p-Indicator">,</span>
-<span class="w">                    </span><span class="nv">1.117e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.997e+05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-4.866e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.362e+05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.373e+08</span><span class="p p-Indicator">,</span>
-<span class="w">                    </span><span class="nv">-2.129e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.722e+08</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.956e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">9.302e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.280e+07</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">excess-entropy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Redlich-Kister</span><span class="w"></span>
+<span class="nt">interactions</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Li(C6)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">V(C6)</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">excess-enthalpy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-3.268e+06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.955e+06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-4.573e+06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.147e+06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.339e+06</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">                    </span><span class="nv">1.117e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.997e+05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-4.866e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.362e+05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.373e+08</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">                    </span><span class="nv">-2.129e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.722e+08</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.956e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">9.302e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.280e+07</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">excess-entropy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -1366,7 +1368,7 @@ entries. See <a class="reference internal" href="species.html#sec-yaml-eos-redli
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     <br/>
   </p>
 </div>

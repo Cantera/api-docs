@@ -1,10 +1,9 @@
 var classCantera_1_1GasTransportData =
 [
-    [ "GasTransportData", "d1/d10/classCantera_1_1GasTransportData.html#a1279c4d0eaf476f98939105b264f6fda", null ],
     [ "GasTransportData", "d1/d10/classCantera_1_1GasTransportData.html#a2667c3839fc2ec4df31ff943f9c5b0cf", null ],
     [ "setCustomaryUnits", "d1/d10/classCantera_1_1GasTransportData.html#a996f2b96209e0a4d4561a2c603bba957", null ],
-    [ "validate", "d1/d10/classCantera_1_1GasTransportData.html#ad0bd387b88f724503ee3647819452239", null ],
-    [ "getParameters", "d1/d10/classCantera_1_1GasTransportData.html#a2a78301bb0bb712087d7a3eeacb78681", null ],
+    [ "validate", "d1/d10/classCantera_1_1GasTransportData.html#aa4143fcf89b41b48259ea7f6f1400fd4", null ],
+    [ "getParameters", "d1/d10/classCantera_1_1GasTransportData.html#a871682a99b22337d798b74dd3477c2b0", null ],
     [ "geometry", "d1/d10/classCantera_1_1GasTransportData.html#adf5af5b2e5925b99f035a50117b2276d", null ],
     [ "diameter", "d1/d10/classCantera_1_1GasTransportData.html#a2242a375bebbd1a1d1cf02a80d2715a2", null ],
     [ "well_depth", "d1/d10/classCantera_1_1GasTransportData.html#a8ea5de7008a6dfe3ac0d18e6e0f7cb75", null ],

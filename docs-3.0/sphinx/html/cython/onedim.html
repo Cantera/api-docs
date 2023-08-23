@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>One-dimensional Reacting Flows &#8212; Cantera 3.0.0b1 documentation</title>
+    <title>One-dimensional Reacting Flows &#8212; Cantera 3.0.0 documentation</title>
   
   
   
@@ -41,6 +41,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'cython/onedim';</script>
     <script>
@@ -379,6 +380,13 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Physical Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="units.html">Python Interface With Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="scripts.html">Mechanism Conversion</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml_conversion.html">YAML to Chemkin conversion</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </nav></div>
@@ -2621,8 +2629,11 @@ on <code class="xref py py-obj docutils literal notranslate"><span class="pre">b
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">creation_rates_ddC</span></span><a class="headerlink" href="#cantera.FlameBase.creation_rates_ddC" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate derivatives of species creation rates with respect to molar
 concentration at constant temperature, pressure and mole fractions.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 <p>Returns an array of size <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_species</span></code> x <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_points</span></code>.</p>
 </dd></dl>
 
@@ -2743,8 +2754,11 @@ for each reaction [J/kmol].</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">destruction_rates_ddC</span></span><a class="headerlink" href="#cantera.FlameBase.destruction_rates_ddC" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate derivatives of species destruction rates with respect to molar
 concentration at constant temperature, pressure and mole fractions.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 <p>Returns an array of size <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_species</span></code> x <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_points</span></code>.</p>
 </dd></dl>
 
@@ -2877,8 +2891,11 @@ includes third-body concentrations, see <a class="reference internal" href="util
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward_rate_constants_ddC</span></span><a class="headerlink" href="#cantera.FlameBase.forward_rate_constants_ddC" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate derivatives for forward rate constants with respect to molar
 concentration at constant temperature, pressure and mole fractions.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 <p>Returns an array of size <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_reactions</span></code> x <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_points</span></code>.</p>
 </dd></dl>
 
@@ -2911,8 +2928,11 @@ phases or [kmol/m^2/s] for surface phases.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward_rates_of_progress_ddC</span></span><a class="headerlink" href="#cantera.FlameBase.forward_rates_of_progress_ddC" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate derivatives for forward rates-of-progress with respect to molar
 concentration at constant temperature, pressure and mole fractions.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 <p>Returns an array of size <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_reactions</span></code> x <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_points</span></code>.</p>
 </dd></dl>
 
@@ -3144,8 +3164,11 @@ molar diffusive fluxes to gradients in the species mole fractions.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">net_production_rates_ddC</span></span><a class="headerlink" href="#cantera.FlameBase.net_production_rates_ddC" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate derivatives of species net production rates with respect to molar
 density at constant temperature, pressure and mole fractions.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 <p>Returns an array of size <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_species</span></code> x <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_points</span></code>.</p>
 </dd></dl>
 
@@ -3178,8 +3201,11 @@ or [kmol/m^2/s] for surface phases.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">net_rates_of_progress_ddC</span></span><a class="headerlink" href="#cantera.FlameBase.net_rates_of_progress_ddC" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate derivatives for net rates-of-progress with respect to molar
 concentration at constant temperature, pressure and mole fractions.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 <p>Returns an array of size <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_reactions</span></code> x <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_points</span></code>.</p>
 </dd></dl>
 
@@ -3314,8 +3340,11 @@ phases or [kmol/m^2/s] for surface phases.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reverse_rates_of_progress_ddC</span></span><a class="headerlink" href="#cantera.FlameBase.reverse_rates_of_progress_ddC" title="Permalink to this definition">#</a></dt>
 <dd><p>Calculate derivatives for reverse rates-of-progress with respect to molar
 concentration at constant temperature, pressure and mole fractions.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 <p>Returns an array of size <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_reactions</span></code> x <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_points</span></code>.</p>
 </dd></dl>
 
@@ -3776,37 +3805,419 @@ with deprecated HDF format.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composite-domains">Composite Domains</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#freeflame">FreeFlame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#burnerflame">BurnerFlame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counterflowdiffusionflame">CounterflowDiffusionFlame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counterflowpremixedflame">CounterflowPremixedFlame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counterflowtwinpremixedflame">CounterflowTwinPremixedFlame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#impingingjet">ImpingingJet</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ionfreeflame">IonFreeFlame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ionburnerflame">IonBurnerFlame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#freeflame">FreeFlame</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FreeFlame"><code class="docutils literal notranslate"><span class="pre">FreeFlame</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FreeFlame.flame"><code class="docutils literal notranslate"><span class="pre">FreeFlame.flame</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FreeFlame.get_flame_speed_reaction_sensitivities"><code class="docutils literal notranslate"><span class="pre">FreeFlame.get_flame_speed_reaction_sensitivities()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FreeFlame.inlet"><code class="docutils literal notranslate"><span class="pre">FreeFlame.inlet</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FreeFlame.outlet"><code class="docutils literal notranslate"><span class="pre">FreeFlame.outlet</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FreeFlame.set_initial_guess"><code class="docutils literal notranslate"><span class="pre">FreeFlame.set_initial_guess()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FreeFlame.solve"><code class="docutils literal notranslate"><span class="pre">FreeFlame.solve()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#burnerflame">BurnerFlame</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.BurnerFlame"><code class="docutils literal notranslate"><span class="pre">BurnerFlame</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.BurnerFlame.burner"><code class="docutils literal notranslate"><span class="pre">BurnerFlame.burner</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.BurnerFlame.flame"><code class="docutils literal notranslate"><span class="pre">BurnerFlame.flame</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.BurnerFlame.outlet"><code class="docutils literal notranslate"><span class="pre">BurnerFlame.outlet</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.BurnerFlame.set_initial_guess"><code class="docutils literal notranslate"><span class="pre">BurnerFlame.set_initial_guess()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.BurnerFlame.solve"><code class="docutils literal notranslate"><span class="pre">BurnerFlame.solve()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counterflowdiffusionflame">CounterflowDiffusionFlame</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowDiffusionFlame"><code class="docutils literal notranslate"><span class="pre">CounterflowDiffusionFlame</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowDiffusionFlame.equivalence_ratio"><code class="docutils literal notranslate"><span class="pre">CounterflowDiffusionFlame.equivalence_ratio</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowDiffusionFlame.extinct"><code class="docutils literal notranslate"><span class="pre">CounterflowDiffusionFlame.extinct()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowDiffusionFlame.flame"><code class="docutils literal notranslate"><span class="pre">CounterflowDiffusionFlame.flame</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowDiffusionFlame.fuel_inlet"><code class="docutils literal notranslate"><span class="pre">CounterflowDiffusionFlame.fuel_inlet</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowDiffusionFlame.mixture_fraction"><code class="docutils literal notranslate"><span class="pre">CounterflowDiffusionFlame.mixture_fraction()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowDiffusionFlame.oxidizer_inlet"><code class="docutils literal notranslate"><span class="pre">CounterflowDiffusionFlame.oxidizer_inlet</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowDiffusionFlame.set_initial_guess"><code class="docutils literal notranslate"><span class="pre">CounterflowDiffusionFlame.set_initial_guess()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowDiffusionFlame.solve"><code class="docutils literal notranslate"><span class="pre">CounterflowDiffusionFlame.solve()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowDiffusionFlame.strain_rate"><code class="docutils literal notranslate"><span class="pre">CounterflowDiffusionFlame.strain_rate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counterflowpremixedflame">CounterflowPremixedFlame</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowPremixedFlame"><code class="docutils literal notranslate"><span class="pre">CounterflowPremixedFlame</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowPremixedFlame.flame"><code class="docutils literal notranslate"><span class="pre">CounterflowPremixedFlame.flame</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowPremixedFlame.products"><code class="docutils literal notranslate"><span class="pre">CounterflowPremixedFlame.products</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowPremixedFlame.reactants"><code class="docutils literal notranslate"><span class="pre">CounterflowPremixedFlame.reactants</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowPremixedFlame.set_initial_guess"><code class="docutils literal notranslate"><span class="pre">CounterflowPremixedFlame.set_initial_guess()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counterflowtwinpremixedflame">CounterflowTwinPremixedFlame</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowTwinPremixedFlame"><code class="docutils literal notranslate"><span class="pre">CounterflowTwinPremixedFlame</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowTwinPremixedFlame.flame"><code class="docutils literal notranslate"><span class="pre">CounterflowTwinPremixedFlame.flame</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowTwinPremixedFlame.products"><code class="docutils literal notranslate"><span class="pre">CounterflowTwinPremixedFlame.products</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowTwinPremixedFlame.reactants"><code class="docutils literal notranslate"><span class="pre">CounterflowTwinPremixedFlame.reactants</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CounterflowTwinPremixedFlame.set_initial_guess"><code class="docutils literal notranslate"><span class="pre">CounterflowTwinPremixedFlame.set_initial_guess()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#impingingjet">ImpingingJet</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ImpingingJet"><code class="docutils literal notranslate"><span class="pre">ImpingingJet</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ImpingingJet.flame"><code class="docutils literal notranslate"><span class="pre">ImpingingJet.flame</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ImpingingJet.inlet"><code class="docutils literal notranslate"><span class="pre">ImpingingJet.inlet</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ImpingingJet.set_initial_guess"><code class="docutils literal notranslate"><span class="pre">ImpingingJet.set_initial_guess()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ImpingingJet.surface"><code class="docutils literal notranslate"><span class="pre">ImpingingJet.surface</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ionfreeflame">IonFreeFlame</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonFreeFlame"><code class="docutils literal notranslate"><span class="pre">IonFreeFlame</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonFreeFlame.E"><code class="docutils literal notranslate"><span class="pre">IonFreeFlame.E</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonFreeFlame.electric_field_enabled"><code class="docutils literal notranslate"><span class="pre">IonFreeFlame.electric_field_enabled</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonFreeFlame.solve"><code class="docutils literal notranslate"><span class="pre">IonFreeFlame.solve()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonFreeFlame.flame"><code class="docutils literal notranslate"><span class="pre">IonFreeFlame.flame</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonFreeFlame.inlet"><code class="docutils literal notranslate"><span class="pre">IonFreeFlame.inlet</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonFreeFlame.outlet"><code class="docutils literal notranslate"><span class="pre">IonFreeFlame.outlet</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ionburnerflame">IonBurnerFlame</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonBurnerFlame"><code class="docutils literal notranslate"><span class="pre">IonBurnerFlame</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonBurnerFlame.E"><code class="docutils literal notranslate"><span class="pre">IonBurnerFlame.E</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonBurnerFlame.electric_field_enabled"><code class="docutils literal notranslate"><span class="pre">IonBurnerFlame.electric_field_enabled</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonBurnerFlame.solve"><code class="docutils literal notranslate"><span class="pre">IonBurnerFlame.solve()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonBurnerFlame.burner"><code class="docutils literal notranslate"><span class="pre">IonBurnerFlame.burner</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonBurnerFlame.flame"><code class="docutils literal notranslate"><span class="pre">IonBurnerFlame.flame</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonBurnerFlame.outlet"><code class="docutils literal notranslate"><span class="pre">IonBurnerFlame.outlet</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flow-domains">Flow Domains</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idealgasflow">IdealGasFlow</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#freeflow">FreeFlow</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#axisymmetricflow">AxisymmetricFlow</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ionflow">IonFlow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idealgasflow">IdealGasFlow</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.P"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.P</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.boundary_emissivities"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.boundary_emissivities</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.bounds"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.bounds()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.component_index"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.component_index()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.component_name"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.component_name()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.component_names"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.component_names</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.domain_type"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.domain_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.electric_field_enabled"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.electric_field_enabled</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.energy_enabled"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.energy_enabled</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.flow_type"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.flow_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.get_settings3"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.get_settings3()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.grid"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.grid</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.have_user_tolerances"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.have_user_tolerances</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.index"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.index</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.n_components"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.n_components</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.n_points"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.n_points</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.name"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.name</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.phase"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.phase</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.radiation_enabled"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.radiation_enabled</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.radiative_heat_loss"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.radiative_heat_loss</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.set_axisymmetric_flow"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.set_axisymmetric_flow()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.set_bounds"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.set_bounds()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.set_default_tolerances"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.set_default_tolerances()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.set_fixed_temp_profile"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.set_fixed_temp_profile()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.set_free_flow"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.set_free_flow()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.set_steady_tolerances"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.set_steady_tolerances()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.set_transient_tolerances"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.set_transient_tolerances()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.set_transport"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.set_transport()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.settings"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.settings</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.solving_stage"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.solving_stage</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.soret_enabled"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.soret_enabled</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.steady_abstol"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.steady_abstol()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.steady_reltol"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.steady_reltol()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.tolerances"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.tolerances()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.transient_abstol"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.transient_abstol()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.transient_reltol"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.transient_reltol()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.transport_model"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.transport_model</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasFlow.type"><code class="docutils literal notranslate"><span class="pre">IdealGasFlow.type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#freeflow">FreeFlow</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FreeFlow"><code class="docutils literal notranslate"><span class="pre">FreeFlow</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#axisymmetricflow">AxisymmetricFlow</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AxisymmetricFlow"><code class="docutils literal notranslate"><span class="pre">AxisymmetricFlow</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ionflow">IonFlow</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonFlow"><code class="docutils literal notranslate"><span class="pre">IonFlow</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IonFlow.set_solving_stage"><code class="docutils literal notranslate"><span class="pre">IonFlow.set_solving_stage()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundaries">Boundaries</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inlet1d">Inlet1D</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outlet1d">Outlet1D</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outletreservoir1d">OutletReservoir1D</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetryplane1d">SymmetryPlane1D</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#surface1d">Surface1D</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactingsurface1d">ReactingSurface1D</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inlet1d">Inlet1D</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Inlet1D"><code class="docutils literal notranslate"><span class="pre">Inlet1D</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outlet1d">Outlet1D</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Outlet1D"><code class="docutils literal notranslate"><span class="pre">Outlet1D</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outletreservoir1d">OutletReservoir1D</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.OutletReservoir1D"><code class="docutils literal notranslate"><span class="pre">OutletReservoir1D</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetryplane1d">SymmetryPlane1D</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.SymmetryPlane1D"><code class="docutils literal notranslate"><span class="pre">SymmetryPlane1D</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#surface1d">Surface1D</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Surface1D"><code class="docutils literal notranslate"><span class="pre">Surface1D</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactingsurface1d">ReactingSurface1D</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactingSurface1D"><code class="docutils literal notranslate"><span class="pre">ReactingSurface1D</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactingSurface1D.coverage_enabled"><code class="docutils literal notranslate"><span class="pre">ReactingSurface1D.coverage_enabled</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactingSurface1D.phase"><code class="docutils literal notranslate"><span class="pre">ReactingSurface1D.phase</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactingSurface1D.set_kinetics"><code class="docutils literal notranslate"><span class="pre">ReactingSurface1D.set_kinetics()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactingSurface1D.surface"><code class="docutils literal notranslate"><span class="pre">ReactingSurface1D.surface</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-classes">Base Classes</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domain1d">Domain1D</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary1d">Boundary1D</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sim1d">Sim1D</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flamebase">FlameBase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domain1d">Domain1D</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D"><code class="docutils literal notranslate"><span class="pre">Domain1D</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.bounds"><code class="docutils literal notranslate"><span class="pre">Domain1D.bounds()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.component_index"><code class="docutils literal notranslate"><span class="pre">Domain1D.component_index()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.component_name"><code class="docutils literal notranslate"><span class="pre">Domain1D.component_name()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.component_names"><code class="docutils literal notranslate"><span class="pre">Domain1D.component_names</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.domain_type"><code class="docutils literal notranslate"><span class="pre">Domain1D.domain_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.grid"><code class="docutils literal notranslate"><span class="pre">Domain1D.grid</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.have_user_tolerances"><code class="docutils literal notranslate"><span class="pre">Domain1D.have_user_tolerances</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.index"><code class="docutils literal notranslate"><span class="pre">Domain1D.index</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.n_components"><code class="docutils literal notranslate"><span class="pre">Domain1D.n_components</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.n_points"><code class="docutils literal notranslate"><span class="pre">Domain1D.n_points</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.name"><code class="docutils literal notranslate"><span class="pre">Domain1D.name</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.phase"><code class="docutils literal notranslate"><span class="pre">Domain1D.phase</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.set_bounds"><code class="docutils literal notranslate"><span class="pre">Domain1D.set_bounds()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.set_default_tolerances"><code class="docutils literal notranslate"><span class="pre">Domain1D.set_default_tolerances()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.set_steady_tolerances"><code class="docutils literal notranslate"><span class="pre">Domain1D.set_steady_tolerances()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.set_transient_tolerances"><code class="docutils literal notranslate"><span class="pre">Domain1D.set_transient_tolerances()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.settings"><code class="docutils literal notranslate"><span class="pre">Domain1D.settings</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.steady_abstol"><code class="docutils literal notranslate"><span class="pre">Domain1D.steady_abstol()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.steady_reltol"><code class="docutils literal notranslate"><span class="pre">Domain1D.steady_reltol()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.tolerances"><code class="docutils literal notranslate"><span class="pre">Domain1D.tolerances()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.transient_abstol"><code class="docutils literal notranslate"><span class="pre">Domain1D.transient_abstol()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Domain1D.transient_reltol"><code class="docutils literal notranslate"><span class="pre">Domain1D.transient_reltol()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary1d">Boundary1D</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Boundary1D"><code class="docutils literal notranslate"><span class="pre">Boundary1D</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Boundary1D.T"><code class="docutils literal notranslate"><span class="pre">Boundary1D.T</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Boundary1D.X"><code class="docutils literal notranslate"><span class="pre">Boundary1D.X</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Boundary1D.Y"><code class="docutils literal notranslate"><span class="pre">Boundary1D.Y</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Boundary1D.mdot"><code class="docutils literal notranslate"><span class="pre">Boundary1D.mdot</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Boundary1D.spread_rate"><code class="docutils literal notranslate"><span class="pre">Boundary1D.spread_rate</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sim1d">Sim1D</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D"><code class="docutils literal notranslate"><span class="pre">Sim1D</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.clear_stats"><code class="docutils literal notranslate"><span class="pre">Sim1D.clear_stats()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.domain_index"><code class="docutils literal notranslate"><span class="pre">Sim1D.domain_index()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.domains"><code class="docutils literal notranslate"><span class="pre">Sim1D.domains</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.eval"><code class="docutils literal notranslate"><span class="pre">Sim1D.eval()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.eval_count_stats"><code class="docutils literal notranslate"><span class="pre">Sim1D.eval_count_stats</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.eval_time_stats"><code class="docutils literal notranslate"><span class="pre">Sim1D.eval_time_stats</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.extinct"><code class="docutils literal notranslate"><span class="pre">Sim1D.extinct()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.fixed_temperature"><code class="docutils literal notranslate"><span class="pre">Sim1D.fixed_temperature</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.fixed_temperature_location"><code class="docutils literal notranslate"><span class="pre">Sim1D.fixed_temperature_location</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.get_max_grid_points"><code class="docutils literal notranslate"><span class="pre">Sim1D.get_max_grid_points()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.get_refine_criteria"><code class="docutils literal notranslate"><span class="pre">Sim1D.get_refine_criteria()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.grid_size_stats"><code class="docutils literal notranslate"><span class="pre">Sim1D.grid_size_stats</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.jacobian_count_stats"><code class="docutils literal notranslate"><span class="pre">Sim1D.jacobian_count_stats</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.jacobian_time_stats"><code class="docutils literal notranslate"><span class="pre">Sim1D.jacobian_time_stats</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.max_time_step_count"><code class="docutils literal notranslate"><span class="pre">Sim1D.max_time_step_count</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.phase"><code class="docutils literal notranslate"><span class="pre">Sim1D.phase()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.profile"><code class="docutils literal notranslate"><span class="pre">Sim1D.profile()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.refine"><code class="docutils literal notranslate"><span class="pre">Sim1D.refine()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.restore"><code class="docutils literal notranslate"><span class="pre">Sim1D.restore()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.restore_data"><code class="docutils literal notranslate"><span class="pre">Sim1D.restore_data()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.restore_steady_solution"><code class="docutils literal notranslate"><span class="pre">Sim1D.restore_steady_solution()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.restore_time_stepping_solution"><code class="docutils literal notranslate"><span class="pre">Sim1D.restore_time_stepping_solution()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.save"><code class="docutils literal notranslate"><span class="pre">Sim1D.save()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_flat_profile"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_flat_profile()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_grid_min"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_grid_min()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_initial_guess"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_initial_guess()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_interrupt"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_interrupt()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_max_grid_points"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_max_grid_points()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_max_jac_age"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_max_jac_age()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_max_time_step"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_max_time_step()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_min_time_step"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_min_time_step()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_profile"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_profile()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_refine_criteria"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_refine_criteria()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_steady_callback"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_steady_callback()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_time_step"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_time_step()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_time_step_callback"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_time_step_callback()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_time_step_factor"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_time_step_factor()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.set_value"><code class="docutils literal notranslate"><span class="pre">Sim1D.set_value()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.show"><code class="docutils literal notranslate"><span class="pre">Sim1D.show()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.show_solution"><code class="docutils literal notranslate"><span class="pre">Sim1D.show_solution()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.show_stats"><code class="docutils literal notranslate"><span class="pre">Sim1D.show_stats()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.solve"><code class="docutils literal notranslate"><span class="pre">Sim1D.solve()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.solve_adjoint"><code class="docutils literal notranslate"><span class="pre">Sim1D.solve_adjoint()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.time_step_stats"><code class="docutils literal notranslate"><span class="pre">Sim1D.time_step_stats</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.value"><code class="docutils literal notranslate"><span class="pre">Sim1D.value()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Sim1D.work_value"><code class="docutils literal notranslate"><span class="pre">Sim1D.work_value()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flamebase">FlameBase</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase"><code class="docutils literal notranslate"><span class="pre">FlameBase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.E"><code class="docutils literal notranslate"><span class="pre">FlameBase.E</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.L"><code class="docutils literal notranslate"><span class="pre">FlameBase.L</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.P"><code class="docutils literal notranslate"><span class="pre">FlameBase.P</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.T"><code class="docutils literal notranslate"><span class="pre">FlameBase.T</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.X"><code class="docutils literal notranslate"><span class="pre">FlameBase.X</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.Y"><code class="docutils literal notranslate"><span class="pre">FlameBase.Y</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.activities"><code class="docutils literal notranslate"><span class="pre">FlameBase.activities</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.activity_coefficients"><code class="docutils literal notranslate"><span class="pre">FlameBase.activity_coefficients</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.boundary_emissivities"><code class="docutils literal notranslate"><span class="pre">FlameBase.boundary_emissivities</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.chemical_potentials"><code class="docutils literal notranslate"><span class="pre">FlameBase.chemical_potentials</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.concentrations"><code class="docutils literal notranslate"><span class="pre">FlameBase.concentrations</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.cp"><code class="docutils literal notranslate"><span class="pre">FlameBase.cp</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.cp_mass"><code class="docutils literal notranslate"><span class="pre">FlameBase.cp_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.cp_mole"><code class="docutils literal notranslate"><span class="pre">FlameBase.cp_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.creation_rates"><code class="docutils literal notranslate"><span class="pre">FlameBase.creation_rates</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.creation_rates_ddC"><code class="docutils literal notranslate"><span class="pre">FlameBase.creation_rates_ddC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.creation_rates_ddP"><code class="docutils literal notranslate"><span class="pre">FlameBase.creation_rates_ddP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.creation_rates_ddT"><code class="docutils literal notranslate"><span class="pre">FlameBase.creation_rates_ddT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.cv"><code class="docutils literal notranslate"><span class="pre">FlameBase.cv</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.cv_mass"><code class="docutils literal notranslate"><span class="pre">FlameBase.cv_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.cv_mole"><code class="docutils literal notranslate"><span class="pre">FlameBase.cv_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.delta_enthalpy"><code class="docutils literal notranslate"><span class="pre">FlameBase.delta_enthalpy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.delta_entropy"><code class="docutils literal notranslate"><span class="pre">FlameBase.delta_entropy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.delta_gibbs"><code class="docutils literal notranslate"><span class="pre">FlameBase.delta_gibbs</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.delta_standard_enthalpy"><code class="docutils literal notranslate"><span class="pre">FlameBase.delta_standard_enthalpy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.delta_standard_entropy"><code class="docutils literal notranslate"><span class="pre">FlameBase.delta_standard_entropy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.delta_standard_gibbs"><code class="docutils literal notranslate"><span class="pre">FlameBase.delta_standard_gibbs</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.density"><code class="docutils literal notranslate"><span class="pre">FlameBase.density</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.density_mass"><code class="docutils literal notranslate"><span class="pre">FlameBase.density_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.density_mole"><code class="docutils literal notranslate"><span class="pre">FlameBase.density_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.destruction_rates"><code class="docutils literal notranslate"><span class="pre">FlameBase.destruction_rates</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.destruction_rates_ddC"><code class="docutils literal notranslate"><span class="pre">FlameBase.destruction_rates_ddC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.destruction_rates_ddP"><code class="docutils literal notranslate"><span class="pre">FlameBase.destruction_rates_ddP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.destruction_rates_ddT"><code class="docutils literal notranslate"><span class="pre">FlameBase.destruction_rates_ddT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.electric_field_enabled"><code class="docutils literal notranslate"><span class="pre">FlameBase.electric_field_enabled</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.electrochemical_potentials"><code class="docutils literal notranslate"><span class="pre">FlameBase.electrochemical_potentials</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.elemental_mass_fraction"><code class="docutils literal notranslate"><span class="pre">FlameBase.elemental_mass_fraction()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.elemental_mole_fraction"><code class="docutils literal notranslate"><span class="pre">FlameBase.elemental_mole_fraction()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.energy_enabled"><code class="docutils literal notranslate"><span class="pre">FlameBase.energy_enabled</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.enthalpy_mass"><code class="docutils literal notranslate"><span class="pre">FlameBase.enthalpy_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.enthalpy_mole"><code class="docutils literal notranslate"><span class="pre">FlameBase.enthalpy_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.entropy_mass"><code class="docutils literal notranslate"><span class="pre">FlameBase.entropy_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.entropy_mole"><code class="docutils literal notranslate"><span class="pre">FlameBase.entropy_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.equilibrium_constants"><code class="docutils literal notranslate"><span class="pre">FlameBase.equilibrium_constants</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.forward_rate_constants"><code class="docutils literal notranslate"><span class="pre">FlameBase.forward_rate_constants</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.forward_rate_constants_ddC"><code class="docutils literal notranslate"><span class="pre">FlameBase.forward_rate_constants_ddC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.forward_rate_constants_ddP"><code class="docutils literal notranslate"><span class="pre">FlameBase.forward_rate_constants_ddP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.forward_rate_constants_ddT"><code class="docutils literal notranslate"><span class="pre">FlameBase.forward_rate_constants_ddT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.forward_rates_of_progress"><code class="docutils literal notranslate"><span class="pre">FlameBase.forward_rates_of_progress</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.forward_rates_of_progress_ddC"><code class="docutils literal notranslate"><span class="pre">FlameBase.forward_rates_of_progress_ddC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.forward_rates_of_progress_ddP"><code class="docutils literal notranslate"><span class="pre">FlameBase.forward_rates_of_progress_ddP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.forward_rates_of_progress_ddT"><code class="docutils literal notranslate"><span class="pre">FlameBase.forward_rates_of_progress_ddT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.from_array"><code class="docutils literal notranslate"><span class="pre">FlameBase.from_array()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.from_pandas"><code class="docutils literal notranslate"><span class="pre">FlameBase.from_pandas()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.from_solution_array"><code class="docutils literal notranslate"><span class="pre">FlameBase.from_solution_array()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.g"><code class="docutils literal notranslate"><span class="pre">FlameBase.g</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.gas"><code class="docutils literal notranslate"><span class="pre">FlameBase.gas</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.get_refine_criteria"><code class="docutils literal notranslate"><span class="pre">FlameBase.get_refine_criteria()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.gibbs_mass"><code class="docutils literal notranslate"><span class="pre">FlameBase.gibbs_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.gibbs_mole"><code class="docutils literal notranslate"><span class="pre">FlameBase.gibbs_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.grid"><code class="docutils literal notranslate"><span class="pre">FlameBase.grid</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.h"><code class="docutils literal notranslate"><span class="pre">FlameBase.h</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.heat_production_rates"><code class="docutils literal notranslate"><span class="pre">FlameBase.heat_production_rates</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.heat_release_rate"><code class="docutils literal notranslate"><span class="pre">FlameBase.heat_release_rate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.int_energy"><code class="docutils literal notranslate"><span class="pre">FlameBase.int_energy</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.int_energy_mass"><code class="docutils literal notranslate"><span class="pre">FlameBase.int_energy_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.int_energy_mole"><code class="docutils literal notranslate"><span class="pre">FlameBase.int_energy_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.isothermal_compressibility"><code class="docutils literal notranslate"><span class="pre">FlameBase.isothermal_compressibility</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.max_grid_points"><code class="docutils literal notranslate"><span class="pre">FlameBase.max_grid_points</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.mean_molecular_weight"><code class="docutils literal notranslate"><span class="pre">FlameBase.mean_molecular_weight</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.mix_diff_coeffs"><code class="docutils literal notranslate"><span class="pre">FlameBase.mix_diff_coeffs</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.mix_diff_coeffs_mass"><code class="docutils literal notranslate"><span class="pre">FlameBase.mix_diff_coeffs_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.mix_diff_coeffs_mole"><code class="docutils literal notranslate"><span class="pre">FlameBase.mix_diff_coeffs_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.mobilities"><code class="docutils literal notranslate"><span class="pre">FlameBase.mobilities</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.net_production_rates"><code class="docutils literal notranslate"><span class="pre">FlameBase.net_production_rates</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.net_production_rates_ddC"><code class="docutils literal notranslate"><span class="pre">FlameBase.net_production_rates_ddC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.net_production_rates_ddP"><code class="docutils literal notranslate"><span class="pre">FlameBase.net_production_rates_ddP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.net_production_rates_ddT"><code class="docutils literal notranslate"><span class="pre">FlameBase.net_production_rates_ddT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.net_rates_of_progress"><code class="docutils literal notranslate"><span class="pre">FlameBase.net_rates_of_progress</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.net_rates_of_progress_ddC"><code class="docutils literal notranslate"><span class="pre">FlameBase.net_rates_of_progress_ddC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.net_rates_of_progress_ddP"><code class="docutils literal notranslate"><span class="pre">FlameBase.net_rates_of_progress_ddP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.net_rates_of_progress_ddT"><code class="docutils literal notranslate"><span class="pre">FlameBase.net_rates_of_progress_ddT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.other_components"><code class="docutils literal notranslate"><span class="pre">FlameBase.other_components()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.partial_molar_cp"><code class="docutils literal notranslate"><span class="pre">FlameBase.partial_molar_cp</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.partial_molar_enthalpies"><code class="docutils literal notranslate"><span class="pre">FlameBase.partial_molar_enthalpies</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.partial_molar_entropies"><code class="docutils literal notranslate"><span class="pre">FlameBase.partial_molar_entropies</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.partial_molar_int_energies"><code class="docutils literal notranslate"><span class="pre">FlameBase.partial_molar_int_energies</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.partial_molar_volumes"><code class="docutils literal notranslate"><span class="pre">FlameBase.partial_molar_volumes</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.radiation_enabled"><code class="docutils literal notranslate"><span class="pre">FlameBase.radiation_enabled</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.read_hdf"><code class="docutils literal notranslate"><span class="pre">FlameBase.read_hdf()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.reverse_rate_constants"><code class="docutils literal notranslate"><span class="pre">FlameBase.reverse_rate_constants</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.reverse_rates_of_progress"><code class="docutils literal notranslate"><span class="pre">FlameBase.reverse_rates_of_progress</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.reverse_rates_of_progress_ddC"><code class="docutils literal notranslate"><span class="pre">FlameBase.reverse_rates_of_progress_ddC</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.reverse_rates_of_progress_ddP"><code class="docutils literal notranslate"><span class="pre">FlameBase.reverse_rates_of_progress_ddP</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.reverse_rates_of_progress_ddT"><code class="docutils literal notranslate"><span class="pre">FlameBase.reverse_rates_of_progress_ddT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.s"><code class="docutils literal notranslate"><span class="pre">FlameBase.s</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.set_gas_state"><code class="docutils literal notranslate"><span class="pre">FlameBase.set_gas_state()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.set_initial_guess"><code class="docutils literal notranslate"><span class="pre">FlameBase.set_initial_guess()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.set_profile"><code class="docutils literal notranslate"><span class="pre">FlameBase.set_profile()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.set_refine_criteria"><code class="docutils literal notranslate"><span class="pre">FlameBase.set_refine_criteria()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.settings"><code class="docutils literal notranslate"><span class="pre">FlameBase.settings</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.solution"><code class="docutils literal notranslate"><span class="pre">FlameBase.solution()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.soret_enabled"><code class="docutils literal notranslate"><span class="pre">FlameBase.soret_enabled</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.sound_speed"><code class="docutils literal notranslate"><span class="pre">FlameBase.sound_speed</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.species_viscosities"><code class="docutils literal notranslate"><span class="pre">FlameBase.species_viscosities</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.spread_rate"><code class="docutils literal notranslate"><span class="pre">FlameBase.spread_rate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.standard_cp_R"><code class="docutils literal notranslate"><span class="pre">FlameBase.standard_cp_R</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.standard_enthalpies_RT"><code class="docutils literal notranslate"><span class="pre">FlameBase.standard_enthalpies_RT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.standard_entropies_R"><code class="docutils literal notranslate"><span class="pre">FlameBase.standard_entropies_R</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.standard_gibbs_RT"><code class="docutils literal notranslate"><span class="pre">FlameBase.standard_gibbs_RT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.standard_int_energies_RT"><code class="docutils literal notranslate"><span class="pre">FlameBase.standard_int_energies_RT</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.thermal_conductivity"><code class="docutils literal notranslate"><span class="pre">FlameBase.thermal_conductivity</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.thermal_diff_coeffs"><code class="docutils literal notranslate"><span class="pre">FlameBase.thermal_diff_coeffs</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.thermal_expansion_coeff"><code class="docutils literal notranslate"><span class="pre">FlameBase.thermal_expansion_coeff</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.third_body_concentrations"><code class="docutils literal notranslate"><span class="pre">FlameBase.third_body_concentrations</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.to_array"><code class="docutils literal notranslate"><span class="pre">FlameBase.to_array()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.to_pandas"><code class="docutils literal notranslate"><span class="pre">FlameBase.to_pandas()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.to_solution_array"><code class="docutils literal notranslate"><span class="pre">FlameBase.to_solution_array()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.transport_model"><code class="docutils literal notranslate"><span class="pre">FlameBase.transport_model</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.velocity"><code class="docutils literal notranslate"><span class="pre">FlameBase.velocity</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.viscosity"><code class="docutils literal notranslate"><span class="pre">FlameBase.viscosity</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.volume"><code class="docutils literal notranslate"><span class="pre">FlameBase.volume</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.volume_mass"><code class="docutils literal notranslate"><span class="pre">FlameBase.volume_mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.volume_mole"><code class="docutils literal notranslate"><span class="pre">FlameBase.volume_mole</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.write_csv"><code class="docutils literal notranslate"><span class="pre">FlameBase.write_csv()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlameBase.write_hdf"><code class="docutils literal notranslate"><span class="pre">FlameBase.write_hdf()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -3852,7 +4263,7 @@ with deprecated HDF format.</p>
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     <br/>
   </p>
 </div>

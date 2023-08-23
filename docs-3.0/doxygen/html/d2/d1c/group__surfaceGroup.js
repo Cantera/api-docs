@@ -1,7 +1,6 @@
 var group__surfaceGroup =
 [
     [ "InterfaceRateBase", "dd/d4c/classCantera_1_1InterfaceRateBase.html", [
-      [ "InterfaceRateBase", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a8e8a6ccf426845fa4052ae9e98441731", null ],
       [ "setParameters", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a3c98e20f2c74902641a868a6fc75bbc5", null ],
       [ "getParameters", "dd/d4c/classCantera_1_1InterfaceRateBase.html#ac770256e0f2a4f209f01525f6efd9a3c", null ],
       [ "setCoverageDependencies", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a14df35749daefc00301fc8ae1a0068b8", null ],
@@ -21,7 +20,6 @@ var group__surfaceGroup =
       [ "m_ecov", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a1b201bed97fdf19c78cabfe90fd206d0", null ],
       [ "m_mcov", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a022b217305ac828a61460fcc83a08ab3", null ],
       [ "m_chargeTransfer", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a830d1aa3d70a948fb731f9c7ddd467f1", null ],
-      [ "m_exchangeCurrentDensityFormulation", "dd/d4c/classCantera_1_1InterfaceRateBase.html#aaae8fa4129f49b09f8eda3a3213b2d48", null ],
       [ "m_beta", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a18c413a52e6391d131cff0bc1bd92a58", null ],
       [ "m_deltaPotential_RT", "dd/d4c/classCantera_1_1InterfaceRateBase.html#afbd21cec516276d0b190e6d0e873e82f", null ],
       [ "m_deltaGibbs0_RT", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a579cec9232d90acb11f3c8276264dd99", null ],
@@ -36,7 +34,6 @@ var group__surfaceGroup =
       [ "m_netCharges", "dd/d4c/classCantera_1_1InterfaceRateBase.html#a9886339db6803d98116792d127d75bf4", null ]
     ] ],
     [ "StickingCoverage", "db/da8/classCantera_1_1StickingCoverage.html", [
-      [ "StickingCoverage", "db/da8/classCantera_1_1StickingCoverage.html#ae2d8e752d18253db9f6c244ee8d56913", null ],
       [ "setStickingParameters", "db/da8/classCantera_1_1StickingCoverage.html#a067765003be30813de5ebf855afc4c65", null ],
       [ "getStickingParameters", "db/da8/classCantera_1_1StickingCoverage.html#ab87f302767f2d6c6d8b6d7464f08a54d", null ],
       [ "motzWiseCorrection", "db/da8/classCantera_1_1StickingCoverage.html#ae52b5ac51c6606e8864e791d1e490a46", null ],
@@ -56,38 +53,20 @@ var group__surfaceGroup =
       [ "m_multiplier", "db/da8/classCantera_1_1StickingCoverage.html#ad757b9ade5c0e48820804bce31958d75", null ],
       [ "m_factor", "db/da8/classCantera_1_1StickingCoverage.html#a52aab515018bdd51564b6d137163b26e", null ]
     ] ],
-    [ "InterfaceRate", "d4/df1/classCantera_1_1InterfaceRate.html", [
-      [ "InterfaceRate", "d4/df1/classCantera_1_1InterfaceRate.html#a1cf2bf11857f3d467bb21186de686ccc", null ],
+    [ "InterfaceRate< RateType, DataType >", "d4/df1/classCantera_1_1InterfaceRate.html", [
       [ "InterfaceRate", "d4/df1/classCantera_1_1InterfaceRate.html#a3724b7e85b3d9c2d2f486a351ecaf113", null ],
-      [ "InterfaceRate", "d4/df1/classCantera_1_1InterfaceRate.html#a8121ac9dfc6d6627f399ab6a0bd5cd5d", null ],
-      [ "newMultiRate", "d4/df1/classCantera_1_1InterfaceRate.html#ad3da98231a262c633218e2a1562b6b90", null ],
-      [ "type", "d4/df1/classCantera_1_1InterfaceRate.html#a2974561a5f408aa3ce45a347ea6c62b1", null ],
-      [ "setParameters", "d4/df1/classCantera_1_1InterfaceRate.html#ae3491aa21735285b6402a014ac26bdb8", null ],
-      [ "getParameters", "d4/df1/classCantera_1_1InterfaceRate.html#aa231061435bb7c618ef9b911e1ce2589", null ],
-      [ "setContext", "d4/df1/classCantera_1_1InterfaceRate.html#ae1ab8fb9ba1434c0bc8f8b32cba1578e", null ],
+      [ "type", "d4/df1/classCantera_1_1InterfaceRate.html#aca3030461f60cddf5be39a73332f6ea3", null ],
       [ "updateFromStruct", "d4/df1/classCantera_1_1InterfaceRate.html#a816aef660b33729b7b979f1026eb679b", null ],
       [ "evalFromStruct", "d4/df1/classCantera_1_1InterfaceRate.html#ad032a650e29bb4c9cbe2da6a0c4bf4b3", null ],
       [ "ddTScaledFromStruct", "d4/df1/classCantera_1_1InterfaceRate.html#a1a2ed08a5bd23f1f6bebeb5a9102428c", null ],
-      [ "preExponentialFactor", "d4/df1/classCantera_1_1InterfaceRate.html#a04e0c481fb5e259d3d1c655004553e6e", null ],
-      [ "activationEnergy", "d4/df1/classCantera_1_1InterfaceRate.html#a6c2e55059e239614eccf120f0272aed4", null ],
       [ "addCoverageDependence", "d4/df1/classCantera_1_1InterfaceRate.html#ab8efedba2d3b4791e3cb5f7cc960b793", null ]
     ] ],
-    [ "StickingRate", "d2/d1a/classCantera_1_1StickingRate.html", [
-      [ "StickingRate", "d2/d1a/classCantera_1_1StickingRate.html#aa5736b88dd323b708764e1209c31f7ae", null ],
+    [ "StickingRate< RateType, DataType >", "d2/d1a/classCantera_1_1StickingRate.html", [
       [ "StickingRate", "d2/d1a/classCantera_1_1StickingRate.html#a272710aceaf47ee295ca4ade8fc18d90", null ],
-      [ "StickingRate", "d2/d1a/classCantera_1_1StickingRate.html#ac239e6c4cc078bc9320996a01a6c6cb1", null ],
-      [ "newMultiRate", "d2/d1a/classCantera_1_1StickingRate.html#ad3da98231a262c633218e2a1562b6b90", null ],
-      [ "type", "d2/d1a/classCantera_1_1StickingRate.html#a2974561a5f408aa3ce45a347ea6c62b1", null ],
-      [ "setRateUnits", "d2/d1a/classCantera_1_1StickingRate.html#ac1b22ca1ca0c03491071a3a4555d8e99", null ],
-      [ "setParameters", "d2/d1a/classCantera_1_1StickingRate.html#ae3491aa21735285b6402a014ac26bdb8", null ],
-      [ "getParameters", "d2/d1a/classCantera_1_1StickingRate.html#aa231061435bb7c618ef9b911e1ce2589", null ],
-      [ "setContext", "d2/d1a/classCantera_1_1StickingRate.html#ae1ab8fb9ba1434c0bc8f8b32cba1578e", null ],
-      [ "validate", "d2/d1a/classCantera_1_1StickingRate.html#aff651719ee994c2e882749e683aa0994", null ],
+      [ "type", "d2/d1a/classCantera_1_1StickingRate.html#aca3030461f60cddf5be39a73332f6ea3", null ],
       [ "updateFromStruct", "d2/d1a/classCantera_1_1StickingRate.html#a816aef660b33729b7b979f1026eb679b", null ],
       [ "evalFromStruct", "d2/d1a/classCantera_1_1StickingRate.html#ad032a650e29bb4c9cbe2da6a0c4bf4b3", null ],
-      [ "ddTScaledFromStruct", "d2/d1a/classCantera_1_1StickingRate.html#a1a2ed08a5bd23f1f6bebeb5a9102428c", null ],
-      [ "preExponentialFactor", "d2/d1a/classCantera_1_1StickingRate.html#a04e0c481fb5e259d3d1c655004553e6e", null ],
-      [ "activationEnergy", "d2/d1a/classCantera_1_1StickingRate.html#a6c2e55059e239614eccf120f0272aed4", null ]
+      [ "ddTScaledFromStruct", "d2/d1a/classCantera_1_1StickingRate.html#a1a2ed08a5bd23f1f6bebeb5a9102428c", null ]
     ] ],
     [ "InterfaceArrheniusRate", "d2/d1c/group__surfaceGroup.html#gaeb3e7cef511b79be31f203c21aa7186d", null ],
     [ "InterfaceBlowersMaselRate", "d2/d1c/group__surfaceGroup.html#ga1a8869aec5d3f7b9080baf6239b8c3b9", null ],

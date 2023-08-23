@@ -1,7 +1,6 @@
 var classCantera_1_1vcs__MultiPhaseEquil =
 [
     [ "vcs_MultiPhaseEquil", "da/df6/classCantera_1_1vcs__MultiPhaseEquil.html#aa6c8f401d7c9696904f4101b1cf0c5c0", null ],
-    [ "~vcs_MultiPhaseEquil", "da/df6/classCantera_1_1vcs__MultiPhaseEquil.html#a83a0aa3aea31d76d9ceb83b7acc68fb6", null ],
     [ "iterations", "da/df6/classCantera_1_1vcs__MultiPhaseEquil.html#a0f2e07109249b09e6d13d043f589837e", null ],
     [ "equilibrate", "da/df6/classCantera_1_1vcs__MultiPhaseEquil.html#ac96740303c63e1a701c4603db8ef6ac3", null ],
     [ "equilibrate_TP", "da/df6/classCantera_1_1vcs__MultiPhaseEquil.html#ac5831cc964e8366fa516048f46892e7d", null ],

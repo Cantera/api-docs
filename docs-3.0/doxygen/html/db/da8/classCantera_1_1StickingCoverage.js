@@ -1,6 +1,5 @@
 var classCantera_1_1StickingCoverage =
 [
-    [ "StickingCoverage", "db/da8/classCantera_1_1StickingCoverage.html#ae2d8e752d18253db9f6c244ee8d56913", null ],
     [ "setStickingParameters", "db/da8/classCantera_1_1StickingCoverage.html#a067765003be30813de5ebf855afc4c65", null ],
     [ "getStickingParameters", "db/da8/classCantera_1_1StickingCoverage.html#ab87f302767f2d6c6d8b6d7464f08a54d", null ],
     [ "motzWiseCorrection", "db/da8/classCantera_1_1StickingCoverage.html#ae52b5ac51c6606e8864e791d1e490a46", null ],

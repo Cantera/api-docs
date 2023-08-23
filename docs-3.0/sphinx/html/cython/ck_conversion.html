@@ -1,0 +1,1271 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Chemkin to YAML conversion &#8212; Cantera 3.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cython/ck_conversion';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/documentation/dev/sphinx/html/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.0';
+        </script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CTI to YAML conversion" href="cti_conversion.html" />
+    <link rel="prev" title="Mechanism Conversion" href="scripts.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+   
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><ul class="bd-navbar-elements navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/install/index.html">
+            Install
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/tutorials/index.html">
+            Tutorials
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/examples/index.html">
+            Examples
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/community.html">
+            Community
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/science/index.html">
+            Science
+        </a>
+    </li>
+
+    <li class="nav-item current active">
+        <a class="nav-link nav-internal" href="/documentation/index.html">
+            Documentation
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/blog/index.html">
+            Blog
+        </a>
+    </li>
+</ul></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      3.0  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><ul class="bd-navbar-elements navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/install/index.html">
+            Install
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/tutorials/index.html">
+            Tutorials
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/examples/index.html">
+            Examples
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/community.html">
+            Community
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/science/index.html">
+            Science
+        </a>
+    </li>
+
+    <li class="nav-item current active">
+        <a class="nav-link nav-internal" href="/documentation/index.html">
+            Documentation
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link nav-internal" href="/blog/index.html">
+            Blog
+        </a>
+    </li>
+</ul></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      3.0  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transport.html">Transport Properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zerodim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constants.html">Physical Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html">Python Interface With Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="scripts.html">Mechanism Conversion</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml_conversion.html">YAML to Chemkin conversion</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.salsalabs.org/donate-to-cantera/index.html" class="btn btn-secondary" type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Python Module Documentation</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="scripts.html" class="nav-link">Mechanism Conversion</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Chemkin to YAML conversion</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="chemkin-to-yaml-conversion">
+<h1>Chemkin to YAML conversion<a class="headerlink" href="#chemkin-to-yaml-conversion" title="Permalink to this heading">#</a></h1>
+<p>For documentation and tutorial, refer to the <a class="reference external" href="https://cantera.org/tutorials/ck2yaml-tutorial.html">Converting Chemkin-format files</a> pages.</p>
+<section id="module-cantera.ck2yaml">
+<span id="module-level-documentation"></span><h2>Module-level documentation<a class="headerlink" href="#module-cantera.ck2yaml" title="Permalink to this heading">#</a></h2>
+<p>ck2yaml.py: Convert Chemkin-format mechanisms to Cantera YAML input files</p>
+<dl class="simple">
+<dt>Usage:</dt><dd><dl class="simple">
+<dt>ck2yaml [–input=&lt;filename&gt;]</dt><dd><p>[–thermo=&lt;filename&gt;]
+[–transport=&lt;filename&gt;]
+[–surface=&lt;filename&gt;]
+[–name=&lt;name&gt;]
+[–extra=&lt;filename&gt;]
+[–output=&lt;filename&gt;]
+[–single-intermediate-temperature]
+[–permissive]
+[–quiet]
+[–no-validate]
+[-d | –debug]</p>
+</dd>
+</dl>
+</dd>
+<dt>Example:</dt><dd><p>ck2yaml –input=chem.inp –thermo=therm.dat –transport=tran.dat</p>
+</dd>
+</dl>
+<p>If the output file name is not given, an output file with the same name as the
+input file, with the extension changed to ‘.yaml’.</p>
+<p>An input file containing only species definitions (which can be referenced from
+phase definitions in other input files) can be created by specifying only a
+thermo file.</p>
+<p>For the case of a surface mechanism, the gas phase input file should be
+specified as ‘input’ and the surface phase input file should be specified as
+‘surface’.</p>
+<p>The ‘–single-intermediate-temperature’ option should be used with thermo data where
+only a single break temperature is used and the last value in the first line of each
+species thermo entry is the molecular weight instead.</p>
+<p>The ‘–permissive’ option allows certain recoverable parsing errors (such as
+duplicate transport data) to be ignored. The ‘–name=&lt;name&gt;’ option
+is used to override default phase names (that is, ‘gas’).</p>
+<p>The ‘–extra=&lt;filename&gt;’ option takes a YAML file as input. This option can be
+used to add to the file description, or to define custom fields that are
+included in the YAML output.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Arrhenius">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">Arrhenius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ea</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Arrhenius" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Represent a modified Arrhenius rate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> – The pre-exponential factor, given as a tuple consisting of a floating
+point value and a units string</p></li>
+<li><p><strong>b</strong> – The temperature exponent</p></li>
+<li><p><strong>Ea</strong> – The activation energy, given as a tuple consisting of a floating
+point value and a units string</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Arrhenius.as_yaml">
+<span class="sig-name descname"><span class="pre">as_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Arrhenius.as_yaml" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Chebyshev">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">Chebyshev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coeffs</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Chebyshev" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.ck2yaml.KineticsModel" title="cantera.ck2yaml.KineticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">KineticsModel</span></code></a></p>
+<p>A rate calculated in terms of a bivariate Chebyshev polynomial.
+See <a class="reference external" href="https://cantera.org/science/kinetics.html#chebyshev-reaction-rate-expressions">https://cantera.org/science/kinetics.html#chebyshev-reaction-rate-expressions</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coeffs</strong> – Matrix of Chebyshev coefficients, dimension N_T by N_P</p></li>
+<li><p><strong>Tmin</strong> – Minimum temperature for which the parameterization is valid</p></li>
+<li><p><strong>Tmax</strong> – Maximum temperature for which the parameterization is valid</p></li>
+<li><p><strong>Pmin</strong> – Minimum pressure for which the parameterization is valid, given as a
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">(value,</span> <span class="pre">units)</span></code> tuple</p></li>
+<li><p><strong>Pmax</strong> – Maximum pressure for which the parameterization is valid, given as a
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">(value,</span> <span class="pre">units)</span></code> tuple</p></li>
+<li><p><strong>quantity_units</strong> – Quantity units for the rate constant</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Chebyshev.pressure_dependent">
+<span class="sig-name descname"><span class="pre">pressure_dependent</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cantera.ck2yaml.Chebyshev.pressure_dependent" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Chebyshev.reduce">
+<span class="sig-name descname"><span class="pre">reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Chebyshev.reduce" title="Permalink to this definition">#</a></dt>
+<dd><p>Assign data from this object to the YAML mapping <code class="docutils literal notranslate"><span class="pre">output</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.ChemicallyActivated">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">ChemicallyActivated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.ChemicallyActivated" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.ck2yaml.ThreeBody" title="cantera.ck2yaml.ThreeBody"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreeBody</span></code></a></p>
+<p>A rate for a chemically-activated reaction.
+See <a class="reference external" href="https://cantera.org/science/kinetics.html#chemically-activated-reactions">https://cantera.org/science/kinetics.html#chemically-activated-reactions</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>low_rate</strong> – The Arrhenius kinetics at the low-pressure limit</p></li>
+<li><p><strong>high_rate</strong> – The Arrhenius kinetics at the high-pressure limit</p></li>
+<li><p><strong>efficiencies</strong> – A mapping of species names to collider efficiencies</p></li>
+<li><p><strong>F</strong> – Falloff function parameterization</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.ChemicallyActivated.reaction_string_suffix">
+<span class="sig-name descname"><span class="pre">reaction_string_suffix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">species</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.ChemicallyActivated.reaction_string_suffix" title="Permalink to this definition">#</a></dt>
+<dd><p>Suffix for reactant and product strings, used for pressure-dependent
+reactions</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.ChemicallyActivated.reduce">
+<span class="sig-name descname"><span class="pre">reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.ChemicallyActivated.reduce" title="Permalink to this definition">#</a></dt>
+<dd><p>Assign data from this object to the YAML mapping <code class="docutils literal notranslate"><span class="pre">output</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.ElementaryRate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">ElementaryRate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rate</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.ElementaryRate" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.ck2yaml.KineticsModel" title="cantera.ck2yaml.KineticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">KineticsModel</span></code></a></p>
+<p>A reaction rate described by a single Arrhenius expression.
+See <a class="reference external" href="https://cantera.org/science/kinetics.html#reactions-with-a-pressure-independent-rate">https://cantera.org/science/kinetics.html#reactions-with-a-pressure-independent-rate</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rate</strong> – The Arrhenius expression describing this reaction rate.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ck2yaml.ElementaryRate.pressure_dependent">
+<span class="sig-name descname"><span class="pre">pressure_dependent</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cantera.ck2yaml.ElementaryRate.pressure_dependent" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.ElementaryRate.reduce">
+<span class="sig-name descname"><span class="pre">reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.ElementaryRate.reduce" title="Permalink to this definition">#</a></dt>
+<dd><p>Assign data from this object to the YAML mapping <code class="docutils literal notranslate"><span class="pre">output</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Falloff">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">Falloff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Falloff" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.ck2yaml.ThreeBody" title="cantera.ck2yaml.ThreeBody"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreeBody</span></code></a></p>
+<p>A rate for a pressure-dependent falloff reaction.
+See <a class="reference external" href="https://cantera.org/science/kinetics.html#falloff-reactions">https://cantera.org/science/kinetics.html#falloff-reactions</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>low_rate</strong> – The Arrhenius kinetics at the low-pressure limit</p></li>
+<li><p><strong>high_rate</strong> – The Arrhenius kinetics at the high-pressure limit</p></li>
+<li><p><strong>efficiencies</strong> – A mapping of species names to collider efficiencies</p></li>
+<li><p><strong>F</strong> – Falloff function parameterization</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Falloff.reaction_string_suffix">
+<span class="sig-name descname"><span class="pre">reaction_string_suffix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">species</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Falloff.reaction_string_suffix" title="Permalink to this definition">#</a></dt>
+<dd><p>Suffix for reactant and product strings, used for pressure-dependent
+reactions</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Falloff.reduce">
+<span class="sig-name descname"><span class="pre">reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Falloff.reduce" title="Permalink to this definition">#</a></dt>
+<dd><p>Assign data from this object to the YAML mapping <code class="docutils literal notranslate"><span class="pre">output</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.ck2yaml.FlowList">
+<span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">FlowList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.FlowList" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.ck2yaml.FlowMap">
+<span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">FlowMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.FlowMap" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cantera.ck2yaml.InputError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">InputError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.InputError" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>An exception class for exceptional behavior involving Chemkin-format
+mechanism files. Pass a string describing the circumstances that caused
+the exceptional behavior.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.KineticsModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">KineticsModel</span></span><a class="headerlink" href="#cantera.ck2yaml.KineticsModel" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A base class for kinetics models</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ck2yaml.KineticsModel.pressure_dependent">
+<span class="sig-name descname"><span class="pre">pressure_dependent</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cantera.ck2yaml.KineticsModel.pressure_dependent" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.KineticsModel.reaction_string_suffix">
+<span class="sig-name descname"><span class="pre">reaction_string_suffix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">species</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.KineticsModel.reaction_string_suffix" title="Permalink to this definition">#</a></dt>
+<dd><p>Suffix for reactant and product strings, used for pressure-dependent
+reactions</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.KineticsModel.reduce">
+<span class="sig-name descname"><span class="pre">reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.KineticsModel.reduce" title="Permalink to this definition">#</a></dt>
+<dd><p>Assign data from this object to the YAML mapping <code class="docutils literal notranslate"><span class="pre">output</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Nasa7">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">Nasa7</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tmid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_coeffs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">high_coeffs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Nasa7" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Thermodynamic data parameterized as two seven-coefficient NASA
+polynomials.
+See <a class="reference external" href="https://cantera.org/science/species-thermo.html#the-nasa-7-coefficient-polynomial-parameterization">https://cantera.org/science/species-thermo.html#the-nasa-7-coefficient-polynomial-parameterization</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Nasa7.to_yaml">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Nasa7.to_yaml" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Nasa9">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">Nasa9</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Nasa9" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Thermodynamic data parameterized as any number of nine-coefficient NASA
+polynomials.
+See <a class="reference external" href="https://cantera.org/science/species-thermo.html#the-nasa-9-coefficient-polynomial-parameterization">https://cantera.org/science/species-thermo.html#the-nasa-9-coefficient-polynomial-parameterization</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – List of polynomials, where each polynomial is written as
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">[(T_low,</span> <span class="pre">T_high),</span> <span class="pre">[a_0,</span> <span class="pre">a_1,</span> <span class="pre">...,</span> <span class="pre">a_8]]</span>
+<span class="pre">`</span></code></p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Nasa9.to_yaml">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Nasa9.to_yaml" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.PDepArrhenius">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">PDepArrhenius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressures</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure_units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrhenius</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.PDepArrhenius" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.ck2yaml.KineticsModel" title="cantera.ck2yaml.KineticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">KineticsModel</span></code></a></p>
+<p>A rate calculated by interpolating between Arrhenius expressions at
+various pressures.
+See <a class="reference external" href="https://cantera.org/science/kinetics.html#pressure-dependent-arrhenius-rate-expressions-p-log">https://cantera.org/science/kinetics.html#pressure-dependent-arrhenius-rate-expressions-p-log</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pressures</strong> – A list of pressures at which Arrhenius expressions are given.</p></li>
+<li><p><strong>pressure_units</strong> – A string indicating the units used for the pressures</p></li>
+<li><p><strong>arrhenius</strong> – A list of <a class="reference internal" href="#cantera.ck2yaml.Arrhenius" title="cantera.ck2yaml.Arrhenius"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Arrhenius</span></code></a> objects at each given pressure</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ck2yaml.PDepArrhenius.pressure_dependent">
+<span class="sig-name descname"><span class="pre">pressure_dependent</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cantera.ck2yaml.PDepArrhenius.pressure_dependent" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.PDepArrhenius.reduce">
+<span class="sig-name descname"><span class="pre">reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.PDepArrhenius.reduce" title="Permalink to this definition">#</a></dt>
+<dd><p>Assign data from this object to the YAML mapping <code class="docutils literal notranslate"><span class="pre">output</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">Parser</span></span><a class="headerlink" href="#cantera.ck2yaml.Parser" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser.add_element">
+<span class="sig-name descname"><span class="pre">add_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element_string</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Parser.add_element" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser.convert_mech">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">convert_mech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thermo_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">surface_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gas'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">single_intermediate_temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Parser.convert_mech" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser.get_rate_constant_units">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_rate_constant_units</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'s'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Parser.get_rate_constant_units" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser.load_chemkin_file">
+<span class="sig-name descname"><span class="pre">load_chemkin_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_undeclared_species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">surface</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Parser.load_chemkin_file" title="Permalink to this definition">#</a></dt>
+<dd><p>Load a Chemkin-format input file from <code class="docutils literal notranslate"><span class="pre">path</span></code> on disk.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser.load_extra_file">
+<span class="sig-name descname"><span class="pre">load_extra_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Parser.load_extra_file" title="Permalink to this definition">#</a></dt>
+<dd><p>Load YAML-formatted entries from <code class="docutils literal notranslate"><span class="pre">path</span></code> on disk.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser.parse_composition">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_composition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nElements</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Parser.parse_composition" title="Permalink to this definition">#</a></dt>
+<dd><p>Parse the elemental composition from a 7 or 9 coefficient NASA polynomial
+entry.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser.parse_transport_data">
+<span class="sig-name descname"><span class="pre">parse_transport_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_offset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Parser.parse_transport_data" title="Permalink to this definition">#</a></dt>
+<dd><p>Parse the Chemkin-format transport data in <code class="docutils literal notranslate"><span class="pre">lines</span></code> (a list of strings)
+and add that transport data to the previously-loaded species.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser.read_NASA7_entry">
+<span class="sig-name descname"><span class="pre">read_NASA7_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TintDefault</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Parser.read_NASA7_entry" title="Permalink to this definition">#</a></dt>
+<dd><p>Read a thermodynamics entry for one species in a Chemkin-format file
+(consisting of two 7-coefficient NASA polynomials). Returns the label of
+the species, the thermodynamics model as a <a class="reference internal" href="#cantera.ck2yaml.Nasa7" title="cantera.ck2yaml.Nasa7"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa7</span></code></a> object, and
+the elemental composition of the species.</p>
+<p>For more details on this format, see <a class="reference external" href="https://cantera.org/tutorials/ck2yaml-tutorial.html#debugging-common-errors-in-ck-files">Debugging common errors in CK files</a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser.read_NASA9_entry">
+<span class="sig-name descname"><span class="pre">read_NASA9_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Parser.read_NASA9_entry" title="Permalink to this definition">#</a></dt>
+<dd><p>Read a thermodynamics <code class="docutils literal notranslate"><span class="pre">entry</span></code> for one species given as one or more
+9-coefficient NASA polynomials, written in the format described in
+Appendix A of NASA Reference Publication 1311 (McBride and Gordon, 1996).
+Returns the label of the species, the thermodynamics model as a
+<a class="reference internal" href="#cantera.ck2yaml.Nasa9" title="cantera.ck2yaml.Nasa9"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa9</span></code></a> object, and the elemental composition of the species</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser.read_kinetics_entry">
+<span class="sig-name descname"><span class="pre">read_kinetics_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">surface</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Parser.read_kinetics_entry" title="Permalink to this definition">#</a></dt>
+<dd><p>Read a kinetics <code class="docutils literal notranslate"><span class="pre">entry</span></code> for a single reaction as loaded from a
+Chemkin-format file. Returns a <a class="reference internal" href="#cantera.ck2yaml.Reaction" title="cantera.ck2yaml.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object with the
+reaction and its associated kinetics.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser.setup_kinetics">
+<span class="sig-name descname"><span class="pre">setup_kinetics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Parser.setup_kinetics" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser.show_duplicate_reactions">
+<span class="sig-name descname"><span class="pre">show_duplicate_reactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Parser.show_duplicate_reactions" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser.warn">
+<span class="sig-name descname"><span class="pre">warn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Parser.warn" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Parser.write_yaml">
+<span class="sig-name descname"><span class="pre">write_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gas'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mech.yaml'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Parser.write_yaml" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Reaction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">Reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactants</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">products</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kinetics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reversible</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duplicate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forward_orders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">third_body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Reaction" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> – A unique nonnegative integer index</p></li>
+<li><p><strong>reactants</strong> – A list of <code class="xref py py-obj docutils literal notranslate"><span class="pre">(stoichiometry,</span> <span class="pre">species</span> <span class="pre">name)</span></code> tuples</p></li>
+<li><p><strong>products</strong> – A list of <code class="xref py py-obj docutils literal notranslate"><span class="pre">(stoichiometry,</span> <span class="pre">species</span> <span class="pre">name)</span></code> tuples</p></li>
+<li><p><strong>kinetics</strong> – A <a class="reference internal" href="#cantera.ck2yaml.KineticsModel" title="cantera.ck2yaml.KineticsModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KineticsModel</span></code></a> instance which describes the rate constant</p></li>
+<li><p><strong>reversible</strong> – Boolean indicating whether the reaction is reversible</p></li>
+<li><p><strong>duplicate</strong> – Boolean indicating whether the reaction is a known (permitted) duplicate</p></li>
+<li><p><strong>forward_orders</strong> – A dictionary specifying a non-default reaction order (value) for each
+specified species (key)</p></li>
+<li><p><strong>third_body</strong> – A string name used for the third-body species written in
+pressure-dependent reaction types (usually “M”)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Reaction.to_yaml">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Reaction.to_yaml" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Species">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">Species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sites</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Species" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Species.to_yaml">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Species.to_yaml" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Sri">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">Sri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Sri" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The SRI falloff function, described with either 3 or 5 parameters.
+See <a class="reference external" href="https://cantera.org/science/kinetics.html#the-sri-falloff-function">https://cantera.org/science/kinetics.html#the-sri-falloff-function</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Sri.reduce">
+<span class="sig-name descname"><span class="pre">reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Sri.reduce" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Surface">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">Surface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_density</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Surface" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.SurfaceRate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">SurfaceRate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coverages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_sticking</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">motz_wise</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.SurfaceRate" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.ck2yaml.KineticsModel" title="cantera.ck2yaml.KineticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">KineticsModel</span></code></a></p>
+<p>An Arrhenius-like reaction occurring on a surface
+See <a class="reference external" href="https://cantera.org/science/kinetics.html#surface-reactions">https://cantera.org/science/kinetics.html#surface-reactions</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rate</strong> – The Arrhenius expression describing this reaction rate.</p></li>
+<li><p><strong>coverages</strong> – A list of tuples where each tuple specifies the coverage dependencies
+for a species, in the form <code class="xref py py-obj docutils literal notranslate"><span class="pre">(species_name,</span> <span class="pre">a_k,</span> <span class="pre">m_k,</span> <span class="pre">E_k)</span></code></p></li>
+<li><p><strong>is_sticking</strong> – True if the Arrhenius expression is a parameterization of a sticking
+coefficient, rather than the rate constant itself.</p></li>
+<li><p><strong>motz_wise</strong> – True if the sticking coefficient should be translated into a rate
+coefficient using the correction factor developed by Motz &amp; Wise for
+reactions with high (near-unity) sticking coefficients</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ck2yaml.SurfaceRate.pressure_dependent">
+<span class="sig-name descname"><span class="pre">pressure_dependent</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cantera.ck2yaml.SurfaceRate.pressure_dependent" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.SurfaceRate.reduce">
+<span class="sig-name descname"><span class="pre">reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.SurfaceRate.reduce" title="Permalink to this definition">#</a></dt>
+<dd><p>Assign data from this object to the YAML mapping <code class="docutils literal notranslate"><span class="pre">output</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.ThreeBody">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">ThreeBody</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">high_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">efficiencies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.ThreeBody" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.ck2yaml.KineticsModel" title="cantera.ck2yaml.KineticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">KineticsModel</span></code></a></p>
+<p>A rate calculated for a reaction which includes a third-body collider.
+See <a class="reference external" href="https://cantera.org/science/kinetics.html#three-body-reactions">https://cantera.org/science/kinetics.html#three-body-reactions</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>high_rate</strong> – The Arrhenius kinetics (high-pressure limit)</p></li>
+<li><p><strong>efficiencies</strong> – A mapping of species names to collider efficiencies</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ck2yaml.ThreeBody.pressure_dependent">
+<span class="sig-name descname"><span class="pre">pressure_dependent</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cantera.ck2yaml.ThreeBody.pressure_dependent" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.ThreeBody.reaction_string_suffix">
+<span class="sig-name descname"><span class="pre">reaction_string_suffix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">species</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.ThreeBody.reaction_string_suffix" title="Permalink to this definition">#</a></dt>
+<dd><p>Suffix for reactant and product strings, used for pressure-dependent
+reactions</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.ThreeBody.reduce">
+<span class="sig-name descname"><span class="pre">reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.ThreeBody.reduce" title="Permalink to this definition">#</a></dt>
+<dd><p>Assign data from this object to the YAML mapping <code class="docutils literal notranslate"><span class="pre">output</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.TransportData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">TransportData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">well_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collision_diameter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dipole_moment</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polarizability</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_rot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.TransportData" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.ck2yaml.TransportData.geometry_flags">
+<span class="sig-name descname"><span class="pre">geometry_flags</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['atom',</span> <span class="pre">'linear',</span> <span class="pre">'nonlinear']</span></em><a class="headerlink" href="#cantera.ck2yaml.TransportData.geometry_flags" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.TransportData.to_yaml">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.TransportData.to_yaml" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Troe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">Troe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Troe" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The Troe falloff function, described with either 3 or 4 parameters.
+See <a class="reference external" href="https://cantera.org/science/kinetics.html#the-troe-falloff-function">https://cantera.org/science/kinetics.html#the-troe-falloff-function</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.ck2yaml.Troe.reduce">
+<span class="sig-name descname"><span class="pre">reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.Troe.reduce" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.ck2yaml.compatible_quantities">
+<span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">compatible_quantities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_basis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.compatible_quantities" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.ck2yaml.contains">
+<span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.contains" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.ck2yaml.convert_mech">
+<span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">convert_mech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thermo_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">surface_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gas'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">single_intermediate_temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.convert_mech" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.ck2yaml.float2string">
+<span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">float2string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.float2string" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.ck2yaml.fortFloat">
+<span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">fortFloat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.fortFloat" title="Permalink to this definition">#</a></dt>
+<dd><p>Convert a string representation of a floating point value to a float,
+allowing for some of the peculiarities of allowable Fortran representations.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.ck2yaml.get_index">
+<span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">get_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.get_index" title="Permalink to this definition">#</a></dt>
+<dd><p>Find the first location in <em>seq</em> which contains a case-insensitive,
+whitespace-insensitive match for <em>value</em>. Returns <em>None</em> if no match is
+found.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.ck2yaml.main">
+<span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argv</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.main" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.ck2yaml.represent_float">
+<span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">represent_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.represent_float" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.ck2yaml.script_entry_point">
+<span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">script_entry_point</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.script_entry_point" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.ck2yaml.strip_nonascii">
+<span class="sig-prename descclassname"><span class="pre">cantera.ck2yaml.</span></span><span class="sig-name descname"><span class="pre">strip_nonascii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ck2yaml.strip_nonascii" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="scripts.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mechanism Conversion</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cti_conversion.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">CTI to YAML conversion</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-cantera.ck2yaml">Module-level documentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Arrhenius"><code class="docutils literal notranslate"><span class="pre">Arrhenius</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Arrhenius.as_yaml"><code class="docutils literal notranslate"><span class="pre">Arrhenius.as_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Chebyshev"><code class="docutils literal notranslate"><span class="pre">Chebyshev</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Chebyshev.pressure_dependent"><code class="docutils literal notranslate"><span class="pre">Chebyshev.pressure_dependent</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Chebyshev.reduce"><code class="docutils literal notranslate"><span class="pre">Chebyshev.reduce()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.ChemicallyActivated"><code class="docutils literal notranslate"><span class="pre">ChemicallyActivated</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.ChemicallyActivated.reaction_string_suffix"><code class="docutils literal notranslate"><span class="pre">ChemicallyActivated.reaction_string_suffix()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.ChemicallyActivated.reduce"><code class="docutils literal notranslate"><span class="pre">ChemicallyActivated.reduce()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.ElementaryRate"><code class="docutils literal notranslate"><span class="pre">ElementaryRate</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.ElementaryRate.pressure_dependent"><code class="docutils literal notranslate"><span class="pre">ElementaryRate.pressure_dependent</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.ElementaryRate.reduce"><code class="docutils literal notranslate"><span class="pre">ElementaryRate.reduce()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Falloff"><code class="docutils literal notranslate"><span class="pre">Falloff</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Falloff.reaction_string_suffix"><code class="docutils literal notranslate"><span class="pre">Falloff.reaction_string_suffix()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Falloff.reduce"><code class="docutils literal notranslate"><span class="pre">Falloff.reduce()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.FlowList"><code class="docutils literal notranslate"><span class="pre">FlowList()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.FlowMap"><code class="docutils literal notranslate"><span class="pre">FlowMap()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.InputError"><code class="docutils literal notranslate"><span class="pre">InputError</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.KineticsModel"><code class="docutils literal notranslate"><span class="pre">KineticsModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.KineticsModel.pressure_dependent"><code class="docutils literal notranslate"><span class="pre">KineticsModel.pressure_dependent</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.KineticsModel.reaction_string_suffix"><code class="docutils literal notranslate"><span class="pre">KineticsModel.reaction_string_suffix()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.KineticsModel.reduce"><code class="docutils literal notranslate"><span class="pre">KineticsModel.reduce()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Nasa7"><code class="docutils literal notranslate"><span class="pre">Nasa7</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Nasa7.to_yaml"><code class="docutils literal notranslate"><span class="pre">Nasa7.to_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Nasa9"><code class="docutils literal notranslate"><span class="pre">Nasa9</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Nasa9.to_yaml"><code class="docutils literal notranslate"><span class="pre">Nasa9.to_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.PDepArrhenius"><code class="docutils literal notranslate"><span class="pre">PDepArrhenius</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.PDepArrhenius.pressure_dependent"><code class="docutils literal notranslate"><span class="pre">PDepArrhenius.pressure_dependent</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.PDepArrhenius.reduce"><code class="docutils literal notranslate"><span class="pre">PDepArrhenius.reduce()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser"><code class="docutils literal notranslate"><span class="pre">Parser</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser.add_element"><code class="docutils literal notranslate"><span class="pre">Parser.add_element()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser.convert_mech"><code class="docutils literal notranslate"><span class="pre">Parser.convert_mech()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser.get_rate_constant_units"><code class="docutils literal notranslate"><span class="pre">Parser.get_rate_constant_units()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser.load_chemkin_file"><code class="docutils literal notranslate"><span class="pre">Parser.load_chemkin_file()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser.load_extra_file"><code class="docutils literal notranslate"><span class="pre">Parser.load_extra_file()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser.parse_composition"><code class="docutils literal notranslate"><span class="pre">Parser.parse_composition()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser.parse_transport_data"><code class="docutils literal notranslate"><span class="pre">Parser.parse_transport_data()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser.read_NASA7_entry"><code class="docutils literal notranslate"><span class="pre">Parser.read_NASA7_entry()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser.read_NASA9_entry"><code class="docutils literal notranslate"><span class="pre">Parser.read_NASA9_entry()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser.read_kinetics_entry"><code class="docutils literal notranslate"><span class="pre">Parser.read_kinetics_entry()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser.setup_kinetics"><code class="docutils literal notranslate"><span class="pre">Parser.setup_kinetics()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser.show_duplicate_reactions"><code class="docutils literal notranslate"><span class="pre">Parser.show_duplicate_reactions()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser.warn"><code class="docutils literal notranslate"><span class="pre">Parser.warn()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Parser.write_yaml"><code class="docutils literal notranslate"><span class="pre">Parser.write_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Reaction"><code class="docutils literal notranslate"><span class="pre">Reaction</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Reaction.to_yaml"><code class="docutils literal notranslate"><span class="pre">Reaction.to_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Species"><code class="docutils literal notranslate"><span class="pre">Species</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Species.to_yaml"><code class="docutils literal notranslate"><span class="pre">Species.to_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Sri"><code class="docutils literal notranslate"><span class="pre">Sri</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Sri.reduce"><code class="docutils literal notranslate"><span class="pre">Sri.reduce()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Surface"><code class="docutils literal notranslate"><span class="pre">Surface</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.SurfaceRate"><code class="docutils literal notranslate"><span class="pre">SurfaceRate</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.SurfaceRate.pressure_dependent"><code class="docutils literal notranslate"><span class="pre">SurfaceRate.pressure_dependent</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.SurfaceRate.reduce"><code class="docutils literal notranslate"><span class="pre">SurfaceRate.reduce()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.ThreeBody"><code class="docutils literal notranslate"><span class="pre">ThreeBody</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.ThreeBody.pressure_dependent"><code class="docutils literal notranslate"><span class="pre">ThreeBody.pressure_dependent</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.ThreeBody.reaction_string_suffix"><code class="docutils literal notranslate"><span class="pre">ThreeBody.reaction_string_suffix()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.ThreeBody.reduce"><code class="docutils literal notranslate"><span class="pre">ThreeBody.reduce()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.TransportData"><code class="docutils literal notranslate"><span class="pre">TransportData</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.TransportData.geometry_flags"><code class="docutils literal notranslate"><span class="pre">TransportData.geometry_flags</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.TransportData.to_yaml"><code class="docutils literal notranslate"><span class="pre">TransportData.to_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Troe"><code class="docutils literal notranslate"><span class="pre">Troe</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.Troe.reduce"><code class="docutils literal notranslate"><span class="pre">Troe.reduce()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.compatible_quantities"><code class="docutils literal notranslate"><span class="pre">compatible_quantities()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.contains"><code class="docutils literal notranslate"><span class="pre">contains()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.convert_mech"><code class="docutils literal notranslate"><span class="pre">convert_mech()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.float2string"><code class="docutils literal notranslate"><span class="pre">float2string()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.fortFloat"><code class="docutils literal notranslate"><span class="pre">fortFloat()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.get_index"><code class="docutils literal notranslate"><span class="pre">get_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.represent_float"><code class="docutils literal notranslate"><span class="pre">represent_float()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.script_entry_point"><code class="docutils literal notranslate"><span class="pre">script_entry_point()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ck2yaml.strip_nonascii"><code class="docutils literal notranslate"><span class="pre">strip_nonascii()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/cython/ck_conversion.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2001-2023, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,13 +1,9 @@
 var global_8cpp =
 [
-    [ "BOOST_STACKTRACE_GNU_SOURCE_NOT_REQUIRED", "db/d7d/global_8cpp.html#a7643bcc8740d182abcb7efd5d0e79774", null ],
-    [ "app", "db/d7d/global_8cpp.html#a51cd5e4d317ed6ce123d2445a10f9ca4", null ],
+    [ "app", "db/d7d/global_8cpp.html#aa26f67fc98c09d15d7c985c5d691ed8d", null ],
     [ "setLogger", "db/d7d/global_8cpp.html#ga40134534f5b00a810ec7b6de60378b00", null ],
     [ "writelog_direct", "db/d7d/global_8cpp.html#ga06a0aa74360053f00128c7a5adf1eb48", null ],
     [ "writelogendl", "db/d7d/global_8cpp.html#gaed3c4e18a21f764dc088d5957bcef148", null ],
-    [ "writeline", "db/d7d/global_8cpp.html#ga95456c944f7c5c193695766bb4fe93b9", null ],
-    [ "_warn_deprecated", "db/d7d/global_8cpp.html#a19776c400b18ebbbb5d32769c30988ab", null ],
-    [ "_warn", "db/d7d/global_8cpp.html#ab6849d59a434554d0def156dcee3386a", null ],
     [ "suppress_deprecation_warnings", "db/d7d/global_8cpp.html#ga2ad83de9e93f370a39fde7c30dd5dea6", null ],
     [ "make_deprecation_warnings_fatal", "db/d7d/global_8cpp.html#ga5c8f2df8777aeeb40a231aa3027e2c3c", null ],
     [ "suppress_warnings", "db/d7d/global_8cpp.html#ga93285c65499f91842d8d951408a8fadf", null ],

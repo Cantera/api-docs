@@ -1,27 +1,8 @@
 var classCantera_1_1Group =
 [
-    [ "Group", "d6/d41/classCantera_1_1Group.html#a0b29b9393b4b6856ac75b759f4166c13", null ],
-    [ "Group", "d6/d41/classCantera_1_1Group.html#afcd7a25dc3bf99864a4a57f324fdedd5", null ],
-    [ "Group", "d6/d41/classCantera_1_1Group.html#a5c0316b23a34bf70033e0ef41d8a8679", null ],
-    [ "Group", "d6/d41/classCantera_1_1Group.html#a3b519cbc878800d09db812040402a2eb", null ],
-    [ "Group", "d6/d41/classCantera_1_1Group.html#a22f1ac6275d20964db102f650d8bcbc0", null ],
-    [ "~Group", "d6/d41/classCantera_1_1Group.html#af01fe963b4d079001758b734085e6c8a", null ],
-    [ "operator=", "d6/d41/classCantera_1_1Group.html#abe4ed836684d8fb5aaedbb6816eb4c3e", null ],
     [ "operator-=", "d6/d41/classCantera_1_1Group.html#abaa6e5bd223525b26eeb69fba3a0d9ec", null ],
-    [ "operator+=", "d6/d41/classCantera_1_1Group.html#aab68632249457a7425bfe2d876c76d6a", null ],
-    [ "operator*=", "d6/d41/classCantera_1_1Group.html#a47882f6acef6902cec87c92e1efc239f", null ],
-    [ "operator==", "d6/d41/classCantera_1_1Group.html#aa903bf039686713f07f8c660994670e3", null ],
     [ "validate", "d6/d41/classCantera_1_1Group.html#a41d45236c37b75848f4b1667a11fb50e", null ],
     [ "valid", "d6/d41/classCantera_1_1Group.html#a315419f26d3c59fa143b49b90a019049", null ],
-    [ "operator!", "d6/d41/classCantera_1_1Group.html#a61efd4196a96540ee018fee8791f3f10", null ],
-    [ "sign", "d6/d41/classCantera_1_1Group.html#afdb9e7072e35b9ffa4144fdb467582db", null ],
-    [ "size", "d6/d41/classCantera_1_1Group.html#a259cb5a711406a8c3e5d937eb9350cca", null ],
     [ "nAtoms", "d6/d41/classCantera_1_1Group.html#a952c6ed88a3e70c11f66a81f974ec351", null ],
-    [ "nAtoms", "d6/d41/classCantera_1_1Group.html#acf6cfe6c6b693fbf127a41e1e728e00b", null ],
-    [ "fmt", "d6/d41/classCantera_1_1Group.html#ac17f38abba23eb63e0755c4a8823d8d1", null ],
-    [ "operator-", "d6/d41/classCantera_1_1Group.html#aec21b46dba37c4f37186fdc341ff9634", null ],
-    [ "operator+", "d6/d41/classCantera_1_1Group.html#a1fd496f8ed8191a1ff9125f91b4b2787", null ],
-    [ "operator<<", "d6/d41/classCantera_1_1Group.html#ada51e0db71ed7ac27f844d3e8104c8e3", null ],
-    [ "m_comp", "d6/d41/classCantera_1_1Group.html#a3f1e49e2db4cb5d2cc886c9f0af9de3b", null ],
-    [ "m_sign", "d6/d41/classCantera_1_1Group.html#a97ff672d7d9a8f435c2e2840bf4b0efc", null ]
+    [ "nAtoms", "d6/d41/classCantera_1_1Group.html#acf6cfe6c6b693fbf127a41e1e728e00b", null ]
 ];

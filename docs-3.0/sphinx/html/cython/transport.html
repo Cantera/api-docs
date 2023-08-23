@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Transport Properties &#8212; Cantera 3.0.0b1 documentation</title>
+    <title>Transport Properties &#8212; Cantera 3.0.0 documentation</title>
   
   
   
@@ -41,6 +41,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'cython/transport';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/documentation/dev/sphinx/html/_static/doc-versions.json';
@@ -378,6 +379,13 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Physical Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="units.html">Python Interface With Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="scripts.html">Mechanism Conversion</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml_conversion.html">YAML to Chemkin conversion</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </nav></div>
@@ -811,7 +819,59 @@ by <a class="reference internal" href="#cantera.GasTransportData.input_data" tit
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#species-transport-properties">Species Transport Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport"><code class="docutils literal notranslate"><span class="pre">Transport</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.CK_mode"><code class="docutils literal notranslate"><span class="pre">Transport.CK_mode</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.binary_diff_coeffs"><code class="docutils literal notranslate"><span class="pre">Transport.binary_diff_coeffs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.electrical_conductivity"><code class="docutils literal notranslate"><span class="pre">Transport.electrical_conductivity</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.get_binary_diff_coeffs_polynomial"><code class="docutils literal notranslate"><span class="pre">Transport.get_binary_diff_coeffs_polynomial()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.get_collision_integral_polynomials"><code class="docutils literal notranslate"><span class="pre">Transport.get_collision_integral_polynomials()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.get_thermal_conductivity_polynomial"><code class="docutils literal notranslate"><span class="pre">Transport.get_thermal_conductivity_polynomial()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.get_viscosity_polynomial"><code class="docutils literal notranslate"><span class="pre">Transport.get_viscosity_polynomial()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.mix_diff_coeffs"><code class="docutils literal notranslate"><span class="pre">Transport.mix_diff_coeffs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.mix_diff_coeffs_mass"><code class="docutils literal notranslate"><span class="pre">Transport.mix_diff_coeffs_mass</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.mix_diff_coeffs_mole"><code class="docutils literal notranslate"><span class="pre">Transport.mix_diff_coeffs_mole</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.mobilities"><code class="docutils literal notranslate"><span class="pre">Transport.mobilities</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.multi_diff_coeffs"><code class="docutils literal notranslate"><span class="pre">Transport.multi_diff_coeffs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.set_binary_diff_coeffs_polynomial"><code class="docutils literal notranslate"><span class="pre">Transport.set_binary_diff_coeffs_polynomial()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.set_collision_integral_polynomial"><code class="docutils literal notranslate"><span class="pre">Transport.set_collision_integral_polynomial()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.set_thermal_conductivity_polynomial"><code class="docutils literal notranslate"><span class="pre">Transport.set_thermal_conductivity_polynomial()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.set_viscosity_polynomial"><code class="docutils literal notranslate"><span class="pre">Transport.set_viscosity_polynomial()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.species_viscosities"><code class="docutils literal notranslate"><span class="pre">Transport.species_viscosities</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.thermal_conductivity"><code class="docutils literal notranslate"><span class="pre">Transport.thermal_conductivity</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.thermal_diff_coeffs"><code class="docutils literal notranslate"><span class="pre">Transport.thermal_diff_coeffs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.transport_model"><code class="docutils literal notranslate"><span class="pre">Transport.transport_model</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.viscosity"><code class="docutils literal notranslate"><span class="pre">Transport.viscosity</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport.mean_particle_diameter"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport.mean_particle_diameter</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport.mean_pore_radius"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport.mean_pore_radius</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport.molar_fluxes"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport.molar_fluxes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport.permeability"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport.permeability</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport.porosity"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport.porosity</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport.thermal_conductivity"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport.thermal_conductivity</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport.tortuosity"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport.tortuosity</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#species-transport-properties">Species Transport Properties</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData"><code class="docutils literal notranslate"><span class="pre">GasTransportData</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.acentric_factor"><code class="docutils literal notranslate"><span class="pre">GasTransportData.acentric_factor</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.clear_user_data"><code class="docutils literal notranslate"><span class="pre">GasTransportData.clear_user_data()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.diameter"><code class="docutils literal notranslate"><span class="pre">GasTransportData.diameter</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.dipole"><code class="docutils literal notranslate"><span class="pre">GasTransportData.dipole</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.dispersion_coefficient"><code class="docutils literal notranslate"><span class="pre">GasTransportData.dispersion_coefficient</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.geometry"><code class="docutils literal notranslate"><span class="pre">GasTransportData.geometry</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.input_data"><code class="docutils literal notranslate"><span class="pre">GasTransportData.input_data</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.polarizability"><code class="docutils literal notranslate"><span class="pre">GasTransportData.polarizability</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.quadrupole_polarizability"><code class="docutils literal notranslate"><span class="pre">GasTransportData.quadrupole_polarizability</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.rotational_relaxation"><code class="docutils literal notranslate"><span class="pre">GasTransportData.rotational_relaxation</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.set_customary_units"><code class="docutils literal notranslate"><span class="pre">GasTransportData.set_customary_units()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.update_user_data"><code class="docutils literal notranslate"><span class="pre">GasTransportData.update_user_data()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.well_depth"><code class="docutils literal notranslate"><span class="pre">GasTransportData.well_depth</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
@@ -855,7 +915,7 @@ by <a class="reference internal" href="#cantera.GasTransportData.input_data" tit
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     <br/>
   </p>
 </div>

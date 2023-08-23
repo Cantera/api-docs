@@ -1,12 +1,6 @@
 var classCantera_1_1MultiSpeciesThermo =
 [
-    [ "index_STIT", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#a1f6366d5565155174263a536c9573a3f", null ],
-    [ "STIT_map", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#a5240d407f1c0f5e99fefa917e5ae4525", null ],
-    [ "tpoly_map", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#ab62c11355b214e463bfd3074a73b900e", null ],
     [ "MultiSpeciesThermo", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#a05fc786e0c3af1b662002fc678a34fbb", null ],
-    [ "MultiSpeciesThermo", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#a5ab14fcd2f80cab8494f303688535375", null ],
-    [ "~MultiSpeciesThermo", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#a599ff14397df2ef33188a0cce852f016", null ],
-    [ "operator=", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#a3754c54c3527be5e37647c58883d6538", null ],
     [ "install_STIT", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#a2e4832c0163d1bc7ee91c1b8fb9f2fde", null ],
     [ "modifySpecies", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#a7cdfcab470abdcd3a572312e538dabae", null ],
     [ "update_single", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#ad0daa8939245028bfb5f88ae87a1eef2", null ],
@@ -21,7 +15,6 @@ var classCantera_1_1MultiSpeciesThermo =
     [ "resetHf298", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#afe4e2608827652aab10d9bda4167ad39", null ],
     [ "ready", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#a04e3152f283c801368140ecd8ab82384", null ],
     [ "provideSTIT", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#a1d47e43104fb3ab3e61af117d5a1156a", null ],
-    [ "provideSTIT", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#a57e5b01b841afce033e31c7637a27b4a", null ],
     [ "markInstalled", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#a3847dd050cb7db03482541c4bbce3080", null ],
     [ "m_sp", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#a068c6e7ee5121bb7be10e0f9ecd8801c", null ],
     [ "m_tpoly", "d5/dda/classCantera_1_1MultiSpeciesThermo.html#aa25d627e0668168d3def75faf1525c10", null ],

@@ -2,8 +2,6 @@ var classCantera_1_1solveSP =
 [
     [ "solveSP", "d7/def/classCantera_1_1solveSP.html#a27afea50597a3e57b30d37814e5fdbd8", null ],
     [ "~solveSP", "d7/def/classCantera_1_1solveSP.html#a594e4c5ee60ed2b54f18e2971c496ca3", null ],
-    [ "solveSP", "d7/def/classCantera_1_1solveSP.html#a257e7f9e9ea22a757e99cd36763d5bd2", null ],
-    [ "operator=", "d7/def/classCantera_1_1solveSP.html#a1741dc733aaf044a4bd73c4e4549ef91", null ],
     [ "solveSurfProb", "d7/def/classCantera_1_1solveSP.html#af49c44e5a7fcad6171192cc12e4040e9", null ],
     [ "print_header", "d7/def/classCantera_1_1solveSP.html#ac6b7025c182a4a4f939c3e372c0b94bb", null ],
     [ "printIteration", "d7/def/classCantera_1_1solveSP.html#a8c279ca1375acbe7feff484e7449f8fe", null ],
@@ -44,6 +42,5 @@ var classCantera_1_1solveSP =
     [ "m_wtSpecies", "d7/def/classCantera_1_1solveSP.html#a0e5e0318e50ca809775766eaad561ffa", null ],
     [ "m_resid", "d7/def/classCantera_1_1solveSP.html#a2e40211fa1b3a8cced6f18b12dddb1f1", null ],
     [ "m_XMolKinSpecies", "d7/def/classCantera_1_1solveSP.html#aa787e41228e52c6c152dd87a0f4669db", null ],
-    [ "m_Jac", "d7/def/classCantera_1_1solveSP.html#ad023b6ddcad1e45a2470767891bb3a3a", null ],
-    [ "m_ioflag", "d7/def/classCantera_1_1solveSP.html#a23dc45657ae52349f93bb3160cd98cb8", null ]
+    [ "m_Jac", "d7/def/classCantera_1_1solveSP.html#ad023b6ddcad1e45a2470767891bb3a3a", null ]
 ];

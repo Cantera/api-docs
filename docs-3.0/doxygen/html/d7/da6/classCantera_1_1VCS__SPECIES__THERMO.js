@@ -1,6 +1,5 @@
 var classCantera_1_1VCS__SPECIES__THERMO =
 [
-    [ "VCS_SPECIES_THERMO", "d7/da6/classCantera_1_1VCS__SPECIES__THERMO.html#a5f9d3291fc11bb9e1455c419ea7019ea", null ],
     [ "IndexPhase", "d7/da6/classCantera_1_1VCS__SPECIES__THERMO.html#af34c57f1aedd8da86e74bbbff7dee6b8", null ],
     [ "IndexSpeciesPhase", "d7/da6/classCantera_1_1VCS__SPECIES__THERMO.html#a3ebc2a27c82dc2dc3915da1f3a2ff7a7", null ],
     [ "OwningPhase", "d7/da6/classCantera_1_1VCS__SPECIES__THERMO.html#af9f3db04ac7446afa05bbe91c158f62e", null ],

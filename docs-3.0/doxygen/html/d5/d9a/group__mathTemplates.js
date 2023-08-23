@@ -1,15 +1,15 @@
 var group__mathTemplates =
 [
-    [ "clip", "d5/d9a/group__mathTemplates.html#ga9736f9063c7137a0df18e358ac2d1aea", null ],
-    [ "sign", "d5/d9a/group__mathTemplates.html#gacf38363aba441de9ad9f86932116003d", null ],
-    [ "dot4", "d5/d9a/group__mathTemplates.html#gadeb5c14688bbfe9cd0d4fec33fefd7ae", null ],
-    [ "dot5", "d5/d9a/group__mathTemplates.html#ga7a72d0f65e3652d4cb095cfd4ec5b017", null ],
-    [ "dot", "d5/d9a/group__mathTemplates.html#ga68ff0708588ea7737d778b38ac5eff5c", null ],
-    [ "scale", "d5/d9a/group__mathTemplates.html#ga805da1302033e3f56a3d53f6ea296f4b", null ],
-    [ "poly6", "d5/d9a/group__mathTemplates.html#gad6bf2c3f1c20507381e768019c24f7dd", null ],
-    [ "poly8", "d5/d9a/group__mathTemplates.html#gaaf5191524b09ebbaabed2a8e1a7d8821", null ],
-    [ "poly5", "d5/d9a/group__mathTemplates.html#ga8445959d2c2ef7a6ca846f8f3b804157", null ],
-    [ "poly4", "d5/d9a/group__mathTemplates.html#gac49b7eaa150f51f925d0e9869c0e4253", null ],
-    [ "poly3", "d5/d9a/group__mathTemplates.html#gabca98935cce3614e830dd4069cd5b228", null ],
-    [ "len", "d5/d9a/group__mathTemplates.html#ga659b077653d9fdd49e4ea167df47e004", null ]
+    [ "clip", "d5/d9a/group__mathTemplates.html#gae5462649a5d21bd29d7cbbb1c6d72e4c", null ],
+    [ "sign", "d5/d9a/group__mathTemplates.html#ga1764c1268bc41fe5590a1287c071b27e", null ],
+    [ "dot4", "d5/d9a/group__mathTemplates.html#gad73f07551f5d4d235991b60e45abdee8", null ],
+    [ "dot5", "d5/d9a/group__mathTemplates.html#ga3b1f3c07cb5697fdc0e3fc0ac56171dc", null ],
+    [ "dot", "d5/d9a/group__mathTemplates.html#ga5ba1f83c4ff708d1ed401ec9b464749e", null ],
+    [ "scale", "d5/d9a/group__mathTemplates.html#gadf46bfcbfcdffe08dddf8443d2ec0f64", null ],
+    [ "poly6", "d5/d9a/group__mathTemplates.html#ga80ef8f634fb88935f976477944b8fd7f", null ],
+    [ "poly8", "d5/d9a/group__mathTemplates.html#ga8f1aa6fd7618ffdea3a26ceedc5a0e6e", null ],
+    [ "poly5", "d5/d9a/group__mathTemplates.html#ga960345e761a5e85f52606070b4c55490", null ],
+    [ "poly4", "d5/d9a/group__mathTemplates.html#ga5906ef15a839ea1c51c3d720d9971a3e", null ],
+    [ "poly3", "d5/d9a/group__mathTemplates.html#gad0c1e4676f50b71fbae63651f21a1976", null ],
+    [ "len", "d5/d9a/group__mathTemplates.html#ga04c8ceda7eb9708ecee465e17f9177f6", null ]
 ];

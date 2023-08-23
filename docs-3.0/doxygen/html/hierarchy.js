@@ -4,12 +4,12 @@ var hierarchy =
       [ "AnyMap", "db/d74/classCantera_1_1AnyMap.html", null ],
       [ "AnyValue", "d8/d14/classCantera_1_1AnyValue.html", null ]
     ] ],
-    [ "AnyMap::Iterator", "d7/dcd/classCantera_1_1AnyMap_1_1Iterator.html", null ],
-    [ "AnyMap::OrderedIterator", "d4/dbe/classCantera_1_1AnyMap_1_1OrderedIterator.html", null ],
-    [ "AnyMap::OrderedProxy", "d9/db8/classCantera_1_1AnyMap_1_1OrderedProxy.html", null ],
+    [ "Iterator", "d7/dcd/classCantera_1_1AnyMap_1_1Iterator.html", null ],
+    [ "OrderedIterator", "d4/dbe/classCantera_1_1AnyMap_1_1OrderedIterator.html", null ],
+    [ "OrderedProxy", "d9/db8/classCantera_1_1AnyMap_1_1OrderedProxy.html", null ],
     [ "Application", "d6/d9a/classCantera_1_1Application.html", null ],
-    [ "Application::Messages", "d8/df8/classCantera_1_1Application_1_1Messages.html", null ],
-    [ "Application::ThreadMessages", "d9/d14/classCantera_1_1Application_1_1ThreadMessages.html", null ],
+    [ "Messages", "d8/df8/classCantera_1_1Application_1_1Messages.html", null ],
+    [ "ThreadMessages", "d9/d14/classCantera_1_1Application_1_1ThreadMessages.html", null ],
     [ "Array2D", "d1/dcf/classCantera_1_1Array2D.html", [
       [ "DenseMatrix", "dd/d8f/classCantera_1_1DenseMatrix.html", null ]
     ] ],
@@ -21,9 +21,9 @@ var hierarchy =
     [ "CachedValue< T >", "d2/d34/structCantera_1_1CachedValue.html", null ],
     [ "ChemEquil", "da/d0e/classCantera_1_1ChemEquil.html", null ],
     [ "clockWC", "dd/dee/classCantera_1_1clockWC.html", null ],
-    [ "CoverageDependentSurfPhase::HeatCapacityDependency", "df/db9/structCantera_1_1CoverageDependentSurfPhase_1_1HeatCapacityDependency.html", null ],
-    [ "CoverageDependentSurfPhase::InterpolativeDependency", "de/ddc/structCantera_1_1CoverageDependentSurfPhase_1_1InterpolativeDependency.html", null ],
-    [ "CoverageDependentSurfPhase::PolynomialDependency", "df/d43/structCantera_1_1CoverageDependentSurfPhase_1_1PolynomialDependency.html", null ],
+    [ "HeatCapacityDependency", "df/db9/structCantera_1_1CoverageDependentSurfPhase_1_1HeatCapacityDependency.html", null ],
+    [ "InterpolativeDependency", "de/ddc/structCantera_1_1CoverageDependentSurfPhase_1_1InterpolativeDependency.html", null ],
+    [ "PolynomialDependency", "df/d43/structCantera_1_1CoverageDependentSurfPhase_1_1PolynomialDependency.html", null ],
     [ "Delegator", "d9/dc6/classCantera_1_1Delegator.html", [
       [ "ReactionDataDelegator", "d1/dfe/classCantera_1_1ReactionDataDelegator.html", null ],
       [ "ReactionRateDelegator", "d0/d76/classCantera_1_1ReactionRateDelegator.html", null ],
@@ -51,45 +51,45 @@ var hierarchy =
       [ "PythonHandle", "d4/d17/classCantera_1_1PythonHandle.html", null ]
     ] ],
     [ "FactoryBase", "da/dac/classCantera_1_1FactoryBase.html", [
-      [ "Factory< WallBase >", "dc/dd4/classCantera_1_1Factory.html", [
-        [ "WallFactory", "d8/dfa/classCantera_1_1WallFactory.html", null ]
-      ] ],
-      [ "Factory< Transport >", "dc/dd4/classCantera_1_1Factory.html", [
-        [ "TransportFactory", "d5/d04/classCantera_1_1TransportFactory.html", null ]
-      ] ],
-      [ "Factory< Func1, const shared_ptr< Func1 >, double >", "dc/dd4/classCantera_1_1Factory.html", [
-        [ "Math1FactoryB", "de/df1/classCantera_1_1Math1FactoryB.html", null ]
-      ] ],
-      [ "Factory< Func1, const shared_ptr< Func1 >, const shared_ptr< Func1 > >", "dc/dd4/classCantera_1_1Factory.html", [
-        [ "Math1FactoryA", "d4/dec/classCantera_1_1Math1FactoryA.html", null ]
+      [ "Factory< Domain1D, shared_ptr< Solution >, const string & >", "dc/dd4/classCantera_1_1Factory.html", [
+        [ "DomainFactory", "d6/dce/classCantera_1_1DomainFactory.html", null ]
       ] ],
       [ "Factory< ExtensionManager >", "dc/dd4/classCantera_1_1Factory.html", [
         [ "ExtensionManagerFactory", "d7/d2a/classCantera_1_1ExtensionManagerFactory.html", null ]
       ] ],
-      [ "Factory< ReactorBase >", "dc/dd4/classCantera_1_1Factory.html", [
-        [ "ReactorFactory", "df/d23/classCantera_1_1ReactorFactory.html", null ]
-      ] ],
-      [ "Factory< Kinetics >", "dc/dd4/classCantera_1_1Factory.html", [
-        [ "KineticsFactory", "da/dfc/classCantera_1_1KineticsFactory.html", null ]
-      ] ],
-      [ "Factory< PDSS >", "dc/dd4/classCantera_1_1Factory.html", null ],
       [ "Factory< FlowDevice >", "dc/dd4/classCantera_1_1Factory.html", [
         [ "FlowDeviceFactory", "d0/dc8/classCantera_1_1FlowDeviceFactory.html", null ]
       ] ],
       [ "Factory< Func1, const vector< double > & >", "dc/dd4/classCantera_1_1Factory.html", [
         [ "Func1Factory", "d1/ddf/classCantera_1_1Func1Factory.html", null ]
       ] ],
+      [ "Factory< Kinetics >", "dc/dd4/classCantera_1_1Factory.html", [
+        [ "KineticsFactory", "da/dfc/classCantera_1_1KineticsFactory.html", null ]
+      ] ],
+      [ "Factory< Func1, const shared_ptr< Func1 >, const shared_ptr< Func1 > >", "dc/dd4/classCantera_1_1Factory.html", [
+        [ "Math1FactoryA", "d4/dec/classCantera_1_1Math1FactoryA.html", null ]
+      ] ],
+      [ "Factory< Func1, const shared_ptr< Func1 >, double >", "dc/dd4/classCantera_1_1Factory.html", [
+        [ "Math1FactoryB", "de/df1/classCantera_1_1Math1FactoryB.html", null ]
+      ] ],
+      [ "Factory< PDSS >", "dc/dd4/classCantera_1_1Factory.html", null ],
       [ "Factory< PreconditionerBase >", "dc/dd4/classCantera_1_1Factory.html", [
         [ "PreconditionerFactory", "dc/dc7/classCantera_1_1PreconditionerFactory.html", null ]
-      ] ],
-      [ "Factory< ThermoPhase >", "dc/dd4/classCantera_1_1Factory.html", [
-        [ "ThermoFactory", "d7/d94/classCantera_1_1ThermoFactory.html", null ]
       ] ],
       [ "Factory< ReactionRate, const AnyMap &, const UnitStack & >", "dc/dd4/classCantera_1_1Factory.html", [
         [ "ReactionRateFactory", "de/d4b/classCantera_1_1ReactionRateFactory.html", null ]
       ] ],
-      [ "Factory< Domain1D, shared_ptr< Solution >, const string & >", "dc/dd4/classCantera_1_1Factory.html", [
-        [ "DomainFactory", "d6/dce/classCantera_1_1DomainFactory.html", null ]
+      [ "Factory< ReactorBase >", "dc/dd4/classCantera_1_1Factory.html", [
+        [ "ReactorFactory", "df/d23/classCantera_1_1ReactorFactory.html", null ]
+      ] ],
+      [ "Factory< ThermoPhase >", "dc/dd4/classCantera_1_1Factory.html", [
+        [ "ThermoFactory", "d7/d94/classCantera_1_1ThermoFactory.html", null ]
+      ] ],
+      [ "Factory< Transport >", "dc/dd4/classCantera_1_1Factory.html", [
+        [ "TransportFactory", "d5/d04/classCantera_1_1TransportFactory.html", null ]
+      ] ],
+      [ "Factory< WallBase >", "dc/dd4/classCantera_1_1Factory.html", [
+        [ "WallFactory", "d8/dfa/classCantera_1_1WallFactory.html", null ]
       ] ],
       [ "Factory< T, Args >", "dc/dd4/classCantera_1_1Factory.html", null ]
     ] ],

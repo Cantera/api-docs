@@ -1,23 +1,19 @@
 var classCantera_1_1BinarySolutionTabulatedThermo =
 [
     [ "BinarySolutionTabulatedThermo", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#abbad22ddc8c2a4d98873211feca1add8", null ],
-    [ "type", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a3fd7546c6fe10a8af9e23c4a3e611caf", null ],
-    [ "addSpecies", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a1345257537abafa7ccde0fe431abae62", null ],
-    [ "initThermo", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a8a12209d08a5c4876d9894d619368a79", null ],
-    [ "ready", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#ae0659ce466366fc566dc1425c658a019", null ],
-    [ "getParameters", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a1c186fe492e4b39164020a458c00a4a6", null ],
-    [ "getPartialMolarVolumes", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#aab1fd3b7e89a12f08575dad79efa878a", null ],
-    [ "calcDensity", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#afac1b45437d49cc161e7ca2d5c00906a", null ],
-    [ "compositionChanged", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#ac901f42e1d2a9513f06eacccf09e11a3", null ],
+    [ "type", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a5094b6f3d574dc173727f57ef3827056", null ],
+    [ "addSpecies", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#ad8622fb895371716dfb0b053c461395a", null ],
+    [ "initThermo", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a5270c438a6b7ec6516f66cd7374ef0ee", null ],
+    [ "ready", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#ad4b254336af7129424758449ddc44ebb", null ],
+    [ "getParameters", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a4f1a384ca669451d09fab7f51ece641d", null ],
+    [ "getPartialMolarVolumes", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a67dee1c6bfebd9ceb811d58a57aa6372", null ],
+    [ "calcDensity", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#aa1179d608585ff6b10f5815ecc102afc", null ],
+    [ "compositionChanged", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#ac9cc93671219d9b36c92ba76f17737f7", null ],
     [ "interpolate", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a69602eb8c390eaca827dee836460e8c9", null ],
     [ "diff", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a9d9de0c3c452adc5e212fb4012d9996c", null ],
-    [ "_updateThermo", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#adc787a3ca8a5489e2763cc7e712685bc", null ],
+    [ "_updateThermo", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#ad9869937268b4ee2b4b0c27b6ebd9e21", null ],
     [ "m_kk_tab", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a882d6f7235e988411f54b09b73377053", null ],
     [ "m_h0_tab", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#ac8985e52c8b18cb1deb7472c5eba0f53", null ],
     [ "m_s0_tab", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a41db558386d585034e227ad84450a87b", null ],
-    [ "m_molefrac_tab", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a17a4b2f5e69f6da93121792d8efef5a0", null ],
-    [ "m_enthalpy_tab", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#aca5366769a0bb00686db98f06e66b5b4", null ],
-    [ "m_entropy_tab", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#af51de5fa66cf9d6d505d0f842a4f4639", null ],
-    [ "m_molar_volume_tab", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a5f483952b13bc1102cfeed3749ff1ac3", null ],
-    [ "m_derived_molar_volume_tab", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a3be912a91b1b4a716ffa09d6dd172e56", null ]
+    [ "m_molefrac_tab", "de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html#a17a4b2f5e69f6da93121792d8efef5a0", null ]
 ];

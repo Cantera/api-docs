@@ -1,15 +1,11 @@
 var classCantera_1_1ReactionRate =
 [
-    [ "ReactionRate", "d0/d19/classCantera_1_1ReactionRate.html#a9bd241b284ce7e57eb7635610ced0712", null ],
-    [ "ReactionRate", "d0/d19/classCantera_1_1ReactionRate.html#ab37c5207cbbf2cee3e2c57bc7617a6e1", null ],
-    [ "~ReactionRate", "d0/d19/classCantera_1_1ReactionRate.html#a98a4bc30dd09c46bdfe399d047ee5c65", null ],
-    [ "operator=", "d0/d19/classCantera_1_1ReactionRate.html#a3916ecdc9b0ffc5a2b09b6112f9cace9", null ],
-    [ "newMultiRate", "d0/d19/classCantera_1_1ReactionRate.html#a9b53b28d47fa1ca4e3057109260c4437", null ],
+    [ "newMultiRate", "d0/d19/classCantera_1_1ReactionRate.html#a8fe2a668ebf3b573fa31d6d77fd09733", null ],
     [ "type", "d0/d19/classCantera_1_1ReactionRate.html#abcd0b94b0bb247ed61023df2e12b45e4", null ],
     [ "subType", "d0/d19/classCantera_1_1ReactionRate.html#a95be722e77bb5d9097aca418edf643cc", null ],
     [ "setParameters", "d0/d19/classCantera_1_1ReactionRate.html#a145c971e93f6dedf25b016c280ce62d1", null ],
     [ "parameters", "d0/d19/classCantera_1_1ReactionRate.html#a719985fafb56ee92560361b99b3d1d0a", null ],
-    [ "conversionUnits", "d0/d19/classCantera_1_1ReactionRate.html#a85ce4a4e6d5b11c2ebea217b1f422539", null ],
+    [ "conversionUnits", "d0/d19/classCantera_1_1ReactionRate.html#a30abda896570ca55a78101ee44fcf220", null ],
     [ "setRateUnits", "d0/d19/classCantera_1_1ReactionRate.html#a4729f7ab59be3f2a592c70bf886c538e", null ],
     [ "check", "d0/d19/classCantera_1_1ReactionRate.html#aa00d9ff1855d4350b113c6ea43714aba", null ],
     [ "check", "d0/d19/classCantera_1_1ReactionRate.html#a9e0bca1588f084e0a970d7ac23e5caa9", null ],
@@ -25,11 +21,10 @@ var classCantera_1_1ReactionRate =
     [ "compositionDependent", "d0/d19/classCantera_1_1ReactionRate.html#a1d534a4c215e65d1e1b70a6826aa589e", null ],
     [ "setCompositionDependence", "d0/d19/classCantera_1_1ReactionRate.html#a0b54f2f5871088a1dcb60587d498f154", null ],
     [ "getParameters", "d0/d19/classCantera_1_1ReactionRate.html#adcd32bf303af355def0ff56f3c0ff341", null ],
-    [ "_evaluator", "d0/d19/classCantera_1_1ReactionRate.html#accf44b2896d493519f85f21e20109803", null ],
+    [ "_evaluator", "d0/d19/classCantera_1_1ReactionRate.html#ae38ff0d85394128acc766a96ae8835d7", null ],
     [ "m_input", "d0/d19/classCantera_1_1ReactionRate.html#ad99f7a99d03ef1dc32d1949996a9edc1", null ],
     [ "m_rate_index", "d0/d19/classCantera_1_1ReactionRate.html#ae3b162c1f6fde403f3ec75473f38647b", null ],
     [ "m_valid", "d0/d19/classCantera_1_1ReactionRate.html#a8a503ea8b57d562480e866d19f1ee484", null ],
     [ "m_composition_dependent_rate", "d0/d19/classCantera_1_1ReactionRate.html#acd2e00f5e4b3b7249f4cc1afaf6927b2", null ],
-    [ "m_conversion_units", "d0/d19/classCantera_1_1ReactionRate.html#a2a97a189d3e7c07abefce5d32b64689b", null ],
-    [ "m_evaluator", "d0/d19/classCantera_1_1ReactionRate.html#acd01cad8a4933771cf7332f2959c6ee1", null ]
+    [ "m_conversion_units", "d0/d19/classCantera_1_1ReactionRate.html#a2a97a189d3e7c07abefce5d32b64689b", null ]
 ];

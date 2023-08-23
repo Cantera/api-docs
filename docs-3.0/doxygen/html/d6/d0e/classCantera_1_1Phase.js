@@ -1,9 +1,6 @@
 var classCantera_1_1Phase =
 [
     [ "Phase", "d6/d0e/classCantera_1_1Phase.html#a13314c17c642d48cdfd6f085cac43a8e", null ],
-    [ "~Phase", "d6/d0e/classCantera_1_1Phase.html#a3a16afac62d6efd5f5929200580a4879", null ],
-    [ "Phase", "d6/d0e/classCantera_1_1Phase.html#afa25b6ac918d52a6a0f68057f86134f3", null ],
-    [ "operator=", "d6/d0e/classCantera_1_1Phase.html#a8b58a97b3debd7c6cb27755ee35a8a5f", null ],
     [ "name", "d6/d0e/classCantera_1_1Phase.html#afa7a10b4b56522f03c698ac514b0f844", null ],
     [ "setName", "d6/d0e/classCantera_1_1Phase.html#aef2484ad3ead7e14e9baa36393be8fb8", null ],
     [ "type", "d6/d0e/classCantera_1_1Phase.html#a3fd7546c6fe10a8af9e23c4a3e611caf", null ],
@@ -71,7 +68,7 @@ var classCantera_1_1Phase =
     [ "setMoleFractions", "d6/d0e/classCantera_1_1Phase.html#a13ea4dcf4adc8e438ef5777afc4fa0af", null ],
     [ "setMoleFractions_NoNorm", "d6/d0e/classCantera_1_1Phase.html#af8dc47ead72eb4971d5090f02a6735d5", null ],
     [ "getMassFractions", "d6/d0e/classCantera_1_1Phase.html#ae7e204f6bd1241f644bc00265616cb08", null ],
-    [ "massFractions", "d6/d0e/classCantera_1_1Phase.html#aa7889d3297a11f0383cd27831cef4785", null ],
+    [ "massFractions", "d6/d0e/classCantera_1_1Phase.html#ab3e2f7ffc4400eb9b59505ecc141acca", null ],
     [ "setMassFractions", "d6/d0e/classCantera_1_1Phase.html#ad977287f641546b5af6066234c3d3fd7", null ],
     [ "setMassFractions_NoNorm", "d6/d0e/classCantera_1_1Phase.html#a39df677ae2255ef806ac618e5810a7c0", null ],
     [ "getConcentrations", "d6/d0e/classCantera_1_1Phase.html#a05845c40c5f836f1e94e521c7a6ff40c", null ],
@@ -130,7 +127,6 @@ var classCantera_1_1Phase =
     [ "m_ndim", "d6/d0e/classCantera_1_1Phase.html#a50a6dde923d7b3c82151321348b1a839", null ],
     [ "m_speciesComp", "d6/d0e/classCantera_1_1Phase.html#a1e427efd8d9bfd1545d58de34b9f9a88", null ],
     [ "m_speciesCharge", "d6/d0e/classCantera_1_1Phase.html#af937141c6a0964121cf6451b627ad1f6", null ],
-    [ "m_species", "d6/d0e/classCantera_1_1Phase.html#aaa84a6dc2e57f35f3a83806be08c8e5b", null ],
     [ "m_undefinedElementBehavior", "d6/d0e/classCantera_1_1Phase.html#a353035056269c0c93681d94c3b0dbc6b", null ],
     [ "m_caseSensitiveSpecies", "d6/d0e/classCantera_1_1Phase.html#a2fff45d99f373915abea1505c8c462ff", null ],
     [ "m_name", "d6/d0e/classCantera_1_1Phase.html#ab76434042ddfc9d5e703e038f0ad0b1f", null ],

@@ -1,8 +1,6 @@
 var classCantera_1_1WaterPropsIAPWS =
 [
     [ "WaterPropsIAPWS", "d9/d05/classCantera_1_1WaterPropsIAPWS.html#af9514ad9f8d3a3277ac3b8ca6ff87be9", null ],
-    [ "WaterPropsIAPWS", "d9/d05/classCantera_1_1WaterPropsIAPWS.html#a61006d6ba14c6b44a8a550ee205fa8c0", null ],
-    [ "operator=", "d9/d05/classCantera_1_1WaterPropsIAPWS.html#a1b40de18f8405e1349a1ce28d196e0e2", null ],
     [ "setState_TR", "d9/d05/classCantera_1_1WaterPropsIAPWS.html#a16ca9616a8c31d8a209220ce90328f38", null ],
     [ "setState_TD", "d9/d05/classCantera_1_1WaterPropsIAPWS.html#adb57465c5fabc9dc2c8f4a2f4102330c", null ],
     [ "gibbs_mass", "d9/d05/classCantera_1_1WaterPropsIAPWS.html#a4e3144dfebb4295d682c78a210a9fc81", null ],

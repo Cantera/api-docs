@@ -1,8 +1,6 @@
 var group__odeGroup =
 [
     [ "FuncEval", "d1/dd1/classCantera_1_1FuncEval.html", [
-      [ "FuncEval", "d1/dd1/classCantera_1_1FuncEval.html#a0c0c4d7f54846b4dae8d138dc01585d0", null ],
-      [ "~FuncEval", "d1/dd1/classCantera_1_1FuncEval.html#a6654b984f4dc060191cead0151863875", null ],
       [ "eval", "d1/dd1/classCantera_1_1FuncEval.html#a9e17c43cac4143921b76690e54d94fb6", null ],
       [ "evalDae", "d1/dd1/classCantera_1_1FuncEval.html#a02ace98960a9affe2d30fb9baa65e6d6", null ],
       [ "getConstraints", "d1/dd1/classCantera_1_1FuncEval.html#ad2a5f43b732fdee209a9c505126a5702", null ],
@@ -23,7 +21,6 @@ var group__odeGroup =
       [ "clearErrors", "d1/dd1/classCantera_1_1FuncEval.html#a5a1056d4e9d26a692f621e83be8cd8d1", null ],
       [ "m_sens_params", "d1/dd1/classCantera_1_1FuncEval.html#aedd4e11be5a798efffe3ca5719da1be7", null ],
       [ "m_paramScales", "d1/dd1/classCantera_1_1FuncEval.html#a2decaf94b9ef8f51df2854e2b8b6f36b", null ],
-      [ "m_suppress_errors", "d1/dd1/classCantera_1_1FuncEval.html#a447c9eeac8d0d79851cdceb1de2f7e7b", null ],
       [ "m_errors", "d1/dd1/classCantera_1_1FuncEval.html#aca566a3f6d30afe032c78818060940d3", null ]
     ] ],
     [ "Integrator", "d8/d6f/classCantera_1_1Integrator.html", [
@@ -37,19 +34,17 @@ var group__odeGroup =
       [ "setPreconditioner", "d8/d6f/classCantera_1_1Integrator.html#a266cdcea76e14c41df4e00888155cadf", null ],
       [ "preconditionerSolve", "d8/d6f/classCantera_1_1Integrator.html#adf60bf8502aa5723cd34ca17186fb9dc", null ],
       [ "preconditionerSide", "d8/d6f/classCantera_1_1Integrator.html#a77f369b43d1c56a827a9b38d6d560ca7", null ],
-      [ "preconditioner", "d8/d6f/classCantera_1_1Integrator.html#af2124f49855ac99c38b6e5a7ee82b080", null ],
+      [ "preconditioner", "d8/d6f/classCantera_1_1Integrator.html#a24ae99004d4d897dedd8b5c67132dda8", null ],
       [ "linearSolverType", "d8/d6f/classCantera_1_1Integrator.html#a9d939a709fa476a5c7efb8a32840e16c", null ],
       [ "initialize", "d8/d6f/classCantera_1_1Integrator.html#a605b89edc3f265c7aea0d04fb131b481", null ],
-      [ "reinitialize", "d8/d6f/classCantera_1_1Integrator.html#ad61e1241d067d7c9bf36e94f37ca7a5e", null ],
       [ "integrate", "d8/d6f/classCantera_1_1Integrator.html#a9eb35d10f2f010f102de5b4a804c1b3f", null ],
       [ "step", "d8/d6f/classCantera_1_1Integrator.html#a88bf5836a530689a89e13e84b25275e0", null ],
-      [ "solution", "d8/d6f/classCantera_1_1Integrator.html#a4964685ae548ba97cb749ca3a94b7653", null ],
-      [ "solution", "d8/d6f/classCantera_1_1Integrator.html#a0c559069da5d0d7c37511b7406b9ffb9", null ],
-      [ "derivative", "d8/d6f/classCantera_1_1Integrator.html#a7f1a4cf95c34db8e19776836255550a4", null ],
+      [ "solution", "d8/d6f/classCantera_1_1Integrator.html#afa6929becd7f4caccfd451339cc1eb90", null ],
+      [ "solution", "d8/d6f/classCantera_1_1Integrator.html#ab7ce8deeba7b9c8397a70fac5846f294", null ],
+      [ "derivative", "d8/d6f/classCantera_1_1Integrator.html#a59ecced80721795ffe15527092da5713", null ],
       [ "lastOrder", "d8/d6f/classCantera_1_1Integrator.html#aa9c639c5e84313a15dc6a664908b0997", null ],
       [ "nEquations", "d8/d6f/classCantera_1_1Integrator.html#aad2946dfd16fdcc5955d48240bcd2c0e", null ],
       [ "nEvals", "d8/d6f/classCantera_1_1Integrator.html#aaae873a2f5326dcbbeb37a1f0fd9547b", null ],
-      [ "maxOrder", "d8/d6f/classCantera_1_1Integrator.html#a9eae2771c652f1c132d0baceb4e50e98", null ],
       [ "setMaxOrder", "d8/d6f/classCantera_1_1Integrator.html#affb48850ed1203145dcef72fef940bfd", null ],
       [ "setMethod", "d8/d6f/classCantera_1_1Integrator.html#ad31dffd6e145e9e29c79e347d5e4e665", null ],
       [ "setMaxStepSize", "d8/d6f/classCantera_1_1Integrator.html#a0c134025adafa2a281fde4f8c81cc509", null ],
@@ -57,21 +52,10 @@ var group__odeGroup =
       [ "setMaxErrTestFails", "d8/d6f/classCantera_1_1Integrator.html#a534004ab923afc471f65ac50a7d866b1", null ],
       [ "setMaxSteps", "d8/d6f/classCantera_1_1Integrator.html#a1b34b9919744ce03ddb28216a91e5abb", null ],
       [ "maxSteps", "d8/d6f/classCantera_1_1Integrator.html#a210e8ea4afcf3b50e075ddb91b3beda2", null ],
-      [ "setBandwidth", "d8/d6f/classCantera_1_1Integrator.html#aa22d12d029ebed6217ae3d765a6b5297", null ],
-      [ "nSensParams", "d8/d6f/classCantera_1_1Integrator.html#a4e4558368907dbceb2162b0b831fd1e8", null ],
-      [ "sensitivity", "d8/d6f/classCantera_1_1Integrator.html#ae19a0059ca17039d72b8384295152f17", null ],
       [ "solverStats", "d8/d6f/classCantera_1_1Integrator.html#a5ecd6c68a51345eaeebc3eba1d2d77b8", null ],
-      [ "maxNonlinIterations", "d8/d6f/classCantera_1_1Integrator.html#af92a5325242a3bc6e292239bcb2c8e71", null ],
-      [ "setMaxNonlinIterations", "d8/d6f/classCantera_1_1Integrator.html#a4c5086bc46da6930a47456718010661d", null ],
-      [ "maxNonlinConvFailures", "d8/d6f/classCantera_1_1Integrator.html#a054cb21fd08813adc8b9300646ad3fcd", null ],
-      [ "setMaxNonlinConvFailures", "d8/d6f/classCantera_1_1Integrator.html#ab34f3c07a0cf7e7a4b3d2707b6f3a27b", null ],
-      [ "algebraicInErrorTest", "d8/d6f/classCantera_1_1Integrator.html#abf9665d4e4f863d3b5e65c1ab06d39d0", null ],
-      [ "includeAlgebraicInErrorTest", "d8/d6f/classCantera_1_1Integrator.html#a829927771b9d667e503cbdf22d242f41", null ],
-      [ "warn", "d8/d6f/classCantera_1_1Integrator.html#a303d07ee4c33f13f3fb7288368235eab", null ],
       [ "m_preconditioner", "d8/d6f/classCantera_1_1Integrator.html#a3d5f2bdcc2bc11b20abb706e3dda52a2", null ],
-      [ "m_prec_side", "d8/d6f/classCantera_1_1Integrator.html#a9fa7d9711abecfbe1ecb7099f10f0bfc", null ],
-      [ "m_dummy", "d8/d6f/classCantera_1_1Integrator.html#abb70d98e2179b63c0cb616f0f09f34ec", null ]
+      [ "m_prec_side", "d8/d6f/classCantera_1_1Integrator.html#a9fa7d9711abecfbe1ecb7099f10f0bfc", null ]
     ] ],
-    [ "cvodes_rhs", "d9/dba/group__odeGroup.html#gad87a6eb827a82db1acecb31b45904bff", null ],
+    [ "cvodes_rhs", "d9/dba/group__odeGroup.html#ga33bb23927e55017bfef16eb33eb2e153", null ],
     [ "newIntegrator", "d9/dba/group__odeGroup.html#ga502ab661b02a814da79b2285cc888a78", null ]
 ];

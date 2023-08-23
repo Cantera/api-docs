@@ -1,8 +1,6 @@
 var structCantera_1_1UnitStack =
 [
-    [ "UnitStack", "d9/d1b/structCantera_1_1UnitStack.html#a2d94954a6d3ed7cde20dd806235af4ff", null ],
-    [ "UnitStack", "d9/d1b/structCantera_1_1UnitStack.html#a6f2e73cd4e02882b69c7c99f4dfef17b", null ],
-    [ "UnitStack", "d9/d1b/structCantera_1_1UnitStack.html#a9942391e22e54e12ebe3ef9beffce536", null ],
+    [ "UnitStack", "d9/d1b/structCantera_1_1UnitStack.html#a366711cfc422878c88c4141631d56628", null ],
     [ "size", "d9/d1b/structCantera_1_1UnitStack.html#a259cb5a711406a8c3e5d937eb9350cca", null ],
     [ "standardUnits", "d9/d1b/structCantera_1_1UnitStack.html#a80862496eb360d10f2b9a08bfc77d742", null ],
     [ "setStandardUnits", "d9/d1b/structCantera_1_1UnitStack.html#ad3c52733cc56b2710c9af28f485061c1", null ],

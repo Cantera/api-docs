@@ -1,8 +1,5 @@
 var classCantera_1_1ThirdBody =
 [
-    [ "ThirdBody", "de/d5e/classCantera_1_1ThirdBody.html#a9e746e361bd08a4ab996d8423ac381f5", null ],
-    [ "ThirdBody", "de/d5e/classCantera_1_1ThirdBody.html#a0b2f5addc1e5dc1f6ae66580285b08cd", null ],
-    [ "ThirdBody", "de/d5e/classCantera_1_1ThirdBody.html#ae7a93a31e4a718e183dc28526d3172ec", null ],
     [ "ThirdBody", "de/d5e/classCantera_1_1ThirdBody.html#a0012864c9cac67c6fd0fad51edb69569", null ],
     [ "name", "de/d5e/classCantera_1_1ThirdBody.html#afa7a10b4b56522f03c698ac514b0f844", null ],
     [ "setName", "de/d5e/classCantera_1_1ThirdBody.html#acc1dc8bdb34199df4de0f529d76c8c4f", null ],

@@ -1,9 +1,6 @@
 var classCantera_1_1PDSS =
 [
     [ "PDSS", "de/dbe/classCantera_1_1PDSS.html#a4e59bd7289426b63194e6b6662548f6f", null ],
-    [ "PDSS", "de/dbe/classCantera_1_1PDSS.html#a86eda4581e17ef6ccc12777308f7f96f", null ],
-    [ "~PDSS", "de/dbe/classCantera_1_1PDSS.html#aaca985d4705123e3d1f2d3af837067c9", null ],
-    [ "operator=", "de/dbe/classCantera_1_1PDSS.html#aea3d6214f1db2b0e220262f6ca6390db", null ],
     [ "enthalpy_mole", "de/dbe/classCantera_1_1PDSS.html#a15f4a508274c362a7673629a08c5a263", null ],
     [ "enthalpy_RT", "de/dbe/classCantera_1_1PDSS.html#aa203957f8e61aa68893eaeca09a1d061", null ],
     [ "intEnergy_mole", "de/dbe/classCantera_1_1PDSS.html#ae3babd8850360b068eebd017ed79924b", null ],

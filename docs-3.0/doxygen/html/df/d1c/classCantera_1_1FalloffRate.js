@@ -1,7 +1,5 @@
 var classCantera_1_1FalloffRate =
 [
-    [ "FalloffRate", "df/d1c/classCantera_1_1FalloffRate.html#a63b3e07b3ec027e103b7a66db195833b", null ],
-    [ "FalloffRate", "df/d1c/classCantera_1_1FalloffRate.html#a0001f8317f6bdb2ad7c682a912b150d8", null ],
     [ "init", "df/d1c/classCantera_1_1FalloffRate.html#ac29643b73cf583cb7cea597710b37ff9", null ],
     [ "setFalloffCoeffs", "df/d1c/classCantera_1_1FalloffRate.html#a52bd2b364502c7d0b845112ad1153e94", null ],
     [ "getFalloffCoeffs", "df/d1c/classCantera_1_1FalloffRate.html#ac6e7fff0a0324eaee3ee67f4abeea38b", null ],
@@ -9,7 +7,7 @@ var classCantera_1_1FalloffRate =
     [ "F", "df/d1c/classCantera_1_1FalloffRate.html#a20462e6ecc44a0f32afa47cc57bcba4e", null ],
     [ "evalF", "df/d1c/classCantera_1_1FalloffRate.html#a6a4701bd51b2b33913473ce004e9bf9e", null ],
     [ "workSize", "df/d1c/classCantera_1_1FalloffRate.html#a633d2378f33f3a6a27c16e2bc4df29bd", null ],
-    [ "type", "df/d1c/classCantera_1_1FalloffRate.html#a2974561a5f408aa3ce45a347ea6c62b1", null ],
+    [ "type", "df/d1c/classCantera_1_1FalloffRate.html#aca3030461f60cddf5be39a73332f6ea3", null ],
     [ "nParameters", "df/d1c/classCantera_1_1FalloffRate.html#a1b106ba0179505313ae594098e405868", null ],
     [ "setParameters", "df/d1c/classCantera_1_1FalloffRate.html#a30cea4414ceda6e149e2f89c62315902", null ],
     [ "getParameters", "df/d1c/classCantera_1_1FalloffRate.html#a569ef0b20d2d8df0909ec630de8be6ee", null ],
@@ -21,9 +19,9 @@ var classCantera_1_1FalloffRate =
     [ "setAllowNegativePreExponentialFactor", "df/d1c/classCantera_1_1FalloffRate.html#a14d054781df6bb71526f5edbf554626c", null ],
     [ "chemicallyActivated", "df/d1c/classCantera_1_1FalloffRate.html#a6db8b32e61776fa554788100f5ade7d7", null ],
     [ "setChemicallyActivated", "df/d1c/classCantera_1_1FalloffRate.html#ae09433d2ab4af03ba3e45b8e9950ea6c", null ],
-    [ "lowRate", "df/d1c/classCantera_1_1FalloffRate.html#a999b7bb4a8c8d84733dddc8cb7b714e5", null ],
+    [ "lowRate", "df/d1c/classCantera_1_1FalloffRate.html#a716a42f5ad63361df07bc454d22f274f", null ],
     [ "setLowRate", "df/d1c/classCantera_1_1FalloffRate.html#ad53b5a7b319a07bed0e31eb770cdd583", null ],
-    [ "highRate", "df/d1c/classCantera_1_1FalloffRate.html#a103029057f19f08f20567fa185d4fa43", null ],
+    [ "highRate", "df/d1c/classCantera_1_1FalloffRate.html#a04f27982e8b38f90c650270cb80aad77", null ],
     [ "setHighRate", "df/d1c/classCantera_1_1FalloffRate.html#a4ab1b57ecdd4204050081e4bfa7c8143", null ],
     [ "m_lowRate", "df/d1c/classCantera_1_1FalloffRate.html#a7286582d74c946ff0099340fe88c6804", null ],
     [ "m_highRate", "df/d1c/classCantera_1_1FalloffRate.html#a56bf5a74e6d3f9e18ef4b95c66f84db5", null ],

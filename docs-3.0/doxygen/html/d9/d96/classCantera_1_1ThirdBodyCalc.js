@@ -4,7 +4,7 @@ var classCantera_1_1ThirdBodyCalc =
     [ "resizeCoeffs", "d9/d96/classCantera_1_1ThirdBodyCalc.html#aabfaa509093732d091da64bd44a5f990", null ],
     [ "update", "d9/d96/classCantera_1_1ThirdBodyCalc.html#a8decdc7c0208b3c54a2ea43f45fff185", null ],
     [ "multiply", "d9/d96/classCantera_1_1ThirdBodyCalc.html#a81f075871c768dac7f729d0f336327b2", null ],
-    [ "derivatives", "d9/d96/classCantera_1_1ThirdBodyCalc.html#a74c137485d648d4aa723edba37e2d7ca", null ],
+    [ "derivatives", "d9/d96/classCantera_1_1ThirdBodyCalc.html#a98ceabd083b3ba6dc68a7f34ba258caf", null ],
     [ "scale", "d9/d96/classCantera_1_1ThirdBodyCalc.html#aa196f86898ed3f31fb1843c4ec3df14f", null ],
     [ "scaleM", "d9/d96/classCantera_1_1ThirdBodyCalc.html#a037d3bedf82925994355022f69610b44", null ],
     [ "empty", "d9/d96/classCantera_1_1ThirdBodyCalc.html#a644718bb2fb240de962dc3c9a1fdf0dc", null ],

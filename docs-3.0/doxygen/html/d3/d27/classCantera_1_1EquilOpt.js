@@ -1,6 +1,5 @@
 var classCantera_1_1EquilOpt =
 [
-    [ "EquilOpt", "d3/d27/classCantera_1_1EquilOpt.html#a882110e7f08e571cea646a110137d7a7", null ],
     [ "relTolerance", "d3/d27/classCantera_1_1EquilOpt.html#a80111c6ba5db9918164d2909f9bec073", null ],
     [ "absElemTol", "d3/d27/classCantera_1_1EquilOpt.html#a088e19a8b1c4e62562956db17fe87761", null ],
     [ "maxIterations", "d3/d27/classCantera_1_1EquilOpt.html#adfed55b92ded4adea8686fe2014f85cb", null ],

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Species &#8212; Cantera 3.0.0b1 documentation</title>
+    <title>Species &#8212; Cantera 3.0.0 documentation</title>
   
   
   
@@ -41,6 +41,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'yaml/species';</script>
     <script>
@@ -375,9 +376,10 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="elements.html">Elements</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Species</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reactions.html">Reactions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ck_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="yaml2ck.html">YAML to Chemkin conversion</a></li>
 </ul>
 </div>
 </nav></div>
@@ -465,6 +467,10 @@ See <a class="reference internal" href="#sec-yaml-species-crit-props"><span clas
 <dt><code class="docutils literal notranslate"><span class="pre">transport</span></code></dt><dd><p>Mapping containing the species transport model specification and
 parameters. See <a class="reference internal" href="#sec-yaml-species-transport"><span class="std std-ref">Species transport models</span></a>.</p>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">coverage-dependencies</span></code></dt><dd><p>Mapping where keys are the names of other species whose coverages affects
+thermodynamic properties of this species. The map values are the dependency entries
+including <code class="docutils literal notranslate"><span class="pre">model</span></code> and model-specific parameters as <a class="reference internal" href="#sec-yaml-species-coverage"><span class="std std-ref">described here</span></a>.</p>
+</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">sites</span></code></dt><dd><p>The number of sites occupied by a surface or edge species. Default is 1.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">Debye-Huckel</span></code></dt><dd><p>Additional model parameters used in the Debye-Hückel model. See
@@ -478,11 +484,11 @@ parameters. See <a class="reference internal" href="#sec-yaml-species-transport"
 <dt><code class="docutils literal notranslate"><span class="pre">model</span></code></dt><dd><p>String specifying the model to be used. Required. Supported model strings
 are:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#sec-yaml-nasa7"><span class="std std-ref">NASA7</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-nasa9"><span class="std std-ref">NASA9</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-shomate"><span class="std std-ref">Shomate</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-constcp"><span class="std std-ref">constant-cp</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-piecewise-gibbs"><span class="std std-ref">piecewise-Gibbs</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NASA7</span></code> (<a class="reference internal" href="#sec-yaml-nasa7"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NASA9</span></code> (<a class="reference internal" href="#sec-yaml-nasa9"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Shomate</span></code> (<a class="reference internal" href="#sec-yaml-shomate"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">constant-cp</span></code> (<a class="reference internal" href="#sec-yaml-constcp"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">piecewise-Gibbs</span></code> (<a class="reference internal" href="#sec-yaml-piecewise-gibbs"><span class="std std-ref">details</span></a>)</p></li>
 </ul>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">reference-pressure</span></code></dt><dd><p>The reference pressure at which the given thermodynamic properties apply.
@@ -507,14 +513,14 @@ formulation that uses two temperature regions listed in descending order.</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NASA7</span>
-<span class="w">  </span><span class="nt">temperature-ranges</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">300.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1000.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5000.0</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">data</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">3.298677</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0014082404</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.963222e-06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.641515e-09</span><span class="p p-Indicator">,</span>
-<span class="w">    </span><span class="nv">-2.444854e-12</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1020.8999</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.950372</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2.92664</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0014879768</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-5.68476e-07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0097038e-10</span><span class="p p-Indicator">,</span>
-<span class="w">    </span><span class="nv">-6.753351e-15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-922.7977</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.980528</span><span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NASA7</span><span class="w"></span>
+<span class="w">  </span><span class="nt">temperature-ranges</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">300.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1000.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5000.0</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">3.298677</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0014082404</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.963222e-06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.641515e-09</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">    </span><span class="nv">-2.444854e-12</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1020.8999</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.950372</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2.92664</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0014879768</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-5.68476e-07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0097038e-10</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">    </span><span class="nv">-6.753351e-15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-922.7977</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.980528</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -534,20 +540,20 @@ ascending order.</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NASA9</span>
-<span class="w">  </span><span class="nt">temperature-ranges</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">200.00</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1000.00</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6000.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20000</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">reference-pressure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1 bar</span>
-<span class="w">  </span><span class="nt">data</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2.210371497E+04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.818461820E+02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.082738360E+00</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-8.530914410E-03</span><span class="p p-Indicator">,</span>
-<span class="w">     </span><span class="nv">1.384646189E-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-9.625793620E-09</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.519705809E-12</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">7.108460860E+02</span><span class="p p-Indicator">,</span>
-<span class="w">     </span><span class="nv">-1.076003744E+01</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5.877124060E+05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.239249073E+03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.066949220E+00</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-6.139685500E-04</span><span class="p p-Indicator">,</span>
-<span class="w">     </span><span class="nv">1.491806679E-07</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">-1.923105485E-11</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.061954386E-15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.283210415E+04</span><span class="p p-Indicator">,</span>
-<span class="w">     </span><span class="nv">-1.586640027E+01</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">8.310139160E+08</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-6.420733540E+05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.020264635E+02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.065092046E-02</span><span class="p p-Indicator">,</span>
-<span class="w">     </span><span class="nv">2.486903333E-06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-9.705954110E-11</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.437538881E-15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.938707040E+06</span><span class="p p-Indicator">,</span>
-<span class="w">     </span><span class="nv">-1.672099740E+03</span><span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NASA9</span><span class="w"></span>
+<span class="w">  </span><span class="nt">temperature-ranges</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">200.00</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1000.00</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6000.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20000</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">reference-pressure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1 bar</span><span class="w"></span>
+<span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2.210371497E+04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.818461820E+02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.082738360E+00</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-8.530914410E-03</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">     </span><span class="nv">1.384646189E-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-9.625793620E-09</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.519705809E-12</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">7.108460860E+02</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">     </span><span class="nv">-1.076003744E+01</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5.877124060E+05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.239249073E+03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.066949220E+00</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-6.139685500E-04</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">     </span><span class="nv">1.491806679E-07</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">-1.923105485E-11</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.061954386E-15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.283210415E+04</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">     </span><span class="nv">-1.586640027E+01</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">8.310139160E+08</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-6.420733540E+05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.020264635E+02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.065092046E-02</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">     </span><span class="nv">2.486903333E-06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-9.705954110E-11</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.437538881E-15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.938707040E+06</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">     </span><span class="nv">-1.672099740E+03</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -568,15 +574,15 @@ ascending order.</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Shomate</span>
-<span class="w">  </span><span class="nt">temperature-ranges</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">298</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1300</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6000</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">reference-pressure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1 bar</span>
-<span class="w">  </span><span class="nt">data</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">25.56759</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.096130</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.054656</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.671301</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.131021</span><span class="p p-Indicator">,</span>
-<span class="w">    </span><span class="nv">-118.0089</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">227.3665</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">35.15070</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.300095</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-0.205921</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.013550</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.282780</span><span class="p p-Indicator">,</span>
-<span class="w">    </span><span class="nv">-127.8375</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">231.7120</span><span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Shomate</span><span class="w"></span>
+<span class="w">  </span><span class="nt">temperature-ranges</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">298</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1300</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6000</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">reference-pressure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1 bar</span><span class="w"></span>
+<span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">25.56759</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.096130</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.054656</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.671301</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.131021</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">    </span><span class="nv">-118.0089</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">227.3665</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">35.15070</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.300095</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-0.205921</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.013550</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.282780</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">    </span><span class="nv">-127.8375</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">231.7120</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -601,12 +607,12 @@ Defaults to infinity.</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">constant-cp</span>
-<span class="w">  </span><span class="nt">T0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000 K</span>
-<span class="w">  </span><span class="nt">h0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9.22 kcal/mol</span>
-<span class="w">  </span><span class="nt">s0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-3.02 cal/mol/K</span>
-<span class="w">  </span><span class="nt">cp0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.95 cal/mol/K</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">constant-cp</span><span class="w"></span>
+<span class="w">  </span><span class="nt">T0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000 K</span><span class="w"></span>
+<span class="w">  </span><span class="nt">h0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9.22 kcal/mol</span><span class="w"></span>
+<span class="w">  </span><span class="nt">s0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-3.02 cal/mol/K</span><span class="w"></span>
+<span class="w">  </span><span class="nt">cp0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.95 cal/mol/K</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -635,11 +641,11 @@ Defaults to infinity.</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">piecewise-Gibbs</span>
-<span class="w">  </span><span class="nt">h0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-230.015 kJ/mol</span>
-<span class="w">  </span><span class="nt">dimensionless</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">298.15</span><span class="p">:</span><span class="w"> </span><span class="nv">-91.50963</span><span class="p p-Indicator">,</span><span class="nt"> 333.15</span><span class="p">:</span><span class="w"> </span><span class="nv">-85.0</span><span class="p p-Indicator">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">thermo</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">piecewise-Gibbs</span><span class="w"></span>
+<span class="w">  </span><span class="nt">h0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-230.015 kJ/mol</span><span class="w"></span>
+<span class="w">  </span><span class="nt">dimensionless</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">298.15</span><span class="p">:</span><span class="w"> </span><span class="nv">-91.50963</span><span class="p p-Indicator">,</span><span class="nt"> 333.15</span><span class="p">:</span><span class="w"> </span><span class="nv">-85.0</span><span class="p p-Indicator">}</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -661,15 +667,15 @@ Defaults to infinity.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">model</span></code></dt><dd><p>String specifying the model to be used. Required. Supported model strings
 are:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#sec-yaml-eos-constant-volume"><span class="std std-ref">constant-volume</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-eos-density-temperature-polynomial"><span class="std std-ref">density-temperature-polynomial</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-eos-hkft"><span class="std std-ref">HKFT</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-eos-ideal-gas"><span class="std std-ref">ideal-gas</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-eos-ions-from-neutral"><span class="std std-ref">ions-from-neutral-molecule</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-eos-liquid-water-iapws95"><span class="std std-ref">liquid-water-IAPWS95</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-eos-molar-volume-temperature-polynomial"><span class="std std-ref">molar-volume-temperature-polynomial</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-eos-peng-robinson"><span class="std std-ref">Peng-Robinson</span></a></p></li>
-<li><p><a class="reference internal" href="#sec-yaml-eos-redlich-kwong"><span class="std std-ref">Redlich-Kwong</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">constant-volume</span></code> (<a class="reference internal" href="#sec-yaml-eos-constant-volume"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">density-temperature-polynomial</span></code> (<a class="reference internal" href="#sec-yaml-eos-density-temperature-polynomial"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HKFT</span></code> (<a class="reference internal" href="#sec-yaml-eos-hkft"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ideal-gas</span></code> (<a class="reference internal" href="#sec-yaml-eos-ideal-gas"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ions-from-neutral-molecule</span></code> (<a class="reference internal" href="#sec-yaml-eos-ions-from-neutral"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">liquid-water-IAPWS95</span></code> (<a class="reference internal" href="#sec-yaml-eos-liquid-water-iapws95"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">molar-volume-temperature-polynomial</span></code> (<a class="reference internal" href="#sec-yaml-eos-molar-volume-temperature-polynomial"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Peng-Robinson</span></code> (<a class="reference internal" href="#sec-yaml-eos-peng-robinson"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Redlich-Kwong</span></code> (<a class="reference internal" href="#sec-yaml-eos-redlich-kwong"><span class="std std-ref">details</span></a>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -686,9 +692,9 @@ are:</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation-of-state</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">constant-volume</span>
-<span class="w">  </span><span class="nt">molar-volume</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3 cm^3/mol</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation-of-state</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">constant-volume</span><span class="w"></span>
+<span class="w">  </span><span class="nt">molar-volume</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3 cm^3/mol</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -702,10 +708,10 @@ are:</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation-of-state</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">density-temperature-polynomial</span>
-<span class="w">  </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">mass</span><span class="p">:</span><span class="w"> </span><span class="nv">g</span><span class="p p-Indicator">,</span><span class="nt"> length</span><span class="p">:</span><span class="w"> </span><span class="nv">cm</span><span class="p p-Indicator">}</span>
-<span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.536504</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.04279e-4</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.84825e-9</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-5.2853e-12</span><span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation-of-state</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">density-temperature-polynomial</span><span class="w"></span>
+<span class="w">  </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">mass</span><span class="p">:</span><span class="w"> </span><span class="nv">g</span><span class="p p-Indicator">,</span><span class="nt"> length</span><span class="p">:</span><span class="w"> </span><span class="nv">cm</span><span class="p p-Indicator">}</span><span class="w"></span>
+<span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.536504</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.04279e-4</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.84825e-9</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-5.2853e-12</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -726,14 +732,14 @@ are:</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation-of-state</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HKFT</span>
-<span class="w">  </span><span class="nt">h0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-57433. cal/gmol</span>
-<span class="w">  </span><span class="nt">s0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">13.96 cal/gmol/K</span>
-<span class="w">  </span><span class="nt">a</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.1839 cal/gmol/bar</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-228.5 cal/gmol</span><span class="p p-Indicator">,</span>
-<span class="w">     </span><span class="nv">3.256 cal*K/gmol/bar</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-27260. cal*K/gmol</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">c</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">18.18 cal/gmol/K</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-29810. cal*K/gmol</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">omega</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">33060 cal/gmol</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation-of-state</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HKFT</span><span class="w"></span>
+<span class="w">  </span><span class="nt">h0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-57433. cal/gmol</span><span class="w"></span>
+<span class="w">  </span><span class="nt">s0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">13.96 cal/gmol/K</span><span class="w"></span>
+<span class="w">  </span><span class="nt">a</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.1839 cal/gmol/bar</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-228.5 cal/gmol</span><span class="p p-Indicator">,</span><span class="w"></span>
+<span class="w">     </span><span class="nv">3.256 cal*K/gmol/bar</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-27260. cal*K/gmol</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">c</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">18.18 cal/gmol/K</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-29810. cal*K/gmol</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">omega</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">33060 cal/gmol</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -761,9 +767,9 @@ phase. Default is <code class="docutils literal notranslate"><span class="pre">f
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation-of-state</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ions-from-neutral-molecule</span>
-<span class="w">  </span><span class="nt">multipliers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">KCl(l)</span><span class="p">:</span><span class="w"> </span><span class="nv">1.2</span><span class="p p-Indicator">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation-of-state</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ions-from-neutral-molecule</span><span class="w"></span>
+<span class="w">  </span><span class="nt">multipliers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">KCl(l)</span><span class="p">:</span><span class="w"> </span><span class="nv">1.2</span><span class="p p-Indicator">}</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -798,15 +804,15 @@ coefficients for binary interactions between the two species.</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation-of-state</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Peng-Robinson</span>
-<span class="w">  </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">length</span><span class="p">:</span><span class="w"> </span><span class="nv">cm</span><span class="p p-Indicator">,</span><span class="nt"> quantity</span><span class="p">:</span><span class="w"> </span><span class="nv">mol</span><span class="p p-Indicator">}</span>
-<span class="w">  </span><span class="nt">a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.998873E+11</span>
-<span class="w">  </span><span class="nt">b</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">18.9714</span>
-<span class="w">  </span><span class="nt">acentric-factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.344</span>
-<span class="w">  </span><span class="nt">binary-a</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">H2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4 bar*cm^6/mol^2</span>
-<span class="w">    </span><span class="nt">CO2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.897e7 bar*cm^6/mol^2</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">equation-of-state</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Peng-Robinson</span><span class="w"></span>
+<span class="w">  </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">length</span><span class="p">:</span><span class="w"> </span><span class="nv">cm</span><span class="p p-Indicator">,</span><span class="nt"> quantity</span><span class="p">:</span><span class="w"> </span><span class="nv">mol</span><span class="p p-Indicator">}</span><span class="w"></span>
+<span class="w">  </span><span class="nt">a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.998873E+11</span><span class="w"></span>
+<span class="w">  </span><span class="nt">b</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">18.9714</span><span class="w"></span>
+<span class="w">  </span><span class="nt">acentric-factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.344</span><span class="w"></span>
+<span class="w">  </span><span class="nt">binary-a</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">H2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4 bar*cm^6/mol^2</span><span class="w"></span>
+<span class="w">    </span><span class="nt">CO2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.897e7 bar*cm^6/mol^2</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -825,81 +831,6 @@ temperature-dependent expression.</p>
 coefficients for binary interactions between the two species.</p>
 </dd>
 </dl>
-</section>
-<section id="coverage-dependent-surface">
-<span id="sec-yaml-coverage-dependent-surface-species"></span><h3>Coverage-dependent Surface<a class="headerlink" href="#coverage-dependent-surface" title="Permalink to this heading">#</a></h3>
-<p>A model where species thermodynamic properties are calculated as a function
-coverage as <a class="reference external" href="../../../doxygen/html/db/d25/classCantera_1_1CoverageDependentSurfPhase.html">described here</a>.</p>
-<p>Additional fields:</p>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">coverage-dependencies</span></code></dt><dd><p>Mapping where keys are the name of species whose coverage affects
-thermodynamic properties of the node-owner species. The map values are
-the dependency entries including <code class="docutils literal notranslate"><span class="pre">model</span></code>, model-specific parameters,
-<code class="docutils literal notranslate"><span class="pre">heat-capacity-a</span></code>, and <code class="docutils literal notranslate"><span class="pre">heat-capacity-b</span></code> that correspond
-to an individual dependency between the node-owner species and keyed species.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">model</span></code></dt><dd><p>Dependency model for coverage-dependent enthalpy or entropy. It should be
-one of the four: <code class="docutils literal notranslate"><span class="pre">linear</span></code>, <code class="docutils literal notranslate"><span class="pre">polynomial</span></code>, <code class="docutils literal notranslate"><span class="pre">piecewise-linear</span></code>
-or <code class="docutils literal notranslate"><span class="pre">interpolative</span></code>. The <code class="docutils literal notranslate"><span class="pre">model</span></code> and model-specific parameters are grouped
-as follow.</p>
-<p><code class="docutils literal notranslate"><span class="pre">linear</span></code>: <code class="docutils literal notranslate"><span class="pre">enthalpy</span></code>, <code class="docutils literal notranslate"><span class="pre">entropy</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">polynomial</span></code>: <code class="docutils literal notranslate"><span class="pre">enthalpy-coefficients</span></code>, <code class="docutils literal notranslate"><span class="pre">entropy-coefficients</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">piecewise-linear</span></code>: <code class="docutils literal notranslate"><span class="pre">enthalpy-low</span></code>, <code class="docutils literal notranslate"><span class="pre">enthalpy-high</span></code>, <code class="docutils literal notranslate"><span class="pre">enthalpy-change</span></code>,
-<code class="docutils literal notranslate"><span class="pre">entropy-low</span></code>, <code class="docutils literal notranslate"><span class="pre">entropy-high</span></code>, <code class="docutils literal notranslate"><span class="pre">entropy-change</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">interpolative</span></code>: <code class="docutils literal notranslate"><span class="pre">enthalpy-coverages</span></code>, <code class="docutils literal notranslate"><span class="pre">enthalpies</span></code>, <code class="docutils literal notranslate"><span class="pre">entropy-coverages</span></code>,
-<code class="docutils literal notranslate"><span class="pre">entropies</span></code></p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">enthalpy</span></code> or <code class="docutils literal notranslate"><span class="pre">entropy</span></code></dt><dd><p>Slope of the coverage-dependent enthalpy or entropy used in the <code class="docutils literal notranslate"><span class="pre">linear</span></code>
-model.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">enthalpy-coefficients</span></code> or <code class="docutils literal notranslate"><span class="pre">entropy-coefficients</span></code></dt><dd><p>Array of polynomial coefficients in order of 1st, 2nd, 3rd, and 4th-order
-used in coverage-dependent enthalpy or entropy calculation with the <code class="docutils literal notranslate"><span class="pre">polynomial</span></code>
-model.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">enthalpy-low</span></code> or <code class="docutils literal notranslate"><span class="pre">entropy-low</span></code></dt><dd><p>Slope of the coverage-dependent enthalpy or entropy for the lower coverage
-region used in the <code class="docutils literal notranslate"><span class="pre">piecewise-linear</span></code> model.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">enthalpy-high</span></code> or <code class="docutils literal notranslate"><span class="pre">entropy-high</span></code></dt><dd><p>Slope of the coverage-dependent enthalpy or entropy for the higher coverage
-region used in the <code class="docutils literal notranslate"><span class="pre">piecewise-linear</span></code> model.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">enthalpy-change</span></code> or <code class="docutils literal notranslate"><span class="pre">entropy-change</span></code></dt><dd><p>Coverage that separates the lower and higher coverage regions of the
-coverage-dependent enthalpy or entropy used in the <code class="docutils literal notranslate"><span class="pre">piecewise-linear</span></code> model.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">enthalpy-coverages</span></code> or <code class="docutils literal notranslate"><span class="pre">entropy-coverages</span></code></dt><dd><p>Array of discrete coverage values used in coverage-dependent enthalpy
-or entropy used in the <code class="docutils literal notranslate"><span class="pre">interpolative</span></code> model.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">enthalpies</span></code> or <code class="docutils literal notranslate"><span class="pre">entropies</span></code></dt><dd><p>Array of discrete enthalpy or entropy values corresponding to the coverages
-in <code class="docutils literal notranslate"><span class="pre">enthalpy-coverages</span></code> or <code class="docutils literal notranslate"><span class="pre">entropy-coverages</span></code>, respectively, used in the
-<code class="docutils literal notranslate"><span class="pre">interpolative</span></code> model.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">heat-capacity-a</span></code> or <code class="docutils literal notranslate"><span class="pre">heat-capacity-b</span></code></dt><dd><p>Coefficient <span class="math notranslate nohighlight">\(c^{(a)}\)</span> or <span class="math notranslate nohighlight">\(c^{(b)}\)</span> used in the coverage-dependent
-<code class="docutils literal notranslate"><span class="pre">heat</span> <span class="pre">capacity</span></code> model.</p>
-</dd>
-</dl>
-<p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">coverage-dependencies</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">OC_Pt</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="nv">linear</span><span class="p p-Indicator">,</span>
-<span class="nt">          units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">energy</span><span class="p">:</span><span class="w"> </span><span class="nv">eV</span><span class="p p-Indicator">,</span><span class="nt"> quantity</span><span class="p">:</span><span class="w"> </span><span class="nv">molec</span><span class="p p-Indicator">},</span>
-<span class="nt">          enthalpy</span><span class="p">:</span><span class="w"> </span><span class="nv">0.48</span><span class="p p-Indicator">,</span><span class="nt"> entropy</span><span class="p">:</span><span class="w"> </span><span class="nv">-0.031</span><span class="p p-Indicator">}</span>
-<span class="w">  </span><span class="nt">C_Pt</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="nv">polynomial</span><span class="p p-Indicator">,</span>
-<span class="nt">         units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">energy</span><span class="p">:</span><span class="w"> </span><span class="nv">J</span><span class="p p-Indicator">,</span><span class="nt"> quantity</span><span class="p">:</span><span class="w"> </span><span class="nv">mol</span><span class="p p-Indicator">},</span>
-<span class="nt">         enthalpy-coefficients</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.86e4</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.2e5</span><span class="p p-Indicator">],</span>
-<span class="nt">         entropy-coefficients</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.8e3</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.26e4</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]}</span>
-<span class="w">  </span><span class="nt">CO2_Pt</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="nv">piecewise-linear</span><span class="p p-Indicator">,</span>
-<span class="nt">           units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">energy</span><span class="p">:</span><span class="w"> </span><span class="nv">kJ</span><span class="p p-Indicator">,</span><span class="nt"> quantity</span><span class="p">:</span><span class="w"> </span><span class="nv">mol</span><span class="p p-Indicator">},</span>
-<span class="nt">           enthalpy-low</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5e2</span><span class="p p-Indicator">,</span><span class="nt"> enthalpy-high</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0e2</span><span class="p p-Indicator">,</span>
-<span class="nt">           enthalpy-change</span><span class="p">:</span><span class="w"> </span><span class="nv">0.4</span><span class="p p-Indicator">,</span>
-<span class="nt">           entropy-low</span><span class="p">:</span><span class="w"> </span><span class="nv">0.1e2</span><span class="p p-Indicator">,</span><span class="nt"> entropy-high</span><span class="p">:</span><span class="w"> </span><span class="nv">-0.2e2</span><span class="p p-Indicator">,</span>
-<span class="nt">           entropy-change</span><span class="p">:</span><span class="w"> </span><span class="nv">0.4</span><span class="p p-Indicator">,</span>
-<span class="nt">           heat-capacity-a</span><span class="p">:</span><span class="w"> </span><span class="nv">0.02e-1</span><span class="p p-Indicator">,</span><span class="nt"> heat-capacity-b</span><span class="p">:</span><span class="w"> </span><span class="nv">-0.156e-1</span><span class="p p-Indicator">}</span>
-<span class="w">  </span><span class="nt">O_Pt</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="nv">interpolative</span><span class="p p-Indicator">,</span>
-<span class="nt">         units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">energy</span><span class="p">:</span><span class="w"> </span><span class="nv">kcal</span><span class="p p-Indicator">,</span><span class="nt"> quantity</span><span class="p">:</span><span class="w"> </span><span class="nv">mol</span><span class="p p-Indicator">},</span>
-<span class="nt">         enthalpy-coverages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.4</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.9</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">],</span>
-<span class="nt">         enthalpies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.0</span><span class="p p-Indicator">],</span>
-<span class="nt">         entropy-coverages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">],</span>
-<span class="nt">         entropies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-0.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.0</span><span class="p p-Indicator">]}</span>
-</pre></div>
-</div>
 </section>
 </section>
 <section id="species-transport-models">
@@ -939,13 +870,139 @@ the value provided there supersedes this one.</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">transport</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gas</span>
-<span class="w">  </span><span class="nt">geometry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linear</span>
-<span class="w">  </span><span class="nt">well-depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">107.4</span>
-<span class="w">  </span><span class="nt">diameter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.458</span>
-<span class="w">  </span><span class="nt">polarizability</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.6</span>
-<span class="w">  </span><span class="nt">rotational-relaxation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.8</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">transport</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gas</span><span class="w"></span>
+<span class="w">  </span><span class="nt">geometry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linear</span><span class="w"></span>
+<span class="w">  </span><span class="nt">well-depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">107.4</span><span class="w"></span>
+<span class="w">  </span><span class="nt">diameter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.458</span><span class="w"></span>
+<span class="w">  </span><span class="nt">polarizability</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.6</span><span class="w"></span>
+<span class="w">  </span><span class="nt">rotational-relaxation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.8</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="species-coverage-dependencies">
+<span id="sec-yaml-species-coverage"></span><h2>Species coverage dependencies<a class="headerlink" href="#species-coverage-dependencies" title="Permalink to this heading">#</a></h2>
+<p>The coverage-dependent surface species formulation calculates coverage-dependent
+correction factors to the ideal surface phase properties. Used in conjunction with the
+<a class="reference internal" href="phases.html#sec-yaml-coverage-dependent-surface"><span class="std std-ref">coverage-dependent-surface</span></a> phase model.
+Full details are <a class="reference external" href="../../../doxygen/html/db/d25/classCantera_1_1CoverageDependentSurfPhase.html">described here</a>.</p>
+<p>Fields of a species <code class="docutils literal notranslate"><span class="pre">coverage-dependencies</span></code> map entry used by all models are:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">model</span></code></dt><dd><p>String specifying the model to be used. Required. Supported model strings are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">linear</span></code> (<a class="reference internal" href="#sec-yaml-species-coverage-linear"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">polynomial</span></code> (<a class="reference internal" href="#sec-yaml-species-coverage-polynomial"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">piecewise-linear</span></code> (<a class="reference internal" href="#sec-yaml-species-coverage-piecewise-linear"><span class="std std-ref">details</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">interpolative</span></code> (<a class="reference internal" href="#sec-yaml-species-coverage-interpolative"><span class="std std-ref">details</span></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<section id="linear-dependency-model">
+<span id="sec-yaml-species-coverage-linear"></span><h3>Linear dependency model<a class="headerlink" href="#linear-dependency-model" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">enthalpy</span></code></dt><dd><p>Slope of the coverage-dependent enthalpy.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">entropy</span></code></dt><dd><p>Slope of the coverage-dependent entropy.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">coverage-dependencies</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">O_Pt</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linear</span><span class="w"></span>
+<span class="w">    </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">energy</span><span class="p">:</span><span class="w"> </span><span class="nv">eV</span><span class="p p-Indicator">,</span><span class="nt"> quantity</span><span class="p">:</span><span class="w"> </span><span class="nv">molec</span><span class="p p-Indicator">}</span><span class="w"></span>
+<span class="w">    </span><span class="nt">enthalpy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.48</span><span class="w"></span>
+<span class="w">    </span><span class="nt">entropy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-0.031</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># + other entries (optional)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="polynomial-dependency-model">
+<span id="sec-yaml-species-coverage-polynomial"></span><h3>Polynomial dependency model<a class="headerlink" href="#polynomial-dependency-model" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">enthalpy-coefficients</span></code></dt><dd><p>Array of polynomial coefficients in order of 1st, 2nd, 3rd, and
+4th-order used in coverage-dependent enthalpy calculation.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">entropy-coefficients</span></code></dt><dd><p>Array of polynomial coefficients in order of 1st, 2nd, 3rd, and
+4th-order used in coverage-dependent entropy calculation.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">coverage-dependencies</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">OC_Pt</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">polynomial</span><span class="w"></span>
+<span class="w">    </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">energy</span><span class="p">:</span><span class="w"> </span><span class="nv">J</span><span class="p p-Indicator">,</span><span class="nt"> quantity</span><span class="p">:</span><span class="w"> </span><span class="nv">mol</span><span class="p p-Indicator">}</span><span class="w"></span>
+<span class="w">    </span><span class="nt">enthalpy-coefficients</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.86e4</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.2e5</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">entropy-coefficients</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.8e3</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.26e4</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># + other entries (optional)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="piecewise-linear-dependency-model">
+<span id="sec-yaml-species-coverage-piecewise-linear"></span><h3>Piecewise-linear dependency model<a class="headerlink" href="#piecewise-linear-dependency-model" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">enthalpy-low</span></code></dt><dd><p>Slope of the coverage-dependent enthalpy for the lower coverage region.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">entropy-low</span></code></dt><dd><p>Slope of the coverage-dependent entropy for the lower coverage region.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">enthalpy-high</span></code></dt><dd><p>Slope of the coverage-dependent enthalpy for the higher coverage region.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">entropy-high</span></code></dt><dd><p>Slope of the coverage-dependent entropy for the higher coverage region.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">enthalpy-change</span></code></dt><dd><p>Coverage that separates the lower and higher coverage regions of the
+coverage-dependent enthalpy.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">entropy-change</span></code></dt><dd><p>Coverage that separates the lower and higher coverage regions of the
+coverage-dependent entropy.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">heat-capacity-a</span></code></dt><dd><p>Coefficient <span class="math notranslate nohighlight">\(c^{(a)}\)</span> used in the
+<a class="reference external" href="../../../doxygen/html/df/db9/structCantera_1_1CoverageDependentSurfPhase_1_1HeatCapacityDependency.html">coverage-dependent heat capacity</a> model.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">heat-capacity-b</span></code></dt><dd><p>Coefficient <span class="math notranslate nohighlight">\(c^{(b)}\)</span> used in the
+<a class="reference external" href="../../../doxygen/html/df/db9/structCantera_1_1CoverageDependentSurfPhase_1_1HeatCapacityDependency.html">coverage-dependent heat capacity</a> model.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">coverage-dependencies</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">CO2_Pt</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">piecewise-linear</span><span class="w"></span>
+<span class="w">    </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">energy</span><span class="p">:</span><span class="w"> </span><span class="nv">kJ</span><span class="p p-Indicator">,</span><span class="nt"> quantity</span><span class="p">:</span><span class="w"> </span><span class="nv">mol</span><span class="p p-Indicator">}</span><span class="w"></span>
+<span class="w">    </span><span class="nt">enthalpy-low</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5e2</span><span class="w"></span>
+<span class="w">    </span><span class="nt">enthalpy-high</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0e2</span><span class="w"></span>
+<span class="w">    </span><span class="nt">enthalpy-change</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.4</span><span class="w"></span>
+<span class="w">    </span><span class="nt">entropy-low</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1e2</span><span class="w"></span>
+<span class="w">    </span><span class="nt">entropy-high</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-0.2e2</span><span class="w"></span>
+<span class="w">    </span><span class="nt">entropy-change</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.4</span><span class="w"></span>
+<span class="w">    </span><span class="nt">heat-capacity-a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.02e-1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">heat-capacity-b</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-0.156e-1</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># + other entries (optional)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="interpolative-dependency-model">
+<span id="sec-yaml-species-coverage-interpolative"></span><h3>Interpolative dependency model<a class="headerlink" href="#interpolative-dependency-model" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">enthalpy-coverages</span></code></dt><dd><p>Array of discrete coverage values used in coverage-dependent enthalpy.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">entropy-coverages</span></code></dt><dd><p>Array of discrete coverage values used in coverage-dependent entropy.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">enthalpies</span></code></dt><dd><p>Array of discrete enthalpy values corresponding to the
+coverages in <code class="docutils literal notranslate"><span class="pre">enthalpy-coverages</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">entropies</span></code></dt><dd><p>Array of discrete entropy values corresponding to the
+coverages in <code class="docutils literal notranslate"><span class="pre">entropy-coverages</span></code>.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">coverage-dependencies</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">C_Pt</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">interpolative</span><span class="w"></span>
+<span class="w">    </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">energy</span><span class="p">:</span><span class="w"> </span><span class="nv">kcal</span><span class="p p-Indicator">,</span><span class="nt"> quantity</span><span class="p">:</span><span class="w"> </span><span class="nv">mol</span><span class="p p-Indicator">}</span><span class="w"></span>
+<span class="w">    </span><span class="nt">enthalpy-coverages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.4</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.9</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">entropy-coverages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">enthalpies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.0</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">entropies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-0.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.0</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># + other entries (optional)</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -1018,11 +1075,17 @@ the value provided there supersedes this one.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molar-volume-temperature-polynomial">Molar volume temperature polynomial</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#peng-robinson">Peng-Robinson</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redlich-kwong">Redlich-Kwong</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coverage-dependent-surface">Coverage-dependent Surface</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#species-transport-models">Species transport models</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gas-transport">Gas transport</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#species-coverage-dependencies">Species coverage dependencies</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-dependency-model">Linear dependency model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-dependency-model">Polynomial dependency model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#piecewise-linear-dependency-model">Piecewise-linear dependency model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolative-dependency-model">Interpolative dependency model</a></li>
 </ul>
 </li>
 </ul>
@@ -1068,7 +1131,7 @@ the value provided there supersedes this one.</p>
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     <br/>
   </p>
 </div>

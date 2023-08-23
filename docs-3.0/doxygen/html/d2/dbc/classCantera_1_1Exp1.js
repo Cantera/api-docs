@@ -1,14 +1,11 @@
 var classCantera_1_1Exp1 =
 [
-    [ "Exp1", "d2/dbc/classCantera_1_1Exp1.html#a1b2f9bc3f431508b36ba5c62e894bd84", null ],
     [ "Exp1", "d2/dbc/classCantera_1_1Exp1.html#a859fa4b39709786511ea5e1cef638f54", null ],
-    [ "Exp1", "d2/dbc/classCantera_1_1Exp1.html#a5e71b3a7e915d97266eaa9c2dde28aff", null ],
-    [ "operator=", "d2/dbc/classCantera_1_1Exp1.html#ad7086c1a97036e687146441201b66174", null ],
-    [ "write", "d2/dbc/classCantera_1_1Exp1.html#aa00c35a668fe313e4c2cbb92f051ddd4", null ],
-    [ "ID", "d2/dbc/classCantera_1_1Exp1.html#a447a205ad07c8cbe03337a7bb1be3351", null ],
-    [ "type", "d2/dbc/classCantera_1_1Exp1.html#a3fd7546c6fe10a8af9e23c4a3e611caf", null ],
-    [ "eval", "d2/dbc/classCantera_1_1Exp1.html#a1c81c0b17045846f58e6805fc28a892d", null ],
-    [ "duplicate", "d2/dbc/classCantera_1_1Exp1.html#ad26a36abcf05f4ed5cd96ecafd52312a", null ],
-    [ "derivative", "d2/dbc/classCantera_1_1Exp1.html#add413b6d193ee81507d1b6c2e6a7077e", null ],
-    [ "derivative3", "d2/dbc/classCantera_1_1Exp1.html#a7b4d89276c0c73f552ce58e27dd16003", null ]
+    [ "write", "d2/dbc/classCantera_1_1Exp1.html#a84177badb8030c21d0b4878ced332bd2", null ],
+    [ "ID", "d2/dbc/classCantera_1_1Exp1.html#a9a78e16d7b94411ad62938e795ddcad1", null ],
+    [ "type", "d2/dbc/classCantera_1_1Exp1.html#a5094b6f3d574dc173727f57ef3827056", null ],
+    [ "eval", "d2/dbc/classCantera_1_1Exp1.html#a315bfb070c6aae13f4b5d58fcca8da63", null ],
+    [ "duplicate", "d2/dbc/classCantera_1_1Exp1.html#ac531103ebfd7064e8856a6099c474550", null ],
+    [ "derivative", "d2/dbc/classCantera_1_1Exp1.html#a073f1f677bb06caa597abb4e025b4b24", null ],
+    [ "derivative3", "d2/dbc/classCantera_1_1Exp1.html#ab29bcb8e0bef4174c1e17e6ee0e4eaba", null ]
 ];

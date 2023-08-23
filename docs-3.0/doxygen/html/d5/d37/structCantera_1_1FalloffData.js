@@ -1,13 +1,12 @@
 var structCantera_1_1FalloffData =
 [
-    [ "FalloffData", "d5/d37/structCantera_1_1FalloffData.html#acc9fded56fd5cd7e9b31d15284147ba9", null ],
     [ "update", "d5/d37/structCantera_1_1FalloffData.html#a321d2e7029e3ea277d6810407ce69464", null ],
     [ "update", "d5/d37/structCantera_1_1FalloffData.html#a5647f86a7cf7224f4822ffe07e2f9fe6", null ],
     [ "update", "d5/d37/structCantera_1_1FalloffData.html#a8a04165ad8770204e9f19422f36a6779", null ],
     [ "perturbThirdBodies", "d5/d37/structCantera_1_1FalloffData.html#a2cafe580eda1405b66355c95a4f41c34", null ],
     [ "restore", "d5/d37/structCantera_1_1FalloffData.html#a966cdbc6c634a7519bc160e2483f56ce", null ],
-    [ "resize", "d5/d37/structCantera_1_1FalloffData.html#a18a6ec5da62ab28d5d2fa5d24c45037d", null ],
-    [ "invalidateCache", "d5/d37/structCantera_1_1FalloffData.html#a950125a9f540d36669bd2802201b1b1d", null ],
+    [ "resize", "d5/d37/structCantera_1_1FalloffData.html#a651d35c1817e23f57a34101a53dfbb28", null ],
+    [ "invalidateCache", "d5/d37/structCantera_1_1FalloffData.html#aa3ce068e8f4d3b1052bad4e953c79355", null ],
     [ "update", "d5/d37/structCantera_1_1FalloffData.html#a7ab12baf406993645ef688298a276500", null ],
     [ "update", "d5/d37/structCantera_1_1FalloffData.html#a4045277efd847ff814c9d2821eb1a6f3", null ],
     [ "update", "d5/d37/structCantera_1_1FalloffData.html#adcdb618bb24d0d9f3eaa98fd07efb754", null ],

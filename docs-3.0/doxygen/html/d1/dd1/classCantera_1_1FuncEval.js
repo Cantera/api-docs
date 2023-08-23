@@ -1,7 +1,5 @@
 var classCantera_1_1FuncEval =
 [
-    [ "FuncEval", "d1/dd1/classCantera_1_1FuncEval.html#a0c0c4d7f54846b4dae8d138dc01585d0", null ],
-    [ "~FuncEval", "d1/dd1/classCantera_1_1FuncEval.html#a6654b984f4dc060191cead0151863875", null ],
     [ "eval", "d1/dd1/classCantera_1_1FuncEval.html#a9e17c43cac4143921b76690e54d94fb6", null ],
     [ "evalDae", "d1/dd1/classCantera_1_1FuncEval.html#a02ace98960a9affe2d30fb9baa65e6d6", null ],
     [ "getConstraints", "d1/dd1/classCantera_1_1FuncEval.html#ad2a5f43b732fdee209a9c505126a5702", null ],
@@ -22,6 +20,5 @@ var classCantera_1_1FuncEval =
     [ "clearErrors", "d1/dd1/classCantera_1_1FuncEval.html#a5a1056d4e9d26a692f621e83be8cd8d1", null ],
     [ "m_sens_params", "d1/dd1/classCantera_1_1FuncEval.html#aedd4e11be5a798efffe3ca5719da1be7", null ],
     [ "m_paramScales", "d1/dd1/classCantera_1_1FuncEval.html#a2decaf94b9ef8f51df2854e2b8b6f36b", null ],
-    [ "m_suppress_errors", "d1/dd1/classCantera_1_1FuncEval.html#a447c9eeac8d0d79851cdceb1de2f7e7b", null ],
     [ "m_errors", "d1/dd1/classCantera_1_1FuncEval.html#aca566a3f6d30afe032c78818060940d3", null ]
 ];

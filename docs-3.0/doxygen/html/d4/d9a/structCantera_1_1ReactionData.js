@@ -1,6 +1,5 @@
 var structCantera_1_1ReactionData =
 [
-    [ "ReactionData", "d4/d9a/structCantera_1_1ReactionData.html#a7c6fb6518b866531d89ab678a0081764", null ],
     [ "update", "d4/d9a/structCantera_1_1ReactionData.html#a7ab12baf406993645ef688298a276500", null ],
     [ "update", "d4/d9a/structCantera_1_1ReactionData.html#a4045277efd847ff814c9d2821eb1a6f3", null ],
     [ "update", "d4/d9a/structCantera_1_1ReactionData.html#adcdb618bb24d0d9f3eaa98fd07efb754", null ],

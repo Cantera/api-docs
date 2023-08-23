@@ -12,7 +12,7 @@ var modules =
     [ "Numerical Utilities", "dc/db9/group__numerics.html", "dc/db9/group__numerics" ],
     [ "ODE and DAE Function Utilities", "d9/dba/group__odeGroup.html", "d9/dba/group__odeGroup" ],
     [ "One-Dimensional Reacting Flows", "d4/d2d/group__onedGroup.html", "d4/d2d/group__onedGroup" ],
-    [ "Models of Phases of Matter", "dc/de7/group__phases.html", "dc/de7/group__phases" ],
     [ "Thermodynamic Properties", "dd/db1/group__thermoprops.html", "dd/db1/group__thermoprops" ],
+    [ "Transport Properties", "df/d60/group__tranprops.html", "df/d60/group__tranprops" ],
     [ "Zero-Dimensional Reactor Networks", "d9/de1/group__zerodGroup.html", "d9/de1/group__zerodGroup" ]
 ];

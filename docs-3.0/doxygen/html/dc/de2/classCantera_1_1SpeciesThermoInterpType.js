@@ -1,10 +1,5 @@
 var classCantera_1_1SpeciesThermoInterpType =
 [
-    [ "SpeciesThermoInterpType", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#a3d1f37e6002251cab5844ec17c00a46d", null ],
-    [ "SpeciesThermoInterpType", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#abcf78b53f6603f224cf1870c86e92da7", null ],
-    [ "SpeciesThermoInterpType", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#aff535c67476851c8eef0dce0da9ca359", null ],
-    [ "~SpeciesThermoInterpType", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#aafcb73f36d73b1b40f38fe5a9aecef87", null ],
-    [ "operator=", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#a4367ebab67a5ba7688245f4841e1493e", null ],
     [ "minTemp", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#a208a7606750f95585bc4f98d2d41de75", null ],
     [ "setMinTemp", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#ac4a40dfd2cd241ce8771b8bfcc65e486", null ],
     [ "maxTemp", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#a39afa9b94257f2e92e1f79b4e58b8705", null ],
@@ -24,10 +19,8 @@ var classCantera_1_1SpeciesThermoInterpType =
     [ "modifyOneHf298", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#af6cf404ce84018dc68d4ed42f5830fb6", null ],
     [ "resetHf298", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#a92bfae5a63c2368cbb95a13baa08ad14", null ],
     [ "input", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#af1e42842e94dc57555de1e77cb18ef90", null ],
-    [ "input", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#afe808c3e784e5e43e6e80ffadd26f192", null ],
     [ "getParameters", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#a8f10eef9b0a9c1315e17c29bc332994f", null ],
     [ "m_lowT", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#ac07859eff50fe709238c2cc584afc7b2", null ],
     [ "m_highT", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#ada4007df8c98cfc29feaf6c82dd58202", null ],
-    [ "m_Pref", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#a4149d3d45dd07aa8631841af6657c894", null ],
-    [ "m_input", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#ad99f7a99d03ef1dc32d1949996a9edc1", null ]
+    [ "m_Pref", "dc/de2/classCantera_1_1SpeciesThermoInterpType.html#a4149d3d45dd07aa8631841af6657c894", null ]
 ];

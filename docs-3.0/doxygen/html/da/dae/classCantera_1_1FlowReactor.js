@@ -1,6 +1,5 @@
 var classCantera_1_1FlowReactor =
 [
-    [ "FlowReactor", "da/dae/classCantera_1_1FlowReactor.html#abce819dacde85fb9d01cd941b2736dec", null ],
     [ "type", "da/dae/classCantera_1_1FlowReactor.html#a5094b6f3d574dc173727f57ef3827056", null ],
     [ "isOde", "da/dae/classCantera_1_1FlowReactor.html#a269124ce55cd80f24d982e9cc6c2b593", null ],
     [ "timeIsIndependent", "da/dae/classCantera_1_1FlowReactor.html#a457835be63e1ed24ee48c24a9be70e30", null ],

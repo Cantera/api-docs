@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>General Structure &#8212; Cantera 3.0.0b1 documentation</title>
+    <title>General Structure &#8212; Cantera 3.0.0 documentation</title>
   
   
   
@@ -41,6 +41,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'yaml/general';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/documentation/dev/sphinx/html/_static/doc-versions.json';
@@ -374,9 +375,10 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="elements.html">Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="species.html">Species</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reactions.html">Reactions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ck_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="yaml2ck.html">YAML to Chemkin conversion</a></li>
 </ul>
 </div>
 </nav></div>
@@ -452,27 +454,27 @@ reaction, species, or element definitions can be used. The specific names
 for <a class="reference internal" href="reactions.html#sec-yaml-reactions"><span class="std std-ref">Reactions</span></a>, <a class="reference internal" href="species.html#sec-yaml-species"><span class="std std-ref">Species</span></a>, and
 <a class="reference internal" href="elements.html#sec-yaml-elements"><span class="std std-ref">Elements</span></a> to add to a phase. A simple input file has the
 following structure:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">phases</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spam</span>
-<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ideal-gas</span>
-<span class="w">  </span><span class="c1"># Additional fields come after this</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">green-eggs</span>
-<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">model-name</span>
-<span class="w">  </span><span class="c1"># Additional fields come after this</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">phases</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spam</span><span class="w"></span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ideal-gas</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Additional fields come after this</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">green-eggs</span><span class="w"></span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">model-name</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Additional fields come after this</span><span class="w"></span>
 
-<span class="nt">species</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A</span>
-<span class="w">  </span><span class="c1"># Additional fields come after this</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">B</span>
-<span class="w">  </span><span class="c1"># Additional fields come after this</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C</span>
-<span class="w">  </span><span class="c1"># Additional fields come after this</span>
+<span class="nt">species</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Additional fields come after this</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">B</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Additional fields come after this</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Additional fields come after this</span><span class="w"></span>
 
-<span class="nt">reactions</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A + B &lt;=&gt; C + D</span>
-<span class="w">  </span><span class="c1"># Additional fields come after this</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A + C &lt;=&gt; 2 D</span>
-<span class="w">  </span><span class="c1"># Additional fields come after this</span>
+<span class="nt">reactions</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A + B &lt;=&gt; C + D</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Additional fields come after this</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A + C &lt;=&gt; 2 D</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Additional fields come after this</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -505,11 +507,11 @@ Supported base units are:</p>
 </ul>
 <p>Units can be specified on individual input values by placing them after the
 value, separated by a space:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.45e9 cm^3/kmol</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0.4</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">21033 kJ/kmol</span><span class="p p-Indicator">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.45e9 cm^3/kmol</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0.4</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">21033 kJ/kmol</span><span class="p p-Indicator">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>or by using a <code class="docutils literal notranslate"><span class="pre">units</span></code> mapping:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">mass</span><span class="p">:</span><span class="w"> </span><span class="nv">g</span><span class="p p-Indicator">,</span><span class="nt"> quantity</span><span class="p">:</span><span class="w"> </span><span class="nv">mol</span><span class="p p-Indicator">,</span><span class="nt"> pressure</span><span class="p">:</span><span class="w"> </span><span class="nv">atm</span><span class="p p-Indicator">,</span><span class="nt"> activation-energy</span><span class="p">:</span><span class="w"> </span><span class="nv">cal/mol</span><span class="p p-Indicator">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">mass</span><span class="p">:</span><span class="w"> </span><span class="nv">g</span><span class="p p-Indicator">,</span><span class="nt"> quantity</span><span class="p">:</span><span class="w"> </span><span class="nv">mol</span><span class="p p-Indicator">,</span><span class="nt"> pressure</span><span class="p">:</span><span class="w"> </span><span class="nv">atm</span><span class="p p-Indicator">,</span><span class="nt"> activation-energy</span><span class="p">:</span><span class="w"> </span><span class="nv">cal/mol</span><span class="p p-Indicator">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>A <code class="docutils literal notranslate"><span class="pre">units</span></code> mapping will set the default units for all values within the same
@@ -624,7 +626,7 @@ the desired units of <code class="docutils literal notranslate"><span class="pre
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     <br/>
   </p>
 </div>

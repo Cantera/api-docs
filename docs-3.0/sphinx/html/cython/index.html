@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Python Module Documentation &#8212; Cantera 3.0.0b1 documentation</title>
+    <title>Python Module Documentation &#8212; Cantera 3.0.0 documentation</title>
   
   
   
@@ -41,6 +41,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'cython/index';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/documentation/dev/sphinx/html/_static/doc-versions.json';
@@ -49,7 +50,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Objects Representing Phases" href="importing.html" />
-    <link rel="prev" title="YAML to Chemkin conversion" href="../yaml/ck_conversion.html" />
+    <link rel="prev" title="YAML to Chemkin conversion" href="../yaml/yaml2ck.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -378,6 +379,13 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Physical Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="units.html">Python Interface With Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="scripts.html">Mechanism Conversion</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml_conversion.html">YAML to Chemkin conversion</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </nav></div>
@@ -465,6 +473,8 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="transport.html">Transport Properties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="transport.html#cantera.Transport"><code class="docutils literal notranslate"><span class="pre">Transport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="transport.html#cantera.DustyGasTransport"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="transport.html#species-transport-properties">Species Transport Properties</a></li>
 </ul>
 </li>
@@ -486,7 +496,21 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="onedim.html#base-classes">Base Classes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="constants.html">Physical Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constants.html">Physical Constants</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="constants.html#cantera.avogadro"><code class="docutils literal notranslate"><span class="pre">avogadro</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html#cantera.gas_constant"><code class="docutils literal notranslate"><span class="pre">gas_constant</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html#cantera.one_atm"><code class="docutils literal notranslate"><span class="pre">one_atm</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html#cantera.boltzmann"><code class="docutils literal notranslate"><span class="pre">boltzmann</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html#cantera.planck"><code class="docutils literal notranslate"><span class="pre">planck</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html#cantera.stefan_boltzmann"><code class="docutils literal notranslate"><span class="pre">stefan_boltzmann</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html#cantera.electron_charge"><code class="docutils literal notranslate"><span class="pre">electron_charge</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html#cantera.electron_mass"><code class="docutils literal notranslate"><span class="pre">electron_mass</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html#cantera.faraday"><code class="docutils literal notranslate"><span class="pre">faraday</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html#cantera.light_speed"><code class="docutils literal notranslate"><span class="pre">light_speed</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html#cantera.permeability_0"><code class="docutils literal notranslate"><span class="pre">permeability_0</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html#cantera.epsilon_0"><code class="docutils literal notranslate"><span class="pre">epsilon_0</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="units.html">Python Interface With Units</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="units.html#solution-with-units">Solution with Units</a></li>
 <li class="toctree-l2"><a class="reference internal" href="units.html#purefluid-phases-with-units">PureFluid Phases With Units</a></li>
@@ -497,6 +521,13 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="utilities.html#unit-conversions">Unit Conversions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utilities.html#global-functions">Global Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utilities.html#exceptions">Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Mechanism Conversion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml_conversion.html">YAML to Chemkin conversion</a></li>
 </ul>
 </li>
 </ul>
@@ -515,7 +546,7 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../yaml/ck_conversion.html"
+       href="../yaml/yaml2ck.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
@@ -584,7 +615,7 @@ document.write(`
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     <br/>
   </p>
 </div>

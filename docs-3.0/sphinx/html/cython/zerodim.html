@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Zero-Dimensional Reactor Networks &#8212; Cantera 3.0.0b1 documentation</title>
+    <title>Zero-Dimensional Reactor Networks &#8212; Cantera 3.0.0 documentation</title>
   
   
   
@@ -41,6 +41,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'cython/zerodim';</script>
     <script>
@@ -379,6 +380,13 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Physical Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="units.html">Python Interface With Units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="scripts.html">Mechanism Conversion</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml_conversion.html">YAML to Chemkin conversion</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </nav></div>
@@ -1273,8 +1281,11 @@ When this is <a class="reference external" href="https://docs.python.org/3/libra
 <dt class="sig sig-object py" id="cantera.Reactor.finite_difference_jacobian">
 <span class="sig-name descname"><span class="pre">finite_difference_jacobian</span></span><a class="headerlink" href="#cantera.Reactor.finite_difference_jacobian" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the reactor-specific Jacobian, calculated using a finite difference method.</p>
-<p><strong>Warning:</strong> this property is an experimental part of the Cantera API and
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
 may be changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1315,11 +1326,17 @@ properties and kinetic rates for this reactor.</p>
 <dt class="sig sig-object py" id="cantera.Reactor.jacobian">
 <span class="sig-name descname"><span class="pre">jacobian</span></span><a class="headerlink" href="#cantera.Reactor.jacobian" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the local, reactor-specific Jacobian or an approximation thereof</p>
-<p><strong>Warning</strong>: Depending on the particular implementation, this may return an
-approximate Jacobian intended only for use in forming a preconditioner for
-iterative solvers, excluding terms that would generate a fully-dense Jacobian.</p>
-<p><strong>Warning</strong>: This method is an experimental part of the Cantera API and may be
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Depending on the particular implementation, this may return an approximate
+Jacobian intended only for use in forming a preconditioner for iterative
+solvers, excluding terms that would generate a fully-dense Jacobian.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This method is an experimental part of the Cantera API and may be
 changed or removed without notice.</p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -2830,50 +2847,352 @@ good preconditioner for the system.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-functions">Defining Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-classes">Base Classes</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactorbase">ReactorBase</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowdevice">FlowDevice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-functions">Defining Functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Func1"><code class="docutils literal notranslate"><span class="pre">Func1</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Func1.cxx_functor"><code class="docutils literal notranslate"><span class="pre">Func1.cxx_functor()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Func1.type"><code class="docutils literal notranslate"><span class="pre">Func1.type</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Func1.write"><code class="docutils literal notranslate"><span class="pre">Func1.write()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reactor-networks">Reactor Networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Tabulated1"><code class="docutils literal notranslate"><span class="pre">Tabulated1</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-classes">Base Classes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactorbase">ReactorBase</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase"><code class="docutils literal notranslate"><span class="pre">ReactorBase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.T"><code class="docutils literal notranslate"><span class="pre">ReactorBase.T</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.Y"><code class="docutils literal notranslate"><span class="pre">ReactorBase.Y</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.density"><code class="docutils literal notranslate"><span class="pre">ReactorBase.density</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.inlets"><code class="docutils literal notranslate"><span class="pre">ReactorBase.inlets</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.insert"><code class="docutils literal notranslate"><span class="pre">ReactorBase.insert()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.mass"><code class="docutils literal notranslate"><span class="pre">ReactorBase.mass</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.name"><code class="docutils literal notranslate"><span class="pre">ReactorBase.name</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.outlets"><code class="docutils literal notranslate"><span class="pre">ReactorBase.outlets</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.reactor_type"><code class="docutils literal notranslate"><span class="pre">ReactorBase.reactor_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.surfaces"><code class="docutils literal notranslate"><span class="pre">ReactorBase.surfaces</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.syncState"><code class="docutils literal notranslate"><span class="pre">ReactorBase.syncState()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.thermo"><code class="docutils literal notranslate"><span class="pre">ReactorBase.thermo</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.type"><code class="docutils literal notranslate"><span class="pre">ReactorBase.type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.volume"><code class="docutils literal notranslate"><span class="pre">ReactorBase.volume</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorBase.walls"><code class="docutils literal notranslate"><span class="pre">ReactorBase.walls</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowdevice">FlowDevice</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowDevice"><code class="docutils literal notranslate"><span class="pre">FlowDevice</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowDevice.flowdevice_type"><code class="docutils literal notranslate"><span class="pre">FlowDevice.flowdevice_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowDevice.mass_flow_rate"><code class="docutils literal notranslate"><span class="pre">FlowDevice.mass_flow_rate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowDevice.pressure_function"><code class="docutils literal notranslate"><span class="pre">FlowDevice.pressure_function</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowDevice.set_pressure_function"><code class="docutils literal notranslate"><span class="pre">FlowDevice.set_pressure_function()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowDevice.set_time_function"><code class="docutils literal notranslate"><span class="pre">FlowDevice.set_time_function()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowDevice.time_function"><code class="docutils literal notranslate"><span class="pre">FlowDevice.time_function</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowDevice.type"><code class="docutils literal notranslate"><span class="pre">FlowDevice.type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reactor-networks">Reactor Networks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet"><code class="docutils literal notranslate"><span class="pre">ReactorNet</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.add_reactor"><code class="docutils literal notranslate"><span class="pre">ReactorNet.add_reactor()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.advance"><code class="docutils literal notranslate"><span class="pre">ReactorNet.advance()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.advance_limits"><code class="docutils literal notranslate"><span class="pre">ReactorNet.advance_limits</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.advance_to_steady_state"><code class="docutils literal notranslate"><span class="pre">ReactorNet.advance_to_steady_state()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.atol"><code class="docutils literal notranslate"><span class="pre">ReactorNet.atol</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.atol_sensitivity"><code class="docutils literal notranslate"><span class="pre">ReactorNet.atol_sensitivity</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.component_name"><code class="docutils literal notranslate"><span class="pre">ReactorNet.component_name()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.derivative_settings"><code class="docutils literal notranslate"><span class="pre">ReactorNet.derivative_settings</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.distance"><code class="docutils literal notranslate"><span class="pre">ReactorNet.distance</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.get_derivative"><code class="docutils literal notranslate"><span class="pre">ReactorNet.get_derivative()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.get_state"><code class="docutils literal notranslate"><span class="pre">ReactorNet.get_state()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.global_component_index"><code class="docutils literal notranslate"><span class="pre">ReactorNet.global_component_index()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.include_algebraic_in_error_test"><code class="docutils literal notranslate"><span class="pre">ReactorNet.include_algebraic_in_error_test</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.initial_time"><code class="docutils literal notranslate"><span class="pre">ReactorNet.initial_time</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.initialize"><code class="docutils literal notranslate"><span class="pre">ReactorNet.initialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.linear_solver_type"><code class="docutils literal notranslate"><span class="pre">ReactorNet.linear_solver_type</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.max_err_test_fails"><code class="docutils literal notranslate"><span class="pre">ReactorNet.max_err_test_fails</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.max_nonlinear_convergence_failures"><code class="docutils literal notranslate"><span class="pre">ReactorNet.max_nonlinear_convergence_failures</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.max_nonlinear_iterations"><code class="docutils literal notranslate"><span class="pre">ReactorNet.max_nonlinear_iterations</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.max_order"><code class="docutils literal notranslate"><span class="pre">ReactorNet.max_order</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.max_steps"><code class="docutils literal notranslate"><span class="pre">ReactorNet.max_steps</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.max_time_step"><code class="docutils literal notranslate"><span class="pre">ReactorNet.max_time_step</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.n_sensitivity_params"><code class="docutils literal notranslate"><span class="pre">ReactorNet.n_sensitivity_params</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.n_vars"><code class="docutils literal notranslate"><span class="pre">ReactorNet.n_vars</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.preconditioner"><code class="docutils literal notranslate"><span class="pre">ReactorNet.preconditioner</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.reinitialize"><code class="docutils literal notranslate"><span class="pre">ReactorNet.reinitialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.rtol"><code class="docutils literal notranslate"><span class="pre">ReactorNet.rtol</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.rtol_sensitivity"><code class="docutils literal notranslate"><span class="pre">ReactorNet.rtol_sensitivity</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.sensitivities"><code class="docutils literal notranslate"><span class="pre">ReactorNet.sensitivities()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.sensitivity"><code class="docutils literal notranslate"><span class="pre">ReactorNet.sensitivity()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.sensitivity_parameter_name"><code class="docutils literal notranslate"><span class="pre">ReactorNet.sensitivity_parameter_name()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.set_initial_time"><code class="docutils literal notranslate"><span class="pre">ReactorNet.set_initial_time()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.solver_stats"><code class="docutils literal notranslate"><span class="pre">ReactorNet.solver_stats</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.step"><code class="docutils literal notranslate"><span class="pre">ReactorNet.step()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.time"><code class="docutils literal notranslate"><span class="pre">ReactorNet.time</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorNet.verbose"><code class="docutils literal notranslate"><span class="pre">ReactorNet.verbose</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reactors">Reactors</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reservoir">Reservoir</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactor">Reactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molereactor">MoleReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idealgasreactor">IdealGasReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idealgasmolereactor">IdealGasMoleReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constpressurereactor">ConstPressureReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constpressuremolereactor">ConstPressureMoleReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idealgasconstpressurereactor">IdealGasConstPressureReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idealgasconstpressuremolereactor">IdealGasConstPressureMoleReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowreactor">FlowReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensiblereactor">ExtensibleReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibleidealgasreactor">ExtensibleIdealGasReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibleconstpressurereactor">ExtensibleConstPressureReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibleidealgasconstpressurereactor">ExtensibleIdealGasConstPressureReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensiblemolereactor">ExtensibleMoleReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibleidealgasmolereactor">ExtensibleIdealGasMoleReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibleconstpressuremolereactor">ExtensibleConstPressureMoleReactor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibleidealgasconstpressuremolereactor">ExtensibleIdealGasConstPressureMoleReactor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reservoir">Reservoir</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reservoir"><code class="docutils literal notranslate"><span class="pre">Reservoir</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reservoir.reactor_type"><code class="docutils literal notranslate"><span class="pre">Reservoir.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactor">Reactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor"><code class="docutils literal notranslate"><span class="pre">Reactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor.add_sensitivity_reaction"><code class="docutils literal notranslate"><span class="pre">Reactor.add_sensitivity_reaction()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor.add_sensitivity_species_enthalpy"><code class="docutils literal notranslate"><span class="pre">Reactor.add_sensitivity_species_enthalpy()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor.chemistry_enabled"><code class="docutils literal notranslate"><span class="pre">Reactor.chemistry_enabled</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor.component_index"><code class="docutils literal notranslate"><span class="pre">Reactor.component_index()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor.component_name"><code class="docutils literal notranslate"><span class="pre">Reactor.component_name()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor.energy_enabled"><code class="docutils literal notranslate"><span class="pre">Reactor.energy_enabled</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor.finite_difference_jacobian"><code class="docutils literal notranslate"><span class="pre">Reactor.finite_difference_jacobian</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor.get_state"><code class="docutils literal notranslate"><span class="pre">Reactor.get_state()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor.insert"><code class="docutils literal notranslate"><span class="pre">Reactor.insert()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor.jacobian"><code class="docutils literal notranslate"><span class="pre">Reactor.jacobian</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor.kinetics"><code class="docutils literal notranslate"><span class="pre">Reactor.kinetics</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor.n_vars"><code class="docutils literal notranslate"><span class="pre">Reactor.n_vars</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">Reactor.reactor_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Reactor.set_advance_limit"><code class="docutils literal notranslate"><span class="pre">Reactor.set_advance_limit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molereactor">MoleReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.MoleReactor"><code class="docutils literal notranslate"><span class="pre">MoleReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.MoleReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">MoleReactor.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idealgasreactor">IdealGasReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasReactor"><code class="docutils literal notranslate"><span class="pre">IdealGasReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">IdealGasReactor.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idealgasmolereactor">IdealGasMoleReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasMoleReactor"><code class="docutils literal notranslate"><span class="pre">IdealGasMoleReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasMoleReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">IdealGasMoleReactor.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constpressurereactor">ConstPressureReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ConstPressureReactor"><code class="docutils literal notranslate"><span class="pre">ConstPressureReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ConstPressureReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">ConstPressureReactor.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constpressuremolereactor">ConstPressureMoleReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ConstPressureMoleReactor"><code class="docutils literal notranslate"><span class="pre">ConstPressureMoleReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ConstPressureMoleReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">ConstPressureMoleReactor.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idealgasconstpressurereactor">IdealGasConstPressureReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasConstPressureReactor"><code class="docutils literal notranslate"><span class="pre">IdealGasConstPressureReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasConstPressureReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">IdealGasConstPressureReactor.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idealgasconstpressuremolereactor">IdealGasConstPressureMoleReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasConstPressureMoleReactor"><code class="docutils literal notranslate"><span class="pre">IdealGasConstPressureMoleReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.IdealGasConstPressureMoleReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">IdealGasConstPressureMoleReactor.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowreactor">FlowReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowReactor"><code class="docutils literal notranslate"><span class="pre">FlowReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowReactor.area"><code class="docutils literal notranslate"><span class="pre">FlowReactor.area</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowReactor.distance"><code class="docutils literal notranslate"><span class="pre">FlowReactor.distance</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowReactor.inlet_surface_atol"><code class="docutils literal notranslate"><span class="pre">FlowReactor.inlet_surface_atol</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowReactor.inlet_surface_max_error_failures"><code class="docutils literal notranslate"><span class="pre">FlowReactor.inlet_surface_max_error_failures</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowReactor.inlet_surface_max_steps"><code class="docutils literal notranslate"><span class="pre">FlowReactor.inlet_surface_max_steps</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowReactor.inlet_surface_rtol"><code class="docutils literal notranslate"><span class="pre">FlowReactor.inlet_surface_rtol</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowReactor.mass_flow_rate"><code class="docutils literal notranslate"><span class="pre">FlowReactor.mass_flow_rate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">FlowReactor.reactor_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowReactor.speed"><code class="docutils literal notranslate"><span class="pre">FlowReactor.speed</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.FlowReactor.surface_area_to_volume_ratio"><code class="docutils literal notranslate"><span class="pre">FlowReactor.surface_area_to_volume_ratio</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensiblereactor">ExtensibleReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleReactor"><code class="docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleReactor.delegatable_methods"><code class="docutils literal notranslate"><span class="pre">ExtensibleReactor.delegatable_methods</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleReactor.expansion_rate"><code class="docutils literal notranslate"><span class="pre">ExtensibleReactor.expansion_rate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleReactor.heat_rate"><code class="docutils literal notranslate"><span class="pre">ExtensibleReactor.heat_rate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleReactor.n_vars"><code class="docutils literal notranslate"><span class="pre">ExtensibleReactor.n_vars</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleReactor.qdot"><code class="docutils literal notranslate"><span class="pre">ExtensibleReactor.qdot</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">ExtensibleReactor.reactor_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleReactor.restore_surface_state"><code class="docutils literal notranslate"><span class="pre">ExtensibleReactor.restore_surface_state()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleReactor.restore_thermo_state"><code class="docutils literal notranslate"><span class="pre">ExtensibleReactor.restore_thermo_state()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleReactor.vdot"><code class="docutils literal notranslate"><span class="pre">ExtensibleReactor.vdot</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibleidealgasreactor">ExtensibleIdealGasReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleIdealGasReactor"><code class="docutils literal notranslate"><span class="pre">ExtensibleIdealGasReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleIdealGasReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">ExtensibleIdealGasReactor.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibleconstpressurereactor">ExtensibleConstPressureReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleConstPressureReactor"><code class="docutils literal notranslate"><span class="pre">ExtensibleConstPressureReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleConstPressureReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">ExtensibleConstPressureReactor.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibleidealgasconstpressurereactor">ExtensibleIdealGasConstPressureReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleIdealGasConstPressureReactor"><code class="docutils literal notranslate"><span class="pre">ExtensibleIdealGasConstPressureReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleIdealGasConstPressureReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">ExtensibleIdealGasConstPressureReactor.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensiblemolereactor">ExtensibleMoleReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleMoleReactor"><code class="docutils literal notranslate"><span class="pre">ExtensibleMoleReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleMoleReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">ExtensibleMoleReactor.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibleidealgasmolereactor">ExtensibleIdealGasMoleReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleIdealGasMoleReactor"><code class="docutils literal notranslate"><span class="pre">ExtensibleIdealGasMoleReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleIdealGasMoleReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">ExtensibleIdealGasMoleReactor.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibleconstpressuremolereactor">ExtensibleConstPressureMoleReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleConstPressureMoleReactor"><code class="docutils literal notranslate"><span class="pre">ExtensibleConstPressureMoleReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleConstPressureMoleReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">ExtensibleConstPressureMoleReactor.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibleidealgasconstpressuremolereactor">ExtensibleIdealGasConstPressureMoleReactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleIdealGasConstPressureMoleReactor"><code class="docutils literal notranslate"><span class="pre">ExtensibleIdealGasConstPressureMoleReactor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ExtensibleIdealGasConstPressureMoleReactor.reactor_type"><code class="docutils literal notranslate"><span class="pre">ExtensibleIdealGasConstPressureMoleReactor.reactor_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#walls">Walls</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wall">Wall</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wall">Wall</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall"><code class="docutils literal notranslate"><span class="pre">Wall</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall.area"><code class="docutils literal notranslate"><span class="pre">Wall.area</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall.emissivity"><code class="docutils literal notranslate"><span class="pre">Wall.emissivity</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall.expansion_rate"><code class="docutils literal notranslate"><span class="pre">Wall.expansion_rate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall.expansion_rate_coeff"><code class="docutils literal notranslate"><span class="pre">Wall.expansion_rate_coeff</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall.heat_flux"><code class="docutils literal notranslate"><span class="pre">Wall.heat_flux</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall.heat_rate"><code class="docutils literal notranslate"><span class="pre">Wall.heat_rate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall.heat_transfer_coeff"><code class="docutils literal notranslate"><span class="pre">Wall.heat_transfer_coeff</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall.qdot"><code class="docutils literal notranslate"><span class="pre">Wall.qdot()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall.set_heat_flux"><code class="docutils literal notranslate"><span class="pre">Wall.set_heat_flux()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall.set_velocity"><code class="docutils literal notranslate"><span class="pre">Wall.set_velocity()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall.type"><code class="docutils literal notranslate"><span class="pre">Wall.type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall.vdot"><code class="docutils literal notranslate"><span class="pre">Wall.vdot()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall.velocity"><code class="docutils literal notranslate"><span class="pre">Wall.velocity</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Wall.wall_type"><code class="docutils literal notranslate"><span class="pre">Wall.wall_type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surfaces">Surfaces</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactorsurface">ReactorSurface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactorsurface">ReactorSurface</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorSurface"><code class="docutils literal notranslate"><span class="pre">ReactorSurface</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorSurface.add_sensitivity_reaction"><code class="docutils literal notranslate"><span class="pre">ReactorSurface.add_sensitivity_reaction()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorSurface.area"><code class="docutils literal notranslate"><span class="pre">ReactorSurface.area</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorSurface.coverages"><code class="docutils literal notranslate"><span class="pre">ReactorSurface.coverages</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorSurface.install"><code class="docutils literal notranslate"><span class="pre">ReactorSurface.install()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ReactorSurface.kinetics"><code class="docutils literal notranslate"><span class="pre">ReactorSurface.kinetics</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flow-controllers">Flow Controllers</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#massflowcontroller">MassFlowController</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valve">Valve</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pressurecontroller">PressureController</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#massflowcontroller">MassFlowController</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.MassFlowController"><code class="docutils literal notranslate"><span class="pre">MassFlowController</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.MassFlowController.flowdevice_type"><code class="docutils literal notranslate"><span class="pre">MassFlowController.flowdevice_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.MassFlowController.mass_flow_coeff"><code class="docutils literal notranslate"><span class="pre">MassFlowController.mass_flow_coeff</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.MassFlowController.mass_flow_rate"><code class="docutils literal notranslate"><span class="pre">MassFlowController.mass_flow_rate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.MassFlowController.pressure_function"><code class="docutils literal notranslate"><span class="pre">MassFlowController.pressure_function</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.MassFlowController.set_pressure_function"><code class="docutils literal notranslate"><span class="pre">MassFlowController.set_pressure_function()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.MassFlowController.set_time_function"><code class="docutils literal notranslate"><span class="pre">MassFlowController.set_time_function()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.MassFlowController.time_function"><code class="docutils literal notranslate"><span class="pre">MassFlowController.time_function</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.MassFlowController.type"><code class="docutils literal notranslate"><span class="pre">MassFlowController.type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valve">Valve</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Valve"><code class="docutils literal notranslate"><span class="pre">Valve</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Valve.flowdevice_type"><code class="docutils literal notranslate"><span class="pre">Valve.flowdevice_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Valve.mass_flow_rate"><code class="docutils literal notranslate"><span class="pre">Valve.mass_flow_rate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Valve.pressure_function"><code class="docutils literal notranslate"><span class="pre">Valve.pressure_function</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Valve.set_pressure_function"><code class="docutils literal notranslate"><span class="pre">Valve.set_pressure_function()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Valve.set_time_function"><code class="docutils literal notranslate"><span class="pre">Valve.set_time_function()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Valve.time_function"><code class="docutils literal notranslate"><span class="pre">Valve.time_function</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Valve.type"><code class="docutils literal notranslate"><span class="pre">Valve.type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Valve.valve_coeff"><code class="docutils literal notranslate"><span class="pre">Valve.valve_coeff</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pressurecontroller">PressureController</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PressureController"><code class="docutils literal notranslate"><span class="pre">PressureController</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PressureController.flowdevice_type"><code class="docutils literal notranslate"><span class="pre">PressureController.flowdevice_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PressureController.mass_flow_rate"><code class="docutils literal notranslate"><span class="pre">PressureController.mass_flow_rate</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PressureController.pressure_coeff"><code class="docutils literal notranslate"><span class="pre">PressureController.pressure_coeff</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PressureController.pressure_function"><code class="docutils literal notranslate"><span class="pre">PressureController.pressure_function</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PressureController.primary"><code class="docutils literal notranslate"><span class="pre">PressureController.primary</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PressureController.set_master"><code class="docutils literal notranslate"><span class="pre">PressureController.set_master()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PressureController.set_pressure_function"><code class="docutils literal notranslate"><span class="pre">PressureController.set_pressure_function()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PressureController.set_time_function"><code class="docutils literal notranslate"><span class="pre">PressureController.set_time_function()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PressureController.time_function"><code class="docutils literal notranslate"><span class="pre">PressureController.time_function</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.PressureController.type"><code class="docutils literal notranslate"><span class="pre">PressureController.type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preconditioners">Preconditioners</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptivepreconditioner">AdaptivePreconditioner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptivepreconditioner">AdaptivePreconditioner</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AdaptivePreconditioner"><code class="docutils literal notranslate"><span class="pre">AdaptivePreconditioner</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AdaptivePreconditioner.ilut_drop_tol"><code class="docutils literal notranslate"><span class="pre">AdaptivePreconditioner.ilut_drop_tol</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AdaptivePreconditioner.ilut_fill_factor"><code class="docutils literal notranslate"><span class="pre">AdaptivePreconditioner.ilut_fill_factor</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AdaptivePreconditioner.matrix"><code class="docutils literal notranslate"><span class="pre">AdaptivePreconditioner.matrix</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AdaptivePreconditioner.precon_linear_solver_type"><code class="docutils literal notranslate"><span class="pre">AdaptivePreconditioner.precon_linear_solver_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AdaptivePreconditioner.precon_type"><code class="docutils literal notranslate"><span class="pre">AdaptivePreconditioner.precon_type</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AdaptivePreconditioner.print_contents"><code class="docutils literal notranslate"><span class="pre">AdaptivePreconditioner.print_contents()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AdaptivePreconditioner.threshold"><code class="docutils literal notranslate"><span class="pre">AdaptivePreconditioner.threshold</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -2919,7 +3238,7 @@ good preconditioner for the system.</p>
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     <br/>
   </p>
 </div>

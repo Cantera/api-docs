@@ -1,13 +1,12 @@
 var classCantera_1_1IdealGasReactor =
 [
-    [ "IdealGasReactor", "dc/d06/classCantera_1_1IdealGasReactor.html#ac985c9b55b59fa337f81a0822a9927b0", null ],
-    [ "type", "dc/d06/classCantera_1_1IdealGasReactor.html#a3fd7546c6fe10a8af9e23c4a3e611caf", null ],
-    [ "setThermoMgr", "dc/d06/classCantera_1_1IdealGasReactor.html#ac1eadd4fed4f49eae8968359a521a3e3", null ],
-    [ "getState", "dc/d06/classCantera_1_1IdealGasReactor.html#ac0aab0dd56e750ab85f501ed062a3ae2", null ],
-    [ "initialize", "dc/d06/classCantera_1_1IdealGasReactor.html#a5ef6517be6f7fc69ed6967484c61f233", null ],
-    [ "eval", "dc/d06/classCantera_1_1IdealGasReactor.html#a2ff514411942b98c0c7d050b9cabb1c2", null ],
-    [ "updateState", "dc/d06/classCantera_1_1IdealGasReactor.html#a9c0d87fd5df7db5d086ca013e3ddb9e6", null ],
-    [ "componentIndex", "dc/d06/classCantera_1_1IdealGasReactor.html#a188be7862719069aaaf97f85f38a6b49", null ],
-    [ "componentName", "dc/d06/classCantera_1_1IdealGasReactor.html#a058b8ee7c331549ca36c26a62474e3f4", null ],
+    [ "type", "dc/d06/classCantera_1_1IdealGasReactor.html#a5094b6f3d574dc173727f57ef3827056", null ],
+    [ "setThermoMgr", "dc/d06/classCantera_1_1IdealGasReactor.html#a010c2e7393e682905aca70e3219308de", null ],
+    [ "getState", "dc/d06/classCantera_1_1IdealGasReactor.html#a9d3ee8e1e450f7b16803580f95c4beaa", null ],
+    [ "initialize", "dc/d06/classCantera_1_1IdealGasReactor.html#acb4765d051f0e1b6ebb9d358a3d530c0", null ],
+    [ "eval", "dc/d06/classCantera_1_1IdealGasReactor.html#a4a66b8940379c2a799cc2dbb43d6880f", null ],
+    [ "updateState", "dc/d06/classCantera_1_1IdealGasReactor.html#ac6a6bd144c99998dec1e15d8cdae8a57", null ],
+    [ "componentIndex", "dc/d06/classCantera_1_1IdealGasReactor.html#a5ddfda3364cf860f92aafcb02f8665a8", null ],
+    [ "componentName", "dc/d06/classCantera_1_1IdealGasReactor.html#abbaa74b9b6e4120f9cd7ff353f030640", null ],
     [ "m_uk", "dc/d06/classCantera_1_1IdealGasReactor.html#a8fc162f90a9bc915dc7f660f1afc0324", null ]
 ];

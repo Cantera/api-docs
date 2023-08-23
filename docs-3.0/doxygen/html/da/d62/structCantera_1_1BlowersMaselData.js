@@ -1,9 +1,8 @@
 var structCantera_1_1BlowersMaselData =
 [
-    [ "BlowersMaselData", "da/d62/structCantera_1_1BlowersMaselData.html#a4ac2a388b74034c3e02c76e0c60e3108", null ],
     [ "update", "da/d62/structCantera_1_1BlowersMaselData.html#a5647f86a7cf7224f4822ffe07e2f9fe6", null ],
     [ "update", "da/d62/structCantera_1_1BlowersMaselData.html#a321d2e7029e3ea277d6810407ce69464", null ],
-    [ "resize", "da/d62/structCantera_1_1BlowersMaselData.html#a18a6ec5da62ab28d5d2fa5d24c45037d", null ],
+    [ "resize", "da/d62/structCantera_1_1BlowersMaselData.html#a651d35c1817e23f57a34101a53dfbb28", null ],
     [ "update", "da/d62/structCantera_1_1BlowersMaselData.html#a7ab12baf406993645ef688298a276500", null ],
     [ "update", "da/d62/structCantera_1_1BlowersMaselData.html#a4045277efd847ff814c9d2821eb1a6f3", null ],
     [ "update", "da/d62/structCantera_1_1BlowersMaselData.html#adcdb618bb24d0d9f3eaa98fd07efb754", null ],

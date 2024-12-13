@@ -1,0 +1,812 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Code Style Guidelines &#8212; Cantera 3.1.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'develop/style-guidelines';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuring Visual Studio Code for Cantera" href="vscode-tips.html" />
+    <link rel="prev" title="Contributing to Cantera" href="CONTRIBUTING.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Compiling Cantera from Source</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="compiling/compilation-reqs.html">Compilation Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling/source-code.html">Downloading the Cantera source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling/configure-build.html">Configure and Build Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling/dependencies.html">Software used by Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling/config-options.html">Configuration Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling/special-cases.html">Special Compiling Cases</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">How Cantera Works</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="reactor-integration.html">How Time Integration of Reactor Networks Works</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Adding New Features to Cantera</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing to Cantera</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Code Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vscode-tips.html">Configuring Visual Studio Code for Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-tests.html">Writing Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-tests.html">Running Tests and Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-examples.html">Writing Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc-formatting.html">Formatting Documentation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Releasing &amp; Distributing Cantera</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="distribution-packages/release-checklist.html">Making a New Cantera Release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distribution-packages/pypi-sdist-wheel.html">Distributing sdist and Wheel Packages via PyPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distribution-packages/conda.html">Distributing Conda Package via conda-forge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distribution-packages/ubuntu-ppa.html">Distributing for Ubuntu via a Personal Package Archive (PPA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distribution-packages/windows-and-macos.html">Distributing for Windows and macOS</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Develop</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Code Style...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="code-style-guidelines">
+<h1>Code Style Guidelines<a class="headerlink" href="#code-style-guidelines" title="Link to this heading">#</a></h1>
+<p>The following style guidelines are recommended for all new code added to Cantera.
+Following these guidelines will simplify the review process for pull requests and make
+it easier for others to understand your code in the context of Cantera as a whole.</p>
+<section id="general-style">
+<h2>General Style<a class="headerlink" href="#general-style" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Try to follow the style of surrounding code, and use variable names that follow
+existing patterns. Pay attention to indentation and spacing.</p></li>
+<li><p>Configure your editor to use 4 spaces per indentation level, and <strong>never to use
+tabs</strong>.</p></li>
+<li><p>Avoid introducing trailing whitespace</p></li>
+<li><p>Limit line lengths to 88 characters when possible</p></li>
+<li><p>Write comments to explain non-obvious operations</p></li>
+<li><p>Use whitespace to improve code readability. Examples:</p>
+<ul>
+<li><p>after commas</p></li>
+<li><p>before and after binary operators (<code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code>/<code class="docutils literal notranslate"><span class="pre">||</span></code>/…) and comparisons (<code class="docutils literal notranslate"><span class="pre">&lt;</span></code>/<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>/<code class="docutils literal notranslate"><span class="pre">==</span></code>/…)</p></li>
+<li><p>before and after equality signs <code class="docutils literal notranslate"><span class="pre">=</span></code> unless used for the assignment of a default
+parameter.</p></li>
+<li><p>For mathematical operators (<code class="docutils literal notranslate"><span class="pre">+</span></code>/<code class="docutils literal notranslate"><span class="pre">-</span></code>/<code class="docutils literal notranslate"><span class="pre">*</span></code>/<code class="docutils literal notranslate"><span class="pre">/</span></code> except <code class="docutils literal notranslate"><span class="pre">^</span></code>), whitespace should be added
+around the operators with the lowest priority (examples: <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span> <span class="pre">+</span> <span class="pre">z</span></code>, <code class="docutils literal notranslate"><span class="pre">x*2</span> <span class="pre">-</span> <span class="pre">1</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">(a+b)</span> <span class="pre">*</span> <span class="pre">(a-b)</span></code>).</p></li>
+<li><p>For additional guidance, refer to <a class="reference external" href="https://peps.python.org/pep-0008/#whitespace-in-expressions-and-statements">Python
+PEP-8</a>,
+where recommendations can be extrapolated to other programming languages</p></li>
+</ul>
+</li>
+<li><p>Do not go out of your way to change formatting in otherwise unmodified code</p></li>
+<li><p>Write ‘for example’, ‘such as’, or ‘that is’ instead of using the Latin abbreviations
+‘i.e.’ and ‘e.g.’.</p></li>
+</ul>
+</section>
+<section id="c">
+<h2>C++<a class="headerlink" href="#c" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Avoid defining non-trivial functions in header files</p></li>
+<li><p>Header files should include an ‘include guard’</p></li>
+<li><p>Protected and private member variable names are generally prefixed with <code class="docutils literal notranslate"><span class="pre">m_</span></code>. For most
+classes, member variables should not be public.</p></li>
+<li><p>Class names use <code class="docutils literal notranslate"><span class="pre">InitialCapsNames</span></code></p></li>
+<li><p>Methods use <code class="docutils literal notranslate"><span class="pre">camelCaseNames</span></code></p></li>
+<li><p>Do not indent the contents of namespaces</p></li>
+<li><p>Code should follow the C++17 standard, with minimum required compiler versions GCC
+7.0, Clang 4.0, MSVC 14.14 (Visual Studio 2017 version 15.7) and Intel 19.0.</p></li>
+<li><p>Cantera moves frequently used C++ standard namespace types and functions into the
+declarative region, meaning that the <code class="docutils literal notranslate"><span class="pre">std</span></code> scope resolution can be omitted. This
+applies to the following: <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">vector</span></code>, <code class="docutils literal notranslate"><span class="pre">map</span></code>, <code class="docutils literal notranslate"><span class="pre">set</span></code>, <code class="docutils literal notranslate"><span class="pre">pair</span></code>, <code class="docutils literal notranslate"><span class="pre">shared_ptr</span></code>,
+<code class="docutils literal notranslate"><span class="pre">make_shared</span></code>, <code class="docutils literal notranslate"><span class="pre">unique_ptr</span></code>, <code class="docutils literal notranslate"><span class="pre">make_unique</span></code> and <code class="docutils literal notranslate"><span class="pre">function</span></code>. Example: use <code class="docutils literal notranslate"><span class="pre">string</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">std::string</span></code>; a <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">namespace</span> <span class="pre">std;</span></code> declaration is not required.</p></li>
+<li><p>Avoid manual memory management (that is, <code class="docutils literal notranslate"><span class="pre">new</span></code> and <code class="docutils literal notranslate"><span class="pre">delete</span></code>), preferring to use
+standard library containers, as well as <code class="docutils literal notranslate"><span class="pre">unique_ptr</span></code> and <code class="docutils literal notranslate"><span class="pre">shared_ptr</span></code> when dynamic
+allocation is required.</p></li>
+<li><p>Portions of Boost which are “header only” may be used. If possible, include Boost
+header files only within .cpp files rather than other header files to avoid
+unnecessary increases in compilation time. Boost should not be added to the public
+interface unless its existence and use is optional. This keeps the number of
+dependencies low for users of Cantera. In these cases, <code class="docutils literal notranslate"><span class="pre">CANTERA_API_NO_BOOST</span></code> should
+be used to conditionally remove Boost dependencies.</p></li>
+<li><p>While Cantera does not specifically follow these rules, the following style guides are
+useful references for possible style choices and the rationales behind them.</p>
+<ul>
+<li><p><a class="reference external" href="https://google.github.io/styleguide/cppguide.html">The Google C++ Style Guide</a></p></li>
+<li><p><a class="reference external" href="http://geosoft.no/development/cppstyle.html">GeoSoft C++ Programming Style Guidelines</a></p></li>
+</ul>
+</li>
+<li><p>For any new code, do <em>not</em> use the obsolete <code class="docutils literal notranslate"><span class="pre">doublereal</span></code> and <code class="docutils literal notranslate"><span class="pre">integer</span></code> typedefs for
+the basic types <code class="docutils literal notranslate"><span class="pre">double</span></code> and <code class="docutils literal notranslate"><span class="pre">int</span></code>, but also do not go out of your way to change uses
+of these in otherwise unmodified code.</p></li>
+<li><p>Initialize member variables with their declarations, when possible, rather than using
+constructor-based initialization.</p></li>
+</ul>
+<section id="doxygen-comments">
+<h3>Doxygen Comments<a class="headerlink" href="#doxygen-comments" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>All classes, member variables, and methods should use
+<a class="reference external" href="https://www.doxygen.nl/manual/docblocks.html">Doxygen-style comments</a>.</p></li>
+<li><p>Comments should provide brief and/or detailed descriptions. For example, comment
+blocks starting with <code class="docutils literal notranslate"><span class="pre">/**</span></code> or <code class="docutils literal notranslate"><span class="pre">//!</span></code> use the autobrief feature (comments are split into
+brief and detailed descriptions at the first dot <code class="docutils literal notranslate"><span class="pre">'.'</span></code>). For short comments, the C++
+style <code class="docutils literal notranslate"><span class="pre">//!</span></code> is preferred; do not use <code class="docutils literal notranslate"><span class="pre">///</span></code> or <code class="docutils literal notranslate"><span class="pre">/*!</span></code> comment styles in new code.</p></li>
+<li><p><a class="reference external" href="https://www.doxygen.nl/manual/commands.html">Doxygen commands</a> should use the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>
+prefix instead of <code class="docutils literal notranslate"><span class="pre">\</span></code> in order to better differentiate from LaTeX input.</p></li>
+<li><p>Whenever appropriate, classes and functions should be added to
+<a class="reference external" href="https://www.doxygen.nl/manual/grouping.html">Doxygen groupings</a> using the <code class="docutils literal notranslate"><span class="pre">&#64;ingroup</span></code>
+command. Alternatively, entire code sections can be added using the <code class="docutils literal notranslate"><span class="pre">&#64;addtogroup</span></code>
+command, where grouped classes and functions are bracketed by <code class="docutils literal notranslate"><span class="pre">&#64;{</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;}</span></code>.</p></li>
+<li><p>If applicable, new features should reference literature using the <code class="docutils literal notranslate"><span class="pre">&#64;cite</span></code> command,
+with BibTeX-style entries added to <code class="docutils literal notranslate"><span class="pre">cantera.bib</span></code>.</p></li>
+<li><p>Indicate the version added for new functions and classes with an annotation like
+<code class="docutils literal notranslate"><span class="pre">&#64;since</span> <span class="pre">New</span> <span class="pre">in</span> <span class="pre">%Cantera</span> <span class="pre">X.Y</span></code> where <code class="docutils literal notranslate"><span class="pre">X.Y</span></code> is the next Cantera version. This notation
+should also be used to indicate significant changes in behavior.</p></li>
+</ul>
+</section>
+</section>
+<section id="python">
+<h2>Python<a class="headerlink" href="#python" title="Link to this heading">#</a></h2>
+<section id="style-guide">
+<h3>Style Guide<a class="headerlink" href="#style-guide" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Style generally follows <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8</a></p></li>
+<li><p>The minimum Python version that Cantera supports is Python 3.8, so code should only
+use features added in Python 3.8 or earlier</p></li>
+<li><p>Please use double quotes in all new Python code</p></li>
+</ul>
+</section>
+<section id="sphinx-comments">
+<h3>Sphinx comments<a class="headerlink" href="#sphinx-comments" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Cantera Python documentation is based on the Python documentation generator
+<a class="reference external" href="https://www.sphinx-doc.org/en/master/index.html">Sphinx</a></p></li>
+<li><p>All classes, member variables, and methods should include
+<a class="reference external" href="https://peps.python.org/pep-0257/#what-is-a-docstring">Python docstrings</a></p></li>
+<li><p>New classes and global functions need to be added to one of the pages in
+<code class="docutils literal notranslate"><span class="pre">doc/sphinx/python</span></code> so they will appear in the API reference. For a Cython class
+defined in <code class="docutils literal notranslate"><span class="pre">.pyx</span></code> file, the argument list needs to be repeated as part of the
+<code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">autoclass::</span></code> declaration; for a function or pure Python class, the signature is
+automatically read by Sphinx.</p></li>
+<li><p>Docstrings should use annotations compatible with
+<a class="reference external" href="https://www.sphinx-doc.org/en/master/tutorial/automatic-doc-generation.html">autodoc</a>.
+For guidance, refer to existing Cantera documentation or online tutorials (see
+<a class="reference external" href="https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html">example</a>)</p></li>
+<li><p>Indicate the version added for new functions and classes with an annotation like
+<code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">versionadded::</span> <span class="pre">X.Y</span></code> where <code class="docutils literal notranslate"><span class="pre">X.Y</span></code> is the next Cantera version. Significant changes
+in behavior should be indicated with <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">versionchanged::</span> <span class="pre">X.Y</span></code>.</p></li>
+<li><p>To document an attribute of a Cython class, include a docstring <em>below</em> the member
+declaration (in the <code class="docutils literal notranslate"><span class="pre">.pxd</span></code> file). For example:</p>
+<div class="highlight-cython notranslate"><div class="highlight"><pre><span></span><span class="k">cdef</span> <span class="k">class</span> <span class="nf">ReactorBase</span><span class="p">:</span>
+    <span class="k">cdef</span> <span class="kr">public</span> <span class="kt">dict</span> <span class="nf">node_attr</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Attributes of a node &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<section id="id1">
+<h2>C#<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>C# coding conventions should follow https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions</p></li>
+<li><p>All identifiers should follow the naming conventions in the above document including</p>
+<ul>
+<li><p>Prefixing with <code class="docutils literal notranslate"><span class="pre">_</span></code> for private instance fields (<code class="docutils literal notranslate"><span class="pre">_foo</span></code>, unlike C++)</p></li>
+<li><p>Prefixing with <code class="docutils literal notranslate"><span class="pre">s_</span></code> for private static fields (<code class="docutils literal notranslate"><span class="pre">s_bar</span></code>), <code class="docutils literal notranslate"><span class="pre">t_</span></code> for private
+<code class="docutils literal notranslate"><span class="pre">[ThreadStatic]</span></code> fields (<code class="docutils literal notranslate"><span class="pre">t_baz</span></code>).</p></li>
+<li><p>Initial caps names for class methods (<code class="docutils literal notranslate"><span class="pre">DoSomething()</span></code>, unlike C++)</p></li>
+</ul>
+</li>
+<li><p>Give the opening brace of a statement block its own line (unlike C++), except empty
+blocks, which may be written as an <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">}</span></code> (for example, a constructor which calls
+a base-class constructor only).</p></li>
+<li><p>Use only one statement per line.</p></li>
+<li><p>Always use statement blocks (<code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code>) for the bodies of statements that can take
+either a statement block or a single statement (<code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, etc.)</p></li>
+<li><p>Use file-scoped namespaces in each new file.</p></li>
+<li><p>Do not take any extra Nuget dependencies in the <code class="docutils literal notranslate"><span class="pre">Cantera.csproj</span></code> project.</p></li>
+<li><p>Use C# XML Doc-Comments on types and members, including at least the <code class="docutils literal notranslate"><span class="pre">&lt;summary&gt;</span></code> tag.
+Always include a doc comment for types, but for members with self-explanatory names,
+you may omit the doc comment and suppress the build error that would be thrown with
+<code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">warning</span> <span class="pre">disable/restore</span> <span class="pre">CS1591</span></code>.</p>
+<ul>
+<li><p>C# doc-comments use <code class="docutils literal notranslate"><span class="pre">///</span></code>, unlike Cantera’s preferred use of <code class="docutils literal notranslate"><span class="pre">//!</span></code> for C++</p></li>
+</ul>
+</li>
+<li><p>Do not expose any code requiring the <code class="docutils literal notranslate"><span class="pre">unsafe</span></code> keyword via a public API
+(pointers, the <code class="docutils literal notranslate"><span class="pre">fixed</span></code> statement, etc.). Pointers are used for the high-performance
+interop layer with the native Cantera library, but such access should have a
+“safe” wrapper, such as a <code class="docutils literal notranslate"><span class="pre">Span&lt;T&gt;</span></code> or a managed array.</p></li>
+<li><p>Do not allow exceptions to pass uncaught out of a callback invoked from native code,
+as the interop layer cannot marshall exceptions between managed and native code,
+and the process will crash. Use <code class="docutils literal notranslate"><span class="pre">CallbackException.Register()</span></code> within a catch-all
+block to log the exception for later throwing back in managed code.</p></li>
+<li><p>The primary API for accessing Cantera is the <code class="docutils literal notranslate"><span class="pre">Application</span></code> class, which handles
+required static initialization of the library. When exposing a new wrapper for CLib
+functionality, do not expose a public constructor. Rather, mark the constructor
+<code class="docutils literal notranslate"><span class="pre">internal</span></code> and wrap it in an appropriate factory method in the <code class="docutils literal notranslate"><span class="pre">Application</span></code> class
+(<code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">static</span> <span class="pre">CreateFoo(string</span> <span class="pre">filename)</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code>).</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-style">General Style</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c">C++</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#doxygen-comments">Doxygen Comments</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#style-guide">Style Guide</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sphinx-comments">Sphinx comments</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">C#</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/develop/style-guidelines.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

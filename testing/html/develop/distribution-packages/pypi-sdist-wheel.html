@@ -1,0 +1,802 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Distributing sdist and Wheel Packages via PyPI &#8212; Cantera 3.1.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'develop/distribution-packages/pypi-sdist-wheel';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Distributing Conda Package via conda-forge" href="conda.html" />
+    <link rel="prev" title="Making a New Cantera Release" href="release-checklist.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Compiling Cantera from Source</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../compiling/compilation-reqs.html">Compilation Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compiling/source-code.html">Downloading the Cantera source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compiling/configure-build.html">Configure and Build Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compiling/dependencies.html">Software used by Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compiling/config-options.html">Configuration Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compiling/special-cases.html">Special Compiling Cases</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">How Cantera Works</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reactor-integration.html">How Time Integration of Reactor Networks Works</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Adding New Features to Cantera</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing to Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../style-guidelines.html">Code Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vscode-tips.html">Configuring Visual Studio Code for Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-tests.html">Writing Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running-tests.html">Running Tests and Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-examples.html">Writing Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc-formatting.html">Formatting Documentation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Releasing &amp; Distributing Cantera</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="release-checklist.html">Making a New Cantera Release</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Distributing sdist and Wheel Packages via PyPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conda.html">Distributing Conda Package via conda-forge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu-ppa.html">Distributing for Ubuntu via a Personal Package Archive (PPA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="windows-and-macos.html">Distributing for Windows and macOS</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Develop</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Distributing...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="distributing-sdist-and-wheel-packages-via-pypi">
+<h1>Distributing sdist and Wheel Packages via PyPI<a class="headerlink" href="#distributing-sdist-and-wheel-packages-via-pypi" title="Link to this heading">#</a></h1>
+<p>Cantera has been <a class="reference external" href="https://pypi.org/project/Cantera/">distributed on PyPI</a> as a source
+distribution (sdist) and a wheel since v2.6.0 in 2022. Wheels are Python’s binary
+distribution format, where source code is compiled to platform-specific libraries to
+eliminate the need for user machines to have compilers and dependencies installed.
+Source distributions are also uploaded so that platforms where a wheel is not available
+can still attempt to build Cantera from the source code.</p>
+<p>This page describes how to build sdists and wheels for Cantera, and how these are built
+for distribution via PyPI. Some of the trade-offs in selecting the current build system
+are documented in the relevant <a class="reference external" href="https://github.com/Cantera/enhancements/issues/205">enhancement
+issue</a>. The source code to build and
+publish the wheels is in a <a class="reference external" href="https://github.com/Cantera/pypi-packages">specialized repository on
+GitHub</a>.</p>
+<p>The overall process is conducted in two steps:</p>
+<ol class="arabic simple">
+<li><p>SCons is used to build an sdist from the git checkout with <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">sdist</span></code></p></li>
+<li><p>cibuildwheel/<code class="docutils literal notranslate"><span class="pre">build</span></code> is used to build wheels from the sdist, <strong>not the git checkout</strong></p></li>
+</ol>
+<p>There are a few reasons for this two-stage process. First, it ensures that our sdist can
+be used to build a wheel on users’ systems. Second, it tremendously simplifies the
+cibuildwheel config, because installation of build dependencies is handled by
+cibuildwheel at build time.</p>
+<section id="tldr">
+<h2>TLDR<a class="headerlink" href="#tldr" title="Link to this heading">#</a></h2>
+<p>This set of steps should build an sdist and wheel on a developer’s machine for local
+testing.</p>
+<ol class="arabic simple">
+<li><p>Clone the repository (submodules are optional)</p></li>
+<li><p>Install SCons and <a class="reference external" href="https://pypi.org/project/build/">build</a></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">sdist</span></code>
+a. <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">clean</span> <span class="pre">sdist</span></code> can also be used to automatically remove the
+<code class="docutils literal notranslate"><span class="pre">build</span></code> folder prior to building the <code class="docutils literal notranslate"><span class="pre">sdist</span></code>.</p></li>
+<li><p>Building the wheel requires that Boost and libhdf5 are available on the build system.
+If these are not installed in standard locations, you can set the <code class="docutils literal notranslate"><span class="pre">Boost_ROOT</span></code> and
+<code class="docutils literal notranslate"><span class="pre">HDF5_ROOT</span></code> environment variables to point to the correct location. On Linux, you
+will also need to install OpenBLAS (macOS uses Apple’s Accelerate framework to
+provide LAPACK).</p></li>
+<li><p>Change to the <code class="docutils literal notranslate"><span class="pre">build/python_sdist/dist</span></code> folder</p></li>
+<li><p>Unpack the sdist: <code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">xf</span> <span class="pre">cantera-3.1.0a2.tar.gz</span></code>. Note the version <code class="docutils literal notranslate"><span class="pre">3.1.0a2</span></code> may be
+different.</p></li>
+<li><p>Change into the unpacked directory</p></li>
+<li><p>Build the wheel: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">build</span> <span class="pre">--wheel</span> <span class="pre">.</span></code> Note the trailing <code class="docutils literal notranslate"><span class="pre">.</span></code> which indicates
+the current directory. You can also add the <code class="docutils literal notranslate"><span class="pre">-v</span></code> or <code class="docutils literal notranslate"><span class="pre">-vv</span></code> flags to increase build
+verbosity.</p></li>
+</ol>
+<p>The wheel should be located in the <code class="docutils literal notranslate"><span class="pre">build/python_sdist/dist/cantera-3.1.0a2/dist</span></code>
+folder. You can inspect the contents using any Zip-file reader. The CLI tool <code class="docutils literal notranslate"><span class="pre">unzip</span></code> can
+list the contents with the <code class="docutils literal notranslate"><span class="pre">-l</span></code> flag. You can install the wheel by running <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">&lt;path</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">wheel&gt;</span></code>.</p>
+</section>
+<section id="source-distributions">
+<h2>Source Distributions<a class="headerlink" href="#source-distributions" title="Link to this heading">#</a></h2>
+<p>Sdists are built from the git checkout using SCons. Starting with v3.1, the only
+dependencies required to build the sdist are SCons and
+<code class="docutils literal notranslate"><span class="pre">build</span></code> (also known as <code class="docutils literal notranslate"><span class="pre">pyproject-build</span></code>). Dependencies such as NumPy, Boost, or any of
+the dependencies available as submodules are not necessary to build the sdist.</p>
+<p>To build the sdist, run <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">sdist</span></code> from the repository root.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For versions 2.6 and 3.0, all the usual dependencies to build Cantera from source
+are required. Starting with 3.1, the build process for the sdist was simplified to
+pull in external dependencies at wheel-build time, rather than copying code from the
+Cantera external source tree into the sdist.</p>
+</div>
+<p>The code for the sdist is located in the <code class="docutils literal notranslate"><span class="pre">interfaces/python_sdist</span></code> folder. Building the
+sdist takes two steps:</p>
+<ol class="arabic simple">
+<li><p>SCons runs the <code class="docutils literal notranslate"><span class="pre">build_sdist.py</span></code> file to copy all the relevant source files into the
+<code class="docutils literal notranslate"><span class="pre">build/python_sdist</span></code> folder.</p></li>
+<li><p>SCons runs <code class="docutils literal notranslate"><span class="pre">build</span></code> to turn the source files into a compliant sdist tarball using the
+<code class="docutils literal notranslate"><span class="pre">scikit-build-core</span></code> package as the build backend.</p></li>
+</ol>
+<p>Both of these steps are done at “configure” time in SCons, when SCons is first parsing
+the SConstruct and SConscript files. If the build is successful, SCons will exit before
+performing any configuration or platform checks. This is why the build is done at
+configure time, to avoid these time-consuming checks that aren’t necessary since the
+sdist just copies files into the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder.</p>
+<p>If successful, the <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> file will be located in the <code class="docutils literal notranslate"><span class="pre">build/python_sdist/dist</span></code>
+folder.</p>
+<section id="sdist-configuration">
+<h3>Sdist configuration<a class="headerlink" href="#sdist-configuration" title="Link to this heading">#</a></h3>
+<p>The configuration for the sdist is done in the <code class="docutils literal notranslate"><span class="pre">pyproject.toml.in</span></code> file. This is a
+template file that is filled in at build time by the <code class="docutils literal notranslate"><span class="pre">build_sdist.py</span></code> script. It needs
+to be filled in by SCons because that’s where we define the version of Cantera, in the
+<code class="docutils literal notranslate"><span class="pre">SConstruct</span></code> file.</p>
+<p>You can read more about the standard fields in the <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> file in the <a class="reference external" href="https://packaging.python.org/en/latest/specifications/pyproject-toml/">PyPA
+documentation</a>.
+You can read more about the <code class="docutils literal notranslate"><span class="pre">scikit-build</span></code> fields in the <a class="reference external" href="https://scikit-build-core.readthedocs.io/en/latest/"><code class="docutils literal notranslate"><span class="pre">scikit-build-core</span></code>
+documentation</a>.</p>
+</section>
+</section>
+<section id="wheels">
+<h2>Wheels<a class="headerlink" href="#wheels" title="Link to this heading">#</a></h2>
+<p>As mentioned above, wheels (<code class="docutils literal notranslate"><span class="pre">.whl</span></code> files) are Python’s standard binary distribution
+artifact. Similar to Conda packages, wheels include compiled libraries specific to a
+particular platform, so that end users don’t need to have compilers installed to use a
+package.</p>
+<p>Building Cantera’s wheels is done using <code class="docutils literal notranslate"><span class="pre">build</span></code>, similar to the sdist. However, the
+wheel is built from the unpacked sdist tarball, and you must pass the <code class="docutils literal notranslate"><span class="pre">--wheel</span></code> flag to
+<code class="docutils literal notranslate"><span class="pre">build</span></code>. Then, <code class="docutils literal notranslate"><span class="pre">build</span></code> will install <code class="docutils literal notranslate"><span class="pre">scikit-build-core</span></code> to manage building the wheel
+from Cantera’s C++ and Cython source files.</p>
+<p><code class="docutils literal notranslate"><span class="pre">scikit-build-core</span></code> uses CMake to manage the compiling and linking process for the
+wheel. Most of the configuration for the wheel build is therefore done in the
+<code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> files in the <code class="docutils literal notranslate"><span class="pre">interfaces/python_sdist</span></code> folder. These are copied into
+the <code class="docutils literal notranslate"><span class="pre">build/python_sdist</span></code> folder and from there into the actual sdist tarball.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The minimum required version of CMake is 3.27 to support all the options we use with
+<a class="reference external" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></a>. A
+compatible version should be installed by <code class="docutils literal notranslate"><span class="pre">scikit-build-core</span></code> if it isn’t available
+on the system. Linux and macOS hosts also require the Ninja build system, version 1.11
+or greater. This should also be installed by <code class="docutils literal notranslate"><span class="pre">scikit-build-core</span></code> at build time if isn’t
+available on the system.</p>
+</div>
+<p>There are essentially 4 stages to the wheel build:</p>
+<ol class="arabic simple">
+<li><p>External dependencies (<code class="docutils literal notranslate"><span class="pre">eigen</span></code>, <code class="docutils literal notranslate"><span class="pre">fmt</span></code>, <code class="docutils literal notranslate"><span class="pre">SUNDIALS</span></code>, <code class="docutils literal notranslate"><span class="pre">HighFive</span></code>, <code class="docutils literal notranslate"><span class="pre">yaml-cpp</span></code>) are either
+located on the system, or downloaded and compiled using the <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> mechanism</p></li>
+<li><p>Cantera’s C++ source code is built and linked to the appropriate dependencies</p></li>
+<li><p>Cython runs and generates C++ source code for the Python interface</p></li>
+<li><p>The generated C++ is compiled, linked to <code class="docutils literal notranslate"><span class="pre">libcantera</span></code>, and packaged into the <code class="docutils literal notranslate"><span class="pre">.whl</span></code>
+file</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cantera’s other dependencies, specifically Boost and libhdf5, are neither installed nor
+built during the wheel build and must be pre-installed on the build system. I couldn’t
+find a way to have eigen and HighFive, respectively, find those dependencies if they
+were also installed using <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>. If Boost and libhdf5 are installed in
+non-standard directories, you can use the <code class="docutils literal notranslate"><span class="pre">Boost_ROOT</span></code> or <code class="docutils literal notranslate"><span class="pre">Boost_INCLUDE_DIRS</span></code> and
+<code class="docutils literal notranslate"><span class="pre">HDF5_ROOT</span></code> variables to specify the correct locations. See the CMake documentation for
+<a class="reference external" href="https://cmake.org/cmake/help/latest/command/find_package.html"><code class="docutils literal notranslate"><span class="pre">find_package()</span></code></a>.</p>
+</div>
+<p>Steps 1 and 2 above are set up in the <code class="docutils literal notranslate"><span class="pre">interfaces/python_sdist/src/CMakeLists.txt</span></code> file.
+Steps 3 and 4 are set up in the <code class="docutils literal notranslate"><span class="pre">interfaces/python_sdist/cantera/CMakeLists.txt</span></code> file.</p>
+</section>
+<section id="publishing-the-sdist-and-wheels">
+<h2>Publishing the sdist and Wheels<a class="headerlink" href="#publishing-the-sdist-and-wheels" title="Link to this heading">#</a></h2>
+<p>When a version of Cantera is ready to be published to PyPI, the workflow in the
+<a class="reference external" href="https://github.com/Cantera/pypi-packages">pypi-packages</a> repository must be executed.
+The workflow essentially conducts the steps in the <a class="reference internal" href="#tldr"><span class="std std-ref">TLDR</span></a> section above.</p>
+<p>The one big addition to the GitHub Actions workflow is that there are a couple of shell
+scripts in the <code class="docutils literal notranslate"><span class="pre">pypi-packages</span></code> repository to build libhdf5, HighFive, and SUNDIALS for
+macOS and Windows.</p>
+<p>For Linux builds, we have a <a class="reference external" href="https://github.com/Cantera/cantera-base-manylinux">custom-built manylinux
+image</a> that already has the
+dependencies installed. This saves time compiling our dependencies on Linux/ARM builds
+because those are emulated and already very slow.</p>
+<p>As much of the configuration for <code class="docutils literal notranslate"><span class="pre">cibuildwheel</span></code> as possible is done statically in
+<code class="docutils literal notranslate"><span class="pre">pyproject.toml.in</span></code>. Only values that are dynamically determined when the workflow runs
+should be set in the workflow.</p>
+<p>This workflow should be automatically triggered when a new version of Cantera is tagged,
+identified by a tag matching the pattern <code class="docutils literal notranslate"><span class="pre">v*</span></code>. This is managed by the GitHub action
+workflow in <code class="docutils literal notranslate"><span class="pre">.github/workflows/packaging.yml</span></code> in the main Cantera repository. You can
+<a class="reference external" href="https://github.com/Cantera/pypi-packages/actions/workflows/python-package.yml">check the status</a>
+of these package builds or trigger the workflow manually (in case it fails and requires
+updates after the tag is pushed).</p>
+</section>
+<section id="tips">
+<h2>Tips<a class="headerlink" href="#tips" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>You can manually run the packaging build in the <code class="docutils literal notranslate"><span class="pre">pypi-packages</span></code> repository by going
+to the <em>Actions</em> tab in the repository and manually running the workflow. Choose
+your branch from the dropdown and paste in a commit from the <code class="docutils literal notranslate"><span class="pre">Cantera/cantera</span></code>
+repository. You can paste any valid commit associated with Cantera, including commits
+from branches associated with pull requests in <code class="docutils literal notranslate"><span class="pre">Cantera/cantera</span></code>.</p></li>
+<li><p>With CMake 3.27 or later, <code class="docutils literal notranslate"><span class="pre">*_ROOT</span></code> locations for dependencies can be spelled as either
+the canonical spelling defined by the library (for example, <code class="docutils literal notranslate"><span class="pre">Boost_ROOT</span></code>) or as all
+upper-case (for example, <code class="docutils literal notranslate"><span class="pre">BOOST_ROOT</span></code>). This behavior is configured by <a class="reference external" href="https://cmake.org/cmake/help/latest/policy/CMP0144.html">CMake Policy
+0144</a>.</p></li>
+</ul>
+<p>[manylinux]:</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tldr">TLDR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-distributions">Source Distributions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sdist-configuration">Sdist configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wheels">Wheels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publishing-the-sdist-and-wheels">Publishing the sdist and Wheels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips">Tips</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/develop/distribution-packages/pypi-sdist-wheel.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

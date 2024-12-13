@@ -1,0 +1,1083 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Transport Properties &#8212; Cantera 3.1.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python/transport';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Zero-Dimensional Reactor Networks" href="zerodim.html" />
+    <link rel="prev" title="Chemical Kinetics" href="kinetics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Python Module Documentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Transport Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zerodim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="scripts.html">Mechanism Conversion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yaml_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lxcat_conversion.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="units.html">Python Interface With Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html">Physical Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html">Utilities</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../yaml/index.html">YAML Input File Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/general.html">General Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/phases.html">Phase Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/species.html">Species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/reactions.html">Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/yaml2ck.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/lxcat2yaml.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/releasenotes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.1.html">Cantera 3.1.0b1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.0.html">Cantera 3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.6.html">Cantera 2.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.5.html">Cantera 2.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.4.html">Cantera 2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.3.html">Cantera 2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.2.html">Cantera 2.2.1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.1.html">Cantera 2.1.2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.0.html">Cantera 2.0.2</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Science Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/thermo/index.html">Thermodynamic Properties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/thermo/species-thermo.html">Species Thermodynamic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/thermo/phase-thermo.html">Phase Thermodynamic Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/kinetics/index.html">Chemical Reactions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/kinetics/reaction-rates.html">Reaction Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/kinetics/rate-constants.html">Rate Constant Parameterizations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/transport/index.html">Transport Properties</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/reactors/index.html">Reactors and Reactor Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/controlreactor.html">Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/constant-pressure-reactor.html">Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-reactor.html">Ideal Gas Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-reactor.html">Ideal Gas Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/mole-reactor.html">Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/constant-pressure-mole-reactor.html">Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-mole-reactor.html">Ideal Gas Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-mole-reactor.html">Ideal Gas Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/interactions.html">Reactor Interactions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/onedim/index.html">One-dimensional Flames</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/governing-equations.html">Governing Equations for One-dimensional Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/discretization.html">Discretization of 1D Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/nonlinear-solver.html">Nonlinear Solver for One-dimensional Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/grid-refinement.html">Grid Refinement for One-dimensional Flows</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../reference/index.html" class="nav-link">Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Python Module Documentation</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Transport Properties</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="transport-properties">
+<h1>Transport Properties<a class="headerlink" href="#transport-properties" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.Transport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">Transport</span></span><a class="headerlink" href="#cantera.Transport" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="importing.html#cantera.solutionbase._SolutionBase" title="cantera.solutionbase._SolutionBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">_SolutionBase</span></code></a></p>
+<p>This class is used to compute transport properties for a phase of matter.</p>
+<p>Not all transport properties are implemented in all transport models.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Transport.CK_mode">
+<span class="sig-name descname"><span class="pre">CK_mode</span></span><a class="headerlink" href="#cantera.Transport.CK_mode" title="Link to this definition">#</a></dt>
+<dd><p>Boolean to indicate if the chemkin interpretation is used.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Transport.binary_diff_coeffs">
+<span class="sig-name descname"><span class="pre">binary_diff_coeffs</span></span><a class="headerlink" href="#cantera.Transport.binary_diff_coeffs" title="Link to this definition">#</a></dt>
+<dd><p>Binary diffusion coefficients [m^2/s].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Transport.electrical_conductivity">
+<span class="sig-name descname"><span class="pre">electrical_conductivity</span></span><a class="headerlink" href="#cantera.Transport.electrical_conductivity" title="Link to this definition">#</a></dt>
+<dd><p>Electrical conductivity. [S/m].</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Transport.get_binary_diff_coeffs_polynomial">
+<span class="sig-name descname"><span class="pre">get_binary_diff_coeffs_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Transport.get_binary_diff_coeffs_polynomial" title="Link to this definition">#</a></dt>
+<dd><p>Get the coefficients of the polynomial fit of the binary diffusion coefficient
+for species <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> as a function of temperature. See
+<a class="reference external" href="../cxx/d8/d58/classCantera_1_1GasTransport.html#a384e3fa8d986dff5c70492d5be1a1d62">GasTransport::fitDiffCoeffs()</a> for the functional form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Transport.get_collision_integral_polynomials">
+<span class="sig-name descname"><span class="pre">get_collision_integral_polynomials</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Transport.get_collision_integral_polynomials" title="Link to this definition">#</a></dt>
+<dd><p>Get the coefficients of the polynomial fit of the collision integral for
+species <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> as a function of temperature. See
+<a class="reference external" href="../cxx/d8/d58/classCantera_1_1GasTransport.html#a63596d9283bcd529d0f7cca7043ec803">GasTransport::fitCollisionIntegrals()</a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Transport.get_thermal_conductivity_polynomial">
+<span class="sig-name descname"><span class="pre">get_thermal_conductivity_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Transport.get_thermal_conductivity_polynomial" title="Link to this definition">#</a></dt>
+<dd><p>Get the coefficients of the polynomial fit for the thermal conductivity of
+species <code class="docutils literal notranslate"><span class="pre">i</span></code> as a function of temperature. See
+<a class="reference external" href="../cxx/d8/d58/classCantera_1_1GasTransport.html#a267d20cdea7486fe84e722ee82d84b20">GasTransport::fitProperties()</a> for the functional form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Transport.get_viscosity_polynomial">
+<span class="sig-name descname"><span class="pre">get_viscosity_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Transport.get_viscosity_polynomial" title="Link to this definition">#</a></dt>
+<dd><p>Get the coefficients of the polynomial fit for the viscosity of species <code class="docutils literal notranslate"><span class="pre">i</span></code>
+as a function of temperature. See <a class="reference external" href="../cxx/d8/d58/classCantera_1_1GasTransport.html#a267d20cdea7486fe84e722ee82d84b20">GasTransport::fitProperties()</a> for the
+functional form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Transport.mix_diff_coeffs">
+<span class="sig-name descname"><span class="pre">mix_diff_coeffs</span></span><a class="headerlink" href="#cantera.Transport.mix_diff_coeffs" title="Link to this definition">#</a></dt>
+<dd><p>Mixture-averaged diffusion coefficients [m^2/s] relating the
+mass-averaged diffusive fluxes (with respect to the mass averaged
+velocity) to gradients in the species mole fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Transport.mix_diff_coeffs_mass">
+<span class="sig-name descname"><span class="pre">mix_diff_coeffs_mass</span></span><a class="headerlink" href="#cantera.Transport.mix_diff_coeffs_mass" title="Link to this definition">#</a></dt>
+<dd><p>Mixture-averaged diffusion coefficients [m^2/s] relating the
+diffusive mass fluxes to gradients in the species mass fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Transport.mix_diff_coeffs_mole">
+<span class="sig-name descname"><span class="pre">mix_diff_coeffs_mole</span></span><a class="headerlink" href="#cantera.Transport.mix_diff_coeffs_mole" title="Link to this definition">#</a></dt>
+<dd><p>Mixture-averaged diffusion coefficients [m^2/s] relating the
+molar diffusive fluxes to gradients in the species mole fractions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Transport.mobilities">
+<span class="sig-name descname"><span class="pre">mobilities</span></span><a class="headerlink" href="#cantera.Transport.mobilities" title="Link to this definition">#</a></dt>
+<dd><p>Electrical mobilities of charged species [m^2/s-V]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Transport.multi_diff_coeffs">
+<span class="sig-name descname"><span class="pre">multi_diff_coeffs</span></span><a class="headerlink" href="#cantera.Transport.multi_diff_coeffs" title="Link to this definition">#</a></dt>
+<dd><p>Multicomponent diffusion coefficients, D[i,j], the diffusion
+coefficient for species i due to concentration gradients in
+species j [m**2/s].</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Transport.set_binary_diff_coeffs_polynomial">
+<span class="sig-name descname"><span class="pre">set_binary_diff_coeffs_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Transport.set_binary_diff_coeffs_polynomial" title="Link to this definition">#</a></dt>
+<dd><p>Set the coefficients of the polynomial fit of the binary diffusion coefficient
+for species <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> as a function of temperature. See
+<a class="reference external" href="../cxx/d8/d58/classCantera_1_1GasTransport.html#a384e3fa8d986dff5c70492d5be1a1d62">GasTransport::fitDiffCoeffs()</a> for the functional form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Transport.set_collision_integral_polynomial">
+<span class="sig-name descname"><span class="pre">set_collision_integral_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avalues</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bvalues</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cvalues</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actualT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Transport.set_collision_integral_polynomial" title="Link to this definition">#</a></dt>
+<dd><p>Set the coefficients of the polynomial fit of the collision integral for
+species <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> as a function of temperature. See
+<a class="reference external" href="../cxx/d8/d58/classCantera_1_1GasTransport.html#a63596d9283bcd529d0f7cca7043ec803">GasTransport::fitCollisionIntegrals()</a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Transport.set_thermal_conductivity_polynomial">
+<span class="sig-name descname"><span class="pre">set_thermal_conductivity_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Transport.set_thermal_conductivity_polynomial" title="Link to this definition">#</a></dt>
+<dd><p>Set the coefficients of the polynomial fit for the thermal conductivity of
+species <code class="docutils literal notranslate"><span class="pre">i</span></code> as a function of temperature. See
+<a class="reference external" href="../cxx/d8/d58/classCantera_1_1GasTransport.html#a267d20cdea7486fe84e722ee82d84b20">GasTransport::fitProperties()</a> for the functional form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Transport.set_viscosity_polynomial">
+<span class="sig-name descname"><span class="pre">set_viscosity_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Transport.set_viscosity_polynomial" title="Link to this definition">#</a></dt>
+<dd><p>Set the coefficients of the polynomial fit for the viscosity of species <code class="docutils literal notranslate"><span class="pre">i</span></code>
+as a function of temperature. See <a class="reference external" href="../cxx/d8/d58/classCantera_1_1GasTransport.html#a267d20cdea7486fe84e722ee82d84b20">GasTransport::fitProperties()</a> for the
+functional form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Transport.species_viscosities">
+<span class="sig-name descname"><span class="pre">species_viscosities</span></span><a class="headerlink" href="#cantera.Transport.species_viscosities" title="Link to this definition">#</a></dt>
+<dd><p>Pure species viscosities [Pa-s]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Transport.thermal_conductivity">
+<span class="sig-name descname"><span class="pre">thermal_conductivity</span></span><a class="headerlink" href="#cantera.Transport.thermal_conductivity" title="Link to this definition">#</a></dt>
+<dd><p>Thermal conductivity. [W/m/K]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Transport.thermal_diff_coeffs">
+<span class="sig-name descname"><span class="pre">thermal_diff_coeffs</span></span><a class="headerlink" href="#cantera.Transport.thermal_diff_coeffs" title="Link to this definition">#</a></dt>
+<dd><p>Return a one-dimensional array of the species thermal diffusion
+coefficients [kg/m/s].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Transport.transport_fitting_errors">
+<span class="sig-name descname"><span class="pre">transport_fitting_errors</span></span><a class="headerlink" href="#cantera.Transport.transport_fitting_errors" title="Link to this definition">#</a></dt>
+<dd><p>Get error metrics about any functional fits calculated for pure species
+transport properties. See {ct}`GasTransport::fitDiffCoeffs` and
+{ct}`GasTransport::fitProperties`.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This property is an experimental part of the Cantera API and
+may be changed or removed without notice.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.1.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Transport.transport_model">
+<span class="sig-name descname"><span class="pre">transport_model</span></span><a class="headerlink" href="#cantera.Transport.transport_model" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set the string specifying the transport model, such as <code class="xref py py-obj docutils literal notranslate"><span class="pre">multicomponent</span></code>,
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">mixture-averaged</span></code>, or <code class="xref py py-obj docutils literal notranslate"><span class="pre">unity-Lewis-number</span></code>.</p>
+<p>Setting a new transport model deletes the underlying C++ Transport
+object and replaces it with a new one implementing the specified model.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Transport.viscosity">
+<span class="sig-name descname"><span class="pre">viscosity</span></span><a class="headerlink" href="#cantera.Transport.viscosity" title="Link to this definition">#</a></dt>
+<dd><p>Viscosity [Pa-s].</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.DustyGasTransport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">DustyGasTransport</span></span><a class="headerlink" href="#cantera.DustyGasTransport" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cantera.Transport" title="cantera.transport.Transport"><code class="xref py py-class docutils literal notranslate"><span class="pre">Transport</span></code></a></p>
+<p>Implements the “dusty gas” model for transport in porous media.</p>
+<p>As implemented here, only species transport (<a class="reference internal" href="#cantera.Transport.multi_diff_coeffs" title="cantera.Transport.multi_diff_coeffs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multi_diff_coeffs</span></code></a>)
+is handled. The viscosity, thermal conductivity, and thermal diffusion
+coefficients are not implemented.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.DustyGasTransport.mean_particle_diameter">
+<span class="sig-name descname"><span class="pre">mean_particle_diameter</span></span><a class="headerlink" href="#cantera.DustyGasTransport.mean_particle_diameter" title="Link to this definition">#</a></dt>
+<dd><p>Mean particle diameter of the porous medium [m].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.DustyGasTransport.mean_pore_radius">
+<span class="sig-name descname"><span class="pre">mean_pore_radius</span></span><a class="headerlink" href="#cantera.DustyGasTransport.mean_pore_radius" title="Link to this definition">#</a></dt>
+<dd><p>Mean pore radius of the porous medium [m].</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.DustyGasTransport.molar_fluxes">
+<span class="sig-name descname"><span class="pre">molar_fluxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.DustyGasTransport.molar_fluxes" title="Link to this definition">#</a></dt>
+<dd><p>Get the molar fluxes [kmol/m^2/s], given the thermodynamic state at
+two nearby points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T1</strong> – Temperature [K] at the first point</p></li>
+<li><p><strong>T2</strong> – Temperature [K] at the second point</p></li>
+<li><p><strong>rho1</strong> – Density [kg/m^3] at the first point</p></li>
+<li><p><strong>rho2</strong> – Density [kg/m^3] at the second point</p></li>
+<li><p><strong>Y1</strong> – Array of mass fractions at the first point. Length <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_species</span></code>.</p></li>
+<li><p><strong>Y2</strong> – Array of mass fractions at the second point. Length <code class="xref py py-obj docutils literal notranslate"><span class="pre">n_species</span></code>.</p></li>
+<li><p><strong>delta</strong> – Distance [m] between the two points.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.DustyGasTransport.permeability">
+<span class="sig-name descname"><span class="pre">permeability</span></span><a class="headerlink" href="#cantera.DustyGasTransport.permeability" title="Link to this definition">#</a></dt>
+<dd><p>Permeability of the porous medium [m^2].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.DustyGasTransport.porosity">
+<span class="sig-name descname"><span class="pre">porosity</span></span><a class="headerlink" href="#cantera.DustyGasTransport.porosity" title="Link to this definition">#</a></dt>
+<dd><p>Porosity of the porous medium [dimensionless].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.DustyGasTransport.thermal_conductivity">
+<span class="sig-name descname"><span class="pre">thermal_conductivity</span></span><a class="headerlink" href="#cantera.DustyGasTransport.thermal_conductivity" title="Link to this definition">#</a></dt>
+<dd><p>Thermal conductivity. [W/m/K]
+Returns the thermal conductivity of the ideal gas object using the
+multicomponent model. The value is not specific to the dusty gas model.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.DustyGasTransport.tortuosity">
+<span class="sig-name descname"><span class="pre">tortuosity</span></span><a class="headerlink" href="#cantera.DustyGasTransport.tortuosity" title="Link to this definition">#</a></dt>
+<dd><p>Tortuosity of the porous medium [dimensionless].</p>
+</dd></dl>
+
+</dd></dl>
+
+<section id="species-transport-properties">
+<h2>Species Transport Properties<a class="headerlink" href="#species-transport-properties" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.GasTransportData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">GasTransportData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diameter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">well_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dipole</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polarizability</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotational_relaxation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acentric_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dispersion_coefficient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quadrupole_polarizability</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.GasTransportData" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Transport data for a single gas-phase species which can be used in
+mixture-averaged or multicomponent transport models.</p>
+<p>The arguments passed to the constructor are equivalent to the properties of
+the object, with values in MKS units. To set properties in non-MKS units,
+use the <a class="reference internal" href="#cantera.GasTransportData.set_customary_units" title="cantera.GasTransportData.set_customary_units"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_customary_units</span></code></a> method.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.GasTransportData.acentric_factor">
+<span class="sig-name descname"><span class="pre">acentric_factor</span></span><a class="headerlink" href="#cantera.GasTransportData.acentric_factor" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set Pitzer’s acentric factor. [dimensionless]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.GasTransportData.clear_user_data">
+<span class="sig-name descname"><span class="pre">clear_user_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cantera.GasTransportData.clear_user_data" title="Link to this definition">#</a></dt>
+<dd><p>Clear all saved input data, so that the data given by <a class="reference internal" href="#cantera.GasTransportData.input_data" title="cantera.GasTransportData.input_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_data</span></code></a> or
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution.write_yaml</span></code> will only include values generated by Cantera based on
+the current object state.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.GasTransportData.diameter">
+<span class="sig-name descname"><span class="pre">diameter</span></span><a class="headerlink" href="#cantera.GasTransportData.diameter" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set the Lennard-Jones collision diameter [m]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.GasTransportData.dipole">
+<span class="sig-name descname"><span class="pre">dipole</span></span><a class="headerlink" href="#cantera.GasTransportData.dipole" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set the permanent dipole moment of the molecule [Coulomb-m].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.GasTransportData.dispersion_coefficient">
+<span class="sig-name descname"><span class="pre">dispersion_coefficient</span></span><a class="headerlink" href="#cantera.GasTransportData.dispersion_coefficient" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set dispersion coefficient. [m^5]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.GasTransportData.geometry">
+<span class="sig-name descname"><span class="pre">geometry</span></span><a class="headerlink" href="#cantera.GasTransportData.geometry" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set the string specifying the molecular geometry. One of <code class="xref py py-obj docutils literal notranslate"><span class="pre">atom</span></code>,
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">linear</span></code>, or <code class="xref py py-obj docutils literal notranslate"><span class="pre">nonlinear</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.GasTransportData.input_data">
+<span class="sig-name descname"><span class="pre">input_data</span></span><a class="headerlink" href="#cantera.GasTransportData.input_data" title="Link to this definition">#</a></dt>
+<dd><p>Get input data defining this GasTransportData object, along with any
+user-specified data provided with its input (YAML) definition.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.GasTransportData.polarizability">
+<span class="sig-name descname"><span class="pre">polarizability</span></span><a class="headerlink" href="#cantera.GasTransportData.polarizability" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set the polarizability of the molecule [m^3].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.GasTransportData.quadrupole_polarizability">
+<span class="sig-name descname"><span class="pre">quadrupole_polarizability</span></span><a class="headerlink" href="#cantera.GasTransportData.quadrupole_polarizability" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set quadrupole polarizability. [m^5]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.GasTransportData.rotational_relaxation">
+<span class="sig-name descname"><span class="pre">rotational_relaxation</span></span><a class="headerlink" href="#cantera.GasTransportData.rotational_relaxation" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set the rotational relaxation number (the number of collisions it
+takes to equilibrate the rotational degrees of freedom with the
+temperature).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.GasTransportData.set_customary_units">
+<span class="sig-name descname"><span class="pre">set_customary_units</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diameter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">well_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dipole</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polarizability</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotational_relaxation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acentric_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dispersion_coefficient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quadrupole_polarizability</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.GasTransportData.set_customary_units" title="Link to this definition">#</a></dt>
+<dd><p>Set the parameters using “customary” units: diameter in Angstroms, well
+depth in Kelvin, dipole in Debye, and polarizability in Angstroms^3.
+These are the units used in in CK-style input files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.GasTransportData.update_user_data">
+<span class="sig-name descname"><span class="pre">update_user_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.GasTransportData.update_user_data" title="Link to this definition">#</a></dt>
+<dd><p>Add the contents of the provided <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> as additional fields when generating
+YAML phase definition files with <code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution.write_yaml</span></code> or in the data returned
+by <a class="reference internal" href="#cantera.GasTransportData.input_data" title="cantera.GasTransportData.input_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_data</span></code></a>. Existing keys with matching names are overwritten.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.GasTransportData.well_depth">
+<span class="sig-name descname"><span class="pre">well_depth</span></span><a class="headerlink" href="#cantera.GasTransportData.well_depth" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set the Lennard-Jones well depth [J]</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport"><code class="docutils literal notranslate"><span class="pre">Transport</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.CK_mode"><code class="docutils literal notranslate"><span class="pre">Transport.CK_mode</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.binary_diff_coeffs"><code class="docutils literal notranslate"><span class="pre">Transport.binary_diff_coeffs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.electrical_conductivity"><code class="docutils literal notranslate"><span class="pre">Transport.electrical_conductivity</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.get_binary_diff_coeffs_polynomial"><code class="docutils literal notranslate"><span class="pre">Transport.get_binary_diff_coeffs_polynomial()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.get_collision_integral_polynomials"><code class="docutils literal notranslate"><span class="pre">Transport.get_collision_integral_polynomials()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.get_thermal_conductivity_polynomial"><code class="docutils literal notranslate"><span class="pre">Transport.get_thermal_conductivity_polynomial()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.get_viscosity_polynomial"><code class="docutils literal notranslate"><span class="pre">Transport.get_viscosity_polynomial()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.mix_diff_coeffs"><code class="docutils literal notranslate"><span class="pre">Transport.mix_diff_coeffs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.mix_diff_coeffs_mass"><code class="docutils literal notranslate"><span class="pre">Transport.mix_diff_coeffs_mass</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.mix_diff_coeffs_mole"><code class="docutils literal notranslate"><span class="pre">Transport.mix_diff_coeffs_mole</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.mobilities"><code class="docutils literal notranslate"><span class="pre">Transport.mobilities</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.multi_diff_coeffs"><code class="docutils literal notranslate"><span class="pre">Transport.multi_diff_coeffs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.set_binary_diff_coeffs_polynomial"><code class="docutils literal notranslate"><span class="pre">Transport.set_binary_diff_coeffs_polynomial()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.set_collision_integral_polynomial"><code class="docutils literal notranslate"><span class="pre">Transport.set_collision_integral_polynomial()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.set_thermal_conductivity_polynomial"><code class="docutils literal notranslate"><span class="pre">Transport.set_thermal_conductivity_polynomial()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.set_viscosity_polynomial"><code class="docutils literal notranslate"><span class="pre">Transport.set_viscosity_polynomial()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.species_viscosities"><code class="docutils literal notranslate"><span class="pre">Transport.species_viscosities</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.thermal_conductivity"><code class="docutils literal notranslate"><span class="pre">Transport.thermal_conductivity</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.thermal_diff_coeffs"><code class="docutils literal notranslate"><span class="pre">Transport.thermal_diff_coeffs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.transport_fitting_errors"><code class="docutils literal notranslate"><span class="pre">Transport.transport_fitting_errors</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.transport_model"><code class="docutils literal notranslate"><span class="pre">Transport.transport_model</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Transport.viscosity"><code class="docutils literal notranslate"><span class="pre">Transport.viscosity</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport.mean_particle_diameter"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport.mean_particle_diameter</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport.mean_pore_radius"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport.mean_pore_radius</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport.molar_fluxes"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport.molar_fluxes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport.permeability"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport.permeability</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport.porosity"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport.porosity</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport.thermal_conductivity"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport.thermal_conductivity</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.DustyGasTransport.tortuosity"><code class="docutils literal notranslate"><span class="pre">DustyGasTransport.tortuosity</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#species-transport-properties">Species Transport Properties</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData"><code class="docutils literal notranslate"><span class="pre">GasTransportData</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.acentric_factor"><code class="docutils literal notranslate"><span class="pre">GasTransportData.acentric_factor</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.clear_user_data"><code class="docutils literal notranslate"><span class="pre">GasTransportData.clear_user_data()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.diameter"><code class="docutils literal notranslate"><span class="pre">GasTransportData.diameter</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.dipole"><code class="docutils literal notranslate"><span class="pre">GasTransportData.dipole</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.dispersion_coefficient"><code class="docutils literal notranslate"><span class="pre">GasTransportData.dispersion_coefficient</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.geometry"><code class="docutils literal notranslate"><span class="pre">GasTransportData.geometry</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.input_data"><code class="docutils literal notranslate"><span class="pre">GasTransportData.input_data</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.polarizability"><code class="docutils literal notranslate"><span class="pre">GasTransportData.polarizability</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.quadrupole_polarizability"><code class="docutils literal notranslate"><span class="pre">GasTransportData.quadrupole_polarizability</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.rotational_relaxation"><code class="docutils literal notranslate"><span class="pre">GasTransportData.rotational_relaxation</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.set_customary_units"><code class="docutils literal notranslate"><span class="pre">GasTransportData.set_customary_units()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.update_user_data"><code class="docutils literal notranslate"><span class="pre">GasTransportData.update_user_data()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.GasTransportData.well_depth"><code class="docutils literal notranslate"><span class="pre">GasTransportData.well_depth</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/python/transport.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

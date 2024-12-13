@@ -1,0 +1,936 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lithium Ion Battery Discharge Curve &#8212; Cantera 3.1.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/python/kinetics/lithium_ion_battery';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Extending Reactor Models with Custom Equations" href="../../../userguide/extensible-reactor.html" />
+    <link rel="prev" title="Calculating Heating Value of a Fuel" href="../../../userguide/heating-value.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../../../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/python-tutorial.html">Python Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/input-tutorial.html">Introduction to YAML Input Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/reactor-tutorial.html">Using Reactor Networks for Time Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/cxx-tutorial.html">Using Cantera from C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/compiling-cxx.html">Compiling Cantera C++ Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/ck2yaml-tutorial.html">Converting Chemkin Format Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/creating-mechanisms.html">Creating YAML Mechanism Files from Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/thermobuild.html">Converting Data from NASA ThermoBuild</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/input-errors.html">Handling Errors in Input Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/legacy2yaml-tutorial.html">Converting Legacy CTI and XML Input Files to YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/flame-temperature.html">Calculating Adiabatic Flame Temperature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/heating-value.html">Calculating Heating Value of a Fuel</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lithium Ion Battery Discharge Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../userguide/extensible-reactor.html">Extending Reactor Models with Custom Equations</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../../../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../userguide/index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Lithium Ion...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-python-kinetics-lithium-ion-battery-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="lithium-ion-battery-discharge-curve">
+<span id="sphx-glr-examples-python-kinetics-lithium-ion-battery-py"></span><h1>Lithium Ion Battery Discharge Curve<a class="headerlink" href="#lithium-ion-battery-discharge-curve" title="Link to this heading">#</a></h1>
+<p>In this example, we illustrate how to calculate the open circuit voltage (voltage when
+the external applied current is zero) for a lithium ion battery as a function of anode
+and cathode lithium content. The open circuit voltage here is calculated via two means:
+kinetically and thermodynamically.</p>
+<p>The thermodynamics are based on a graphite anode and a LiCoO₂ cathode (the typical
+active materials for commercial batteries, as of 2019), and are modeled using the
+<a class="reference external" href="../../../cxx/de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html">BinarySolutionTabulatedThermo</a> class.</p>
+<p>The system here can be thought of as consisting of two particles—anode and
+cathode—connected by a liquid electrolyte:</p>
+<a class="reference internal image-reference" href="../../../_images/single-particle-battery.svg"><img alt="Cartoon of a Single Particle Battery Model" class="align-center" src="../../../_images/single-particle-battery.svg" width="75%" /></a>
+<p>For the sake of simplicity, we’re going to assume that the anode and cathode capacities
+are perfectly balanced. That is, if the cathode lithium content is X percent of its max
+possible (its capacity), then we will assume that the anode is at 1-X percent. Without
+loss of generality, we will define the anode composition.</p>
+<p>The routine below returns the steady-state cell voltage of a lithium-ion cell for a
+given cell current, active material lithium stoichiometries, and electrolyte ionic
+resistance. This functionality is presented in greater detail in the reference (which
+also describes the derivation of the <a class="reference external" href="../../../cxx/de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html">BinarySolutionTabulatedThermo</a> class):</p>
+<blockquote>
+<div><p>M. Mayur, S. C. DeCaluwe, B. L. Kee, W. G. Bessler, “Modeling and simulation of the
+thermodynamics of lithium-ion battery intercalation materials in the open-source
+software Cantera,” <em>Electrochim. Acta</em> 323, 134797 (2019),
+<a class="reference external" href="https://doi.org/10.1016/j.electacta.2019.134797">https://doi.org/10.1016/j.electacta.2019.134797</a></p>
+</div></blockquote>
+<p>In the future, this example may be developed further to demonstrate simulating
+charge-discharge of the lithium ion battery.</p>
+<p>Requires: cantera &gt;= 2.6.0, matplotlib &gt;= 2.0, scipy &gt;= 1.10.0</p>
+<p class="tags"><span>Tags: </span><a class="sd-sphinx-override sd-badge sd-bg-secondary sd-bg-text-secondary reference internal" href="../../../_tags/Python.html"><span class="doc">Python</span></a><span> </span><a class="sd-sphinx-override sd-badge sd-bg-primary sd-bg-text-primary reference internal" href="../../../_tags/surface_chemistry.html"><span class="doc">surface chemistry</span></a><span> </span><a class="sd-sphinx-override sd-badge sd-bg-primary sd-bg-text-primary reference internal" href="../../../_tags/kinetics.html"><span class="doc">kinetics</span></a><span> </span><a class="sd-sphinx-override sd-badge sd-bg-primary sd-bg-text-primary reference internal" href="../../../_tags/electrochemistry.html"><span class="doc">electrochemistry</span></a><span> </span><a class="sd-sphinx-override sd-badge sd-bg-primary sd-bg-text-primary reference internal" href="../../../_tags/battery.html"><span class="doc">battery</span></a><span> </span><a class="sd-sphinx-override sd-badge sd-bg-primary sd-bg-text-primary reference internal" href="../../../_tags/plotting.html"><span class="doc">plotting</span></a></p>
+<section id="kinetic-equilibrium-calculations">
+<h2>Kinetic equilibrium calculations<a class="headerlink" href="#kinetic-equilibrium-calculations" title="Link to this heading">#</a></h2>
+<p>In the kinetic equilibrium problem, steady state is achieved when the faradaic current
+at each electrode (anode and cathode) surface and the ionic current through the
+electrolyte are all zero. There are, essentially, four relevant electric potentials
+which must be determined:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\phi_{\rm anode}\)</span>: electric potential of graphite anode.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi_{\rm elyte,\, anode}\)</span>: electric potential of electrolyte
+at anode interface.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi_{\rm elyte,\, cathode}\)</span>: electric potential of
+electrolyte at cathode interface.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi_{\rm cathode}\)</span>: electric potential of LCO cathode.</p></li>
+</ul>
+<p>Setting one of these four to the reference potential of zero (because it is the
+difference in electric potential which drives currents, the actual potential values are
+irrelevant. Let’s assume the anode electric potential is zero), there is only one
+distribution of electric potentials across the cell such that the current is invariant
+across the cell. I.e. we want the potentials such that:</p>
+<div class="math notranslate nohighlight">
+\[i_{\rm Far,\, anode} = i_{\rm ionic} = i_{\rm Far,\,cathode}= i_{\rm app}\]</div>
+<p>where <span class="math notranslate nohighlight">\(i_{\rm app}\)</span> is the user input for the applied current. For this example,
+we assume an applied current of 0, to calculate the equilibrium voltage.</p>
+<section id="faradaic-current">
+<h3>Faradaic current<a class="headerlink" href="#faradaic-current" title="Link to this heading">#</a></h3>
+<p>The faradaic current for this model is calculated using Butler-Volmer
+kinetics. For a Li-ion battery, this is:</p>
+<div class="math notranslate nohighlight">
+\[i = S_{\rm elde}i_\circ\left[\exp\left(\frac{F\beta\eta}{RT}\right)
+  - \exp\left(-\frac{F(1-\beta)\eta}{RT}\right) \right]\]</div>
+<p>where <span class="math notranslate nohighlight">\(S_{\rm elde}\)</span> is the specific surface area of the electrode in question,
+<span class="math notranslate nohighlight">\(F\)</span> is Faraday’s constant, <span class="math notranslate nohighlight">\(\beta\)</span> is the charge-transfer symmetry
+parameter, <span class="math notranslate nohighlight">\(R\)</span> the universal gas constant, <span class="math notranslate nohighlight">\(T\)</span> the temperature, and
+<span class="math notranslate nohighlight">\(\eta\)</span> the overpotential, which is the electric potential difference between the
+electrode and electrolyte, <span class="math notranslate nohighlight">\(\Delta \phi = \phi_{\rm elde} - \phi_{\rm elyte}\)</span>,
+relative to that at equilibrium, <span class="math notranslate nohighlight">\(\Delta \phi_{\rm eq}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\eta = \Delta \phi - \Delta \phi_{\rm eq}\]</div>
+<p><span class="math notranslate nohighlight">\(i_\circ\)</span> is known as the “exchange current density,” which is equal to the rate
+of the forward and reverse current at equilibrium (which are equal). <span class="math notranslate nohighlight">\(i_\circ\)</span> and
+<span class="math notranslate nohighlight">\(\beta\)</span> are provided as user inputs in the YAML file. At any particular state,
+(user-specified electric potentials, pressure, temperature, and chemical compositions),
+Cantera calculates <span class="math notranslate nohighlight">\(\eta\)</span> as part of the routine to evaluate reaction rates of
+progress <span class="math notranslate nohighlight">\(\left(\dot{q} = i_{\rm Far}/F \right)\)</span>. The user simply sets the state
+values mentioned above.</p>
+</section>
+<section id="ionic-current">
+<h3>Ionic current<a class="headerlink" href="#ionic-current" title="Link to this heading">#</a></h3>
+<p>The electrolyte is modeled as a resistor with user-defined ionic resistance
+<span class="math notranslate nohighlight">\(R_{\rm io}\)</span>, and hence the ionic current is calculated as:</p>
+<div class="math notranslate nohighlight">
+\[i_{\rm ionic} = \frac{\phi_{\rm elyte,\,ca} - \phi_{\rm elyte,\,an}}{R_{\rm io}}\]</div>
+<p>where positive current is defined as delivering Li<span class="math notranslate nohighlight">\(^+\)</span> to the anode interface.
+Given <span class="math notranslate nohighlight">\(i_{\rm app}\)</span>, this equation can be inverted, to calculate the electric
+potential of the electrolyte at the cathode interface, relative to that at the anode
+interface:</p>
+<div class="math notranslate nohighlight">
+\[\phi_{\rm elyte,\,ca} = \phi_{\rm elyte,\,an} + R_{\rm io}i_{\rm app}\]</div>
+<p>Again: in this example, <span class="math notranslate nohighlight">\(i_{\rm app} = 0\)</span> and hence the two electric potential
+values in the electrolyte are equal.</p>
+</section>
+<section id="numerical-routine">
+<h3>Numerical routine<a class="headerlink" href="#numerical-routine" title="Link to this heading">#</a></h3>
+<p>For the kinetic routine, there are three processes to determine the cell voltage
+<span class="math notranslate nohighlight">\(\phi_{\rm cathode} - \phi_{\rm anode}\)</span> which corresponds to the user-provided
+<span class="math notranslate nohighlight">\(i_{\rm app}\)</span>:</p>
+<ol class="arabic simple">
+<li><p>Determine the <span class="math notranslate nohighlight">\(\phi_{\rm elyte,\,anode}\)</span> value which corresponds to
+<span class="math notranslate nohighlight">\(i_{\rm app}\)</span>, given <span class="math notranslate nohighlight">\(X_{\rm Li, anode}\)</span>, the percentage of Li in the
+anode active material.</p></li>
+<li><p>Determine <span class="math notranslate nohighlight">\(\phi_{\rm elyte,\,cathode}\)</span>, given <span class="math notranslate nohighlight">\(\phi_{\rm elyte,\,anode}\)</span>
+and <span class="math notranslate nohighlight">\(i_{\rm app}\)</span>.</p></li>
+<li><p>Determine the <span class="math notranslate nohighlight">\(\phi_{\rm cathode}\)</span> which corresponds to <span class="math notranslate nohighlight">\(i_{\rm app}\)</span>,
+given <span class="math notranslate nohighlight">\(\phi_{\rm elyte,\,cathode}\)</span> and <span class="math notranslate nohighlight">\(X_{\rm Li, anode}\)</span>, the
+percentage of Li in the anode active material.</p></li>
+</ol>
+<p>The routines below are written generally such that an interested user may set
+<span class="math notranslate nohighlight">\(i_{\rm app}\)</span> to any value of interest.</p>
+</section>
+<section id="import-necessary-packages">
+<h3>Import necessary packages<a class="headerlink" href="#import-necessary-packages" title="Link to this heading">#</a></h3>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">fsolve</span>
+<span class="kn">import</span> <span class="nn">time</span>  <span class="c1"># Used for timing our calculations</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">cantera</span> <span class="k">as</span> <span class="nn">ct</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Runnning Cantera version: </span><span class="si">{</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ct</span><span class="o">.</span><span class="n">__version__</span></a><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Runnning Cantera version: 3.1.0b1
+</pre></div>
+</div>
+</section>
+</section>
+<section id="define-the-phases">
+<h2>Define the phases<a class="headerlink" href="#define-the-phases" title="Link to this heading">#</a></h2>
+<p>The phase thermodynamics are defined according to experimentally-measured open circuit
+voltage values, as described in the reference provided above. These values are stored
+in the input file <a class="reference internal" href="../../input/lithium_ion_battery.html"><span class="doc">lithium_ion_battery.yaml</span></a>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">input_file</span></a> <span class="o">=</span> <span class="s2">&quot;../data/lithium_ion_battery.yaml&quot;</span>
+<a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anode</span></a> <span class="o">=</span> <a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class"><span class="n">ct</span><span class="o">.</span><span class="n">Solution</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">input_file</span></a><span class="p">,</span> <span class="s2">&quot;anode&quot;</span><span class="p">)</span>
+<a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cathode</span></a> <span class="o">=</span> <a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class"><span class="n">ct</span><span class="o">.</span><span class="n">Solution</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">input_file</span></a><span class="p">,</span> <span class="s2">&quot;cathode&quot;</span><span class="p">)</span>
+<span class="c1"># The &#39;elde&#39; electrode phase is needed as a source/sink for electron</span>
+<a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elde</span></a> <span class="o">=</span> <a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class"><span class="n">ct</span><span class="o">.</span><span class="n">Solution</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">input_file</span></a><span class="p">,</span> <span class="s2">&quot;electron&quot;</span><span class="p">)</span>
+<a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elyte</span></a> <span class="o">=</span> <a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class"><span class="n">ct</span><span class="o">.</span><span class="n">Solution</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">input_file</span></a><span class="p">,</span> <span class="s2">&quot;electrolyte&quot;</span><span class="p">)</span>
+<a href="../../../python/importing.html#cantera.Interface" title="cantera.Interface" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anode_interface</span></a> <span class="o">=</span> <a href="../../../python/importing.html#cantera.Interface" title="cantera.Interface" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class"><span class="n">ct</span><span class="o">.</span><span class="n">Interface</span></a><span class="p">(</span>
+    <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">input_file</span></a><span class="p">,</span> <span class="s2">&quot;edge_anode_electrolyte&quot;</span><span class="p">,</span> <span class="p">[</span><a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anode</span></a><span class="p">,</span> <a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elde</span></a><span class="p">,</span> <a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elyte</span></a><span class="p">]</span>
+<span class="p">)</span>
+<a href="../../../python/importing.html#cantera.Interface" title="cantera.Interface" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cathode_interface</span></a> <span class="o">=</span> <a href="../../../python/importing.html#cantera.Interface" title="cantera.Interface" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class"><span class="n">ct</span><span class="o">.</span><span class="n">Interface</span></a><span class="p">(</span>
+    <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">input_file</span></a><span class="p">,</span> <span class="s2">&quot;edge_cathode_electrolyte&quot;</span><span class="p">,</span> <span class="p">[</span><a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cathode</span></a><span class="p">,</span> <a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elde</span></a><span class="p">,</span> <a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elyte</span></a><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="define-battery-conditions-temperature-pressure-stoichiometry-electrolyte-resistance">
+<h2>Define battery conditions: temperature, pressure, stoichiometry, electrolyte resistance<a class="headerlink" href="#define-battery-conditions-temperature-pressure-stoichiometry-electrolyte-resistance" title="Link to this heading">#</a></h2>
+<p>Inputs are:</p>
+<ul class="simple">
+<li><p>Stoichiometries <code class="docutils literal notranslate"><span class="pre">X_Li_ca</span></code> and <code class="docutils literal notranslate"><span class="pre">X_Li_an</span></code> [-] (can be vectors)</p></li>
+<li><p>Temperature <code class="docutils literal notranslate"><span class="pre">T</span></code> [K]</p></li>
+<li><p>Pressure <code class="docutils literal notranslate"><span class="pre">P</span></code> [Pa]</p></li>
+<li><p>Externally-applied current <code class="docutils literal notranslate"><span class="pre">i_app</span></code> [A]</p></li>
+<li><p>Electrolyte resistance <code class="docutils literal notranslate"><span class="pre">R_elyte</span></code> [Ohm]</p></li>
+<li><p>Anode total surface area <code class="docutils literal notranslate"><span class="pre">S_an</span></code> [m^2]</p></li>
+<li><p>Cathode total surface area <code class="docutils literal notranslate"><span class="pre">S_ca</span></code> [m^2]</p></li>
+</ul>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Array of lithium mole fractions in the anode</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_an</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html#numpy.arange" title="numpy.arange" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.995</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">)</span>
+<span class="c1"># Assume that the cathode and anode capacities are balanced</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_ca</span></a> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_an</span></a>
+
+<span class="c1"># I_app = 0: Open circuit</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">I_app</span></a> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="c1"># At zero current, electrolyte resistance is irrelevant</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">R_elyte</span></a> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="c1"># Temperature and pressure</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">T</span></a> <span class="o">=</span> <span class="mi">300</span>  <span class="c1"># K</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">P</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ct</span><span class="o">.</span><span class="n">one_atm</span></a>
+
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">F</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ct</span><span class="o">.</span><span class="n">faraday</span></a>
+
+<span class="c1"># [m^2] Cathode total active material surface area</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">S_ca</span></a> <span class="o">=</span> <span class="mf">1.1167</span>
+
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">S_an</span></a> <span class="o">=</span> <span class="mf">0.7824</span>  <span class="c1"># [m^2] Anode total active material surface area</span>
+</pre></div>
+</div>
+</section>
+<section id="set-phase-temperatures-and-pressures">
+<h2>Set phase temperatures and pressures<a class="headerlink" href="#set-phase-temperatures-and-pressures" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">phases</span></a> <span class="o">=</span> <span class="p">[</span><a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anode</span></a><span class="p">,</span> <a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elde</span></a><span class="p">,</span> <a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elyte</span></a><span class="p">,</span> <a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cathode</span></a><span class="p">,</span> <a href="../../../python/importing.html#cantera.Interface" title="cantera.Interface" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anode_interface</span></a><span class="p">,</span> <a href="../../../python/importing.html#cantera.Interface" title="cantera.Interface" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cathode_interface</span></a><span class="p">]</span>
+<span class="k">for</span> <a href="../../../python/importing.html#cantera.Interface" title="cantera.Interface" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ph</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">phases</span></a><span class="p">:</span>
+    <a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ph</span><span class="o">.</span><span class="n">TP</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">T</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">P</span></a>
+</pre></div>
+</div>
+</section>
+<section id="helper-functions">
+<h2>Helper Functions<a class="headerlink" href="#helper-functions" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">anode_curr</span><span class="p">(</span><span class="n">phi_l</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">I_app</span></a><span class="p">,</span> <span class="n">phi_s</span><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_an</span></a><span class="p">):</span>
+    <span class="c1"># Set the active material mole fraction</span>
+    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anode</span><span class="o">.</span><span class="n">X</span></a> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Li[anode]&quot;</span><span class="p">:</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_an</span></a><span class="p">,</span> <span class="s2">&quot;V[anode]&quot;</span><span class="p">:</span> <span class="mi">1</span> <span class="o">-</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_an</span></a><span class="p">}</span>
+
+    <span class="c1"># Set the electrode and electrolyte potential</span>
+    <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elde</span><span class="o">.</span><span class="n">electric_potential</span></a> <span class="o">=</span> <span class="n">phi_s</span>
+    <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elyte</span><span class="o">.</span><span class="n">electric_potential</span></a> <span class="o">=</span> <span class="n">phi_l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Get the net product rate of electrons in the anode (per m2^ interface)</span>
+    <span class="n">r_elec</span> <span class="o">=</span> <a href="../../../python/kinetics.html#cantera.InterfaceKinetics.get_net_production_rates" title="cantera.InterfaceKinetics.get_net_production_rates" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-method"><span class="n">anode_interface</span><span class="o">.</span><span class="n">get_net_production_rates</span></a><span class="p">(</span><a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elde</span></a><span class="p">)</span>
+
+    <span class="n">anode_current</span> <span class="o">=</span> <span class="n">r_elec</span> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ct</span><span class="o">.</span><span class="n">faraday</span></a> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">S_an</span></a>
+    <span class="n">diff</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">I_app</span></a> <span class="o">+</span> <span class="n">anode_current</span>
+
+    <span class="k">return</span> <span class="n">diff</span>
+
+
+<span class="k">def</span> <span class="nf">cathode_curr</span><span class="p">(</span><span class="n">phi_s</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">I_app</span></a><span class="p">,</span> <span class="n">phi_l</span><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_ca</span></a><span class="p">):</span>
+    <span class="c1"># Set the active material mole fractions</span>
+    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cathode</span><span class="o">.</span><span class="n">X</span></a> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Li[cathode]&quot;</span><span class="p">:</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_ca</span></a><span class="p">,</span> <span class="s2">&quot;V[cathode]&quot;</span><span class="p">:</span> <span class="mi">1</span> <span class="o">-</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_ca</span></a><span class="p">}</span>
+
+    <span class="c1"># Set the electrode and electrolyte potential</span>
+    <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elde</span><span class="o">.</span><span class="n">electric_potential</span></a> <span class="o">=</span> <span class="n">phi_s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elyte</span><span class="o">.</span><span class="n">electric_potential</span></a> <span class="o">=</span> <span class="n">phi_l</span>
+
+    <span class="c1"># Get the net product rate of electrons in the cathode (per m2^ interface)</span>
+    <span class="n">r_elec</span> <span class="o">=</span> <a href="../../../python/kinetics.html#cantera.InterfaceKinetics.get_net_production_rates" title="cantera.InterfaceKinetics.get_net_production_rates" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-method"><span class="n">cathode_interface</span><span class="o">.</span><span class="n">get_net_production_rates</span></a><span class="p">(</span><a href="../../../python/importing.html#cantera.Solution" title="cantera.Solution" class="sphx-glr-backref-module-cantera sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elde</span></a><span class="p">)</span>
+
+    <span class="n">cathode_current</span> <span class="o">=</span> <span class="n">r_elec</span> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ct</span><span class="o">.</span><span class="n">faraday</span></a> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">S_an</span></a>
+    <span class="n">diff</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">I_app</span></a> <span class="o">-</span> <span class="n">cathode_current</span>
+
+    <span class="k">return</span> <span class="n">diff</span>
+</pre></div>
+</div>
+</section>
+<section id="run-the-calculations-for-all-stoichiometries">
+<h2>Run the calculations for all stoichiometries<a class="headerlink" href="#run-the-calculations-for-all-stoichiometries" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tic</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">t0</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/time.html#time.time" title="time.time" class="sphx-glr-backref-module-time sphx-glr-backref-type-py-function"><span class="n">time</span><span class="o">.</span><span class="n">time</span></a><span class="p">()</span>
+
+<span class="c1"># Initialize array of OCVs</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E_cell_kin</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html#numpy.zeros_like" title="numpy.zeros_like" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_ca</span></a><span class="p">)</span>
+
+<span class="k">for</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">X_an</span></a> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_an</span></a><span class="p">):</span>
+    <span class="c1"># Set anode electrode potential to 0</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">phi_s_an</span></a> <span class="o">=</span> <span class="mi">0</span>
+    <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E_init</span></a> <span class="o">=</span> <span class="mf">3.0</span>
+
+    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">phi_l_an</span></a> <span class="o">=</span> <span class="n">fsolve</span><span class="p">(</span><span class="n">anode_curr</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E_init</span></a><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">I_app</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">phi_s_an</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">X_an</span></a><span class="p">))</span>
+
+    <span class="c1"># Calculate electrolyte potential at cathode interface</span>
+    <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">phi_l_ca</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">phi_l_an</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">I_app</span></a> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">R_elyte</span></a>
+
+    <span class="c1"># Calculate cathode electrode potential</span>
+    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">phi_s_ca</span></a> <span class="o">=</span> <span class="n">fsolve</span><span class="p">(</span><span class="n">cathode_curr</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E_init</span></a><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">I_app</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">phi_l_ca</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_ca</span></a><span class="p">[</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">]))</span>
+
+    <span class="c1"># Calculate cell voltage</span>
+    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E_cell_kin</span></a><span class="p">[</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">]</span> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">phi_s_ca</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">phi_s_an</span></a>
+
+<span class="c1"># Toc</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">t1</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/time.html#time.time" title="time.time" class="sphx-glr-backref-module-time sphx-glr-backref-type-py-function"><span class="n">time</span><span class="o">.</span><span class="n">time</span></a><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="si">:</span><span class="s2">d</span><span class="si">}</span><span class="s2"> cell voltages calculated in </span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">t1</span></a><span class="w"> </span><span class="o">-</span><span class="w"> </span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">t0</span></a><span class="si">:</span><span class="s2">3.2e</span><span class="si">}</span><span class="s2"> seconds.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>49 cell voltages calculated in 1.68e-02 seconds.
+</pre></div>
+</div>
+</section>
+<section id="plot-cell-voltage-as-a-function-of-the-cathode-stoichiometry">
+<h2>Plot cell voltage, as a function of the cathode stoichiometry<a class="headerlink" href="#plot-cell-voltage-as-a-function-of-the-cathode-stoichiometry" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_ca</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E_cell_kin</span></a><span class="p">)</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_</span></a> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">],</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Li Fraction in Cathode (%)&quot;</span><span class="p">,</span>
+           <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Open Circuit Potential (V)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_lithium_ion_battery_001.png" srcset="../../../_images/sphx_glr_lithium_ion_battery_001.png, ../../../_images/sphx_glr_lithium_ion_battery_001_2_00x.png 2.00x" alt="lithium ion battery" class = "sphx-glr-single-img"/></section>
+<section id="thermodynamic-equilibrium-calculation">
+<h2>Thermodynamic Equilibrium Calculation<a class="headerlink" href="#thermodynamic-equilibrium-calculation" title="Link to this heading">#</a></h2>
+<p>For the <span class="math notranslate nohighlight">\(i_{app} = 0\)</span> case, we can also calculate the voltage using
+thermodynamics. At equilibrium, the net electrochemical potential change of the
+reaction must be zero:</p>
+<div class="math notranslate nohighlight">
+\[\sum_k\nu_k\tilde{\mu}_k = 0\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tilde{\mu}_k = \mu_k + z_kF\Phi_k\)</span>, where, in turn
+<span class="math notranslate nohighlight">\(\mu_k = \frac{\partial g_k}{\partial n_k}\)</span> is the chemical potential,
+<span class="math notranslate nohighlight">\(\nu_k\)</span> the net stoichiometric coefficient, <span class="math notranslate nohighlight">\(z_k\)</span> the net elementary
+charge, and <span class="math notranslate nohighlight">\(\Phi_k\)</span> the phase electric potential for species <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>From this, we can calculate the equilibrium electric potential difference
+<span class="math notranslate nohighlight">\(\Delta \Phi_{\rm eq} = \left(\Phi_{\rm elde} - \Phi_{\rm elyte}\right)_{\rm eq}\)</span>
+as:</p>
+<div class="math notranslate nohighlight">
+\[\Delta \Phi_{\rm eq} = -\frac{\Delta g_{\rm rxn}}{n_{\rm charge}F}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta g_{\rm rxn} = \sum_k \nu_k\mu_k\)</span> is the chemical potential of the
+reaction and and <span class="math notranslate nohighlight">\(n_{\rm charge} = \sum_{k,\,{\rm elde}} \nu_k z_k\)</span> is the net
+elementary charge transferred from the electrolyte to the electrode.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tic</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">t0</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/time.html#time.time" title="time.time" class="sphx-glr-backref-module-time sphx-glr-backref-type-py-function"><span class="n">time</span><span class="o">.</span><span class="n">time</span></a><span class="p">()</span>
+
+<span class="c1"># Initialize array of OCVs</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E_cell_therm</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html#numpy.zeros_like" title="numpy.zeros_like" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_ca</span></a><span class="p">)</span>
+
+<span class="k">for</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">X_an</span></a> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_an</span></a><span class="p">):</span>
+    <span class="c1"># Set anode electrode potential to 0</span>
+    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anode</span><span class="o">.</span><span class="n">X</span></a> <span class="o">=</span> <span class="s2">&quot;Li[anode]:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">X_an</span></a><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, V[anode]:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">X_an</span></a><span class="p">)</span>
+    <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">dG_an</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anode_interface</span><span class="o">.</span><span class="n">delta_gibbs</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n_charge</span></a> <span class="o">=</span> <span class="mf">1.0</span>
+    <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">E_eq_an</span></a> <span class="o">=</span> <span class="o">-</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">dG_an</span></a> <span class="o">/</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n_charge</span></a> <span class="o">/</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ct</span><span class="o">.</span><span class="n">faraday</span></a>
+
+    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cathode</span><span class="o">.</span><span class="n">X</span></a> <span class="o">=</span> <span class="s2">&quot;Li[cathode]:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">X_an</span></a><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, V[cathode]:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">X_an</span></a><span class="p">)</span>
+    <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">dG_ca</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cathode_interface</span><span class="o">.</span><span class="n">delta_gibbs</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n_charge</span></a> <span class="o">=</span> <span class="mf">1.0</span>
+    <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">E_eq_ca</span></a> <span class="o">=</span> <span class="o">-</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">dG_ca</span></a> <span class="o">/</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n_charge</span></a> <span class="o">/</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ct</span><span class="o">.</span><span class="n">faraday</span></a>
+
+    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E_cell_therm</span></a><span class="p">[</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">]</span> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">E_eq_ca</span></a> <span class="o">-</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">E_eq_an</span></a>
+
+<span class="c1"># Toc</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">t1</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/time.html#time.time" title="time.time" class="sphx-glr-backref-module-time sphx-glr-backref-type-py-function"><span class="n">time</span><span class="o">.</span><span class="n">time</span></a><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="si">:</span><span class="s2">d</span><span class="si">}</span><span class="s2"> cell voltages calculated in </span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">t1</span></a><span class="w"> </span><span class="o">-</span><span class="w"> </span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">t0</span></a><span class="si">:</span><span class="s2">3.2e</span><span class="si">}</span><span class="s2"> seconds.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>49 cell voltages calculated in 7.25e-04 seconds.
+</pre></div>
+</div>
+</section>
+<section id="plot-thermodynamic-ocv-and-compare-to-results-from-kinetic-method">
+<h2>Plot thermodynamic OCV, and compare to results from kinetic method<a class="headerlink" href="#plot-thermodynamic-ocv-and-compare-to-results-from-kinetic-method" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_ca</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E_cell_kin</span></a><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Kinetic&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">X_Li_ca</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E_cell_therm</span></a><span class="p">,</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Thermodynamic&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">],</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Li Fraction in Cathode (%)&quot;</span><span class="p">,</span>
+       <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Open Circuit Potential (V)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_lithium_ion_battery_002.png" srcset="../../../_images/sphx_glr_lithium_ion_battery_002.png, ../../../_images/sphx_glr_lithium_ion_battery_002_2_00x.png 2.00x" alt="lithium ion battery" class = "sphx-glr-single-img"/><p>As one would expect, the two approaches give identical results. While both methods are
+incredibly fast, the thermodynamic method is roughly 30 times faster.</p>
+<p>A large part of this is that the thermodynamic approach is an analytical approach
+(i.e. the answer is known from theory), while the kinetic approach relies on the
+root-finding fzero method to fit the correct voltage. Note also that the kinetic
+method, because of the use of Butler-Volmer kinetics, calculates the thermodynamic
+voltage, in order to calculate the overpotential <span class="math notranslate nohighlight">\(\eta = \Delta \Phi - \Delta
+\Phi_{\rm eq}\)</span>.</p>
+<p>However, it is at last important to note that, while slower, the kinetic method is of
+course more robust, and can be used to find results away from equilibrium. The
+thermodynamic method is only applicable at equilibrium (zero current).</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.447 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-python-kinetics-lithium-ion-battery-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/85ea2e5341b10fb0c7e83d7fad419234/lithium_ion_battery.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">lithium_ion_battery.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/3783862244cacec61073d52f40fa04c3/lithium_ion_battery.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">lithium_ion_battery.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/4e2682566f0c78e8c0f2d7d00e1d0369/lithium_ion_battery.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">lithium_ion_battery.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

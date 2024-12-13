@@ -1,0 +1,845 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to YAML Input Files &#8212; Cantera 3.1.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'userguide/input-tutorial';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using Reactor Networks for Time Integration" href="reactor-tutorial.html" />
+    <link rel="prev" title="Python Tutorial" href="python-tutorial.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python-tutorial.html">Python Tutorial</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to YAML Input Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reactor-tutorial.html">Using Reactor Networks for Time Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cxx-tutorial.html">Using Cantera from C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling-cxx.html">Compiling Cantera C++ Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ck2yaml-tutorial.html">Converting Chemkin Format Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating-mechanisms.html">Creating YAML Mechanism Files from Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermobuild.html">Converting Data from NASA ThermoBuild</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input-errors.html">Handling Errors in Input Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legacy2yaml-tutorial.html">Converting Legacy CTI and XML Input Files to YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flame-temperature.html">Calculating Adiabatic Flame Temperature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heating-value.html">Calculating Heating Value of a Fuel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/python/kinetics/lithium_ion_battery.html">Lithium Ion Battery Discharge Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensible-reactor.html">Extending Reactor Models with Custom Equations</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Introduction...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-yaml-input-files">
+<h1>Introduction to YAML Input Files<a class="headerlink" href="#introduction-to-yaml-input-files" title="Link to this heading">#</a></h1>
+<p>All calculations in Cantera require an input file to describe the properties of the
+relevant phase(s) of matter. These input files can be provided via one of several
+methods:</p>
+<ul class="simple">
+<li><p><em>Use an existing input file</em>. The input files included with Cantera should suffice for
+tutorials and introductory work with thermodynamic phases and reaction kinetics. A
+number of additional input files are available from various sources on the web.</p></li>
+<li><p><em>Convert a mechanism from Chemkin (CK) format to YAML format</em>. Many reaction
+mechanisms are published in Chemkin (CK) format, and can be converted to Cantera’s
+YAML format using the <code class="docutils literal notranslate"><span class="pre">ck2yaml</span></code> conversion tool. see <a class="reference internal" href="ck2yaml-tutorial.html"><span class="doc std std-doc">Converting Chemkin Format Files</span></a> for more
+information.</p></li>
+<li><p><em>Create your own YAML file from scratch or by editing an existing file</em>. Advanced
+users may need to edit an existing input file in order to define additional species,
+reactions, or entirely new phases. See <a class="reference internal" href="creating-mechanisms.html"><span class="doc std std-doc">Creating YAML Mechanism Files from Scratch</span></a> for more information.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Whenever you edit a Cantera input file, it is <em>highly advised</em> that you begin by copying
+the existing file and saving it under a new name, before editing the new file. Editing a
+file under its original name can easily lead to errors, if one forgets that this file
+does not represent the original mechanism.</p>
+</div>
+<section id="understanding-cantera-s-input-file-syntax">
+<h2>Understanding Cantera’s Input File Syntax<a class="headerlink" href="#understanding-cantera-s-input-file-syntax" title="Link to this heading">#</a></h2>
+<p>With any input file, it can be helpful to understand the syntax requirements. Clearly,
+anyone writing directly in the YAML formats must conform to these standards. However,
+even when importing an externally-provided file or converting from CK format,
+understanding the input file syntax can help diagnose and correct any errors (although
+many/most of the CK conversion errors will be related to errors in the CK syntax
+formatting).</p>
+<p>Cantera YAML files use a subset of the <a class="reference external" href="https://yaml.org/spec/1.2/spec.html">YAML 1.2</a>
+specification. Cantera YAML files consist of individual values, which may be strings,
+numbers or booleans, that are then composed as elements of nested mappings and
+sequences.</p>
+<section id="strings">
+<h3>Strings<a class="headerlink" href="#strings" title="Link to this heading">#</a></h3>
+<p>Strings may be generally written without quotes, but may be enclosed in single
+quotes or double quotes if needed in order to avoid certain parsing ambiguities.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">A string</span>
+<span class="l l-Scalar l-Scalar-Plain">Another &#39;string&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">&quot;A string</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">that requires quotes&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="numbers">
+<h3>Numbers<a class="headerlink" href="#numbers" title="Link to this heading">#</a></h3>
+<p>Numbers can be written as integers, decimal values, or using E-notation</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="l l-Scalar l-Scalar-Plain">3.14</span>
+<span class="l l-Scalar l-Scalar-Plain">6.022e23</span>
+</pre></div>
+</div>
+</section>
+<section id="booleans">
+<h3>Booleans<a class="headerlink" href="#booleans" title="Link to this heading">#</a></h3>
+<p>Boolean values in YAML are written as the words <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</section>
+<section id="sequences">
+<h3>Sequences<a class="headerlink" href="#sequences" title="Link to this heading">#</a></h3>
+<p>A sequence of multiple items is specified by separating the items by commas and
+enclosing them in square brackets. The individual items can have any type – strings,
+integers, floating-point numbers, mappings, or sequences.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">elements</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">O</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">C</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">N</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Ar</span><span class="p p-Indicator">]</span>
+<span class="nt">temperature-ranges</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">200.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1000.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3500.0</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>The syntax above, using square brackets to define a list, is called <strong>flow style</strong> in
+YAML. Sequences can also be written in <strong>block style</strong>, using one line for each item in
+the sequence, with each line starting with a dash:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">elements</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">O</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">N</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ar</span>
+</pre></div>
+</div>
+<p>Sequences can also be nested. The following examples are all equivalent:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[[</span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">],</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">3</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4</span><span class="p p-Indicator">]]</span>
+
+<span class="nt">data</span><span class="p">:</span>
+<span class="p p-Indicator">-</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="p p-Indicator">-</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+
+<span class="nt">data</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+</pre></div>
+</div>
+</section>
+<section id="mappings">
+<h3>Mappings<a class="headerlink" href="#mappings" title="Link to this heading">#</a></h3>
+<p>A mapping is a container consisting of key–value pairs. The keys in a mapping must be
+unique. Like sequences, there are two ways to write a mapping. In the <strong>flow style</strong>,
+the mapping is enclosed in curly brackets, colons (followed by spaces) are used to
+separate keys and values, and key–value pairs are separated by commas:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">composition</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">H</span><span class="p">:</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">,</span><span class="nt"> C</span><span class="p">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="nt"> O</span><span class="p">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+<p>In the <strong>block style</strong>, each key is written on a new line, followed by a colon. The
+value can be placed either on the same line, or on the following line, indented one
+level:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">composition</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">H</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">C</span><span class="p">:</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">O</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+<p>All keys in Cantera YAML files are treated as strings. A Cantera YAML file is itself a
+mapping, usually in the <strong>block style</strong>. We refer to the keys in this top-level mapping
+as the <strong>sections</strong> of the input file.</p>
+</section>
+<section id="sequences-of-mappings">
+<h3>Sequences of Mappings<a class="headerlink" href="#sequences-of-mappings" title="Link to this heading">#</a></h3>
+<p>A common structure in Cantera input files is a nested sequence of mappings. This can be
+written in the <strong>block style</strong> as:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">O2 + CO &lt;=&gt; O + CO2</span>
+<span class="w">  </span><span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">2.5e+12</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">47800</span><span class="p p-Indicator">}</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">O2 + CH2O &lt;=&gt; HO2 + HCO</span>
+<span class="w">  </span><span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0e+14</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">40000</span><span class="p p-Indicator">}</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H + O2 + M &lt;=&gt; HO2 + M</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">three-body</span>
+<span class="w">  </span><span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">2.8e+18</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">-0.86</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">efficiencies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">AR</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> C2H6</span><span class="p">:</span><span class="w"> </span><span class="nv">1.5</span><span class="p p-Indicator">,</span><span class="nt"> CO</span><span class="p">:</span><span class="w"> </span><span class="nv">0.75</span><span class="p p-Indicator">,</span><span class="nt"> CO2</span><span class="p">:</span><span class="w"> </span><span class="nv">1.5</span><span class="p p-Indicator">,</span><span class="nt"> H2O</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> N2</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> O2</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+<p>The keys in each mapping need not be the same. In this example, each of the three
+mappings in the sequence has <code class="docutils literal notranslate"><span class="pre">equation</span></code> and <code class="docutils literal notranslate"><span class="pre">rate-constant</span></code> keys, while only the third
+entry has <code class="docutils literal notranslate"><span class="pre">type</span></code> and <code class="docutils literal notranslate"><span class="pre">efficiencies</span></code> keys.</p>
+</section>
+<section id="comments">
+<h3>Comments<a class="headerlink" href="#comments" title="Link to this heading">#</a></h3>
+<p>The character <code class="docutils literal notranslate"><span class="pre">#</span></code> is the comment character. Everything to the right of this character on
+a line is ignored:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># set the default units</span>
+<span class="nt">units</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cm</span><span class="w">  </span><span class="c1"># use centimeters for length</span>
+<span class="w">  </span><span class="nt">quantity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mol</span><span class="w">  </span><span class="c1"># use moles for quantity</span>
+</pre></div>
+</div>
+</section>
+<section id="dimensional-values">
+<h3>Dimensional Values<a class="headerlink" href="#dimensional-values" title="Link to this heading">#</a></h3>
+<p>Many fields have numerical values that represent dimensional quantities—a pressure, or
+a density, for example. If these are entered without specifying the units, the default
+units (set by the <code class="docutils literal notranslate"><span class="pre">units</span></code> directive) will be used. However, it is also possible to
+specify the units for each individual dimensional quantity, unless stated otherwise. All
+that is required is to write the units after the value, separated by a space:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pressure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0e5</span><span class="w">  </span><span class="c1"># default is Pascals</span>
+<span class="nt">pressure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0 bar</span><span class="w">  </span><span class="c1"># this is equivalent</span>
+<span class="nt">density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.0 g/cm^3</span>
+<span class="nt">density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4000.0</span><span class="w">  </span><span class="c1"># kg/m^3</span>
+</pre></div>
+</div>
+<p>Compound unit strings may be used, as long as a few rules are followed:</p>
+<ol class="arabic simple">
+<li><p>Units in the denominator follow <code class="docutils literal notranslate"><span class="pre">/</span></code>.</p></li>
+<li><p>Units in the numerator follow <code class="docutils literal notranslate"><span class="pre">*</span></code>, except for the first one.</p></li>
+<li><p>Numerical exponents follow the unit string with a <code class="docutils literal notranslate"><span class="pre">^</span></code> character.</p></li>
+</ol>
+<p>Examples of compound units:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0e20 cm^6/mol^2/s</span><span class="w">  </span><span class="c1"># OK</span>
+<span class="nt">h</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6.626e-34 J*s</span><span class="w">  </span><span class="c1"># OK</span>
+<span class="nt">density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0 g*cm^-3</span><span class="w">  </span><span class="c1"># OK</span>
+<span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0e20 cm6/mol/s</span><span class="w">  </span><span class="c1"># error (missing &#39;^&#39;)</span>
+<span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0e20 cm^6/mol^2-s</span><span class="w">  </span><span class="c1"># error (&#39;s&#39; should be in denominator)</span>
+<span class="nt">density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0g/cm^3</span><span class="w">  </span><span class="c1"># error (missing space between value and units)</span>
+</pre></div>
+</div>
+<p>See the <a class="reference internal" href="../yaml/general.html#sec-yaml-units"><span class="std std-ref">Units API</span></a> documentation for additional details, including the
+full set of supported units.</p>
+</section>
+<section id="default-units">
+<h3>Default units<a class="headerlink" href="#default-units" title="Link to this heading">#</a></h3>
+<p>Default units that apply to a whole input file or some portion thereof can be set using
+<code class="docutils literal notranslate"><span class="pre">units</span></code> mapping. A <code class="docutils literal notranslate"><span class="pre">units</span></code> mapping placed at the top level of an input file applies to
+the entire file. A <code class="docutils literal notranslate"><span class="pre">units</span></code> mapping placed as a member of another mapping applies to that
+mapping and any nested mappings or sequences, and overrides higher-level <code class="docutils literal notranslate"><span class="pre">units</span></code>
+mappings:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">length</span><span class="p">:</span><span class="w"> </span><span class="nv">cm</span><span class="p p-Indicator">,</span><span class="nt"> mass</span><span class="p">:</span><span class="w"> </span><span class="nv">kg</span><span class="p p-Indicator">}</span>
+<span class="nt">section1</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">length</span><span class="p">:</span><span class="w"> </span><span class="nv">m</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4000</span><span class="w">  </span><span class="c1"># interpreted as 4000 kg/m^3</span>
+<span class="nt">section2</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w">  </span><span class="c1"># interpreted as 0.1 kg/cm^3</span>
+<span class="nt">section3</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">mass</span><span class="p">:</span><span class="w"> </span><span class="nv">mg</span><span class="p p-Indicator">}</span><span class="w">  </span><span class="c1"># must be the first item in the list</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">species1</span>
+<span class="w">  </span><span class="nt">density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5e4</span><span class="w">  </span><span class="c1"># interpreted as 5e4 mg/cm^3</span>
+</pre></div>
+</div>
+<p>Default units may be set for <code class="docutils literal notranslate"><span class="pre">mass</span></code>, <code class="docutils literal notranslate"><span class="pre">length</span></code>, <code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">quantity</span></code>, <code class="docutils literal notranslate"><span class="pre">pressure</span></code>, <code class="docutils literal notranslate"><span class="pre">energy</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">activation-energy</span></code>.</p>
+</section>
+</section>
+<section id="input-files-distributed-with-cantera">
+<h2>Input Files Distributed with Cantera<a class="headerlink" href="#input-files-distributed-with-cantera" title="Link to this heading">#</a></h2>
+<p>Several reaction mechanism files are included in the Cantera distribution, including
+ones that model natural gas combustion (<code class="docutils literal notranslate"><span class="pre">gri30.yaml</span></code>), high-temperature air
+(<code class="docutils literal notranslate"><span class="pre">air.yaml</span></code>), a hydrogen/oxygen reaction mechanism (<code class="docutils literal notranslate"><span class="pre">h2o2.yaml</span></code>), some pure fluids in
+the liquid-vapor region (<code class="docutils literal notranslate"><span class="pre">liquidvapor.yaml</span></code>), and a few surface reaction mechanisms
+(such as <code class="docutils literal notranslate"><span class="pre">ptcombust.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">diamond.yaml</span></code>, etc.), among others.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The input files included with Cantera are provided for convenience, and may not be
+suited for research purposes.</p>
+</div>
+<p>Under Windows, these files may be located in <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files\Cantera\data</span></code> depending
+on how you installed Cantera and the options you specified. On a Unix/Linux/macOS
+machine, they are usually kept in the <code class="docutils literal notranslate"><span class="pre">data</span></code> subdirectory within the Cantera
+installation directory. You can also browse the <a class="reference external" href="https://github.com/Cantera/cantera/tree/main/data">list of data
+files</a> in the Cantera source
+repository.</p>
+<p>Please see the tutorials for <a class="reference internal" href="python-tutorial.html"><span class="doc std std-doc">Python</span></a> and Matlab for
+instructions on how to import from these pre-existing files.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-cantera-s-input-file-syntax">Understanding Cantera’s Input File Syntax</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strings">Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numbers">Numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#booleans">Booleans</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequences">Sequences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mappings">Mappings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequences-of-mappings">Sequences of Mappings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comments">Comments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensional-values">Dimensional Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-units">Default units</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-files-distributed-with-cantera">Input Files Distributed with Cantera</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/userguide/input-tutorial.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

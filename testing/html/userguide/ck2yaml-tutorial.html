@@ -1,0 +1,917 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Converting Chemkin Format Files &#8212; Cantera 3.1.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'userguide/ck2yaml-tutorial';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Creating YAML Mechanism Files from Scratch" href="creating-mechanisms.html" />
+    <link rel="prev" title="Frequently Asked Questions" href="faq.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python-tutorial.html">Python Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input-tutorial.html">Introduction to YAML Input Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reactor-tutorial.html">Using Reactor Networks for Time Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cxx-tutorial.html">Using Cantera from C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling-cxx.html">Compiling Cantera C++ Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Converting Chemkin Format Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating-mechanisms.html">Creating YAML Mechanism Files from Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermobuild.html">Converting Data from NASA ThermoBuild</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input-errors.html">Handling Errors in Input Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legacy2yaml-tutorial.html">Converting Legacy CTI and XML Input Files to YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flame-temperature.html">Calculating Adiabatic Flame Temperature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heating-value.html">Calculating Heating Value of a Fuel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/python/kinetics/lithium_ion_battery.html">Lithium Ion Battery Discharge Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensible-reactor.html">Extending Reactor Models with Custom Equations</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Converting...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="converting-chemkin-format-files">
+<h1>Converting Chemkin Format Files<a class="headerlink" href="#converting-chemkin-format-files" title="Link to this heading">#</a></h1>
+<p>Many existing reaction mechanism files are in <strong><a class="reference internal" href="../reference/glossary.html#term-CK"><span class="xref std std-term">CK</span></a> format</strong>, by which we mean
+the input file format developed for use with the Chemkin-II software package (and
+subsequent releases) as specified in the report describing the Chemkin software
+<span id="id1">[<a class="reference internal" href="../reference/bibliography.html#id19" title="R. J. Kee, F. M. Rupley, and J. A. Miller. Chemkin-II: a fortran chemical kinetics package for the analysis of gas-phase chemical kinetics. Technical Report SAND89-8009, Sandia National Laboratories, 1989. URL: https://www.osti.gov/biblio/5681118.">Kee <em>et al.</em>, 1989</a>]</span>. Cantera comes with a converter utility program <code class="docutils literal notranslate"><span class="pre">ck2yaml</span></code> (or
+<code class="docutils literal notranslate"><span class="pre">ck2yaml.py</span></code>) that converts CK format into Cantera’s YAML format. If you want to convert
+a Chemkin-format file to YAML format, or you’re having errors when you try to do so,
+this section will help.</p>
+<section id="converting-gas-phase-mechanisms">
+<h2>Converting gas-phase mechanisms<a class="headerlink" href="#converting-gas-phase-mechanisms" title="Link to this heading">#</a></h2>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For documentation of all the command line options that can be used with <code class="docutils literal notranslate"><span class="pre">ck2yaml</span></code>, see
+its <a class="reference internal" href="../yaml/ck2yaml.html#sec-ck2yaml"><span class="std std-ref">documentation in the reference section</span></a>.</p>
+</div>
+<p>To convert a gas phase mechanism where the thermodynamic and transport data are provided
+as separate files, run the following command from a terminal (command prompt):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ck2yaml<span class="w"> </span>--input<span class="o">=</span>chem.inp<span class="w"> </span>--thermo<span class="o">=</span>therm.dat<span class="w"> </span>--transport<span class="o">=</span>tran.dat
+</pre></div>
+</div>
+<p>If the <code class="docutils literal notranslate"><span class="pre">ck2yaml</span></code> script is not on your path but the Cantera Python module is,
+<code class="docutils literal notranslate"><span class="pre">ck2yaml</span></code> can also be used by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>cantera.ck2yaml<span class="w"> </span>--input<span class="o">=</span>chem.inp<span class="w"> </span>--thermo<span class="o">=</span>therm.dat<span class="w"> </span>--transport<span class="o">=</span>tran.dat
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you’re using Cantera from IPython or a Jupyter Notebook, you can run the above shell
+command from Python by prefixing it with an exclamation point. For example:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python<span class="w"> </span>-m<span class="w"> </span>cantera.ck2yaml<span class="w"> </span>--input<span class="o">=</span>chem.inp<span class="w"> </span>--thermo<span class="o">=</span>therm.dat<span class="w"> </span>--transport<span class="o">=</span>tran.dat
+</pre></div>
+</div>
+</div>
+</section>
+<section id="converting-surface-mechanism-files">
+<h2>Converting surface mechanism files<a class="headerlink" href="#converting-surface-mechanism-files" title="Link to this heading">#</a></h2>
+<p>For mechanisms involving both surface and gas phase species, an additional input file
+is needed to define the surface species and reactions occurring on the surface. This
+file is specified with the <code class="docutils literal notranslate"><span class="pre">--surface</span></code> option:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>cantera.ck2yaml<span class="w"> </span>--input<span class="o">=</span>gas.inp<span class="w"> </span>--thermo<span class="o">=</span>therm.dat<span class="w"> </span>--surface<span class="o">=</span>surf.inp
+</pre></div>
+</div>
+</section>
+<section id="converting-standalone-thermo-data">
+<h2>Converting standalone thermo data<a class="headerlink" href="#converting-standalone-thermo-data" title="Link to this heading">#</a></h2>
+<p>An input file containing only species definitions (which can be referenced from
+phase definitions in other input files) can be created by specifying only a
+thermo file. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ck2yaml<span class="w"> </span>--thermo<span class="o">=</span>therm.dat
+</pre></div>
+</div>
+</section>
+<section id="debugging-common-errors-in-ck-files">
+<span id="sec-debugging-chemkin"></span><h2>Debugging common errors in CK files<a class="headerlink" href="#debugging-common-errors-in-ck-files" title="Link to this heading">#</a></h2>
+<p>When <code class="docutils literal notranslate"><span class="pre">ck2yaml</span></code> encounters an error, it attempts to print the surrounding information to
+help you to locate the error. Many of the most common errors are due to an inconsistency
+of the input files from their standard, as defined in the report for Chemkin referenced
+above. Here, we describe some requirements of the CK format that are common sources of
+errors.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Many existing CK format files cause errors in <code class="docutils literal notranslate"><span class="pre">ck2yaml</span></code> when they are processed. Some of
+these errors may be avoided by specifying the <code class="docutils literal notranslate"><span class="pre">--permissive</span></code> option. This option allows
+certain recoverable parsing errors (for example, duplicate transport or thermodynamic
+data) to be ignored.</p>
+</div>
+<section id="input-file-sections">
+<h3>Input file sections<a class="headerlink" href="#input-file-sections" title="Link to this heading">#</a></h3>
+<p>Each section of a CK input file must start with a keyword representing that section and
+end with the keyword <code class="docutils literal notranslate"><span class="pre">END</span></code>. Keywords that may begin a section include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ELEMENTS</span></code> or <code class="docutils literal notranslate"><span class="pre">ELEM</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SPECIES</span></code> or <code class="docutils literal notranslate"><span class="pre">SPEC</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">THERMO</span></code> or <code class="docutils literal notranslate"><span class="pre">THERMO</span> <span class="pre">ALL</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REACTIONS</span></code> or <code class="docutils literal notranslate"><span class="pre">REAC</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TRANSPORT</span></code></p></li>
+</ul>
+</section>
+<section id="thermo-data">
+<h3>Thermo data<a class="headerlink" href="#thermo-data" title="Link to this heading">#</a></h3>
+<p>The thermodynamic data is read in a fixed format. This means that each column of the
+input has a particular meaning. The format for each thermodynamic entry should be as
+follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CH3OH</span>             <span class="n">L</span> <span class="mi">8</span><span class="o">/</span><span class="mi">88</span><span class="n">C</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">4</span><span class="n">O</span>   <span class="mi">1</span>     <span class="n">G</span>   <span class="mf">200.000</span>  <span class="mf">3500.000</span>  <span class="mf">1000.000</span>    <span class="mi">1</span>
+ <span class="mf">1.78970791E+00</span> <span class="mf">1.40938292E-02</span><span class="o">-</span><span class="mf">6.36500835E-06</span> <span class="mf">1.38171085E-09</span><span class="o">-</span><span class="mf">1.17060220E-13</span>    <span class="mi">2</span>
+<span class="o">-</span><span class="mf">2.53748747E+04</span> <span class="mf">1.45023623E+01</span> <span class="mf">5.71539582E+00</span><span class="o">-</span><span class="mf">1.52309129E-02</span> <span class="mf">6.52441155E-05</span>    <span class="mi">3</span>
+<span class="o">-</span><span class="mf">7.10806889E-08</span> <span class="mf">2.61352698E-11</span><span class="o">-</span><span class="mf">2.56427656E+04</span><span class="o">-</span><span class="mf">1.50409823E+00</span>                   <span class="mi">4</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Many common errors are generated because information is missing or in the wrong column.
+Check thoroughly for extraneous or missing spaces. Also make sure that the input file
+does not contain tab characters.</p>
+</div>
+<p>The following table is adapted from the Chemkin manual <span id="id2">[<a class="reference internal" href="../reference/bibliography.html#id19" title="R. J. Kee, F. M. Rupley, and J. A. Miller. Chemkin-II: a fortran chemical kinetics package for the analysis of gas-phase chemical kinetics. Technical Report SAND89-8009, Sandia National Laboratories, 1989. URL: https://www.osti.gov/biblio/5681118.">Kee <em>et al.</em>, 1989</a>]</span> to describe
+the column positioning of each required part of the entry. Empty columns should be
+filled with spaces.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Line No.</p></th>
+<th class="head"><p>Columns</p></th>
+<th class="head"><p>Contents</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1–18</p></td>
+<td><p>Species Name</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>19–24</p></td>
+<td><p>Date (Optional)</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>25–44</p></td>
+<td><p>Atomic Symbols and formula</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>45</p></td>
+<td><p>Phase of species (<code class="docutils literal notranslate"><span class="pre">S</span></code>, <code class="docutils literal notranslate"><span class="pre">L</span></code>, or <code class="docutils literal notranslate"><span class="pre">G</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>46–55</p></td>
+<td><p>Low temperature</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>56–65</p></td>
+<td><p>High temperature</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>66–73</p></td>
+<td><p>Common temperature</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>74–78</p></td>
+<td><p>Additional Atomic Symbols</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>80</p></td>
+<td><p>The integer <code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>1–75</p></td>
+<td><p>Coefficients <span class="math notranslate nohighlight">\(a_1\)</span> to <span class="math notranslate nohighlight">\(a_5\)</span> for the upper temperature interval</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>80</p></td>
+<td><p>The integer <code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>1–75</p></td>
+<td><p>Coefficients <span class="math notranslate nohighlight">\(a_6,\ a_7\)</span> for the upper temperature interval, and <span class="math notranslate nohighlight">\(a_1,\ a_2,\ a_3\)</span>
+for the lower temperature interval</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>80</p></td>
+<td><p>The integer <code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>1–60</p></td>
+<td><p>Coefficients <span class="math notranslate nohighlight">\(a_4\)</span> through <span class="math notranslate nohighlight">\(a_7\)</span> for the lower temperature interval</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>80</p></td>
+<td><p>The integer <code class="docutils literal notranslate"><span class="pre">4</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="line-1">
+<h4>Line 1<a class="headerlink" href="#line-1" title="Link to this heading">#</a></h4>
+<p>The first 18 columns are reserved for the species name. The name assigned to the
+species in the thermodynamic data must be the same as the species name defined in the
+<code class="docutils literal notranslate"><span class="pre">SPECIES</span></code> section. If the species name is shorter than 18 characters, the rest of the
+characters should be filled by spaces.</p>
+<p>The next six columns (columns 19–24) are typically used to write a date; they are not
+used further.</p>
+<p>The next 20 columns (25–44) are used to specify the elemental composition of the
+species. Five characters are used for each element: the first two specify the element
+symbol, while the remaining three specify the number of atoms of that element in the
+species. Up to four elements may be specified this way. For species with more than four
+elements, the <a class="reference internal" href="#sec-ck-extended-composition"><span class="std std-ref">extended composition format</span></a> described below
+may be used.</p>
+<p>In column 45, the phase of the species (<code class="docutils literal notranslate"><span class="pre">S</span></code>, <code class="docutils literal notranslate"><span class="pre">L</span></code>, or <code class="docutils literal notranslate"><span class="pre">G</span></code> for solid, liquid, or gas
+respectively) should be specified.</p>
+<p>The next 28 columns are reserved for the temperatures that delimit the ranges of the
+polynomials specified on the next several lines. The first two temperatures have a width
+of 10 columns each (46–55 and 56–65), and represent the lowest temperature and highest
+temperature for which the polynomials are valid. The last temperature has a width of 8
+columns (66–73) and is the <strong>common</strong> temperature, where the switch from low to high
+occurs.</p>
+<p>The next 5 columns (74–78) are reserved for atomic symbols and are usually left blank
+for the default behavior.</p>
+<p>Column 79 is blank; and finally, the row is ended in column 80 with the integer <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</section>
+<section id="lines-2-4">
+<h4>Lines 2–4<a class="headerlink" href="#lines-2-4" title="Link to this heading">#</a></h4>
+<p>The next three lines of the thermodynamic entry have a similar format. They contain the
+coefficients of the <a class="reference internal" href="../reference/thermo/species-thermo.html#sec-thermo-nasa7"><span class="std std-ref">7-coefficient polynomial formulation</span></a> in two
+temperature regions.</p>
+<p>The second row of the thermo entry (the first after the information row) contains the
+first five coefficients that apply to the temperature range between the midpoint and the
+upper limit. 15 columns are alloted for each coefficient (for a total of 75 columns),
+with no spaces between them. Although the entry above shows spaces between positive
+coefficients, it is to be noted that this is done only for formatting consistency with
+other lines that contain negative numbers. After the coefficients, four spaces in
+columns 76–79 are followed by the integer <code class="docutils literal notranslate"><span class="pre">2</span></code> in column 80.</p>
+<p>On the next line, the last two coefficients for the upper temperature range and the
+first three coefficients for the lower temperature range are specified. Once again, this
+takes up the first 75 columns, columns 76–79 are blank, and the integer <code class="docutils literal notranslate"><span class="pre">3</span></code> is in
+column 80.</p>
+<p>Finally, on the last line of a particular entry, the last four coefficients of the lower
+temperature range are specified in columns 1–60, 19 blank spaces are present, and the
+integer <code class="docutils literal notranslate"><span class="pre">4</span></code> is in column 80.</p>
+</section>
+<section id="extended-composition-format">
+<span id="sec-ck-extended-composition"></span><h4>Extended composition format<a class="headerlink" href="#extended-composition-format" title="Link to this heading">#</a></h4>
+<p>If the number of atoms of an element in a thermodynamic entry has more than 3 digits,
+the standard format for the composition cannot be used. To allow for such species, the
+following extended format is allowed. The element symbol should have a <code class="docutils literal notranslate"><span class="pre">0</span></code> in the first
+line of the entry. An ampersand (<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>) is added after the index of the first line, and
+the element symbols and their amounts should be written on the next line as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BIN6J</span>      <span class="n">PYRENEJ1</span>     <span class="n">C</span>   <span class="mi">0</span><span class="n">H</span>   <span class="mi">0</span>    <span class="mi">0</span>    <span class="mi">0</span><span class="n">G</span>   <span class="mf">300.000</span>  <span class="mf">5000.000</span> <span class="mf">1401.000</span>     <span class="mi">1</span><span class="o">&amp;</span>
+<span class="n">C</span> <span class="mi">778</span>    <span class="n">H</span> <span class="mi">263</span>
+ <span class="mf">3.63345177E+01</span> <span class="mf">3.13968020E-02</span><span class="o">-</span><span class="mf">1.09044660E-05</span> <span class="mf">1.71125597E-09</span><span class="o">-</span><span class="mf">1.00056355E-13</span>    <span class="mi">2</span>
+ <span class="mf">4.05143093E+04</span><span class="o">-</span><span class="mf">1.77494305E+02</span><span class="o">-</span><span class="mf">1.20603441E+01</span> <span class="mf">1.59247554E-01</span><span class="o">-</span><span class="mf">1.41562602E-04</span>    <span class="mi">3</span>
+ <span class="mf">6.26071650E-08</span><span class="o">-</span><span class="mf">1.09305161E-11</span> <span class="mf">5.56473533E+04</span> <span class="mf">7.68451211E+01</span>                   <span class="mi">4</span>
+</pre></div>
+</div>
+<p>or on separate lines with ampersand (<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>) as the last character on the line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BIN6</span>       <span class="n">PYRENE</span>       <span class="n">C</span>   <span class="mi">0</span><span class="n">H</span>   <span class="mi">0</span>    <span class="mi">0</span>    <span class="mi">0</span><span class="n">G</span>   <span class="mf">300.000</span>  <span class="mf">5000.000</span> <span class="mf">1401.000</span>     <span class="mi">1</span><span class="o">&amp;</span>
+<span class="n">C</span>      <span class="mi">778</span><span class="o">&amp;</span>
+<span class="n">H</span>      <span class="mi">264</span>
+ <span class="mf">3.65839677E+01</span> <span class="mf">3.36764102E-02</span><span class="o">-</span><span class="mf">1.16783938E-05</span> <span class="mf">1.83077466E-09</span><span class="o">-</span><span class="mf">1.06963777E-13</span>    <span class="mi">2</span>
+ <span class="mf">9.29809483E+03</span><span class="o">-</span><span class="mf">1.81272070E+02</span><span class="o">-</span><span class="mf">1.29758980E+01</span> <span class="mf">1.63790064E-01</span><span class="o">-</span><span class="mf">1.43851166E-04</span>    <span class="mi">3</span>
+ <span class="mf">6.31057915E-08</span><span class="o">-</span><span class="mf">1.09568047E-11</span> <span class="mf">2.48866399E+04</span> <span class="mf">7.94950474E+01</span>                   <span class="mi">4</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="transport-parameters">
+<h3>Transport parameters<a class="headerlink" href="#transport-parameters" title="Link to this heading">#</a></h3>
+<p>The transport data file also has a specified format, as described in <span id="id3">[<a class="reference internal" href="../reference/bibliography.html#id18" title="R. J. Kee, G. Dixon-Lewis, J. Warnatz, M. E. Coltrin, and J. A. Miller. A Fortran computer code package for the evaluation of gas-phase multicomponent transport properties. Technical Report SAND86-8246, Sandia National Laboratories, 1986.">Kee <em>et al.</em>, 1986</a>]</span>,
+although the format is not as strict as for the thermodynamic entries. In particular,
+the first 15 columns of a line are reserved for the species name. <em>One common source of
+errors is a species that is present in the transport data file, but not in the
+thermodynamic data or in the species list; or a species that is present in the species
+list but not the transport data file.</em> The rest of the columns on a given line have no
+particular format, but must be present in the following order:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter Number</p></th>
+<th class="head"><p>Parameter Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>An integer with value 0, 1, or 2 indicating monatomic, linear, or non-linear
+molecular geometry.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>The Lennard-Jones potential well depth <span class="math notranslate nohighlight">\(\varepsilon/k_B\)</span> in Kelvin</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>The Lennard-Jones collision diameter <span class="math notranslate nohighlight">\(\sigma\)</span> in Angstrom</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>The dipole moment <span class="math notranslate nohighlight">\(\mu\)</span> in Debye</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>The polarizability <span class="math notranslate nohighlight">\(\alpha\)</span> in Angstroms cubed</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>The rotational relaxation collision number <span class="math notranslate nohighlight">\(Z_{rot}\)</span> at 298 K</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Another common error is if all six of these numbers are not present for every species.</p>
+</section>
+<section id="other-formatting-issues">
+<h3>Other formatting issues<a class="headerlink" href="#other-formatting-issues" title="Link to this heading">#</a></h3>
+<p>It may be the case that scientific formatted numbers are missing the <code class="docutils literal notranslate"><span class="pre">E</span></code>. In this case,
+numbers often show up as <code class="docutils literal notranslate"><span class="pre">1.1+01</span></code>, when they should be <code class="docutils literal notranslate"><span class="pre">1.1E+01</span></code>. You can fix this with
+a Regular Expression “find and replace”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Find: (\d+\.\d+)([+-]\d+)
+Replace: $1E$2
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-gas-phase-mechanisms">Converting gas-phase mechanisms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-surface-mechanism-files">Converting surface mechanism files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-standalone-thermo-data">Converting standalone thermo data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-common-errors-in-ck-files">Debugging common errors in CK files</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-file-sections">Input file sections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermo-data">Thermo data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#line-1">Line 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lines-2-4">Lines 2–4</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-composition-format">Extended composition format</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transport-parameters">Transport parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-formatting-issues">Other formatting issues</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/userguide/ck2yaml-tutorial.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

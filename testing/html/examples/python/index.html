@@ -1,0 +1,1625 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Python Examples &#8212; Cantera 3.1.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/python/index';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Thermodynamics" href="thermo/index.html" />
+    <link rel="prev" title="Examples" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Python Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="thermo/index.html">Thermodynamics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="thermo/mixing.html">Mixing using <code class="xref py py-obj docutils literal notranslate"><span class="pre">Quantity</span></code> objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/critical_properties.html">Critical state properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/isentropic.html">Converging-Diverging Nozzle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/plasma_equilibrium.html">Equilibrium with charged species and multiple condensed phases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/rankine.html">Rankine cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/rankine_units.html">Rankine cycle (with units)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/adiabatic.html">Adiabatic flame temperature including solid carbon formation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/sound_speed_units.html">Sound speeds (with units)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/sound_speed.html">Sound speeds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/isentropic_units.html">Isentropic, adiabatic flow (with units)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/vapordome.html">Vapor Dome</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/equivalenceRatio.html">Equivalence ratio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/coverage_dependent_surf.html">Surface with coverage-dependent thermo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/equations_of_state.html">Non-ideal equations of state</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="kinetics/index.html">Kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/reaction_path.html">Viewing a reaction path diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/diamond_cvd.html">Growth of diamond film using CVD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/shock_tube.html">Shock-tube species profiles as a function of time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/extract_submechanism.html">Extracting a sub-mechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/mechanism_reduction.html">Mechanism reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/blowers_masel.html">Blowers-Masel reaction rates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/jet_stirred_reactor.html">Jet-stirred reactor temperature and species profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/lithium_ion_battery.html">Lithium Ion Battery Discharge Curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/custom_reactions.html">Custom reaction rates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/sofc.html">Solid oxide fuel cell using elementary kinetics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/interactive_path_diagram.html">Interactive Reaction Path Diagrams</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="transport/index.html">Transport</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="transport/dusty_gas.html">Porous media transport using the dusty gas model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transport/multiprocessing_viscosity.html">Parallelizing transport property calculations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="reactors/index.html">Reactor networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="reactors/mix1.html">Mixing two streams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/periodic_cstr.html">Continuously stirred tank reactor with periodic behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/combustor.html">Combustor residence time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/reactor1.html">Constant-pressure, adiabatic kinetics simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/plasma.html">Plasma Reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/piston.html">Reactors separated by a moving piston</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/custom.html">Integrating constant pressure ignition using SciPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/sensitivity1.html">Constant-pressure, adiabatic kinetics simulation with sensitivity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/surf_pfr.html">Plug flow reactor with surface chemistry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/preconditioned_integration.html">Acceleration of reactor integration using a sparse preconditioned solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/fuel_injection.html">Soot precursor formation with time-varying mass flow rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/reactor2.html">Reactors with walls and heat transfer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/custom2.html">Using <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code> to implement wall inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/surf_pfr_chain.html">Plug flow reactor modeled as a chain of well stirred reactors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/1D_pfr_surfchem.html">Plug flow reactor: silicon nitride deposition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/pfr.html">Plug flow reactor modeling approaches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/continuous_reactor.html">Continuously Stirred Tank Reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/ic_engine.html">Diesel-type internal combustion engine simulation with gaseous fuel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/NonIdealShockTube.html">Ignition delay time using the Redlich-Kwong real gas model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/1D_packed_bed.html">One-dimensional packed-bed, catalytic-membrane reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/PorousMediaBurner.html">Reactor cascade model for reactive flows in inert porous media</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="onedim/index.html">1D reacting flows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_speed.html">Flame speed as a function of equivalence ratio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/ion_burner_flame.html">Burner-stabilized flame including ionized species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/burner_flame.html">Burner-stabilized flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame.html">Counterflow diffusion flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/premixed_counterflow_flame.html">Opposed-flow premixed strained flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/ion_free_flame.html">Freely-propagating flame with charged species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flamespeed_sensitivity.html">Laminar flame speed sensitivity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/adiabatic_flame.html">Laminar flame speed calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/catalytic_combustion.html">Catalytic combustion of methane on platinum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/stagnation_flame.html">Detached flat flame stabilized at a stagnation point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_fixed_T.html">Burner-stabilized flame with imposed temperature profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_initial_guess.html">Saving, loading, and restarting 1D calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/premixed_counterflow_twin_flame.html">Symmetric premixed twin flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_continuation.html">Diffusion flame unstable branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_extinction.html">Diffusion flame extinction strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_batch.html">Scaling of diffusion flames with pressure and strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_speed_convergence_analysis.html">Flame Speed with Convergence Analysis</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cxx/index.html">C++ Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cxx/example_utils.html">Example utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cxx/rankine.html">Open Rankine cycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cxx/LiC6_electrode.html">LiC6 electrode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cxx/kinetics1.html">Autoignition in a homogeneous reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cxx/gas_transport.html">Gas phase transport properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cxx/openmp_ignition.html">Ignition delay calculation with OpenMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cxx/blasius.html">Blasius BVP solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cxx/demo.html">Property calculation demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cxx/combustor.html">Adiabatic combustor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cxx/flamespeed.html">Freely-propagating flame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cxx/derivative_speed.html">Benchmark derivative evaluations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cxx/custom.html">Custom reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cxx/BoundaryValueProblem.html">Class <code class="xref py py-obj docutils literal notranslate"><span class="pre">BoundaryValueProblem</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../clib/index.html">C (experimental) Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../clib/demo.html">CLib Demo</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../matlab_experimental/index.html">Matlab (experimental) Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/plotSolution.html">Utility for plotting a specific solution component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/conuv.html">ODE system for a constant-volume, adiabatic reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/conhp.html">ODE system for a constant-pressure, adiabatic reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/ignite_hp.html">Constant pressure ignition with user-specified equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/ignite_uv.html">Constant volume ignition with user-specified equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/isentropic.html">Isentropic, adiabatic flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/reactor_ode.html">ODE system for a generic zero-dimensional reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/equil.html">Methane/air chemical equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/reactor2.html">Adiabatic, constant volume reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/rankine.html">Rankine cycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/flame.html">Utility for flame setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/prandtl2.html">Prandtl number for an equilibrium H/O gas mixture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/prandtl1.html">Prandtl number for an equilibrium H/O gas mixture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/PFR_solver.html">Plug flow reactor governing equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/reactor1.html">Adiabatic, constant pressure reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/diamond_cvd.html">Simulating growth of a diamond film by CVD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/surf_reactor.html">Zero-dimensional reactor with surface chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/flame2.html">Axisymmetric stagnation-point non-premixed flame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/flame1.html">Burner-stabilized flat flame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/ignite.html">Adiabatic, constant pressure reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/periodic_cstr.html">Continuously stirred tank reactor with periodic behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/diff_flame.html">Opposed-flow diffusion flame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/plug_flow_reactor.html">Nozzle with compressible flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/lithium_ion_battery.html">Lithium-ion battery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab_experimental/catcomb.html">Catalytic combustion of a stagnation flow on a platinum surface</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fortran/index.html">Fortran Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fortran/isentropic.html">Isentropic flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fortran/f77_demo.html">Fortran 77 demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fortran/ctlib.html">CKLIB emulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fortran/demo.html">Fortran 90 demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fortran/demo_ftnlib.html">Fortran 77 wrapper library</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../input/index.html">Example Input Files</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../input/h2o2.html"><code class="docutils literal notranslate"><span class="pre">h2o2.yaml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../input/diamond.html"><code class="docutils literal notranslate"><span class="pre">diamond.yaml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../input/lithium_ion_battery.html"><code class="docutils literal notranslate"><span class="pre">lithium_ion_battery.yaml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../input/covdepsurf.html"><code class="docutils literal notranslate"><span class="pre">covdepsurf.yaml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../input/oxygen-plasma-itikawa.html"><code class="docutils literal notranslate"><span class="pre">oxygen-plasma-itikawa.yaml</span></code></a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../_tags/tagsindex.html">Index of example tags</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/1D_flow.html">1D flow (23)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/flamespeed.html">Freely-propagating flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/catcomb.html">Catalytic combustion of a stagnation flow on a platinum surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/diff_flame.html">Opposed-flow diffusion flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/flame1.html">Burner-stabilized flat flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/flame2.html">Axisymmetric stagnation-point non-premixed flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/extract_submechanism.html">Extracting a sub-mechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/adiabatic_flame.html">Laminar flame speed calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/burner_flame.html">Burner-stabilized flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/catalytic_combustion.html">Catalytic combustion of methane on platinum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame.html">Counterflow diffusion flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_batch.html">Scaling of diffusion flames with pressure and strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_continuation.html">Diffusion flame unstable branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_extinction.html">Diffusion flame extinction strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_fixed_T.html">Burner-stabilized flame with imposed temperature profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_initial_guess.html">Saving, loading, and restarting 1D calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_speed_convergence_analysis.html">Flame Speed with Convergence Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flamespeed_sensitivity.html">Laminar flame speed sensitivity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/ion_burner_flame.html">Burner-stabilized flame including ionized species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/ion_free_flame.html">Freely-propagating flame with charged species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/premixed_counterflow_flame.html">Opposed-flow premixed strained flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/premixed_counterflow_twin_flame.html">Symmetric premixed twin flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/stagnation_flame.html">Detached flat flame stabilized at a stagnation point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/1D_packed_bed.html">One-dimensional packed-bed, catalytic-membrane reactor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/C.html">C (1)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../clib/demo.html">CLib Demo</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/C%2B%2B.html">C++ (12)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/BoundaryValueProblem.html">Class <code class="xref py py-obj docutils literal notranslate"><span class="pre">BoundaryValueProblem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/LiC6_electrode.html">LiC6 electrode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/blasius.html">Blasius BVP solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/combustor.html">Adiabatic combustor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/custom.html">Custom reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/demo.html">Property calculation demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/derivative_speed.html">Benchmark derivative evaluations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/flamespeed.html">Freely-propagating flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/gas_transport.html">Gas phase transport properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/kinetics1.html">Autoignition in a homogeneous reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/openmp_ignition.html">Ignition delay calculation with OpenMP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/rankine.html">Open Rankine cycle</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/Fortran_77.html">Fortran 77 (3)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/ctlib.html">CKLIB emulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/f77_demo.html">Fortran 77 demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/isentropic.html">Isentropic flow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/Fortran_90.html">Fortran 90 (1)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/demo.html">Fortran 90 demo</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/Matlab.html">Matlab (19)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/catcomb.html">Catalytic combustion of a stagnation flow on a platinum surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/diamond_cvd.html">Simulating growth of a diamond film by CVD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/diff_flame.html">Opposed-flow diffusion flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/equil.html">Methane/air chemical equilibrium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/flame1.html">Burner-stabilized flat flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/flame2.html">Axisymmetric stagnation-point non-premixed flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite.html">Adiabatic, constant pressure reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite_hp.html">Constant pressure ignition with user-specified equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite_uv.html">Constant volume ignition with user-specified equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/isentropic.html">Isentropic, adiabatic flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/lithium_ion_battery.html">Lithium-ion battery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/periodic_cstr.html">Continuously stirred tank reactor with periodic behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/plug_flow_reactor.html">Nozzle with compressible flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/prandtl1.html">Prandtl number for an equilibrium H/O gas mixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/prandtl2.html">Prandtl number for an equilibrium H/O gas mixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/rankine.html">Rankine cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/reactor1.html">Adiabatic, constant pressure reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/reactor2.html">Adiabatic, constant volume reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/surf_reactor.html">Zero-dimensional reactor with surface chemistry</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/Python.html">Python (62)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/blowers_masel.html">Blowers-Masel reaction rates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/custom_reactions.html">Custom reaction rates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/diamond_cvd.html">Growth of diamond film using CVD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/extract_submechanism.html">Extracting a sub-mechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/interactive_path_diagram.html">Interactive Reaction Path Diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/lithium_ion_battery.html">Lithium Ion Battery Discharge Curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/mechanism_reduction.html">Mechanism reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/reaction_path.html">Viewing a reaction path diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/shock_tube.html">Shock-tube species profiles as a function of time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/sofc.html">Solid oxide fuel cell using elementary kinetics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/adiabatic_flame.html">Laminar flame speed calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/burner_flame.html">Burner-stabilized flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/catalytic_combustion.html">Catalytic combustion of methane on platinum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame.html">Counterflow diffusion flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_batch.html">Scaling of diffusion flames with pressure and strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_continuation.html">Diffusion flame unstable branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_extinction.html">Diffusion flame extinction strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_fixed_T.html">Burner-stabilized flame with imposed temperature profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_initial_guess.html">Saving, loading, and restarting 1D calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_speed_convergence_analysis.html">Flame Speed with Convergence Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flamespeed_sensitivity.html">Laminar flame speed sensitivity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/ion_burner_flame.html">Burner-stabilized flame including ionized species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/ion_free_flame.html">Freely-propagating flame with charged species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/premixed_counterflow_flame.html">Opposed-flow premixed strained flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/premixed_counterflow_twin_flame.html">Symmetric premixed twin flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/stagnation_flame.html">Detached flat flame stabilized at a stagnation point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/1D_packed_bed.html">One-dimensional packed-bed, catalytic-membrane reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/1D_pfr_surfchem.html">Plug flow reactor: silicon nitride deposition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/NonIdealShockTube.html">Ignition delay time using the Redlich-Kwong real gas model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/PorousMediaBurner.html">Reactor cascade model for reactive flows in inert porous media</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/combustor.html">Combustor residence time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/continuous_reactor.html">Continuously Stirred Tank Reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/custom.html">Integrating constant pressure ignition using SciPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/custom2.html">Using <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code> to implement wall inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/fuel_injection.html">Soot precursor formation with time-varying mass flow rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/ic_engine.html">Diesel-type internal combustion engine simulation with gaseous fuel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/mix1.html">Mixing two streams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/periodic_cstr.html">Continuously stirred tank reactor with periodic behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/pfr.html">Plug flow reactor modeling approaches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/piston.html">Reactors separated by a moving piston</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/plasma.html">Plasma Reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/preconditioned_integration.html">Acceleration of reactor integration using a sparse preconditioned solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/reactor1.html">Constant-pressure, adiabatic kinetics simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/sensitivity1.html">Constant-pressure, adiabatic kinetics simulation with sensitivity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/surf_pfr.html">Plug flow reactor with surface chemistry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/surf_pfr_chain.html">Plug flow reactor modeled as a chain of well stirred reactors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/adiabatic.html">Adiabatic flame temperature including solid carbon formation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/coverage_dependent_surf.html">Surface with coverage-dependent thermo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/critical_properties.html">Critical state properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/equations_of_state.html">Non-ideal equations of state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/equivalenceRatio.html">Equivalence ratio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/isentropic.html">Converging-Diverging Nozzle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/isentropic_units.html">Isentropic, adiabatic flow (with units)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/mixing.html">Mixing using <code class="xref py py-obj docutils literal notranslate"><span class="pre">Quantity</span></code> objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/plasma_equilibrium.html">Equilibrium with charged species and multiple condensed phases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/rankine.html">Rankine cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/rankine_units.html">Rankine cycle (with units)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/sound_speed.html">Sound speeds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/sound_speed_units.html">Sound speeds (with units)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/vapordome.html">Vapor Dome</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transport/dusty_gas.html">Porous media transport using the dusty gas model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transport/multiprocessing_viscosity.html">Parallelizing transport property calculations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/battery.html">battery (3)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/LiC6_electrode.html">LiC6 electrode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/lithium_ion_battery.html">Lithium-ion battery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/lithium_ion_battery.html">Lithium Ion Battery Discharge Curve</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/benchmarking.html">benchmarking (3)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/derivative_speed.html">Benchmark derivative evaluations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/custom_reactions.html">Custom reaction rates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transport/multiprocessing_viscosity.html">Parallelizing transport property calculations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/burner-stabilized_flame.html">burner-stabilized flame (4)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/flame1.html">Burner-stabilized flat flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_fixed_T.html">Burner-stabilized flame with imposed temperature profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/ion_burner_flame.html">Burner-stabilized flame including ionized species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/ion_free_flame.html">Freely-propagating flame with charged species</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/catalysis.html">catalysis (8)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/catcomb.html">Catalytic combustion of a stagnation flow on a platinum surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/surf_reactor.html">Zero-dimensional reactor with surface chemistry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/catalytic_combustion.html">Catalytic combustion of methane on platinum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/1D_packed_bed.html">One-dimensional packed-bed, catalytic-membrane reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/1D_pfr_surfchem.html">Plug flow reactor: silicon nitride deposition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/surf_pfr.html">Plug flow reactor with surface chemistry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/surf_pfr_chain.html">Plug flow reactor modeled as a chain of well stirred reactors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/coverage_dependent_surf.html">Surface with coverage-dependent thermo</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/combustion.html">combustion (58)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/combustor.html">Adiabatic combustor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/custom.html">Custom reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/flamespeed.html">Freely-propagating flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/kinetics1.html">Autoignition in a homogeneous reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/openmp_ignition.html">Ignition delay calculation with OpenMP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/catcomb.html">Catalytic combustion of a stagnation flow on a platinum surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/diff_flame.html">Opposed-flow diffusion flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/equil.html">Methane/air chemical equilibrium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/flame1.html">Burner-stabilized flat flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/flame2.html">Axisymmetric stagnation-point non-premixed flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite.html">Adiabatic, constant pressure reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite_hp.html">Constant pressure ignition with user-specified equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite_uv.html">Constant volume ignition with user-specified equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/periodic_cstr.html">Continuously stirred tank reactor with periodic behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/plug_flow_reactor.html">Nozzle with compressible flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/reactor1.html">Adiabatic, constant pressure reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/reactor2.html">Adiabatic, constant volume reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/surf_reactor.html">Zero-dimensional reactor with surface chemistry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/extract_submechanism.html">Extracting a sub-mechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/interactive_path_diagram.html">Interactive Reaction Path Diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/jet_stirred_reactor.html">Jet-stirred reactor temperature and species profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/mechanism_reduction.html">Mechanism reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/shock_tube.html">Shock-tube species profiles as a function of time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/adiabatic_flame.html">Laminar flame speed calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/burner_flame.html">Burner-stabilized flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/catalytic_combustion.html">Catalytic combustion of methane on platinum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame.html">Counterflow diffusion flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_batch.html">Scaling of diffusion flames with pressure and strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_continuation.html">Diffusion flame unstable branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_extinction.html">Diffusion flame extinction strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_fixed_T.html">Burner-stabilized flame with imposed temperature profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_initial_guess.html">Saving, loading, and restarting 1D calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_speed.html">Flame speed as a function of equivalence ratio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_speed_convergence_analysis.html">Flame Speed with Convergence Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flamespeed_sensitivity.html">Laminar flame speed sensitivity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/ion_burner_flame.html">Burner-stabilized flame including ionized species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/ion_free_flame.html">Freely-propagating flame with charged species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/premixed_counterflow_flame.html">Opposed-flow premixed strained flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/premixed_counterflow_twin_flame.html">Symmetric premixed twin flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/stagnation_flame.html">Detached flat flame stabilized at a stagnation point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/NonIdealShockTube.html">Ignition delay time using the Redlich-Kwong real gas model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/PorousMediaBurner.html">Reactor cascade model for reactive flows in inert porous media</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/combustor.html">Combustor residence time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/continuous_reactor.html">Continuously Stirred Tank Reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/custom.html">Integrating constant pressure ignition using SciPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/custom2.html">Using <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code> to implement wall inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/fuel_injection.html">Soot precursor formation with time-varying mass flow rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/ic_engine.html">Diesel-type internal combustion engine simulation with gaseous fuel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/periodic_cstr.html">Continuously stirred tank reactor with periodic behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/pfr.html">Plug flow reactor modeling approaches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/piston.html">Reactors separated by a moving piston</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/plasma.html">Plasma Reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/preconditioned_integration.html">Acceleration of reactor integration using a sparse preconditioned solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/reactor1.html">Constant-pressure, adiabatic kinetics simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/reactor2.html">Reactors with walls and heat transfer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/sensitivity1.html">Constant-pressure, adiabatic kinetics simulation with sensitivity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/adiabatic.html">Adiabatic flame temperature including solid carbon formation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/equivalenceRatio.html">Equivalence ratio</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/compressible_flow.html">compressible flow (5)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/isentropic.html">Isentropic flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/isentropic.html">Isentropic, adiabatic flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/plug_flow_reactor.html">Nozzle with compressible flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/isentropic.html">Converging-Diverging Nozzle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/isentropic_units.html">Isentropic, adiabatic flow (with units)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/diffusion_flame.html">diffusion flame (6)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/diff_flame.html">Opposed-flow diffusion flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/flame2.html">Axisymmetric stagnation-point non-premixed flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame.html">Counterflow diffusion flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_batch.html">Scaling of diffusion flames with pressure and strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_continuation.html">Diffusion flame unstable branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_extinction.html">Diffusion flame extinction strain rate</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/editing_mechanisms.html">editing mechanisms (2)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/extract_submechanism.html">Extracting a sub-mechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/mechanism_reduction.html">Mechanism reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/electrochemistry.html">electrochemistry (4)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/LiC6_electrode.html">LiC6 electrode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/lithium_ion_battery.html">Lithium-ion battery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/lithium_ion_battery.html">Lithium Ion Battery Discharge Curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/sofc.html">Solid oxide fuel cell using elementary kinetics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/equilibrium.html">equilibrium (10)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../clib/demo.html">CLib Demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/demo.html">Property calculation demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/demo.html">Fortran 90 demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/equil.html">Methane/air chemical equilibrium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/prandtl1.html">Prandtl number for an equilibrium H/O gas mixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/prandtl2.html">Prandtl number for an equilibrium H/O gas mixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/adiabatic.html">Adiabatic flame temperature including solid carbon formation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/plasma_equilibrium.html">Equilibrium with charged species and multiple condensed phases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/sound_speed.html">Sound speeds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/sound_speed_units.html">Sound speeds (with units)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/extinction.html">extinction (3)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_batch.html">Scaling of diffusion flames with pressure and strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_continuation.html">Diffusion flame unstable branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_extinction.html">Diffusion flame extinction strain rate</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/flame_speed.html">flame speed (5)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/flamespeed.html">Freely-propagating flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_initial_guess.html">Saving, loading, and restarting 1D calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_speed.html">Flame speed as a function of equivalence ratio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_speed_convergence_analysis.html">Flame Speed with Convergence Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flamespeed_sensitivity.html">Laminar flame speed sensitivity analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/fuel_cell.html">fuel cell (1)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/sofc.html">Solid oxide fuel cell using elementary kinetics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/heat_transfer.html">heat transfer (1)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="reactors/PorousMediaBurner.html">Reactor cascade model for reactive flows in inert porous media</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/ignition_delay.html">ignition delay (11)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/custom.html">Custom reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/kinetics1.html">Autoignition in a homogeneous reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/openmp_ignition.html">Ignition delay calculation with OpenMP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite.html">Adiabatic, constant pressure reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite_hp.html">Constant pressure ignition with user-specified equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite_uv.html">Constant volume ignition with user-specified equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/reactor1.html">Adiabatic, constant pressure reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/reactor2.html">Adiabatic, constant volume reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/mechanism_reduction.html">Mechanism reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/NonIdealShockTube.html">Ignition delay time using the Redlich-Kwong real gas model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/custom.html">Integrating constant pressure ignition using SciPy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/internal_combustion_engine.html">internal combustion engine (1)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="reactors/ic_engine.html">Diesel-type internal combustion engine simulation with gaseous fuel</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/jet-stirred_reactor.html">jet-stirred reactor (1)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/jet_stirred_reactor.html">Jet-stirred reactor temperature and species profiles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/kinetics.html">kinetics (19)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../clib/demo.html">CLib Demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/derivative_speed.html">Benchmark derivative evaluations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/ctlib.html">CKLIB emulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/demo.html">Fortran 90 demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/f77_demo.html">Fortran 77 demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/diamond_cvd.html">Simulating growth of a diamond film by CVD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/lithium_ion_battery.html">Lithium-ion battery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/blowers_masel.html">Blowers-Masel reaction rates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/custom_reactions.html">Custom reaction rates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/diamond_cvd.html">Growth of diamond film using CVD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/extract_submechanism.html">Extracting a sub-mechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/jet_stirred_reactor.html">Jet-stirred reactor temperature and species profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/lithium_ion_battery.html">Lithium Ion Battery Discharge Curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/mechanism_reduction.html">Mechanism reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/reaction_path.html">Viewing a reaction path diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/shock_tube.html">Shock-tube species profiles as a function of time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/sofc.html">Solid oxide fuel cell using elementary kinetics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_speed.html">Flame speed as a function of equivalence ratio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/fuel_injection.html">Soot precursor formation with time-varying mass flow rate</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/mixture.html">mixture (3)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="reactors/mix1.html">Mixing two streams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/equivalenceRatio.html">Equivalence ratio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/mixing.html">Mixing using <code class="xref py py-obj docutils literal notranslate"><span class="pre">Quantity</span></code> objects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/multicomponent_transport.html">multicomponent transport (4)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/prandtl2.html">Prandtl number for an equilibrium H/O gas mixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/adiabatic_flame.html">Laminar flame speed calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/burner_flame.html">Burner-stabilized flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transport/dusty_gas.html">Porous media transport using the dusty gas model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/multiphase.html">multiphase (3)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="thermo/adiabatic.html">Adiabatic flame temperature including solid carbon formation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/critical_properties.html">Critical state properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/plasma_equilibrium.html">Equilibrium with charged species and multiple condensed phases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/non-ideal_fluid.html">non-ideal fluid (8)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/rankine.html">Open Rankine cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/rankine.html">Rankine cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/NonIdealShockTube.html">Ignition delay time using the Redlich-Kwong real gas model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/critical_properties.html">Critical state properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/equations_of_state.html">Non-ideal equations of state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/rankine.html">Rankine cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/rankine_units.html">Rankine cycle (with units)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/vapordome.html">Vapor Dome</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/packed_bed_reactor.html">packed bed reactor (3)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="reactors/1D_packed_bed.html">One-dimensional packed-bed, catalytic-membrane reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/surf_pfr.html">Plug flow reactor with surface chemistry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/surf_pfr_chain.html">Plug flow reactor modeled as a chain of well stirred reactors</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/parallel_computing.html">parallel computing (2)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/openmp_ignition.html">Ignition delay calculation with OpenMP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transport/multiprocessing_viscosity.html">Parallelizing transport property calculations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/plasma.html">plasma (4)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="onedim/ion_burner_flame.html">Burner-stabilized flame including ionized species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/ion_free_flame.html">Freely-propagating flame with charged species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/plasma.html">Plasma Reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/plasma_equilibrium.html">Equilibrium with charged species and multiple condensed phases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/plotting.html">plotting (41)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/diff_flame.html">Opposed-flow diffusion flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/equil.html">Methane/air chemical equilibrium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/flame1.html">Burner-stabilized flat flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/flame2.html">Axisymmetric stagnation-point non-premixed flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite.html">Adiabatic, constant pressure reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite_hp.html">Constant pressure ignition with user-specified equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite_uv.html">Constant volume ignition with user-specified equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/isentropic.html">Isentropic, adiabatic flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/lithium_ion_battery.html">Lithium-ion battery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/periodic_cstr.html">Continuously stirred tank reactor with periodic behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/plug_flow_reactor.html">Nozzle with compressible flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/prandtl1.html">Prandtl number for an equilibrium H/O gas mixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/prandtl2.html">Prandtl number for an equilibrium H/O gas mixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/reactor1.html">Adiabatic, constant pressure reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/reactor2.html">Adiabatic, constant volume reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/surf_reactor.html">Zero-dimensional reactor with surface chemistry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/extract_submechanism.html">Extracting a sub-mechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/interactive_path_diagram.html">Interactive Reaction Path Diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/lithium_ion_battery.html">Lithium Ion Battery Discharge Curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/mechanism_reduction.html">Mechanism reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame.html">Counterflow diffusion flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_batch.html">Scaling of diffusion flames with pressure and strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_continuation.html">Diffusion flame unstable branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_extinction.html">Diffusion flame extinction strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_fixed_T.html">Burner-stabilized flame with imposed temperature profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_speed_convergence_analysis.html">Flame Speed with Convergence Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flamespeed_sensitivity.html">Laminar flame speed sensitivity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/premixed_counterflow_twin_flame.html">Symmetric premixed twin flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/NonIdealShockTube.html">Ignition delay time using the Redlich-Kwong real gas model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/combustor.html">Combustor residence time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/custom.html">Integrating constant pressure ignition using SciPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/custom2.html">Using <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code> to implement wall inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/fuel_injection.html">Soot precursor formation with time-varying mass flow rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/ic_engine.html">Diesel-type internal combustion engine simulation with gaseous fuel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/periodic_cstr.html">Continuously stirred tank reactor with periodic behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/piston.html">Reactors separated by a moving piston</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/reactor1.html">Constant-pressure, adiabatic kinetics simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/reactor2.html">Reactors with walls and heat transfer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/sensitivity1.html">Constant-pressure, adiabatic kinetics simulation with sensitivity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/isentropic.html">Converging-Diverging Nozzle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/vapordome.html">Vapor Dome</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/plug_flow_reactor.html">plug flow reactor (4)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="reactors/1D_pfr_surfchem.html">Plug flow reactor: silicon nitride deposition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/pfr.html">Plug flow reactor modeling approaches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/surf_pfr.html">Plug flow reactor with surface chemistry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/surf_pfr_chain.html">Plug flow reactor modeled as a chain of well stirred reactors</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/pollutant_formation.html">pollutant formation (3)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/reaction_path.html">Viewing a reaction path diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/fuel_injection.html">Soot precursor formation with time-varying mass flow rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/ic_engine.html">Diesel-type internal combustion engine simulation with gaseous fuel</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/porous_media.html">porous media (2)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="reactors/1D_packed_bed.html">One-dimensional packed-bed, catalytic-membrane reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/PorousMediaBurner.html">Reactor cascade model for reactive flows in inert porous media</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/preconditioner.html">preconditioner (1)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="reactors/preconditioned_integration.html">Acceleration of reactor integration using a sparse preconditioned solver</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/premixed_flame.html">premixed flame (13)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/flamespeed.html">Freely-propagating flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/adiabatic_flame.html">Laminar flame speed calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/burner_flame.html">Burner-stabilized flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_fixed_T.html">Burner-stabilized flame with imposed temperature profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_initial_guess.html">Saving, loading, and restarting 1D calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_speed.html">Flame speed as a function of equivalence ratio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_speed_convergence_analysis.html">Flame Speed with Convergence Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flamespeed_sensitivity.html">Laminar flame speed sensitivity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/ion_burner_flame.html">Burner-stabilized flame including ionized species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/ion_free_flame.html">Freely-propagating flame with charged species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/premixed_counterflow_flame.html">Opposed-flow premixed strained flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/premixed_counterflow_twin_flame.html">Symmetric premixed twin flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/stagnation_flame.html">Detached flat flame stabilized at a stagnation point</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/radiative_heat_transfer.html">radiative heat transfer (1)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="reactors/PorousMediaBurner.html">Reactor cascade model for reactive flows in inert porous media</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/reaction_path_analysis.html">reaction path analysis (2)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/interactive_path_diagram.html">Interactive Reaction Path Diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/reaction_path.html">Viewing a reaction path diagram</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/reactor_network.html">reactor network (32)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../clib/demo.html">CLib Demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/combustor.html">Adiabatic combustor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/custom.html">Custom reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/kinetics1.html">Autoignition in a homogeneous reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/openmp_ignition.html">Ignition delay calculation with OpenMP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite.html">Adiabatic, constant pressure reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/periodic_cstr.html">Continuously stirred tank reactor with periodic behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/reactor1.html">Adiabatic, constant pressure reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/reactor2.html">Adiabatic, constant volume reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/surf_reactor.html">Zero-dimensional reactor with surface chemistry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/interactive_path_diagram.html">Interactive Reaction Path Diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/mechanism_reduction.html">Mechanism reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/1D_pfr_surfchem.html">Plug flow reactor: silicon nitride deposition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/NonIdealShockTube.html">Ignition delay time using the Redlich-Kwong real gas model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/PorousMediaBurner.html">Reactor cascade model for reactive flows in inert porous media</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/combustor.html">Combustor residence time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/continuous_reactor.html">Continuously Stirred Tank Reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/custom.html">Integrating constant pressure ignition using SciPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/custom2.html">Using <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code> to implement wall inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/fuel_injection.html">Soot precursor formation with time-varying mass flow rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/ic_engine.html">Diesel-type internal combustion engine simulation with gaseous fuel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/mix1.html">Mixing two streams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/periodic_cstr.html">Continuously stirred tank reactor with periodic behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/pfr.html">Plug flow reactor modeling approaches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/piston.html">Reactors separated by a moving piston</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/plasma.html">Plasma Reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/preconditioned_integration.html">Acceleration of reactor integration using a sparse preconditioned solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/reactor1.html">Constant-pressure, adiabatic kinetics simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/reactor2.html">Reactors with walls and heat transfer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/sensitivity1.html">Constant-pressure, adiabatic kinetics simulation with sensitivity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/surf_pfr.html">Plug flow reactor with surface chemistry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/surf_pfr_chain.html">Plug flow reactor modeled as a chain of well stirred reactors</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/saving_output.html">saving output (12)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/flamespeed.html">Freely-propagating flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/gas_transport.html">Gas phase transport properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/kinetics1.html">Autoignition in a homogeneous reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/adiabatic_flame.html">Laminar flame speed calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/burner_flame.html">Burner-stabilized flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame.html">Counterflow diffusion flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_batch.html">Scaling of diffusion flames with pressure and strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_continuation.html">Diffusion flame unstable branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_extinction.html">Diffusion flame extinction strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_fixed_T.html">Burner-stabilized flame with imposed temperature profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flame_initial_guess.html">Saving, loading, and restarting 1D calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/plasma_equilibrium.html">Equilibrium with charged species and multiple condensed phases</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/sensitivity_analysis.html">sensitivity analysis (3)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/blowers_masel.html">Blowers-Masel reaction rates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/flamespeed_sensitivity.html">Laminar flame speed sensitivity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/sensitivity1.html">Constant-pressure, adiabatic kinetics simulation with sensitivity analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/shock_tube.html">shock tube (1)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/shock_tube.html">Shock-tube species profiles as a function of time</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/strained_flame.html">strained flame (8)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/flame2.html">Axisymmetric stagnation-point non-premixed flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame.html">Counterflow diffusion flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_batch.html">Scaling of diffusion flames with pressure and strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_continuation.html">Diffusion flame unstable branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/diffusion_flame_extinction.html">Diffusion flame extinction strain rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/premixed_counterflow_flame.html">Opposed-flow premixed strained flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/premixed_counterflow_twin_flame.html">Symmetric premixed twin flame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/stagnation_flame.html">Detached flat flame stabilized at a stagnation point</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/surface_chemistry.html">surface chemistry (12)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/catcomb.html">Catalytic combustion of a stagnation flow on a platinum surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/diamond_cvd.html">Simulating growth of a diamond film by CVD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/lithium_ion_battery.html">Lithium-ion battery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/diamond_cvd.html">Growth of diamond film using CVD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/lithium_ion_battery.html">Lithium Ion Battery Discharge Curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/sofc.html">Solid oxide fuel cell using elementary kinetics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="onedim/catalytic_combustion.html">Catalytic combustion of methane on platinum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/1D_packed_bed.html">One-dimensional packed-bed, catalytic-membrane reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/1D_pfr_surfchem.html">Plug flow reactor: silicon nitride deposition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/surf_pfr.html">Plug flow reactor with surface chemistry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/surf_pfr_chain.html">Plug flow reactor modeled as a chain of well stirred reactors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/coverage_dependent_surf.html">Surface with coverage-dependent thermo</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/thermodynamic_cycle.html">thermodynamic cycle (5)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/rankine.html">Open Rankine cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/rankine.html">Rankine cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/ic_engine.html">Diesel-type internal combustion engine simulation with gaseous fuel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/rankine.html">Rankine cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/rankine_units.html">Rankine cycle (with units)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/thermodynamics.html">thermodynamics (22)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../clib/demo.html">CLib Demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/LiC6_electrode.html">LiC6 electrode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/demo.html">Property calculation demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/rankine.html">Open Rankine cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/demo.html">Fortran 90 demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/f77_demo.html">Fortran 77 demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/isentropic.html">Isentropic, adiabatic flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/rankine.html">Rankine cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/ic_engine.html">Diesel-type internal combustion engine simulation with gaseous fuel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/mix1.html">Mixing two streams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/coverage_dependent_surf.html">Surface with coverage-dependent thermo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/critical_properties.html">Critical state properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/equations_of_state.html">Non-ideal equations of state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/equivalenceRatio.html">Equivalence ratio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/isentropic.html">Converging-Diverging Nozzle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/isentropic_units.html">Isentropic, adiabatic flow (with units)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/mixing.html">Mixing using <code class="xref py py-obj docutils literal notranslate"><span class="pre">Quantity</span></code> objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/rankine.html">Rankine cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/rankine_units.html">Rankine cycle (with units)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/sound_speed.html">Sound speeds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/sound_speed_units.html">Sound speeds (with units)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/vapordome.html">Vapor Dome</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/transport.html">transport (9)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../clib/demo.html">CLib Demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/demo.html">Property calculation demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/gas_transport.html">Gas phase transport properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/demo.html">Fortran 90 demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/f77_demo.html">Fortran 77 demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/prandtl1.html">Prandtl number for an equilibrium H/O gas mixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/prandtl2.html">Prandtl number for an equilibrium H/O gas mixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transport/dusty_gas.html">Porous media transport using the dusty gas model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transport/multiprocessing_viscosity.html">Parallelizing transport property calculations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/tutorial.html">tutorial (6)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../clib/demo.html">CLib Demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/demo.html">Property calculation demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/gas_transport.html">Gas phase transport properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/ctlib.html">CKLIB emulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/demo.html">Fortran 90 demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fortran/f77_demo.html">Fortran 77 demo</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/units.html">units (3)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="thermo/isentropic_units.html">Isentropic, adiabatic flow (with units)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/rankine_units.html">Rankine cycle (with units)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermo/sound_speed_units.html">Sound speeds (with units)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/user-defined_model.html">user-defined model (11)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/BoundaryValueProblem.html">Class <code class="xref py py-obj docutils literal notranslate"><span class="pre">BoundaryValueProblem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/blasius.html">Blasius BVP solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/custom.html">Custom reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite_hp.html">Constant pressure ignition with user-specified equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/ignite_uv.html">Constant volume ignition with user-specified equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/plug_flow_reactor.html">Nozzle with compressible flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinetics/custom_reactions.html">Custom reaction rates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/1D_packed_bed.html">One-dimensional packed-bed, catalytic-membrane reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/PorousMediaBurner.html">Reactor cascade model for reactive flows in inert porous media</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/custom.html">Integrating constant pressure ignition using SciPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/custom2.html">Using <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code> to implement wall inertia</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_tags/well-stirred_reactor.html">well-stirred reactor (5)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cxx/combustor.html">Adiabatic combustor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../matlab_experimental/periodic_cstr.html">Continuously stirred tank reactor with periodic behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/combustor.html">Combustor residence time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/continuous_reactor.html">Continuously Stirred Tank Reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactors/periodic_cstr.html">Continuously stirred tank reactor with periodic behavior</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Examples</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Python Examples</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="python-examples">
+<h1>Python Examples<a class="headerlink" href="#python-examples" title="Link to this heading">#</a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To find examples covering a specific topic, see the
+<a class="reference internal" href="../../_tags/tagsindex.html#tagoverview"><span class="std std-ref">index of example tags</span></a>.</p>
+<p>If you’re just getting started with Cantera, see our
+<a class="reference internal" href="../../userguide/python-tutorial.html"><span class="doc">Python Tutorial</span></a> for an introduction to the Cantera Python interface.</p>
+</div>
+<div class="sphx-glr-thumbnails"></div><section id="thermodynamics">
+<h2>Thermodynamics<a class="headerlink" href="#thermodynamics" title="Link to this heading">#</a></h2>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="In this example, air and methane are mixed in stoichiometric proportions. This is a simpler, steady-state version of the example ../reactors/mix1."><img alt="" src="../../_images/sphx_glr_mixing_thumb.png" />
+<p><a class="reference internal" href="thermo/mixing.html#sphx-glr-examples-python-thermo-mixing-py"><span class="std std-ref">Mixing using Quantity objects</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Mixing using Quantity objects</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Print the critical state properties for the fluids for which Cantera has built-in liquid/vapor equations of state."><img alt="" src="../../_images/sphx_glr_critical_properties_thumb.png" />
+<p><a class="reference internal" href="thermo/critical_properties.html#sphx-glr-examples-python-thermo-critical-properties-py"><span class="std std-ref">Critical state properties</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Critical state properties</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Calculate the area ratio vs. Mach number curve for a mixture accelerating to supersonic speed through a converging--diverging nozzle, assuming isentropic, adiabatic flow."><img alt="" src="../../_images/sphx_glr_isentropic_thumb2.png" />
+<p><a class="reference internal" href="thermo/isentropic.html#sphx-glr-examples-python-thermo-isentropic-py"><span class="std std-ref">Converging-Diverging Nozzle</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Converging-Diverging Nozzle</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="An equilibrium example with charged species in the gas phase and multiple condensed phases."><img alt="" src="../../_images/sphx_glr_plasma_equilibrium_thumb.png" />
+<p><a class="reference internal" href="thermo/plasma_equilibrium.html#sphx-glr-examples-python-thermo-plasma-equilibrium-py"><span class="std std-ref">Equilibrium with charged species and multiple condensed phases</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Equilibrium with charged species and multiple condensed phases</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Calculate the efficiency of a Rankine vapor power cycle using a pure fluid model for water."><img alt="" src="../../_images/sphx_glr_rankine_thumb2.png" />
+<p><a class="reference internal" href="thermo/rankine.html#sphx-glr-examples-python-thermo-rankine-py"><span class="std std-ref">Rankine cycle</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Rankine cycle</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Calculate the efficiency of a Rankine vapor power cycle using a pure fluid model for water. Includes the units of quantities in the calculations."><img alt="" src="../../_images/sphx_glr_rankine_units_thumb.png" />
+<p><a class="reference internal" href="thermo/rankine_units.html#sphx-glr-examples-python-thermo-rankine-units-py"><span class="std std-ref">Rankine cycle (with units)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Rankine cycle (with units)</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Adiabatic flame temperature and equilibrium composition for a fuel/air mixture as a function of equivalence ratio, including formation of solid carbon."><img alt="" src="../../_images/sphx_glr_adiabatic_thumb.png" />
+<p><a class="reference internal" href="thermo/adiabatic.html#sphx-glr-examples-python-thermo-adiabatic-py"><span class="std std-ref">Adiabatic flame temperature including solid carbon formation</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Adiabatic flame temperature including solid carbon formation</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Compute the &quot;equilibrium&quot; and &quot;frozen&quot; sound speeds for a gas. Uses the pint library to include customized units in the calculation."><img alt="" src="../../_images/sphx_glr_sound_speed_units_thumb.png" />
+<p><a class="reference internal" href="thermo/sound_speed_units.html#sphx-glr-examples-python-thermo-sound-speed-units-py"><span class="std std-ref">Sound speeds (with units)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Sound speeds (with units)</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Compute the &quot;equilibrium&quot; and &quot;frozen&quot; sound speeds for a gas"><img alt="" src="../../_images/sphx_glr_sound_speed_thumb.png" />
+<p><a class="reference internal" href="thermo/sound_speed.html#sphx-glr-examples-python-thermo-sound-speed-py"><span class="std std-ref">Sound speeds</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Sound speeds</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Isentropic, adiabatic flow example - calculate area ratio vs. Mach number curve. Uses the pint library to include customized units in the calculation."><img alt="" src="../../_images/sphx_glr_isentropic_units_thumb.png" />
+<p><a class="reference internal" href="thermo/isentropic_units.html#sphx-glr-examples-python-thermo-isentropic-units-py"><span class="std std-ref">Isentropic, adiabatic flow (with units)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Isentropic, adiabatic flow (with units)</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example generates a saturated steam table and plots the vapor dome. The steam table corresponds to data typically found in thermodynamic text books and uses the same customary units."><img alt="" src="../../_images/sphx_glr_vapordome_thumb.png" />
+<p><a class="reference internal" href="thermo/vapordome.html#sphx-glr-examples-python-thermo-vapordome-py"><span class="std std-ref">Vapor Dome</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Vapor Dome</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to set a mixture according to equivalence ratio and mixture fraction."><img alt="" src="../../_images/sphx_glr_equivalenceRatio_thumb.png" />
+<p><a class="reference internal" href="thermo/equivalenceRatio.html#sphx-glr-examples-python-thermo-equivalenceratio-py"><span class="std std-ref">Equivalence ratio</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Equivalence ratio</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates (1) the four different dependency models available for coverage-dependent enthalpy and entropy calculations and (2) capability of including self-interaction but also cross-interaction among different surface species. See the input file ../../input/covdepsurf for the method of defining the coverage-dependency parameters."><img alt="" src="../../_images/sphx_glr_coverage_dependent_surf_thumb.png" />
+<p><a class="reference internal" href="thermo/coverage_dependent_surf.html#sphx-glr-examples-python-thermo-coverage-dependent-surf-py"><span class="std std-ref">Surface with coverage-dependent thermo</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Surface with coverage-dependent thermo</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates a comparison between ideal and non-ideal equations of state (EoS) using Cantera and CoolProp."><img alt="" src="../../_images/sphx_glr_equations_of_state_thumb.png" />
+<p><a class="reference internal" href="thermo/equations_of_state.html#sphx-glr-examples-python-thermo-equations-of-state-py"><span class="std std-ref">Non-ideal equations of state</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Non-ideal equations of state</div>
+</div></div></section>
+<section id="kinetics">
+<h2>Kinetics<a class="headerlink" href="#kinetics" title="Link to this heading">#</a></h2>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This script uses Graphviz to generate an image. You must have Graphviz installed and the program &#x27;dot&#x27; must be on your path for this example to work. Graphviz can be obtained from https://www.graphviz.org/ or (possibly) installed using your operating system&#x27;s package manager."><img alt="" src="../../_images/sphx_glr_reaction_path_thumb.svg" /><p><a class="reference internal" href="kinetics/reaction_path.html#sphx-glr-examples-python-kinetics-reaction-path-py"><span class="std std-ref">Viewing a reaction path diagram</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Viewing a reaction path diagram</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example computes the growth rate of a diamond film according to a simplified version of a particular published growth mechanism (see ../../input/diamond for details). Only the surface coverage equations are solved here; the gas composition is fixed. (For an example of coupled gas-phase and surface, see ../onedim/catalytic_combustion.) Atomic hydrogen plays an important role in diamond CVD, and this example computes the growth rate and surface coverages as a function of [H] at the surface for fixed temperature and [CH3]."><img alt="" src="../../_images/sphx_glr_diamond_cvd_thumb1.png" />
+<p><a class="reference internal" href="kinetics/diamond_cvd.html#sphx-glr-examples-python-kinetics-diamond-cvd-py"><span class="std std-ref">Growth of diamond film using CVD</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Growth of diamond film using CVD</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Simulate species profiles for a shock tube as a function of time, and observe the impact of incorporating the reduced-pressure linear mixture rule (LMR-R) in such calculations."><img alt="" src="../../_images/sphx_glr_shock_tube_thumb.png" />
+<p><a class="reference internal" href="kinetics/shock_tube.html#sphx-glr-examples-python-kinetics-shock-tube-py"><span class="std std-ref">Shock-tube species profiles as a function of time</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Shock-tube species profiles as a function of time</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="An example demonstrating how to use Species and Reaction objects to programmatically extract a reaction submechanism. In this example, the CO/H2 oxidation reactions are extracted from the GRI 3.0 mechanism."><img alt="" src="../../_images/sphx_glr_extract_submechanism_thumb.png" />
+<p><a class="reference internal" href="kinetics/extract_submechanism.html#sphx-glr-examples-python-kinetics-extract-submechanism-py"><span class="std std-ref">Extracting a sub-mechanism</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Extracting a sub-mechanism</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A simplistic approach to mechanism reduction which demonstrates Cantera&#x27;s features for dynamically manipulating chemical mechanisms."><img alt="" src="../../_images/sphx_glr_mechanism_reduction_thumb.png" />
+<p><a class="reference internal" href="kinetics/mechanism_reduction.html#sphx-glr-examples-python-kinetics-mechanism-reduction-py"><span class="std std-ref">Mechanism reduction</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Mechanism reduction</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A simple example to demonstrate the difference between Blowers-Masel reaction and elementary reaction."><img alt="" src="../../_images/sphx_glr_blowers_masel_thumb.png" />
+<p><a class="reference internal" href="kinetics/blowers_masel.html#sphx-glr-examples-python-kinetics-blowers-masel-py"><span class="std std-ref">Blowers-Masel reaction rates</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Blowers-Masel reaction rates</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Simulate temperature profiles and species profiles in a jet-stirred reactor across a range of initial temperatures, and observe the impact of incorporating the reduced-pressure linear mixture rule (LMR-R) in such calculations."><img alt="" src="../../_images/sphx_glr_jet_stirred_reactor_thumb.png" />
+<p><a class="reference internal" href="kinetics/jet_stirred_reactor.html#sphx-glr-examples-python-kinetics-jet-stirred-reactor-py"><span class="std std-ref">Jet-stirred reactor temperature and species profiles</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Jet-stirred reactor temperature and species profiles</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="In this example, we illustrate how to calculate the open circuit voltage (voltage when the external applied current is zero) for a lithium ion battery as a function of anode and cathode lithium content. The open circuit voltage here is calculated via two means: kinetically and thermodynamically."><img alt="" src="../../_images/sphx_glr_lithium_ion_battery_thumb1.png" />
+<p><a class="reference internal" href="kinetics/lithium_ion_battery.html#sphx-glr-examples-python-kinetics-lithium-ion-battery-py"><span class="std std-ref">Lithium Ion Battery Discharge Curve</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Lithium Ion Battery Discharge Curve</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="An example demonstrating how to use custom reaction objects."><img alt="" src="../../_images/sphx_glr_custom_reactions_thumb.png" />
+<p><a class="reference internal" href="kinetics/custom_reactions.html#sphx-glr-examples-python-kinetics-custom-reactions-py"><span class="std std-ref">Custom reaction rates</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Custom reaction rates</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A simple model of a solid oxide fuel cell."><img alt="" src="../../_images/sphx_glr_sofc_thumb.png" />
+<p><a class="reference internal" href="kinetics/sofc.html#sphx-glr-examples-python-kinetics-sofc-py"><span class="std std-ref">Solid oxide fuel cell using elementary kinetics</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Solid oxide fuel cell using elementary kinetics</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example uses ipywidgets to create interactive displays of reaction path diagrams from Cantera simulations."><img alt="" src="../../_images/sphx_glr_interactive_path_diagram_thumb.svg" /><p><a class="reference internal" href="kinetics/interactive_path_diagram.html#sphx-glr-examples-python-kinetics-interactive-path-diagram-py"><span class="std std-ref">Interactive Reaction Path Diagrams</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Interactive Reaction Path Diagrams</div>
+</div></div></section>
+<section id="transport">
+<h2>Transport<a class="headerlink" href="#transport" title="Link to this heading">#</a></h2>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The dusty gas model is a multicomponent transport model for gas transport through the pores of a stationary porous medium. This example shows how to create a DustyGasTransport transport manager and use it to compute the multicomponent diffusion coefficients and thermal conductivity."><img alt="" src="../../_images/sphx_glr_dusty_gas_thumb.png" />
+<p><a class="reference internal" href="transport/dusty_gas.html#sphx-glr-examples-python-transport-dusty-gas-py"><span class="std std-ref">Porous media transport using the dusty gas model</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Porous media transport using the dusty gas model</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how Cantera can be used with the multiprocessing module."><img alt="" src="../../_images/sphx_glr_multiprocessing_viscosity_thumb.png" />
+<p><a class="reference internal" href="transport/multiprocessing_viscosity.html#sphx-glr-examples-python-transport-multiprocessing-viscosity-py"><span class="std std-ref">Parallelizing transport property calculations</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Parallelizing transport property calculations</div>
+</div></div></section>
+<section id="reactor-networks">
+<h2>Reactor networks<a class="headerlink" href="#reactor-networks" title="Link to this heading">#</a></h2>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Since reactors can have multiple inlets and outlets, they can be used to implement mixers, splitters, etc. In this example, air and methane are mixed in stoichiometric proportions. Due to the low temperature, no reactions occur. Note that the air stream and the methane stream use different reaction mechanisms, with different numbers of species and reactions. When gas flows from one reactor or reservoir to another one with a different reaction mechanism, species are matched by name. If the upstream reactor contains a species that is not present in the downstream reaction mechanism, it will be ignored. In general, reaction mechanisms for downstream reactors should contain all species that might be present in any upstream reactor."><img alt="" src="../../_images/sphx_glr_mix1_thumb.svg" /><p><a class="reference internal" href="reactors/mix1.html#sphx-glr-examples-python-reactors-mix1-py"><span class="std std-ref">Mixing two streams</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Mixing two streams</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example illustrates a continuously stirred tank reactor (CSTR) with steady inputs but periodic interior state."><img alt="" src="../../_images/sphx_glr_periodic_cstr_thumb1.png" />
+<p><a class="reference internal" href="reactors/periodic_cstr.html#sphx-glr-examples-python-reactors-periodic-cstr-py"><span class="std std-ref">Continuously stirred tank reactor with periodic behavior</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Continuously stirred tank reactor with periodic behavior</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Calculate steady-state solutions for a combustor, modeled as a single well-stirred reactor, for different residence times."><img alt="" src="../../_images/sphx_glr_combustor_thumb1.png" />
+<p><a class="reference internal" href="reactors/combustor.html#sphx-glr-examples-python-reactors-combustor-py"><span class="std std-ref">Combustor residence time</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Combustor residence time</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Requires: cantera &gt;= 2.5.0, matplotlib &gt;= 2.0"><img alt="" src="../../_images/sphx_glr_reactor1_thumb1.png" />
+<p><a class="reference internal" href="reactors/reactor1.html#sphx-glr-examples-python-reactors-reactor1-py"><span class="std std-ref">Constant-pressure, adiabatic kinetics simulation</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Constant-pressure, adiabatic kinetics simulation</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This file uses a similar approach as custom.py, where the governing equations are implemented in Python, to solve the electron concentration in a plasma."><img alt="" src="../../_images/sphx_glr_plasma_thumb.png" />
+<p><a class="reference internal" href="reactors/plasma.html#sphx-glr-examples-python-reactors-plasma-py"><span class="std std-ref">Plasma Reactor</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Plasma Reactor</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Two reactors separated by a piston that moves with a speed proportional to the pressure difference between the reactors."><img alt="" src="../../_images/sphx_glr_piston_thumb.png" />
+<p><a class="reference internal" href="reactors/piston.html#sphx-glr-examples-python-reactors-piston-py"><span class="std std-ref">Reactors separated by a moving piston</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Reactors separated by a moving piston</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Solve a constant pressure ignition problem where the governing equations are implemented in Python."><img alt="" src="../../_images/sphx_glr_custom_thumb1.png" />
+<p><a class="reference internal" href="reactors/custom.html#sphx-glr-examples-python-reactors-custom-py"><span class="std std-ref">Integrating constant pressure ignition using SciPy</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Integrating constant pressure ignition using SciPy</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Requires: cantera &gt;= 2.5.0, matplotlib &gt;= 2.0"><img alt="" src="../../_images/sphx_glr_sensitivity1_thumb.png" />
+<p><a class="reference internal" href="reactors/sensitivity1.html#sphx-glr-examples-python-reactors-sensitivity1-py"><span class="std std-ref">Constant-pressure, adiabatic kinetics simulation with sensitivity analysis</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Constant-pressure, adiabatic kinetics simulation with sensitivity analysis</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example simulates the partial oxidation of methane over a platinum catalyst in a packed bed reactor. This example solves the DAE system directly, using the FlowReactor class and the SUNDIALS IDA solver, in contrast to the approximation as a chain of steady-state WSRs used in surf_pfr_chain."><img alt="" src="../../_images/sphx_glr_surf_pfr_thumb.png" />
+<p><a class="reference internal" href="reactors/surf_pfr.html#sphx-glr-examples-python-reactors-surf-pfr-py"><span class="std std-ref">Plug flow reactor with surface chemistry</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Plug flow reactor with surface chemistry</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Ideal gas, constant-pressure, adiabatic kinetics simulation that compares preconditioned and non-preconditioned integration of n-hexane."><img alt="" src="../../_images/sphx_glr_preconditioned_integration_thumb.png" />
+<p><a class="reference internal" href="reactors/preconditioned_integration.html#sphx-glr-examples-python-reactors-preconditioned-integration-py"><span class="std std-ref">Acceleration of reactor integration using a sparse preconditioned solver</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Acceleration of reactor integration using a sparse preconditioned solver</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Simulation of fuel injection into a vitiated air mixture to show formation of soot precursors."><img alt="" src="../../_images/sphx_glr_fuel_injection_thumb.png" />
+<p><a class="reference internal" href="reactors/fuel_injection.html#sphx-glr-examples-python-reactors-fuel-injection-py"><span class="std std-ref">Soot precursor formation with time-varying mass flow rate</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Soot precursor formation with time-varying mass flow rate</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Two reactors connected with a piston, with heat loss to the environment"><img alt="" src="../../_images/sphx_glr_reactor2_thumb.svg" /><p><a class="reference internal" href="reactors/reactor2.html#sphx-glr-examples-python-reactors-reactor2-py"><span class="std std-ref">Reactors with walls and heat transfer</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Reactors with walls and heat transfer</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Solve an ignition problem where the normal reactor governing equations are extended with additional equations implemented in Python."><img alt="" src="../../_images/sphx_glr_custom2_thumb.png" />
+<p><a class="reference internal" href="reactors/custom2.html#sphx-glr-examples-python-reactors-custom2-py"><span class="std std-ref">Using ExtensibleReactor to implement wall inertia</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Using ExtensibleReactor to implement wall inertia</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example solves a plug flow reactor problem, where the chemistry is surface chemistry. The specific problem simulated is the partial oxidation of methane over a platinum catalyst in a packed bed reactor. To avoid needing to solve a DAE system, the PFR is approximated as a chain of successive WSRs. See surf_pfr for a more advanced implementation that solves the DAE system directly."><img alt="" src="../../_images/sphx_glr_surf_pfr_chain_thumb.png" />
+<p><a class="reference internal" href="reactors/surf_pfr_chain.html#sphx-glr-examples-python-reactors-surf-pfr-chain-py"><span class="std std-ref">Plug flow reactor modeled as a chain of well stirred reactors</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Plug flow reactor modeled as a chain of well stirred reactors</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A 1-D steady state plug-flow reactor demonstrating silicon nitride (Si3N4) deposition from ammonia (NH3) and silicon tetrafluoride (SiF4)."><img alt="" src="../../_images/sphx_glr_1D_pfr_surfchem_thumb.png" />
+<p><a class="reference internal" href="reactors/1D_pfr_surfchem.html#sphx-glr-examples-python-reactors-1d-pfr-surfchem-py"><span class="std std-ref">Plug flow reactor: silicon nitride deposition</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Plug flow reactor: silicon nitride deposition</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example solves a plug-flow reactor problem of hydrogen-oxygen combustion. The PFR is computed by two approaches: The simulation of a Lagrangian fluid particle, and the simulation of a chain of reactors."><img alt="" src="../../_images/sphx_glr_pfr_thumb.png" />
+<p><a class="reference internal" href="reactors/pfr.html#sphx-glr-examples-python-reactors-pfr-py"><span class="std std-ref">Plug flow reactor modeling approaches</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Plug flow reactor modeling approaches</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="In this example we will illustrate how Cantera can be used to simulate a continuously stirred tank reactor (CSTR), also interchangeably referred to as a perfectly stirred reactor (PSR), a well stirred reactor (WSR), a jet stirred reactor (JSR), or a Longwell reactor (and there may well be more &quot;aliases&quot;)."><img alt="" src="../../_images/sphx_glr_continuous_reactor_thumb.png" />
+<p><a class="reference internal" href="reactors/continuous_reactor.html#sphx-glr-examples-python-reactors-continuous-reactor-py"><span class="std std-ref">Continuously Stirred Tank Reactor</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Continuously Stirred Tank Reactor</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="The simulation uses n-dodecane as fuel, which is injected close to top dead center. Note that this example uses numerous simplifying assumptions and thus serves for illustration purposes only."><img alt="" src="../../_images/sphx_glr_ic_engine_thumb.png" />
+<p><a class="reference internal" href="reactors/ic_engine.html#sphx-glr-examples-python-reactors-ic-engine-py"><span class="std std-ref">Diesel-type internal combustion engine simulation with gaseous fuel</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Diesel-type internal combustion engine simulation with gaseous fuel</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="In this example we illustrate how to setup and use a constant volume, adiabatic reactor to simulate reflected shock tube experiments. This reactor is then used to compute the ignition delay of a gas at a specified initial temperature and pressure."><img alt="" src="../../_images/sphx_glr_NonIdealShockTube_thumb.png" />
+<p><a class="reference internal" href="reactors/NonIdealShockTube.html#sphx-glr-examples-python-reactors-nonidealshocktube-py"><span class="std std-ref">Ignition delay time using the Redlich-Kwong real gas model</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Ignition delay time using the Redlich-Kwong real gas model</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="The model shown in this example simulates heterogeneous catalytic processes inside packed-bed, catalytic membrane reactors. The gas-phase and surface-phase species conservation equations are derived and the system of differential-algebraic equations (DAE) is solved using the scikits.odes.dae IDA solver."><img alt="" src="../../_images/sphx_glr_1D_packed_bed_thumb.png" />
+<p><a class="reference internal" href="reactors/1D_packed_bed.html#sphx-glr-examples-python-reactors-1d-packed-bed-py"><span class="std std-ref">One-dimensional packed-bed, catalytic-membrane reactor</span></a></p>
+  <div class="sphx-glr-thumbnail-title">One-dimensional packed-bed, catalytic-membrane reactor</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Showcases the use of ExtensibleReactor to add a temperature equation for a solid-phase and custom heat transfer/radiation models."><img alt="" src="../../_images/sphx_glr_PorousMediaBurner_thumb.png" />
+<p><a class="reference internal" href="reactors/PorousMediaBurner.html#sphx-glr-examples-python-reactors-porousmediaburner-py"><span class="std std-ref">Reactor cascade model for reactive flows in inert porous media</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Reactor cascade model for reactive flows in inert porous media</div>
+</div></div></section>
+<section id="d-reacting-flows">
+<h2>1D reacting flows<a class="headerlink" href="#d-reacting-flows" title="Link to this heading">#</a></h2>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Simulate flame speeds across a range of equivalence ratios, and observe the impact of incorporating the reduced-pressure linear mixture rule (LMR-R) in such calculations."><img alt="" src="../../_images/sphx_glr_flame_speed_thumb.png" />
+<p><a class="reference internal" href="onedim/flame_speed.html#sphx-glr-examples-python-onedim-flame-speed-py"><span class="std std-ref">Flame speed as a function of equivalence ratio</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Flame speed as a function of equivalence ratio</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A burner-stabilized premixed methane-air flame with charged species."><img alt="" src="../../_images/sphx_glr_ion_burner_flame_thumb.png" />
+<p><a class="reference internal" href="onedim/ion_burner_flame.html#sphx-glr-examples-python-onedim-ion-burner-flame-py"><span class="std std-ref">Burner-stabilized flame including ionized species</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Burner-stabilized flame including ionized species</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A burner-stabilized lean premixed hydrogen-oxygen flame at low pressure."><img alt="" src="../../_images/sphx_glr_burner_flame_thumb.png" />
+<p><a class="reference internal" href="onedim/burner_flame.html#sphx-glr-examples-python-onedim-burner-flame-py"><span class="std std-ref">Burner-stabilized flame</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Burner-stabilized flame</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="An opposed-flow ethane/air diffusion flame"><img alt="" src="../../_images/sphx_glr_diffusion_flame_thumb.png" />
+<p><a class="reference internal" href="onedim/diffusion_flame.html#sphx-glr-examples-python-onedim-diffusion-flame-py"><span class="std std-ref">Counterflow diffusion flame</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Counterflow diffusion flame</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This script simulates a lean hydrogen-oxygen flame stabilized in a strained flowfield, with an opposed flow consisting of equilibrium products."><img alt="" src="../../_images/sphx_glr_premixed_counterflow_flame_thumb.png" />
+<p><a class="reference internal" href="onedim/premixed_counterflow_flame.html#sphx-glr-examples-python-onedim-premixed-counterflow-flame-py"><span class="std std-ref">Opposed-flow premixed strained flame</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Opposed-flow premixed strained flame</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A freely-propagating, premixed methane-air flat flame with charged species."><img alt="" src="../../_images/sphx_glr_ion_free_flame_thumb.png" />
+<p><a class="reference internal" href="onedim/ion_free_flame.html#sphx-glr-examples-python-onedim-ion-free-flame-py"><span class="std std-ref">Freely-propagating flame with charged species</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Freely-propagating flame with charged species</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="In this example we simulate a freely-propagating, adiabatic, premixed methane-air flame, calculate its laminar burning velocity and perform a sensitivity analysis of its kinetics with respect to each reaction rate constant."><img alt="" src="../../_images/sphx_glr_flamespeed_sensitivity_thumb.png" />
+<p><a class="reference internal" href="onedim/flamespeed_sensitivity.html#sphx-glr-examples-python-onedim-flamespeed-sensitivity-py"><span class="std std-ref">Laminar flame speed sensitivity analysis</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Laminar flame speed sensitivity analysis</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A freely-propagating, premixed hydrogen flat flame with multicomponent transport properties."><img alt="" src="../../_images/sphx_glr_adiabatic_flame_thumb.png" />
+<p><a class="reference internal" href="onedim/adiabatic_flame.html#sphx-glr-examples-python-onedim-adiabatic-flame-py"><span class="std std-ref">Laminar flame speed calculation</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Laminar flame speed calculation</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This script solves a catalytic combustion problem. A stagnation flow is set up, with a gas inlet 10 cm from a platinum surface at 900 K. The lean, premixed methane/air mixture enters at ~6 cm/s (0.06 kg/m2/s), and burns catalytically on the platinum surface. Gas-phase chemistry is included too, and has some effect very near the surface."><img alt="" src="../../_images/sphx_glr_catalytic_combustion_thumb.png" />
+<p><a class="reference internal" href="onedim/catalytic_combustion.html#sphx-glr-examples-python-onedim-catalytic-combustion-py"><span class="std std-ref">Catalytic combustion of methane on platinum</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Catalytic combustion of methane on platinum</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This script simulates a lean hydrogen-oxygen flame stabilized in a strained flowfield at an axisymmetric stagnation point on a non-reacting surface. The solution begins with a flame attached to the inlet (burner), and the mass flow rate is progressively increased, causing the flame to detach and move closer to the surface."><img alt="" src="../../_images/sphx_glr_stagnation_flame_thumb.png" />
+<p><a class="reference internal" href="onedim/stagnation_flame.html#sphx-glr-examples-python-onedim-stagnation-flame-py"><span class="std std-ref">Detached flat flame stabilized at a stagnation point</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Detached flat flame stabilized at a stagnation point</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A burner-stabilized, premixed methane/air flat flame with multicomponent transport properties and a specified temperature profile."><img alt="" src="../../_images/sphx_glr_flame_fixed_T_thumb.png" />
+<p><a class="reference internal" href="onedim/flame_fixed_T.html#sphx-glr-examples-python-onedim-flame-fixed-t-py"><span class="std std-ref">Burner-stabilized flame with imposed temperature profile</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Burner-stabilized flame with imposed temperature profile</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A freely-propagating, premixed methane-air flame. Examples of saving and loading a flame and restarting with different initial guesses."><img alt="" src="../../_images/sphx_glr_flame_initial_guess_thumb.png" />
+<p><a class="reference internal" href="onedim/flame_initial_guess.html#sphx-glr-examples-python-onedim-flame-initial-guess-py"><span class="std std-ref">Saving, loading, and restarting 1D calculations</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Saving, loading, and restarting 1D calculations</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Simulate two counter-flow jets of premixed reactants shooting into each other. This simulation differs from the similar premixed_counterflow_flame example as the latter simulates a jet of reactants shooting into products."><img alt="" src="../../_images/sphx_glr_premixed_counterflow_twin_flame_thumb.png" />
+<p><a class="reference internal" href="onedim/premixed_counterflow_twin_flame.html#sphx-glr-examples-python-onedim-premixed-counterflow-twin-flame-py"><span class="std std-ref">Symmetric premixed twin flame</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Symmetric premixed twin flame</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example uses the two-point flame control feature to march solutions down the stable and unstable burning branch for a counterflow diffusion flame. A hydrogen-oxygen diffusion flame at 1 bar is studied."><img alt="" src="../../_images/sphx_glr_diffusion_flame_continuation_thumb.png" />
+<p><a class="reference internal" href="onedim/diffusion_flame_continuation.html#sphx-glr-examples-python-onedim-diffusion-flame-continuation-py"><span class="std std-ref">Diffusion flame unstable branch</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Diffusion flame unstable branch</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example computes the extinction point of a counterflow diffusion flame. A hydrogen-oxygen diffusion flame at 1 bar is studied."><img alt="" src="../../_images/sphx_glr_diffusion_flame_extinction_thumb.png" />
+<p><a class="reference internal" href="onedim/diffusion_flame_extinction.html#sphx-glr-examples-python-onedim-diffusion-flame-extinction-py"><span class="std std-ref">Diffusion flame extinction strain rate</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Diffusion flame extinction strain rate</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example creates two batches of counterflow diffusion flame simulations. The first batch computes counterflow flames at increasing pressure, the second at increasing strain rates."><img alt="" src="../../_images/sphx_glr_diffusion_flame_batch_thumb.png" />
+<p><a class="reference internal" href="onedim/diffusion_flame_batch.html#sphx-glr-examples-python-onedim-diffusion-flame-batch-py"><span class="std std-ref">Scaling of diffusion flames with pressure and strain rate</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Scaling of diffusion flames with pressure and strain rate</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Requires: cantera &gt;= 3.0.0, matplotlib &gt;= 2.0, pandas"><img alt="" src="../../_images/sphx_glr_flame_speed_convergence_analysis_thumb.png" />
+<p><a class="reference internal" href="onedim/flame_speed_convergence_analysis.html#sphx-glr-examples-python-onedim-flame-speed-convergence-analysis-py"><span class="std std-ref">Flame Speed with Convergence Analysis</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Flame Speed with Convergence Analysis</div>
+</div></div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-footer sphx-glr-footer-gallery docutils container">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/c96c924ee18f4754d057954e4e2fe81d/python_python.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">all</span> <span class="pre">examples</span> <span class="pre">in</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">python_python.zip</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/bf2dda2204f855feb9b48b257dac7778/python_jupyter.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">all</span> <span class="pre">examples</span> <span class="pre">in</span> <span class="pre">Jupyter</span> <span class="pre">notebooks:</span> <span class="pre">python_jupyter.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamics">Thermodynamics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetics">Kinetics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transport">Transport</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reactor-networks">Reactor networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-reacting-flows">1D reacting flows</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/examples/python/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

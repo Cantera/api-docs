@@ -1,0 +1,992 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Species Thermodynamic Models &#8212; Cantera 3.1.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/thermo/species-thermo';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Phase Thermodynamic Models" href="phase-thermo.html" />
+    <link rel="prev" title="Thermodynamic Properties" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/index.html">Python Module Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/transport.html">Transport Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/zerodim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../python/scripts.html">Mechanism Conversion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../python/ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/yaml_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/lxcat_conversion.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/units.html">Python Interface With Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/constants.html">Physical Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/utilities.html">Utilities</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../yaml/index.html">YAML Input File Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/general.html">General Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/phases.html">Phase Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/species.html">Species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/reactions.html">Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/yaml2ck.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/lxcat2yaml.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../releasenotes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v3.1.html">Cantera 3.1.0b1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v3.0.html">Cantera 3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.6.html">Cantera 2.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.5.html">Cantera 2.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.4.html">Cantera 2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.3.html">Cantera 2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.2.html">Cantera 2.2.1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.1.html">Cantera 2.1.2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.0.html">Cantera 2.0.2</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Science Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Thermodynamic Properties</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Species Thermodynamic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phase-thermo.html">Phase Thermodynamic Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../kinetics/index.html">Chemical Reactions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/reaction-rates.html">Reaction Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/rate-constants.html">Rate Constant Parameterizations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../transport/index.html">Transport Properties</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reactors/index.html">Reactors and Reactor Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/controlreactor.html">Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/constant-pressure-reactor.html">Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-reactor.html">Ideal Gas Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-constant-pressure-reactor.html">Ideal Gas Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/mole-reactor.html">Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/constant-pressure-mole-reactor.html">Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-mole-reactor.html">Ideal Gas Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-constant-pressure-mole-reactor.html">Ideal Gas Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/interactions.html">Reactor Interactions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../onedim/index.html">One-dimensional Flames</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../onedim/governing-equations.html">Governing Equations for One-dimensional Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onedim/discretization.html">Discretization of 1D Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onedim/nonlinear-solver.html">Nonlinear Solver for One-dimensional Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onedim/grid-refinement.html">Grid Refinement for One-dimensional Flows</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Thermodynamic Properties</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Species...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="species-thermodynamic-models">
+<h1>Species Thermodynamic Models<a class="headerlink" href="#species-thermodynamic-models" title="Link to this heading">#</a></h1>
+<p>The phase models discussed in the <a class="reference internal" href="phase-thermo.html"><span class="doc std std-doc">Phase Thermodynamic Models</span></a> section implement specific models for
+the thermodynamic properties appropriate for the type of phase or interface they
+represent. Although each one may use different expressions to compute the properties,
+they all require thermodynamic property information for the individual species.</p>
+<p>Generally, the phase models require a parameterization of the <em>standard state</em> heat
+capacity, enthalpy, and entropy for each species at a fixed pressure <span class="math notranslate nohighlight">\(p^\circ\)</span> as a
+function of <span class="math notranslate nohighlight">\(T\)</span>. In addition, phase models may require information describing how each
+species affects the equation of state, either in terms of the species standard molar
+volume, or through parameters that are specific to the equation of state.</p>
+<section id="models-for-species-standard-state-enthalpy-entropy-and-heat-capacity">
+<span id="sec-standard-state-species-thermo"></span><h2>Models for Species Standard State Enthalpy, Entropy, and Heat Capacity<a class="headerlink" href="#models-for-species-standard-state-enthalpy-entropy-and-heat-capacity" title="Link to this heading">#</a></h2>
+<p>Many of Cantera’s phase thermodynamic models are formulated to make use of the
+<a class="reference external" href="https://goldbook.iupac.org/terms/view/S05925">standard state</a> thermodynamic properties
+for individual species, defined at a standard pressure <span class="math notranslate nohighlight">\(p^\circ\)</span> and for the composition
+specified by the phase model. For example, this could include a pure gas in the case of
+the ideal gas model, or an ion at infinite dilution in water in the case of aqueous
+solutions. The value of <span class="math notranslate nohighlight">\(p^\circ\)</span> is not fixed by Cantera, and may vary among different
+sources of thermodynamic data.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>In some parts of the Cantera documentation, properties calculated at the user-specified
+standard pressure <span class="math notranslate nohighlight">\(p^\circ\)</span> are referred to as <em>reference-state</em> thermodynamic
+properties, as they represent a well-known reference state and properties for all other
+states are calculated according to their departure from this known reference condition.
+In these same parts of the documentation, the term <em>standard-state properties</em> refers to
+properties calculated using the composition defining the standard state but at the
+mixture’s current pressure.</p>
+<p>This nomenclature is fairly unique to Cantera, based on the desire to distinguish these
+different steps in the calculation of the full thermodynamic properties, and is not
+often seen in other descriptions of solution thermodynamics.</p>
+</div>
+<p>The necessary properties are:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{c}^\circ_p(T)\)</span>: the standard-state molar heat capacity at constant pressure as
+a function of temperature;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{h}^\circ(T)\)</span>, the standard-state molar enthalpy as a function of temperature;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{s}^\circ(T)\)</span>: the standard-state molar entropy as a function of temperature.</p></li>
+</ol>
+<p>While each of these functions is implemented explicitly in Cantera for computational
+efficiency, <span class="math notranslate nohighlight">\(\hat{h}^\circ(T)\)</span> and <span class="math notranslate nohighlight">\(\hat{s}^\circ(T)\)</span> can be expressed in terms of
+<span class="math notranslate nohighlight">\(\hat{c}^\circ_p(T)\)</span> using the relations</p>
+<div class="math notranslate nohighlight">
+\[  \hat{h}^\circ(T) = \hat{h}^\circ(T_\t{ref}) +
+                       \int_{T_\t{ref}}^T  \hat{c}^\circ_p(T) \; dT \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[  \hat{s}^\circ(T) = \hat{s}^\circ(T_\t{ref}) +
+                       \int_{T_\t{ref}}^T  \frac{\hat{c}^\circ_p(T)}{T} \; dT \]</div>
+<p>respectively. This means that a parameterization of <span class="math notranslate nohighlight">\(\hat{c}_p^\circ(T)\)</span> plus the
+constants <span class="math notranslate nohighlight">\(\hat{h}^\circ(T_\t{ref})\)</span> and <span class="math notranslate nohighlight">\(\hat{s}^\circ(T_\t{ref})\)</span> at a reference
+temperature <span class="math notranslate nohighlight">\(T_\t{ref}\)</span> is sufficient to define the standard state properties for a
+species.</p>
+<p>The models described in this section can be used to provide standard state thermodynamic
+data for each species in a phase. They are implemented by classes deriving from
+<a class="reference external" href="../../cxx/dc/de2/classCantera_1_1SpeciesThermoInterpType.html">SpeciesThermoInterpType</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is no requirement that all species in a phase use the same parameterization; each
+species can use the one most appropriate to represent how the heat capacity depends on
+temperature.</p>
+</div>
+<section id="the-nasa-7-coefficient-polynomial-parameterization">
+<span id="sec-thermo-nasa7"></span><h3>The NASA 7-Coefficient Polynomial Parameterization<a class="headerlink" href="#the-nasa-7-coefficient-polynomial-parameterization" title="Link to this heading">#</a></h3>
+<p>The NASA 7-coefficient polynomial parameterization is used to compute the species
+standard-state thermodynamic properties <span class="math notranslate nohighlight">\(\hat{c}^\circ_p(T)\)</span>, <span class="math notranslate nohighlight">\(\hat{h}^\circ(T)\)</span>, and
+<span class="math notranslate nohighlight">\(\hat{s}^\circ(T)\)</span>.</p>
+<p>The NASA parameterization represents <span class="math notranslate nohighlight">\(\hat{c}^\circ_p(T)\)</span> with a fourth-order
+polynomial:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\frac{\hat{c}_p^\circ(T)}{R} &amp;= a_0 + a_1 T + a_2 T^2 + a_3 T^3 + a_4 T^4\\\frac{\hat{h}^\circ (T)}{R T} &amp;= a_0 + \frac{a_1}{2} T + \frac{a_2}{3} T^2 +
+    \frac{a_3}{4} T^3 + \frac{a_4}{5} T^4 + \frac{a_5}{T}\\\frac{\hat{s}^\circ(T)}{R} &amp;= a_0 \ln T + a_1 T + \frac{a_2}{2} T^2 +
+    \frac{a_3}{3} T^3 + \frac{a_4}{4} T^4 + a_6
+\end{aligned}\end{align} \]</div>
+<p>This model is implemented by the C++ classes <a class="reference external" href="../../cxx/d6/de9/classCantera_1_1NasaPoly1.html">NasaPoly1</a> and <a class="reference external" href="../../cxx/db/ddd/classCantera_1_1NasaPoly2.html">NasaPoly2</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is sometimes referred to as the <em>NASA7 polynomial</em> within Cantera. It was used in
+the original NASA equilibrium program and in Chemkin, which uses 7 coefficients in each
+of two temperature regions. It is not compatible with the form used in more recent
+versions of the NASA equilibrium program, which uses 9 coefficients for each temperature
+region.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>A NASA7 parameterization can be defined in the YAML format by specifying
+<a class="reference internal" href="../../yaml/species.html#sec-yaml-nasa7"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">NASA7</span></code></span></a> as the <code class="docutils literal notranslate"><span class="pre">model</span></code> in the species <code class="docutils literal notranslate"><span class="pre">thermo</span></code> field.</p>
+</div>
+</section>
+<section id="the-nasa-9-coefficient-polynomial-parameterization">
+<span id="sec-thermo-nasa9"></span><h3>The NASA 9-Coefficient Polynomial Parameterization<a class="headerlink" href="#the-nasa-9-coefficient-polynomial-parameterization" title="Link to this heading">#</a></h3>
+<p>The NASA 9-coefficient polynomial parameterization <span id="id1">[<a class="reference internal" href="../bibliography.html#id31" title="B. J. McBride, M. J. Zehe, and S. Gordon. NASA Glenn coefficients for calculating thermodynamic properties of individual species. Technical Report NASA/TP-2002-211556, National Aeronautics and Space Administration, 2002. URL: https://ntrs.nasa.gov/citations/20020085330.">McBride <em>et al.</em>, 2002</a>]</span>, often called
+<em>NASA9</em> within Cantera for short, is an extension of the NASA 7-coefficient polynomial
+parameterization that includes two additional terms in each temperature region and
+supports an arbitrary number of temperature regions.</p>
+<p>The NASA9 parameterization represents the species thermodynamic properties with the
+following equations:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\frac{\hat{c}_p^\circ(T)}{R} &amp;= a_0 T^{-2} + a_1 T^{-1} + a_2 + a_3 T
+    + a_4 T^2 + a_5 T^3 + a_6 T^4\\\frac{\hat{h}^\circ(T)}{R T} &amp;= - a_0 T^{-2} + a_1 \frac{\ln T}{T} + a_2
+    + \frac{a_3}{2} T + \frac{a_4}{3} T^2  + \frac{a_5}{4} T^3 +
+    \frac{a_6}{5} T^4 + \frac{a_7}{T}\\\frac{\hat{s}^\circ(T)}{R} &amp;= - \frac{a_0}{2} T^{-2} - a_1 T^{-1} + a_2 \ln T
+   + a_3 T + \frac{a_4}{2} T^2 + \frac{a_5}{3} T^3  + \frac{a_6}{4} T^4 + a_8
+\end{aligned}\end{align} \]</div>
+<p>A common source for species data in the NASA9 format is the
+<a class="reference internal" href="../../userguide/thermobuild.html"><span class="doc std std-doc">NASA ThermoBuild</span></a> tool. This model is implemented by the C++
+classes <a class="reference external" href="../../cxx/d4/db6/classCantera_1_1Nasa9Poly1.html">Nasa9Poly1</a> and <a class="reference external" href="../../cxx/d9/de8/classCantera_1_1Nasa9PolyMultiTempRegion.html">Nasa9PolyMultiTempRegion</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>A NASA-9 parameterization can be defined in the YAML format by specifying
+<a class="reference internal" href="../../yaml/species.html#sec-yaml-nasa9"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">NASA9</span></code></span></a> as the <code class="docutils literal notranslate"><span class="pre">model</span></code> in the species <code class="docutils literal notranslate"><span class="pre">thermo</span></code> field.</p>
+</div>
+</section>
+<section id="the-shomate-parameterization">
+<span id="sec-thermo-shomate"></span><h3>The Shomate Parameterization<a class="headerlink" href="#the-shomate-parameterization" title="Link to this heading">#</a></h3>
+<p>The Shomate parameterization is:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\hat{c}_p^\circ(T) &amp;= A + Bt + Ct^2 + Dt^3 + \frac{E}{t^2}\\\hat{h}^\circ(T) &amp;= At + \frac{Bt^2}{2} + \frac{Ct^3}{3} + \frac{Dt^4}{4} -
+    \frac{E}{t} + F\\\hat{s}^\circ(T) &amp;= A \ln t + B t + \frac{Ct^2}{2} + \frac{Dt^3}{3} - \frac{E}{2t^2} + G
+\end{aligned}\end{align} \]</div>
+<p>where <span class="math notranslate nohighlight">\(t = T / 1000\textrm{ K}\)</span>. It requires 7 coefficients <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, <span class="math notranslate nohighlight">\(C\)</span>, <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(E\)</span>,
+<span class="math notranslate nohighlight">\(F\)</span>, and <span class="math notranslate nohighlight">\(G\)</span>. This parameterization is used to represent standard-state properties in
+the <a class="reference external" href="http://webbook.nist.gov/chemistry">NIST Chemistry WebBook</a>. The values of the
+coefficients <span class="math notranslate nohighlight">\(A\)</span> through <span class="math notranslate nohighlight">\(G\)</span> should be entered precisely as shown there, with no units
+attached. Unit conversions to SI is handled internally. This model is implemented by the
+C++ classes <a class="reference external" href="../../cxx/da/d66/classCantera_1_1ShomatePoly.html">ShomatePoly</a> and <a class="reference external" href="../../cxx/da/d9a/classCantera_1_1ShomatePoly2.html">ShomatePoly2</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>A Shomate parameterization can be defined in the YAML format by specifying
+<a class="reference internal" href="../../yaml/species.html#sec-yaml-shomate"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Shomate</span></code></span></a> as the <code class="docutils literal notranslate"><span class="pre">model</span></code> in the species <code class="docutils literal notranslate"><span class="pre">thermo</span></code> field.</p>
+</div>
+</section>
+<section id="constant-heat-capacity">
+<span id="sec-thermo-const-cp"></span><h3>Constant Heat Capacity<a class="headerlink" href="#constant-heat-capacity" title="Link to this heading">#</a></h3>
+<p>In some cases, species properties may only be required at a single temperature or over a
+narrow temperature range. In such cases, the heat capacity can be approximated as
+constant, and simple expressions can be used for the thermodynamic properties:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\hat{c}_p^\circ(T) &amp;= \hat{c}_p^\circ(T_\t{ref})\\\hat{h}^\circ(T) &amp;= \hat{h}^\circ\left(T_\t{ref}\right) + \hat{c}_p^\circ \left(T-T_\t{ref}\right)\\\hat{s}^\circ(T) &amp;= \hat{s}^\circ(T_\t{ref}) + \hat{c}_p^\circ \ln{\left(\frac{T}{T_\t{ref}}\right)}
+\end{aligned}\end{align} \]</div>
+<p>The parameterization uses four constants: <span class="math notranslate nohighlight">\(T_\t{ref}\)</span>,
+<span class="math notranslate nohighlight">\(\hat{c}_p^\circ(T_\t{ref})\)</span>, <span class="math notranslate nohighlight">\(\hat{h}^\circ(T_\t{ref})\)</span>, and
+<span class="math notranslate nohighlight">\(\hat{s}^\circ(T)\)</span>. The default value of <span class="math notranslate nohighlight">\(T_\t{ref}\)</span> is 298.15 K; the default value
+for the other parameters is 0.0. This model is implemented by the C++ class
+<a class="reference external" href="../../cxx/df/d7e/classCantera_1_1ConstCpPoly.html">ConstCpPoly</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>A constant heat capacity parameterization can be defined in the YAML format by
+specifying <a class="reference internal" href="../../yaml/species.html#sec-yaml-constcp"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">constant-cp</span></code></span></a> as the <code class="docutils literal notranslate"><span class="pre">model</span></code> in the species <code class="docutils literal notranslate"><span class="pre">thermo</span></code>
+field.</p>
+</div>
+</section>
+<section id="piecewise-gibbs-free-energy">
+<span id="sec-thermo-piecewise-gibbs"></span><h3>Piecewise Gibbs Free Energy<a class="headerlink" href="#piecewise-gibbs-free-energy" title="Link to this heading">#</a></h3>
+<p>This parameterization uses a piecewise interpolation of the Gibbs free energy between specified values, with a constant heat capacity between each pair of
+interpolation points. This model is implemented by the C++ class <a class="reference external" href="../../cxx/d4/d9e/classCantera_1_1Mu0Poly.html">Mu0Poly</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>A piecewise Gibbs parameterization can be defined in the YAML format by specifying
+<a class="reference internal" href="../../yaml/species.html#sec-yaml-constcp"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">piecewise-Gibbs</span></code></span></a> as the <code class="docutils literal notranslate"><span class="pre">model</span></code> in the species <code class="docutils literal notranslate"><span class="pre">thermo</span></code> field.</p>
+</div>
+</section>
+</section>
+<section id="models-for-species-contributions-to-the-equation-of-state">
+<h2>Models for Species Contributions to the Equation of State<a class="headerlink" href="#models-for-species-contributions-to-the-equation-of-state" title="Link to this heading">#</a></h2>
+<p>Besides enthalpy, entropy, and heat capacity data, some phase models require additional
+parameters that describe how each species affects the mechanical equation of state.
+These models are used in combination with one of the above parameterizations for the
+standard state enthalpy, entropy, and heat capacity. This applies to most models that
+represent condensed phases.</p>
+<section id="constant-volume-model">
+<h3>Constant Volume Model<a class="headerlink" href="#constant-volume-model" title="Link to this heading">#</a></h3>
+<p>This species equation of state model can be used for phase models that require standard
+state density information for each species, and simply specifies a constant specific
+volume, density or molar density for the species. Implemented by the C++ class
+<a class="reference external" href="../../cxx/da/d33/classCantera_1_1PDSS__ConstVol.html">PDSS_ConstVol</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>A constant volume parameterization can be defined in the YAML format by specifying
+<a class="reference internal" href="../../yaml/species.html#sec-yaml-eos-constant-volume"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">constant-volume</span></code></span></a> as the <code class="docutils literal notranslate"><span class="pre">model</span></code> in the species
+<code class="docutils literal notranslate"><span class="pre">equation-of-state</span></code> field.</p>
+</div>
+</section>
+<section id="temperature-dependent-density">
+<h3>Temperature-dependent Density<a class="headerlink" href="#temperature-dependent-density" title="Link to this heading">#</a></h3>
+<p>This species equation of state model can be used for phase models that require the
+standard state molar volume <span class="math notranslate nohighlight">\(V_{m,k}^\circ\)</span> for each species <span class="math notranslate nohighlight">\(k\)</span>. The standard state
+density <span class="math notranslate nohighlight">\(\rho^\circ_k\)</span> is described using a third-order polynomial:</p>
+<div class="math notranslate nohighlight">
+\[  \rho^\circ_k(T) = \frac{W_k}{V_{m,k}^\circ(T)} = a_0 + a_1 T + a_2 T^2 + a_3 T^3  \]</div>
+<p>where <span class="math notranslate nohighlight">\(W_k\)</span> is the molecular weight of the species. This model is implemented by class
+<a class="reference external" href="../../cxx/d0/d2f/classCantera_1_1PDSS__SSVol.html">PDSS_SSVol</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>A temperature-dependent density parameterization can be defined in the YAML format by
+specifying <a class="reference internal" href="../../yaml/species.html#sec-yaml-eos-density-temperature-polynomial"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">density-temperature-polynomial</span></code></span></a>
+as the <code class="docutils literal notranslate"><span class="pre">model</span></code> in the species <code class="docutils literal notranslate"><span class="pre">equation-of-state</span></code> field.</p>
+</div>
+</section>
+<section id="temperature-dependent-molar-volume">
+<h3>Temperature-dependent Molar Volume<a class="headerlink" href="#temperature-dependent-molar-volume" title="Link to this heading">#</a></h3>
+<p>This species equation of state model can be used for phase models that require the
+standard state molar volume <span class="math notranslate nohighlight">\(V_{m,k}^\circ\)</span> for each species <span class="math notranslate nohighlight">\(k\)</span>. The standard state
+molar volume is described using a third-order polynomial:</p>
+<div class="math notranslate nohighlight">
+\[  V_{m,k}^\circ(T) = a_0 + a_1 T + a_2 T^2 + a_3 T^3  \]</div>
+<p>This model is implemented by class <a class="reference external" href="../../cxx/d0/d2f/classCantera_1_1PDSS__SSVol.html">PDSS_SSVol</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>A temperature-dependent molar volume parameterization can be defined in the YAML format
+by specifying <a class="reference internal" href="../../yaml/species.html#sec-yaml-eos-molar-volume-temperature-polynomial"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">molar-volume-temperature-polynomial</span></code></span></a>
+as the <code class="docutils literal notranslate"><span class="pre">model</span></code> in the species <code class="docutils literal notranslate"><span class="pre">equation-of-state</span></code> field.</p>
+</div>
+</section>
+<section id="peng-robinson-equation-of-state">
+<h3>Peng-Robinson Equation of State<a class="headerlink" href="#peng-robinson-equation-of-state" title="Link to this heading">#</a></h3>
+<p>This species equation of state model is parameterized using the coefficients <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>,
+and <span class="math notranslate nohighlight">\(\omega\)</span> for a pure species that follows the Peng-Robinson equation of state:</p>
+<div class="math notranslate nohighlight">
+\[  P = \frac{RT}{V_m - b} - \frac{a\alpha}{V_m^2 + 2bV_m - b^2}  \]</div>
+<p>where <span class="math notranslate nohighlight">\(V_m\)</span> is the molar volume,</p>
+<div class="math notranslate nohighlight">
+\[  \alpha = \left[ 1 + \kappa \left(1 - \sqrt{T_r}\right) \right]^2  \]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split} \kappa =
+\begin{cases}
+0.37464 + 1.54226\omega - 0.26992\omega^2,  &amp; \omega \le 0.491 \\
+0.379642 + 1.487503\omega - 0.164423\omega^2 + 0.016667\omega^3 , &amp; \omega &gt; 0.491
+\end{cases}
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(T_r = T / T_c\)</span> is the reduced temperature, and <span class="math notranslate nohighlight">\(T_c\)</span> is the critical temperature.</p>
+<p>These pure-species properties are combined in the multi-species Peng-Robinson phase
+model, implemented by class <a class="reference external" href="../../cxx/d3/ddc/classCantera_1_1PengRobinson.html">PengRobinson</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>A Peng-Robinson parameterization for a species can be defined in the YAML format by
+specifying <a class="reference internal" href="../../yaml/species.html#sec-yaml-eos-peng-robinson"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Peng-Robinson</span></code></span></a> as the <code class="docutils literal notranslate"><span class="pre">model</span></code> in the species
+<code class="docutils literal notranslate"><span class="pre">equation-of-state</span></code> field.</p>
+</div>
+</section>
+<section id="redlich-kwong-equation-of-state">
+<h3>Redlich-Kwong Equation of State<a class="headerlink" href="#redlich-kwong-equation-of-state" title="Link to this heading">#</a></h3>
+<p>This species equation of state model is parameterized using the coefficients <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>
+for a pure species that follows the Redlich-Kwong equation of state:</p>
+<div class="math notranslate nohighlight">
+\[  P = \frac{RT}{V_m-b} - \frac{a}{\sqrt{T} V_m (V_m + b) }  \]</div>
+<p>where <span class="math notranslate nohighlight">\(V_m\)</span> is the molar volume.</p>
+<p>These pure-species properties are combined in the multi-species Redlich-Kwong phase
+model, implemented by class <a class="reference external" href="../../cxx/d6/d29/classCantera_1_1RedlichKwongMFTP.html">RedlichKwongMFTP</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>A Redlich-Kwong parameterization for a species can be defined in the YAML format by
+specifying <a class="reference internal" href="../../yaml/species.html#sec-yaml-eos-redlich-kwong"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Redlich-Kwong</span></code></span></a> as the <code class="docutils literal notranslate"><span class="pre">model</span></code> in the species
+<code class="docutils literal notranslate"><span class="pre">equation-of-state</span></code> field.</p>
+</div>
+</section>
+</section>
+<section id="other-species-equation-of-state-models">
+<h2>Other Species Equation of State Models<a class="headerlink" href="#other-species-equation-of-state-models" title="Link to this heading">#</a></h2>
+<p>The following models provide complete standard state parameterizations for a species,
+including molar volume, enthalpy, entropy, and heat capacity.</p>
+<section id="helgeson-kirkham-flowers-tanger-model">
+<h3>Helgeson-Kirkham-Flowers-Tanger Model<a class="headerlink" href="#helgeson-kirkham-flowers-tanger-model" title="Link to this heading">#</a></h3>
+<p>The Helgeson-Kirkham-Flowers-Tanger model for aqueous species. Implemented by the C++
+class <a class="reference external" href="../../cxx/d9/d18/classCantera_1_1PDSS__HKFT.html">PDSS_HKFT</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>An <a class="reference internal" href="../glossary.html#term-HKFT"><span class="xref std std-term">HKFT</span></a> parameterization can be defined in the YAML format by specifying
+<a class="reference internal" href="../../yaml/species.html#sec-yaml-eos-hkft"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">HKFT</span></code></span></a> as the <code class="docutils literal notranslate"><span class="pre">model</span></code> in the species <code class="docutils literal notranslate"><span class="pre">equation-of-state</span></code> field.</p>
+</div>
+</section>
+<section id="liquid-water">
+<h3>Liquid Water<a class="headerlink" href="#liquid-water" title="Link to this heading">#</a></h3>
+<p>A model for liquid water that uses the IAPWS95 formulation <span id="id2">[<a class="reference internal" href="../bibliography.html#id55" title="W. Wagner and A. Pruß. The IAPWS formulation 1995 for the thermodynamic properties of ordinary water substance for general and scientific use. Journal of Physical and Chemical Reference Data, 31(2):387–535, 2002. URL: https://dx.doi.org/10.1063/1.1461829, doi:10.1063/1.1461829.">Wagner and Pruß, 2002</a>]</span>.
+Implemented by the C++ class <a class="reference external" href="../../cxx/de/d64/classCantera_1_1PDSS__Water.html">PDSS_Water</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>A liquid water parameterization can be defined in the YAML format by specifying
+<a class="reference internal" href="../../yaml/species.html#sec-yaml-eos-liquid-water-iapws95"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">liquid-water-IAPWS95</span></code></span></a> as the <code class="docutils literal notranslate"><span class="pre">model</span></code> in the
+species <code class="docutils literal notranslate"><span class="pre">equation-of-state</span></code> field.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models-for-species-standard-state-enthalpy-entropy-and-heat-capacity">Models for Species Standard State Enthalpy, Entropy, and Heat Capacity</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-nasa-7-coefficient-polynomial-parameterization">The NASA 7-Coefficient Polynomial Parameterization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-nasa-9-coefficient-polynomial-parameterization">The NASA 9-Coefficient Polynomial Parameterization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shomate-parameterization">The Shomate Parameterization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-heat-capacity">Constant Heat Capacity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#piecewise-gibbs-free-energy">Piecewise Gibbs Free Energy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models-for-species-contributions-to-the-equation-of-state">Models for Species Contributions to the Equation of State</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-volume-model">Constant Volume Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-dependent-density">Temperature-dependent Density</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-dependent-molar-volume">Temperature-dependent Molar Volume</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#peng-robinson-equation-of-state">Peng-Robinson Equation of State</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redlich-kwong-equation-of-state">Redlich-Kwong Equation of State</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-species-equation-of-state-models">Other Species Equation of State Models</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#helgeson-kirkham-flowers-tanger-model">Helgeson-Kirkham-Flowers-Tanger Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#liquid-water">Liquid Water</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/reference/thermo/species-thermo.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

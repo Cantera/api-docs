@@ -1,0 +1,1443 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Configuration Options &#8212; Cantera 3.1.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'develop/compiling/config-options';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Special Compiling Cases" href="special-cases.html" />
+    <link rel="prev" title="Software used by Cantera" href="dependencies.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Compiling Cantera from Source</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="compilation-reqs.html">Compilation Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source-code.html">Downloading the Cantera source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure-build.html">Configure and Build Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">Software used by Cantera</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Configuration Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="special-cases.html">Special Compiling Cases</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">How Cantera Works</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reactor-integration.html">How Time Integration of Reactor Networks Works</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Adding New Features to Cantera</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing to Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../style-guidelines.html">Code Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vscode-tips.html">Configuring Visual Studio Code for Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-tests.html">Writing Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running-tests.html">Running Tests and Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-examples.html">Writing Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc-formatting.html">Formatting Documentation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Releasing &amp; Distributing Cantera</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../distribution-packages/release-checklist.html">Making a New Cantera Release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distribution-packages/pypi-sdist-wheel.html">Distributing sdist and Wheel Packages via PyPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distribution-packages/conda.html">Distributing Conda Package via conda-forge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distribution-packages/ubuntu-ppa.html">Distributing for Ubuntu via a Personal Package Archive (PPA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distribution-packages/windows-and-macos.html">Distributing for Windows and macOS</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Develop</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Configuratio...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="configuration-options">
+<span id="scons-config"></span><h1>Configuration Options<a class="headerlink" href="#configuration-options" title="Link to this heading">#</a></h1>
+<p>This document lists the options available for compiling Cantera with
+SCons.</p>
+<p>The default values are operating-system dependent. To see the defaults for your current
+operating system, run the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nb">help</span>
+</pre></div>
+</div>
+<p>from the command prompt.</p>
+<p>The following options can be passed to SCons to customize the Cantera
+build process. They should be given in the form:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span>build<span class="w"> </span><span class="nv">option1</span><span class="o">=</span>value1<span class="w"> </span><span class="nv">option2</span><span class="o">=</span>value2
+</pre></div>
+</div>
+<p>Variables set in this way will be stored in the <code class="docutils literal notranslate"><span class="pre">cantera.conf</span></code> file and reused
+automatically on subsequent invocations of SCons. Alternatively, the
+configuration options can be entered directly into <code class="docutils literal notranslate"><span class="pre">cantera.conf</span></code> before
+running <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">build</span></code>. The format of this file is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">option1</span> <span class="o">=</span> <span class="s1">&#39;value1&#39;</span>
+<span class="n">option2</span> <span class="o">=</span> <span class="s1">&#39;value2&#39;</span>
+</pre></div>
+</div>
+<section id="options-list">
+<h2>Options List<a class="headerlink" href="#options-list" title="Link to this heading">#</a></h2>
+<ul class="simple" id="sconsopt-msvc-version">
+<li><p><code class="docutils literal notranslate"><span class="pre">msvc_version</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Version of Visual Studio to use. The default is the newest installed version.
+Note that since multiple MSVC toolsets can be installed for a single version of
+Visual Studio, you probably want to use <code class="docutils literal notranslate"><span class="pre">msvc_toolset_version</span></code> unless you
+specifically installed multiple versions of Visual Studio. Windows MSVC only.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul id="sconsopt-msvc-toolset-version">
+<li><p><code class="docutils literal notranslate"><span class="pre">msvc_toolset_version</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Version of the MSVC toolset to use. The default is the default version for
+the given <code class="docutils literal notranslate"><span class="pre">msvc_version</span></code>. Note that the toolset selected here must be
+installed in the MSVC version selected by <code class="docutils literal notranslate"><span class="pre">msvc_version</span></code>. The default
+toolsets associated with various Visual Studio versions are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">14.1</span></code> (<code class="docutils literal notranslate"><span class="pre">14.1x</span></code>): Visual Studio 2017</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">14.2</span></code> (<code class="docutils literal notranslate"><span class="pre">14.2x</span></code>): Visual Studio 2019</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">14.3</span></code> (<code class="docutils literal notranslate"><span class="pre">14.3x</span></code>): Visual Studio 2022.</p></li>
+</ul>
+<p>For version numbers in parentheses, <code class="docutils literal notranslate"><span class="pre">x</span></code> is a placeholder for a minor version
+number. Windows MSVC only.</p>
+<ul class="simple">
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-target-arch">
+<li><p><code class="docutils literal notranslate"><span class="pre">target_arch</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'amd64'</span></code> | <code class="docutils literal notranslate"><span class="pre">'x86'</span></code> ]
+Target architecture. The default is the same architecture as the
+installed version of Python. Windows only.</p>
+<ul>
+<li><p>default: platform dependent</p>
+<ul>
+<li><p>Windows: <code class="docutils literal notranslate"><span class="pre">'amd64'</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-toolchain">
+<li><p><code class="docutils literal notranslate"><span class="pre">toolchain</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'msvc'</span></code> | <code class="docutils literal notranslate"><span class="pre">'mingw'</span></code> | <code class="docutils literal notranslate"><span class="pre">'intel'</span></code> ]
+The preferred compiler toolchain. If MSVC is not on the path but
+<code class="docutils literal notranslate"><span class="pre">g++</span></code> is on the path, <code class="docutils literal notranslate"><span class="pre">mingw</span></code> is used as a backup. Windows only.</p>
+<ul>
+<li><p>default: platform dependent</p>
+<ul>
+<li><p>Windows: <code class="docutils literal notranslate"><span class="pre">'msvc'</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-ar">
+<li><p><code class="docutils literal notranslate"><span class="pre">AR</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+The archiver to use.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'${AR}'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-cxx">
+<li><p><code class="docutils literal notranslate"><span class="pre">CXX</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+The C++ compiler to use.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'${CXX}'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-cxx-flags">
+<li><p><code class="docutils literal notranslate"><span class="pre">cxx_flags</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Compiler flags passed to the C++ compiler only. Separate multiple
+options with spaces, for example, <code class="docutils literal notranslate"><span class="pre">&quot;cxx_flags='-g</span> <span class="pre">-Wextra</span> <span class="pre">-O3</span> <span class="pre">-std=c++20'&quot;</span></code></p>
+<ul>
+<li><p>default: compiler dependent</p>
+<ul>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">MSVC</span></code>: <code class="docutils literal notranslate"><span class="pre">'/EHsc</span> <span class="pre">/std:c++17</span> <span class="pre">/utf-8'</span></code></p></li>
+<li><p>Otherwise: <code class="docutils literal notranslate"><span class="pre">'-std=c++17'</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-cc">
+<li><p><code class="docutils literal notranslate"><span class="pre">CC</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+The C compiler to use. This is only used to compile CVODE.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'${CC}'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-cc-flags">
+<li><p><code class="docutils literal notranslate"><span class="pre">cc_flags</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Compiler flags passed to both the C and C++ compilers, regardless of
+optimization level.</p>
+<ul>
+<li><p>default: compiler dependent</p>
+<ul>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">MSVC</span></code>: <code class="docutils literal notranslate"><span class="pre">'/MD</span> <span class="pre">/nologo</span> <span class="pre">/D_SCL_SECURE_NO_WARNINGS</span> <span class="pre">/D_CRT_SECURE_NO_WARNINGS'</span></code></p></li>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">Clang</span></code>: <code class="docutils literal notranslate"><span class="pre">'-fcolor-diagnostics'</span></code></p></li>
+<li><p>Otherwise: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-prefix">
+<li><p><code class="docutils literal notranslate"><span class="pre">prefix</span></code>: [ <code class="docutils literal notranslate"><span class="pre">path/to/prefix</span></code> ]
+Set this to the directory where Cantera should be installed. If the Python
+executable found during compilation is managed by <code class="docutils literal notranslate"><span class="pre">conda</span></code>, the installation
+<code class="docutils literal notranslate"><span class="pre">prefix</span></code> defaults to the corresponding environment and the <code class="docutils literal notranslate"><span class="pre">conda</span></code> layout
+will be used for installation (specifying any of the options <code class="docutils literal notranslate"><span class="pre">prefix</span></code>,
+<code class="docutils literal notranslate"><span class="pre">python_prefix</span></code>, <code class="docutils literal notranslate"><span class="pre">python_cmd</span></code>, or <code class="docutils literal notranslate"><span class="pre">layout</span></code> will override this default). On
+Windows systems, <code class="docutils literal notranslate"><span class="pre">$ProgramFiles</span></code> typically refers to <code class="docutils literal notranslate"><span class="pre">&quot;C:\Program</span> <span class="pre">Files&quot;</span></code>.</p>
+<ul>
+<li><p>default: platform dependent</p>
+<ul>
+<li><p>Windows: <code class="docutils literal notranslate"><span class="pre">'$ProgramFiles\Cantera'</span></code></p></li>
+<li><p>Otherwise: <code class="docutils literal notranslate"><span class="pre">'/usr/local'</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-libdirname">
+<li><p><code class="docutils literal notranslate"><span class="pre">libdirname</span></code>: [ <code class="docutils literal notranslate"><span class="pre">path/to/libdirname</span></code> ]
+Set this to the directory where Cantera libraries should be installed.
+Some distributions (for example, Fedora/RHEL) use <code class="docutils literal notranslate"><span class="pre">lib64</span></code> instead of <code class="docutils literal notranslate"><span class="pre">lib</span></code>
+on 64-bit systems or could use some other library directory name instead of
+<code class="docutils literal notranslate"><span class="pre">lib</span></code>, depending on architecture and profile (for example, Gentoo <code class="docutils literal notranslate"><span class="pre">libx32</span></code>
+on x32 profile). If the user didn’t set the <code class="docutils literal notranslate"><span class="pre">libdirname</span></code> configuration
+variable, set it to the default value <code class="docutils literal notranslate"><span class="pre">lib</span></code></p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'lib'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-python-package">
+<li><p><code class="docutils literal notranslate"><span class="pre">python_package</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'n'</span></code> | <code class="docutils literal notranslate"><span class="pre">'y'</span></code> | <code class="docutils literal notranslate"><span class="pre">'full'</span></code> | <code class="docutils literal notranslate"><span class="pre">'none'</span></code> | <code class="docutils literal notranslate"><span class="pre">'default'</span></code> | <code class="docutils literal notranslate"><span class="pre">'minimal'</span></code> ]
+Set this to <code class="docutils literal notranslate"><span class="pre">y</span></code> to build the Python interface, including conversion
+scripts for CHEMKIN, CTI, and CTML input files. Set this to <code class="docutils literal notranslate"><span class="pre">n</span></code> to
+skip building the Python interface. Building the Python interface
+requires the Python headers, Cython, and NumPy. Testing the Python
+interface further requires ruamel.yaml and pytest. The default
+behavior is to build the full Python module for whichever version of
+Python is running SCons if the required prerequisites (NumPy and
+Cython) are installed. Note: <code class="docutils literal notranslate"><span class="pre">y</span></code> is a synonym for <code class="docutils literal notranslate"><span class="pre">full</span></code> and <code class="docutils literal notranslate"><span class="pre">n</span></code> is a
+synonym for <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'default'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-python-cmd">
+<li><p><code class="docutils literal notranslate"><span class="pre">python_cmd</span></code>: [ <code class="docutils literal notranslate"><span class="pre">path/to/python_cmd</span></code> ]
+Cantera needs to know where to find the Python interpreter. If
+<code class="docutils literal notranslate"><span class="pre">PYTHON_CMD</span></code> is not set, then the configuration process will use the
+same Python interpreter being used by SCons.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'${PYTHON_CMD}'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-python-prefix">
+<li><p><code class="docutils literal notranslate"><span class="pre">python_prefix</span></code>: [ <code class="docutils literal notranslate"><span class="pre">path/to/python_prefix</span></code> ]
+Use this option if you want to install the Cantera Python package to
+an alternate location. On Unix-like systems, the default is the same
+as the <code class="docutils literal notranslate"><span class="pre">prefix</span></code> option. If the <code class="docutils literal notranslate"><span class="pre">python_prefix</span></code> option is set to
+the empty string or the <code class="docutils literal notranslate"><span class="pre">prefix</span></code> option is not set, then the package
+will be installed to the system default <code class="docutils literal notranslate"><span class="pre">site-packages</span></code> directory.
+To install to the current user’s <code class="docutils literal notranslate"><span class="pre">site-packages</span></code> directory, use
+<code class="docutils literal notranslate"><span class="pre">python_prefix=USER</span></code>.</p>
+<ul>
+<li><p>default: platform dependent</p>
+<ul>
+<li><p>Otherwise: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-f90-interface">
+<li><p><code class="docutils literal notranslate"><span class="pre">f90_interface</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'n'</span></code> | <code class="docutils literal notranslate"><span class="pre">'y'</span></code> | <code class="docutils literal notranslate"><span class="pre">'default'</span></code> ]
+This variable controls whether the Fortran 90/95 interface will be
+built. If set to <code class="docutils literal notranslate"><span class="pre">default</span></code>, the builder will look for a compatible
+Fortran compiler in the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable, and compile
+the Fortran 90 interface if one is found.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'default'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-fortran">
+<li><p><code class="docutils literal notranslate"><span class="pre">FORTRAN</span></code>: [ <code class="docutils literal notranslate"><span class="pre">path/to/FORTRAN</span></code> ]
+The Fortran (90) compiler. If unspecified, the builder will look for a
+compatible compiler (pgfortran, gfortran, ifort, ifx, g95) in the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>
+environment variable. Used only for compiling the Fortran 90 interface.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-fortranflags">
+<li><p><code class="docutils literal notranslate"><span class="pre">FORTRANFLAGS</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Compilation options for the Fortran (90) compiler.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'-O3'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-coverage">
+<li><p><code class="docutils literal notranslate"><span class="pre">coverage</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+Enable collection of code coverage information with gcov.
+Available only when compiling with gcc.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'no'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-doxygen-docs">
+<li><p><code class="docutils literal notranslate"><span class="pre">doxygen_docs</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+Build HTML documentation for the C++ interface using Doxygen.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'no'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-sphinx-docs">
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx_docs</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+Build HTML documentation for Cantera using Sphinx.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'no'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-run-examples">
+<li><p><code class="docutils literal notranslate"><span class="pre">run_examples</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+Run examples to generate plots and outputs for Sphinx Gallery. Disable to
+speed up doc builds when not working on the examples or if dependencies of
+the examples are not available.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'yes'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-sphinx-cmd">
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx_cmd</span></code>: [ <code class="docutils literal notranslate"><span class="pre">path/to/sphinx_cmd</span></code> ]
+Command to use for building the Sphinx documentation.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'sphinx-build'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-sphinx-options">
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx_options</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Options passed to the <code class="docutils literal notranslate"><span class="pre">sphinx_cmd</span></code> command line. Separate multiple
+options with spaces, for example, <code class="docutils literal notranslate"><span class="pre">&quot;-W</span> <span class="pre">--keep-going&quot;</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'-W</span> <span class="pre">--keep-going'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-example-data">
+<li><p><code class="docutils literal notranslate"><span class="pre">example_data</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+Install data files used in examples. These files will be accessible on the
+Cantera data path using a prefix, such as <code class="docutils literal notranslate"><span class="pre">example_data/mech.yaml</span></code></p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'yes'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-system-eigen">
+<li><p><code class="docutils literal notranslate"><span class="pre">system_eigen</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'n'</span></code> | <code class="docutils literal notranslate"><span class="pre">'y'</span></code> | <code class="docutils literal notranslate"><span class="pre">'default'</span></code> ]
+Select whether to use Eigen from a system installation (<code class="docutils literal notranslate"><span class="pre">y</span></code>), from a
+Git submodule (<code class="docutils literal notranslate"><span class="pre">n</span></code>), or to decide automatically (<code class="docutils literal notranslate"><span class="pre">default</span></code>). If Eigen
+is not installed directly into a system include directory, for example, it
+is installed in <code class="docutils literal notranslate"><span class="pre">/opt/include/eigen3/Eigen</span></code>, then you will need to add
+<code class="docutils literal notranslate"><span class="pre">/opt/include/eigen3</span></code> to <code class="docutils literal notranslate"><span class="pre">extra_inc_dirs</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'default'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-system-fmt">
+<li><p><code class="docutils literal notranslate"><span class="pre">system_fmt</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'n'</span></code> | <code class="docutils literal notranslate"><span class="pre">'y'</span></code> | <code class="docutils literal notranslate"><span class="pre">'default'</span></code> ]
+Select whether to use the fmt library from a system installation
+(<code class="docutils literal notranslate"><span class="pre">y</span></code>), from a Git submodule (<code class="docutils literal notranslate"><span class="pre">n</span></code>), or to decide automatically
+(<code class="docutils literal notranslate"><span class="pre">default</span></code>). If you do not want to use the Git submodule and fmt
+is not installed directly into system include and library
+directories, then you will need to add those directories to
+<code class="docutils literal notranslate"><span class="pre">extra_inc_dirs</span></code> and <code class="docutils literal notranslate"><span class="pre">extra_lib_dirs</span></code>. This installation of fmt
+must include the shared version of the library, for example,
+<code class="docutils literal notranslate"><span class="pre">libfmt.so</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'default'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-hdf-support">
+<li><p><code class="docutils literal notranslate"><span class="pre">hdf_support</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'n'</span></code> | <code class="docutils literal notranslate"><span class="pre">'y'</span></code> | <code class="docutils literal notranslate"><span class="pre">'default'</span></code> ]
+Select whether to support HDF5 container files natively (<code class="docutils literal notranslate"><span class="pre">y</span></code>), disable HDF5
+support (<code class="docutils literal notranslate"><span class="pre">n</span></code>), or to decide automatically based on the system configuration
+(<code class="docutils literal notranslate"><span class="pre">default</span></code>). Native HDF5 support uses the HDF5 library as well as the
+header-only HighFive C++ wrapper (see option <code class="docutils literal notranslate"><span class="pre">system_highfive</span></code>). Specifying
+<code class="docutils literal notranslate"><span class="pre">hdf_include</span></code> or <code class="docutils literal notranslate"><span class="pre">hdf_libdir</span></code> changes the default to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'default'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-hdf-include">
+<li><p><code class="docutils literal notranslate"><span class="pre">hdf_include</span></code>: [ <code class="docutils literal notranslate"><span class="pre">path/to/hdf_include</span></code> ]
+The directory where the HDF5 header files are installed. This should be the
+directory that contains files <code class="docutils literal notranslate"><span class="pre">H5Version.h</span></code> and <code class="docutils literal notranslate"><span class="pre">H5Public.h</span></code>, amongst others.
+Not needed if the headers are installed in a standard location, for example,
+<code class="docutils literal notranslate"><span class="pre">/usr/include</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-hdf-libdir">
+<li><p><code class="docutils literal notranslate"><span class="pre">hdf_libdir</span></code>: [ <code class="docutils literal notranslate"><span class="pre">path/to/hdf_libdir</span></code> ]
+The directory where the HDF5 libraries are installed. Not needed if the
+libraries are installed in a standard location, for example, <code class="docutils literal notranslate"><span class="pre">/usr/lib</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-system-highfive">
+<li><p><code class="docutils literal notranslate"><span class="pre">system_highfive</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'n'</span></code> | <code class="docutils literal notranslate"><span class="pre">'y'</span></code> | <code class="docutils literal notranslate"><span class="pre">'default'</span></code> ]
+Select whether to use HighFive from a system installation (<code class="docutils literal notranslate"><span class="pre">y</span></code>), from a
+Git submodule (<code class="docutils literal notranslate"><span class="pre">n</span></code>), or to decide automatically (<code class="docutils literal notranslate"><span class="pre">default</span></code>). If HighFive
+is not installed directly into a system include directory, for example, it
+is installed in <code class="docutils literal notranslate"><span class="pre">/opt/include/HighFive</span></code>, then you will need to add
+<code class="docutils literal notranslate"><span class="pre">/opt/include/HighFive</span></code> to <code class="docutils literal notranslate"><span class="pre">extra_inc_dirs</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'default'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-system-yamlcpp">
+<li><p><code class="docutils literal notranslate"><span class="pre">system_yamlcpp</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'n'</span></code> | <code class="docutils literal notranslate"><span class="pre">'y'</span></code> | <code class="docutils literal notranslate"><span class="pre">'default'</span></code> ]
+Select whether to use the yaml-cpp library from a system installation
+(<code class="docutils literal notranslate"><span class="pre">y</span></code>), from a Git submodule (<code class="docutils literal notranslate"><span class="pre">n</span></code>), or to decide automatically
+(<code class="docutils literal notranslate"><span class="pre">default</span></code>). If yaml-cpp is not installed directly into system
+include and library directories, then you will need to add those
+directories to <code class="docutils literal notranslate"><span class="pre">extra_inc_dirs</span></code> and <code class="docutils literal notranslate"><span class="pre">extra_lib_dirs</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'default'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-system-sundials">
+<li><p><code class="docutils literal notranslate"><span class="pre">system_sundials</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'n'</span></code> | <code class="docutils literal notranslate"><span class="pre">'y'</span></code> | <code class="docutils literal notranslate"><span class="pre">'default'</span></code> ]
+Select whether to use SUNDIALS from a system installation (<code class="docutils literal notranslate"><span class="pre">y</span></code>), from
+a Git submodule (<code class="docutils literal notranslate"><span class="pre">n</span></code>), or to decide automatically (<code class="docutils literal notranslate"><span class="pre">default</span></code>).
+Specifying <code class="docutils literal notranslate"><span class="pre">sundials_include</span></code> or <code class="docutils literal notranslate"><span class="pre">sundials_libdir</span></code> changes the
+default to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'default'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-sundials-include">
+<li><p><code class="docutils literal notranslate"><span class="pre">sundials_include</span></code>: [ <code class="docutils literal notranslate"><span class="pre">path/to/sundials_include</span></code> ]
+The directory where the SUNDIALS header files are installed. This
+should be the directory that contains the <code class="docutils literal notranslate"><span class="pre">&quot;cvodes&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;nvector&quot;</span></code>, etc.
+subdirectories. Not needed if the headers are installed in a
+standard location, for example, <code class="docutils literal notranslate"><span class="pre">/usr/include</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-sundials-libdir">
+<li><p><code class="docutils literal notranslate"><span class="pre">sundials_libdir</span></code>: [ <code class="docutils literal notranslate"><span class="pre">path/to/sundials_libdir</span></code> ]
+The directory where the SUNDIALS static libraries are installed.
+Not needed if the libraries are installed in a standard location,
+for example, <code class="docutils literal notranslate"><span class="pre">/usr/lib</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-system-blas-lapack">
+<li><p><code class="docutils literal notranslate"><span class="pre">system_blas_lapack</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'n'</span></code> | <code class="docutils literal notranslate"><span class="pre">'y'</span></code> | <code class="docutils literal notranslate"><span class="pre">'default'</span></code> ]
+Select whether to use BLAS/LAPACK from a system installation (<code class="docutils literal notranslate"><span class="pre">y</span></code>), use
+Eigen linear algebra support (<code class="docutils literal notranslate"><span class="pre">n</span></code>), or to decide automatically based on
+libraries detected on the system (<code class="docutils literal notranslate"><span class="pre">default</span></code>). Specifying <code class="docutils literal notranslate"><span class="pre">blas_lapack_libs</span></code>
+or <code class="docutils literal notranslate"><span class="pre">blas_lapack_dir</span></code> changes the default to <code class="docutils literal notranslate"><span class="pre">y</span></code>. On macOS, the <code class="docutils literal notranslate"><span class="pre">default</span></code>
+option uses the Accelerate framework, whereas on other operating systems the
+preferred option depends on the CPU manufacturer. In general, OpenBLAS
+(<code class="docutils literal notranslate"><span class="pre">openblas</span></code>) is prioritized over standard libraries (<code class="docutils literal notranslate"><span class="pre">lapack,blas</span></code>), with
+Eigen being used if no suitable BLAS/LAPACK libraries are detected. On Intel
+CPUs, MKL (Windows: <code class="docutils literal notranslate"><span class="pre">mkl_rt</span></code> / Linux: <code class="docutils literal notranslate"><span class="pre">mkl_rt,dl</span></code>) has the highest priority,
+followed by the other options. Note that Eigen is required whether or not
+BLAS/LAPACK libraries are used.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'default'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-blas-lapack-libs">
+<li><p><code class="docutils literal notranslate"><span class="pre">blas_lapack_libs</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Cantera can use BLAS and LAPACK libraries installed on your system if you
+have optimized versions available (see option <code class="docutils literal notranslate"><span class="pre">system_blas_lapack</span></code>). To use
+specific versions of BLAS and LAPACK, set <code class="docutils literal notranslate"><span class="pre">blas_lapack_libs</span></code> to the the list
+of libraries that should be passed to the linker, separated by commas, for
+example, <code class="docutils literal notranslate"><span class="pre">&quot;lapack,blas&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;lapack,f77blas,cblas,atlas&quot;</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-blas-lapack-dir">
+<li><p><code class="docutils literal notranslate"><span class="pre">blas_lapack_dir</span></code>: [ <code class="docutils literal notranslate"><span class="pre">path/to/blas_lapack_dir</span></code> ]
+Directory containing the libraries specified by <code class="docutils literal notranslate"><span class="pre">blas_lapack_libs</span></code>. Not
+needed if the libraries are installed in a standard location, for example,
+<code class="docutils literal notranslate"><span class="pre">/usr/lib</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-lapack-ftn-trailing-underscore">
+<li><p><code class="docutils literal notranslate"><span class="pre">lapack_ftn_trailing_underscore</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+Controls whether the LAPACK functions have a trailing underscore
+in the Fortran libraries.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'yes'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-lapack-ftn-string-len-at-end">
+<li><p><code class="docutils literal notranslate"><span class="pre">lapack_ftn_string_len_at_end</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+Controls whether the LAPACK functions have the string length
+argument at the end of the argument list (<code class="docutils literal notranslate"><span class="pre">yes</span></code>) or after
+each argument (<code class="docutils literal notranslate"><span class="pre">no</span></code>) in the Fortran libraries.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'yes'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-googletest">
+<li><p><code class="docutils literal notranslate"><span class="pre">googletest</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'default'</span></code> | <code class="docutils literal notranslate"><span class="pre">'system'</span></code> | <code class="docutils literal notranslate"><span class="pre">'submodule'</span></code> | <code class="docutils literal notranslate"><span class="pre">'none'</span></code> ]
+Select whether to use gtest/gmock from system
+installation (<code class="docutils literal notranslate"><span class="pre">system</span></code>), from a Git submodule (<code class="docutils literal notranslate"><span class="pre">submodule</span></code>), to decide
+automatically (<code class="docutils literal notranslate"><span class="pre">default</span></code>) or don’t look for gtest/gmock (<code class="docutils literal notranslate"><span class="pre">none</span></code>)
+and don’t run tests that depend on gtest/gmock.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'default'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-env-vars">
+<li><p><code class="docutils literal notranslate"><span class="pre">env_vars</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Environment variables to propagate through to SCons. Either the
+string <code class="docutils literal notranslate"><span class="pre">all</span></code> or a comma separated list of variable names, for example,
+<code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH,HOME</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'PATH,LD_LIBRARY_PATH,DYLD_LIBRARY_PATH,PYTHONPATH,USERPROFILE'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-use-pch">
+<li><p><code class="docutils literal notranslate"><span class="pre">use_pch</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+Use a precompiled-header to speed up compilation</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'yes'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-pch-flags">
+<li><p><code class="docutils literal notranslate"><span class="pre">pch_flags</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Compiler flags when using precompiled-header.</p>
+<ul>
+<li><p>default: compiler dependent</p>
+<ul>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">MSVC</span></code>: <code class="docutils literal notranslate"><span class="pre">'/FIpch/system.h'</span></code></p></li>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">GCC</span></code>: <code class="docutils literal notranslate"><span class="pre">'-include</span> <span class="pre">src/pch/system.h'</span></code></p></li>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">icx</span></code>: <code class="docutils literal notranslate"><span class="pre">'-include-pch</span> <span class="pre">src/pch/system.h.gch'</span></code></p></li>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">Clang</span></code>: <code class="docutils literal notranslate"><span class="pre">'-include-pch</span> <span class="pre">src/pch/system.h.gch'</span></code></p></li>
+<li><p>Otherwise: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-thread-flags">
+<li><p><code class="docutils literal notranslate"><span class="pre">thread_flags</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Compiler and linker flags for POSIX multithreading support.</p>
+<ul>
+<li><p>default: platform dependent</p>
+<ul>
+<li><p>Windows: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+<li><p>macOS: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+<li><p>Otherwise: <code class="docutils literal notranslate"><span class="pre">'-pthread'</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-optimize">
+<li><p><code class="docutils literal notranslate"><span class="pre">optimize</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+Enable extra compiler optimizations specified by the
+<code class="docutils literal notranslate"><span class="pre">optimize_flags</span></code> variable, instead of the flags specified by the
+<code class="docutils literal notranslate"><span class="pre">no_optimize_flags</span></code> variable.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'yes'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-optimize-flags">
+<li><p><code class="docutils literal notranslate"><span class="pre">optimize_flags</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Additional compiler flags passed to the C/C++ compiler when <code class="docutils literal notranslate"><span class="pre">optimize=yes</span></code>.</p>
+<ul>
+<li><p>default: compiler dependent</p>
+<ul>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">MSVC</span></code>: <code class="docutils literal notranslate"><span class="pre">'/O2'</span></code></p></li>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">icx</span></code>: <code class="docutils literal notranslate"><span class="pre">'-O3</span> <span class="pre">-fp-model</span> <span class="pre">precise'</span></code></p></li>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">GCC</span></code>: <code class="docutils literal notranslate"><span class="pre">'-O3</span> <span class="pre">-Wno-inline'</span></code></p></li>
+<li><p>Otherwise: <code class="docutils literal notranslate"><span class="pre">'-O3'</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-no-optimize-flags">
+<li><p><code class="docutils literal notranslate"><span class="pre">no_optimize_flags</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Additional compiler flags passed to the C/C++ compiler when <code class="docutils literal notranslate"><span class="pre">optimize=no</span></code>.</p>
+<ul>
+<li><p>default: compiler dependent</p>
+<ul>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">MSVC</span></code>: <code class="docutils literal notranslate"><span class="pre">'/Od</span> <span class="pre">/Ob0'</span></code></p></li>
+<li><p>Otherwise: <code class="docutils literal notranslate"><span class="pre">'-O0'</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-debug">
+<li><p><code class="docutils literal notranslate"><span class="pre">debug</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+Enable compiler debugging symbols.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'yes'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-debug-flags">
+<li><p><code class="docutils literal notranslate"><span class="pre">debug_flags</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Additional compiler flags passed to the C/C++ compiler when <code class="docutils literal notranslate"><span class="pre">debug=yes</span></code>.</p>
+<ul>
+<li><p>default: compiler dependent</p>
+<ul>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">MSVC</span></code>: <code class="docutils literal notranslate"><span class="pre">'/Zi</span> <span class="pre">/Fd${TARGET}.pdb'</span></code></p></li>
+<li><p>Otherwise: <code class="docutils literal notranslate"><span class="pre">'-g'</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-no-debug-flags">
+<li><p><code class="docutils literal notranslate"><span class="pre">no_debug_flags</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Additional compiler flags passed to the C/C++ compiler when <code class="docutils literal notranslate"><span class="pre">debug=no</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-debug-linker-flags">
+<li><p><code class="docutils literal notranslate"><span class="pre">debug_linker_flags</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Additional options passed to the linker when <code class="docutils literal notranslate"><span class="pre">debug=yes</span></code>.</p>
+<ul>
+<li><p>default: compiler dependent</p>
+<ul>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">MSVC</span></code>: <code class="docutils literal notranslate"><span class="pre">'/DEBUG'</span></code></p></li>
+<li><p>Otherwise: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-no-debug-linker-flags">
+<li><p><code class="docutils literal notranslate"><span class="pre">no_debug_linker_flags</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Additional options passed to the linker when <code class="docutils literal notranslate"><span class="pre">debug=no</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-warning-flags">
+<li><p><code class="docutils literal notranslate"><span class="pre">warning_flags</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Additional compiler flags passed to the C/C++ compiler to enable
+extra warnings. Used only when compiling source code that is part
+of Cantera (for example, excluding code in the <code class="docutils literal notranslate"><span class="pre">ext</span></code> directory).</p>
+<ul>
+<li><p>default: compiler dependent</p>
+<ul>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">MSVC</span></code>: <code class="docutils literal notranslate"><span class="pre">'/W3'</span></code></p></li>
+<li><p>Otherwise: <code class="docutils literal notranslate"><span class="pre">'-Wall'</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-extra-inc-dirs">
+<li><p><code class="docutils literal notranslate"><span class="pre">extra_inc_dirs</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Additional directories to search for header files, with multiple
+directories separated by colons (*nix, macOS) or semicolons (Windows).
+If an active <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment is detected, the corresponding include
+path is automatically added.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-extra-lib-dirs">
+<li><p><code class="docutils literal notranslate"><span class="pre">extra_lib_dirs</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Additional directories to search for libraries, with multiple
+directories separated by colons (*nix, macOS) or semicolons (Windows).
+If an active <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment is detected, the corresponding library
+path is automatically added.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-boost-inc-dir">
+<li><p><code class="docutils literal notranslate"><span class="pre">boost_inc_dir</span></code>: [ <code class="docutils literal notranslate"><span class="pre">path/to/boost_inc_dir</span></code> ]
+Location of the Boost header files. Not needed if the headers are
+installed in a standard location, for example, <code class="docutils literal notranslate"><span class="pre">/usr/include</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-stage-dir">
+<li><p><code class="docutils literal notranslate"><span class="pre">stage_dir</span></code>: [ <code class="docutils literal notranslate"><span class="pre">path/to/stage_dir</span></code> ]
+Directory relative to the Cantera source directory to be
+used as a staging area for building for example, a Debian
+package. If specified, ‘scons install’ will install files
+to <code class="docutils literal notranslate"><span class="pre">stage_dir/prefix/...</span></code>.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-logging">
+<li><p><code class="docutils literal notranslate"><span class="pre">logging</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'debug'</span></code> | <code class="docutils literal notranslate"><span class="pre">'info'</span></code> | <code class="docutils literal notranslate"><span class="pre">'warning'</span></code> | <code class="docutils literal notranslate"><span class="pre">'error'</span></code> | <code class="docutils literal notranslate"><span class="pre">'default'</span></code> ]
+Select logging level for SCons output. By default, logging messages use
+the <code class="docutils literal notranslate"><span class="pre">info</span></code> level for ‘scons build’ and the <code class="docutils literal notranslate"><span class="pre">warning</span></code> level for all other
+commands. In case the SCons option <code class="docutils literal notranslate"><span class="pre">--silent</span></code> is passed, all messages below
+the <code class="docutils literal notranslate"><span class="pre">error</span></code> level are suppressed.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'default'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-gtest-flags">
+<li><p><code class="docutils literal notranslate"><span class="pre">gtest_flags</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Additional options passed to each GTest test suite, for example,
+<code class="docutils literal notranslate"><span class="pre">--gtest_filter=*pattern*</span></code>. Separate multiple options with spaces.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-renamed-shared-libraries">
+<li><p><code class="docutils literal notranslate"><span class="pre">renamed_shared_libraries</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+If this option is turned on, the shared libraries that are created
+will be renamed to have a <code class="docutils literal notranslate"><span class="pre">_shared</span></code> extension added to their base name.
+If not, the base names will be the same as the static libraries.
+In some cases this simplifies subsequent linking environments with
+static libraries and avoids a bug with using valgrind with
+the <code class="docutils literal notranslate"><span class="pre">-static</span></code> linking flag.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'yes'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-versioned-shared-library">
+<li><p><code class="docutils literal notranslate"><span class="pre">versioned_shared_library</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+If enabled, create a versioned shared library, with symlinks to the
+more generic library name, for example, <code class="docutils literal notranslate"><span class="pre">libcantera_shared.so.2.5.0</span></code> as the
+actual library and <code class="docutils literal notranslate"><span class="pre">libcantera_shared.so</span></code> and <code class="docutils literal notranslate"><span class="pre">libcantera_shared.so.2</span></code>
+as symlinks.</p>
+<ul>
+<li><p>default: compiler dependent</p>
+<ul>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">mingw</span></code>: <code class="docutils literal notranslate"><span class="pre">'no'</span></code></p></li>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">MSVC</span></code>: <code class="docutils literal notranslate"><span class="pre">'no'</span></code></p></li>
+<li><p>Otherwise: <code class="docutils literal notranslate"><span class="pre">'yes'</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-use-rpath-linkage">
+<li><p><code class="docutils literal notranslate"><span class="pre">use_rpath_linkage</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+If enabled, link to all shared libraries using <code class="docutils literal notranslate"><span class="pre">rpath</span></code>, that is, a fixed
+run-time search path for dynamic library loading.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'yes'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-openmp-flag">
+<li><p><code class="docutils literal notranslate"><span class="pre">openmp_flag</span></code>: [ <code class="docutils literal notranslate"><span class="pre">string</span></code> ]
+Compiler flags used for multiprocessing (only used to generate sample build
+scripts).</p>
+<ul>
+<li><p>default: compiler dependent</p>
+<ul>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">MSVC</span></code>: <code class="docutils literal notranslate"><span class="pre">'/openmp'</span></code></p></li>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">icx</span></code>: <code class="docutils literal notranslate"><span class="pre">'-qopenmp'</span></code></p></li>
+<li><p>If using <code class="docutils literal notranslate"><span class="pre">apple-clang</span></code>: <code class="docutils literal notranslate"><span class="pre">'-Xpreprocessor</span> <span class="pre">-fopenmp'</span></code></p></li>
+<li><p>Otherwise: <code class="docutils literal notranslate"><span class="pre">'-fopenmp'</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-layout">
+<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'standard'</span></code> | <code class="docutils literal notranslate"><span class="pre">'compact'</span></code> | <code class="docutils literal notranslate"><span class="pre">'conda'</span></code> ]
+The layout of the directory structure. <code class="docutils literal notranslate"><span class="pre">standard</span></code> installs files to
+several subdirectories under ‘prefix’, for example, <code class="docutils literal notranslate"><span class="pre">prefix/bin</span></code>,
+<code class="docutils literal notranslate"><span class="pre">prefix/include/cantera</span></code>, <code class="docutils literal notranslate"><span class="pre">prefix/lib</span></code> etc. This layout is best used in
+conjunction with <code class="docutils literal notranslate"><span class="pre">&quot;prefix='/usr/local'&quot;</span></code>. <code class="docutils literal notranslate"><span class="pre">compact</span></code> puts all installed files
+in the subdirectory defined by ‘prefix’. This layout is best with a prefix
+like <code class="docutils literal notranslate"><span class="pre">/opt/cantera</span></code>. If the Python executable found during compilation is
+managed by <code class="docutils literal notranslate"><span class="pre">conda</span></code>, the layout will default to <code class="docutils literal notranslate"><span class="pre">conda</span></code> irrespective of
+operating system. For the <code class="docutils literal notranslate"><span class="pre">conda</span></code> layout, the Python package as well as all
+libraries and header files are installed into the active <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment.
+Input data, samples, and other files are installed in the <code class="docutils literal notranslate"><span class="pre">shared/cantera</span></code>
+subdirectory of the active <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment.</p>
+<ul>
+<li><p>default: platform dependent</p>
+<ul>
+<li><p>Windows: <code class="docutils literal notranslate"><span class="pre">'compact'</span></code></p></li>
+<li><p>Otherwise: <code class="docutils literal notranslate"><span class="pre">'standard'</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-package-build">
+<li><p><code class="docutils literal notranslate"><span class="pre">package_build</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+Used in combination with packaging tools (example: <code class="docutils literal notranslate"><span class="pre">conda-build</span></code>). If
+enabled, the installed package will be independent from host and build
+environments, with all external library and include paths removed. Packaged
+C++ and Fortran samples assume that users will compile with local SDKs, which
+should be backwards compatible with the tools used for the build process.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'no'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-fast-fail-tests">
+<li><p><code class="docutils literal notranslate"><span class="pre">fast_fail_tests</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+If enabled, tests will exit at the first failure.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'no'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-skip-slow-tests">
+<li><p><code class="docutils literal notranslate"><span class="pre">skip_slow_tests</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+If enabled, skip a subset of tests that are known to have long runtimes.
+Skipping these may be desirable when running with options that cause tests
+to run slowly, like disabling optimization or activating code profiling.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'no'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-show-long-tests">
+<li><p><code class="docutils literal notranslate"><span class="pre">show_long_tests</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+If enabled, duration of slowest tests will be shown.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'no'</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="sconsopt-verbose-tests">
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose_tests</span></code>: [ <code class="docutils literal notranslate"><span class="pre">'yes'</span></code> | <code class="docutils literal notranslate"><span class="pre">'no'</span></code> ]
+If enabled, verbose test output will be shown.</p>
+<ul>
+<li><p>default: <code class="docutils literal notranslate"><span class="pre">'no'</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#options-list">Options List</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/develop/compiling/config-options.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

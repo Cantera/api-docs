@@ -1,0 +1,1221 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Utilities &#8212; Cantera 3.1.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python/utilities';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="YAML Input File Reference" href="../yaml/index.html" />
+    <link rel="prev" title="Physical Constants" href="constants.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Python Module Documentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transport.html">Transport Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zerodim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="scripts.html">Mechanism Conversion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yaml_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lxcat_conversion.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="units.html">Python Interface With Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html">Physical Constants</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Utilities</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../yaml/index.html">YAML Input File Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/general.html">General Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/phases.html">Phase Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/species.html">Species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/reactions.html">Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/yaml2ck.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/lxcat2yaml.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/releasenotes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.1.html">Cantera 3.1.0b1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.0.html">Cantera 3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.6.html">Cantera 2.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.5.html">Cantera 2.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.4.html">Cantera 2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.3.html">Cantera 2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.2.html">Cantera 2.2.1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.1.html">Cantera 2.1.2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.0.html">Cantera 2.0.2</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Science Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/thermo/index.html">Thermodynamic Properties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/thermo/species-thermo.html">Species Thermodynamic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/thermo/phase-thermo.html">Phase Thermodynamic Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/kinetics/index.html">Chemical Reactions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/kinetics/reaction-rates.html">Reaction Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/kinetics/rate-constants.html">Rate Constant Parameterizations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/transport/index.html">Transport Properties</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/reactors/index.html">Reactors and Reactor Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/controlreactor.html">Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/constant-pressure-reactor.html">Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-reactor.html">Ideal Gas Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-reactor.html">Ideal Gas Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/mole-reactor.html">Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/constant-pressure-mole-reactor.html">Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-mole-reactor.html">Ideal Gas Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-mole-reactor.html">Ideal Gas Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/interactions.html">Reactor Interactions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/onedim/index.html">One-dimensional Flames</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/governing-equations.html">Governing Equations for One-dimensional Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/discretization.html">Discretization of 1D Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/nonlinear-solver.html">Nonlinear Solver for One-dimensional Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/grid-refinement.html">Grid Refinement for One-dimensional Flows</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../reference/index.html" class="nav-link">Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Python Module Documentation</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Utilities</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="utilities">
+<h1>Utilities<a class="headerlink" href="#utilities" title="Link to this heading">#</a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#yaml-input-output" id="id2">YAML Input/Output</a></p>
+<ul>
+<li><p><a class="reference internal" href="#anymap" id="id3">AnyMap</a></p></li>
+<li><p><a class="reference internal" href="#yamlwriter" id="id4">YamlWriter</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#unit-conversions" id="id5">Unit Conversions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#unitsystem" id="id6">UnitSystem</a></p></li>
+<li><p><a class="reference internal" href="#units" id="id7">Units</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#global-functions" id="id8">Global Functions</a></p></li>
+<li><p><a class="reference internal" href="#exceptions" id="id9">Exceptions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#canteraerror" id="id10">CanteraError</a></p></li>
+<li><p><a class="reference internal" href="#thermomodelmethoderror" id="id11">ThermoModelMethodError</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="yaml-input-output">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">YAML Input/Output</a><a class="headerlink" href="#yaml-input-output" title="Link to this heading">#</a></h2>
+<section id="anymap">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">AnyMap</a><a class="headerlink" href="#anymap" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.AnyMap">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">AnyMap</span></span><a class="headerlink" href="#cantera.AnyMap" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+<p>A key-value store representing objects defined in Cantera’s YAML input format.</p>
+<p>Extends the capabilities of a normal <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> object by providing functions for
+converting values between different unit systems. See <a class="reference internal" href="../yaml/general.html#sec-yaml-units"><span class="std std-ref">Units</span></a> for
+details on how units are handled in YAML input files.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.AnyMap.convert">
+<span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.AnyMap.convert" title="Link to this definition">#</a></dt>
+<dd><p>Convert the value corresponding to the specified <em>key</em> to the units defined by
+<em>dest</em>. <em>dest</em> may be a string or a <a class="reference internal" href="#cantera.Units" title="cantera.Units"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Units</span></code></a> object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.AnyMap.convert_activation_energy">
+<span class="sig-name descname"><span class="pre">convert_activation_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.AnyMap.convert_activation_energy" title="Link to this definition">#</a></dt>
+<dd><p>Convert the value corresponding to the specified <em>key</em> to the units defined by
+<em>dest</em>. <em>dest</em> may be a string or a <a class="reference internal" href="#cantera.Units" title="cantera.Units"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Units</span></code></a> object defining units that are
+interpretable as an activation energy.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.AnyMap.convert_rate_coeff">
+<span class="sig-name descname"><span class="pre">convert_rate_coeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.AnyMap.convert_rate_coeff" title="Link to this definition">#</a></dt>
+<dd><p>Convert the value corresponding to the specified <em>key</em> to the units defined by
+<em>dest</em>, with special handling for <code class="xref py py-obj docutils literal notranslate"><span class="pre">UnitStack</span></code> input and potentially-undefined
+rate coefficient units.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.AnyMap.default_units">
+<span class="sig-name descname"><span class="pre">default_units</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cantera.AnyMap.default_units" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.AnyMap.set_activation_energy">
+<span class="sig-name descname"><span class="pre">set_activation_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.AnyMap.set_activation_energy" title="Link to this definition">#</a></dt>
+<dd><p>Set the element <em>key</em> of this map to the specified value, converting from the
+activation energy units defined by <em>src</em> to the correct unit system for this map
+when serializing to YAML.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.AnyMap.set_quantity">
+<span class="sig-name descname"><span class="pre">set_quantity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.AnyMap.set_quantity" title="Link to this definition">#</a></dt>
+<dd><p>Set the element <em>key</em> of this map to the specified value, converting from the
+units defined by <em>src</em> to the correct unit system for this map when serializing
+to YAML.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.AnyMap.units">
+<span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#cantera.AnyMap.units" title="Link to this definition">#</a></dt>
+<dd><p>Get the <a class="reference internal" href="#cantera.UnitSystem" title="cantera.UnitSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnitSystem</span></code></a> applicable to this <a class="reference internal" href="#cantera.AnyMap" title="cantera.AnyMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AnyMap</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="yamlwriter">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">YamlWriter</a><a class="headerlink" href="#yamlwriter" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.YamlWriter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">YamlWriter</span></span><a class="headerlink" href="#cantera.YamlWriter" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A class for generating full YAML input files from multiple Solution objects</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.YamlWriter.add_solution">
+<span class="sig-name descname"><span class="pre">add_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soln</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.YamlWriter.add_solution" title="Link to this definition">#</a></dt>
+<dd><p>Include a phase definition for the specified Solution object</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.YamlWriter.output_units">
+<span class="sig-name descname"><span class="pre">output_units</span></span><a class="headerlink" href="#cantera.YamlWriter.output_units" title="Link to this definition">#</a></dt>
+<dd><p>Set the units to be used in the output file. Dimensions not specified
+will use Cantera’s defaults.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>units</strong> – A <a class="reference internal" href="#cantera.UnitSystem" title="cantera.UnitSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnitSystem</span></code></a> object or map where keys are dimensions (mass, length, time,
+quantity, pressure, energy, activation-energy), and the values are
+corresponding units such as kg, mm, s, kmol, Pa, cal, and eV.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.YamlWriter.precision">
+<span class="sig-name descname"><span class="pre">precision</span></span><a class="headerlink" href="#cantera.YamlWriter.precision" title="Link to this definition">#</a></dt>
+<dd><p>For output floating point values, set the maximum number of digits to
+the right of the decimal point. The default is 15 digits.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.YamlWriter.set_header">
+<span class="sig-name descname"><span class="pre">set_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soln</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.YamlWriter.set_header" title="Link to this definition">#</a></dt>
+<dd><p>Include top-level information for the specified Solution object</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.YamlWriter.skip_user_defined">
+<span class="sig-name descname"><span class="pre">skip_user_defined</span></span><a class="headerlink" href="#cantera.YamlWriter.skip_user_defined" title="Link to this definition">#</a></dt>
+<dd><p>By default user-defined data present in the input is preserved on
+output. This method can be used to skip output of user-defined data
+fields which are not directly used by Cantera.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.YamlWriter.to_file">
+<span class="sig-name descname"><span class="pre">to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.YamlWriter.to_file" title="Link to this definition">#</a></dt>
+<dd><p>Write the definitions for the added phases, species and reactions to
+the specified file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.YamlWriter.to_string">
+<span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cantera.YamlWriter.to_string" title="Link to this definition">#</a></dt>
+<dd><p>Return a YAML string that contains the definitions for the added phases,
+species, and reactions.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="unit-conversions">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Unit Conversions</a><a class="headerlink" href="#unit-conversions" title="Link to this heading">#</a></h2>
+<section id="unitsystem">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">UnitSystem</a><a class="headerlink" href="#unitsystem" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.UnitSystem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">UnitSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.UnitSystem" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Unit system used for YAML input and output.</p>
+<p>The <a class="reference internal" href="#cantera.UnitSystem" title="cantera.UnitSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnitSystem</span></code></a> class is used to specify dimensional values for a given unit
+system. The main use is for converting values specified in input files to Cantera’s
+native unit system, which is SI units except for the use of kmol as the base
+unit of quantity, that is, kilogram, meter, second, kelvin, ampere, and kmol.</p>
+<p>Generally, this class is used indirectly, through methods interacting with <a class="reference internal" href="#cantera.AnyMap" title="cantera.AnyMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AnyMap</span></code></a>
+objects such as <a class="reference internal" href="kinetics.html#cantera.ExtensibleRate.set_parameters" title="cantera.ExtensibleRate.set_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExtensibleRate.set_parameters</span></code></a> and <a class="reference internal" href="kinetics.html#cantera.ExtensibleRate.get_parameters" title="cantera.ExtensibleRate.get_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExtensibleRate.get_parameters</span></code></a>.</p>
+<p>The default unit system used by Cantera is SI+kmol:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ct</span><span class="o">.</span><span class="n">UnitSystem</span><span class="p">({</span>
+    <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;mass&quot;</span><span class="p">:</span> <span class="s2">&quot;kg&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;quantity&quot;</span><span class="p">:</span> <span class="s2">&quot;kmol&quot;</span><span class="p">,</span> <span class="s2">&quot;pressure&quot;</span><span class="p">:</span> <span class="s2">&quot;Pa&quot;</span><span class="p">,</span> <span class="s2">&quot;energy&quot;</span><span class="p">:</span> <span class="s2">&quot;J&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;activation-energy&quot;</span><span class="p">:</span> <span class="s2">&quot;J / kmol&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>A CGS+mol unit system with activation energy units of cal/mol is created as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ct</span><span class="o">.</span><span class="n">UnitSystem</span><span class="p">({</span>
+    <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="s2">&quot;cm&quot;</span><span class="p">,</span> <span class="s2">&quot;mass&quot;</span><span class="p">:</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;quantity&quot;</span><span class="p">:</span> <span class="s2">&quot;mol&quot;</span><span class="p">,</span> <span class="s2">&quot;pressure&quot;</span><span class="p">:</span> <span class="s2">&quot;dyn / cm^2&quot;</span><span class="p">,</span> <span class="s2">&quot;energy&quot;</span><span class="p">:</span> <span class="s2">&quot;erg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;activation-energy&quot;</span><span class="p">:</span> <span class="s2">&quot;cal / mol&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Defaults for dimensions not specified will be left unchanged. Accordingly,
+the default unit system is retrieved as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ct</span><span class="o">.</span><span class="n">UnitSystem</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.UnitSystem.convert_activation_energy_to">
+<span class="sig-name descname"><span class="pre">convert_activation_energy_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.UnitSystem.convert_activation_energy_to" title="Link to this definition">#</a></dt>
+<dd><p>Convert <em>quantity</em> to the activation energy units defined by <em>dest</em>, using this
+<a class="reference internal" href="#cantera.UnitSystem" title="cantera.UnitSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnitSystem</span></code></a> to define the default units of <em>quantity</em>. <em>quantity</em> can be one of
+the following:</p>
+<ul class="simple">
+<li><p>A number, for example <code class="docutils literal notranslate"><span class="pre">3.14</span></code></p></li>
+<li><p>A “quantity string” containing a number and a dimension string, separated by
+a space. For example, <code class="docutils literal notranslate"><span class="pre">&quot;3.14</span> <span class="pre">J/kmol&quot;</span></code></p></li>
+<li><p>A NumPy array of either numeric values or quantity strings as described above</p></li>
+<li><p>A list, tuple, or other sequence of any shape containing numeric values or
+quantity strings, For example <code class="docutils literal notranslate"><span class="pre">(&quot;30</span> <span class="pre">kcal/mol&quot;,</span> <span class="pre">3.14,</span> <span class="pre">&quot;12000</span> <span class="pre">K&quot;)</span></code></p></li>
+</ul>
+<p><em>dest</em> can be a string or <a class="reference internal" href="#cantera.Units" title="cantera.Units"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Units</span></code></a> object specifying the destination units, which
+must be interpretable as unit of energy per unit quantity (for example, J/kmol),
+energy (for example, eV) or temperature (K).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.UnitSystem.convert_rate_coeff_to">
+<span class="sig-name descname"><span class="pre">convert_rate_coeff_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.UnitSystem.convert_rate_coeff_to" title="Link to this definition">#</a></dt>
+<dd><p>Convert a <em>quantity</em> representing a rate coefficient to the units defined by
+<em>dest</em>, using this <a class="reference internal" href="#cantera.UnitSystem" title="cantera.UnitSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnitSystem</span></code></a> to define the default units of <em>quantity</em>.
+Behaves similar to`convert_to` but with special handling for the case of
+standalone rate constants, where the destination units are not actually known,
+and where the units may be specified using <a class="reference internal" href="#cantera.Units" title="cantera.Units"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Units</span></code></a> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">UnitStack</span></code> objects.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.UnitSystem.convert_to">
+<span class="sig-name descname"><span class="pre">convert_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.UnitSystem.convert_to" title="Link to this definition">#</a></dt>
+<dd><p>Convert <em>quantity</em> to the units defined by <em>dest</em>, using this <a class="reference internal" href="#cantera.UnitSystem" title="cantera.UnitSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnitSystem</span></code></a> to
+define the default units of <em>quantity</em>. <em>quantity</em> can be one of the following:</p>
+<ul class="simple">
+<li><p>A number, for example <code class="docutils literal notranslate"><span class="pre">3.14</span></code></p></li>
+<li><p>A “quantity string” containing a number and a dimension string, separated by
+a space. For example, <code class="docutils literal notranslate"><span class="pre">&quot;3.14</span> <span class="pre">kmol/m^3&quot;</span></code></p></li>
+<li><p>A NumPy array of either numeric values or quantity strings as described above</p></li>
+<li><p>A list, tuple, or other sequence of any shape containing numeric values or
+quantity strings, For example <code class="docutils literal notranslate"><span class="pre">(&quot;3000</span> <span class="pre">mm&quot;,</span> <span class="pre">3.14,</span> <span class="pre">&quot;12</span> <span class="pre">cm&quot;)</span></code></p></li>
+</ul>
+<p><em>dest</em> can be a string or <a class="reference internal" href="#cantera.Units" title="cantera.Units"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Units</span></code></a> object specifying the destination units.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.UnitSystem.units">
+<span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#cantera.UnitSystem.units" title="Link to this definition">#</a></dt>
+<dd><p>Units used by the unit system</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="units">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Units</a><a class="headerlink" href="#units" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.Units">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">Units</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Units" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A representation of the units associated with a dimensional quantity.</p>
+<p>This class is a light-weight interface to internal Cantera capabilities that are
+used for converting quantities between unit systems and checking for dimensional
+consistency. Internally, <a class="reference internal" href="#cantera.Units" title="cantera.Units"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Units</span></code></a> objects are mainly used within the <a class="reference internal" href="#cantera.UnitSystem" title="cantera.UnitSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnitSystem</span></code></a>
+class to convert values from a user-specified Unit system to Cantera’s base units
+(SI + kmol).</p>
+<p>The Python API handles display of <a class="reference internal" href="#cantera.Units" title="cantera.Units"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Units</span></code></a> that do not require a conversion factor,
+with other functions not enabled.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.Units.dimension">
+<span class="sig-name descname"><span class="pre">dimension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">primary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#cantera.Units.dimension" title="Link to this definition">#</a></dt>
+<dd><p>The dimension of the given unit component.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.0.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>primary</strong> – A string with the desired unit component. One of <code class="docutils literal notranslate"><span class="pre">&quot;mass&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;length&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;time&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;temperature&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;current&quot;</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">&quot;quantity&quot;</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Units.dimensions">
+<span class="sig-name descname"><span class="pre">dimensions</span></span><a class="headerlink" href="#cantera.Units.dimensions" title="Link to this definition">#</a></dt>
+<dd><p>A dictionary of the primary unit components to their dimensions.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cantera.Units.factor">
+<span class="sig-name descname"><span class="pre">factor</span></span><a class="headerlink" href="#cantera.Units.factor" title="Link to this definition">#</a></dt>
+<dd><p>The factor required to convert from this unit to Cantera’s base units.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.0.</span></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="global-functions">
+<span id="sec-python-global-funcs"></span><h2><a class="toc-backref" href="#id8" role="doc-backlink">Global Functions</a><a class="headerlink" href="#global-functions" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.add_directory">
+<span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">add_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.add_directory" title="Link to this definition">#</a></dt>
+<dd><p>Add a directory to search for Cantera data files.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.get_data_directories">
+<span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">get_data_directories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cantera.get_data_directories" title="Link to this definition">#</a></dt>
+<dd><p>Get a list of the directories Cantera searches for data files.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.import_phases">
+<span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">import_phases</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.import_phases" title="Link to this definition">#</a></dt>
+<dd><p>Import multiple phases from one file. The phase names should be
+entered as a list of strings.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.appdelete">
+<span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">appdelete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cantera.appdelete" title="Link to this definition">#</a></dt>
+<dd><p>Delete all global Cantera C++ objects</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.use_sparse">
+<span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">use_sparse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sparse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.use_sparse" title="Link to this definition">#</a></dt>
+<dd><p>Enable sparse output using <code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.sparse</span></code>. Sparse output requires a working
+<em>SciPy</em> installation. Use pip or conda to install <code class="docutils literal notranslate"><span class="pre">scipy</span></code> to enable this method.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.make_deprecation_warnings_fatal">
+<span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">make_deprecation_warnings_fatal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cantera.make_deprecation_warnings_fatal" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.suppress_deprecation_warnings">
+<span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">suppress_deprecation_warnings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cantera.suppress_deprecation_warnings" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.suppress_thermo_warnings">
+<span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">suppress_thermo_warnings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">suppress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.suppress_thermo_warnings" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.use_legacy_rate_constants">
+<span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">use_legacy_rate_constants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">legacy</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.use_legacy_rate_constants" title="Link to this definition">#</a></dt>
+<dd><p>Set definition used for rate constant calculation.</p>
+<p>If set to <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a> (default value), rate constants of three-body reactions are
+consistent with conventional definitions (for example Eq. 9.75 in
+<span id="id1">Kee <em>et al.</em> [<a class="reference internal" href="../reference/bibliography.html#id20" title="R. J. Kee, M. E. Coltrin, and P. Glarborg. Chemically Reacting Flow: Theory and Practice. John Wiley &amp; Sons, 2003.">2003</a>]</span>). If set to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>, output for rate constants of three-body
+reactions is multiplied by third-body concentrations, consistent with Cantera’s
+behavior prior to version 3.0.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.debug_mode_enabled">
+<span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">debug_mode_enabled</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cantera.debug_mode_enabled" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.print_stack_trace_on_segfault">
+<span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">print_stack_trace_on_segfault</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cantera.print_stack_trace_on_segfault" title="Link to this definition">#</a></dt>
+<dd><p>Enable printing a stack trace if a segfault occurs. Not recommended for general
+use as it is possible for this to deadlock.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.add_module_directory">
+<span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">add_module_directory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cantera.add_module_directory" title="Link to this definition">#</a></dt>
+<dd><p>Add the directory containing the module from which this function is called
+to the Cantera input file search path.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cantera.extension">
+<span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">extension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.extension" title="Link to this definition">#</a></dt>
+<dd><p>A decorator for declaring Cantera extensions that should be registered with
+the corresponding factory classes to create objects with the specified <em>name</em>.</p>
+<p>This decorator can be used in combination with an <code class="docutils literal notranslate"><span class="pre">extensions</span></code> section in a YAML
+input file to trigger registration of extensions marked with this decorator,
+For example, consider an input file containing top level <code class="docutils literal notranslate"><span class="pre">extensions</span></code> and
+<code class="docutils literal notranslate"><span class="pre">reactions</span></code> sections such as:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">extensions</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_cool_module</span>
+
+<span class="nn">...</span><span class="w">  </span><span class="c1"># phases and species sections</span>
+
+<span class="nt">reactions</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">O + H2 &lt;=&gt; H + OH</span><span class="w">  </span><span class="c1"># Reaction 3</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cool-rate</span>
+<span class="w">  </span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.87e+04</span>
+<span class="w">  </span><span class="nt">b</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.7</span>
+<span class="w">  </span><span class="nt">Ea</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6260.0</span>
+</pre></div>
+</div>
+<p>and a Python module <code class="docutils literal notranslate"><span class="pre">my_cool_module.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cantera</span> <span class="k">as</span> <span class="nn">ct</span>
+
+<span class="k">class</span> <span class="nc">CoolRateData</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">ExtensibleRateData</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soln</span><span class="p">):</span>
+        <span class="o">...</span>
+
+<span class="nd">@ct</span><span class="o">.</span><span class="n">extension</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;cool-rate&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">CoolRateData</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">CoolRate</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">ExtensibleRate</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">units</span><span class="p">):</span>
+        <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>Loading this input file from any Cantera user interface would cause Cantera to load
+the <code class="docutils literal notranslate"><span class="pre">my_cool_module.py</span></code> module and register the <code class="docutils literal notranslate"><span class="pre">CoolRate</span></code> and <code class="docutils literal notranslate"><span class="pre">CoolRateData</span></code>
+classes to handle reactions whose <code class="docutils literal notranslate"><span class="pre">type</span></code> in the YAML file is set to <code class="docutils literal notranslate"><span class="pre">cool-rate</span></code>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.0.</span></p>
+</div>
+</dd></dl>
+
+</section>
+<section id="exceptions">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Exceptions</a><a class="headerlink" href="#exceptions" title="Link to this heading">#</a></h2>
+<section id="canteraerror">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">CanteraError</a><a class="headerlink" href="#canteraerror" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.CanteraError">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">CanteraError</span></span><a class="headerlink" href="#cantera.CanteraError" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cantera.CanteraError.set_stack_trace_depth">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_stack_trace_depth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.CanteraError.set_stack_trace_depth" title="Link to this definition">#</a></dt>
+<dd><p>Set the number of stack frames to include when a <a class="reference internal" href="#cantera.CanteraError" title="cantera.CanteraError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CanteraError</span></code></a> is displayed. By
+default, or if the depth is set to 0, no stack information will be shown.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="thermomodelmethoderror">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">ThermoModelMethodError</a><a class="headerlink" href="#thermomodelmethoderror" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cantera.ThermoModelMethodError">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cantera.</span></span><span class="sig-name descname"><span class="pre">ThermoModelMethodError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thermo_model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.ThermoModelMethodError" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>Exception raised for an invalid method used by a thermo model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>thermo_model</strong> – The thermo model used by class <a class="reference internal" href="thermo.html#cantera.ThermoPhase" title="cantera.ThermoPhase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ThermoPhase</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#yaml-input-output">YAML Input/Output</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anymap">AnyMap</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AnyMap"><code class="docutils literal notranslate"><span class="pre">AnyMap</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AnyMap.convert"><code class="docutils literal notranslate"><span class="pre">AnyMap.convert()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AnyMap.convert_activation_energy"><code class="docutils literal notranslate"><span class="pre">AnyMap.convert_activation_energy()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AnyMap.convert_rate_coeff"><code class="docutils literal notranslate"><span class="pre">AnyMap.convert_rate_coeff()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AnyMap.default_units"><code class="docutils literal notranslate"><span class="pre">AnyMap.default_units()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AnyMap.set_activation_energy"><code class="docutils literal notranslate"><span class="pre">AnyMap.set_activation_energy()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AnyMap.set_quantity"><code class="docutils literal notranslate"><span class="pre">AnyMap.set_quantity()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.AnyMap.units"><code class="docutils literal notranslate"><span class="pre">AnyMap.units</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yamlwriter">YamlWriter</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.YamlWriter"><code class="docutils literal notranslate"><span class="pre">YamlWriter</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.YamlWriter.add_solution"><code class="docutils literal notranslate"><span class="pre">YamlWriter.add_solution()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.YamlWriter.output_units"><code class="docutils literal notranslate"><span class="pre">YamlWriter.output_units</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.YamlWriter.precision"><code class="docutils literal notranslate"><span class="pre">YamlWriter.precision</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.YamlWriter.set_header"><code class="docutils literal notranslate"><span class="pre">YamlWriter.set_header()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.YamlWriter.skip_user_defined"><code class="docutils literal notranslate"><span class="pre">YamlWriter.skip_user_defined</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.YamlWriter.to_file"><code class="docutils literal notranslate"><span class="pre">YamlWriter.to_file()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.YamlWriter.to_string"><code class="docutils literal notranslate"><span class="pre">YamlWriter.to_string()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-conversions">Unit Conversions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unitsystem">UnitSystem</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.UnitSystem"><code class="docutils literal notranslate"><span class="pre">UnitSystem</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.UnitSystem.convert_activation_energy_to"><code class="docutils literal notranslate"><span class="pre">UnitSystem.convert_activation_energy_to()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.UnitSystem.convert_rate_coeff_to"><code class="docutils literal notranslate"><span class="pre">UnitSystem.convert_rate_coeff_to()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.UnitSystem.convert_to"><code class="docutils literal notranslate"><span class="pre">UnitSystem.convert_to()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.UnitSystem.units"><code class="docutils literal notranslate"><span class="pre">UnitSystem.units</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#units">Units</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Units"><code class="docutils literal notranslate"><span class="pre">Units</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Units.dimension"><code class="docutils literal notranslate"><span class="pre">Units.dimension()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Units.dimensions"><code class="docutils literal notranslate"><span class="pre">Units.dimensions</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.Units.factor"><code class="docutils literal notranslate"><span class="pre">Units.factor</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#global-functions">Global Functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.add_directory"><code class="docutils literal notranslate"><span class="pre">add_directory()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.get_data_directories"><code class="docutils literal notranslate"><span class="pre">get_data_directories()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.import_phases"><code class="docutils literal notranslate"><span class="pre">import_phases()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.appdelete"><code class="docutils literal notranslate"><span class="pre">appdelete()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.use_sparse"><code class="docutils literal notranslate"><span class="pre">use_sparse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.make_deprecation_warnings_fatal"><code class="docutils literal notranslate"><span class="pre">make_deprecation_warnings_fatal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.suppress_deprecation_warnings"><code class="docutils literal notranslate"><span class="pre">suppress_deprecation_warnings()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.suppress_thermo_warnings"><code class="docutils literal notranslate"><span class="pre">suppress_thermo_warnings()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.use_legacy_rate_constants"><code class="docutils literal notranslate"><span class="pre">use_legacy_rate_constants()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.debug_mode_enabled"><code class="docutils literal notranslate"><span class="pre">debug_mode_enabled()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.print_stack_trace_on_segfault"><code class="docutils literal notranslate"><span class="pre">print_stack_trace_on_segfault()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.add_module_directory"><code class="docutils literal notranslate"><span class="pre">add_module_directory()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.extension"><code class="docutils literal notranslate"><span class="pre">extension()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#canteraerror">CanteraError</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CanteraError"><code class="docutils literal notranslate"><span class="pre">CanteraError</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.CanteraError.set_stack_trace_depth"><code class="docutils literal notranslate"><span class="pre">CanteraError.set_stack_trace_depth()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermomodelmethoderror">ThermoModelMethodError</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cantera.ThermoModelMethodError"><code class="docutils literal notranslate"><span class="pre">ThermoModelMethodError</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/python/utilities.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

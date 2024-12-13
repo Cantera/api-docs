@@ -1,0 +1,766 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Extending Reactor Models with Custom Equations &#8212; Cantera 3.1.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'userguide/extensible-reactor';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples" href="../examples/index.html" />
+    <link rel="prev" title="Lithium Ion Battery Discharge Curve" href="../examples/python/kinetics/lithium_ion_battery.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python-tutorial.html">Python Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input-tutorial.html">Introduction to YAML Input Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reactor-tutorial.html">Using Reactor Networks for Time Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cxx-tutorial.html">Using Cantera from C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling-cxx.html">Compiling Cantera C++ Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ck2yaml-tutorial.html">Converting Chemkin Format Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating-mechanisms.html">Creating YAML Mechanism Files from Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermobuild.html">Converting Data from NASA ThermoBuild</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input-errors.html">Handling Errors in Input Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legacy2yaml-tutorial.html">Converting Legacy CTI and XML Input Files to YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flame-temperature.html">Calculating Adiabatic Flame Temperature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heating-value.html">Calculating Heating Value of a Fuel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/python/kinetics/lithium_ion_battery.html">Lithium Ion Battery Discharge Curve</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Extending Reactor Models with Custom Equations</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Extending...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="extending-reactor-models-with-custom-equations">
+<h1>Extending Reactor Models with Custom Equations<a class="headerlink" href="#extending-reactor-models-with-custom-equations" title="Link to this heading">#</a></h1>
+<p>In some cases, Cantera’s built-in reactor types are insufficient to model a problem.
+In this situation, the <a class="reference internal" href="../python/zerodim.html#cantera.ExtensibleReactor" title="cantera.ExtensibleReactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code></a> family of classes can be used to
+modify and governing equations, starting from one of the built-in reactor types.</p>
+<p>These reactor types allow the methods that implement the governing equations and related
+reactor configuration to be augmented or replaced with user-defined Python functions.
+New state variables can be added to the reactor, and existing ones can be redefined.
+User-defined <code class="docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code> implementations can be used alongside the built-in
+reactor types to build reactor networks that can be integrated using the
+<a class="reference internal" href="../python/zerodim.html#cantera.ReactorNet" title="cantera.ReactorNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReactorNet</span></code></a> integrator provided by Cantera.</p>
+<p>This guide introduces the use of the <code class="docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code> model to modify the governing
+equations for a reactor.</p>
+<section id="modifying-existing-governing-equations">
+<h2>Modifying Existing Governing Equations<a class="headerlink" href="#modifying-existing-governing-equations" title="Link to this heading">#</a></h2>
+<p>The variables in the governing equations for a reactor that are differentiated with
+respect to time are known as the <em>state variables</em>. The state variables depend on the
+type of reactor base class chosen. For example, choosing an
+<a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-reactor.html"><span class="doc std std-doc">ideal gas constant pressure reactor</span></a>
+allows the user to modify the governing equations for the following state variables:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m\)</span>, the mass of the reactor’s contents (in kg)</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span>, the temperature (in K)</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_k\)</span>, the mass fractions for each species (dimensionless)</p></li>
+</ul>
+<p>As shown in the derivations of the governing equations, the equations implemented by
+the <a class="reference external" href="../cxx/dc/d5d/classCantera_1_1IdealGasConstPressureReactor.html">IdealGasConstPressureReactor</a> class are:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dm}{dt} = \sum_\t{in} \dot{m}_\t{in} - \sum_\t{out} \dot{m}_\t{out}
+    + \dot{m}_\t{wall}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+m c_p \frac{dT}{dt} = \dot{Q} - \sum_k h_k \dot{m}_{k,\t{gen}}
+     + \sum_\t{in} \dot{m}_\t{in} \left(h_\t{in} - \sum_k h_k Y_{k,\t{in}} \right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{d(mY_k)}{dt} = \sum_\t{in} \dot{m}_\t{in} Y_{k,\t{in}}
+                     - \sum_\t{out} \dot{m}_\t{out} Y_k + \dot{m}_{k,gen}
+\]</div>
+<p>Each of these equations is written with an expression on the left-hand side (LHS)
+multiplied by the time derivative of a state variable which equals an expression on the
+right-hand side (RHS). The interface of the reactor network model is defined so that the
+reactor governing equations are evaluated by calculating these LHS and RHS expressions
+for each governing equation. The extensible reactor model then allows calculation of
+these LHS and RHS terms to be replaced or augmented by user-provided methods.</p>
+<p>For example, to add a term for a large mass, say a rock, inside the reactor that affects
+the thermal mass, the energy equation would become:</p>
+<div class="math notranslate nohighlight">
+\[
+\left(m c_p + m_\t{rock} c_{p,\t{rock}}\right) \frac{dT}{dt} = \dot{Q}
+    - \sum_k h_k \dot{m}_{k,\t{gen}}
+    + \sum_\t{in} \dot{m}_\t{in} \left(h_\t{in} - \sum_k h_k Y_{k,\t{in}} \right)
+\]</div>
+<p>Here, the LHS coefficient has changed from <span class="math notranslate nohighlight">\(m c_p\)</span> to
+<span class="math notranslate nohighlight">\(m c_p + m_{\t{rock}} c_{p,\t{rock}}\)</span>. Since the rock does not change the
+composition of the species in the reactor and does not change the mass flow rate of any
+inlets or outlets, the other governing equations defining the ideal gas constant
+pressure reactor can be left unmodified. To implement this change, we define a new class
+derived from <a class="reference internal" href="../python/zerodim.html#cantera.ExtensibleIdealGasConstPressureReactor" title="cantera.ExtensibleIdealGasConstPressureReactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensibleIdealGasConstPressureReactor</span></code></a>. In this new class, we
+then define an implementation for the <code class="docutils literal notranslate"><span class="pre">after_eval</span></code> method which has the signature</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">after_eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">LHS</span><span class="p">,</span> <span class="n">RHS</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">t</span></code> is the current simulation time and <code class="docutils literal notranslate"><span class="pre">LHS</span></code> and <code class="docutils literal notranslate"><span class="pre">RHS</span></code> are arrays with one element
+for each state variable. In this case, the length of each array is two plus the number of species.</p>
+<p>Optional user-defined methods for the <code class="docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code> class start with the prefix
+<code class="docutils literal notranslate"><span class="pre">before_</span></code>, <code class="docutils literal notranslate"><span class="pre">after_</span></code>, or <code class="docutils literal notranslate"><span class="pre">replace_</span></code>, indicating whether the this method will called
+before, after, or instead of the corresponding method from the base class. In this case,
+our method will be called after the <code class="docutils literal notranslate"><span class="pre">eval</span></code> method of <a class="reference external" href="../cxx/dc/d5d/classCantera_1_1IdealGasConstPressureReactor.html">IdealGasConstPressureReactor</a>,
+with the values of <code class="docutils literal notranslate"><span class="pre">LHS</span></code> and <code class="docutils literal notranslate"><span class="pre">RHS</span></code> already set based on the original governing
+equations. Instead of <code class="docutils literal notranslate"><span class="pre">after_eval</span></code>, we could implement either <code class="docutils literal notranslate"><span class="pre">before_eval</span></code> or
+<code class="docutils literal notranslate"><span class="pre">replace_eval</span></code> methods. However, in the case of <code class="docutils literal notranslate"><span class="pre">before_eval</span></code>, any element of <code class="docutils literal notranslate"><span class="pre">LHS</span></code> that
+we set would be overwritten by the initial implementation, and if we use <code class="docutils literal notranslate"><span class="pre">replace_eval</span></code>,
+we would have needed to calculate values for all elements of <code class="docutils literal notranslate"><span class="pre">RHS</span></code> and <code class="docutils literal notranslate"><span class="pre">LHS</span></code> instead of
+just modifying a single value.</p>
+<p>To obtain the above modification to the governing equations, the implementation of
+<code class="docutils literal notranslate"><span class="pre">after_eval</span></code> inside a new reactor class is then:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cantera</span> <span class="k">as</span> <span class="nn">ct</span>
+
+<span class="k">class</span> <span class="nc">RockReactor</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">ExtensibleIdealGasConstPressureReactor</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">mass_rock</span><span class="p">,</span> <span class="n">cp_rock</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mass_rock</span> <span class="o">=</span> <span class="n">mass_rock</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cp_rock</span> <span class="o">=</span> <span class="n">cp_rock</span>
+
+    <span class="k">def</span> <span class="nf">after_eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">LHS</span><span class="p">,</span> <span class="n">RHS</span><span class="p">):</span>
+        <span class="c1"># The index 1 corresponds to the governing equation for the second</span>
+        <span class="c1"># state variable (temperature)</span>
+        <span class="n">LHS</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass_rock</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cp_rock</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can then use this new reactor class in a reactor network with some different values
+of <code class="docutils literal notranslate"><span class="pre">mass_rock</span></code> to see the impact of the modified governing equations. To do this, we
+can define a reactor network with an imposed heat transfer rate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp_rock</span> <span class="o">=</span> <span class="mi">790</span>  <span class="c1"># J/kg/K</span>
+
+<span class="k">for</span> <span class="n">mass_rock</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]:</span>
+    <span class="c1"># Define objects, properties, and initial conditions.</span>
+    <span class="n">gas</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s1">&#39;h2o2.yaml&#39;</span><span class="p">)</span>
+    <span class="n">gas</span><span class="o">.</span><span class="n">TPX</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span> <span class="n">ct</span><span class="o">.</span><span class="n">one_atm</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;O2&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;N2&#39;</span><span class="p">:</span> <span class="mf">3.76</span><span class="p">}</span>
+    <span class="n">T0</span> <span class="o">=</span> <span class="n">gas</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="n">r1</span> <span class="o">=</span> <span class="n">RockReactor</span><span class="p">(</span><span class="n">gas</span><span class="p">,</span> <span class="n">mass_rock</span><span class="o">=</span><span class="n">mass_rock</span><span class="p">,</span> <span class="n">cp_rock</span><span class="o">=</span><span class="n">cp_rock</span><span class="p">)</span>
+    <span class="n">r1</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># volume (not including &#39;rock&#39;)</span>
+
+    <span class="n">env</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Reservoir</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span>
+    <span class="n">wall</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Wall</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="mf">1e4</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Heat transfer of 10 kW</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ReactorNet</span><span class="p">([</span><span class="n">r1</span><span class="p">])</span>
+
+    <span class="c1"># Integrate for 10 seconds</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">advance</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mass_rock = </span><span class="si">{</span><span class="n">mass_rock</span><span class="si">}</span><span class="s1"> kg; ΔT = </span><span class="si">{</span><span class="n">r1</span><span class="o">.</span><span class="n">thermo</span><span class="o">.</span><span class="n">T</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">T0</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> K&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mass_rock = 0.0 kg; ΔT = 42.14 K
+mass_rock = 1.0 kg; ΔT = 31.63 K
+mass_rock = 3.0 kg; ΔT = 21.10 K
+</pre></div>
+</div>
+</div>
+</div>
+<p>As expected, we see that the temperature rise decreases as the thermal mass of the
+reactor’s contents increases.</p>
+<p>Other modifications to the reactor’s governing equations and behavior may be made by
+implementing <code class="docutils literal notranslate"><span class="pre">before_*</span></code>, <code class="docutils literal notranslate"><span class="pre">after_</span></code>, and <code class="docutils literal notranslate"><span class="pre">replace_*</span></code> versions of any of the reactor
+methods listed in the documentation for the <a class="reference internal" href="../python/zerodim.html#cantera.ExtensibleReactor" title="cantera.ExtensibleReactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code></a> class.</p>
+</section>
+<section id="additional-examples">
+<h2>Additional Examples<a class="headerlink" href="#additional-examples" title="Link to this heading">#</a></h2>
+<dl class="simple myst">
+<dt><a class="reference internal" href="../examples/python/reactors/custom2.html"><span class="doc std std-doc">Using <code class="docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code> to implement wall inertia</span></a></dt><dd><p>This example shows how to introduce additional governing equations to a reactor. Here,
+in addition to the <code class="docutils literal notranslate"><span class="pre">eval</span></code> method, overrides are introduced that modify the behavior of
+the <code class="docutils literal notranslate"><span class="pre">initialize</span></code>, <code class="docutils literal notranslate"><span class="pre">get_state</span></code>, <code class="docutils literal notranslate"><span class="pre">update_state</span></code>, <code class="docutils literal notranslate"><span class="pre">component_index</span></code>, and <code class="docutils literal notranslate"><span class="pre">component_name</span></code>
+methods. The result is a reactor network with a wall between two reactors that has
+inertia and takes time to respond to changes in the reactor’s pressure.</p>
+</dd>
+<dt><a class="reference internal" href="../examples/python/reactors/PorousMediaBurner.html"><span class="doc std std-doc">Reactor cascade model for reactive flows in inert porous media</span></a></dt><dd><p>This example showcases the use of <a class="reference internal" href="../python/zerodim.html#cantera.ExtensibleReactor" title="cantera.ExtensibleReactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code></a> to add a temperature
+equation for a solid phase and custom heat transfer/radiation models. Each reactor in
+the network represents a different spatial locations along the length of a porous
+media burner.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-existing-governing-equations">Modifying Existing Governing Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-examples">Additional Examples</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/userguide/extensible-reactor.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

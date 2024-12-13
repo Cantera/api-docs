@@ -1,0 +1,930 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Governing Equations for One-dimensional Flow &#8212; Cantera 3.1.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/onedim/governing-equations';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Discretization of 1D Equations" href="discretization.html" />
+    <link rel="prev" title="One-dimensional Flames" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/index.html">Python Module Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/transport.html">Transport Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/zerodim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../python/scripts.html">Mechanism Conversion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../python/ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/yaml_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/lxcat_conversion.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/units.html">Python Interface With Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/constants.html">Physical Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/utilities.html">Utilities</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../yaml/index.html">YAML Input File Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/general.html">General Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/phases.html">Phase Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/species.html">Species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/reactions.html">Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/yaml2ck.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/lxcat2yaml.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../releasenotes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v3.1.html">Cantera 3.1.0b1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v3.0.html">Cantera 3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.6.html">Cantera 2.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.5.html">Cantera 2.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.4.html">Cantera 2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.3.html">Cantera 2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.2.html">Cantera 2.2.1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.1.html">Cantera 2.1.2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.0.html">Cantera 2.0.2</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Science Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../thermo/index.html">Thermodynamic Properties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../thermo/species-thermo.html">Species Thermodynamic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../thermo/phase-thermo.html">Phase Thermodynamic Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../kinetics/index.html">Chemical Reactions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/reaction-rates.html">Reaction Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/rate-constants.html">Rate Constant Parameterizations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../transport/index.html">Transport Properties</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reactors/index.html">Reactors and Reactor Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/controlreactor.html">Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/constant-pressure-reactor.html">Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-reactor.html">Ideal Gas Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-constant-pressure-reactor.html">Ideal Gas Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/mole-reactor.html">Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/constant-pressure-mole-reactor.html">Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-mole-reactor.html">Ideal Gas Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-constant-pressure-mole-reactor.html">Ideal Gas Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/interactions.html">Reactor Interactions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">One-dimensional Flames</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Governing Equations for One-dimensional Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="discretization.html">Discretization of 1D Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nonlinear-solver.html">Nonlinear Solver for One-dimensional Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grid-refinement.html">Grid Refinement for One-dimensional Flows</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">One-dimensional Flames</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Governing...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="governing-equations-for-one-dimensional-flow">
+<h1>Governing Equations for One-dimensional Flow<a class="headerlink" href="#governing-equations-for-one-dimensional-flow" title="Link to this heading">#</a></h1>
+<p>Cantera models flames that are stabilized in an axisymmetric stagnation flow, and
+computes the solution along the stagnation streamline (<span class="math notranslate nohighlight">\(r=0\)</span>), using a similarity
+solution to reduce the three-dimensional governing equations to a single dimension.</p>
+<section id="axisymmetric-stagnation-flow">
+<h2>Axisymmetric Stagnation Flow<a class="headerlink" href="#axisymmetric-stagnation-flow" title="Link to this heading">#</a></h2>
+<p>The governing equations for a steady axisymmetric stagnation flow follow those derived
+in Section 7.2 of <span id="id1">Kee <em>et al.</em> [<a class="reference internal" href="../bibliography.html#id21" title="R. J. Kee, M. E. Coltrin, P. Glarborg, and H. Zhu. Chemically Reacting Flow: Theory and Practice. John Wiley &amp; Sons, 2nd edition, 2017. URL: https://dx.doi.org/10.1002/9781119186304, doi:10.1002/9781119186304.">2017</a>]</span> and are implemented by class <a class="reference external" href="../../cxx/d1/dc1/classCantera_1_1Flow1D.html">Flow1D</a>.</p>
+<p><em>Continuity</em>:</p>
+<div class="math notranslate nohighlight">
+\[  \pxpy{u}{z} + 2 \rho V = 0  \]</div>
+<p><em>Radial momentum</em>:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho u \pxpy{V}{z} + \rho V^2 = - \Lambda + \pxpy{}{z}\left(\mu \pxpy{V}{z}\right)
+\]</div>
+<p><em>Energy</em>:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho c_p u \pxpy{T}{z} = \pxpy{}{z}\left(\lambda \pxpy{T}{z}\right)
+    - \sum_k j_k \pxpy{h_k}{z} - \sum_k h_k W_k \dot{\omega}_k
+\]</div>
+<p><em>Species</em>:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho u \pxpy{Y_k}{z} = - \pxpy{j_k}{z} + W_k \dot{\omega}_k
+\]</div>
+<p>where the following variables are used:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(z\)</span> is the axial coordinate</p></li>
+<li><p><span class="math notranslate nohighlight">\(r\)</span> is the radial coordinate</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho\)</span> is the density</p></li>
+<li><p><span class="math notranslate nohighlight">\(u\)</span> is the axial velocity</p></li>
+<li><p><span class="math notranslate nohighlight">\(v\)</span> is the radial velocity</p></li>
+<li><p><span class="math notranslate nohighlight">\(V = v/r\)</span> is the scaled radial velocity</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Lambda\)</span> is the pressure eigenvalue (independent of <span class="math notranslate nohighlight">\(z\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the dynamic viscosity</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_p\)</span> is the heat capacity at constant pressure</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span> is the temperature</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda\)</span> is the thermal conductivity</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_k\)</span> is the mass fraction of species <span class="math notranslate nohighlight">\(k\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(j_k\)</span> is the diffusive mass flux of species <span class="math notranslate nohighlight">\(k\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c_{p,k}\)</span> is the specific heat capacity of species <span class="math notranslate nohighlight">\(k\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(h_k\)</span> is the enthalpy of species <span class="math notranslate nohighlight">\(k\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(W_k\)</span> is the molecular weight of species <span class="math notranslate nohighlight">\(k\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\dot{\omega}_k\)</span> is the molar production rate of species <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+</ul>
+<p>The tangential velocity <span class="math notranslate nohighlight">\(w\)</span> has been assumed to be zero. The model is applicable to both
+ideal and non-ideal fluids, which follow ideal-gas or real-gas (Redlich-Kwong and
+Peng-Robinson) equations of state.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.0: </span>Support for real gases in the flame models was introduced in Cantera 3.0.</p>
+</div>
+<p>To help in the solution of the discretized problem, it is useful to write a
+differential equation for the scalar <span class="math notranslate nohighlight">\(\Lambda\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[  \frac{d\Lambda}{dz} = 0  \]</div>
+<p>When discretized, the Jacobian terms introduced by this equation match the block
+diagonal structure produced by the other governing equations, rather than creating a
+column of entries that would cause fill-in when factorizing as part of the Newton
+solver.</p>
+</section>
+<section id="diffusive-fluxes">
+<h2>Diffusive Fluxes<a class="headerlink" href="#diffusive-fluxes" title="Link to this heading">#</a></h2>
+<p>The species diffusive mass fluxes <span class="math notranslate nohighlight">\(j_k\)</span> are computed according to either a
+mixture-averaged or multicomponent formulation. If the mixture-averaged formulation is
+used, the calculation performed is:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+j_k^* = - \rho \frac{W_k}{\overline{W}} D_{km}^\prime \pxpy{X_k}{z}\\j_k = j_k^* - Y_k \sum_i j_i^*
+\end{aligned}\end{align} \]</div>
+<p>where <span class="math notranslate nohighlight">\(\overline{W}\)</span> is the mean molecular weight of the mixture, <span class="math notranslate nohighlight">\(D_{km}^\prime\)</span> is the
+mixture-averaged diffusion coefficient for species <span class="math notranslate nohighlight">\(k\)</span>, and <span class="math notranslate nohighlight">\(X_k\)</span> is the mole fraction
+for species <span class="math notranslate nohighlight">\(k\)</span>. The diffusion coefficients used here are those computed by the method
+<a class="reference external" href="../../cxx/d8/d58/classCantera_1_1GasTransport.html#a33a3dea2259f798b937540b6f1319f10">GasTransport::getMixDiffCoeffs()</a>. The correction applied by the second equation
+ensures that the sum of the mass fluxes is zero, a condition which is not inherently
+guaranteed by the mixture-averaged formulation.</p>
+<p>When using the multicomponent formulation, the mass fluxes are computed according to:</p>
+<div class="math notranslate nohighlight">
+\[
+j_k = \frac{\rho W_k}{\overline{W}^2} \sum_i W_i D_{ki} \pxpy{X_i}{z}
+      - \frac{D_k^T}{T} \pxpy{T}{z}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(D_{ki}\)</span> is the multicomponent diffusion coefficient and <span class="math notranslate nohighlight">\(D_k^T\)</span> is the Soret
+diffusion coefficient. Inclusion of the Soret calculation must be explicitly enabled
+when setting up the simulation, on top of specifying a multicomponent transport model,
+for example by using the <a class="reference external" href="../../cxx/d1/dc1/classCantera_1_1Flow1D.html#a41087c1849cc13e7b6afc9e38e641374">Flow1D::enableSoret()</a> method (C++) or setting the
+<a class="reference internal" href="../../python/onedim.html#cantera.FlameBase.soret_enabled" title="cantera.FlameBase.soret_enabled"><code class="xref py py-attr docutils literal notranslate"><span class="pre">soret_enabled</span></code></a> property (Python).</p>
+</section>
+<section id="boundary-conditions">
+<h2>Boundary Conditions<a class="headerlink" href="#boundary-conditions" title="Link to this heading">#</a></h2>
+<section id="inlet-boundary">
+<h3>Inlet boundary<a class="headerlink" href="#inlet-boundary" title="Link to this heading">#</a></h3>
+<p>For a boundary located at a point <span class="math notranslate nohighlight">\(z_0\)</span> where there is an inflow, values are supplied
+for the temperature <span class="math notranslate nohighlight">\(T_0\)</span>, the species mass fractions <span class="math notranslate nohighlight">\(Y_{k,0}\)</span> the scaled radial
+velocity <span class="math notranslate nohighlight">\(V_0\)</span>, and the mass flow rate <span class="math notranslate nohighlight">\(\dot{m}_0\)</span>. In the case of the
+freely-propagating flame, the mass flow rate is not an input but is determined
+indirectly by holding the temperature fixed at an intermediate location within the
+domain; see <a class="reference internal" href="discretization.html"><span class="doc std std-doc">Discretization of 1D Equations</span></a> for details.</p>
+<p>The following equations are solved at the point <span class="math notranslate nohighlight">\(z = z_\t{in}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+T(z_\t{in}) &amp;= T_0\\V(z_\t{in}) &amp;= V_0\\\dot{m}_0 Y_{k,\t{in}} - j_k(z_\t{in}) - \rho(z_\t{in}) u(z_\t{in}) Y_k(z_\t{in}) &amp;= 0
+\end{aligned}\end{align} \]</div>
+<p>If the mass flow rate is specified, we also solve:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho(z_\t{in}) u(z_\t{in}) = \dot{m}_0
+\]</div>
+<p>Otherwise, we solve:</p>
+<div class="math notranslate nohighlight">
+\[  \Lambda(z_\t{in}) = 0  \]</div>
+<p>These equations are implemented by class <a class="reference external" href="../../cxx/de/dd2/classCantera_1_1Inlet1D.html">Inlet1D</a>.</p>
+</section>
+<section id="outlet-boundary">
+<h3>Outlet boundary<a class="headerlink" href="#outlet-boundary" title="Link to this heading">#</a></h3>
+<p>For a boundary located at a point <span class="math notranslate nohighlight">\(z_\t{out}\)</span> where there is an outflow, we solve:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\Lambda(z_\t{out}) = 0\\\left.\pxpy{T}{z}\right|_{z_\t{out}} = 0\\\left.\pxpy{Y_k}{z}\right|_{z_\t{out}} = 0\\V(z_\t{out}) = 0
+\end{aligned}\end{align} \]</div>
+<p>These equations are implemented by class <a class="reference external" href="../../cxx/d5/d5e/classCantera_1_1Outlet1D.html">Outlet1D</a>.</p>
+</section>
+<section id="symmetry-boundary">
+<h3>Symmetry boundary<a class="headerlink" href="#symmetry-boundary" title="Link to this heading">#</a></h3>
+<p>For a symmetry boundary located at a point <span class="math notranslate nohighlight">\(z_\t{symm}\)</span>, we solve:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\rho(z_\t{symm}) u(z_\t{symm}) = 0\\\left.\pxpy{V}{z}\right|_{z_\t{symm}} = 0\\\left.\pxpy{T}{z}\right|_{z_\t{symm}} = 0\\j_k(z_\t{symm}) = 0
+\end{aligned}\end{align} \]</div>
+<p>These equations are implemented by class <a class="reference external" href="../../cxx/d0/db5/classCantera_1_1Symm1D.html">Symm1D</a>.</p>
+</section>
+<section id="reacting-surface">
+<h3>Reacting surface<a class="headerlink" href="#reacting-surface" title="Link to this heading">#</a></h3>
+<p>For a surface boundary located at a point <span class="math notranslate nohighlight">\(z_\t{surf}\)</span> on which reactions may
+occur, the temperature <span class="math notranslate nohighlight">\(T_\t{surf}\)</span> is specified. We solve:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\rho(z_\t{surf}) u(z_\t{surf}) &amp;= 0\\V(z_\t{surf}) &amp;= 0\\T(z_\t{surf}) &amp;= T_\t{surf}\\j_k(z_\t{surf}) + \dot{s}_k W_k &amp;= 0
+\end{aligned}\end{align} \]</div>
+<p>where <span class="math notranslate nohighlight">\(\dot{s}_k\)</span> is the molar production rate of the gas-phase species <span class="math notranslate nohighlight">\(k\)</span> on the
+surface. In addition, the surface coverages <span class="math notranslate nohighlight">\(\theta_i\)</span> for each surface species <span class="math notranslate nohighlight">\(i\)</span> are
+computed such that <span class="math notranslate nohighlight">\(\dot{s}_i = 0\)</span>.</p>
+<p>These equations are implemented by class <a class="reference external" href="../../cxx/d9/d19/classCantera_1_1ReactingSurf1D.html">ReactingSurf1D</a>.</p>
+</section>
+</section>
+<section id="the-drift-diffusion-model">
+<h2>The Drift-Diffusion Model<a class="headerlink" href="#the-drift-diffusion-model" title="Link to this heading">#</a></h2>
+<p>To account for the transport of charged species in a flame, class <a class="reference external" href="../../cxx/d4/db9/classCantera_1_1IonFlow.html">IonFlow</a> adds the
+drift term to the diffusive fluxes of the mixture-average formulation according to
+<span id="id2">Pedersen and Brown [<a class="reference internal" href="../bibliography.html#id36" title="T. Pedersen and R. .C. Brown. Simulation of electric field effects in premixed methane flames. Combustion and Flame, 94(4):433–448, 1993. URL: https://doi.org/10.1016/0010-2180(93)90125-M, doi:10.1016/0010-2180(93)90125-M.">1993</a>]</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+j_k^* = \rho \frac{W_k}{\overline{W}} D_{km}^\prime \pxpy{X_k}{z} + s_k \mu_k E Y_k,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(s_k\)</span> is the sign of charge (1,-1, and 0 respectively for positive, negative, and
+neutral charge), <span class="math notranslate nohighlight">\(\mu_k\)</span> is the mobility, and <span class="math notranslate nohighlight">\(E\)</span> is the electric field. The diffusion
+coefficients and mobilities of charged species can be more accurately calculated by
+<a class="reference external" href="../../cxx/d4/d65/classCantera_1_1IonGasTransport.html#a33a3dea2259f798b937540b6f1319f10">IonGasTransport::getMixDiffCoeffs()</a> and <a class="reference external" href="../../cxx/d4/d65/classCantera_1_1IonGasTransport.html#a1af5ac141294b84964470be8be361676">IonGasTransport::getMobilities()</a>. The
+following correction is applied instead to preserve the correct fluxes of charged
+species:</p>
+<div class="math notranslate nohighlight">
+\[
+j_k = j_k^* - \frac {1 - |s_k|} {1 - \sum_i |s_i| Y_i} Y_k \sum_i j_i^*.
+\]</div>
+<p>In addition, Gauss’s law is solved simultaneously with the species and energy equations,</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\pxpy{E}{z} &amp;= \frac{e}{\epsilon_0}\sum_k Z_k n_k ,\\n_k &amp;= N_a \rho Y_k / W_k,\\E|_{z=0} &amp;= 0,
+\end{aligned}\end{align} \]</div>
+<p>where <span class="math notranslate nohighlight">\(Z_k\)</span> is the charge number, <span class="math notranslate nohighlight">\(n_k\)</span> is the number density, and <span class="math notranslate nohighlight">\(N_a\)</span> is the Avogadro
+number.</p>
+</section>
+<section id="counterflow-two-point-flame-control">
+<h2>Counterflow Two-Point Flame Control<a class="headerlink" href="#counterflow-two-point-flame-control" title="Link to this heading">#</a></h2>
+<p>A two-point temperature control feature is available for counterflow diffusion flames.
+This feature allows users to set a control point on each side of a flame and
+incrementally lower the flame temperature. This allows for the simulation of the stable
+burning branch as well as the unstable burning branch of the standard flamelet
+“S-curve”. The implementation is based on the method discussed in
+<span id="id3">Nishioka <em>et al.</em> [<a class="reference internal" href="../bibliography.html#id35" title="M. Nishioka, C.K. Law, and T. Takeno. A flame-controlling continuation method for generating s-curve responses with detailed chemistry. Combustion and Flame, 104:328-342, 1996. URL: https://doi.org/10.1016/0010-2180(95)00132-8, doi:10.1016/0010-2180(95)00132-8.">1996</a>]</span> and <span id="id4">Huo <em>et al.</em> [<a class="reference internal" href="../bibliography.html#id16" title="H. Huo, X. Wang, and V. Yang. A general study of counterflow diffusion flames at subcritical and supercritical conditions: oxygen/hydrogen mixtures. Combustion and Flame, 161:3040-3050, 2014. URL: https://doi.org/10.1016/j.combustflame.2014.06.005, doi:10.1016/j.combustflame.2014.06.005.">2014</a>]</span>. The diagram below shows the general
+concept of the two-point flame control method, with control points located on either
+side of the peak flame temperature. An initial flame solution is used as a starting
+point, and the temperatures at the control points are lowered to produce a new flame
+solution that satisfies the governing equations and passes through the new temperatures
+at the control points.</p>
+<a class="reference internal image-reference" href="../../_images/two_point_control_diagram.svg"><img alt="Two-Point Flame Control Diagram" class="align-center" src="../../_images/two_point_control_diagram.svg" width="50%" /></a>
+<p>For the two-point control method, one governing equation is modified (<span class="math notranslate nohighlight">\(\Lambda\)</span>), and
+a new governing equation for the axial oxidizer velocity is added (<span class="math notranslate nohighlight">\(U_o\)</span>). The fuel
+and oxidizer velocity boundary conditions are modified when the two-point control is
+active. These equations allow for the temperature reduction to be performed in a
+numerically consistent manner (preventing any issues of over-defining the system of
+governing equations). The two equations that are activated when two-point control is
+turned on are:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d\Lambda}{dz} = 0
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dU_o}{dz} = 0
+\]</div>
+<p>At the left control point the residual for the <span class="math notranslate nohighlight">\(\Lambda\)</span> equation is:</p>
+<div class="math notranslate nohighlight">
+\[
+T(z=z_L) - T_{L, \t{control}}
+\]</div>
+<p>At the left control point the residual for the <span class="math notranslate nohighlight">\(U_o\)</span> equation is:</p>
+<div class="math notranslate nohighlight">
+\[
+T(z=z_R) - T_{R, \t{control}}
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(T(z=z_L)\)</span> is the temperature of the flowfield at the left control point,
+<span class="math notranslate nohighlight">\(T(z=z_R)\)</span> is the temperature of the flowfield at the right control point,
+<span class="math notranslate nohighlight">\(T_{L, \t{control}}\)</span> is the left control point desired temperature, and
+<span class="math notranslate nohighlight">\(T_{R, \t{control}}\)</span> is the right control point desired temperature.</p>
+<p>The values of <span class="math notranslate nohighlight">\(\Lambda\)</span> and <span class="math notranslate nohighlight">\(U_o\)</span> are influenced by the left and right control points,
+respectively. A residual error is induced because of the difference between the flow’s
+temperature at that point and the desired control point temperature. In order to drive
+this error to zero, the solver adjusts the flow rates at the boundaries, which changes
+the temperature distribution, which in turn affects the values of <span class="math notranslate nohighlight">\(\Lambda\)</span> and <span class="math notranslate nohighlight">\(U_o\)</span>.</p>
+<p>At the left boundary, the boundary condition for the continuity equation is imposed by
+using the value of the axial velocity at the left boundary. At the right boundary, the
+boundary condition for the continuity equation is imposed by using the solution from the
+oxidizer velocity equation.</p>
+<div class="math notranslate nohighlight">
+\[
+\dot{m}_\t{in,left} = \rho(z_{\t{in,left}}) U(z_{\t{in,left}})
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\dot{m}_\t{in,right} = - \rho(z_{\t{in,right}}) U_o(z_{\t{in,right}})
+\]</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#axisymmetric-stagnation-flow">Axisymmetric Stagnation Flow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusive-fluxes">Diffusive Fluxes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions">Boundary Conditions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inlet-boundary">Inlet boundary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outlet-boundary">Outlet boundary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetry-boundary">Symmetry boundary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reacting-surface">Reacting surface</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-drift-diffusion-model">The Drift-Diffusion Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#counterflow-two-point-flame-control">Counterflow Two-Point Flame Control</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/reference/onedim/governing-equations.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

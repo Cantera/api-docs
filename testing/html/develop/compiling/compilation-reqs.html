@@ -1,0 +1,1139 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Compilation Requirements &#8212; Cantera 3.1.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'develop/compiling/compilation-reqs';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Downloading the Cantera source code" href="source-code.html" />
+    <link rel="prev" title="Develop" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Compiling Cantera from Source</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Compilation Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source-code.html">Downloading the Cantera source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure-build.html">Configure and Build Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">Software used by Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config-options.html">Configuration Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="special-cases.html">Special Compiling Cases</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">How Cantera Works</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reactor-integration.html">How Time Integration of Reactor Networks Works</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Adding New Features to Cantera</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing to Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../style-guidelines.html">Code Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vscode-tips.html">Configuring Visual Studio Code for Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-tests.html">Writing Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running-tests.html">Running Tests and Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-examples.html">Writing Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc-formatting.html">Formatting Documentation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Releasing &amp; Distributing Cantera</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../distribution-packages/release-checklist.html">Making a New Cantera Release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distribution-packages/pypi-sdist-wheel.html">Distributing sdist and Wheel Packages via PyPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distribution-packages/conda.html">Distributing Conda Package via conda-forge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distribution-packages/ubuntu-ppa.html">Distributing for Ubuntu via a Personal Package Archive (PPA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distribution-packages/windows-and-macos.html">Distributing for Windows and macOS</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Develop</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Compilation...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="compilation-requirements">
+<span id="sec-compilation-reqs"></span><h1>Compilation Requirements<a class="headerlink" href="#compilation-requirements" title="Link to this heading">#</a></h1>
+<p>Click the buttons below to see the required software that you must install to
+compile Cantera on your operating system.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-auto sd-row-cols-xs-auto sd-row-cols-sm-auto sd-row-cols-md-auto sd-row-cols-lg-auto docutils">
+<div class="sd-col sd-d-flex-column docutils">
+<p><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-primary sd-shadow-sm reference internal" href="#sec-conda"><span class="std std-ref">Conda &amp; Anaconda</span></a></p>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<p><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-primary sd-shadow-sm reference internal" href="#sec-ubuntu-debian-reqs"><span class="std std-ref">Ubuntu &amp; Debian</span></a></p>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<p><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-primary sd-shadow-sm reference internal" href="#sec-opensuse-reqs"><span class="std std-ref">  OpenSUSE &amp; SLE</span></a></p>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<p><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-primary sd-shadow-sm reference internal" href="#sec-fedora-reqs"><span class="std std-ref">  Fedora &amp; RHEL</span></a></p>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<p><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-primary sd-shadow-sm reference internal" href="#sec-macos"><span class="std std-ref">macOS</span></a></p>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<p><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-primary sd-shadow-sm reference internal" href="#sec-windows"><span class="std std-ref">Windows</span></a></p>
+</div>
+</div>
+</div>
+<section id="conda-anaconda">
+<span id="sec-conda"></span><h2>Conda &amp; Anaconda<a class="headerlink" href="#conda-anaconda" title="Link to this heading">#</a></h2>
+<section id="general-notes">
+<h3>General Notes<a class="headerlink" href="#general-notes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>These instructions will set you up to build Cantera with the dependencies installed in
+a Conda environment</p></li>
+<li><p>You will need to install compilers for your system by following the instructions in
+the sections below to install the compiler for your operating system.</p></li>
+<li><p>By default, Cantera is installed into the active conda environment, where the layout
+of the directory structure corresponds to the <a class="reference internal" href="configure-build.html"><span class="doc std std-doc">configuration option</span></a>
+<code class="docutils literal notranslate"><span class="pre">layout=conda</span></code>.</p></li>
+</ul>
+</section>
+<section id="conda-requirements">
+<span id="sec-conda-reqs"></span><h3>Conda Requirements<a class="headerlink" href="#conda-requirements" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Install <a class="reference external" href="https://www.anaconda.com/download/">Anaconda</a>,
+<a class="reference external" href="https://conda.io/miniconda.html">Miniconda</a>, or
+<a class="reference external" href="https://github.com/conda-forge/miniforge">Miniforge</a>.</p></li>
+<li><p>Launch the command line interface:</p>
+<ul>
+<li><p>On macOS and Linux, the installer should add the appropriate activation mechanism
+for your normal terminal by default. You can test this by running</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>in the terminal. If there is no output or an error appears, locate your Conda
+installation and run the following code in the terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/path/to/conda/install/folder/bin/conda<span class="w"> </span>init<span class="w"> </span>--all
+</pre></div>
+</div>
+<p>Then restart your terminal or shell.</p>
+</li>
+<li><p>On Windows, use the Anaconda PowerShell to run the build process (available from
+the Start Menu). When using MSVC compilers, you also need to set environment
+variables for x64-native tools (see <a class="reference external" href="https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-170#developer_command_file_locations">Developer command file locations</a>)
+by running</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span><span class="s2">&quot;C:\path\to\MSVC\Auxiliary\Build\vcvars64.bat&quot;</span>
+</pre></div>
+</div>
+<p>(note that the period <code class="docutils literal notranslate"><span class="pre">'.'</span></code> is part of the command). The path can be found as
+follows: locate the <strong>x64 Native Tools Command Prompt</strong> in the Start Menu,
+right-click, select <strong>More &gt; Open File Location</strong>, right-click on the shortcut,
+select <strong>Properties</strong> and copy the <strong>Target</strong> command.</p>
+</li>
+</ul>
+</li>
+<li><p>Create an environment <code class="docutils literal notranslate"><span class="pre">ct-build</span></code> with the dependencies to build Cantera. Create a
+file called <code class="docutils literal notranslate"><span class="pre">environment.yaml</span></code> with the following content</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ct-build</span>
+<span class="nt">channels</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w">  </span><span class="c1"># Cantera supports Python 3.8 and up</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scons</span><span class="w">  </span><span class="c1"># build system</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boost-cpp</span><span class="w">  </span><span class="c1"># C++ dependency</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hdf5</span><span class="w">  </span><span class="c1"># optional C++ dependency</span>
+<span class="c1"># - highfive  # C++ dependency; uncomment to override Cantera default</span>
+<span class="c1"># - sundials  # uncomment to override Cantera default</span>
+<span class="c1"># - fmt  # uncomment to override Cantera default</span>
+<span class="c1"># - eigen  # uncomment to override Cantera default</span>
+<span class="c1"># - yaml-cpp  # uncomment to override Cantera default</span>
+<span class="c1"># - libgomp  # optional (OpenMP implementation when using GCC)</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cython</span><span class="w">  </span><span class="c1"># needed to build Python package</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy</span><span class="w">  </span><span class="c1"># needed to build Python package</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span><span class="w">  </span><span class="c1"># needed to build Python package</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wheel</span><span class="w">  </span><span class="c1"># needed to build Python package</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">setuptools</span><span class="w">  </span><span class="c1"># needed to build Python package</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest</span><span class="w">  </span><span class="c1"># needed for the Python test suite</span>
+<span class="c1"># - pytest-cov  # optional (needed if running with test coverage enabled)</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruamel.yaml</span><span class="w">  </span><span class="c1"># needed for converter scripts</span>
+<span class="c1"># - pandas  # optional (needed for pandas interface and some examples)</span>
+<span class="c1"># - scipy  # optional (needed for some examples)</span>
+<span class="c1"># - matplotlib  # optional (needed for plots and some examples)</span>
+<span class="c1"># - python-graphviz  # optional (needed for reaction path diagrams and some examples)</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ipython</span><span class="w">  </span><span class="c1"># optional (needed for nicer interactive command line)</span>
+<span class="c1"># - jupyter  # optional (needed for Jupyter Notebook)</span>
+<span class="c1"># - sphinx  # optional (needed for documentation)</span>
+<span class="c1"># - pydata-sphinx-theme  # optional (needed for documentation)</span>
+<span class="c1"># - myst-nb  # optional (needed for documentation)</span>
+<span class="c1"># - myst-parser  # optional (needed for documentation)</span>
+<span class="c1"># - sphinx-gallery  # optional (needed for documentation)</span>
+<span class="c1"># - sphinx-argparse  # optional (needed for documentation)</span>
+<span class="c1"># - sphinx-copybutton  # optional (needed for documentation)</span>
+<span class="c1"># - sphinx-design  # optional (needed for documentation)</span>
+<span class="c1"># - sphinxcontrib-bibtex  # optional (needed for documentation)</span>
+<span class="c1"># - sphinxcontrib-matlabdomain  # optional (needed for documentation)</span>
+<span class="c1"># - sphinxcontrib-doxylink  # optional (needed for documentation)</span>
+<span class="c1"># - doxygen  # optional (needed for documentation)</span>
+<span class="c1"># - graphviz  # optional (needed for documentation)</span>
+<span class="c1"># - texlive-core  # optional (needed for documentation)</span>
+<span class="c1"># - perl  # optional (needed for documentation)</span>
+<span class="c1"># - coolprop  # optional (needed for some examples)</span>
+<span class="c1"># - pint  # optional (needed for some examples)</span>
+<span class="c1"># - jinja2  # optional (needed for code generation; example: .NET interface)</span>
+<span class="c1"># - pip:  # optional (list of PyPI managed packages)</span>
+<span class="c1">#   - &quot;git+https://github.com/Cantera/sphinx-tags.git@main&quot;  # optional (needed for documentation)</span>
+</pre></div>
+</div>
+<p>The environment is then created and activated using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yaml
+conda<span class="w"> </span>activate<span class="w"> </span>ct-build
+</pre></div>
+</div>
+<p>After creating the environment, it can be updated from within <code class="docutils literal notranslate"><span class="pre">ct-build</span></code> using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>update<span class="w"> </span>-f<span class="w"> </span>environment.yaml<span class="w"> </span>--prune
+</pre></div>
+</div>
+</li>
+<li><p>(Optional) If you want to override external libraries packaged with Cantera
+(<code class="docutils literal notranslate"><span class="pre">sundials</span></code>, <code class="docutils literal notranslate"><span class="pre">fmt</span></code>, <code class="docutils literal notranslate"><span class="pre">eigen</span></code>, <code class="docutils literal notranslate"><span class="pre">yaml-cpp</span></code>), simply uncomment corresponding lines in the
+file <code class="docutils literal notranslate"><span class="pre">environment.yaml</span></code> above. Note that specific versions can be forced by providing
+version numbers (example: replace <code class="docutils literal notranslate"><span class="pre">sundials</span></code> by <code class="docutils literal notranslate"><span class="pre">sundials=5.8</span></code> to install version
+<code class="docutils literal notranslate"><span class="pre">5.8</span></code>).</p></li>
+<li><p>(Optional) If you want to build the documentation, make sure to uncomment lines for
+<code class="docutils literal notranslate"><span class="pre">pip</span></code>, <code class="docutils literal notranslate"><span class="pre">sphinx</span></code>, <code class="docutils literal notranslate"><span class="pre">doxygen</span></code>, and any other lines marked as “needed for documentation”
+in the <code class="docutils literal notranslate"><span class="pre">environment.yaml</span></code> sample above.</p></li>
+<li><p>(Cantera &lt; 2.6 only) On previous Cantera versions, the build process required
+configuration options <code class="docutils literal notranslate"><span class="pre">boost_inc_dir</span></code> and <code class="docutils literal notranslate"><span class="pre">prefix</span></code> (see <a class="reference internal" href="configure-build.html"><span class="doc std std-doc">configuration
+options</span></a>); starting with Cantera 2.6, these settings are detected
+automatically.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As the compiled code is based on the conda environment <code class="docutils literal notranslate"><span class="pre">ct-build</span></code>, it is only
+usable from within that environment. This means that in order to use the compiled
+Cantera package, you have to activate your <code class="docutils literal notranslate"><span class="pre">ct-build</span></code> environment first.</p>
+</div>
+<p class="sd-text-right"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-primary sd-shadow-sm reference internal" href="source-code.html"><span class="doc">Next: Download the Source Code</span></a></p>
+</section>
+</section>
+<section id="linux">
+<span id="sec-linux"></span><h2>Linux<a class="headerlink" href="#linux" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>General Notes<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>To download the source code, installing <code class="docutils literal notranslate"><span class="pre">git</span></code> is highly recommended in addition
+to the requirements listed below.</p></li>
+<li><p>The following instructions use the system-installed versions of Python, but alternate
+installations such as the Anaconda distribution of Python can be used as well.</p></li>
+<li><p>Cython is only required to be installed for the version of Python that also has SCons
+installed; following the instructions below will install Cython for the version of
+Python installed in the system directories. The minimum compatible Cython version is
+0.29.31. If your distribution does not contain a suitable version, you may be able to
+install a more recent version using Pip.</p></li>
+<li><p>Users of other distributions should install the equivalent packages, which may have
+slightly different names.</p></li>
+<li><p>In addition to the operating systems below, Cantera should work on any Unix-like
+system where the necessary prerequisites are available, but some additional
+configuration may be required.</p></li>
+</ul>
+</section>
+<section id="ubuntu-debian">
+<span id="sec-ubuntu-debian-reqs"></span><h3>Ubuntu &amp; Debian<a class="headerlink" href="#ubuntu-debian" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Ubuntu 20.04 LTS (Focal Fossa) or newer</p></li>
+<li><p>Debian 11.0 (Bullseye) or newer</p></li>
+<li><p>The following packages must be installed to build any of the Cantera modules using
+your choice of package manager:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">++</span> <span class="n">python3</span> <span class="n">scons</span> <span class="n">libboost</span><span class="o">-</span><span class="n">dev</span> <span class="n">libhdf5</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The HDF5 headers and libraries are not installed to directories on the compiler’s
+default search path. When building Cantera, these paths need to be specified as
+options to <code class="docutils literal notranslate"><span class="pre">scons</span></code>, for example <code class="docutils literal notranslate"><span class="pre">extra_inc_dirs=/usr/include/hdf5/serial</span></code> and
+<code class="docutils literal notranslate"><span class="pre">extra_lib_dirs=/usr/lib/x86_64-linux-gnu/hdf5/serial</span></code>.</p></li>
+</ul>
+</li>
+<li><p>If you want to use system system packages to provide the following dependencies,
+instead of the versions bundled with Cantera, you should also install:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">libsundials</span><span class="o">-</span><span class="n">dev</span> <span class="n">libeigen3</span><span class="o">-</span><span class="n">dev</span> <span class="n">libyaml</span><span class="o">-</span><span class="n">cpp</span><span class="o">-</span><span class="n">dev</span> <span class="n">libfmt</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+</li>
+<li><p>In addition to the general packages, building the Python 3 module also requires:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cython3</span> <span class="n">python3</span><span class="o">-</span><span class="n">setuptools</span> <span class="n">python3</span><span class="o">-</span><span class="n">wheel</span> <span class="n">python3</span><span class="o">-</span><span class="n">numpy</span> <span class="n">python3</span><span class="o">-</span><span class="n">ruamel</span><span class="o">.</span><span class="n">yaml</span> <span class="n">python3</span><span class="o">-</span><span class="n">pytest</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Debian 12.0 (Bookworm) and Ubuntu 23.04 (Lunar Lobster) provide compatible Cython
+versions. For older releases, install Cython using Pip.</p></li>
+</ul>
+</li>
+<li><p>In addition to the general packages, building the Fortran module also requires:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gfortran</span>
+</pre></div>
+</div>
+</li>
+<li><p>In addition to the general packages, building the MATLAB toolbox also requires:</p>
+<ul>
+<li><p>MATLAB version later than 2009a</p>
+<ul>
+<li><p>Typically installed to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">MATLAB</span><span class="o">/</span><span class="n">R20YYn</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">YY</span></code> is a two digit year and <code class="docutils literal notranslate"><span class="pre">n</span></code> is either <code class="docutils literal notranslate"><span class="pre">a</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span></code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="sd-text-right"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-primary sd-shadow-sm reference internal" href="source-code.html"><span class="doc">Next: Download the Source Code</span></a></p>
+</section>
+<section id="fedora-rhel">
+<span id="sec-fedora-reqs"></span><h3>Fedora &amp; RHEL<a class="headerlink" href="#fedora-rhel" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>The following packages must be installed to build any of the Cantera modules using
+your choice of package manager:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcc</span><span class="o">-</span><span class="n">c</span><span class="o">++</span> <span class="n">python3</span> <span class="n">scons</span> <span class="n">boost</span><span class="o">-</span><span class="n">devel</span> <span class="n">hdf5</span><span class="o">-</span><span class="n">devel</span>
+</pre></div>
+</div>
+</li>
+<li><p>If you want to use system system packages to provide the following dependencies,
+instead of the versions bundled with Cantera, you should also install:</p>
+<blockquote>
+<div><p>sundials-devel eigen3-devel yaml-cpp-devel fmt-devel highfive-devel</p>
+</div></blockquote>
+</li>
+<li><p>In addition to the general packages, building the Python 3 module also requires:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span><span class="o">-</span><span class="n">devel</span> <span class="n">Cython</span> <span class="n">python3</span><span class="o">-</span><span class="n">numpy</span> <span class="n">python3</span><span class="o">-</span><span class="n">ruamel</span><span class="o">-</span><span class="n">yaml</span> <span class="n">python3</span><span class="o">-</span><span class="n">pytest</span>
+</pre></div>
+</div>
+</li>
+<li><p>In addition to the general packages, building the Fortran module also requires:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcc</span><span class="o">-</span><span class="n">gfortran</span>
+</pre></div>
+</div>
+</li>
+<li><p>In addition to the general packages, building the MATLAB toolbox also requires:</p>
+<ul>
+<li><p>MATLAB version later than 2009a</p>
+<ul>
+<li><p>Typically installed to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">MATLAB</span><span class="o">/</span><span class="n">R20YYn</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">YY</span></code> is a two digit year and <code class="docutils literal notranslate"><span class="pre">n</span></code> is either <code class="docutils literal notranslate"><span class="pre">a</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span></code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="sd-text-right"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-primary sd-shadow-sm reference internal" href="source-code.html"><span class="doc">Next: Download the Source Code</span></a></p>
+</section>
+<section id="opensuse-suse-linux-enterprise">
+<span id="sec-opensuse-reqs"></span><h3>OpenSUSE &amp; SUSE Linux Enterprise<a class="headerlink" href="#opensuse-suse-linux-enterprise" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>OpenSUSE Leap 15.5 or newer recommended</p></li>
+<li><p>The following packages must be installed to build any of the Cantera modules using
+your choice of package manager:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcc11</span><span class="o">-</span><span class="n">c</span><span class="o">++</span> <span class="n">python311</span> <span class="n">libboost_headers1_75_0</span><span class="o">-</span><span class="n">devel</span> <span class="n">hdf5</span><span class="o">-</span><span class="n">devel</span> <span class="n">python311</span><span class="o">-</span><span class="n">pip</span>
+</pre></div>
+</div>
+<p>You can specify other version numbers for GCC, Python, and Boost, as long as they meet
+Cantera’s minimum requirements.</p>
+</li>
+<li><p>You will also need to install <code class="docutils literal notranslate"><span class="pre">scons</span></code> using the Pip version installed above.</p></li>
+<li><p>In addition to the general packages, building the Python module also requires:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span><span class="o">-</span><span class="n">devel</span>
+</pre></div>
+</div>
+<p>as well as the following packages installed using Pip:</p>
+<blockquote>
+<div><p>numpy wheel cython ruamel.yaml pytest</p>
+</div></blockquote>
+</li>
+<li><p>In addition to the general packages, building the Fortran module also requires:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcc11</span><span class="o">-</span><span class="n">fortran</span>
+</pre></div>
+</div>
+</li>
+<li><p>In addition to the general packages, building the MATLAB toolbox also requires:</p>
+<ul>
+<li><p>MATLAB version later than 2009a</p>
+<ul>
+<li><p>Typically installed to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">MATLAB</span><span class="o">/</span><span class="n">R20YYn</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">YY</span></code> is a two digit year and <code class="docutils literal notranslate"><span class="pre">n</span></code> is either <code class="docutils literal notranslate"><span class="pre">a</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span></code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="sd-text-right"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-primary sd-shadow-sm reference internal" href="source-code.html"><span class="doc">Next: Download the Source Code</span></a></p>
+</section>
+</section>
+<section id="windows">
+<span id="sec-windows"></span><h2>Windows<a class="headerlink" href="#windows" title="Link to this heading">#</a></h2>
+<section id="id2">
+<h3>General Notes<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>The build process will produce a Python module compatible with the version of Python
+used for the compilation. To generate different modules for other versions of Python,
+you will need to install those versions of Python and recompile.</p></li>
+<li><p>The following instructions use the versions of Python downloaded from
+<a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>, but alternate installations such as the Anaconda
+distribution of Python can be used as well.</p></li>
+<li><p>If you want to build the Matlab toolbox and you have a 64-bit copy of Windows, by
+default you will be using a 64-bit copy of Matlab, and therefore you need to compile
+Cantera in 64-bit mode. For simplicity, it is highly recommended that you use a 64-bit
+version of Python to handle this automatically.</p></li>
+<li><p>It is generally helpful to have SCons and Python in your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable.
+This can be done by checking the appropriate box during the installation of Python or
+can be accomplished by adding the top-level Python directory and the <code class="docutils literal notranslate"><span class="pre">Scripts</span></code>
+subdirectory (for example, <code class="docutils literal notranslate"><span class="pre">C:\Python311;C:\Python311\Scripts</span></code>) to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. The
+dialog to change the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> is accessible from:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Control</span> <span class="n">Panel</span> <span class="o">&gt;</span> <span class="n">System</span> <span class="ow">and</span> <span class="n">Security</span> <span class="o">&gt;</span> <span class="n">System</span> <span class="o">&gt;</span> <span class="n">Advanced</span> <span class="n">System</span> <span class="n">Settings</span> <span class="o">&gt;</span> <span class="n">Environment</span> <span class="n">Variables</span>
+</pre></div>
+</div>
+<p>Make sure that the installation of Python that has SCons comes first on your <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
+</li>
+<li><p>In order to use SCons to install Cantera to a system folder (for example,
+<code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files\Cantera</span></code>) you must run the <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">install</span></code> command in a
+command prompt that has been launched by selecting the <em>Run as Administrator</em>
+option.</p></li>
+</ul>
+</section>
+<section id="windows-requirements">
+<span id="sec-windows-reqs"></span><h3>Windows Requirements<a class="headerlink" href="#windows-requirements" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Windows 7 or later; either 32-bit or 64-bit</p></li>
+<li><p>To build any of the Cantera modules, you will need to install</p>
+<ul class="simple">
+<li><p>Python</p>
+<ul>
+<li><p><a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p></li>
+<li><p>Cantera supports Python 3.8 and higher</p></li>
+<li><p>Be sure to choose the appropriate architecture for your system - either
+32-bit or 64-bit</p></li>
+<li><p>When installing, make sure to choose the option to add to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code></p></li>
+</ul>
+</li>
+<li><p>SCons</p>
+<ul>
+<li><p><a class="reference external" href="https://pypi.org/project/SCons/">https://pypi.org/project/SCons/</a></p></li>
+<li><p>Be sure to choose the appropriate architecture for your system - either
+32-bit or 64-bit</p></li>
+</ul>
+</li>
+<li><p>One of the following supported compilers</p>
+<ul>
+<li><p>Microsoft compilers</p>
+<ul>
+<li><p><a class="reference external" href="https://visualstudio.microsoft.com/downloads/">https://visualstudio.microsoft.com/downloads/</a></p></li>
+<li><p>Known to work with Visual Studio 2017 (MSVC 14.1), Visual Studio 2019
+(MSVC 14.2), and Visual Studio 2022 (MSVC 14.3).</p></li>
+</ul>
+</li>
+<li><p>MinGW compilers</p>
+<ul>
+<li><p><a class="reference external" href="http://mingw-w64.org/">http://mingw-w64.org/</a></p></li>
+<li><p><a class="reference external" href="http://tdm-gcc.tdragon.net/">http://tdm-gcc.tdragon.net/</a></p></li>
+<li><p>Known to work with Mingw-w64 12.2.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>The Boost headers</p>
+<ul>
+<li><p><a class="reference external" href="https://www.boost.org/doc/libs/1_82_0/more/getting_started/windows.html#get-boost">https://www.boost.org/doc/libs/1_82_0/more/getting_started/windows.html#get-boost</a></p></li>
+<li><p>It is not necessary to compile the Boost libraries since Cantera only uses
+the headers from Boost</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>In addition to the general software, building the Python module also requires
+several Python packages: Cython, NumPy, setuptools, wheel, ruamel.yaml, and pytest.
+All of these can be installed using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>py<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>setuptools<span class="w"> </span>wheel<span class="w"> </span>cython<span class="w"> </span>numpy<span class="w"> </span>ruamel.yaml<span class="w"> </span>pytest
+</pre></div>
+</div>
+</li>
+</ul>
+<p class="sd-text-right"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-primary sd-shadow-sm reference internal" href="source-code.html"><span class="doc">Next: Download the Source Code</span></a></p>
+</section>
+</section>
+<section id="macos">
+<span id="sec-macos"></span><h2>macOS<a class="headerlink" href="#macos" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>General Notes<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Cantera 2.5.0 and higher do not support Python 2, which may be installed by default
+on your computer. You must install Python 3 from another source to be able to build
+Cantera. The instructions below use Homebrew.</p></li>
+</ul>
+</section>
+<section id="macos-requirements">
+<span id="sec-mac-os-reqs"></span><h3>macOS Requirements<a class="headerlink" href="#macos-requirements" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>macOS 10.15 (Catalina) is required; Homebrew requires 11.0 or newer.</p></li>
+<li><p>To build any of the Cantera interfaces, you will need to install</p>
+<ul>
+<li><p>Xcode</p>
+<ul>
+<li><p>Download and install from the App Store</p></li>
+<li><p>From a Terminal, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>xcode-select<span class="w"> </span>--install
+</pre></div>
+</div>
+<p>and agree to the Xcode license agreement</p>
+</li>
+</ul>
+</li>
+<li><p>Homebrew</p>
+<ul>
+<li><p><a class="reference external" href="https://brew.sh">https://brew.sh</a></p></li>
+<li><p>From a Terminal, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Once Homebrew is installed, the rest of the dependencies can be installed with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>python<span class="w"> </span>scons<span class="w"> </span>boost<span class="w"> </span>git<span class="w"> </span>hdf5<span class="w"> </span>libomp
+</pre></div>
+</div>
+<p>Note that brew installs Python 3 by default, but does not over-write the existing
+system Python. When you want to use the brew-installed Python, check to make sure
+that <code class="docutils literal notranslate"><span class="pre">python3</span></code> and <code class="docutils literal notranslate"><span class="pre">pip3</span></code> refer to the Homebrew installation by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>which<span class="w"> </span>python3
+which<span class="w"> </span>pip3
+</pre></div>
+</div>
+<p>If these commands do not include the Homebrew path, you can run the correct ones as
+<code class="docutils literal notranslate"><span class="pre">$(brew</span> <span class="pre">--prefix)/bin/python3</span></code> and <code class="docutils literal notranslate"><span class="pre">$(brew</span> <span class="pre">--prefix)/bin/pip3</span></code>.</p>
+</li>
+</ul>
+</li>
+<li><p>In addition to the general software, building the Python module also requires:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">$(</span>brew<span class="w"> </span>--prefix<span class="k">)</span>/bin/pip3<span class="w"> </span>install<span class="w"> </span>cython<span class="w"> </span>numpy<span class="w"> </span>wheel<span class="w"> </span>setuptools<span class="w"> </span>ruamel.yaml<span class="w"> </span>pytest
+</pre></div>
+</div>
+</li>
+<li><p>In addition to the general software, building the Fortran module also requires:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>gcc
+</pre></div>
+</div>
+</li>
+<li><p>In addition to the general software, building the MATLAB toolbox also requires:</p>
+<ul>
+<li><p>MATLAB version later than 2009a</p>
+<ul>
+<li><p>Typically installed to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">MATLAB_R20YYn</span><span class="o">.</span><span class="n">app</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">YY</span></code> is a two digit year and <code class="docutils literal notranslate"><span class="pre">n</span></code> is either <code class="docutils literal notranslate"><span class="pre">a</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span></code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>The Homebrew header and library directories will not be on the path for the system
+compiler (Xcode), so when compiling Cantera, you will need to provide the command line
+options <code class="docutils literal notranslate"><span class="pre">extra_inc_dirs=$(brew</span> <span class="pre">--prefix)/include</span></code> and
+<code class="docutils literal notranslate"><span class="pre">extra_lib_dirs=$(brew</span> <span class="pre">--prefix)/lib</span></code>.</p></li>
+</ul>
+<p class="sd-text-right"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-primary sd-shadow-sm reference internal" href="source-code.html"><span class="doc">Next: Download the Source Code</span></a></p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-anaconda">Conda &amp; Anaconda</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-notes">General Notes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-requirements">Conda Requirements</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">General Notes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ubuntu-debian">Ubuntu &amp; Debian</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fedora-rhel">Fedora &amp; RHEL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#opensuse-suse-linux-enterprise">OpenSUSE &amp; SUSE Linux Enterprise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">General Notes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-requirements">Windows Requirements</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macos">macOS</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">General Notes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macos-requirements">macOS Requirements</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/develop/compiling/compilation-reqs.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

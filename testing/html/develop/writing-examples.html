@@ -1,0 +1,781 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Writing Examples &#8212; Cantera 3.1.0b1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'develop/writing-examples';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Formatting Documentation" href="doc-formatting.html" />
+    <link rel="prev" title="Running Tests and Debugging" href="running-tests.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Compiling Cantera from Source</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="compiling/compilation-reqs.html">Compilation Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling/source-code.html">Downloading the Cantera source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling/configure-build.html">Configure and Build Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling/dependencies.html">Software used by Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling/config-options.html">Configuration Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling/special-cases.html">Special Compiling Cases</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">How Cantera Works</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="reactor-integration.html">How Time Integration of Reactor Networks Works</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Adding New Features to Cantera</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing to Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style-guidelines.html">Code Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vscode-tips.html">Configuring Visual Studio Code for Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-tests.html">Writing Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-tests.html">Running Tests and Debugging</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Writing Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc-formatting.html">Formatting Documentation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Releasing &amp; Distributing Cantera</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="distribution-packages/release-checklist.html">Making a New Cantera Release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distribution-packages/pypi-sdist-wheel.html">Distributing sdist and Wheel Packages via PyPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distribution-packages/conda.html">Distributing Conda Package via conda-forge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distribution-packages/ubuntu-ppa.html">Distributing for Ubuntu via a Personal Package Archive (PPA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distribution-packages/windows-and-macos.html">Distributing for Windows and macOS</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Develop</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Writing Examples</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="writing-examples">
+<h1>Writing Examples<a class="headerlink" href="#writing-examples" title="Link to this heading">#</a></h1>
+<p>Cantera’s examples are written in a style so they can be parsed by
+<a class="reference external" href="https://sphinx-gallery.github.io">Sphinx Gallery</a> and rendered nicely on the Cantera
+website. This page describes some of the formatting guidelines and helpful syntax for
+examples for compatibility with this system.</p>
+<section id="code-and-restructuredtext-blocks">
+<h2>Code and reStructuredText Blocks<a class="headerlink" href="#code-and-restructuredtext-blocks" title="Link to this heading">#</a></h2>
+<p>Each example is divided into a series of blocks that are treated as either code or as
+<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">reStructuredText</a>.</p>
+<p>The first comment block in an example (or the file docstring for Python examples) is
+always treated as reStructuredText. It should start with the title of the example
+(underlined with <code class="docutils literal notranslate"><span class="pre">===</span></code>), followed by an introduction.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">Introduction for a Python example</span><a class="headerlink" href="#id1" title="Link to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Rankine cycle (with units)</span>
+<span class="sd">==========================</span>
+
+<span class="sd">Calculate the efficiency of a Rankine vapor power cycle using a pure fluid model</span>
+<span class="sd">for water. Includes the units of quantities in the calculations.</span>
+
+<span class="sd">Requires: Cantera &gt;= 3.0.0, pint</span>
+
+<span class="sd">.. tags:: Python, thermodynamics, thermodynamic cycle, non-ideal fluid, units</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">Introduction for a C++ example</span><a class="headerlink" href="#id2" title="Link to this code">#</a></div>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Blasius BVP solver</span>
+<span class="cm"> * ==================</span>
+<span class="cm"> *</span>
+<span class="cm"> * This example solves the Blasius boundary value problem for the velocity profile of a</span>
+<span class="cm"> * laminar boundary layer over a flat plate. It uses class ``BoundaryValueProblem``,</span>
+<span class="cm"> * defined in :doc:`BoundaryValueProblem.h &lt;BoundaryValueProblem&gt;`, which provides a</span>
+<span class="cm"> * simplified interface to the boundary value problem capabilities of Cantera.</span>
+<span class="cm"> *</span>
+<span class="cm"> * .. tags:: C++, user-defined model</span>
+<span class="cm"> */</span>
+</pre></div>
+</div>
+</div>
+<p>Subsequent blocks that should be rendered using reStructuredText syntax are comment
+blocks where the first line of the comment (after the comment character) is <code class="docutils literal notranslate"><span class="pre">%%</span></code>. This
+special comment block ends at the end of the comment block, or at the first blank line.
+A line that is empty except for the comment character indicates a new paragraph within
+reStructuredText block.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># %%</span>
+<span class="hll"><span class="c1"># Plot temperature and major species profiles</span>
+</span><span class="hll"><span class="c1"># -------------------------------------------</span>
+</span><span class="hll"><span class="c1">#</span>
+</span><span class="hll"><span class="c1"># Check and see if all has gone well.</span>
+</span>
+<span class="c1"># Extract the spatial profiles as a SolutionArray to simplify plotting specific species</span>
+<span class="n">profile</span> <span class="o">=</span> <span class="n">flame</span><span class="o">.</span><span class="n">to_array</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In the example above, only the highlighted lines are considered as part of the
+reStructuredText block. The subsequent comment is treated as a comment in the code
+block.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">reStructuredText for a C++ example</span><a class="headerlink" href="#id3" title="Link to this code">#</a></div>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* %%</span>
+<span class="cm"> * This class solves the Blasius boundary value problem on the domain (0,L):</span>
+<span class="cm"> *</span>
+<span class="cm"> * .. math::</span>
+<span class="cm"> *             \frac{d\zeta}{dz} = u</span>
+<span class="cm"> *</span>
+<span class="cm"> *             \frac{d^2u}{dz^2} + 0.5\zeta \frac{du}{dz} = 0</span>
+<span class="cm"> *</span>
+<span class="cm"> * with boundary conditions</span>
+<span class="cm"> *</span>
+<span class="cm"> * .. math::</span>
+<span class="cm"> *</span>
+<span class="cm"> *     \zeta(0) &amp; = 0 \\</span>
+<span class="cm"> *         u(0) &amp; = 0 \\</span>
+<span class="cm"> *         u(L) &amp; = 1</span>
+<span class="cm"> *</span>
+<span class="cm"> * Note that this is formulated as a system of two equations, with maximum</span>
+<span class="cm"> * order of 2, rather than as a single third-order boundary value problem.</span>
+<span class="cm"> * For reasons having to do with the band structure of the Jacobian, no</span>
+<span class="cm"> * equation in the system should have order greater than 2.</span>
+<span class="cm"> */</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Blasius</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">BVP</span><span class="o">::</span><span class="n">BoundaryValueProblem</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="tags-keywords">
+<h2>Tags / keywords<a class="headerlink" href="#tags-keywords" title="Link to this heading">#</a></h2>
+<p>The initial comment block should also specify a list of tags (keywords) relevant to the
+example. The full list of keywords to choose from is defined in
+<a class="reference external" href="https://github.com/Cantera/cantera/blob/main/doc/example-keywords.txt"><code class="docutils literal notranslate"><span class="pre">example-keywords.txt</span></code></a>.</p>
+<p>The first tag should be the programming language the example is written in.</p>
+<p>New keywords can be added if desired. The purpose of maintaining this list is primarily
+to avoid redundant keywords or variant spellings and punctuations.</p>
+</section>
+<section id="selecting-thumbnails">
+<h2>Selecting thumbnails<a class="headerlink" href="#selecting-thumbnails" title="Link to this heading">#</a></h2>
+<p>Sphinx Gallery executes the Python examples and renders any figures as part of the
+example. By default, the first figure is used as the thumbnail used on the gallery page.
+To select a different thumbnail, add a comment in the example using the <code class="docutils literal notranslate"><span class="pre">sphinx_gallery_thumbnail_number</span></code> directive. To pick the last figure, write:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = -1</span>
+</pre></div>
+</div>
+</section>
+<section id="diagrams">
+<h2>Diagrams<a class="headerlink" href="#diagrams" title="Link to this heading">#</a></h2>
+<p>Diagrams can be included to help explain an example. We strongly recommend that diagrams
+be drawn as vector artwork (for example, using Inkscape or Illustrator) and saved in the
+SVG format to avoid introducing a large number of binary files into our Git repository.</p>
+<p>Diagrams should be saved in the directory <code class="docutils literal notranslate"><span class="pre">doc/sphinx/_static/images/samples</span></code>. They
+can be included in the HTML version of the example using the following syntax within
+a reStructuredText block:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">image</span><span class="p">::</span> /_static/images/samples/flame-speed.svg
+   <span class="nc">:width:</span> 50%
+   <span class="nc">:alt:</span> Freely Propagating Flame
+   <span class="nc">:align:</span> center
+</pre></div>
+</div>
+</section>
+<section id="data-files">
+<h2>Data files<a class="headerlink" href="#data-files" title="Link to this heading">#</a></h2>
+<p>For examples that require YAML data files besides the existing ones included in the
+default Cantera <a class="reference external" href="https://github.com/Cantera/cantera/tree/main/data"><code class="docutils literal notranslate"><span class="pre">data</span></code></a> directory,
+these files can be added to the
+<a class="reference external" href="https://github.com/cantera/cantera-example-data"><code class="docutils literal notranslate"><span class="pre">cantera-example-data</span></code></a> repository.
+Files in this repository will be installed with Cantera and available under the
+<code class="docutils literal notranslate"><span class="pre">example_data</span></code> subdirectory within the standard search path. For example, the mechanism
+<code class="docutils literal notranslate"><span class="pre">n-hexane-NUIG-2015.yaml</span></code> can be loaded as:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">gas</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s2">&quot;example_data/n-hexane-NUIG-2015.yaml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When developing examples, the use of well-documented mechanisms that have been published
+in the peer-reviewed literature is highly encouraged.</p>
+</section>
+<section id="other-style-guidelines">
+<h2>Other Style Guidelines<a class="headerlink" href="#other-style-guidelines" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Use the following markers to underline headings:</p>
+<ul>
+<li><p>Example title with <code class="docutils literal notranslate"><span class="pre">====</span></code></p></li>
+<li><p>Section headings with <code class="docutils literal notranslate"><span class="pre">---</span></code></p></li>
+<li><p>Subsections with <code class="docutils literal notranslate"><span class="pre">^^^</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-and-restructuredtext-blocks">Code and reStructuredText Blocks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tags-keywords">Tags / keywords</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-thumbnails">Selecting thumbnails</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagrams">Diagrams</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-files">Data files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-style-guidelines">Other Style Guidelines</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/develop/writing-examples.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

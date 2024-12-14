@@ -9,6 +9,7 @@ var classCantera_1_1MultiTransport =
     [ "getMolarFluxes", "df/d7c/classCantera_1_1MultiTransport.html#a1ae848ca4f94a7df1f94e8b03b2f51ee", null ],
     [ "getMassFluxes", "df/d7c/classCantera_1_1MultiTransport.html#a13dcd3a0868c8ab1dc8902cafa04f14b", null ],
     [ "init", "df/d7c/classCantera_1_1MultiTransport.html#a87f227f10b9059972da887186dce2ce5", null ],
+    [ "invalidateCache", "df/d7c/classCantera_1_1MultiTransport.html#aa3ce068e8f4d3b1052bad4e953c79355", null ],
     [ "update_T", "df/d7c/classCantera_1_1MultiTransport.html#a1ebfe7a719e58128dd8e2852a60f5b19", null ],
     [ "update_C", "df/d7c/classCantera_1_1MultiTransport.html#a9e22ec2ba979a65221b76bcdb57d1011", null ],
     [ "updateThermal_T", "df/d7c/classCantera_1_1MultiTransport.html#a6fd0e51cb97d1118e4971f1b695a0f64", null ],

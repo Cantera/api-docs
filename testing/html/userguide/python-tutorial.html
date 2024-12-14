@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Python Tutorial &#8212; Cantera 3.1.0b1 documentation</title>
+    <title>Python Tutorial &#8212; Cantera 3.1.0 documentation</title>
   
   
   
@@ -43,7 +43,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../_static/documentation_options.js?v=dd1205ac"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -847,8 +847,8 @@ the two adjacent bulk phases from the file <code class="docutils literal notrans
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;gas&#39;: &lt;cantera.composite.Solution at 0x7ff710f34d50&gt;,
- &#39;diamond&#39;: &lt;cantera.composite.Solution at 0x7ff710f34ca0&gt;}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;gas&#39;: &lt;cantera.composite.Solution at 0x7fc18c1ccca0&gt;,
+ &#39;diamond&#39;: &lt;cantera.composite.Solution at 0x7fc18c1ccd50&gt;}
 </pre></div>
 </div>
 </div>
@@ -990,7 +990,7 @@ class Solution(cantera.transport.Transport, cantera.kinetics.Kinetics, cantera.t
  |  
  |  get_collision_integral_polynomials(self, i, j)
  |      Get the coefficients of the polynomial fit of the collision integral for
- |      species ``i`` and ``j`` as a function of temperature. See
+ |      species ``i`` and ``j`` as a function of the reduced temperature. See
  |      :ct:`GasTransport::fitCollisionIntegrals`.
  |  
  |  get_thermal_conductivity_polynomial(self, i)
@@ -1008,10 +1008,12 @@ class Solution(cantera.transport.Transport, cantera.kinetics.Kinetics, cantera.t
  |      for species ``i`` and ``j`` as a function of temperature. See
  |      :ct:`GasTransport::fitDiffCoeffs` for the functional form.
  |  
- |  set_collision_integral_polynomial(self, i, j, avalues, bvalues, cvalues, actualT=True)
+ |  set_collision_integral_polynomial(self, i, j, avalues, bvalues, cvalues, actualT=False)
  |      Set the coefficients of the polynomial fit of the collision integral for
  |      species ``i`` and ``j`` as a function of temperature. See
- |      :ct:`GasTransport::fitCollisionIntegrals`.
+ |      :ct:`GasTransport::fitCollisionIntegrals`. The flag ``actualT`` determines
+ |      whether the fit is done in terms of the reduced temperature
+ |      (:math:`T^*_{ij} = T k_B / \epsilon_{ij}`; default) or the actual temperature.
  |  
  |  set_thermal_conductivity_polynomial(self, i, values)
  |      Set the coefficients of the polynomial fit for the thermal conductivity of
@@ -3439,7 +3441,7 @@ data needed to create the corresponding rate object:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ArrheniusRate at 7ff738cda5f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ArrheniusRate at 7fc18c2681b0&gt;
 </pre></div>
 </div>
 </div>

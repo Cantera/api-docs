@@ -64,6 +64,7 @@ var group__tranprops =
       [ "setCollisionIntegralPolynomial", "d8/d58/classCantera_1_1GasTransport.html#a1b98c6d0e85d0e4fb50d9355e9bb514d", null ],
       [ "init", "d8/d58/classCantera_1_1GasTransport.html#a87f227f10b9059972da887186dce2ce5", null ],
       [ "CKMode", "d8/d58/classCantera_1_1GasTransport.html#a5de996eef2b767d712fd6d1a6a99b0a2", null ],
+      [ "invalidateCache", "d8/d58/classCantera_1_1GasTransport.html#aa3ce068e8f4d3b1052bad4e953c79355", null ],
       [ "updateViscosity_T", "d8/d58/classCantera_1_1GasTransport.html#a63ac7f8d6ccfecb0a7aac8580e1640e1", null ],
       [ "updateSpeciesViscosities", "d8/d58/classCantera_1_1GasTransport.html#a6f7cb5b1ada724ec628d97fd61d5b32c", null ],
       [ "updateDiff_T", "d8/d58/classCantera_1_1GasTransport.html#a413dd59dcbc0b8d0a0b4b87424bac936", null ],
@@ -174,6 +175,7 @@ var group__tranprops =
       [ "getMolarFluxes", "df/d7c/classCantera_1_1MultiTransport.html#a1ae848ca4f94a7df1f94e8b03b2f51ee", null ],
       [ "getMassFluxes", "df/d7c/classCantera_1_1MultiTransport.html#a13dcd3a0868c8ab1dc8902cafa04f14b", null ],
       [ "init", "df/d7c/classCantera_1_1MultiTransport.html#a87f227f10b9059972da887186dce2ce5", null ],
+      [ "invalidateCache", "df/d7c/classCantera_1_1MultiTransport.html#aa3ce068e8f4d3b1052bad4e953c79355", null ],
       [ "update_T", "df/d7c/classCantera_1_1MultiTransport.html#a1ebfe7a719e58128dd8e2852a60f5b19", null ],
       [ "update_C", "df/d7c/classCantera_1_1MultiTransport.html#a9e22ec2ba979a65221b76bcdb57d1011", null ],
       [ "updateThermal_T", "df/d7c/classCantera_1_1MultiTransport.html#a6fd0e51cb97d1118e4971f1b695a0f64", null ],
@@ -219,6 +221,7 @@ var group__tranprops =
       [ "fittingErrors", "d2/dfb/classCantera_1_1Transport.html#aacdfae3cf4995a19c155833f87ea593f", null ],
       [ "init", "d2/dfb/classCantera_1_1Transport.html#a7e2273b64ddf3cb0f189edc218811dc0", null ],
       [ "CKMode", "d2/dfb/classCantera_1_1Transport.html#aaac78aa4d629048510c0d2ce47b220b2", null ],
+      [ "invalidateCache", "d2/dfb/classCantera_1_1Transport.html#ace2a9dccad0432e26052468d8d3920a5", null ],
       [ "m_thermo", "d2/dfb/classCantera_1_1Transport.html#a06080b6ee63dc7b30a756df0c79a88d3", null ],
       [ "m_nsp", "d2/dfb/classCantera_1_1Transport.html#ab3e6c2c66c42af05f67bbe604928bd21", null ],
       [ "m_fittingErrors", "d2/dfb/classCantera_1_1Transport.html#acb421c952bd0c862377fda2b2109edcb", null ]

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Objects Representing Phases &#8212; Cantera 3.1.0b1 documentation</title>
+    <title>Objects Representing Phases &#8212; Cantera 3.1.0 documentation</title>
   
   
   
@@ -43,7 +43,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=d42ade26"></script>
+    <script src="../_static/documentation_options.js?v=dd1205ac"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -471,7 +471,7 @@ document.write(`
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../reference/releasenotes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.1.html">Cantera 3.1.0b1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.1.html">Cantera 3.1.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.0.html">Cantera 3.0.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.6.html">Cantera 2.6.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.5.html">Cantera 2.5.1</a></li>
@@ -2034,7 +2034,7 @@ for species <code class="docutils literal notranslate"><span class="pre">i</span
 <dt class="sig sig-object py" id="cantera.Quantity.get_collision_integral_polynomials">
 <span class="sig-name descname"><span class="pre">get_collision_integral_polynomials</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Quantity.get_collision_integral_polynomials" title="Link to this definition">#</a></dt>
 <dd><p>Get the coefficients of the polynomial fit of the collision integral for
-species <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> as a function of temperature. See
+species <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> as a function of the reduced temperature. See
 <a class="reference external" href="../cxx/d8/d58/classCantera_1_1GasTransport.html#a63596d9283bcd529d0f7cca7043ec803">GasTransport::fitCollisionIntegrals()</a>.</p>
 </dd></dl>
 
@@ -2842,7 +2842,9 @@ for species <code class="docutils literal notranslate"><span class="pre">i</span
 <span class="sig-name descname"><span class="pre">set_collision_integral_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cantera.Quantity.set_collision_integral_polynomial" title="Link to this definition">#</a></dt>
 <dd><p>Set the coefficients of the polynomial fit of the collision integral for
 species <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> as a function of temperature. See
-<a class="reference external" href="../cxx/d8/d58/classCantera_1_1GasTransport.html#a63596d9283bcd529d0f7cca7043ec803">GasTransport::fitCollisionIntegrals()</a>.</p>
+<a class="reference external" href="../cxx/d8/d58/classCantera_1_1GasTransport.html#a63596d9283bcd529d0f7cca7043ec803">GasTransport::fitCollisionIntegrals()</a>. The flag <code class="docutils literal notranslate"><span class="pre">actualT</span></code> determines
+whether the fit is done in terms of the reduced temperature
+(<span class="math notranslate nohighlight">\(T^*_{ij} = T k_B / \epsilon_{ij}\)</span>; default) or the actual temperature.</p>
 </dd></dl>
 
 <dl class="py method">

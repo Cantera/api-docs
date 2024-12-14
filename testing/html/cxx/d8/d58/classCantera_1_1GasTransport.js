@@ -16,6 +16,7 @@ var classCantera_1_1GasTransport =
     [ "setCollisionIntegralPolynomial", "d8/d58/classCantera_1_1GasTransport.html#a1b98c6d0e85d0e4fb50d9355e9bb514d", null ],
     [ "init", "d8/d58/classCantera_1_1GasTransport.html#a87f227f10b9059972da887186dce2ce5", null ],
     [ "CKMode", "d8/d58/classCantera_1_1GasTransport.html#a5de996eef2b767d712fd6d1a6a99b0a2", null ],
+    [ "invalidateCache", "d8/d58/classCantera_1_1GasTransport.html#aa3ce068e8f4d3b1052bad4e953c79355", null ],
     [ "updateViscosity_T", "d8/d58/classCantera_1_1GasTransport.html#a63ac7f8d6ccfecb0a7aac8580e1640e1", null ],
     [ "updateSpeciesViscosities", "d8/d58/classCantera_1_1GasTransport.html#a6f7cb5b1ada724ec628d97fd61d5b32c", null ],
     [ "updateDiff_T", "d8/d58/classCantera_1_1GasTransport.html#a413dd59dcbc0b8d0a0b4b87424bac936", null ],

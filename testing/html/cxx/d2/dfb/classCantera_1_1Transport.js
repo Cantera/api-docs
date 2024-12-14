@@ -32,6 +32,7 @@ var classCantera_1_1Transport =
     [ "fittingErrors", "d2/dfb/classCantera_1_1Transport.html#aacdfae3cf4995a19c155833f87ea593f", null ],
     [ "init", "d2/dfb/classCantera_1_1Transport.html#a7e2273b64ddf3cb0f189edc218811dc0", null ],
     [ "CKMode", "d2/dfb/classCantera_1_1Transport.html#aaac78aa4d629048510c0d2ce47b220b2", null ],
+    [ "invalidateCache", "d2/dfb/classCantera_1_1Transport.html#ace2a9dccad0432e26052468d8d3920a5", null ],
     [ "m_thermo", "d2/dfb/classCantera_1_1Transport.html#a06080b6ee63dc7b30a756df0c79a88d3", null ],
     [ "m_nsp", "d2/dfb/classCantera_1_1Transport.html#ab3e6c2c66c42af05f67bbe604928bd21", null ],
     [ "m_fittingErrors", "d2/dfb/classCantera_1_1Transport.html#acb421c952bd0c862377fda2b2109edcb", null ]

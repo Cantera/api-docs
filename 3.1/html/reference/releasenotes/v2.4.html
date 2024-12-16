@@ -1,0 +1,1045 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cantera 2.4.0 &#8212; Cantera 3.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=dd1205ac"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/releasenotes/v2.4';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Cantera 2.3.0" href="v2.3.html" />
+    <link rel="prev" title="Cantera 2.5.1" href="v2.5.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/index.html">Python Module Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/transport.html">Transport Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/zerodim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../python/scripts.html">Mechanism Conversion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../python/ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/yaml_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/lxcat_conversion.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/units.html">Python Interface With Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/constants.html">Physical Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/utilities.html">Utilities</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../yaml/index.html">YAML Input File Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/general.html">General Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/phases.html">Phase Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/species.html">Species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/reactions.html">Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/yaml2ck.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/lxcat2yaml.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Release Notes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="v3.1.html">Cantera 3.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v3.0.html">Cantera 3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.6.html">Cantera 2.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.5.html">Cantera 2.5.1</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Cantera 2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.3.html">Cantera 2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.html">Cantera 2.2.1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="v2.1.html">Cantera 2.1.2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="v2.0.html">Cantera 2.0.2</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Science Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../thermo/index.html">Thermodynamic Properties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../thermo/species-thermo.html">Species Thermodynamic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../thermo/phase-thermo.html">Phase Thermodynamic Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../kinetics/index.html">Chemical Reactions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/reaction-rates.html">Reaction Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/rate-constants.html">Rate Constant Parameterizations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../transport/index.html">Transport Properties</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reactors/index.html">Reactors and Reactor Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/controlreactor.html">Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/constant-pressure-reactor.html">Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-reactor.html">Ideal Gas Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-constant-pressure-reactor.html">Ideal Gas Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/mole-reactor.html">Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/constant-pressure-mole-reactor.html">Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-mole-reactor.html">Ideal Gas Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-constant-pressure-mole-reactor.html">Ideal Gas Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/interactions.html">Reactor Interactions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../onedim/index.html">One-dimensional Flames</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../onedim/governing-equations.html">Governing Equations for One-dimensional Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onedim/discretization.html">Discretization of 1D Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onedim/nonlinear-solver.html">Nonlinear Solver for One-dimensional Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onedim/grid-refinement.html">Grid Refinement for One-dimensional Flows</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Release Notes</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Cantera 2.4.0</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="cantera-2-4-0">
+<h1>Cantera 2.4.0<a class="headerlink" href="#cantera-2-4-0" title="Link to this heading">#</a></h1>
+<p>Published on August 24, 2018 | <a class="reference external" href="https://github.com/Cantera/cantera/releases/tag/v2.4.0">Full release on GitHub</a></p>
+<p>Cantera 2.4.0 includes  <a class="reference external" href="https://github.com/Cantera/cantera/compare/v2.3.0...v2.4.0">more than 380 commits</a> to the code since 2.3.0, merges more than <a class="reference external" href="https://github.com/Cantera/cantera/pulls?utf8=%E2%9C%93&amp;amp;q=is%3Apr+is%3Aclosed+updated%3A%3E%3D2017-01-18+">70 pull requests</a>, and <a class="reference external" href="https://github.com/Cantera/cantera/issues?page=1&amp;amp;q=is%3Aissue+is%3Aclosed+updated%3A%3E%3D2017-01-18&amp;amp;utf8=%E2%9C%93">closes almost 60 issues</a>. In this release, we improved the maintainability of Cantera by removing <a class="reference external" href="https://cantera.org/2.4/doxygen/html/da/d58/deprecated.html">or deprecating</a> old, untested code, moving the website and Mixmaster to separate repositories, and automating more of the build/testing process. We also added new features to the 1-D reactor code (among other areas), including adding an ionized gas transport class and the <code class="docutils literal notranslate"><span class="pre">IonFlow</span></code> and <code class="docutils literal notranslate"><span class="pre">BurnerIonFlame</span></code> classes, providing better accessing to callbacks during 1-D solutions, and automatically detecting certain common failure conditions of the 1-D solver. This release of Cantera was made possible by contributions from 14 developers: <a class="reference external" href="https://github.com/speth">&#64;speth</a>, <a class="reference external" href="https://github.com/bryanwweber">&#64;bryanwweber</a>, <a class="reference external" href="https://github.com/BangShiuh">&#64;BangShiuh</a>, <a class="reference external" href="https://github.com/decaluwe">&#64;decaluwe</a>, <a class="reference external" href="https://github.com/wandadars">&#64;wandadars</a>, <a class="reference external" href="https://github.com/jsantner">&#64;jsantner</a>, <a class="reference external" href="https://github.com/arghdos">&#64;arghdos</a>, <a class="reference external" href="https://github.com/rwest">&#64;rwest</a>, <a class="reference external" href="https://github.com/g3bk47">&#64;g3bk47</a>, <a class="reference external" href="https://github.com/awehrfritz">&#64;awehrfritz</a>, <a class="reference external" href="https://github.com/band-a-prend">&#64;band-a-prend</a>, <a class="reference external" href="https://github.com/vdevgan">&#64;vdevgan</a>, <a class="reference external" href="https://github.com/KyleLinevitchJr">&#64;KyleLinevitchJr</a>, and <a class="reference external" href="https://github.com/MarcDuQuesne">&#64;MarcDuQuesne</a>.</p>
+<p>In addition to Conda packages, Windows installers, and Ubuntu packages, this release also features the addition of a pre-compiled Matlab toolbox for macOS users, replacing Homebrew as the prefered method of installing Cantera for Matlab on macOS.</p>
+<p>Thanks to a small development grant from NumFOCUS (see more about NumFOCUS below), <a class="reference external" href="https://github.com/bryanwweber">&#64;bryanwweber</a> and <a class="reference external" href="https://github.com/decaluwe">&#64;decaluwe</a> reorganized and restyled the <a class="reference external" href="https://cantera.org">Cantera website</a>. The website has moved to a <a class="reference external" href="https://github.com/Cantera/cantera-website">separate repository</a>, allowing the website content to be updated without modifications to the main Cantera source code. We also tried to make it easy for all of our users to find what they’re looking for quickly, from installation instructions and tutorials for beginners, to advanced examples and API documentation for experienced Cantera programmers. The new website also redirects all traffic to HTTPS, ensuring a secure experience for everyone.</p>
+<p>Cantera is now officially part of NumFOCUS. NumFOCUS is a 501(c)3 nonprofit dedicated to supporting the open source scientific computing community. If you are interested in learning more about NumFOCUS, please visit their website at <a class="reference external" href="https://numfocus.org">https://numfocus.org</a>, or our website at <a class="reference external" href="https://cantera.org/community.html#donations">https://cantera.org/community.html#donations</a>.</p>
+<p>Cantera 2.4.0 is the last release that will be compatible with Python 2.7. Support for Python 2.7 from the Python Software Foundation will <a class="reference external" href="https://www.python.org/dev/peps/pep-0373/#maintenance-releases">end January 1, 2020</a>. Given the recent release cadence of Cantera, the next major version of Cantera will probably be released very close to that date, so we have made the decision to drop Python 2.7 support for Cantera 2.5.0 and higher.</p>
+<p>One notable change to the build requirements for Cantera 2.4.0 is that SCons 3.0.0 or higher must be used to compile the source code. This means that either Python 2 or Python 3 can be used to run SCons. In addition, there are now three options to handle building the Python interface, depending on whether the user wants to build for Python 2 or Python 3. Please check the documentation or run <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">help</span></code> for more information.</p>
+<section id="summary-of-changes-in-cantera-2-4-0">
+<h2>Summary of changes in Cantera 2.4.0<a class="headerlink" href="#summary-of-changes-in-cantera-2-4-0" title="Link to this heading">#</a></h2>
+<section id="bugs-fixed">
+<h3>Bugs fixed<a class="headerlink" href="#bugs-fixed" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Fix inconsistencies and bugs in several <code class="docutils literal notranslate"><span class="pre">ThermoPhase</span></code> derived classes, including <code class="docutils literal notranslate"><span class="pre">PDSS_IdealGas</span></code>, <code class="docutils literal notranslate"><span class="pre">IonsFromNeutralVPSSTP</span></code>, <code class="docutils literal notranslate"><span class="pre">PDSS_IonsFromNeutral</span></code>, <code class="docutils literal notranslate"><span class="pre">PDSS_HKFT</span></code>, <code class="docutils literal notranslate"><span class="pre">LatticePhase</span></code>, <code class="docutils literal notranslate"><span class="pre">PDSS_SSVol</span></code>, <code class="docutils literal notranslate"><span class="pre">ConstDensityThermo</span></code>, and <code class="docutils literal notranslate"><span class="pre">PureFluidPhase</span></code></p></li>
+<li><p>Preserve constant property pair when multiplying <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> objects</p></li>
+<li><p>Fix using pure fluids in reactors</p></li>
+<li><p>Add temperature dependence of rotational relaxation in transport calculations</p></li>
+<li><p>Disable linking to external SUNDIALS libraries when building the Matlab toolbox</p></li>
+</ul>
+</section>
+<section id="changes-to-existing-capabilities">
+<h3>Changes to existing capabilities<a class="headerlink" href="#changes-to-existing-capabilities" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Allow instantiation of <code class="docutils literal notranslate"><span class="pre">ThermoPhase</span></code> derived classes without XML</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set_equivalence_ratio</span></code> now supports sulfur oxidation</p></li>
+<li><p>Make all complex object types (<code class="docutils literal notranslate"><span class="pre">ThermoPhase</span></code>, <code class="docutils literal notranslate"><span class="pre">Kinetics</span></code>, <code class="docutils literal notranslate"><span class="pre">Transport</span></code>, <code class="docutils literal notranslate"><span class="pre">Reactor</span></code>, <code class="docutils literal notranslate"><span class="pre">Domain1D</span></code>, etc.) objects non-copyable</p></li>
+<li><p>Deprecate <code class="docutils literal notranslate"><span class="pre">FreeFlow</span></code> and <code class="docutils literal notranslate"><span class="pre">AxiStagnFlow</span></code> classes by moving the relevant functions into the <code class="docutils literal notranslate"><span class="pre">StFlow</span></code> class</p></li>
+<li><p>Allow <code class="docutils literal notranslate"><span class="pre">convertMech</span></code> function to be called multiple times</p></li>
+<li><p>Remove the requirement for users to have Boost headers installed when building against the Cantera library</p></li>
+<li><p>Change the options to build the Python interface, since SCons can be run by Python 3</p></li>
+<li><p>Update GTest, fmtlib, SUNDIALS, and Eigen submodule versions</p></li>
+</ul>
+</section>
+<section id="additions">
+<h3>Additions<a class="headerlink" href="#additions" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Add ion gas transport model, and <code class="docutils literal notranslate"><span class="pre">IonFlow</span></code> and <code class="docutils literal notranslate"><span class="pre">BurnerIonFlame</span></code> flame classes</p></li>
+<li><p>Add C++ OpenMP, Non-Ideal Shock Tube, PSR/WSR, and time-dependent mass flow rate examples</p></li>
+<li><p>Add class <code class="docutils literal notranslate"><span class="pre">AnyMap</span></code></p></li>
+<li><p>Allow negative reaction orders</p></li>
+<li><p>Add unity Lewis number transport model</p></li>
+<li><p>Add electron to the built-in elements</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">get_equivalence_ratio</span></code> function</p></li>
+</ul>
+</section>
+</section>
+<section id="full-changelog">
+<h2>Full Changelog<a class="headerlink" href="#full-changelog" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Bugs fixed<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<section id="thermo-species-elements">
+<h4>Thermo/Species/Elements<a class="headerlink" href="#thermo-species-elements" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Fix issues parsing composition strings with mixtures of commas, colons, and spaces (<a class="reference external" href="https://github.com/Cantera/cantera/commit/%5B%603f6f580b%60%5D(https://github.com/Cantera/cantera/commit/3f6f580b25602ebb442769cca1ecf8f5d6818185)"><code class="docutils literal notranslate"><span class="pre">3f6f580b</span></code></a>)</p></li>
+<li><p>Fix setting mass/mole fractions of phases with only a single species (<a class="reference external" href="https://github.com/Cantera/cantera/commit/ed8de04e5b9a490b057d38fa8538c6091bfca92b"><code class="docutils literal notranslate"><span class="pre">ed8de04e</span></code></a>)</p></li>
+<li><p>Fix reference state calculations (<a class="reference external" href="https://github.com/Cantera/cantera/commit/38d291c683046e41c4c40b194c27c9fef68be8b8"><code class="docutils literal notranslate"><span class="pre">38d291c6</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/7b529ac2d6a1332f852edeb31498c7ee5b2a88fb"><code class="docutils literal notranslate"><span class="pre">7b529ac2</span></code></a>)</p></li>
+<li><p>Fix test failures due to inconsistent species addition order (<a class="reference external" href="https://github.com/Cantera/cantera/commit/11a0727d5ca6172fcb3596dbc11e7f7b1cc2e806"><code class="docutils literal notranslate"><span class="pre">11a0727d</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/433">#433</a>)</p></li>
+<li><p>Fix errors in entropy calculation in <code class="docutils literal notranslate"><span class="pre">PDSS_IdealGas</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/dfb32f0c7ec0e5f037cb1879a73fcb926c8a401a"><code class="docutils literal notranslate"><span class="pre">dfb32f0c</span></code></a>)</p></li>
+<li><p>Fix and test creation of <code class="docutils literal notranslate"><span class="pre">IonsFromNeutralVPSSTP</span></code> objects (<a class="reference external" href="https://github.com/Cantera/cantera/commit/3a119381e81778d67a9ec83e6981d0050c620300"><code class="docutils literal notranslate"><span class="pre">3a119381</span></code></a>)</p></li>
+<li><p>Fix inconsistencies in <code class="docutils literal notranslate"><span class="pre">PDSS_IonsFromNeutral</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/ff46dc93b514d646cccf359e807cfb57ad68a460"><code class="docutils literal notranslate"><span class="pre">ff46dc93</span></code></a>)</p></li>
+<li><p>Fix <code class="docutils literal notranslate"><span class="pre">PDSS_HKFT</span></code> initialization when only one property is given (<a class="reference external" href="https://github.com/Cantera/cantera/commit/2c3512c22a688ab8daecea751add0410e626fa5d"><code class="docutils literal notranslate"><span class="pre">2c3512c2</span></code></a>)</p></li>
+<li><p>Fix default molar volume in <code class="docutils literal notranslate"><span class="pre">LatticePhase</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/f3ba29f0bcfacc85cfd069d83626f46dcb0421c6"><code class="docutils literal notranslate"><span class="pre">f3ba29f0</span></code></a>)</p></li>
+<li><p>Setting the composition with an empty array raises an exception (<a class="reference external" href="https://github.com/Cantera/cantera/commit/8a4142d4bc33de089220b1e26282500c6ce2d02b"><code class="docutils literal notranslate"><span class="pre">8a4142d4</span></code></a>)</p></li>
+<li><p>Fix implementation and documentation of <code class="docutils literal notranslate"><span class="pre">PDSS_SSVol</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/ee663c9b3772be84f740a3b36dff44983b79f7a6"><code class="docutils literal notranslate"><span class="pre">ee663c9b</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/a19b2bd4ccdc9e687c84f4769e0c3cbc64a87fa3"><code class="docutils literal notranslate"><span class="pre">a19b2bd4</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/286217d1d3d0af78e5d61353ba8e8621a9636e36"><code class="docutils literal notranslate"><span class="pre">286217d1</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/be8e51d2177740741b54241defab4726e687b67c"><code class="docutils literal notranslate"><span class="pre">be8e51d2</span></code></a>)</p></li>
+<li><p>Fix definition of <code class="docutils literal notranslate"><span class="pre">ConstDensityThermo::standardConcentration</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/89fded32d46084bd7733c81c7d1b383922e433a1"><code class="docutils literal notranslate"><span class="pre">89fded32</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/458">#458</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/490">#490</a>)</p></li>
+<li><p>Preserve constant property pair when multiplying <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> objects (<a class="reference external" href="https://github.com/Cantera/cantera/commit/c9b0bce8b99000099763aedb088dddb80f7047a1"><code class="docutils literal notranslate"><span class="pre">c9b0bce8</span></code></a>)</p></li>
+<li><p>Fix <code class="docutils literal notranslate"><span class="pre">PureFluidPhase</span></code> state data consistency (<a class="reference external" href="https://github.com/Cantera/cantera/commit/fb68cae145d28556e4d7cc58ffc1ec871e0b0be4"><code class="docutils literal notranslate"><span class="pre">fb68cae1</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/0417d31d0ecabd77d5b4fc24900ff0c2bc0620dd"><code class="docutils literal notranslate"><span class="pre">0417d31d</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="kinetics">
+<h4>Kinetics<a class="headerlink" href="#kinetics" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Validate balance of surface sites for interface reactions (<a class="reference external" href="https://github.com/Cantera/cantera/commit/ac5337130a8d21728026f04155c0c85ad2ea0c5e"><code class="docutils literal notranslate"><span class="pre">ac533713</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/412">#412</a>)</p></li>
+<li><p>Reactions which are declared as duplicate but do not have the corresponding duplicate reaction are errors (<a class="reference external" href="https://github.com/Cantera/cantera/commit/0fd2f7c4d0ba7de2c471ae57053421b8d8fbb029"><code class="docutils literal notranslate"><span class="pre">0fd2f7c4</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/2678b57d587d39110325a07adcfa156424a0f326"><code class="docutils literal notranslate"><span class="pre">2678b57d</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/389">#389</a>)</p></li>
+<li><p>Fix use of <code class="docutils literal notranslate"><span class="pre">'scale'</span></code> and <code class="docutils literal notranslate"><span class="pre">'OneWayFlow'</span></code> options in <code class="docutils literal notranslate"><span class="pre">ReactonPathDiagram</span></code>s (<a class="reference external" href="https://github.com/Cantera/cantera/commit/0d982c8f582e08f0e77eff49f51f870b249d333f"><code class="docutils literal notranslate"><span class="pre">0d982c8f</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/0249ce89b86b11d524525d2b265de857b3fe8ecf"><code class="docutils literal notranslate"><span class="pre">0249ce89</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/378">#378</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/424">#424</a>)</p></li>
+<li><p>Fix how species contributions to reaction paths are handled (<a class="reference external" href="https://github.com/Cantera/cantera/commit/3093e6e6d4d8960838492cb3848e0881420dc7b4"><code class="docutils literal notranslate"><span class="pre">3093e6e6</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/5a0fb579a83c3081033421ef6363e6b31e901a0e"><code class="docutils literal notranslate"><span class="pre">5a0fb579</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/092e00744bc6afc96bd14c130ea7162bfa9aa3d9"><code class="docutils literal notranslate"><span class="pre">092e0074</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/377">#377</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/424">#424</a>)</p></li>
+<li><p>Preserve pressure units in <code class="docutils literal notranslate"><span class="pre">PLOG</span></code> reactions when converting from Chemkin to CTI format (<a class="reference external" href="https://github.com/Cantera/cantera/commit/7b7aea2038ecfad88af0919bf4104ac2a87b70e7"><code class="docutils literal notranslate"><span class="pre">7b7aea20</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/a02753ae792a71b4eda2028d4ea73d054ad5a4b4"><code class="docutils literal notranslate"><span class="pre">a02753ae</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/435">#435</a>)</p></li>
+<li><p>Fix style arguments for reaction path diagrams (<a class="reference external" href="https://github.com/Cantera/cantera/commit/b41038f84b705102900e56a7cdbdc141670be4af"><code class="docutils literal notranslate"><span class="pre">b41038f8</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/463">#463</a>)</p></li>
+<li><p>Fix duplicate reaction checking (<a class="reference external" href="https://github.com/Cantera/cantera/commit/513b43200c7b222d9ef992e00b922ef210961ad6"><code class="docutils literal notranslate"><span class="pre">513b4320</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/4c489c175da4d2979a974b748a97a179f475508f"><code class="docutils literal notranslate"><span class="pre">4c489c17</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/468">#468</a>)</p></li>
+<li><p>Fix failures due to tolerances in some kinetics tests (<a class="reference external" href="https://github.com/Cantera/cantera/commit/67aa9eb4e3663f5507e0e6ec25b54bf74f4782c3"><code class="docutils literal notranslate"><span class="pre">67aa9eb4</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="transport">
+<h4>Transport<a class="headerlink" href="#transport" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Fixes to enable <code class="docutils literal notranslate"><span class="pre">CK_mix</span></code> and <code class="docutils literal notranslate"><span class="pre">CK_multi</span></code> mode flags (<a class="reference external" href="https://github.com/Cantera/cantera/commit/35aa8be61e8e68907c4d4cff7c625907094c22c0"><code class="docutils literal notranslate"><span class="pre">35aa8be6</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/435f28641ec81ae53aaa8851ee9fe351b5da08b3"><code class="docutils literal notranslate"><span class="pre">435f2864</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/1b605133d8cb1c77b0348a9984c4b8fc64f55c2a"><code class="docutils literal notranslate"><span class="pre">1b605133</span></code></a>)</p></li>
+<li><p>Add temperature dependence of rotational relaxation (<a class="reference external" href="https://github.com/Cantera/cantera/commit/e79cf6f8cb59c8f8c3d994c71316e12e966140a0"><code class="docutils literal notranslate"><span class="pre">e79cf6f8</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/547">#547</a>)</p></li>
+</ul>
+</section>
+<section id="d-reactors">
+<h4>0-D Reactors<a class="headerlink" href="#d-reactors" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Fix using pure fluids in reactors (<a class="reference external" href="https://github.com/Cantera/cantera/commit/2ac8a0ef088166883ee1639ba12bd13462169e6e"><code class="docutils literal notranslate"><span class="pre">2ac8a0ef</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/deeaaed03f619e936b10e908bf9835e58dc10da7"><code class="docutils literal notranslate"><span class="pre">deeaaed0</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/475">#475</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/487">#487</a>)</p></li>
+<li><p>Check that contents are Solution objects not Mixtures (<a class="reference external" href="https://github.com/Cantera/cantera/commit/a22db9fa22572df3be9446875607455cd3361d9e"><code class="docutils literal notranslate"><span class="pre">a22db9fa</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="d-flames">
+<h4>1-D Flames<a class="headerlink" href="#d-flames" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Fix handling of domain boundary conditions when the energy equation is not solved (<a class="reference external" href="https://github.com/Cantera/cantera/commit/52dbe8c007921769287127701017599e37460598"><code class="docutils literal notranslate"><span class="pre">52dbe8c0</span></code></a>)</p></li>
+<li><p>Fix handling of Soret diffusion enabling/disabling with respect to mixture-averaged diffusion approximation (<a class="reference external" href="https://github.com/Cantera/cantera/commit/a03afbd56ee3b51f203a1ee9e7c2fa536c66b01d"><code class="docutils literal notranslate"><span class="pre">a03afbd5</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/4bd5e92694f4ecf7dee5fdc5f48db21ea3d0b598"><code class="docutils literal notranslate"><span class="pre">4bd5e926</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/fde505113166473b1d5ad3cd61f6aed5dd7b9d4f"><code class="docutils literal notranslate"><span class="pre">fde50511</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/511">#511</a>)</p></li>
+</ul>
+</section>
+<section id="cti-input-files">
+<h4>CTI/Input files<a class="headerlink" href="#cti-input-files" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Fix file size limit when converting CTI to CTML (<a class="reference external" href="https://github.com/Cantera/cantera/commit/0a1257daed71fdd621ac25bcdeea911d84036bfd"><code class="docutils literal notranslate"><span class="pre">0a1257da</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/416">#416</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/430">#430</a>)</p></li>
+<li><p>Fix for reactions with pathologically named third bodies (<a class="reference external" href="https://github.com/Cantera/cantera/commit/55a8910686d15071f300b2c2cec38812514f8ef6"><code class="docutils literal notranslate"><span class="pre">55a89106</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/6d591b82efc9b8909ffaa6fe7e70812bdd8c9135"><code class="docutils literal notranslate"><span class="pre">6d591b82</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/44b24ca873b55085770563cd4f0b63a5c712412e"><code class="docutils literal notranslate"><span class="pre">44b24ca8</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/460">#460</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ctml_writer</span></code> is more tolerant of non-ASCII characters (<a class="reference external" href="https://github.com/Cantera/cantera/commit/0c0a38d4fe6465fde3f51f73ed6bf8fe47c9fd79"><code class="docutils literal notranslate"><span class="pre">0c0a38d4</span></code></a>)</p></li>
+<li><p>Fix incorrect entry in <code class="docutils literal notranslate"><span class="pre">nasathermo.dat</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/3933a943dc6fa712fa8a5c920435b28d8e563353"><code class="docutils literal notranslate"><span class="pre">3933a943</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/491">#491</a>)</p></li>
+<li><p>Fix writing surface reactions to the CTI file when there are no gas-phase reactions (<a class="reference external" href="https://github.com/Cantera/cantera/commit/552ba97a2b3e050c9564fdaaf830fe41f73430d8"><code class="docutils literal notranslate"><span class="pre">552ba97a</span></code></a>)</p></li>
+<li><p>Fix over-zealous detection of new input file sections (<a class="reference external" href="https://github.com/Cantera/cantera/commit/f47e98a594a5b43b8b41b38eaea49eca8f30406c"><code class="docutils literal notranslate"><span class="pre">f47e98a5</span></code></a>)</p></li>
+<li><p>Detect badly-formatted values of the 4th Troe coefficient (<a class="reference external" href="https://github.com/Cantera/cantera/commit/bde6e0545293eb8a530174af6fbba34e4f2430de"><code class="docutils literal notranslate"><span class="pre">bde6e054</span></code></a>)</p></li>
+<li><p>Suppress some output when <code class="docutils literal notranslate"><span class="pre">quiet=True</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/70016b97b3a9a1ec042f35394752891168321030"><code class="docutils literal notranslate"><span class="pre">70016b97</span></code></a>)</p></li>
+<li><p>Fix duplicate key check in parseCompString (<a class="reference external" href="https://github.com/Cantera/cantera/commit/d09161716f2da9160dc7f08f017bfe57c546de84"><code class="docutils literal notranslate"><span class="pre">d0916171</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/525">#525</a>)</p></li>
+<li><p>Fix spurious unexpected output warnings (<a class="reference external" href="https://github.com/Cantera/cantera/commit/fd57936b18a9bcebcffbe25316b23fe9123da18f"><code class="docutils literal notranslate"><span class="pre">fd57936b</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="examples">
+<h4>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Fix errors and empty figures in IC engine example (<a class="reference external" href="https://github.com/Cantera/cantera/commit/6f564e6101541b5368b64b64e96eac4b64f366c7"><code class="docutils literal notranslate"><span class="pre">6f564e61</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/0d01d031a9551bf8252a7f7f2cb769c276ab3fe8"><code class="docutils literal notranslate"><span class="pre">0d01d031</span></code></a>)</p></li>
+<li><p>Remove extraneous arguments in Matlab example scripts (<a class="reference external" href="https://github.com/Cantera/cantera/commit/a31b7d1bb5be876729e4e7728a78f417cdf1b3dd"><code class="docutils literal notranslate"><span class="pre">a31b7d1b</span></code></a>)</p></li>
+<li><p>Remove or fix broken Matlab examples (<a class="reference external" href="https://github.com/Cantera/cantera/commit/536158b402893d14930d1da579c72d545dc72943"><code class="docutils literal notranslate"><span class="pre">536158b4</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/987a247bd0d7b626e972c974faf78576a48b6552"><code class="docutils literal notranslate"><span class="pre">987a247b</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="other">
+<h4>Other<a class="headerlink" href="#other" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Add explicit dependencies on the <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">build</span></code> step for <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">test</span></code> and <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">install</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/70e10632d4a451dec7e0f94ab2e09156b1a6848b"><code class="docutils literal notranslate"><span class="pre">70e10632</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/432">#432</a>)</p></li>
+<li><p>Fix reproducibility of <code class="docutils literal notranslate"><span class="pre">add_species_sequential</span></code> test (<a class="reference external" href="https://github.com/Cantera/cantera/commit/11a0727d5ca6172fcb3596dbc11e7f7b1cc2e806"><code class="docutils literal notranslate"><span class="pre">11a0727d</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/433">#433</a>)</p></li>
+<li><p>Disable linking to external SUNDIALS libraries when building the Matlab toolbox (<a class="reference external" href="https://github.com/Cantera/cantera/commit/c125878a40f1395149c8e9a713aba90a0cb7cc44"><code class="docutils literal notranslate"><span class="pre">c125878a</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/431">#431</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/456">#456</a>)</p></li>
+<li><p>Switch SourceForge links in the docs to point to GitHub (<a class="reference external" href="https://github.com/Cantera/cantera/commit/d920f2eb2cd7296086412746fd5e1e50ca2cd8a9"><code class="docutils literal notranslate"><span class="pre">d920f2eb</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/442">#442</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/455">#455</a>)</p></li>
+<li><p>Fix typos in documentation (<a class="reference external" href="https://github.com/Cantera/cantera/commit/05809bb027a7232badae3dc3eb970695437e19b6"><code class="docutils literal notranslate"><span class="pre">05809bb0</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/fec6c34ed8052f0ee4b86e6a3c37769eba917ccc"><code class="docutils literal notranslate"><span class="pre">fec6c34e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/35ac1acfa87c4262931ec7acdd62de2629353550"><code class="docutils literal notranslate"><span class="pre">35ac1acf</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/af4ccaee099486d60c8eadab3fe823cd427b131b"><code class="docutils literal notranslate"><span class="pre">af4ccaee</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/449">#449</a>)</p></li>
+<li><p>Easier debugging of NumPy import error messages during build (<a class="reference external" href="https://github.com/Cantera/cantera/commit/3f69f6ac8a45196e0f0b9244e01fed06c6b0c64e"><code class="docutils literal notranslate"><span class="pre">3f69f6ac</span></code></a>)</p></li>
+<li><p>Use Trusty Tahr and system Python 3 on TravisCI Linux builds (<a class="reference external" href="https://github.com/Cantera/cantera/commit/9e5da87a2a07455b0c1b063c9494123561ad5c87"><code class="docutils literal notranslate"><span class="pre">9e5da87a</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/45891a2118dcd8146a1485741e9b156df271f048"><code class="docutils literal notranslate"><span class="pre">45891a21</span></code></a>)</p></li>
+<li><p>Fix parallel builds of the Matlab toolbox (<a class="reference external" href="https://github.com/Cantera/cantera/commit/831239633daa7a86f7774c62260c27a0354ab456"><code class="docutils literal notranslate"><span class="pre">83123963</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/483">#483</a>)</p></li>
+<li><p>Remove outdated MacPorts installation instructions (<a class="reference external" href="https://github.com/Cantera/cantera/commit/46f8ef52a7c6041e1cb29e68d58cd7dc97ba1d2d"><code class="docutils literal notranslate"><span class="pre">46f8ef52</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/496">#496</a>)</p></li>
+<li><p>Fix wrong environment variable <code class="docutils literal notranslate"><span class="pre">MATLAB_PATH</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">MATLABPATH</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/d86a7c176e7bf35617728a1b2771ae673f67f351"><code class="docutils literal notranslate"><span class="pre">d86a7c17</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/501">#501</a>)</p></li>
+<li><p>Fix broken links in README, clarify PR template, add Gitter, add badges (<a class="reference external" href="https://github.com/Cantera/cantera/commit/e052a44e92b1492d5515f1b759f8f2fb7d6ffa13"><code class="docutils literal notranslate"><span class="pre">e052a44e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/8de267f25c9cbb58527445838ebcdc72932156bb"><code class="docutils literal notranslate"><span class="pre">8de267f2</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/de3ec3d53e3645f24ae0353d3edc83a122e4ccb4"><code class="docutils literal notranslate"><span class="pre">de3ec3d5</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/0120f2fc5e2d431171476703cb2957960445f873"><code class="docutils literal notranslate"><span class="pre">0120f2fc</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/505">#505</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/506">#506</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/513">#513</a>)</p></li>
+<li><p>Fix installing dependencies on Appveyor (<a class="reference external" href="https://github.com/Cantera/cantera/commit/39c4103504635cb620ba6e4997ce657a4ea546e9"><code class="docutils literal notranslate"><span class="pre">39c41035</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/0b8f0283aacbb12b7f9ab4f9f016be781bd087a6"><code class="docutils literal notranslate"><span class="pre">0b8f0283</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/b1a010e3a3f464ed0a58c33f8265c43fc73ad8b8"><code class="docutils literal notranslate"><span class="pre">b1a010e3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/517">#517</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/529">#529</a>)</p></li>
+<li><p>Add update of git submodules to code checkout instructions (<a class="reference external" href="https://github.com/Cantera/cantera/commit/66ba4b5b507fd182a35f0b3310d22fe9ee72e51c"><code class="docutils literal notranslate"><span class="pre">66ba4b5b</span></code></a>)</p></li>
+<li><p>Remove blank documentation page (<a class="reference external" href="https://github.com/Cantera/cantera/commit/84acdb1a300d5d5d943f579b2d03f3f5067b2514"><code class="docutils literal notranslate"><span class="pre">84acdb1a</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/518">#518</a>)</p></li>
+<li><p>Fix notation for mixture-averaged diffusion coefficient (<a class="reference external" href="https://github.com/Cantera/cantera/commit/df6ecb101b4617348419eb46786215863bf65bcd"><code class="docutils literal notranslate"><span class="pre">df6ecb10</span></code></a>)</p></li>
+<li><p>Fix compiler warning about <code class="docutils literal notranslate"><span class="pre">m_Faraday_dim</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/55490de87103563fc40e0645613ac3e69cdd15a6"><code class="docutils literal notranslate"><span class="pre">55490de8</span></code></a>)</p></li>
+<li><p>Fix catching exceptions when checking git commit during build (<a class="reference external" href="https://github.com/Cantera/cantera/commit/3fac5f2bc6f9060b1e24ddec12632e905b113f75"><code class="docutils literal notranslate"><span class="pre">3fac5f2b</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/c8305375efa93df460a9348ca7f6aaecdcadb94f"><code class="docutils literal notranslate"><span class="pre">c8305375</span></code></a>)</p></li>
+<li><p>Fix display of information from errors in Python callbacks (<a class="reference external" href="https://github.com/Cantera/cantera/commit/d3f49e74cb5a24722aff23db5c8e0dc14becbc07"><code class="docutils literal notranslate"><span class="pre">d3f49e74</span></code></a>)</p></li>
+<li><p>Clean the correct folder after building the minimal Python interface (<a class="reference external" href="https://github.com/Cantera/cantera/commit/ff91457b5af7ffe2962a15b5609ca95dbf656e30"><code class="docutils literal notranslate"><span class="pre">ff91457b</span></code></a>)</p></li>
+<li><p>Fix building MSI for Python 3.7 module (<a class="reference external" href="https://github.com/Cantera/cantera/commit/af51a61ab1be3aca6ac7f7bd7094357ba4ab58db"><code class="docutils literal notranslate"><span class="pre">af51a61a</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h3>Changes to existing capabilities<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<section id="id3">
+<h4>Thermo/Species/Elements<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>PDSS objects store their own data (<a class="reference external" href="https://github.com/Cantera/cantera/commit/50ed3f2e7265baf3ae65629ba67edfa68e199f11"><code class="docutils literal notranslate"><span class="pre">50ed3f2e</span></code></a>)</p></li>
+<li><p>Remove <code class="docutils literal notranslate"><span class="pre">VPSSMgr</span></code> and merge into <code class="docutils literal notranslate"><span class="pre">VPStandardStateTP</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/b39537bfcbdc8f89e607fda8822c3061aa580b7b"><code class="docutils literal notranslate"><span class="pre">b39537bf</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/428">#428</a>)</p></li>
+<li><p>Simplify aqueous phase creation in <code class="docutils literal notranslate"><span class="pre">VPStandardStateTP</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/3ea2a6caf32d31bb06e12ccc4e137a762ec9eec2"><code class="docutils literal notranslate"><span class="pre">3ea2a6ca</span></code></a>)</p></li>
+<li><p>Allow instantiation of <code class="docutils literal notranslate"><span class="pre">ThermoPhase</span></code> derived classes without XML (<a class="reference external" href="https://github.com/Cantera/cantera/commit/86dca05369189b9b0c32cbe960ac416f0eee7ab1"><code class="docutils literal notranslate"><span class="pre">86dca053</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/507a3a9985f2b0237f8d13442d6ac93f37a781d1"><code class="docutils literal notranslate"><span class="pre">507a3a99</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/19c17d149ba92f9f68415354cb6ac32b7e2c893b"><code class="docutils literal notranslate"><span class="pre">19c17d14</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/db1f1af0a0c376747591ccdb0c77cd6487727c65"><code class="docutils literal notranslate"><span class="pre">db1f1af0</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/5efea129599cfdb7a4d7f580c145db95dde15b9c"><code class="docutils literal notranslate"><span class="pre">5efea129</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/3c771ded2bf184b4cffb362127fd77ba35390da4"><code class="docutils literal notranslate"><span class="pre">3c771ded</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/b033d44d3e00a1c4a36cd1a501ff77d34da18bbe"><code class="docutils literal notranslate"><span class="pre">b033d44d</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/31d54c3b111b2d01468faa61060d8330969dd043"><code class="docutils literal notranslate"><span class="pre">31d54c3b</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/95a52b2d34d7bd65e58145e30436c4e88b8b777f"><code class="docutils literal notranslate"><span class="pre">95a52b2d</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/f8ef4a8b2b3efc7392b5cdfd2a378adddf7579b8"><code class="docutils literal notranslate"><span class="pre">f8ef4a8b</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/a6ac446021b8a8b3b314f4d8f8dc8bb81ee66ac2"><code class="docutils literal notranslate"><span class="pre">a6ac4460</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/bfdc2b9e1d26d1ce9fad758a453a3f8e5f39829c"><code class="docutils literal notranslate"><span class="pre">bfdc2b9e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/f69ef446007ee73ad8c5f527605196b514feca6e"><code class="docutils literal notranslate"><span class="pre">f69ef446</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/d744bd9fb8c0cdbfe48b77ef4ae4d39d3cd71647"><code class="docutils literal notranslate"><span class="pre">d744bd9f</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/3676672eec57e5e66a9ef7b50a3449bcdd184a3e"><code class="docutils literal notranslate"><span class="pre">3676672e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/aa02d2423583968132a29a980df6cb3a2d818491"><code class="docutils literal notranslate"><span class="pre">aa02d242</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/e3afaf5e6151d85e1c8ff56a3a752fbc3b170955"><code class="docutils literal notranslate"><span class="pre">e3afaf5e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/3790115b99ff927212c0e498fd18931cd550c5e9"><code class="docutils literal notranslate"><span class="pre">3790115b</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/4c630fc59211b5ebe878afef99baca7637c81a3f"><code class="docutils literal notranslate"><span class="pre">4c630fc5</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/a520f782dbe10ec42db449c5a90ed44b917f004b"><code class="docutils literal notranslate"><span class="pre">a520f782</span></code></a>)</p></li>
+<li><p>Clean up and test <code class="docutils literal notranslate"><span class="pre">RedlichKwongMFTP</span></code> implementation and remove broken “sanity checks” (<a class="reference external" href="https://github.com/Cantera/cantera/commit/ecbd819e91340ac563ec837bc3347034e69a196f"><code class="docutils literal notranslate"><span class="pre">ecbd819e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/dd521de25439115e4653389221e844e56c231db3"><code class="docutils literal notranslate"><span class="pre">dd521de2</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/f9d5f16b729bed36009d7ef9ddb4a042f798cfe0"><code class="docutils literal notranslate"><span class="pre">f9d5f16b</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/267">#267</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/436">#436</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/438">#438</a>)</p></li>
+<li><p>Move common PDSS functions into the the <code class="docutils literal notranslate"><span class="pre">PDSS_Nondimensional</span></code> class (<a class="reference external" href="https://github.com/Cantera/cantera/commit/574462fd3c6d6db6c2d785cc2de0ea745010199c"><code class="docutils literal notranslate"><span class="pre">574462fd</span></code></a>)</p></li>
+<li><p>Remove unused thermodynamics models from <code class="docutils literal notranslate"><span class="pre">ThermoFactory</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/6154e1b4bd417e98a8c94a195794403d633fbd18"><code class="docutils literal notranslate"><span class="pre">6154e1b4</span></code></a>)</p></li>
+<li><p>Deprecate several unused/untested classes. See the <a class="reference external" href="https://cantera.org/2.4/doxygen/html/da/d58/deprecated.html">deprecation list</a> for details. (<a class="reference external" href="https://github.com/Cantera/cantera/commit/2b73fe24baa6a10c36dcbc05e4fea2958346da78"><code class="docutils literal notranslate"><span class="pre">2b73fe24</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/6d22be2a6b282808ad5effa5fd5bd7dca08b0b84"><code class="docutils literal notranslate"><span class="pre">6d22be2a</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/267">#267</a>)</p></li>
+<li><p>Remove unimplemented options from <code class="docutils literal notranslate"><span class="pre">DebyeHuckel</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/afafa34c06640037af82ea1682d6d8c74ae84b36"><code class="docutils literal notranslate"><span class="pre">afafa34c</span></code></a>)</p></li>
+<li><p>Charge transfer reactions can be set for <code class="docutils literal notranslate"><span class="pre">surface_reaction</span></code>s, not just <code class="docutils literal notranslate"><span class="pre">edge_reaction</span></code>s (<a class="reference external" href="https://github.com/Cantera/cantera/commit/51f419fbadef27d318f249c447400a1618a6d151"><code class="docutils literal notranslate"><span class="pre">51f419fb</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/439">#439</a>)</p></li>
+<li><p>Remove unused members from some thermo classes (<a class="reference external" href="https://github.com/Cantera/cantera/commit/4818c87344d8d5076ec9dd2808061cdd4a1b38b9"><code class="docutils literal notranslate"><span class="pre">4818c873</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/6bfd82e0be67a41986c07877ec973a9a97fc0d29"><code class="docutils literal notranslate"><span class="pre">6bfd82e0</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/90d18dd3375c8c87dacecea34e253d5a01d8d8a5"><code class="docutils literal notranslate"><span class="pre">90d18dd3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/c85ba586d236a27b6aefb8864e3312e5299b0c3a"><code class="docutils literal notranslate"><span class="pre">c85ba586</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/cfc3b728f5a7f833c80948d4b6332648882604d6"><code class="docutils literal notranslate"><span class="pre">cfc3b728</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/6ca782030dae74333263d4456e2da7803decdbf7"><code class="docutils literal notranslate"><span class="pre">6ca78203</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/d07908f9c99e560992098d8ebdb367c6c93dd2a4"><code class="docutils literal notranslate"><span class="pre">d07908f9</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/4b69c7f2654d939204a8b58d8084c70ce3599814"><code class="docutils literal notranslate"><span class="pre">4b69c7f2</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/572af616e7ed767d306fe439c0d7dfaad9e1225b"><code class="docutils literal notranslate"><span class="pre">572af616</span></code></a>)</p></li>
+<li><p>Store several class properties as <code class="docutils literal notranslate"><span class="pre">shared_ptr</span></code>s (<a class="reference external" href="https://github.com/Cantera/cantera/commit/04f10972c8daeda802d600f5104dba59cc7d2b3d"><code class="docutils literal notranslate"><span class="pre">04f10972</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/4856d1328b9339459725d63a1e76671e15d91052"><code class="docutils literal notranslate"><span class="pre">4856d132</span></code></a>)</p></li>
+<li><p>Remove debug exception from <code class="docutils literal notranslate"><span class="pre">Phase::entropyElement298</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/d4338249fb29d5de9a1154980dcb01d603354cc0"><code class="docutils literal notranslate"><span class="pre">d4338249</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/467">#467</a>)</p></li>
+<li><p>Explicitly assume that the solvent species is always the first species in the phase (<a class="reference external" href="https://github.com/Cantera/cantera/commit/e33fe6904d573ddd141ce5a619a24fb873137746"><code class="docutils literal notranslate"><span class="pre">e33fe690</span></code></a>)</p></li>
+<li><p>Move implementation of <code class="docutils literal notranslate"><span class="pre">HMWSoln</span></code> to a single file (<a class="reference external" href="https://github.com/Cantera/cantera/commit/e9f08fc58e53b6061df0e75991e2c9d378eafdfd"><code class="docutils literal notranslate"><span class="pre">e9f08fc5</span></code></a>)</p></li>
+<li><p>Try to look up standard entropy when adding undefined elements (<a class="reference external" href="https://github.com/Cantera/cantera/commit/0ca788bd69cbc7b8a3e4ae319d6668ce6a96b1a8"><code class="docutils literal notranslate"><span class="pre">0ca788bd</span></code></a>)</p></li>
+<li><p>Always use <code class="docutils literal notranslate"><span class="pre">PDSS_ConstVol</span></code> for constant volume standard state and remove the implementation from <code class="docutils literal notranslate"><span class="pre">PDSS_SSVol</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/822cdc7d38b3fd609269f5d7ee8b3ff9e4e1b6cf"><code class="docutils literal notranslate"><span class="pre">822cdc7d</span></code></a>)</p></li>
+<li><p>Make adding undefined elements the default behavior (<a class="reference external" href="https://github.com/Cantera/cantera/commit/d03555753130b9e4a9bfec10d17579fcb2038290"><code class="docutils literal notranslate"><span class="pre">d0355575</span></code></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set_equivalence_ratio</span></code> now supports sulfur oxidation (<a class="reference external" href="https://github.com/Cantera/cantera/commit/48eaedbbb44b25bab9c2938d04e508eaa9e564ec"><code class="docutils literal notranslate"><span class="pre">48eaedbb</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/acbd65d1922a601ced413a7d43a20540cf8b2944"><code class="docutils literal notranslate"><span class="pre">acbd65d1</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/aac8eb92afd4191b3581258e0c6ea17348471858"><code class="docutils literal notranslate"><span class="pre">aac8eb92</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/474">#474</a>)</p></li>
+<li><p>Relax warning threshold for heat capacity discontinuities (<a class="reference external" href="https://github.com/Cantera/cantera/commit/a68c048bfa4e32392bd2faaa6740eaa76d98cacd"><code class="docutils literal notranslate"><span class="pre">a68c048b</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="equilibrium-solvers">
+<h4>Equilibrium Solvers<a class="headerlink" href="#equilibrium-solvers" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Various clean ups, refactoring, and simplifications to the VCS solver (<a class="reference external" href="https://github.com/Cantera/cantera/commit/ee323bbafc12926aa0c532047a1de4b550c6d067"><code class="docutils literal notranslate"><span class="pre">ee323bba</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/08726b0904bc40ae182f7706b0172f04d8f4cb2f"><code class="docutils literal notranslate"><span class="pre">08726b09</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/da801f4cbcd7c5c070e926a5fb54fbcb81c1c7a2"><code class="docutils literal notranslate"><span class="pre">da801f4c</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/8522095deaacc3659b3195c5a5638bbe5b6aa606"><code class="docutils literal notranslate"><span class="pre">8522095d</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/bba0d8edf0a96a07ca26c07351eba51216b3682b"><code class="docutils literal notranslate"><span class="pre">bba0d8ed</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/1eebd3efdbd469556b8a4c3800fc0499424d6513"><code class="docutils literal notranslate"><span class="pre">1eebd3ef</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/da3ba35945210644b10aa2900b846a05dd54f80e"><code class="docutils literal notranslate"><span class="pre">da3ba359</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/4e53c893cfdfa84ddd20868962b1c4e733135891"><code class="docutils literal notranslate"><span class="pre">4e53c893</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/7eb939dc5fb79c548f813c7160836d07f24abc26"><code class="docutils literal notranslate"><span class="pre">7eb939dc</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/739d4e483011c940840134a0e84ae2796a5cf473"><code class="docutils literal notranslate"><span class="pre">739d4e48</span></code></a>)</p></li>
+<li><p>Improve control of logging in the <code class="docutils literal notranslate"><span class="pre">ChemEquil</span></code> solver (<a class="reference external" href="https://github.com/Cantera/cantera/commit/5b4a977df7fb3fc7b80363ed84a4a035018e5e27"><code class="docutils literal notranslate"><span class="pre">5b4a977d</span></code></a>)</p></li>
+<li><p>Don’t use saved element potentials as an initial guess and deprecate getter/setter methods (<a class="reference external" href="https://github.com/Cantera/cantera/commit/74167cc3eb81dc63b306c045e2a7b1e86fb5b08b"><code class="docutils literal notranslate"><span class="pre">74167cc3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/3c978cdff6bb950c609b15215eb3d8f608abba96"><code class="docutils literal notranslate"><span class="pre">3c978cdf</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/538">#538</a>)</p></li>
+</ul>
+</section>
+<section id="id4">
+<h4>Transport<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Allow construction of <code class="docutils literal notranslate"><span class="pre">Transport</span></code> derived classes without XML (<a class="reference external" href="https://github.com/Cantera/cantera/commit/4b5af640505c686790ba5cf749274fbbaa61cb12"><code class="docutils literal notranslate"><span class="pre">4b5af640</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/7020fa72bfd7821b46a1b6ae29567e362f940e4f"><code class="docutils literal notranslate"><span class="pre">7020fa72</span></code></a>)</p></li>
+<li><p>Move <code class="docutils literal notranslate"><span class="pre">simpleTransport</span></code> test to GTest suite (<a class="reference external" href="https://github.com/Cantera/cantera/commit/4934079d69fcbafadf3ac361a9ddf2926c9e051b"><code class="docutils literal notranslate"><span class="pre">4934079d</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="id5">
+<h4>0-D Reactors<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Make all reactor-related objects non-copyable (<a class="reference external" href="https://github.com/Cantera/cantera/commit/d9418bb8fbed2b591ca025a32a8c5c1d5591333b"><code class="docutils literal notranslate"><span class="pre">d9418bb8</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="id6">
+<h4>1-D Flames<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Make all 1-D-related objects non-copyable (<a class="reference external" href="https://github.com/Cantera/cantera/commit/279c5c8556340e8112c78aa9b7d3d39b9e90236b"><code class="docutils literal notranslate"><span class="pre">279c5c85</span></code></a>)</p></li>
+<li><p>Deprecate <code class="docutils literal notranslate"><span class="pre">FreeFlow</span></code> and <code class="docutils literal notranslate"><span class="pre">AxiStagnFlow</span></code> classes by moving the relevant functions into the <code class="docutils literal notranslate"><span class="pre">StFlow</span></code> class (<a class="reference external" href="https://github.com/Cantera/cantera/commit/c1067aa6e97584d09da63cf6abdddd110522a91e"><code class="docutils literal notranslate"><span class="pre">c1067aa6</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/3ade3335de105506d83f8550a1ca9525bdcbce01"><code class="docutils literal notranslate"><span class="pre">3ade3335</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/a54ab2f3efec19715039cd7c064902c5050eb2c1"><code class="docutils literal notranslate"><span class="pre">a54ab2f3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/546">#546</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/548">#548</a>)</p></li>
+</ul>
+</section>
+<section id="cti-xml-input-files">
+<h4>CTI/XML/Input Files<a class="headerlink" href="#cti-xml-input-files" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Make searches for child nodes case insensitive (<a class="reference external" href="https://github.com/Cantera/cantera/commit/1bd950fef558101d7e8080629b7e6c1d86fd0fe9"><code class="docutils literal notranslate"><span class="pre">1bd950fe</span></code></a>)</p></li>
+<li><p>Improve error messages for invalid (floating point) geometry flags (<a class="reference external" href="https://github.com/Cantera/cantera/commit/6bf74d179b04848b756791de59f830bc46fb7537"><code class="docutils literal notranslate"><span class="pre">6bf74d17</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/446">#446</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/454">#454</a>)</p></li>
+</ul>
+</section>
+<section id="examples-samples">
+<h4>Examples/Samples<a class="headerlink" href="#examples-samples" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Remove verbose output from f77 demo wrapper (<a class="reference external" href="https://github.com/Cantera/cantera/commit/172e9ffeadd8653ec309321dda61e68e0c508008"><code class="docutils literal notranslate"><span class="pre">172e9ffe</span></code></a>)</p></li>
+</ul>
+</section>
+<section id="documentation">
+<h4>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Note requirement to use <code class="docutils literal notranslate"><span class="pre">modifySpecies</span></code> and <code class="docutils literal notranslate"><span class="pre">modifyReaction</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/4b4128aebd02140ac26fc84627d618b70c5e82dc"><code class="docutils literal notranslate"><span class="pre">4b4128ae</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/394">#394</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/542">#542</a>)</p></li>
+<li><p>Clarify the values returned by <code class="docutils literal notranslate"><span class="pre">getFwdRateConstants</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/831b92dac4fd5b39ab9762a09ea5b3050927c173"><code class="docutils literal notranslate"><span class="pre">831b92da</span></code></a>)</p></li>
+<li><p>Move most content from the old documentation to the new website (<a class="reference external" href="https://github.com/Cantera/cantera/commit/7b6d04c381e9ae1bcec61c53c761412ef81422ef"><code class="docutils literal notranslate"><span class="pre">7b6d04c3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/cc9c8e5633da0c69077064e1092d0a87f387fb25"><code class="docutils literal notranslate"><span class="pre">cc9c8e56</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/71072c43db9eecba08a017b6fb44d811fc25f6d2"><code class="docutils literal notranslate"><span class="pre">71072c43</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/e81cac9582d1492eff7c1c0feeada9a5501e91c1"><code class="docutils literal notranslate"><span class="pre">e81cac95</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/e7f346cddf7713837fb907cf6f898605acb3d2d0"><code class="docutils literal notranslate"><span class="pre">e7f346cd</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/7a69386b8db61e2a9fed74855def5f156e8795ca"><code class="docutils literal notranslate"><span class="pre">7a69386b</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/d57f1d147dfe8ced738ad0f489cd4917b5d2d9a4"><code class="docutils literal notranslate"><span class="pre">d57f1d14</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/b68a87d62466dc0e55c9c8512573da0ae7c4c25e"><code class="docutils literal notranslate"><span class="pre">b68a87d6</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/21db5d84f3ce60a3be79392531df3a19f2d87fa3"><code class="docutils literal notranslate"><span class="pre">21db5d84</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/3052701250034ffad1bf575b790ea1e4659314f8"><code class="docutils literal notranslate"><span class="pre">30527012</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/2a7aed89687db2048bd262d0acea27de62883c5f"><code class="docutils literal notranslate"><span class="pre">2a7aed89</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/e8d28b0e89fae05e5b7e1d01f88c67a8934380f8"><code class="docutils literal notranslate"><span class="pre">e8d28b0e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/dbc3df168701f631b6554ecfd74565b1c9c8f1a0"><code class="docutils literal notranslate"><span class="pre">dbc3df16</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/2f3a0122d65ff66552dc8ed4870d0b3edfb9d764"><code class="docutils literal notranslate"><span class="pre">2f3a0122</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/9670c5dac6aeae078fcb4414da4fbebb33ab116d"><code class="docutils literal notranslate"><span class="pre">9670c5da</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/3fae1c1a9aaa6c26945d71bcb81be7a9af808697"><code class="docutils literal notranslate"><span class="pre">3fae1c1a</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/4ea9d35a2b3dc8b94d1d9681ce109b5959cdd811"><code class="docutils literal notranslate"><span class="pre">4ea9d35a</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/549463683da253f16620493ef50788d09a61476c"><code class="docutils literal notranslate"><span class="pre">54946368</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/d2252037c66ce3451c5a12ce5adac3c9f518294f"><code class="docutils literal notranslate"><span class="pre">d2252037</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/c28bc0235f1b8772ce6176adb76b7c96350d248e"><code class="docutils literal notranslate"><span class="pre">c28bc023</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/d33e67c36c46846f8d30fb989a1a9640c67883e5"><code class="docutils literal notranslate"><span class="pre">d33e67c3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/7e1b6a1489d4545b0dbe3d9fe92a0aa9943e8247"><code class="docutils literal notranslate"><span class="pre">7e1b6a14</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/33840414e5a3d21a5f9cb25278fe9e2685c590a9"><code class="docutils literal notranslate"><span class="pre">33840414</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/0d559778a7a17f5e54ba99419961fee76e39ac64"><code class="docutils literal notranslate"><span class="pre">0d559778</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/b84d3e3f79c63b9d496fcc4d413f49cec1c04111"><code class="docutils literal notranslate"><span class="pre">b84d3e3f</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/053267e254dda6e7367969c4a59e936b50e2a802"><code class="docutils literal notranslate"><span class="pre">053267e2</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/1864e8fd6c845cc61ab62f403a7f574ffde9107f"><code class="docutils literal notranslate"><span class="pre">1864e8fd</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/5f556acd34597a352665359188dd80aa87ded536"><code class="docutils literal notranslate"><span class="pre">5f556acd</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/045f3d37bf330dca5d2492a3a03d1eeecb7077f3"><code class="docutils literal notranslate"><span class="pre">045f3d37</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/1ca6c5eb402db482db0958232ab2e1231f8e8cf9"><code class="docutils literal notranslate"><span class="pre">1ca6c5eb</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/323c7370db1e20e507d9f95038ae6186eb51fe3e"><code class="docutils literal notranslate"><span class="pre">323c7370</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/544">#544</a>)</p></li>
+</ul>
+</section>
+<section id="id7">
+<h4>Other<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Move MixMaster into a separate repository (<a class="reference external" href="https://github.com/Cantera/cantera/commit/886d7b7cdc8326fa39cd180cbc0429cae0c8f873"><code class="docutils literal notranslate"><span class="pre">886d7b7c</span></code></a>)</p></li>
+<li><p>Propagation of environment variables in SCons is more sensible (<a class="reference external" href="https://github.com/Cantera/cantera/commit/e5edc319de58ce7506586ec02fcd1826b900ed71"><code class="docutils literal notranslate"><span class="pre">e5edc319</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/3c82c3a6c63920f9d60604d64d07a7f5d67340a6"><code class="docutils literal notranslate"><span class="pre">3c82c3a6</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/eae9250f2efcb365a1a99b11d74accaf04e19bd3"><code class="docutils literal notranslate"><span class="pre">eae9250f</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/66998a5ae17222e65a6818047617413317754c13"><code class="docutils literal notranslate"><span class="pre">66998a5a</span></code></a>)</p></li>
+<li><p>Remove deprecated code (<a class="reference external" href="https://github.com/Cantera/cantera/commit/7673f7cb529070c24d54231a2c6feb0d7514bd8d"><code class="docutils literal notranslate"><span class="pre">7673f7cb</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/3accd415e81012bc1b88832e7f29f86fd4922598"><code class="docutils literal notranslate"><span class="pre">3accd415</span></code></a>)</p></li>
+<li><p>Print error messages from and pass flags to GTest (<a class="reference external" href="https://github.com/Cantera/cantera/commit/fca22d94e5ecb1e8b359e4a1ce8cd4f840c803b5"><code class="docutils literal notranslate"><span class="pre">fca22d94</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/461b63e462be2edc1a99dd96aee104bc60d44794"><code class="docutils literal notranslate"><span class="pre">461b63e4</span></code></a>)</p></li>
+<li><p>Remove the requirement for clients to have Boost headers installed when building against the Cantera library (<a class="reference external" href="https://github.com/Cantera/cantera/commit/713b9cc23cd4fba835fb8b90e2762c3d48e3685c"><code class="docutils literal notranslate"><span class="pre">713b9cc2</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/f8d183220c42e084bd2b5a26fb7c613aadaed462"><code class="docutils literal notranslate"><span class="pre">f8d18322</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/686250e51f25bd0807af80dff37e5aa89b2f7df9"><code class="docutils literal notranslate"><span class="pre">686250e5</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/87a7deb35d829393e9d7ff108d71cc95248694ea"><code class="docutils literal notranslate"><span class="pre">87a7deb3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/83ffd844d1a23a7dec695726468fd081629fe81a"><code class="docutils literal notranslate"><span class="pre">83ffd844</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/480">#480</a>)</p></li>
+<li><p>Update to GTest 1.8.0 (<a class="reference external" href="https://github.com/Cantera/cantera/commit/60d20754923ee05cea333f70a0d81486abb09a92"><code class="docutils literal notranslate"><span class="pre">60d20754</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/482">#482</a>)</p></li>
+<li><p>Remove <code class="docutils literal notranslate"><span class="pre">HAS_NO_PYTHON</span></code> configuration variable (<a class="reference external" href="https://github.com/Cantera/cantera/commit/16fd18315c461a854d5d718a31608b1776aa20d4"><code class="docutils literal notranslate"><span class="pre">16fd1831</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/483">#483</a>)</p></li>
+<li><p>Change the options to build the Python interface, since SCons can be run by Python 3 (<a class="reference external" href="https://github.com/Cantera/cantera/commit/94ea9b585f087d7a325df6e0a908869d3b1cacfd"><code class="docutils literal notranslate"><span class="pre">94ea9b58</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/2bc4d09da380903e68c23946e93ded10e65ebbd5"><code class="docutils literal notranslate"><span class="pre">2bc4d09d</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/6ca67b48452bb87b12bdb5f9caaef5b3b60cca98"><code class="docutils literal notranslate"><span class="pre">6ca67b48</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/11943bbc6f7f6c81c682a49f180d6b89ba1839e8"><code class="docutils literal notranslate"><span class="pre">11943bbc</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/7054a7bb3d994303151269ef9688f38deb184ac1"><code class="docutils literal notranslate"><span class="pre">7054a7bb</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/f824b20fe28ccdc7a0e84b3b72b37dd7d8fb695d"><code class="docutils literal notranslate"><span class="pre">f824b20f</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/43b42e99420083c04762a08daf96e27a8385f714"><code class="docutils literal notranslate"><span class="pre">43b42e99</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/c233ddcd30eb296b59d5dcab59409d9ebd1311a3"><code class="docutils literal notranslate"><span class="pre">c233ddcd</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/9f4590bc6f16f69c34f17487362aa1163891593d"><code class="docutils literal notranslate"><span class="pre">9f4590bc</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/9c9ee9e9191df2b9b5ca6a4e3ce2a37efa733023"><code class="docutils literal notranslate"><span class="pre">9c9ee9e9</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/5d599bb680e03f3918244a0a13e1ae4015413d0d"><code class="docutils literal notranslate"><span class="pre">5d599bb6</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/4e6af27edf6cc3ebbf90311be827fdc95e5697a1"><code class="docutils literal notranslate"><span class="pre">4e6af27e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/3e39a0bc3d0141b3205466396f37cbd6dcd30b67"><code class="docutils literal notranslate"><span class="pre">3e39a0bc</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/483">#483</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/486">#486</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/488">#488</a>)</p></li>
+<li><p>Check for 3to2 during build by importing the library, rather than running a script (<a class="reference external" href="https://github.com/Cantera/cantera/commit/77ee76c5f30b73f17c873874842336a86f1da396"><code class="docutils literal notranslate"><span class="pre">77ee76c5</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/483">#483</a>)</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">std::sort</span></code> to eliminate need for <code class="docutils literal notranslate"><span class="pre">vcs_optMax</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/07eed363fe9f2d6287db674a44ef4353980b7256"><code class="docutils literal notranslate"><span class="pre">07eed363</span></code></a>)</p></li>
+<li><p>Google Test suite can be disabled entirely (<a class="reference external" href="https://github.com/Cantera/cantera/commit/fb4a36b1ca84032704d55fa2baff8f48c980d1ac"><code class="docutils literal notranslate"><span class="pre">fb4a36b1</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/9bad3545534b022dae579a1df138f005be7695da"><code class="docutils literal notranslate"><span class="pre">9bad3545</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/333d388f90a8d318f3dadd0e70bdcf955e1ec7bb"><code class="docutils literal notranslate"><span class="pre">333d388f</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/535">#535</a>)</p></li>
+<li><p>Improve behavior of Matlab test suite (<a class="reference external" href="https://github.com/Cantera/cantera/commit/bdaabc0428dbb28e4a0d6bd037ff2d4971238d33"><code class="docutils literal notranslate"><span class="pre">bdaabc04</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/677efd82d57543577ba2455c59f2ab4e35cdad00"><code class="docutils literal notranslate"><span class="pre">677efd82</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/b5b542d10b837220aaa59a0013b7d3aed922d1dd"><code class="docutils literal notranslate"><span class="pre">b5b542d1</span></code></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id8">
+<h3>Additions<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<section id="id9">
+<h4>Thermo/Species/Elements<a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Allow synonyms for <code class="docutils literal notranslate"><span class="pre">Factory</span></code> model names (<a class="reference external" href="https://github.com/Cantera/cantera/commit/c28ca48cf8cbc9075ad3817b700640faad1e848c"><code class="docutils literal notranslate"><span class="pre">c28ca48c</span></code></a>)</p></li>
+<li><p>Add electron to the built-in elements (<a class="reference external" href="https://github.com/Cantera/cantera/commit/974bbc7da44998f4ec8f107363bbb53661fb4b0f"><code class="docutils literal notranslate"><span class="pre">974bbc7d</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/443">#443</a>)</p></li>
+<li><p>Identify unspecified electrochemical reactions (<a class="reference external" href="https://github.com/Cantera/cantera/commit/04be9888ed56d14c61ce7c2b9abd58e55e9ce47a"><code class="docutils literal notranslate"><span class="pre">04be9888</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/452">#452</a>)</p></li>
+<li><p>Make activity coefficients and activities available (<a class="reference external" href="https://github.com/Cantera/cantera/commit/a5b0bdf69547b638b7e03c5aa0273a34068eebe9"><code class="docutils literal notranslate"><span class="pre">a5b0bdf6</span></code></a>)</p></li>
+<li><p>Add regression tests for some thermo classes (<a class="reference external" href="https://github.com/Cantera/cantera/commit/338b21694f4840a0a54a7ed3cb8b5555aab87462"><code class="docutils literal notranslate"><span class="pre">338b2169</span></code></a>)</p></li>
+<li><p>Create a default constructor for PDSS objects and avoid unnecessary arguments in the initializers (<a class="reference external" href="https://github.com/Cantera/cantera/commit/04cac2b2771c605cf668195f04551b209838ace5"><code class="docutils literal notranslate"><span class="pre">04cac2b2</span></code></a>)</p></li>
+<li><p>Show values in <code class="docutils literal notranslate"><span class="pre">setDensity</span></code>/<code class="docutils literal notranslate"><span class="pre">setTemperature</span></code> exceptions (<a class="reference external" href="https://github.com/Cantera/cantera/commit/ebc478f8ec46eae1cda179e6b65536af268bfad7"><code class="docutils literal notranslate"><span class="pre">ebc478f8</span></code></a>)</p></li>
+<li><p>Add Cython function to access species viscosity (<a class="reference external" href="https://github.com/Cantera/cantera/commit/cc93ce62ca23ac9dca8074d10d3c0531387ba864"><code class="docutils literal notranslate"><span class="pre">cc93ce62</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/527">#527</a>)</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">get_equivalence_ratio</span></code> function (<a class="reference external" href="https://github.com/Cantera/cantera/commit/a9ad75e974b7d1aed642a23f5b58ff7bd27a2d8d"><code class="docutils literal notranslate"><span class="pre">a9ad75e9</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/521">#521</a>)</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">newSubstance</span></code> method to create pure fluid objects by name (<a class="reference external" href="https://github.com/Cantera/cantera/commit/62c67e4ad1f57763c25393382e7901c8fb131713"><code class="docutils literal notranslate"><span class="pre">62c67e4a</span></code></a>)</p></li>
+<li><p>Allow <code class="docutils literal notranslate"><span class="pre">surface_reaction</span></code>s (not just <code class="docutils literal notranslate"><span class="pre">edge_reaction</span></code>s) to be charge transfer reactions (<a class="reference external" href="https://github.com/Cantera/cantera/commit/51f419fbadef27d318f249c447400a1618a6d151"><code class="docutils literal notranslate"><span class="pre">51f419fb</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/439">#439</a>)</p></li>
+</ul>
+</section>
+<section id="id10">
+<h4>Transport<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Add unity Lewis number transport model (<a class="reference external" href="https://github.com/Cantera/cantera/commit/d38d9da32c0ecbebde25b4a33f56635f20316e0b"><code class="docutils literal notranslate"><span class="pre">d38d9da3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/29a3c1939960beae7a651f6fad0b754856fd5de7"><code class="docutils literal notranslate"><span class="pre">29a3c193</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/3c3ef10f9321f418db3caf9394ee551635588da3"><code class="docutils literal notranslate"><span class="pre">3c3ef10f</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/d4492f3ea39bb991f493407470b31b22e7ba8e42"><code class="docutils literal notranslate"><span class="pre">d4492f3e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/a1c12b4a3b69c91e17bb2a156116c779e477c85c"><code class="docutils literal notranslate"><span class="pre">a1c12b4a</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/510">#510</a>)</p></li>
+<li><p>Add ion gas transport model (<a class="reference external" href="https://github.com/Cantera/cantera/commit/b7e32e4604a9de401ea651f5a3142fcc04de1711"><code class="docutils literal notranslate"><span class="pre">b7e32e46</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/3a0f46eb56f8a99a7152db36aa1b991538048bb9"><code class="docutils literal notranslate"><span class="pre">3a0f46eb</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/eeb27d84a9c1a374da9bf7b4409370c62580aa84"><code class="docutils literal notranslate"><span class="pre">eeb27d84</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/f7852ad84c078cbbc39cfc1e23ff72087a57efb5"><code class="docutils literal notranslate"><span class="pre">f7852ad8</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/fa9b9374cfe8c11349866a475c4ebf535f47368a"><code class="docutils literal notranslate"><span class="pre">fa9b9374</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/1245a694e522dbd9df0fdceb004b42816e0554f3"><code class="docutils literal notranslate"><span class="pre">1245a694</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/5c783c708f0c08def6f6a3d8328b336d65842357"><code class="docutils literal notranslate"><span class="pre">5c783c70</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/539">#539</a>)</p></li>
+</ul>
+</section>
+<section id="id11">
+<h4>1-D Flames<a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Add access to current solution residuals (<a class="reference external" href="https://github.com/Cantera/cantera/commit/6a52908d8571b171bc5685944f185f0aefef4bc3"><code class="docutils literal notranslate"><span class="pre">6a52908d</span></code></a>)</p></li>
+<li><p>Allow user to pass the locations where temperature is set during flame initialization (<a class="reference external" href="https://github.com/Cantera/cantera/commit/2a38b0a765aee9fe0baae7d42fa8763591f09352"><code class="docutils literal notranslate"><span class="pre">2a38b0a7</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/447">#447</a>)</p></li>
+<li><p>Add ability to simulate ionized flames using the <code class="docutils literal notranslate"><span class="pre">IonFlow</span></code> and <code class="docutils literal notranslate"><span class="pre">BurnerIonFlame</span></code> classes (<a class="reference external" href="https://github.com/Cantera/cantera/commit/3b12c6d6623c83a1013398aa694b9dd4d745058c"><code class="docutils literal notranslate"><span class="pre">3b12c6d6</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/e2f718c65b75e3d3670e9b774a79d2f4f1c8606e"><code class="docutils literal notranslate"><span class="pre">e2f718c6</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/9dd0134e3135720c43b01c7bf9b6961cddc4359e"><code class="docutils literal notranslate"><span class="pre">9dd0134e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/6b6d758f2390487b7952916c4f3a9fdec535a59b"><code class="docutils literal notranslate"><span class="pre">6b6d758f</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/1057d2073182628e790c70df0a42f812687ff340"><code class="docutils literal notranslate"><span class="pre">1057d207</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/1be837434240a8610f164ee14355d4f0eee27057"><code class="docutils literal notranslate"><span class="pre">1be83743</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/a8cbfd2c41fc324ce40b59e6e2ac8c192e97fd83"><code class="docutils literal notranslate"><span class="pre">a8cbfd2c</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/2472e080c377fad61162d04200f385cc3096a39b"><code class="docutils literal notranslate"><span class="pre">2472e080</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/a99004d8ef2cd802ce8923f08bf8cf9486c7e9cb"><code class="docutils literal notranslate"><span class="pre">a99004d8</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/24940aeef774e91156cbaa15e8e219b4c35287ad"><code class="docutils literal notranslate"><span class="pre">24940aee</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/c3ba26428421f2edde473d11ad4831da2c9afe6b"><code class="docutils literal notranslate"><span class="pre">c3ba2642</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/a5762ea6b6ee40cc74b32ce0871ae1f788417a87"><code class="docutils literal notranslate"><span class="pre">a5762ea6</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/ac8612f36b7e317fb01e25a33d1edf4ecbfdc604"><code class="docutils literal notranslate"><span class="pre">ac8612f3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/441">#441</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/471">#471</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/546">#546</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/548">#548</a>)</p></li>
+<li><p>Add function to get the refine criteria used in a flame (<a class="reference external" href="https://github.com/Cantera/cantera/commit/bce4210e1b2bf424c2d1e7f1ded45cfcdbfa761d"><code class="docutils literal notranslate"><span class="pre">bce4210e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/4b44c6618285679d00969cddcd12310586240c48"><code class="docutils literal notranslate"><span class="pre">4b44c661</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/c88ddce0d69523b9dab1cc09a1196726de0d6dd9"><code class="docutils literal notranslate"><span class="pre">c88ddce0</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/469">#469</a>)</p></li>
+<li><p>Add a more general <code class="docutils literal notranslate"><span class="pre">CounterFlowDiffusionFlame</span></code> to Matlab, replacing <code class="docutils literal notranslate"><span class="pre">npflame_init</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/43bd96b5ba6073bd952dd2231daac3ead40e1ff7"><code class="docutils literal notranslate"><span class="pre">43bd96b5</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/c092484f4df60caf0c967df4552eedf2c010eb53"><code class="docutils literal notranslate"><span class="pre">c092484f</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/450">#450</a>)</p></li>
+<li><p>Allow access to and disabling of callbacks for 1-D problems (<a class="reference external" href="https://github.com/Cantera/cantera/commit/4b352751f54a033f731d3d69c43c9afe6da559d0"><code class="docutils literal notranslate"><span class="pre">4b352751</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/7a314d3124bb74583850e9ede8d265f1605ae7bf"><code class="docutils literal notranslate"><span class="pre">7a314d31</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/489">#489</a>)</p></li>
+<li><p>Automatically detect when the domain width is too narrow or the flame has blown off the burner (<a class="reference external" href="https://github.com/Cantera/cantera/commit/dfd4b7e671c847cbe2aa6b1e1ed49b0215727990"><code class="docutils literal notranslate"><span class="pre">dfd4b7e6</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/7eb4eaa13aeb77a4d723d80739e4496e75276807"><code class="docutils literal notranslate"><span class="pre">7eb4eaa1</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/4911539b565bffd0b30ffd26e04c30f085b85768"><code class="docutils literal notranslate"><span class="pre">4911539b</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/489">#489</a>)</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">BurnerIonFlame</span></code> class (<a class="reference external" href="https://github.com/Cantera/cantera/commit/2527869536bec16a9e92a593d9389b632dac1409"><code class="docutils literal notranslate"><span class="pre">25278695</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/5082a212c446743e57996d403c1061037864d540"><code class="docutils literal notranslate"><span class="pre">5082a212</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/ee633f3e16314210ecdd7edbfae8b519f274aac1"><code class="docutils literal notranslate"><span class="pre">ee633f3e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/166249869b5c3c828bfc63563de4a2c826047be8"><code class="docutils literal notranslate"><span class="pre">16624986</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/548">#548</a>)</p></li>
+</ul>
+</section>
+<section id="id12">
+<h4>CTI/Input files<a class="headerlink" href="#id12" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Allow negative reaction orders (<a class="reference external" href="https://github.com/Cantera/cantera/commit/8f02c777a5904069e8c8b57ae695be1fb383f033"><code class="docutils literal notranslate"><span class="pre">8f02c777</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/4771874c757942807f40baa66e8a90e8f69ef25e"><code class="docutils literal notranslate"><span class="pre">4771874c</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/501b5fd1f52360464e55a047b92473ca0a89686d"><code class="docutils literal notranslate"><span class="pre">501b5fd1</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/485">#485</a>)</p></li>
+<li><p>Add support for parsing species with specific site occupancies (<a class="reference external" href="https://github.com/Cantera/cantera/commit/89bca5fcd1d8cd964abc731d8852d5ac87914e3c"><code class="docutils literal notranslate"><span class="pre">89bca5fc</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/444">#444</a>)</p></li>
+<li><p>Improve error message reporting during failed <code class="docutils literal notranslate"><span class="pre">ck2cti</span></code> conversions (<a class="reference external" href="https://github.com/Cantera/cantera/commit/4b5a37a3362b7c6001f021256c3241e3e592284e"><code class="docutils literal notranslate"><span class="pre">4b5a37a3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/9c3b500ec869080c166485f37e2ba39c987b6f7e"><code class="docutils literal notranslate"><span class="pre">9c3b500e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/4affcd1efb4f99843878147e678b7e6a9e62ccb1"><code class="docutils literal notranslate"><span class="pre">4affcd1e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/411be3e6cf1d110143fdf893c8a050762f7dc6c7"><code class="docutils literal notranslate"><span class="pre">411be3e6</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/497">#497</a>)</p></li>
+<li><p>Allow <code class="docutils literal notranslate"><span class="pre">convertMech</span></code> function to be called multiple times (<a class="reference external" href="https://github.com/Cantera/cantera/commit/277aa0b91328748d266db644b12edd3934cf2ac7"><code class="docutils literal notranslate"><span class="pre">277aa0b9</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/528">#528</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/536">#536</a>)</p></li>
+</ul>
+</section>
+<section id="id13">
+<h4>Other<a class="headerlink" href="#id13" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Add methods for getting the git commit (<a class="reference external" href="https://github.com/Cantera/cantera/commit/8e89bbb8d2dde80b59b2533563ff67c935addd41"><code class="docutils literal notranslate"><span class="pre">8e89bbb8</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/7979a2b52a791d0e22e161a6400590514ed024fe"><code class="docutils literal notranslate"><span class="pre">7979a2b5</span></code></a>)</p></li>
+<li><p>Add class <code class="docutils literal notranslate"><span class="pre">AnyMap</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/56022e898915c32ecb768fd8a48ec6054354a94c"><code class="docutils literal notranslate"><span class="pre">56022e89</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/9c084d5c84d010ca98d870c73139783cb769a87c"><code class="docutils literal notranslate"><span class="pre">9c084d5c</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/7fab7f3cd3deec74e649a522b37e10efdf238e79"><code class="docutils literal notranslate"><span class="pre">7fab7f3c</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/443">#443</a>)</p></li>
+<li><p>Add compatibility with Cython &gt;=0.26 (<a class="reference external" href="https://github.com/Cantera/cantera/commit/8d953a9424700b85beff13a83fe7a6921768dd75"><code class="docutils literal notranslate"><span class="pre">8d953a94</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/465">#465</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/467">#467</a>)</p></li>
+<li><p>Add compatibility with fmt 4.0.0 (<a class="reference external" href="https://github.com/Cantera/cantera/commit/ea69a014a54ac0fb5199c63b4b673af0b3eff23d"><code class="docutils literal notranslate"><span class="pre">ea69a014</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/470">#470</a>)</p></li>
+<li><p>Building now supports SCons 3.0.0 and Python 3 running SCons (<a class="reference external" href="https://github.com/Cantera/cantera/commit/7d0bc71448f549f3486c5c552c569f1e1f0f5565"><code class="docutils literal notranslate"><span class="pre">7d0bc714</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/684262e945f67498fb7ab460578249ed7bd11188"><code class="docutils literal notranslate"><span class="pre">684262e9</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/477">#477</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/478">#478</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/481">#481</a>)</p></li>
+<li><p>Allow building and testing with msvc-12.0 (<a class="reference external" href="https://github.com/Cantera/cantera/commit/e921cb89c8cb3c167919344277009d54ae711255"><code class="docutils literal notranslate"><span class="pre">e921cb89</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/6844e527137bf265ca8799f408aec1053b66b48a"><code class="docutils literal notranslate"><span class="pre">6844e527</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/479">#479</a>)</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">setup_cantera.csh</span></code> for use with csh/tcsh (<a class="reference external" href="https://github.com/Cantera/cantera/commit/4a4886f63ef21e763092ec04876215b61962dcab"><code class="docutils literal notranslate"><span class="pre">4a4886f6</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/453">#453</a>)</p></li>
+<li><p>Add conda GCC compilers to the check for C compilers during building (<a class="reference external" href="https://github.com/Cantera/cantera/commit/07409dea59cffa57e4dba91087e52d1201b4eb6e"><code class="docutils literal notranslate"><span class="pre">07409dea</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/486">#486</a>)</p></li>
+<li><p>Many documentation updates related to Cantera joining NumFOCUS (<a class="reference external" href="https://github.com/Cantera/cantera/commit/e846505f5783a979b245974a61a0d94e241ccbd1"><code class="docutils literal notranslate"><span class="pre">e846505f</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/e6b4761c6bbc31484afda0af29e6f8450e41fb21"><code class="docutils literal notranslate"><span class="pre">e6b4761c</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/af4a78dddef088785916cf1058c28444e33b463d"><code class="docutils literal notranslate"><span class="pre">af4a78dd</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/ec5aecd3d6cd422a78df5225aead2952d04a04ee"><code class="docutils literal notranslate"><span class="pre">ec5aecd3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/419a09c4145f2a5803f1e30a4554478ffb30235f"><code class="docutils literal notranslate"><span class="pre">419a09c4</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/581cfb7c042289d4dc7eda32bdec9017d5346137"><code class="docutils literal notranslate"><span class="pre">581cfb7c</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/8caf5e5aca2549d7ba2075b6312de64004d346a8"><code class="docutils literal notranslate"><span class="pre">8caf5e5a</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/977a1c7736aaf177138ae297fce3ef8b77494954"><code class="docutils literal notranslate"><span class="pre">977a1c77</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/0d20b50543815370244b112f9e0247568158ae19"><code class="docutils literal notranslate"><span class="pre">0d20b505</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/c78a11b32f6d1613dce77cf2120ecaab96880b08"><code class="docutils literal notranslate"><span class="pre">c78a11b3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/2abc57e2f1324d5e30537f01d39c15b88fe4206f"><code class="docutils literal notranslate"><span class="pre">2abc57e2</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/05fa4df3b9ebe4a8ea644dc23101d7cc62414404"><code class="docutils literal notranslate"><span class="pre">05fa4df3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/8195403fefc63fd1f36707ab36b7495d5fdc22e7"><code class="docutils literal notranslate"><span class="pre">8195403f</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/1a394a3402d929a4acbd47be8a4e22240ece35ed"><code class="docutils literal notranslate"><span class="pre">1a394a34</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/c29fbc808e1a1073ff823da1076d066607362662"><code class="docutils literal notranslate"><span class="pre">c29fbc80</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/66597b72ffcdabd199aebe53b7654962188abe29"><code class="docutils literal notranslate"><span class="pre">66597b72</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/a0ac2b0cc62604009f529037001fb544176b4db3"><code class="docutils literal notranslate"><span class="pre">a0ac2b0c</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/502">#502</a>)</p></li>
+<li><p>Add support for SUNDIALS 3.0.0 and 3.1.0 (<a class="reference external" href="https://github.com/Cantera/cantera/commit/50a3fecb23f4cf97e71d989812a48c1a4c40f754"><code class="docutils literal notranslate"><span class="pre">50a3fecb</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/9c50f7528c71ef470d73939f580d03ea342d85dd"><code class="docutils literal notranslate"><span class="pre">9c50f752</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/82c959d3a39fbe0e4ecdb0ceca9dff81c9e0254b"><code class="docutils literal notranslate"><span class="pre">82c959d3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/322b1fc37572dca61067397d460cc809b9bece46"><code class="docutils literal notranslate"><span class="pre">322b1fc3</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/503">#503</a>)</p></li>
+<li><p>Upgrade Eigen submodule to 3.3.4 (<a class="reference external" href="https://github.com/Cantera/cantera/commit/20f891f1a43acb5fd72963bf34ba101e10fcbf4c"><code class="docutils literal notranslate"><span class="pre">20f891f1</span></code></a>)</p></li>
+<li><p>Add links to old versions of the documentation (<a class="reference external" href="https://github.com/Cantera/cantera/commit/b26dc65c415c69af050f1ef28c5505f10f5800bb"><code class="docutils literal notranslate"><span class="pre">b26dc65c</span></code></a>)</p></li>
+<li><p>Upgrade <code class="docutils literal notranslate"><span class="pre">fmtlib</span></code> submodule to 5.0.0 (<a class="reference external" href="https://github.com/Cantera/cantera/commit/6b3c912ec3147c1cb91e57a21bda30379746c88e"><code class="docutils literal notranslate"><span class="pre">6b3c912e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/99d4972e6b962ed91ef7dc8fb6943416fe86c846"><code class="docutils literal notranslate"><span class="pre">99d4972e</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/3be3f7dad5291aa53c633e3043768d7527e54148"><code class="docutils literal notranslate"><span class="pre">3be3f7da</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/e42b952a8ac88b46d274cfa034e5f3617e1d8c0c"><code class="docutils literal notranslate"><span class="pre">e42b952a</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/51d0d43a4505cb680e073a552cbb31b0f385460d"><code class="docutils literal notranslate"><span class="pre">51d0d43a</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/309871ae8823aa182e4f7a6fb2d8bf3a456019a3"><code class="docutils literal notranslate"><span class="pre">309871ae</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/dab739013ed2c766583cf27cc0617ff68f77c64d"><code class="docutils literal notranslate"><span class="pre">dab73901</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/540">#540</a>)</p></li>
+</ul>
+</section>
+<section id="id14">
+<h4>Examples/Samples<a class="headerlink" href="#id14" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Add C++ OpenMP example (<a class="reference external" href="https://github.com/Cantera/cantera/commit/78d5809d6f3e79a6afb6dad211a0417c56bd5065"><code class="docutils literal notranslate"><span class="pre">78d5809d</span></code></a>)</p></li>
+<li><p>Add NonIdealShockTube example (<a class="reference external" href="https://github.com/Cantera/cantera/commit/2a601c148f9f586d72e247162946e64739477e4a"><code class="docutils literal notranslate"><span class="pre">2a601c14</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/e78aac7b70265705aef4d62cde8c675003dc50e5"><code class="docutils literal notranslate"><span class="pre">e78aac7b</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/commit/26216e9adc9eddbd7466b0ff068860148134241a"><code class="docutils literal notranslate"><span class="pre">26216e9a</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/473">#473</a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/483">#483</a>)</p></li>
+<li><p>Add example of PSR/WSR that replaces <code class="docutils literal notranslate"><span class="pre">combustor.py</span></code> (<a class="reference external" href="https://github.com/Cantera/cantera/commit/dc5ec06a0c020715ccda93942e50c2d2281ee51b"><code class="docutils literal notranslate"><span class="pre">dc5ec06a</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/550">#550</a>)</p></li>
+<li><p>Add example of using a time-dependent mass flow into a reactor (<a class="reference external" href="https://github.com/Cantera/cantera/commit/2f67c9969d6ff2020410fa7ea5abc782c528dc6f"><code class="docutils literal notranslate"><span class="pre">2f67c996</span></code></a>, <a class="reference external" href="https://github.com/Cantera/cantera/pull/550">#550</a>)</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-changes-in-cantera-2-4-0">Summary of changes in Cantera 2.4.0</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bugs-fixed">Bugs fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changes-to-existing-capabilities">Changes to existing capabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additions">Additions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-changelog">Full Changelog</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Bugs fixed</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#thermo-species-elements">Thermo/Species/Elements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetics">Kinetics</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transport">Transport</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-reactors">0-D Reactors</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-flames">1-D Flames</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cti-input-files">CTI/Input files</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#other">Other</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Changes to existing capabilities</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Thermo/Species/Elements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-solvers">Equilibrium Solvers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Transport</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">0-D Reactors</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1-D Flames</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cti-xml-input-files">CTI/XML/Input Files</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-samples">Examples/Samples</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Other</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Additions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Thermo/Species/Elements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Transport</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">1-D Flames</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">CTI/Input files</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Other</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">Examples/Samples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/reference/releasenotes/v2.4.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

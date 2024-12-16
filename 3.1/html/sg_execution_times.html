@@ -1,0 +1,1030 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Computation times &#8212; Cantera 3.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=dd1205ac"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sg_execution_times';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Computation times</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="computation-times">
+<span id="sphx-glr-sg-execution-times"></span><h1>Computation times<a class="headerlink" href="#computation-times" title="Link to this heading">#</a></h1>
+<p><strong>18:33.042</strong> total execution time for 109 files <strong>from all galleries</strong>:</p>
+<div class="docutils container">
+<style scoped>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+</style>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script type="text/javascript" class="init">
+$(document).ready( function () {
+    $('table.sg-datatable').DataTable({order: [[1, 'desc']]});
+} );
+</script><div class="pst-scrollable-table-container"><table class="table table-striped sg-datatable">
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
+<th class="head"><p>Time</p></th>
+<th class="head"><p>Mem (MB)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/onedim/flame_speed.html#sphx-glr-examples-python-onedim-flame-speed-py"><span class="std std-ref">Flame speed as a function of equivalence ratio</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/flame_speed.py</span></code>)</p></td>
+<td><p>04:57.659</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/onedim/flame_speed_convergence_analysis.html#sphx-glr-examples-python-onedim-flame-speed-convergence-analysis-py"><span class="std std-ref">Flame Speed with Convergence Analysis</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/flame_speed_convergence_analysis.py</span></code>)</p></td>
+<td><p>02:36.096</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/onedim/ion_burner_flame.html#sphx-glr-examples-python-onedim-ion-burner-flame-py"><span class="std std-ref">Burner-stabilized flame including ionized species</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/ion_burner_flame.py</span></code>)</p></td>
+<td><p>01:40.289</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/reactors/NonIdealShockTube.html#sphx-glr-examples-python-reactors-nonidealshocktube-py"><span class="std std-ref">Ignition delay time using the Redlich-Kwong real gas model</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/NonIdealShockTube.py</span></code>)</p></td>
+<td><p>01:38.247</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/onedim/diffusion_flame_extinction.html#sphx-glr-examples-python-onedim-diffusion-flame-extinction-py"><span class="std std-ref">Diffusion flame extinction strain rate</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/diffusion_flame_extinction.py</span></code>)</p></td>
+<td><p>01:16.122</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/reactors/continuous_reactor.html#sphx-glr-examples-python-reactors-continuous-reactor-py"><span class="std std-ref">Continuously Stirred Tank Reactor</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/continuous_reactor.py</span></code>)</p></td>
+<td><p>01:05.512</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/onedim/ion_free_flame.html#sphx-glr-examples-python-onedim-ion-free-flame-py"><span class="std std-ref">Freely-propagating flame with charged species</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/ion_free_flame.py</span></code>)</p></td>
+<td><p>01:04.755</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/onedim/premixed_counterflow_twin_flame.html#sphx-glr-examples-python-onedim-premixed-counterflow-twin-flame-py"><span class="std std-ref">Symmetric premixed twin flame</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/premixed_counterflow_twin_flame.py</span></code>)</p></td>
+<td><p>01:02.673</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/kinetics/custom_reactions.html#sphx-glr-examples-python-kinetics-custom-reactions-py"><span class="std std-ref">Custom reaction rates</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/kinetics/custom_reactions.py</span></code>)</p></td>
+<td><p>00:34.560</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/onedim/flame_initial_guess.html#sphx-glr-examples-python-onedim-flame-initial-guess-py"><span class="std std-ref">Saving, loading, and restarting 1D calculations</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/flame_initial_guess.py</span></code>)</p></td>
+<td><p>00:27.037</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/reactors/preconditioned_integration.html#sphx-glr-examples-python-reactors-preconditioned-integration-py"><span class="std std-ref">Acceleration of reactor integration using a sparse preconditioned solver</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/preconditioned_integration.py</span></code>)</p></td>
+<td><p>00:23.760</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/onedim/flamespeed_sensitivity.html#sphx-glr-examples-python-onedim-flamespeed-sensitivity-py"><span class="std std-ref">Laminar flame speed sensitivity analysis</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/flamespeed_sensitivity.py</span></code>)</p></td>
+<td><p>00:16.945</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/onedim/diffusion_flame_continuation.html#sphx-glr-examples-python-onedim-diffusion-flame-continuation-py"><span class="std std-ref">Diffusion flame unstable branch</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/diffusion_flame_continuation.py</span></code>)</p></td>
+<td><p>00:13.266</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/onedim/diffusion_flame.html#sphx-glr-examples-python-onedim-diffusion-flame-py"><span class="std std-ref">Counterflow diffusion flame</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/diffusion_flame.py</span></code>)</p></td>
+<td><p>00:10.110</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/reactors/ic_engine.html#sphx-glr-examples-python-reactors-ic-engine-py"><span class="std std-ref">Diesel-type internal combustion engine simulation with gaseous fuel</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/ic_engine.py</span></code>)</p></td>
+<td><p>00:07.952</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/kinetics/extract_submechanism.html#sphx-glr-examples-python-kinetics-extract-submechanism-py"><span class="std std-ref">Extracting a sub-mechanism</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/kinetics/extract_submechanism.py</span></code>)</p></td>
+<td><p>00:07.685</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/kinetics/mechanism_reduction.html#sphx-glr-examples-python-kinetics-mechanism-reduction-py"><span class="std std-ref">Mechanism reduction</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/kinetics/mechanism_reduction.py</span></code>)</p></td>
+<td><p>00:07.021</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/reactors/PorousMediaBurner.html#sphx-glr-examples-python-reactors-porousmediaburner-py"><span class="std std-ref">Reactor cascade model for reactive flows in inert porous media</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/PorousMediaBurner.py</span></code>)</p></td>
+<td><p>00:06.288</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/onedim/diffusion_flame_batch.html#sphx-glr-examples-python-onedim-diffusion-flame-batch-py"><span class="std std-ref">Scaling of diffusion flames with pressure and strain rate</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/diffusion_flame_batch.py</span></code>)</p></td>
+<td><p>00:05.038</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/onedim/stagnation_flame.html#sphx-glr-examples-python-onedim-stagnation-flame-py"><span class="std std-ref">Detached flat flame stabilized at a stagnation point</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/stagnation_flame.py</span></code>)</p></td>
+<td><p>00:03.219</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/onedim/flame_fixed_T.html#sphx-glr-examples-python-onedim-flame-fixed-t-py"><span class="std std-ref">Burner-stabilized flame with imposed temperature profile</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/flame_fixed_T.py</span></code>)</p></td>
+<td><p>00:02.577</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/kinetics/jet_stirred_reactor.html#sphx-glr-examples-python-kinetics-jet-stirred-reactor-py"><span class="std std-ref">Jet-stirred reactor temperature and species profiles</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/kinetics/jet_stirred_reactor.py</span></code>)</p></td>
+<td><p>00:02.379</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/reactors/pfr.html#sphx-glr-examples-python-reactors-pfr-py"><span class="std std-ref">Plug flow reactor modeling approaches</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/pfr.py</span></code>)</p></td>
+<td><p>00:02.031</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/thermo/equations_of_state.html#sphx-glr-examples-python-thermo-equations-of-state-py"><span class="std std-ref">Non-ideal equations of state</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/thermo/equations_of_state.py</span></code>)</p></td>
+<td><p>00:01.806</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/thermo/adiabatic.html#sphx-glr-examples-python-thermo-adiabatic-py"><span class="std std-ref">Adiabatic flame temperature including solid carbon formation</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/thermo/adiabatic.py</span></code>)</p></td>
+<td><p>00:01.727</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/reactors/1D_pfr_surfchem.html#sphx-glr-examples-python-reactors-1d-pfr-surfchem-py"><span class="std std-ref">Plug flow reactor: silicon nitride deposition</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/1D_pfr_surfchem.py</span></code>)</p></td>
+<td><p>00:01.393</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/onedim/catalytic_combustion.html#sphx-glr-examples-python-onedim-catalytic-combustion-py"><span class="std std-ref">Catalytic combustion of methane on platinum</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/catalytic_combustion.py</span></code>)</p></td>
+<td><p>00:01.347</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/reactors/fuel_injection.html#sphx-glr-examples-python-reactors-fuel-injection-py"><span class="std std-ref">Soot precursor formation with time-varying mass flow rate</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/fuel_injection.py</span></code>)</p></td>
+<td><p>00:00.970</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/reactors/1D_packed_bed.html#sphx-glr-examples-python-reactors-1d-packed-bed-py"><span class="std std-ref">One-dimensional packed-bed, catalytic-membrane reactor</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/1D_packed_bed.py</span></code>)</p></td>
+<td><p>00:00.938</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/onedim/premixed_counterflow_flame.html#sphx-glr-examples-python-onedim-premixed-counterflow-flame-py"><span class="std std-ref">Opposed-flow premixed strained flame</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/premixed_counterflow_flame.py</span></code>)</p></td>
+<td><p>00:00.931</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/onedim/burner_flame.html#sphx-glr-examples-python-onedim-burner-flame-py"><span class="std std-ref">Burner-stabilized flame</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/burner_flame.py</span></code>)</p></td>
+<td><p>00:00.865</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/reactors/sensitivity1.html#sphx-glr-examples-python-reactors-sensitivity1-py"><span class="std std-ref">Constant-pressure, adiabatic kinetics simulation with sensitivity analysis</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/sensitivity1.py</span></code>)</p></td>
+<td><p>00:00.858</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/onedim/adiabatic_flame.html#sphx-glr-examples-python-onedim-adiabatic-flame-py"><span class="std std-ref">Laminar flame speed calculation</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/onedim/adiabatic_flame.py</span></code>)</p></td>
+<td><p>00:00.832</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/reactors/combustor.html#sphx-glr-examples-python-reactors-combustor-py"><span class="std std-ref">Combustor residence time</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/combustor.py</span></code>)</p></td>
+<td><p>00:00.815</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/kinetics/interactive_path_diagram.html#sphx-glr-examples-python-kinetics-interactive-path-diagram-py"><span class="std std-ref">Interactive Reaction Path Diagrams</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/kinetics/interactive_path_diagram.py</span></code>)</p></td>
+<td><p>00:00.765</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/reactors/reactor2.html#sphx-glr-examples-python-reactors-reactor2-py"><span class="std std-ref">Reactors with walls and heat transfer</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/reactor2.py</span></code>)</p></td>
+<td><p>00:00.690</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/reactors/piston.html#sphx-glr-examples-python-reactors-piston-py"><span class="std std-ref">Reactors separated by a moving piston</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/piston.py</span></code>)</p></td>
+<td><p>00:00.679</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/thermo/sound_speed.html#sphx-glr-examples-python-thermo-sound-speed-py"><span class="std std-ref">Sound speeds</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/thermo/sound_speed.py</span></code>)</p></td>
+<td><p>00:00.629</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/thermo/vapordome.html#sphx-glr-examples-python-thermo-vapordome-py"><span class="std std-ref">Vapor Dome</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/thermo/vapordome.py</span></code>)</p></td>
+<td><p>00:00.582</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/thermo/coverage_dependent_surf.html#sphx-glr-examples-python-thermo-coverage-dependent-surf-py"><span class="std std-ref">Surface with coverage-dependent thermo</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/thermo/coverage_dependent_surf.py</span></code>)</p></td>
+<td><p>00:00.572</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/kinetics/blowers_masel.html#sphx-glr-examples-python-kinetics-blowers-masel-py"><span class="std std-ref">Blowers-Masel reaction rates</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/kinetics/blowers_masel.py</span></code>)</p></td>
+<td><p>00:00.462</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/kinetics/lithium_ion_battery.html#sphx-glr-examples-python-kinetics-lithium-ion-battery-py"><span class="std std-ref">Lithium Ion Battery Discharge Curve</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/kinetics/lithium_ion_battery.py</span></code>)</p></td>
+<td><p>00:00.442</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/reactors/reactor1.html#sphx-glr-examples-python-reactors-reactor1-py"><span class="std std-ref">Constant-pressure, adiabatic kinetics simulation</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/reactor1.py</span></code>)</p></td>
+<td><p>00:00.380</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/reactors/periodic_cstr.html#sphx-glr-examples-python-reactors-periodic-cstr-py"><span class="std std-ref">Continuously stirred tank reactor with periodic behavior</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/periodic_cstr.py</span></code>)</p></td>
+<td><p>00:00.357</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/reactors/surf_pfr_chain.html#sphx-glr-examples-python-reactors-surf-pfr-chain-py"><span class="std std-ref">Plug flow reactor modeled as a chain of well stirred reactors</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/surf_pfr_chain.py</span></code>)</p></td>
+<td><p>00:00.339</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/thermo/plasma_equilibrium.html#sphx-glr-examples-python-thermo-plasma-equilibrium-py"><span class="std std-ref">Equilibrium with charged species and multiple condensed phases</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/thermo/plasma_equilibrium.py</span></code>)</p></td>
+<td><p>00:00.313</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/kinetics/sofc.html#sphx-glr-examples-python-kinetics-sofc-py"><span class="std std-ref">Solid oxide fuel cell using elementary kinetics</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/kinetics/sofc.py</span></code>)</p></td>
+<td><p>00:00.307</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/kinetics/diamond_cvd.html#sphx-glr-examples-python-kinetics-diamond-cvd-py"><span class="std std-ref">Growth of diamond film using CVD</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/kinetics/diamond_cvd.py</span></code>)</p></td>
+<td><p>00:00.300</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/kinetics/shock_tube.html#sphx-glr-examples-python-kinetics-shock-tube-py"><span class="std std-ref">Shock-tube species profiles as a function of time</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/kinetics/shock_tube.py</span></code>)</p></td>
+<td><p>00:00.284</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/reactors/surf_pfr.html#sphx-glr-examples-python-reactors-surf-pfr-py"><span class="std std-ref">Plug flow reactor with surface chemistry</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/surf_pfr.py</span></code>)</p></td>
+<td><p>00:00.273</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/kinetics/reaction_path.html#sphx-glr-examples-python-kinetics-reaction-path-py"><span class="std std-ref">Viewing a reaction path diagram</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/kinetics/reaction_path.py</span></code>)</p></td>
+<td><p>00:00.246</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/reactors/plasma.html#sphx-glr-examples-python-reactors-plasma-py"><span class="std std-ref">Plasma Reactor</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/plasma.py</span></code>)</p></td>
+<td><p>00:00.237</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/thermo/rankine_units.html#sphx-glr-examples-python-thermo-rankine-units-py"><span class="std std-ref">Rankine cycle (with units)</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/thermo/rankine_units.py</span></code>)</p></td>
+<td><p>00:00.235</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/reactors/custom2.html#sphx-glr-examples-python-reactors-custom2-py"><span class="std std-ref">Using ExtensibleReactor to implement wall inertia</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/custom2.py</span></code>)</p></td>
+<td><p>00:00.235</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/thermo/isentropic.html#sphx-glr-examples-python-thermo-isentropic-py"><span class="std std-ref">Converging-Diverging Nozzle</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/thermo/isentropic.py</span></code>)</p></td>
+<td><p>00:00.234</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/reactors/custom.html#sphx-glr-examples-python-reactors-custom-py"><span class="std std-ref">Integrating constant pressure ignition using SciPy</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/custom.py</span></code>)</p></td>
+<td><p>00:00.177</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/thermo/critical_properties.html#sphx-glr-examples-python-thermo-critical-properties-py"><span class="std std-ref">Critical state properties</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/thermo/critical_properties.py</span></code>)</p></td>
+<td><p>00:00.167</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/reactors/mix1.html#sphx-glr-examples-python-reactors-mix1-py"><span class="std std-ref">Mixing two streams</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/reactors/mix1.py</span></code>)</p></td>
+<td><p>00:00.110</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/thermo/sound_speed_units.html#sphx-glr-examples-python-thermo-sound-speed-units-py"><span class="std std-ref">Sound speeds (with units)</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/thermo/sound_speed_units.py</span></code>)</p></td>
+<td><p>00:00.092</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/thermo/mixing.html#sphx-glr-examples-python-thermo-mixing-py"><span class="std std-ref">Mixing using Quantity objects</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/thermo/mixing.py</span></code>)</p></td>
+<td><p>00:00.084</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/thermo/isentropic_units.html#sphx-glr-examples-python-thermo-isentropic-units-py"><span class="std std-ref">Isentropic, adiabatic flow (with units)</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/thermo/isentropic_units.py</span></code>)</p></td>
+<td><p>00:00.062</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/thermo/equivalenceRatio.html#sphx-glr-examples-python-thermo-equivalenceratio-py"><span class="std std-ref">Equivalence ratio</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/thermo/equivalenceRatio.py</span></code>)</p></td>
+<td><p>00:00.058</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/thermo/rankine.html#sphx-glr-examples-python-thermo-rankine-py"><span class="std std-ref">Rankine cycle</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/thermo/rankine.py</span></code>)</p></td>
+<td><p>00:00.020</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/python/transport/dusty_gas.html#sphx-glr-examples-python-transport-dusty-gas-py"><span class="std std-ref">Porous media transport using the dusty gas model</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/transport/dusty_gas.py</span></code>)</p></td>
+<td><p>00:00.009</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/clib/demo.html#sphx-glr-examples-clib-demo-c"><span class="std std-ref">CLib Demo</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/clib/demo.c</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/cxx/BoundaryValueProblem.html#sphx-glr-examples-cxx-boundaryvalueproblem-h"><span class="std std-ref">Class BoundaryValueProblem</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/cxx/BoundaryValueProblem.h</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/cxx/LiC6_electrode.html#sphx-glr-examples-cxx-lic6-electrode-cpp"><span class="std std-ref">LiC6 electrode</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/cxx/LiC6_electrode.cpp</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/cxx/blasius.html#sphx-glr-examples-cxx-blasius-cpp"><span class="std std-ref">Blasius BVP solver</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/cxx/blasius.cpp</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/cxx/combustor.html#sphx-glr-examples-cxx-combustor-cpp"><span class="std std-ref">Adiabatic combustor</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/cxx/combustor.cpp</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/cxx/custom.html#sphx-glr-examples-cxx-custom-cpp"><span class="std std-ref">Custom reactor</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/cxx/custom.cpp</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/cxx/demo.html#sphx-glr-examples-cxx-demo-cpp"><span class="std std-ref">Property calculation demo</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/cxx/demo.cpp</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/cxx/derivative_speed.html#sphx-glr-examples-cxx-derivative-speed-cpp"><span class="std std-ref">Benchmark derivative evaluations</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/cxx/derivative_speed.cpp</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/cxx/example_utils.html#sphx-glr-examples-cxx-example-utils-h"><span class="std std-ref">Example utilities</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/cxx/example_utils.h</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/cxx/flamespeed.html#sphx-glr-examples-cxx-flamespeed-cpp"><span class="std std-ref">Freely-propagating flame</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/cxx/flamespeed.cpp</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/cxx/gas_transport.html#sphx-glr-examples-cxx-gas-transport-cpp"><span class="std std-ref">Gas phase transport properties</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/cxx/gas_transport.cpp</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/cxx/kinetics1.html#sphx-glr-examples-cxx-kinetics1-cpp"><span class="std std-ref">Autoignition in a homogeneous reactor</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/cxx/kinetics1.cpp</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/cxx/openmp_ignition.html#sphx-glr-examples-cxx-openmp-ignition-cpp"><span class="std std-ref">Ignition delay calculation with OpenMP</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/cxx/openmp_ignition.cpp</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/cxx/rankine.html#sphx-glr-examples-cxx-rankine-cpp"><span class="std std-ref">Open Rankine cycle</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/cxx/rankine.cpp</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/fortran/ctlib.html#sphx-glr-examples-fortran-ctlib-f"><span class="std std-ref">CKLIB emulation</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/fortran/ctlib.f</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/fortran/demo.html#sphx-glr-examples-fortran-demo-f90"><span class="std std-ref">Fortran 90 demo</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/fortran/demo.f90</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/fortran/demo_ftnlib.html#sphx-glr-examples-fortran-demo-ftnlib-cpp"><span class="std std-ref">Fortran 77 wrapper library</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/fortran/demo_ftnlib.cpp</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/fortran/f77_demo.html#sphx-glr-examples-fortran-f77-demo-f"><span class="std std-ref">Fortran 77 demo</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/fortran/f77_demo.f</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/fortran/isentropic.html#sphx-glr-examples-fortran-isentropic-f"><span class="std std-ref">Isentropic flow</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/fortran/isentropic.f</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/matlab_experimental/PFR_solver.html#sphx-glr-examples-matlab-experimental-pfr-solver-m"><span class="std std-ref">Plug flow reactor governing equations</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/PFR_solver.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/matlab_experimental/catcomb.html#sphx-glr-examples-matlab-experimental-catcomb-m"><span class="std std-ref">Catalytic combustion of a stagnation flow on a platinum surface</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/catcomb.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/matlab_experimental/conhp.html#sphx-glr-examples-matlab-experimental-conhp-m"><span class="std std-ref">ODE system for a constant-pressure, adiabatic reactor</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/conhp.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/matlab_experimental/conuv.html#sphx-glr-examples-matlab-experimental-conuv-m"><span class="std std-ref">ODE system for a constant-volume, adiabatic reactor</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/conuv.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/matlab_experimental/diamond_cvd.html#sphx-glr-examples-matlab-experimental-diamond-cvd-m"><span class="std std-ref">Simulating growth of a diamond film by CVD</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/diamond_cvd.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/matlab_experimental/diff_flame.html#sphx-glr-examples-matlab-experimental-diff-flame-m"><span class="std std-ref">Opposed-flow diffusion flame</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/diff_flame.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/matlab_experimental/equil.html#sphx-glr-examples-matlab-experimental-equil-m"><span class="std std-ref">Methane/air chemical equilibrium</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/equil.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/matlab_experimental/flame.html#sphx-glr-examples-matlab-experimental-flame-m"><span class="std std-ref">Utility for flame setup</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/flame.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/matlab_experimental/flame1.html#sphx-glr-examples-matlab-experimental-flame1-m"><span class="std std-ref">Burner-stabilized flat flame</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/flame1.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/matlab_experimental/flame2.html#sphx-glr-examples-matlab-experimental-flame2-m"><span class="std std-ref">Axisymmetric stagnation-point non-premixed flame</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/flame2.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/matlab_experimental/ignite.html#sphx-glr-examples-matlab-experimental-ignite-m"><span class="std std-ref">Adiabatic, constant pressure reactor</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/ignite.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/matlab_experimental/ignite_hp.html#sphx-glr-examples-matlab-experimental-ignite-hp-m"><span class="std std-ref">Constant pressure ignition with user-specified equations</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/ignite_hp.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/matlab_experimental/ignite_uv.html#sphx-glr-examples-matlab-experimental-ignite-uv-m"><span class="std std-ref">Constant volume ignition with user-specified equations</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/ignite_uv.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/matlab_experimental/isentropic.html#sphx-glr-examples-matlab-experimental-isentropic-m"><span class="std std-ref">Isentropic, adiabatic flow</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/isentropic.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/matlab_experimental/lithium_ion_battery.html#sphx-glr-examples-matlab-experimental-lithium-ion-battery-m"><span class="std std-ref">Lithium-ion battery</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/lithium_ion_battery.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/matlab_experimental/periodic_cstr.html#sphx-glr-examples-matlab-experimental-periodic-cstr-m"><span class="std std-ref">Continuously stirred tank reactor with periodic behavior</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/periodic_cstr.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/matlab_experimental/plotSolution.html#sphx-glr-examples-matlab-experimental-plotsolution-m"><span class="std std-ref">Utility for plotting a specific solution component</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/plotSolution.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/matlab_experimental/plug_flow_reactor.html#sphx-glr-examples-matlab-experimental-plug-flow-reactor-m"><span class="std std-ref">Nozzle with compressible flow</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/plug_flow_reactor.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/matlab_experimental/prandtl1.html#sphx-glr-examples-matlab-experimental-prandtl1-m"><span class="std std-ref">Prandtl number for an equilibrium H/O gas mixture</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/prandtl1.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/matlab_experimental/prandtl2.html#sphx-glr-examples-matlab-experimental-prandtl2-m"><span class="std std-ref">Prandtl number for an equilibrium H/O gas mixture</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/prandtl2.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/matlab_experimental/rankine.html#sphx-glr-examples-matlab-experimental-rankine-m"><span class="std std-ref">Rankine cycle</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/rankine.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/matlab_experimental/reactor1.html#sphx-glr-examples-matlab-experimental-reactor1-m"><span class="std std-ref">Adiabatic, constant pressure reactor</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/reactor1.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/matlab_experimental/reactor2.html#sphx-glr-examples-matlab-experimental-reactor2-m"><span class="std std-ref">Adiabatic, constant volume reactor</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/reactor2.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/matlab_experimental/reactor_ode.html#sphx-glr-examples-matlab-experimental-reactor-ode-m"><span class="std std-ref">ODE system for a generic zero-dimensional reactor</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/reactor_ode.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="examples/matlab_experimental/surf_reactor.html#sphx-glr-examples-matlab-experimental-surf-reactor-m"><span class="std std-ref">Zero-dimensional reactor with surface chemistry</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/matlab_experimental/surf_reactor.m</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="examples/python/transport/multiprocessing_viscosity.html#sphx-glr-examples-python-transport-multiprocessing-viscosity-py"><span class="std std-ref">Parallelizing transport property calculations</span></a> (<code class="docutils literal notranslate"><span class="pre">../samples/python/transport/multiprocessing_viscosity.py</span></code>)</p></td>
+<td><p>00:00.000</p></td>
+<td><p>0.0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/sg_execution_times.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

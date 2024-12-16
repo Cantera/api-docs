@@ -1,0 +1,909 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Reaction Rates &#8212; Cantera 3.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=dd1205ac"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/kinetics/reaction-rates';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Rate Constant Parameterizations" href="rate-constants.html" />
+    <link rel="prev" title="Chemical Reactions" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/index.html">Python Module Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/transport.html">Transport Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/zerodim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../python/scripts.html">Mechanism Conversion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../python/ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/yaml_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/lxcat_conversion.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/units.html">Python Interface With Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/constants.html">Physical Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/utilities.html">Utilities</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../yaml/index.html">YAML Input File Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/general.html">General Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/phases.html">Phase Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/species.html">Species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/reactions.html">Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/yaml2ck.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/lxcat2yaml.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../releasenotes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v3.1.html">Cantera 3.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v3.0.html">Cantera 3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.6.html">Cantera 2.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.5.html">Cantera 2.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.4.html">Cantera 2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.3.html">Cantera 2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.2.html">Cantera 2.2.1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.1.html">Cantera 2.1.2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.0.html">Cantera 2.0.2</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Science Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../thermo/index.html">Thermodynamic Properties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../thermo/species-thermo.html">Species Thermodynamic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../thermo/phase-thermo.html">Phase Thermodynamic Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Chemical Reactions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Reaction Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rate-constants.html">Rate Constant Parameterizations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../transport/index.html">Transport Properties</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reactors/index.html">Reactors and Reactor Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/controlreactor.html">Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/constant-pressure-reactor.html">Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-reactor.html">Ideal Gas Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-constant-pressure-reactor.html">Ideal Gas Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/mole-reactor.html">Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/constant-pressure-mole-reactor.html">Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-mole-reactor.html">Ideal Gas Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-constant-pressure-mole-reactor.html">Ideal Gas Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/interactions.html">Reactor Interactions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../onedim/index.html">One-dimensional Flames</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../onedim/governing-equations.html">Governing Equations for One-dimensional Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onedim/discretization.html">Discretization of 1D Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onedim/nonlinear-solver.html">Nonlinear Solver for One-dimensional Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onedim/grid-refinement.html">Grid Refinement for One-dimensional Flows</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Chemical Reactions</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Reaction Rates</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="reaction-rates">
+<h1>Reaction Rates<a class="headerlink" href="#reaction-rates" title="Link to this heading">#</a></h1>
+<p>Here, we describe how Cantera calculates chemical reaction rates for various reaction
+types.</p>
+<section id="elementary-reactions">
+<span id="sec-elementary"></span><h2>Elementary Reactions<a class="headerlink" href="#elementary-reactions" title="Link to this heading">#</a></h2>
+<p>The basic reaction type is a homogeneous reaction with a pressure-independent
+rate coefficient and mass action kinetics. For example:</p>
+<div class="math notranslate nohighlight">
+\[  a\t{A} + b\t{B} \rightleftharpoons c\t{C} + d\t{D}  \]</div>
+<p>where A and B are reactant species, C and D are product species, and <span class="math notranslate nohighlight">\(a, b, c, \)</span> and <span class="math notranslate nohighlight">\(d\)</span>
+are stoichiometric coefficients.</p>
+<p>The forward reaction rate is then calculated as:</p>
+<div class="math notranslate nohighlight">
+\[  R_f = [\t{A}]^a [\t{B}]^b k_f  \]</div>
+<p>where <span class="math notranslate nohighlight">\(k_f\)</span> is the forward rate constant, calculated using one of the available rate
+parameterizations such as the <a class="reference internal" href="rate-constants.html#sec-arrhenius-rate"><span class="std std-ref">modified Arrhenius</span></a> form.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>An elementary reaction with an Arrhenius reaction rate can be defined in the YAML format
+using the <a class="reference internal" href="../../yaml/reactions.html#sec-yaml-elementary"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">elementary</span></code></span></a> reaction <code class="docutils literal notranslate"><span class="pre">type</span></code>, or by omitting the
+reaction <code class="docutils literal notranslate"><span class="pre">type</span></code> entry, as it represents the default. An exception to this default is
+when the same species occurs on both sides of the reaction equation, in which case the
+reaction is treated as a
+<a class="reference internal" href="#sec-three-body-specific-collider"><span class="std std-ref">three-body reaction for a specific collider</span></a>.</p>
+</div>
+</section>
+<section id="three-body-reactions">
+<span id="sec-three-body-reaction"></span><h2>Three-Body Reactions<a class="headerlink" href="#three-body-reactions" title="Link to this heading">#</a></h2>
+<p>A three-body reaction is a gas-phase reaction of the form:</p>
+<div class="math notranslate nohighlight">
+\[  \t{A + B + M \rightleftharpoons AB + M}  \]</div>
+<p>Here <span class="math notranslate nohighlight">\(\t{M}\)</span> is an unspecified collision partner that carries away excess energy to
+stabilize the <span class="math notranslate nohighlight">\(\t{AB}\)</span> molecule (forward direction) or supplies energy to break the
+<span class="math notranslate nohighlight">\(\t{AB}\)</span> bond (reverse direction). In addition to the generic collision partner
+<span class="math notranslate nohighlight">\(\t{M}\)</span>, it is also possible to explicitly specify a colliding species. In both
+cases, the reaction type can be automatically inferred by Cantera and does not need to
+be explicitly specified by the user.</p>
+<p>Different species may be more or less effective in acting as the collision partner. A
+species that is much lighter than <span class="math notranslate nohighlight">\(\t{A}\)</span> and <span class="math notranslate nohighlight">\(\t{B}\)</span> may not be able to
+transfer much of its kinetic energy, and so would be inefficient as a collision partner.
+On the other hand, a species with a transition from its ground state that is nearly
+resonant with one in the <span class="math notranslate nohighlight">\(\t{AB^*}\)</span> activated complex may be much more effective at
+exchanging energy than would otherwise be expected.</p>
+<p>These effects can be accounted for by defining a collision efficiency <span class="math notranslate nohighlight">\(\epsilon\)</span> for
+each species, defined such that the forward reaction rate is</p>
+<div class="math notranslate nohighlight">
+\[  R_f = [\t{A}][\t{B}][\t{M}] k_f(T)  \]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[  [\t{M}] = \sum_{k} \epsilon_k C_k  \]</div>
+<p>where <span class="math notranslate nohighlight">\(C_k\)</span> is the concentration of species <span class="math notranslate nohighlight">\(k\)</span>. Since any constant collision efficiency
+can be absorbed into the rate coefficient <span class="math notranslate nohighlight">\(k_f(T)\)</span>, the default collision efficiency is
+1.0.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.0: </span>The rate coefficient <span class="math notranslate nohighlight">\(k_f(T)\)</span> may be implemented using any rate parameterization
+supported by Cantera, not just the modified Arrhenius form.</p>
+</div>
+<section id="collider-specific-rate-parameterizations">
+<span id="sec-three-body-specific-collider"></span><h3>Collider-specific rate parameterizations<a class="headerlink" href="#collider-specific-rate-parameterizations" title="Link to this heading">#</a></h3>
+<p>Sometimes, accounting for a particular third body’s collision efficiency may require an
+alternate set of rate parameters entirely. In this case, two reactions are written:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\t{A + B + M \rightleftharpoons AB + M \quad (R1)}\\\t{A + B + C \rightleftharpoons AB + C \quad (R2)}
+\end{aligned}\end{align} \]</div>
+<p>where the third-body efficiency for C in the first reaction should be explicitly set to
+zero. For the second reaction, the efficiencies will automatically be set to one for C
+and zero for all other colliders.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>A three-body reaction may be defined in the YAML format using the
+<a class="reference internal" href="../../yaml/reactions.html#sec-yaml-three-body"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">three-body</span></code></span></a> reaction <code class="docutils literal notranslate"><span class="pre">type</span></code> or, if no <code class="docutils literal notranslate"><span class="pre">type</span></code> is specified,
+identified automatically by the presence of the generic third body M or a specific
+non-reactive species (for example, C in R2 above).</p>
+</div>
+</section>
+</section>
+<section id="pressure-dependent-reactions">
+<h2>Pressure-dependent Reactions<a class="headerlink" href="#pressure-dependent-reactions" title="Link to this heading">#</a></h2>
+<p>For pressure-dependent reactions where the behavior is more complex than described
+by the three-body form, the pressure dependency is folded into the calculation of the
+rate constant. Cantera supports several ways of representing pressure-dependent
+reactions:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="rate-constants.html#sec-falloff-rate"><span class="std std-ref">Falloff Reactions</span></a></p></li>
+<li><p><a class="reference internal" href="rate-constants.html#sec-chemically-activated-rate"><span class="std std-ref">Chemically-Activated Reactions</span></a></p></li>
+<li><p><a class="reference internal" href="rate-constants.html#sec-plog-rate"><span class="std std-ref">Pressure-Dependent Arrhenius Rate Expressions (P-Log)</span></a></p></li>
+<li><p><a class="reference internal" href="rate-constants.html#sec-chebyshev-rate"><span class="std std-ref">Chebyshev Reaction Rate Expressions</span></a></p></li>
+</ul>
+</section>
+<section id="electrochemical-reactions">
+<span id="sec-electrochemical-reactions"></span><h2>Electrochemical Reactions<a class="headerlink" href="#electrochemical-reactions" title="Link to this heading">#</a></h2>
+<p>In an electrochemical reaction (one that moves electrical charge from one phase of
+matter to another), the electric potential difference <span class="math notranslate nohighlight">\(\Delta\phi\)</span> at the phase boundary
+exerts an additional “force” on the reaction that must be accounted for in the rate
+expression.</p>
+<p>The free energy of the reaction equals the electrochemical potential change:</p>
+<div class="math notranslate nohighlight">
+\[  \Delta\tilde{\mu}_{\rm rxn} = \Delta\mu_{\rm rxn} + n_{\rm elec}F\Delta\phi  \]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu_{\rm rxn}\)</span> is the chemical potential, <span class="math notranslate nohighlight">\(n_{\rm elec}\)</span> is the total electrical
+charge moved across the phase boundary (in other words, the charge moved from “phase 1”
+to “phase 2”, where <span class="math notranslate nohighlight">\(\Delta\phi = \phi_2 - \phi_1\)</span>), and <span class="math notranslate nohighlight">\(F\)</span> is Faraday’s constant
+(96,485 Coulombs per mole of charge).</p>
+<p>Cantera’s charge transfer treatment assumes a reversible reaction with a linear energy
+profile in the region of the transition state.  From above, for any <span class="math notranslate nohighlight">\(\Delta\phi\)</span> the
+free energy of the reaction changes by <span class="math notranslate nohighlight">\(n_{\rm elec}F\Delta\phi\)</span>.  The transition state
+energy, meanwhile, changes by a fraction of this, <span class="math notranslate nohighlight">\(\beta n_{\rm elec}F\Delta\phi\)</span>, where
+the “symmetry parameter” <span class="math notranslate nohighlight">\(\beta\)</span> is a number between 0 and 1.</p>
+<p>This means that the activation energy for the reaction changes:</p>
+<ul class="simple">
+<li><p>The barrier height for the forward reaction increases by
+<span class="math notranslate nohighlight">\(\beta n_{\rm elec}F\Delta\phi\)</span>.</p></li>
+<li><p>The reverse reaction barrier height decreases by
+<span class="math notranslate nohighlight">\(\left(1-\beta\right) n_{\rm elec}F\Delta\phi\)</span>.</p></li>
+</ul>
+<p>Note that <span class="math notranslate nohighlight">\(n_{\rm elec}\)</span> and <span class="math notranslate nohighlight">\(\Delta \phi\)</span> both have a sign, so the terms “increase” and
+“decrease” are relative; the forward barrier height might increase by a negative amount
+(that is, decrease), for instance.</p>
+<p>From transition state theory, the forward and reverse reaction rates are therefore
+calculated as:</p>
+<div class="math notranslate nohighlight">
+\[  R_f = k_f\exp\left(-\frac{\beta n_{\rm elec}F\Delta\phi}{RT} \right)\prod_k
+C_{{\rm ac},\,k}^{\nu_k^\prime}  \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[  R_r = k_r\exp\left(\frac{\left(1-\beta\right)n_{\rm elec}F\Delta\phi}{RT} \right)
+\prod_k C_{{\rm ac},\,k}^{\nu_k^{\prime\prime}},  \]</div>
+<p>respectively, where <span class="math notranslate nohighlight">\(k_f\)</span> and <span class="math notranslate nohighlight">\(k_r\)</span> are the normal chemical rate coefficients in the
+absence of any electric potential difference (such as those calculated using Arrhenius
+coefficients), <span class="math notranslate nohighlight">\(C_{{\rm ac},\,k}\)</span> is the
+<a class="reference external" href="../../cxx/dc/d38/classCantera_1_1ThermoPhase.html#a4e85acc4699330cea582b61f83fda33f">activity concentration</a> of species <span class="math notranslate nohighlight">\(k\)</span>,
+<span class="math notranslate nohighlight">\(\nu_k^\prime\)</span> and <span class="math notranslate nohighlight">\(\nu_k^{\prime\prime}\)</span> are the reactant and product stoichiometric
+coefficients, respectively, for species <span class="math notranslate nohighlight">\(k\)</span> for this reaction, and <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are the
+universal gas constant and temperature, respectively.</p>
+<p>Note that Cantera’s actual software implementation looks quite different from the
+description above, which is meant solely to give a clearer understanding of the science
+behind Cantera’s calculations.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<ul class="simple">
+<li><p>Electrochemical reactions only occur at phase boundaries and therefore use the
+standard <a class="reference internal" href="../../yaml/reactions.html#sec-yaml-interface-arrhenius"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">interface</span></code></span></a> reaction rate implementation.</p></li>
+<li><p>Charge transfer is automatically detected, and <span class="math notranslate nohighlight">\(n_{\rm elec}\)</span> automatically
+calculated.  If no value for <code class="docutils literal notranslate"><span class="pre">beta</span></code> is provided, an
+<a class="reference internal" href="../../yaml/reactions.html#sec-yaml-electrochemical-reaction"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">electrochemical</span></code></span></a> reaction assumes a default of
+<code class="docutils literal notranslate"><span class="pre">beta</span> <span class="pre">=</span> <span class="pre">0.5</span></code>.</p></li>
+</ul>
+</div>
+<section id="the-butler-volmer-form">
+<span id="sec-butler-volmer"></span><h3>The Butler-Volmer Form<a class="headerlink" href="#the-butler-volmer-form" title="Link to this heading">#</a></h3>
+<p>Cantera’s electrochemical reaction rate calculation is equivalent to the commonly-used
+Butler-Volmer rate form. In Butler-Volmer, the net rate of progress,
+<span class="math notranslate nohighlight">\(R_{\rm net} = R_f - R_r\)</span>, can be written as:</p>
+<div class="math notranslate nohighlight">
+\[ R_{\rm net} = \frac{i_\circ}{n_{\rm elec}F}\left[\exp\left(-\frac{\beta
+n_{\rm elec}F\eta}{RT} \right) - \exp\left(
+\frac{\left(1-\beta\right)n_{\rm elec}F\eta}{RT}\right) \right]\]</div>
+<p>where the kinetic rate constant <span class="math notranslate nohighlight">\(i_\circ\)</span> is known as the “exchange current density” and
+<span class="math notranslate nohighlight">\(\eta\)</span> the “overpotential” – the difference between the actual electric potential
+difference and that which would set the reaction to equilibrium:</p>
+<div class="math notranslate nohighlight">
+\[  \eta = \Delta\phi - \Delta\phi_{\rm equil}  \]</div>
+<p>To convert between the two forms, the exchange current density varies with the chemical
+state and can be calculated as:</p>
+<div class="math notranslate nohighlight">
+\[  i_\circ = n_{\rm elec}Fk_f^{\left(1-\beta\right)}k_r^\beta\prod_k
+C_{{\rm ac},\,k}^{\left(1-\beta\right)\nu_k^\prime}
+\prod_k C_{{\rm ac},\,k}^{\beta\nu_k^{\prime\prime}}.  \]</div>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>One can explicitly provide an exchange current density, rather than the <span class="math notranslate nohighlight">\(k_f\)</span> value,
+by setting the optional <code class="docutils literal notranslate"><span class="pre">exchange-current-density-formulation</span></code> field to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LiC6 &lt;=&gt; Li+(e) + C6</span>
+<span class="w">  </span><span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5.74</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">beta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.4</span>
+<span class="w">  </span><span class="nt">exchange-current-density-formulation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p>Here, the rate constant Arrhenius parameters will be used to calculate the exchange
+current density.</p>
+</div>
+</section>
+</section>
+<section id="reaction-orders">
+<span id="sec-reaction-orders"></span><h2>Reaction Orders<a class="headerlink" href="#reaction-orders" title="Link to this heading">#</a></h2>
+<p>Explicit reaction orders different from the stoichiometric coefficients are sometimes
+used for non-elementary reactions. For example, consider the global reaction:</p>
+<div class="math notranslate nohighlight">
+\[
+\t{C_8H_{18} + 12.5 O_2 \rightarrow 8 CO_2 + 9 H_2O}
+\]</div>
+<p>the forward rate constant might be given as <span id="id1">[<a class="reference internal" href="../bibliography.html#id57" title="C. K. Westbrook and F. L. Dryer. Simplified reaction mechanisms for the oxidation of hydrocarbon fuels in flames. Combustion Science and Technology, 27(1-2):31-43, 1981. URL: https://doi.org/10.1080/00102208108946970, doi:10.1080/00102208108946970.">Westbrook and Dryer, 1981</a>]</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+k_f = 4.6 \times 10^{11} [\t{C_8H_{18}}]^{0.25} [\t{O_2}]^{1.5}
+       \exp\left(\frac{30.0\,\t{kcal/mol}}{RT}\right)
+\]</div>
+<p>Special care is required in this case since the units of the pre-exponential factor
+depend on the sum of the reaction orders, which may not be an integer.</p>
+<p>Note that you can change reaction orders only for irreversible reactions.</p>
+<p>Normally, reaction orders are required to be positive. However, in some cases negative
+reaction orders are found to be better fits for experimental data. In these cases, the
+default behavior may be overridden in the input file.</p>
+<div class="tip admonition">
+<p class="admonition-title">YAML Usage</p>
+<p>To include explicit orders for the reaction above, it can be written in the YAML format as:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">equation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C8H18 + 12.5 O2 =&gt; 8 CO2 + 9 H2O</span>
+<span class="w">  </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">length</span><span class="p">:</span><span class="w"> </span><span class="nv">cm</span><span class="p p-Indicator">,</span><span class="nt"> quantity</span><span class="p">:</span><span class="w"> </span><span class="nv">mol</span><span class="p p-Indicator">,</span><span class="nt"> activation-energy</span><span class="p">:</span><span class="w"> </span><span class="nv">kcal/mol</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">rate-constant</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">A</span><span class="p">:</span><span class="w"> </span><span class="nv">4.5e+11</span><span class="p p-Indicator">,</span><span class="nt"> b</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> Ea</span><span class="p">:</span><span class="w"> </span><span class="nv">30.0</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">orders</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">C8H18</span><span class="p">:</span><span class="w"> </span><span class="nv">0.25</span><span class="p p-Indicator">,</span><span class="nt"> O2</span><span class="p">:</span><span class="w"> </span><span class="nv">1.5</span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elementary-reactions">Elementary Reactions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-body-reactions">Three-Body Reactions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collider-specific-rate-parameterizations">Collider-specific rate parameterizations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pressure-dependent-reactions">Pressure-dependent Reactions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electrochemical-reactions">Electrochemical Reactions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-butler-volmer-form">The Butler-Volmer Form</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reaction-orders">Reaction Orders</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/reference/kinetics/reaction-rates.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

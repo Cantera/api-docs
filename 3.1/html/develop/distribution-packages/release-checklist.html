@@ -1,0 +1,752 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Making a New Cantera Release &#8212; Cantera 3.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=dd1205ac"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'develop/distribution-packages/release-checklist';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Distributing sdist and Wheel Packages via PyPI" href="pypi-sdist-wheel.html" />
+    <link rel="prev" title="Formatting Documentation" href="../doc-formatting.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Compiling Cantera from Source</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../compiling/compilation-reqs.html">Compilation Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compiling/source-code.html">Downloading the Cantera source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compiling/configure-build.html">Configure and Build Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compiling/dependencies.html">Software used by Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compiling/config-options.html">Configuration Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compiling/special-cases.html">Special Compiling Cases</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">How Cantera Works</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reactor-integration.html">How Time Integration of Reactor Networks Works</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Adding New Features to Cantera</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing to Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../style-guidelines.html">Code Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vscode-tips.html">Configuring Visual Studio Code for Cantera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-tests.html">Writing Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running-tests.html">Running Tests and Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-examples.html">Writing Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc-formatting.html">Formatting Documentation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Releasing &amp; Distributing Cantera</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Making a New Cantera Release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pypi-sdist-wheel.html">Distributing sdist and Wheel Packages via PyPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conda.html">Distributing Conda Package via conda-forge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ubuntu-ppa.html">Distributing for Ubuntu via a Personal Package Archive (PPA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="windows-and-macos.html">Distributing for Windows and macOS</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Develop</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Making a...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="making-a-new-cantera-release">
+<h1>Making a New Cantera Release<a class="headerlink" href="#making-a-new-cantera-release" title="Link to this heading">#</a></h1>
+<p>Checklist for making a new Cantera release. This is mainly useful to Cantera
+maintainers.</p>
+<section id="before-the-release">
+<h2>Before the Release<a class="headerlink" href="#before-the-release" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Reserve DOI on Zenodo.</p></li>
+<li><p>Check the <a class="reference external" href="https://cantera.org/dev/">documentation</a> for accessibility concerns, for
+example by using the
+<a class="reference external" href="https://developer.chrome.com/docs/lighthouse/overview">Lighthouse</a> tool built into
+Chrome.</p>
+<ul>
+<li><p>Check both Sphinx-generated and Doxygen-generated pages.</p></li>
+<li><p>In addition to the automated checks done by Lighthouse, consider some of the manual
+checks that it suggests, such as testing that pressing the “tab” key cycles through
+page elements in a logical order.</p></li>
+<li><p>The most likely changes affecting accessibility would come from changes to the
+versions of the tools used to build the documentation, particularly Doxygen, Sphinx,
+and the Pydata Sphinx theme. For consistency, these all have pinned versions used
+in the <code class="docutils literal notranslate"><span class="pre">docs</span></code> CI build defined in <code class="docutils literal notranslate"><span class="pre">.github/workflows/main.yml</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Check the versions of dependencies that we suggest work for installing/compiling
+Cantera.</p>
+<ul>
+<li><p>Installation instructions in <code class="docutils literal notranslate"><span class="pre">doc/sphinx/install/*.md</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">doc/sphinx/develop/compiling/dependencies.md</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">doc/sphinx/develop/compiling/compilation-reqs.md</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="release-pull-request">
+<h2>Release Pull Request<a class="headerlink" href="#release-pull-request" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Make sure version is set correctly:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">SConstruct</span></code>: <code class="docutils literal notranslate"><span class="pre">'cantera_version'</span></code> (most widely used)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.rst</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">doc/doxygen/Doxyfile</span></code>: <code class="docutils literal notranslate"><span class="pre">'PROJECT_NUMBER'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ck2yaml.py</span></code>, <code class="docutils literal notranslate"><span class="pre">cti2yaml.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">ctml2yaml.py</span></code></p></li>
+<li><p>For final (non alpha/beta) releases, make sure any alpha/beta suffixes are removed
+from the <code class="docutils literal notranslate"><span class="pre">cantera-version</span></code> field of any YAML input files that have been updated</p></li>
+<li><p>Installation instructions (<code class="docutils literal notranslate"><span class="pre">doc/sphinx/install/*.md</span></code>)</p></li>
+</ul>
+</li>
+<li><p>Update branch names given in compilation instructions
+(<code class="docutils literal notranslate"><span class="pre">doc/sphinx/develop/compiling/source-code.md</span></code>)</p></li>
+<li><p>Update entries in <code class="docutils literal notranslate"><span class="pre">doc/sphinx/_static/doc-versions.json</span></code></p></li>
+<li><p>Update DOI in <code class="docutils literal notranslate"><span class="pre">README.rst</span></code> and <code class="docutils literal notranslate"><span class="pre">CITATION.cff</span></code></p></li>
+<li><p>Make sure copyright years are correct:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">doc/sphinx/conf.py</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">License.txt</span></code></p></li>
+</ul>
+</li>
+<li><p>Add release notes to <code class="docutils literal notranslate"><span class="pre">doc/sphinx/reference/releasenotes/vX.Y.md</span></code>, linked from
+<code class="docutils literal notranslate"><span class="pre">doc/sphinx/reference/releasenotes/index.md</span></code>.</p>
+<ul>
+<li><p>The <a class="reference external" href="https://github.com/Cantera/cantera-release-guide/blob/main/graphql.py"><code class="docutils literal notranslate"><span class="pre">graphql.py</span></code></a>
+and <a class="reference external" href="https://github.com/Cantera/cantera-release-guide/blob/main/commiting-users.py"><code class="docutils literal notranslate"><span class="pre">commiting-users.py</span></code></a>
+scripts in the <code class="docutils literal notranslate"><span class="pre">cantera-release-guide</span></code> repo can help with generating some of this
+content.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="after-merging-release-pull-request">
+<h2>After Merging Release Pull Request<a class="headerlink" href="#after-merging-release-pull-request" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Update the recommended citation in <code class="docutils literal notranslate"><span class="pre">community.md</span></code> in the <code class="docutils literal notranslate"><span class="pre">cantera-website</span></code> repository,
+including the year and DOI.</p></li>
+<li><p>Create a tag for the revision corresponding to the release. If this is a feature
+release, also create a maintenance branch. Assuming <code class="docutils literal notranslate"><span class="pre">upstream</span></code> corresponds to the
+<code class="docutils literal notranslate"><span class="pre">Cantera/cantera</span></code> repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">tag</span> <span class="o">-</span><span class="n">a</span> <span class="n">vX</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">Z</span>
+<span class="c1"># Tag message: &quot;Cantera X.Y.Z release&quot;</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">upstream</span> <span class="n">vX</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">Z</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">X</span><span class="o">.</span><span class="n">Y</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">upstream</span> <span class="n">X</span><span class="o">.</span><span class="n">Y</span>
+</pre></div>
+</div>
+</li>
+<li><p>The CI job on the maintenance branch should upload the docs to the versioned path on
+<code class="docutils literal notranslate"><span class="pre">cantera.org</span></code> and archive the docs in the <code class="docutils literal notranslate"><span class="pre">staging</span></code> branch of the
+<a class="reference external" href="https://github.com/Cantera/api-docs/tree/staging"><code class="docutils literal notranslate"><span class="pre">api-docs</span></code></a> repository. Check that
+this worked correctly and merge into the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch if so. Consider squashing
+multiple updates to the same version to keep this repository from growing too much.</p></li>
+<li><p>If this is a feature release, log into <code class="docutils literal notranslate"><span class="pre">cantera.org</span></code> and update the symlink
+<code class="docutils literal notranslate"><span class="pre">/var/www/cantera/stable</span></code> to point to the docs for the new feature branch.</p></li>
+<li><p>Create the release tarball. This requires a couple of steps to merge the
+<code class="docutils literal notranslate"><span class="pre">example_data</span></code> submodule in with the main source directories:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># (after checking out the release commit)</span>
+git<span class="w"> </span>archive<span class="w"> </span>--format<span class="o">=</span>tar<span class="w"> </span>--prefix<span class="o">=</span>cantera/<span class="w"> </span>HEAD<span class="w"> </span>&gt;source.tar
+<span class="nb">cd</span><span class="w"> </span>data/example_data
+git<span class="w"> </span>archive<span class="w"> </span>--format<span class="o">=</span>tar<span class="w"> </span>--prefix<span class="o">=</span>cantera/data/example_data/<span class="w"> </span>HEAD<span class="w"> </span>&gt;../../example-data.tar
+<span class="nb">cd</span><span class="w"> </span>../..
+bsdtar<span class="w"> </span>czvf<span class="w"> </span>cantera-X.Y.Z.tar.gz<span class="w"> </span>@source.tar<span class="w"> </span>@example-data.tar
+rm<span class="w"> </span>source.tar<span class="w"> </span>example-data.tar
+</pre></div>
+</div>
+<ul>
+<li><p>The trailing slash on the <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> argument is <em>really important</em>. Otherwise,
+the files won’t go into a folder.</p></li>
+<li><p>Inspect the contents of the archive to make sure the directory structure looks correct:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tar</span> <span class="n">tvf</span> <span class="n">cantera</span><span class="o">-</span><span class="n">X</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">Z</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> tool can be installed on Debian/Ubuntu from the <code class="docutils literal notranslate"><span class="pre">libarchive-tools</span></code>
+package, or the <code class="docutils literal notranslate"><span class="pre">libarchive</span></code> Conda package. It is installed by default on macOS (and
+is the same as <code class="docutils literal notranslate"><span class="pre">tar</span></code>).</p></li>
+</ul>
+</li>
+<li><p>Build officially-maintained packages</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="pypi-sdist-wheel.html"><span class="doc std std-doc">PyPI</span></a></p></li>
+<li><p><a class="reference internal" href="conda.html"><span class="doc std std-doc">conda-forge</span></a></p></li>
+<li><p><a class="reference internal" href="ubuntu-ppa.html"><span class="doc std std-doc">Ubuntu</span></a></p></li>
+</ul>
+</li>
+<li><p>Generate the detailed Changelog using the
+<a class="reference external" href="https://github.com/Cantera/cantera-release-guide/blob/main/graphql.py"><code class="docutils literal notranslate"><span class="pre">graphql.py</span></code></a>
+script from the <code class="docutils literal notranslate"><span class="pre">cantera-release-guide</span></code> repo and put the resulting list in the
+<a class="reference external" href="https://github.com/Cantera/cantera/wiki">wiki</a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-the-release">Before the Release</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#release-pull-request">Release Pull Request</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#after-merging-release-pull-request">After Merging Release Pull Request</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/develop/distribution-packages/release-checklist.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

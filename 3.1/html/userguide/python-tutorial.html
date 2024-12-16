@@ -1,0 +1,3699 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Python Tutorial &#8212; Cantera 3.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=dd1205ac"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'userguide/python-tutorial';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to YAML Input Files" href="input-tutorial.html" />
+    <link rel="prev" title="User Guide" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Python Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input-tutorial.html">Introduction to YAML Input Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reactor-tutorial.html">Using Reactor Networks for Time Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cxx-tutorial.html">Using Cantera from C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling-cxx.html">Compiling Cantera C++ Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ck2yaml-tutorial.html">Converting Chemkin Format Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating-mechanisms.html">Creating YAML Mechanism Files from Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermobuild.html">Converting Data from NASA ThermoBuild</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input-errors.html">Handling Errors in Input Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legacy2yaml-tutorial.html">Converting Legacy CTI and XML Input Files to YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flame-temperature.html">Calculating Adiabatic Flame Temperature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heating-value.html">Calculating Heating Value of a Fuel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/python/kinetics/lithium_ion_battery.html">Lithium Ion Battery Discharge Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensible-reactor.html">Extending Reactor Models with Custom Equations</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Python Tutorial</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="python-tutorial">
+<h1>Python Tutorial<a class="headerlink" href="#python-tutorial" title="Link to this heading">#</a></h1>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If you haven’t already installed Cantera, we have instructions for
+many platforms in our <a class="reference internal" href="../install/index.html"><span class="doc std std-doc">Installation section</span></a>.</p>
+</div>
+<p>Start by opening an interactive Python session, for example by running
+<a class="reference external" href="http://ipython.org/">IPython</a>. Import the Cantera Python module and NumPy by running:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cantera</span> <span class="k">as</span> <span class="nn">ct</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When using Cantera, the first thing you usually need is an object representing: some
+phase of matter. Here, we’ll create a gas mixture</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas1</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s1">&#39;gri30.yaml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To view the state of the mixture, <em>call</em> the <code class="docutils literal notranslate"><span class="pre">gas1</span></code> object as if it were
+a function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas1</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  gri30:
+
+       temperature   300 K
+          pressure   1.0133e+05 Pa
+           density   0.081894 kg/m^3
+  mean mol. weight   2.016 kg/kmol
+   phase of matter   gas
+
+                          1 kg             1 kmol     
+                     ---------------   ---------------
+          enthalpy             26469             53361  J
+   internal energy       -1.2108e+06        -2.441e+06  J
+           entropy             64910        1.3086e+05  J/K
+    Gibbs function       -1.9447e+07       -3.9204e+07  J
+ heat capacity c_p             14311             28851  J/K
+ heat capacity c_v             10187             20536  J/K
+
+                      mass frac. Y      mole frac. X     chem. pot. / RT
+                     ---------------   ---------------   ---------------
+                H2                 1                 1           -15.717
+     [  +52 minor]                 0                 0  
+</pre></div>
+</div>
+</div>
+</div>
+<p>What you have just done is to create an object, <code class="docutils literal notranslate"><span class="pre">gas1</span></code> that implements GRI-Mech 3.0, the
+53-species, 325-reaction natural gas combustion mechanism developed by
+<span id="id1">Smith <em>et al.</em> [<a class="reference internal" href="../reference/bibliography.html#id47" title="G. P. Smith, D. M. Golden, M. Frenklach, N .W. Moriarty, B. Eiteneer, M. Goldenberg, C. T. Bowman, R. K. Hanson, S. Song, Jr. W. C. Gardiner, V. V. Lissianski, and Z. Qin. GRI-Mech 3.0. 1999. URL: http://combustion.berkeley.edu/gri-mech/version30/text30.html.">1999</a>]</span>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">gas1</span></code> object has properties you would expect for a gas mixture - it has a
+temperature, a pressure, species mole and mass fractions, etc. As we’ll soon see, it has
+many more properties.</p>
+<p>The summary of the state of <code class="docutils literal notranslate"><span class="pre">gas1</span></code> printed above shows that new objects created from the
+<code class="docutils literal notranslate"><span class="pre">gri30.yaml</span></code> input file start out with a temperature of 300 K, a pressure of 1 atm, and
+have a composition that consists of only one species, in this case hydrogen. There is
+nothing special about H2 - it just happens to be the first species listed in the input
+file defining GRI-Mech 3.0. In general, whichever species is listed first will initially
+have a mole fraction of 1.0, and all of the others will be zero.</p>
+</section>
+<section id="setting-the-state">
+<h2>Setting the State<a class="headerlink" href="#setting-the-state" title="Link to this heading">#</a></h2>
+<p>The state of the object can easily be changed. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas1</span><span class="o">.</span><span class="n">TP</span> <span class="o">=</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">101325</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>sets the temperature to 1200 K and the pressure to 101325 Pa (Cantera always uses SI
+units). After this statement, calling <code class="docutils literal notranslate"><span class="pre">gas1()</span></code> results in:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas1</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  gri30:
+
+       temperature   1200 K
+          pressure   1.0133e+05 Pa
+           density   0.020473 kg/m^3
+  mean mol. weight   2.016 kg/kmol
+   phase of matter   gas
+
+                          1 kg             1 kmol     
+                     ---------------   ---------------
+          enthalpy        1.3295e+07        2.6802e+07  J
+   internal energy        8.3457e+06        1.6825e+07  J
+           entropy             85222        1.7181e+05  J/K
+    Gibbs function       -8.8972e+07       -1.7937e+08  J
+ heat capacity c_p             15377             31000  J/K
+ heat capacity c_v             11253             22686  J/K
+
+                      mass frac. Y      mole frac. X     chem. pot. / RT
+                     ---------------   ---------------   ---------------
+                H2                 1                 1           -17.978
+     [  +52 minor]                 0                 0  
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thermodynamics generally requires that <em>two</em> properties in addition to composition
+information be specified to fix the intensive state of a substance (or mixture). The
+state of the mixture can be set using several combinations of two properties. The
+following are all equivalent:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas1</span><span class="o">.</span><span class="n">TP</span> <span class="o">=</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">101325</span>          <span class="c1"># temperature, pressure</span>
+<span class="n">gas1</span><span class="o">.</span><span class="n">TD</span> <span class="o">=</span> <span class="mi">1200</span><span class="p">,</span> <span class="mf">0.020473</span>        <span class="c1"># temperature, density</span>
+<span class="n">gas1</span><span class="o">.</span><span class="n">HP</span> <span class="o">=</span> <span class="mf">1.3295e7</span><span class="p">,</span> <span class="mi">101325</span>      <span class="c1"># specific enthalpy, pressure</span>
+<span class="n">gas1</span><span class="o">.</span><span class="n">UV</span> <span class="o">=</span> <span class="mf">8.3457e6</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mf">0.020473</span>  <span class="c1"># specific internal energy, specific volume</span>
+<span class="n">gas1</span><span class="o">.</span><span class="n">SP</span> <span class="o">=</span> <span class="mi">85222</span><span class="p">,</span> <span class="mi">101325</span>         <span class="c1"># specific entropy, pressure</span>
+<span class="n">gas1</span><span class="o">.</span><span class="n">SV</span> <span class="o">=</span> <span class="mi">85222</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mf">0.020473</span>     <span class="c1"># specific entropy, specific volume</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In each case, the values of the extensive properties must be entered <em>per unit mass</em>.</p>
+<p>Properties may be read independently or together:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas1</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1199.936583092494
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas1</span><span class="o">.</span><span class="n">h</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13293801.951980188
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas1</span><span class="o">.</span><span class="n">UV</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8344978.606604657, 48.84482000683827)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The composition can be set in terms of either mole fractions (<code class="docutils literal notranslate"><span class="pre">X</span></code>) or mass fractions
+(<code class="docutils literal notranslate"><span class="pre">Y</span></code>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas1</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="s1">&#39;CH4:1, O2:2, N2:7.52&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mass and mole fractions can also be set using <code class="docutils literal notranslate"><span class="pre">dict</span></code> objects, which is convenient in
+cases where the composition is stored in a variable or being computed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phi</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">gas1</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;CH4&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;O2&#39;</span><span class="p">:</span><span class="mi">2</span><span class="o">/</span><span class="n">phi</span><span class="p">,</span> <span class="s1">&#39;N2&#39;</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="mf">3.76</span><span class="o">/</span><span class="n">phi</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When the composition alone is changed, the temperature and density are held constant.
+This means that the pressure and other intensive properties will change. The composition
+can also be set in conjunction with the intensive properties of the mixture:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas1</span><span class="o">.</span><span class="n">TPX</span> <span class="o">=</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">101325</span><span class="p">,</span> <span class="s1">&#39;CH4:1, O2:2, N2:7.52&#39;</span>
+<span class="n">gas1</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  gri30:
+
+       temperature   1200 K
+          pressure   1.0133e+05 Pa
+           density   0.28063 kg/m^3
+  mean mol. weight   27.633 kg/kmol
+   phase of matter   gas
+
+                          1 kg             1 kmol     
+                     ---------------   ---------------
+          enthalpy        8.6193e+05        2.3818e+07  J
+   internal energy        5.0087e+05        1.3841e+07  J
+           entropy            8914.2        2.4633e+05  J/K
+    Gibbs function       -9.8351e+06       -2.7178e+08  J
+ heat capacity c_p            1397.3             38611  J/K
+ heat capacity c_v            1096.4             30296  J/K
+
+                      mass frac. Y      mole frac. X     chem. pot. / RT
+                     ---------------   ---------------   ---------------
+                O2           0.22014           0.19011           -28.747
+               CH4          0.055187          0.095057           -35.961
+                N2           0.72467           0.71483           -25.679
+     [  +50 minor]                 0                 0  
+</pre></div>
+</div>
+</div>
+</div>
+<p>The composition above was specified using a string. The format is a comma-separated list
+of <code class="docutils literal notranslate"><span class="pre">&lt;species</span> <span class="pre">name&gt;:&lt;relative</span> <span class="pre">mole</span> <span class="pre">numbers&gt;</span></code> pairs. The mole numbers will be normalized
+to produce the mole fractions, and therefore they are “relative” mole numbers. Mass
+fractions can be set in this way too by changing <code class="docutils literal notranslate"><span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">Y</span></code> in the above statements.</p>
+<p>The composition can also be set using an array, which must have the same size as the
+number of species. For example, to set all 53 mole fractions to the same value, do this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas1</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">53</span><span class="p">)</span>  <span class="c1"># NumPy array of 53 ones</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or, to set all the mass fractions to equal values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas1</span><span class="o">.</span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">53</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When setting the state, you can control what properties are held constant by passing the
+special value <code class="docutils literal notranslate"><span class="pre">None</span></code> to the property setter. For example, to change the specific volume
+to 2.1 m<span class="math notranslate nohighlight">\(^3\)</span>/kg while holding entropy constant:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas1</span><span class="o">.</span><span class="n">SV</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="mf">2.1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or to set the mass fractions while holding temperature and pressure constant:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas1</span><span class="o">.</span><span class="n">TPX</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;CH4:1.0, O2:0.5&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="working-with-a-subset-of-species">
+<h2>Working with a Subset of Species<a class="headerlink" href="#working-with-a-subset-of-species" title="Link to this heading">#</a></h2>
+<p>Many properties of a <a class="reference internal" href="../python/importing.html#cantera.Solution" title="cantera.Solution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Solution</span></code></a> provide values for each species
+present in the phase. If you want to get values only for a subset of these species, you
+can use Python’s “slicing” syntax to select data for just the species of interest. To
+get the mole fractions of just the major species in <code class="docutils literal notranslate"><span class="pre">gas1</span></code>, in the order specified, you
+can write:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xmajor</span> <span class="o">=</span> <span class="n">gas1</span><span class="p">[</span><span class="s1">&#39;CH4&#39;</span><span class="p">,</span><span class="s1">&#39;O2&#39;</span><span class="p">,</span><span class="s1">&#39;CO2&#39;</span><span class="p">,</span><span class="s1">&#39;H2O&#39;</span><span class="p">,</span><span class="s1">&#39;N2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">X</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you want to use the same set of species repeatedly, you can keep a reference to the
+sliced phase object:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">major</span> <span class="o">=</span> <span class="n">gas1</span><span class="p">[</span><span class="s1">&#39;CH4&#39;</span><span class="p">,</span><span class="s1">&#39;O2&#39;</span><span class="p">,</span><span class="s1">&#39;CO2&#39;</span><span class="p">,</span><span class="s1">&#39;H2O&#39;</span><span class="p">,</span><span class="s1">&#39;N2&#39;</span><span class="p">]</span>
+<span class="n">cp_major</span> <span class="o">=</span> <span class="n">major</span><span class="o">.</span><span class="n">partial_molar_cp</span>
+<span class="n">wdot_major</span> <span class="o">=</span> <span class="n">major</span><span class="o">.</span><span class="n">net_production_rates</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The slice object and the original object share the same internal state, so modifications
+to one will affect the other.</p>
+</section>
+<section id="working-with-mechanism-files">
+<h2>Working With Mechanism Files<a class="headerlink" href="#working-with-mechanism-files" title="Link to this heading">#</a></h2>
+<p>In previous example, we created an object that models an ideal gas mixture with the
+species and reactions of GRI-Mech 3.0, using the <code class="docutils literal notranslate"><span class="pre">gri30.yaml</span></code> input file included with
+Cantera. Several other reaction mechanism files are included with Cantera, including
+ones that model high- temperature air, a hydrogen/oxygen reaction mechanism, and a few
+surface reaction mechanisms. These files are usually located in the <code class="docutils literal notranslate"><span class="pre">data</span></code> subdirectory
+of the Cantera installation directory, for example <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files\Cantera\data</span></code> on
+Windows or <code class="docutils literal notranslate"><span class="pre">/usr/local/cantera/data/</span></code> on Unix/Linux/Mac OS X machines, depending on how
+you installed Cantera and the options you specified.</p>
+<p>If for some reason Cantera has difficulty finding where these files are on your system,
+set environment variable <code class="docutils literal notranslate"><span class="pre">CANTERA_DATA</span></code> to the directory or directories (separated using
+<code class="docutils literal notranslate"><span class="pre">;</span></code> on Windows or <code class="docutils literal notranslate"><span class="pre">:</span></code> on other operating systems) where they are located. Alternatively,
+you can call function <a class="reference internal" href="../python/utilities.html#cantera.add_directory" title="cantera.add_directory"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_directory()</span></code></a> to add a directory to the
+Cantera search path:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ct</span><span class="o">.</span><span class="n">add_directory</span><span class="p">(</span><span class="s1">&#39;~/cantera/my_data_files&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cantera input files are plain text files, and can be created with any text editor. See
+the page <a class="reference internal" href="input-tutorial.html"><span class="doc std std-doc">Introduction to YAML Input Files</span></a> for more information.</p>
+<p>A Cantera input file may contain more than one phase specification, and may contain
+specifications of interfaces (surfaces and edges). Here we import a surface phase and
+the two adjacent bulk phases from the file <code class="docutils literal notranslate"><span class="pre">diamond.yaml</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diamond_surf</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Interface</span><span class="p">(</span><span class="s1">&#39;diamond.yaml&#39;</span> <span class="p">,</span> <span class="s1">&#39;diamond_100&#39;</span><span class="p">)</span>
+<span class="n">diamond_surf</span><span class="o">.</span><span class="n">adjacent</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;gas&#39;: &lt;cantera.composite.Solution at 0x7fb50aab8d50&gt;,
+ &#39;diamond&#39;: &lt;cantera.composite.Solution at 0x7fb50aab8ca0&gt;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="converting-ck-format-files">
+<h2>Converting CK-format files<a class="headerlink" href="#converting-ck-format-files" title="Link to this heading">#</a></h2>
+<p>See the page <a class="reference internal" href="ck2yaml-tutorial.html"><span class="doc std std-doc">Converting Chemkin Format Files</span></a> for information on how to convert from CK-format to
+Cantera’s YAML format.</p>
+</section>
+<section id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading">#</a></h2>
+<p>In addition to the Sphinx-generated <a class="reference internal" href="../python/index.html"><span class="doc std std-doc">Python documentation</span></a>, documentation
+of the Python classes and their methods can be accessed from within the Python
+interpreter as well.</p>
+<p>Suppose you have created a Cantera object and want to know what methods are available
+for it, and get help on using the methods:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s1">&#39;gri30.yaml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To get help on the Python class that this object is an instance of:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on Solution in module cantera.composite object:
+
+class Solution(cantera.transport.Transport, cantera.kinetics.Kinetics, cantera.thermo.ThermoPhase)
+ |  A class for chemically-reacting solutions. Instances can be created to
+ |  represent any type of solution -- a mixture of gases, a liquid solution, or
+ |  a solid solution, for example.
+ |  
+ |  Class `Solution` derives from classes `ThermoPhase`, `Kinetics`, and
+ |  `Transport`.  It defines no methods of its own, and is provided so that a
+ |  single object can be used to compute thermodynamic, kinetic, and transport
+ |  properties of a solution.
+ |  
+ |  To skip initialization of the Transport object, pass the keyword argument
+ |  ``transport_model=None`` to the `Solution` constructor.
+ |  
+ |  The most common way to instantiate `Solution` objects is by using a phase
+ |  definition, species and reactions defined in an input file::
+ |  
+ |      gas = ct.Solution(&#39;gri30.yaml&#39;)
+ |  
+ |  If an input file defines multiple phases, the corresponding key in the
+ |  ``phases`` map can be used to specify the desired phase via the ``name`` keyword
+ |  argument of the constructor::
+ |  
+ |      gas = ct.Solution(&#39;diamond.yaml&#39;, name=&#39;gas&#39;)
+ |      diamond = ct.Solution(&#39;diamond.yaml&#39;, name=&#39;diamond&#39;)
+ |  
+ |  The name of the `Solution` object defaults to the *phase* identifier
+ |  specified in the input file. Upon initialization of a `Solution` object,
+ |  a custom name can assigned via::
+ |  
+ |      gas.name = &#39;my_custom_name&#39;
+ |  
+ |  `Solution` objects can also be constructed using `Species` and `Reaction`
+ |  objects which can themselves either be imported from input files or defined
+ |  directly in Python::
+ |  
+ |      spec = ct.Species.list_from_file(&quot;gri30.yaml&quot;)
+ |      spec_gas = ct.Solution(thermo=&#39;ideal-gas&#39;, species=spec)
+ |      rxns = ct.Reaction.list_from_file(&quot;gri30.yaml&quot;, spec_gas)
+ |      gas = ct.Solution(thermo=&#39;ideal-gas&#39;, kinetics=&#39;gas&#39;,
+ |                        species=spec, reactions=rxns, name=&#39;my_custom_name&#39;)
+ |  
+ |  where the ``thermo`` and ``kinetics`` keyword arguments are strings
+ |  specifying the thermodynamic and kinetics model, respectively, and
+ |  ``species`` and ``reactions`` keyword arguments are lists of `Species` and
+ |  `Reaction` objects, respectively. Note that importing the reactions from a
+ |  YAML input file requires a `Kinetics` object containing the species, as
+ |  shown.
+ |  
+ |  Types of underlying models that form the composite `Solution` object are
+ |  queried using the ``thermo_model``, ``kinetics_model`` and
+ |  ``transport_model`` attributes; further, the ``composite`` attribute is a
+ |  shorthand returning a tuple containing the types of the three constitutive
+ |  models.
+ |  
+ |  For non-trivial uses cases of this functionality, see the examples
+ |  :doc:`extract_submechanism.py &lt;/examples/python/kinetics/extract_submechanism&gt;`
+ |  :doc:`mechanism_reduction.py &lt;/examples/python/kinetics/mechanism_reduction&gt;`.
+ |  
+ |  In addition, `Solution` objects can be constructed by passing the text of
+ |  the YAML phase definition in directly, using the ``yaml`` keyword
+ |  argument::
+ |  
+ |      yaml_def = &#39;&#39;&#39;
+ |      phases:
+ |      - name: gas
+ |        thermo: ideal-gas
+ |        kinetics: gas
+ |        elements: [O, H, Ar]
+ |        species:
+ |        - gri30.yaml/species: all
+ |        reactions:
+ |        - gri30.yaml/reactions: declared-species
+ |        skip-undeclared-elements: true
+ |        skip-undeclared-third-bodies: true
+ |        state: {T: 300, P: 1 atm}
+ |      &#39;&#39;&#39;
+ |      gas = ct.Solution(yaml=yaml_def)
+ |  
+ |  Method resolution order:
+ |      Solution
+ |      cantera.transport.Transport
+ |      cantera.kinetics.Kinetics
+ |      cantera.thermo.ThermoPhase
+ |      cantera.solutionbase._SolutionBase
+ |      builtins.object
+ |  
+ |  Methods inherited from cantera.transport.Transport:
+ |  
+ |  __init__(self, /, *args, **kwargs)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |  
+ |  __reduce_cython__(...)
+ |  
+ |  __setstate_cython__(...)
+ |  
+ |  get_binary_diff_coeffs_polynomial(self, i, j)
+ |      Get the coefficients of the polynomial fit of the binary diffusion coefficient
+ |      for species ``i`` and ``j`` as a function of temperature. See
+ |      :ct:`GasTransport::fitDiffCoeffs` for the functional form.
+ |  
+ |  get_collision_integral_polynomials(self, i, j)
+ |      Get the coefficients of the polynomial fit of the collision integral for
+ |      species ``i`` and ``j`` as a function of the reduced temperature. See
+ |      :ct:`GasTransport::fitCollisionIntegrals`.
+ |  
+ |  get_thermal_conductivity_polynomial(self, i)
+ |      Get the coefficients of the polynomial fit for the thermal conductivity of
+ |      species ``i`` as a function of temperature. See
+ |      :ct:`GasTransport::fitProperties` for the functional form.
+ |  
+ |  get_viscosity_polynomial(self, i)
+ |      Get the coefficients of the polynomial fit for the viscosity of species ``i``
+ |      as a function of temperature. See :ct:`GasTransport::fitProperties` for the
+ |      functional form.
+ |  
+ |  set_binary_diff_coeffs_polynomial(self, i, j, values)
+ |      Set the coefficients of the polynomial fit of the binary diffusion coefficient
+ |      for species ``i`` and ``j`` as a function of temperature. See
+ |      :ct:`GasTransport::fitDiffCoeffs` for the functional form.
+ |  
+ |  set_collision_integral_polynomial(self, i, j, avalues, bvalues, cvalues, actualT=False)
+ |      Set the coefficients of the polynomial fit of the collision integral for
+ |      species ``i`` and ``j`` as a function of temperature. See
+ |      :ct:`GasTransport::fitCollisionIntegrals`. The flag ``actualT`` determines
+ |      whether the fit is done in terms of the reduced temperature
+ |      (:math:`T^*_{ij} = T k_B / \epsilon_{ij}`; default) or the actual temperature.
+ |  
+ |  set_thermal_conductivity_polynomial(self, i, values)
+ |      Set the coefficients of the polynomial fit for the thermal conductivity of
+ |      species ``i`` as a function of temperature. See
+ |      :ct:`GasTransport::fitProperties` for the functional form.
+ |  
+ |  set_viscosity_polynomial(self, i, values)
+ |      Set the coefficients of the polynomial fit for the viscosity of species ``i``
+ |      as a function of temperature. See :ct:`GasTransport::fitProperties` for the
+ |      functional form.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Static methods inherited from cantera.transport.Transport:
+ |  
+ |  __new__(*args, **kwargs) class method of cantera.transport.Transport
+ |      Create and return a new object.  See help(type) for accurate signature.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from cantera.transport.Transport:
+ |  
+ |  CK_mode
+ |      Boolean to indicate if the chemkin interpretation is used.
+ |  
+ |  binary_diff_coeffs
+ |      Binary diffusion coefficients [m^2/s].
+ |  
+ |  electrical_conductivity
+ |      Electrical conductivity. [S/m].
+ |  
+ |  mix_diff_coeffs
+ |      Mixture-averaged diffusion coefficients [m^2/s] relating the
+ |      mass-averaged diffusive fluxes (with respect to the mass averaged
+ |      velocity) to gradients in the species mole fractions.
+ |  
+ |  mix_diff_coeffs_mass
+ |      Mixture-averaged diffusion coefficients [m^2/s] relating the
+ |      diffusive mass fluxes to gradients in the species mass fractions.
+ |  
+ |  mix_diff_coeffs_mole
+ |      Mixture-averaged diffusion coefficients [m^2/s] relating the
+ |      molar diffusive fluxes to gradients in the species mole fractions.
+ |  
+ |  mobilities
+ |      Electrical mobilities of charged species [m^2/s-V]
+ |  
+ |  multi_diff_coeffs
+ |      Multicomponent diffusion coefficients, D[i,j], the diffusion
+ |      coefficient for species i due to concentration gradients in
+ |      species j [m**2/s].
+ |  
+ |  species_viscosities
+ |      Pure species viscosities [Pa-s]
+ |  
+ |  thermal_conductivity
+ |      Thermal conductivity. [W/m/K]
+ |  
+ |  thermal_diff_coeffs
+ |      Return a one-dimensional array of the species thermal diffusion
+ |      coefficients [kg/m/s].
+ |  
+ |  transport_fitting_errors
+ |      Get error metrics about any functional fits calculated for pure species
+ |      transport properties. See {ct}`GasTransport::fitDiffCoeffs` and
+ |      {ct}`GasTransport::fitProperties`.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |      
+ |      .. versionadded:: 3.1
+ |  
+ |  transport_model
+ |      Get/Set the string specifying the transport model, such as `multicomponent`,
+ |      `mixture-averaged`, or `unity-Lewis-number`.
+ |      
+ |      Setting a new transport model deletes the underlying C++ Transport
+ |      object and replaces it with a new one implementing the specified model.
+ |  
+ |  viscosity
+ |      Viscosity [Pa-s].
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from cantera.kinetics.Kinetics:
+ |  
+ |  add_reaction(self, rxn)
+ |      Add a new reaction to this phase.
+ |  
+ |  kinetics_species_index(self, species, phase=0)
+ |      The index of species ``species`` of phase ``phase`` within arrays returned
+ |      by methods of class `Kinetics`. If ``species`` is a string, the ``phase``
+ |      argument is unused.
+ |  
+ |  kinetics_species_name(self, k)
+ |      Name of the species with index ``k`` in the arrays returned by methods
+ |      of class `Kinetics`.
+ |  
+ |  modify_reaction(self, irxn, rxn)
+ |      Modify the `Reaction` with index ``irxn`` to have the same rate parameters as
+ |      ``rxn``. ``rxn`` must have the same reactants and products and use the same rate
+ |      parameterization (for example, `ArrheniusRate`, `FalloffRate`, `PlogRate`, etc.)
+ |      as the existing reaction. This method does not modify the third-body
+ |      efficiencies, reaction orders, or reversibility of the reaction.
+ |  
+ |  multiplier(self, i_reaction)
+ |      A scaling factor applied to the rate coefficient for reaction
+ |      ``i_reaction``. Can be used to carry out sensitivity analysis or to
+ |      selectively disable a particular reaction. See `set_multiplier`.
+ |  
+ |  product_stoich_coeff(self, k_spec, i_reaction)
+ |      The stoichiometric coefficient of species ``k_spec`` as a product in
+ |      reaction ``i_reaction``.
+ |  
+ |  reactant_stoich_coeff(self, k_spec, i_reaction)
+ |      The stoichiometric coefficient of species ``k_spec`` as a reactant in
+ |      reaction ``i_reaction``.
+ |  
+ |  reaction(self, i_reaction)
+ |      Return a `Reaction` object representing the reaction with index
+ |      ``i_reaction``. Changes to this object do not affect the `Kinetics` or
+ |      `Solution` object until the `modify_reaction` function is called.
+ |  
+ |  reaction_equations(self, indices=None)
+ |      Returns a list containing the reaction equation for all reactions in the
+ |      mechanism if ``indices`` is unspecified, or the equations for each
+ |      reaction in the sequence ``indices``. For example::
+ |      
+ |          &gt;&gt;&gt; gas.reaction_equations()
+ |          [&#39;2 O + M &lt;=&gt; O2 + M&#39;, &#39;O + H + M &lt;=&gt; OH + M&#39;, &#39;O + H2 &lt;=&gt; H + OH&#39;, ...]
+ |          &gt;&gt;&gt; gas.reaction_equations([2,3])
+ |          [&#39;O + H + M &lt;=&gt; OH + M&#39;, &#39;O + H2 &lt;=&gt; H + OH&#39;]
+ |      
+ |      See also `reaction_equation`.
+ |  
+ |  reactions(self)
+ |      Return a list of all `Reaction` objects. Changes to these objects do not
+ |      affect the `Kinetics` or `Solution` object until the `modify_reaction`
+ |      function is called.
+ |  
+ |  set_multiplier(self, value, i_reaction=-1)
+ |      Set the multiplier for for reaction ``i_reaction`` to ``value``.
+ |      If ``i_reaction`` is not specified, then the multiplier for all reactions
+ |      is set to ``value``. See `multiplier`.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from cantera.kinetics.Kinetics:
+ |  
+ |  creation_rates
+ |      Creation rates for each species. [kmol/m^3/s] for bulk phases or
+ |      [kmol/m^2/s] for surface phases.
+ |  
+ |  creation_rates_ddC
+ |      Calculate derivatives of species creation rates with respect to molar
+ |      concentration at constant temperature, pressure and mole fractions.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |  
+ |  creation_rates_ddCi
+ |      Calculate derivatives for species creation rates with respect to species
+ |      concentration at constant temperature, pressure, and concentration of all other
+ |      species. For sparse output, set ``ct.use_sparse(True)``.
+ |      
+ |      The method returns a matrix with `n_total_species` rows and `n_total_species`
+ |      columns.
+ |      
+ |      For a derivative with respect to :math: `c_i`, all other :math: `c_i` are
+ |      held constant.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |      
+ |      .. versionadded:: 3.0
+ |  
+ |  creation_rates_ddP
+ |      Calculate derivatives of species creation rates with respect to pressure
+ |      at constant temperature, molar concentration and mole fractions.
+ |  
+ |  creation_rates_ddT
+ |      Calculate derivatives of species creation rates with respect to temperature
+ |      at constant pressure, molar concentration and mole fractions.
+ |  
+ |  creation_rates_ddX
+ |      Calculate derivatives for species creation rates with respect to species
+ |      concentrations at constant temperature, pressure and molar concentration.
+ |      For sparse output, set ``ct.use_sparse(True)``.
+ |      
+ |      Note that for derivatives with respect to :math:`X_i`, all other :math:`X_j`
+ |      are held constant, rather than enforcing :math:`\sum X_j = 1`.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |  
+ |  delta_enthalpy
+ |      Change in enthalpy for each reaction [J/kmol].
+ |  
+ |  delta_entropy
+ |      Change in entropy for each reaction [J/kmol/K].
+ |  
+ |  delta_gibbs
+ |      Change in Gibbs free energy for each reaction [J/kmol].
+ |  
+ |  delta_standard_enthalpy
+ |      Change in standard-state enthalpy (independent of composition) for
+ |      each reaction [J/kmol].
+ |  
+ |  delta_standard_entropy
+ |      Change in standard-state entropy (independent of composition) for
+ |      each reaction [J/kmol/K].
+ |  
+ |  delta_standard_gibbs
+ |      Change in standard-state Gibbs free energy (independent of composition)
+ |      for each reaction [J/kmol].
+ |  
+ |  derivative_settings
+ |      Property setting behavior of derivative evaluation.
+ |      
+ |      For :ct:`BulkKinetics`, the following keyword/value pairs are supported:
+ |      
+ |      -  ``skip-third-bodies`` (boolean) ... if `False` (default), third body
+ |         concentrations are considered for the evaluation of derivatives
+ |      
+ |      -  ``skip-falloff`` (boolean) ... if `True` (default), third-body effects
+ |         on reaction rates are not considered.
+ |      
+ |      -  ``rtol-delta`` (double) ... relative tolerance used to perturb properties
+ |         when calculating numerical derivatives. The default value is 1e-8.
+ |      
+ |      Derivative settings are updated using a dictionary::
+ |      
+ |          &gt;&gt;&gt; gas.derivative_settings = {&quot;skip-falloff&quot;: True}
+ |      
+ |      Passing an empty dictionary will reset all values to their defaults.
+ |  
+ |  destruction_rates
+ |      Destruction rates for each species. [kmol/m^3/s] for bulk phases or
+ |      [kmol/m^2/s] for surface phases.
+ |  
+ |  destruction_rates_ddC
+ |      Calculate derivatives of species destruction rates with respect to molar
+ |      concentration at constant temperature, pressure and mole fractions.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |  
+ |  destruction_rates_ddCi
+ |      Calculate derivatives for species destruction rates with respect to species
+ |      concentration at constant temperature, pressure, and concentration of all other
+ |      species. For sparse output, set ``ct.use_sparse(True)``.
+ |      
+ |      The method returns a matrix with `n_total_species` rows and `n_total_species` columns.
+ |      For a derivative with respect to :math: `c_i`, all other :math: `c_i` are
+ |      held constant.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |      
+ |      .. versionadded:: 3.0
+ |  
+ |  destruction_rates_ddP
+ |      Calculate derivatives of species destruction rates with respect to pressure
+ |      at constant temperature, molar concentration and mole fractions.
+ |  
+ |  destruction_rates_ddT
+ |      Calculate derivatives of species destruction rates with respect to temperature
+ |      at constant pressure, molar concentration and mole fractions.
+ |  
+ |  destruction_rates_ddX
+ |      Calculate derivatives for species destruction rates with respect to species
+ |      concentrations at constant temperature, pressure and molar concentration.
+ |      For sparse output, set ``ct.use_sparse(True)``.
+ |      
+ |      Note that for derivatives with respect to :math:`X_i`, all other :math:`X_j`
+ |      are held constant, rather than enforcing :math:`\sum X_j = 1`.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |  
+ |  equilibrium_constants
+ |      Equilibrium constants in concentration units for all reactions.
+ |  
+ |  forward_rate_constants
+ |      Forward rate constants for all reactions.
+ |      
+ |      The computed values include all temperature-dependent and pressure-dependent
+ |      contributions. By default, third-body concentrations are only considered if
+ |      they are part of the reaction rate definition; for a legacy implementation that
+ |      includes third-body concentrations, see `use_legacy_rate_constants`.
+ |  
+ |  forward_rate_constants_ddC
+ |      Calculate derivatives for forward rate constants with respect to molar
+ |      concentration at constant temperature, pressure and mole fractions.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |  
+ |  forward_rate_constants_ddP
+ |      Calculate derivatives for forward rate constants with respect to pressure
+ |      at constant temperature, molar concentration and mole fractions.
+ |  
+ |  forward_rate_constants_ddT
+ |      Calculate derivatives for forward rate constants with respect to temperature
+ |      at constant pressure, molar concentration and mole fractions.
+ |  
+ |  forward_rates_of_progress
+ |      Forward rates of progress for the reactions. [kmol/m^3/s] for bulk
+ |      phases or [kmol/m^2/s] for surface phases.
+ |  
+ |  forward_rates_of_progress_ddC
+ |      Calculate derivatives for forward rates-of-progress with respect to molar
+ |      concentration at constant temperature, pressure and mole fractions.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |  
+ |  forward_rates_of_progress_ddCi
+ |      Calculate derivatives for forward rates-of-progress with respect to species
+ |      concentrations at constant temperature, pressure and remaining species
+ |      concentrations.
+ |      For sparse output, set ``ct.use_sparse(True)``.
+ |      
+ |      Note that for derivatives with respect to :math:`c_i`, all other :math:`c_j`
+ |      are held constant.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |      
+ |      .. versionadded:: 3.0
+ |  
+ |  forward_rates_of_progress_ddP
+ |      Calculate derivatives for forward rates-of-progress with respect to pressure
+ |      at constant temperature, molar concentration and mole fractions.
+ |  
+ |  forward_rates_of_progress_ddT
+ |      Calculate derivatives for forward rates-of-progress with respect to temperature
+ |      at constant pressure, molar concentration and mole fractions.
+ |  
+ |  forward_rates_of_progress_ddX
+ |      Calculate derivatives for forward rates-of-progress with respect to species
+ |      concentrations at constant temperature, pressure and molar concentration.
+ |      For sparse output, set ``ct.use_sparse(True)``.
+ |      
+ |      Note that for derivatives with respect to :math:`X_i`, all other :math:`X_j`
+ |      are held constant, rather than enforcing :math:`\sum X_j = 1`.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |  
+ |  heat_production_rates
+ |      Get the volumetric heat production rates [W/m^3] on a per-reaction
+ |      basis. The sum over all reactions results in the total volumetric heat
+ |      release rate.
+ |      Example: C. K. Law: Combustion Physics (2006), Fig. 7.8.6
+ |      
+ |      &gt;&gt;&gt; gas.heat_production_rates[1]  # heat production rate of the 2nd reaction
+ |  
+ |  heat_release_rate
+ |      Get the total volumetric heat release rate [W/m^3].
+ |  
+ |  kinetics_model
+ |      Return type of kinetics.
+ |  
+ |  kinetics_species_names
+ |      A list of all species names, corresponding to the arrays returned by
+ |      methods of class `Kinetics`.
+ |  
+ |  n_phases
+ |      Number of phases in the reaction mechanism.
+ |  
+ |  n_reactions
+ |      Number of reactions in the reaction mechanism.
+ |  
+ |  n_total_species
+ |      Total number of species in all phases participating in the kinetics
+ |      mechanism.
+ |  
+ |  net_production_rates
+ |      Net production rates for each species. [kmol/m^3/s] for bulk phases or
+ |      [kmol/m^2/s] for surface phases.
+ |  
+ |  net_production_rates_ddC
+ |      Calculate derivatives of species net production rates with respect to molar
+ |      density at constant temperature, pressure and mole fractions.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |  
+ |  net_production_rates_ddCi
+ |      Calculate derivatives for species net production rates with respect to species
+ |      concentration at constant temperature, pressure, and concentration of all other
+ |      species. For sparse output, set ``ct.use_sparse(True)``.
+ |      
+ |      The method returns a matrix with `n_total_species` rows and `n_total_species` columns.
+ |      For a derivative with respect to :math: `c_i`, all other :math: `c_i` are
+ |      held constant.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |      
+ |      .. versionadded:: 3.0
+ |  
+ |  net_production_rates_ddP
+ |      Calculate derivatives of species net production rates with respect to pressure
+ |      at constant temperature, molar concentration and mole fractions.
+ |  
+ |  net_production_rates_ddT
+ |      Calculate derivatives of species net production rates with respect to
+ |      temperature at constant pressure, molar concentration and mole fractions.
+ |  
+ |  net_production_rates_ddX
+ |      Calculate derivatives for species net production rates with respect to species
+ |      concentrations at constant temperature, pressure and molar concentration.
+ |      For sparse output, set ``ct.use_sparse(True)``.
+ |      
+ |      Note that for derivatives with respect to :math:`X_i`, all other :math:`X_j`
+ |      are held constant, rather than enforcing :math:`\sum X_j = 1`.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |  
+ |  net_rates_of_progress
+ |      Net rates of progress for the reactions. [kmol/m^3/s] for bulk phases
+ |      or [kmol/m^2/s] for surface phases.
+ |  
+ |  net_rates_of_progress_ddC
+ |      Calculate derivatives for net rates-of-progress with respect to molar
+ |      concentration at constant temperature, pressure and mole fractions.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |  
+ |  net_rates_of_progress_ddCi
+ |      Calculate derivatives for net rates-of-progress with respect to species
+ |      concentrations at constant temperature, pressure and remaining species
+ |      concentrations. For sparse output, set ``ct.use_sparse(True)``.
+ |      
+ |      Note that for derivatives with respect to :math:`c_i`, all other :math:`c_j`
+ |      are held constant.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |      
+ |      .. versionadded:: 3.0
+ |  
+ |  net_rates_of_progress_ddP
+ |      Calculate derivatives for net rates-of-progress with respect to pressure
+ |      at constant temperature, molar concentration and mole fractions.
+ |  
+ |  net_rates_of_progress_ddT
+ |      Calculate derivatives for net rates-of-progress with respect to temperature
+ |      at constant pressure, molar concentration and mole fractions.
+ |  
+ |  net_rates_of_progress_ddX
+ |      Calculate derivatives for net rates-of-progress with respect to species
+ |      concentrations at constant temperature, pressure and molar concentration.
+ |      For sparse output, set ``ct.use_sparse(True)``.
+ |      
+ |      Note that for derivatives with respect to :math:`X_i`, all other :math:`X_j`
+ |      are held constant, rather than enforcing :math:`\sum X_j = 1`.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |  
+ |  product_stoich_coeffs
+ |      The array of product stoichiometric coefficients. Element ``[k,i]`` of
+ |      this array is the product stoichiometric coefficient of species ``k`` in
+ |      reaction ``i``.
+ |      
+ |      For sparse output, set ``ct.use_sparse(True)``.
+ |      
+ |      .. versionchanged:: 3.0
+ |      
+ |          Method was changed to a property in Cantera 3.0.
+ |  
+ |  product_stoich_coeffs_reversible
+ |      The array of product stoichiometric coefficients of reversible reactions.
+ |      Element ``[k,i]`` of this array is the product stoichiometric coefficient
+ |      of species ``k`` in reaction ``i``.
+ |      
+ |      For sparse output, set ``ct.use_sparse(True)``.
+ |  
+ |  reactant_stoich_coeffs
+ |      The array of reactant stoichiometric coefficients. Element ``[k,i]`` of
+ |      this array is the reactant stoichiometric coefficient of species ``k`` in
+ |      reaction ``i``.
+ |      
+ |      For sparse output, set ``ct.use_sparse(True)``.
+ |      
+ |      .. versionchanged:: 3.0
+ |      
+ |          Method was changed to a property in Cantera 3.0.
+ |  
+ |  reaction_phase_index
+ |      The index of the phase where the reactions occur.
+ |      
+ |      .. deprecated:: 3.0
+ |      
+ |          After Cantera 3.0, the reacting phase is always the first phase associated
+ |          with the Kinetics object. This method will be removed after Cantera 3.1.
+ |  
+ |  reverse_rate_constants
+ |      Reverse rate constants for all reactions.
+ |      
+ |      The computed values include all temperature-dependent and pressure-dependent
+ |      contributions. By default, third-body concentrations are only considered if
+ |      they are part of the reaction rate definition; for a legacy implementation that
+ |      includes third-body concentrations, see `use_legacy_rate_constants`.
+ |  
+ |  reverse_rates_of_progress
+ |      Reverse rates of progress for the reactions. [kmol/m^3/s] for bulk
+ |      phases or [kmol/m^2/s] for surface phases.
+ |  
+ |  reverse_rates_of_progress_ddC
+ |      Calculate derivatives for reverse rates-of-progress with respect to molar
+ |      concentration at constant temperature, pressure and mole fractions.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |  
+ |  reverse_rates_of_progress_ddCi
+ |      Calculate derivatives for reverse rates-of-progress with respect to species
+ |      concentrations at constant temperature, pressure and remaining species
+ |      concentrations.
+ |      For sparse output, set ``ct.use_sparse(True)``.
+ |      
+ |      Note that for derivatives with respect to :math:`c_i`, all other :math:`c_j`
+ |      are held constant.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |      
+ |      .. versionadded:: 3.0
+ |  
+ |  reverse_rates_of_progress_ddP
+ |      Calculate derivatives for reverse rates-of-progress with respect to pressure
+ |      at constant temperature, molar concentration and mole fractions.
+ |  
+ |  reverse_rates_of_progress_ddT
+ |      Calculate derivatives for reverse rates-of-progress with respect to temperature
+ |      at constant pressure, molar concentration and mole fractions.
+ |  
+ |  reverse_rates_of_progress_ddX
+ |      Calculate derivatives for reverse rates-of-progress with respect to species
+ |      concentrations at constant temperature, pressure and molar concentration.
+ |      For sparse output, set ``ct.use_sparse(True)``.
+ |      
+ |      Note that for derivatives with respect to :math:`X_i`, all other :math:`X_j`
+ |      are held constant, rather than enforcing :math:`\sum X_j = 1`.
+ |      
+ |      .. warning::
+ |      
+ |          This property is an experimental part of the Cantera API and
+ |          may be changed or removed without notice.
+ |  
+ |  third_body_concentrations
+ |      Effective third-body concentrations used by individual reactions; values
+ |      are only defined for reactions involving third-bodies and are set to
+ |      not-a-number otherwise.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from cantera.thermo.ThermoPhase:
+ |  
+ |  __call__(self, /, *args, **kwargs)
+ |      Call self as a function.
+ |  
+ |  add_species(self, species)
+ |      Add a new species to this phase. Missing elements will be added
+ |      automatically.
+ |  
+ |  add_species_alias(self, name, alias)
+ |      Add the alternate species name ``alias`` for an original species ``name``.
+ |  
+ |  atomic_weight(self, m)
+ |      Atomic weight [kg/kmol] of element ``m``
+ |  
+ |  element_index(self, element)
+ |      The index of element ``element``, which may be specified as a string or
+ |      an integer. In the latter case, the index is checked for validity and
+ |      returned. If no such element is present, an exception is thrown.
+ |  
+ |  element_name(self, m)
+ |      Name of the element with index ``m``.
+ |  
+ |  elemental_mass_fraction(self, m)
+ |      Get the elemental mass fraction :math:`Z_{\mathrm{mass},m}` of element
+ |      :math:`m` as defined by:
+ |      
+ |      .. math:: Z_{\mathrm{mass},m} = \sum_k \frac{a_{m,k} M_m}{M_k} Y_k
+ |      
+ |      with :math:`a_{m,k}` being the number of atoms of element :math:`m` in
+ |      species :math:`k`, :math:`M_m` the atomic weight of element :math:`m`,
+ |      :math:`M_k` the molecular weight of species :math:`k`, and :math:`Y_k`
+ |      the mass fraction of species :math:`k`::
+ |      
+ |          &gt;&gt;&gt; phase.elemental_mass_fraction(&#39;H&#39;)
+ |          1.0
+ |      
+ |      :param m:
+ |          Base element, may be specified by name or by index.
+ |  
+ |  elemental_mole_fraction(self, m)
+ |      Get the elemental mole fraction :math:`Z_{\mathrm{mole},m}` of element
+ |      :math:`m` (the number of atoms of element m divided by the total number
+ |      of atoms) as defined by:
+ |      
+ |      .. math:: Z_{\mathrm{mole},m} = \frac{\sum_k a_{m,k} X_k}
+ |                                           {\sum_k \sum_j a_{j,k} X_k}
+ |      
+ |      with :math:`a_{m,k}` being the number of atoms of element :math:`m` in
+ |      species :math:`k`, :math:`\sum_j` being a sum over all elements, and
+ |      :math:`X_k` being the mole fraction of species :math:`k`::
+ |      
+ |          &gt;&gt;&gt; phase.elemental_mole_fraction(&#39;H&#39;)
+ |          1.0
+ |      
+ |      :param m:
+ |          Base element, may be specified by name or by index.
+ |  
+ |  equilibrate(self, XY, solver=&#39;auto&#39;, rtol=1e-09, max_steps=1000, max_iter=100, estimate_equil=0, log_level=0)
+ |      Set to a state of chemical equilibrium holding property pair
+ |      ``XY`` constant.
+ |      
+ |      :param XY:
+ |          A two-letter string, which must be one of the set::
+ |      
+ |              [&#39;TP&#39;,&#39;TV&#39;,&#39;HP&#39;,&#39;SP&#39;,&#39;SV&#39;,&#39;UV&#39;]
+ |      
+ |      :param solver:
+ |          Specifies the equilibrium solver to use. May be one of the following:
+ |      
+ |          * ``&#39;element_potential&#39;`` - a fast solver using the element potential
+ |            method
+ |          * ``&#39;gibbs&#39;`` - a slower but more robust Gibbs minimization solver
+ |          * ``&#39;vcs&#39;`` - the VCS non-ideal equilibrium solver
+ |          * ``&#39;auto&#39;`` - The element potential solver will be tried first, then
+ |            if it fails the Gibbs solver will be tried.
+ |      :param rtol:
+ |          The relative error tolerance.
+ |      :param max_steps:
+ |          The maximum number of steps in composition to take to find a converged
+ |          solution.
+ |      :param max_iter:
+ |          For the Gibbs minimization solver, this specifies the number of
+ |          outer iterations on T or P when some property pair other
+ |          than TP is specified.
+ |      :param estimate_equil:
+ |          Integer indicating whether the solver should estimate its own
+ |          initial condition. If 0, the initial mole fraction vector in the
+ |          `ThermoPhase` object is used as the initial condition. If 1, the
+ |          initial mole fraction vector is used if the element abundances are
+ |          satisfied. If -1, the initial mole fraction vector is thrown out,
+ |          and an estimate is formulated.
+ |      :param log_level:
+ |          Set to a value greater than 0 to write diagnostic output.
+ |  
+ |  equivalence_ratio(self, fuel=None, oxidizer=None, basis=&#39;mole&#39;, include_species=None)
+ |      Get the equivalence ratio :math:`\phi` of the current mixture, which is a
+ |      conserved quantity. Considers the oxidation of C to CO2, H to H2O
+ |      and S to SO2. Other elements are assumed not to participate in oxidation
+ |      (that is, N ends up as N2). If fuel and oxidizer are not specified, the
+ |      equivalence ratio is computed from the available oxygen and the
+ |      required oxygen for complete oxidation:
+ |      
+ |      .. math:: \phi = \frac{Z_{\mathrm{mole},C} + Z_{\mathrm{mole},S}
+ |                + \frac{1}{4}Z_{\mathrm{mole},H}} {\frac{1}{2}Z_{\mathrm{mole},O}}
+ |      
+ |      where :math:`Z_{\mathrm{mole},e}` is the elemental mole fraction of element
+ |      :math:`e`. If the fuel and oxidizer compositions are specified, :math:`\phi` is
+ |      computed from:
+ |      
+ |      .. math:: \phi = \frac{Z}{1-Z}\frac{1-Z_{\mathrm{st}}}{Z_{\mathrm{st}}}
+ |      
+ |      where :math:`Z` is the Bilger mixture fraction and :math:`Z_{\mathrm{st}}`
+ |      the Bilger mixture fraction at stoichiometric conditions.
+ |      The ``basis`` determines the composition of fuel and oxidizer:
+ |      ``basis=&#39;mole&#39;`` (default) means mole fractions, ``basis=&#39;mass&#39;`` means
+ |      mass fractions. Note that this definition takes all species into account.
+ |      In case certain species like inert diluents should be ignored, a
+ |      list of species can be provided with ``include_species``. This means that
+ |      only these species are considered for the computation of the equivalence
+ |      ratio. For more information, see the
+ |      :doc:`Python example &lt;/examples/python/thermo/equivalenceRatio&gt;` ::
+ |      
+ |          &gt;&gt;&gt; gas.set_equivalence_ratio(0.5, fuel=&#39;CH3:0.5, CH3OH:.5, N2:0.125&#39;, oxidizer=&#39;O2:0.21, N2:0.79, NO:0.01&#39;)
+ |          &gt;&gt;&gt; gas.equivalence_ratio(fuel=&#39;CH3:0.5, CH3OH:.5, N2:0.125&#39;, oxidizer=&#39;O2:0.21, N2:0.79, NO:0.01&#39;)
+ |          0.5
+ |      
+ |      :param fuel:
+ |          Fuel species name or mole/mass fractions as string, array, or dict.
+ |      :param oxidizer:
+ |          Oxidizer species name or mole/mass fractions as a string, array, or dict.
+ |      :param basis:
+ |          Determines if ``fuel`` and ``oxidizer`` are given in mole fractions
+ |          (``basis=&quot;mole&quot;``) or mass fractions (``basis=&quot;mass&quot;``)
+ |      :param include_species:
+ |          List of species names (optional). Only these species are considered for the
+ |          computation of the equivalence ratio. By default, all species are considered
+ |  
+ |  find_isomers(self, comp)
+ |      Find species/isomers matching a composition specified by ``comp``.
+ |  
+ |  mass_fraction_dict(self, threshold=0.0)
+ |      Return a dictionary giving the mass fraction for each species by name where the
+ |      mass fraction is greater than ``threshold``.
+ |  
+ |  mixture_fraction(self, fuel, oxidizer, basis=&#39;mole&#39;, element=&#39;Bilger&#39;)
+ |      Get the mixture fraction of the current mixture in
+ |      (kg fuel / (kg oxidizer + kg fuel)). This is a quantity that is conserved after
+ |      oxidation. Considers the oxidation of C to CO2, H to H2O and S to SO2. Other
+ |      elements are assumed not to participate in oxidation (that is, N ends up as N2).
+ |      The ``basis`` determines the composition of fuel and oxidizer:
+ |      ``basis=&quot;mole&quot;`` (default) means mole fractions, ``basis=&quot;mass&quot;`` means mass
+ |      fractions. The mixture fraction can be computed from a single element (for
+ |      example, carbon with ``element=&quot;C&quot;``)
+ |      
+ |      .. math:: Z_m = \frac{Z_{\mathrm{mass},m}-Z_{\mathrm{mass},m,\mathrm{ox}}}
+ |          {Z_{\mathrm{mass},\mathrm{fuel}}-Z_{\mathrm{mass},m,\mathrm{ox}}}
+ |      
+ |      where :math:`Z_{\mathrm{mass},m}` is the elemental mass fraction of
+ |      element :math:`m` in the mixture, and :math:`Z_{\mathrm{mass},m,\mathrm{ox}}`
+ |      and :math:`Z_{\mathrm{mass},\mathrm{fuel}}` are the elemental mass fractions of
+ |      the oxidizer and fuel, or from the Bilger mixture fraction
+ |      (``element=&quot;Bilger&quot;``), which considers the elements C, S, H and O
+ |      :cite:p:`bilger1979`. The Bilger mixture fraction is computed by default:
+ |      
+ |      .. math:: Z_m = Z_{\mathrm{Bilger}} = \frac{\beta-\beta_{\mathrm{ox}}}
+ |          {\beta_{\mathrm{fuel}}-\beta_{\mathrm{ox}}}
+ |      
+ |      with
+ |      
+ |      .. math:: \beta = 2\frac{Z_C}{M_C}+2\frac{Z_S}{M_S}+\frac{1}{2}\frac{Z_H}{M_H}
+ |          - \frac{Z_O}{M_O}
+ |      
+ |      and :math:`M_m` the atomic weight of element :math:`m`.
+ |      For more information, see the
+ |      :doc:`Python example &lt;/examples/python/thermo/equivalenceRatio&gt;` ::
+ |      
+ |          &gt;&gt;&gt; gas.set_mixture_fraction(0.5, &#39;CH3:0.5, CH3OH:0.5, N2:0.125&#39;, &#39;O2:0.21, N2:0.79, NO:0.01&#39;)
+ |          &gt;&gt;&gt; gas.mixture_fraction(&#39;CH3:0.5, CH3OH:0.5, N2:0.125&#39;, &#39;O2:0.21, N2:0.79, NO:.01&#39;)
+ |          0.5
+ |      
+ |      :param fuel:
+ |          Fuel species name or mole/mass fractions as string, array, or dict.
+ |      :param oxidizer:
+ |          Oxidizer species name or mole/mass fractions as a string, array, or
+ |          dict.
+ |      :param basis:
+ |          Determines if ``fuel`` and ``oxidizer`` are given in mole
+ |          fractions (``basis=&#39;mole&#39;``) or mass fractions (``basis=&#39;mass&#39;``)
+ |      :param element:
+ |          Computes the mixture fraction from the specified elemental
+ |          mass fraction (given by element name or element index) or as
+ |          the Bilger mixture fraction (default)
+ |  
+ |  modify_species(self, k, species)
+ |      Modify the thermodynamic data associated with a species. The species name,
+ |      elemental composition, and type of thermo parameterization must be unchanged.
+ |  
+ |  mole_fraction_dict(self, threshold=0.0)
+ |      Return a dictionary giving the mole fraction for each species by name where the
+ |      mole fraction is greater than ``threshold``.
+ |  
+ |  n_atoms(self, species, element)
+ |      Number of atoms of element ``element`` in species ``species``. The element
+ |      and species may be specified by name or by index.
+ |      
+ |      &gt;&gt;&gt; phase.n_atoms(&#39;CH4&#39;,&#39;H&#39;)
+ |      4
+ |  
+ |  report(self, show_thermo=True, threshold=1e-14)
+ |      Generate a report describing the thermodynamic state of this phase. To
+ |      print the report to the terminal, simply call the phase object. The
+ |      following two statements are equivalent::
+ |      
+ |      &gt;&gt;&gt; phase()
+ |      &gt;&gt;&gt; print(phase.report())
+ |      
+ |      :param show_thermo:
+ |          A Boolean argument specifying whether to show phase thermodynamic
+ |          information in the ouptut.
+ |      :param threshold:
+ |          The threshold used to clip data in the output. Values below the threshold
+ |          are not displayed.
+ |  
+ |  set_discretized_electron_energy_distribution(self, levels, distribution)
+ |      Set electron energy distribution. When this method is used, electron
+ |      temperature is calculated from the distribution.
+ |      
+ |      :param levels:
+ |          vector of electron energy levels [eV]
+ |      :param distribution:
+ |          vector of distribution
+ |  
+ |  set_equivalence_ratio(self, phi, fuel, oxidizer, basis=&#39;mole&#39;, *, diluent=None, fraction=None)
+ |      Set the composition to a mixture of ``fuel`` and ``oxidizer`` at the
+ |      specified equivalence ratio ``phi``, holding temperature and pressure
+ |      constant. Considers the oxidation of C to CO2, H to H2O and S to SO2.
+ |      Other elements are assumed not to participate in oxidation (that is,
+ |      N ends up as N2). The ``basis`` determines the fuel and oxidizer
+ |      compositions: ``basis=&#39;mole&#39;`` means mole fractions (default),
+ |      ``basis=&#39;mass&#39;`` means mass fractions. The fuel/oxidizer mixture can be
+ |      be diluted by a ``diluent`` based on a mixing ``fraction``. The amount of
+ |      diluent is quantified as a fraction of fuel, oxidizer or the fuel/oxidizer
+ |      mixture. For more information, see the :doc:`Python example
+ |      &lt;/examples/python/thermo/equivalenceRatio&gt;` ::
+ |      
+ |          &gt;&gt;&gt; gas.set_equivalence_ratio(0.5, &#39;CH4&#39;, &#39;O2:1.0, N2:3.76&#39;, basis=&#39;mole&#39;)
+ |          &gt;&gt;&gt; gas.mass_fraction_dict()
+ |          {&#39;CH4&#39;: 0.02837633052851, &#39;N2&#39;: 0.7452356312613, &#39;O2&#39;: 0.22638803821018}
+ |          &gt;&gt;&gt; gas.set_equivalence_ratio(1.2, &#39;NH3:0.8,CO:0.2&#39;, &#39;O2:1&#39;, basis=&#39;mole&#39;)
+ |          &gt;&gt;&gt; gas.mass_fraction_dict()
+ |          {&#39;CO&#39;: 0.14784006249290, &#39;NH3&#39;: 0.35956645545401, &#39;O2&#39;: 0.49259348205308}
+ |      
+ |      :param phi:
+ |          Equivalence ratio
+ |      :param fuel:
+ |          Fuel species name or mole/mass fractions as string, array, or dict.
+ |      :param oxidizer:
+ |          Oxidizer species name or mole/mass fractions as a string, array, or dict.
+ |      :param basis:
+ |          Determines if ``fuel`` and ``oxidizer`` are given in mole
+ |          fractions (``basis=&#39;mole&#39;``) or mass fractions (``basis=&#39;mass&#39;``).
+ |      :param diluent:
+ |          Optional parameter. Required if dilution is used. Specifies the composition
+ |          of the diluent in mole/mass fractions as a string, array or dict.
+ |      :param fraction:
+ |          Optional parameter. Dilutes the fuel/oxidizer mixture with the diluent
+ |          according to ``fraction``. Fraction can refer to the fraction of diluent in
+ |          the  mixture (for example ``fraction=&quot;diluent:0.7&quot;`` will create a mixture
+ |          with 30 % fuel/oxidizer and 70 % diluent), the fraction of fuel in the
+ |          mixture (for example ``fraction=&quot;fuel:0.1&quot;`` means that the mixture contains
+ |          10 % fuel. The amount of oxidizer is determined from the equivalence ratio
+ |          and the remaining mixture is the diluent) or fraction of oxidizer in the
+ |          mixture (for example ``fraction=&quot;oxidizer:0.1&quot;``). The fraction itself is
+ |          interpreted as mole or mass fraction based on ``basis``. The diluent is not
+ |          considered in the computation of the equivalence ratio. Default is no
+ |          dilution or ``fraction=None``. May be given as string or dictionary (for
+ |          example ``fraction={&quot;fuel&quot;:0.7}``).
+ |  
+ |  set_mixture_fraction(self, mixture_fraction, fuel, oxidizer, basis=&#39;mole&#39;)
+ |      Set the composition to a mixture of ``fuel`` and ``oxidizer`` at the
+ |      specified mixture fraction ``mixture_fraction`` (kg fuel / kg mixture), holding
+ |      temperature and pressure constant. Considers the oxidation of C to CO2,
+ |      H to H2O and S to SO2. Other elements are assumed not to participate in
+ |      oxidation (that is, N ends up as N2). The ``basis`` determines the composition
+ |      of fuel and oxidizer: ``basis=&#39;mole&#39;`` (default) means mole fractions,
+ |      ``basis=&#39;mass&#39;`` means mass fractions. For more information, see the
+ |      :doc:`Python example &lt;/examples/python/thermo/equivalenceRatio&gt;` ::
+ |      
+ |          &gt;&gt;&gt; gas.set_mixture_fraction(0.5, &#39;CH4&#39;, &#39;O2:1.0, N2:3.76&#39;)
+ |          &gt;&gt;&gt; gas.mass_fraction_dict()
+ |          {&#39;CH4&#39;: 0.5, &#39;N2&#39;: 0.38350014242997776, &#39;O2&#39;: 0.11649985757002226}
+ |          &gt;&gt;&gt; gas.set_mixture_fraction(0.5, {&#39;NH3&#39;:0.8, &#39;CO&#39;:0.2}, &#39;O2:1.0&#39;)
+ |          &gt;&gt;&gt; gas.mass_fraction_dict()
+ |          {&#39;CO&#39;: 0.145682068778996, &#39;NH3&#39;: 0.354317931221004, &#39;O2&#39;: 0.5}
+ |      
+ |      :param mixture_fraction:
+ |          Mixture fraction (kg fuel / kg mixture)
+ |      :param fuel:
+ |          Fuel species name or mole/mass fractions as string, array, or dict.
+ |      :param oxidizer:
+ |          Oxidizer species name or mole/mass fractions as a string, array, or
+ |          dict.
+ |      :param basis: determines if ``fuel`` and ``oxidizer`` are given in mole
+ |          fractions (``basis=&#39;mole&#39;``) or mass fractions (``basis=&#39;mass&#39;``)
+ |  
+ |  set_unnormalized_mass_fractions(self, Y)
+ |      Set the mass fractions without normalizing to force ``sum(Y) == 1.0``.
+ |      Useful primarily when calculating derivatives with respect to ``Y[k]`` by
+ |      finite difference.
+ |  
+ |  set_unnormalized_mole_fractions(self, X)
+ |      Set the mole fractions without normalizing to force ``sum(X) == 1.0``.
+ |      Useful primarily when calculating derivatives with respect to ``X[k]``
+ |      by finite difference.
+ |  
+ |  species(self, k=None)
+ |      Return the `Species` object for species ``k``, where ``k`` is either the
+ |      species index or the species name. If ``k`` is not specified, a list of
+ |      all species objects is returned. Changes to this object do not affect
+ |      the `ThermoPhase` or `Solution` object until the `modify_species`
+ |      function is called.
+ |  
+ |  species_index(self, species)
+ |      The index of species ``species``, which may be specified as a string or
+ |      an integer. In the latter case, the index is checked for validity and
+ |      returned. If no such species is present, an exception is thrown.
+ |  
+ |  species_name(self, k)
+ |      Name of the species with index ``k``.
+ |  
+ |  stoich_air_fuel_ratio(self, fuel, oxidizer, basis=&#39;mole&#39;)
+ |      Get the stoichiometric air to fuel ratio (kg oxidizer / kg fuel). Considers the
+ |      oxidation of C to CO2, H to H2O and S to SO2. Other elements are assumed
+ |      not to participate in oxidation (that is, N ends up as N2).
+ |      The ``basis`` determines the composition of fuel and oxidizer: ``basis=&#39;mole&#39;`` (default)
+ |      means mole fractions, ``basis=&#39;mass&#39;`` means mass fractions::
+ |      
+ |          &gt;&gt;&gt; gas.set_mixture_fraction(0.5, &#39;CH3:0.5, CH3OH:.5, N2:0.125&#39;, &#39;O2:0.21, N2:0.79, NO:0.01&#39;)
+ |          &gt;&gt;&gt; gas.stoich_air_fuel_ratio(&#39;CH3:0.5, CH3OH:.5, N2:0.125&#39;, &#39;O2:0.21, N2:0.79, NO:0.01&#39;)
+ |          8.148040722239438
+ |      
+ |      :param fuel:
+ |          Fuel species name or mole/mass fractions as string, array, or dict.
+ |      :param oxidizer:
+ |          Oxidizer species name or mole/mass fractions as a string, array, or
+ |          dict.
+ |      :param basis:
+ |          Determines if ``fuel`` and ``oxidizer`` are given in mole
+ |          fractions (``basis=&#39;mole&#39;``) or mass fractions (``basis=&#39;mass&#39;``)
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from cantera.thermo.ThermoPhase:
+ |  
+ |  DP
+ |      Get/Set density [kg/m^3] and pressure [Pa].
+ |  
+ |  DPX
+ |      Get/Set density [kg/m^3], pressure [Pa], and mole fractions.
+ |  
+ |  DPY
+ |      Get/Set density [kg/m^3], pressure [Pa], and mass fractions.
+ |  
+ |  HP
+ |      Get/Set enthalpy [J/kg or J/kmol] and pressure [Pa].
+ |  
+ |  HPX
+ |      Get/Set enthalpy [J/kg or J/kmol], pressure [Pa] and mole fractions.
+ |  
+ |  HPY
+ |      Get/Set enthalpy [J/kg or J/kmol], pressure [Pa] and mass fractions.
+ |  
+ |  P
+ |      Pressure [Pa].
+ |  
+ |  P_sat
+ |      Saturation pressure [Pa] at the current temperature.
+ |  
+ |  Pe
+ |      Get electron Pressure [Pa].
+ |  
+ |  SP
+ |      Get/Set entropy [J/kg/K or J/kmol/K] and pressure [Pa].
+ |  
+ |  SPX
+ |      Get/Set entropy [J/kg/K or J/kmol/K], pressure [Pa], and mole fractions.
+ |  
+ |  SPY
+ |      Get/Set entropy [J/kg/K or J/kmol/K], pressure [Pa], and mass fractions.
+ |  
+ |  SV
+ |      Get/Set entropy [J/kg/K or J/kmol/K] and specific volume [m^3/kg or
+ |      m^3/kmol].
+ |  
+ |  SVX
+ |      Get/Set entropy [J/kg/K or J/kmol/K], specific volume [m^3/kg or
+ |      m^3/kmol], and mole fractions.
+ |  
+ |  SVY
+ |      Get/Set entropy [J/kg/K or J/kmol/K], specific volume [m^3/kg or
+ |      m^3/kmol], and mass fractions.
+ |  
+ |  T
+ |      Temperature [K].
+ |  
+ |  TD
+ |      Get/Set temperature [K] and density [kg/m^3 or kmol/m^3].
+ |  
+ |  TDX
+ |      Get/Set temperature [K], density [kg/m^3 or kmol/m^3], and mole
+ |      fractions.
+ |  
+ |  TDY
+ |      Get/Set temperature [K] and density [kg/m^3 or kmol/m^3], and mass
+ |      fractions.
+ |  
+ |  TP
+ |      Get/Set temperature [K] and pressure [Pa].
+ |  
+ |  TPX
+ |      Get/Set temperature [K], pressure [Pa], and mole fractions.
+ |  
+ |  TPY
+ |      Get/Set temperature [K], pressure [Pa], and mass fractions.
+ |  
+ |  T_sat
+ |      Saturation temperature [K] at the current pressure.
+ |  
+ |  Te
+ |      Get/Set electron Temperature [K].
+ |  
+ |  UV
+ |      Get/Set internal energy [J/kg or J/kmol] and specific volume
+ |      [m^3/kg or m^3/kmol].
+ |  
+ |  UVX
+ |      Get/Set internal energy [J/kg or J/kmol], specific volume
+ |      [m^3/kg or m^3/kmol], and mole fractions.
+ |  
+ |  UVY
+ |      Get/Set internal energy [J/kg or J/kmol], specific volume
+ |      [m^3/kg or m^3/kmol], and mass fractions.
+ |  
+ |  X
+ |      Get/Set the species mole fractions. Can be set as an array, as a dictionary,
+ |      or as a string. Always returns an array::
+ |      
+ |          &gt;&gt;&gt; phase.X = [0.1, 0, 0, 0.4, 0, 0, 0, 0, 0.5]
+ |          &gt;&gt;&gt; phase.X = {&#39;H2&#39;:0.1, &#39;O2&#39;:0.4, &#39;AR&#39;:0.5}
+ |          &gt;&gt;&gt; phase.X = &#39;H2:0.1, O2:0.4, AR:0.5&#39;
+ |          &gt;&gt;&gt; phase.X
+ |          array([0.1, 0, 0, 0.4, 0, 0, 0, 0, 0.5])
+ |  
+ |  Y
+ |      Get/Set the species mass fractions. Can be set as an array, as a dictionary,
+ |      or as a string. Always returns an array::
+ |      
+ |          &gt;&gt;&gt; phase.Y = [0.1, 0, 0, 0.4, 0, 0, 0, 0, 0.5]
+ |          &gt;&gt;&gt; phase.Y = {&#39;H2&#39;:0.1, &#39;O2&#39;:0.4, &#39;AR&#39;:0.5}
+ |          &gt;&gt;&gt; phase.Y = &#39;H2:0.1, O2:0.4, AR:0.5&#39;
+ |          &gt;&gt;&gt; phase.Y
+ |          array([0.1, 0, 0, 0.4, 0, 0, 0, 0, 0.5])
+ |  
+ |  activities
+ |      Array of nondimensional activities. Returns either molar or molal
+ |      activities depending on the convention of the thermodynamic model.
+ |  
+ |  activity_coefficients
+ |      Array of nondimensional, molar activity coefficients.
+ |  
+ |  atomic_weights
+ |      Array of atomic weight [kg/kmol] for each element in the mixture.
+ |  
+ |  auxiliary_data
+ |      Intermediate or model-specific parameters used by particular
+ |      derived classes.
+ |  
+ |  basis
+ |      Determines whether intensive thermodynamic properties are treated on a
+ |      ``mass`` (per kg) or ``molar`` (per kmol) basis. This affects the values
+ |      returned by the properties `h`, `u`, `s`, `g`, `v`, `density`, `cv`,
+ |      and `cp`, as well as the values used with the state-setting properties
+ |      such as `HPX` and `UV`.
+ |  
+ |  case_sensitive_species_names
+ |      Enforce case-sensitivity for look up of species names
+ |  
+ |  charges
+ |      Array of species charges [elem. charge].
+ |  
+ |  chemical_potentials
+ |      Array of species chemical potentials [J/kmol].
+ |  
+ |  concentrations
+ |      Get/Set the species concentrations. Units are kmol/m^3 for bulk phases, kmol/m^2
+ |      for surface phases, and kmol/m for edge phases.
+ |  
+ |  cp
+ |      Heat capacity at constant pressure [J/kg/K or J/kmol/K] depending
+ |      on `basis`.
+ |  
+ |  cp_mass
+ |      Specific heat capacity at constant pressure [J/kg/K].
+ |  
+ |  cp_mole
+ |      Molar heat capacity at constant pressure [J/kmol/K].
+ |  
+ |  critical_density
+ |      Critical density [kg/m^3 or kmol/m^3] depending on `basis`.
+ |  
+ |  critical_pressure
+ |      Critical pressure [Pa].
+ |  
+ |  critical_temperature
+ |      Critical temperature [K].
+ |  
+ |  cv
+ |      Heat capacity at constant volume [J/kg/K or J/kmol/K] depending on
+ |      `basis`.
+ |  
+ |  cv_mass
+ |      Specific heat capacity at constant volume [J/kg/K].
+ |  
+ |  cv_mole
+ |      Molar heat capacity at constant volume [J/kmol/K].
+ |  
+ |  density
+ |      Density [kg/m^3 or kmol/m^3] depending on `basis`.
+ |  
+ |  density_mass
+ |      (Mass) density [kg/m^3].
+ |  
+ |  density_mole
+ |      Molar density [kmol/m^3].
+ |  
+ |  electric_potential
+ |      Get/Set the electric potential [V] for this phase.
+ |  
+ |  electrochemical_potentials
+ |      Array of species electrochemical potentials [J/kmol].
+ |  
+ |  electron_energy_distribution
+ |      Electron energy distribution
+ |  
+ |  electron_energy_distribution_type
+ |      Electron energy distribution type
+ |  
+ |  electron_energy_levels
+ |      Electron energy levels [eV]
+ |  
+ |  electron_species_name
+ |      Electron species name
+ |  
+ |  element_names
+ |      A list of all the element names.
+ |  
+ |  enthalpy_mass
+ |      Specific enthalpy [J/kg].
+ |  
+ |  enthalpy_mole
+ |      Molar enthalpy [J/kmol].
+ |  
+ |  entropy_mass
+ |      Specific entropy [J/kg/K].
+ |  
+ |  entropy_mole
+ |      Molar entropy [J/kmol/K].
+ |  
+ |  g
+ |      Gibbs free energy [J/kg or J/kmol] depending on `basis`.
+ |  
+ |  gibbs_mass
+ |      Specific Gibbs free energy [J/kg].
+ |  
+ |  gibbs_mole
+ |      Molar Gibbs free energy [J/kmol].
+ |  
+ |  h
+ |      Enthalpy [J/kg or J/kmol] depending on `basis`.
+ |  
+ |  has_phase_transition
+ |      Returns true if the phase represents a substance with phase transitions
+ |  
+ |  int_energy_mass
+ |      Specific internal energy [J/kg].
+ |  
+ |  int_energy_mole
+ |      Molar internal energy [J/kmol].
+ |  
+ |  is_compressible
+ |      Returns true if the density of the phase is an independent variable defining
+ |      the thermodynamic state of a substance
+ |  
+ |  is_pure
+ |      Returns true if the phase represents a pure (fixed composition) substance
+ |  
+ |  isothermal_compressibility
+ |      Isothermal compressibility [1/Pa].
+ |  
+ |  isotropic_shape_factor
+ |      Shape factor of isotropic-velocity distribution for electron energy
+ |  
+ |  max_temp
+ |      Maximum temperature for which the thermodynamic data for the phase are
+ |      valid.
+ |  
+ |  mean_electron_energy
+ |      Mean electron energy [eV]
+ |  
+ |  mean_molecular_weight
+ |      The mean molecular weight (molar mass) [kg/kmol].
+ |  
+ |  min_temp
+ |      Minimum temperature for which the thermodynamic data for the phase are
+ |      valid.
+ |  
+ |  molecular_weights
+ |      Array of species molecular weights (molar masses) [kg/kmol].
+ |  
+ |  n_electron_energy_levels
+ |      Number of electron energy levels
+ |  
+ |  n_elements
+ |      Number of elements.
+ |  
+ |  n_selected_species
+ |      Number of species selected for output (by slicing of Solution object)
+ |  
+ |  n_species
+ |      Number of species.
+ |  
+ |  normalize_electron_energy_distribution_enabled
+ |      Automatically normalize electron energy distribution
+ |  
+ |  partial_molar_cp
+ |      Array of species partial molar specific heat capacities at constant
+ |      pressure [J/kmol/K].
+ |  
+ |  partial_molar_enthalpies
+ |      Array of species partial molar enthalpies [J/kmol].
+ |  
+ |  partial_molar_entropies
+ |      Array of species partial molar entropies [J/kmol/K].
+ |  
+ |  partial_molar_int_energies
+ |      Array of species partial molar internal energies [J/kmol].
+ |  
+ |  partial_molar_volumes
+ |      Array of species partial molar volumes [m^3/kmol].
+ |  
+ |  phase_of_matter
+ |      Get the thermodynamic phase (gas, liquid, etc.) at the current conditions.
+ |  
+ |  quadrature_method
+ |      Quadrature method
+ |  
+ |  reference_pressure
+ |      Reference state pressure [Pa].
+ |  
+ |  s
+ |      Entropy [J/kg/K or J/kmol/K] depending on `basis`.
+ |  
+ |  sound_speed
+ |      Speed of sound [m/s].
+ |  
+ |  species_names
+ |      A list of all the species names.
+ |  
+ |  standard_concentration_units
+ |      Get standard concentration units for this phase.
+ |  
+ |  standard_cp_R
+ |      Array of nondimensional species standard-state specific heat capacities
+ |      at constant pressure at the current temperature and pressure.
+ |  
+ |  standard_enthalpies_RT
+ |      Array of nondimensional species standard-state enthalpies at the
+ |      current temperature and pressure.
+ |  
+ |  standard_entropies_R
+ |      Array of nondimensional species standard-state entropies at the
+ |      current temperature and pressure.
+ |  
+ |  standard_gibbs_RT
+ |      Array of nondimensional species standard-state Gibbs free energies at
+ |      the current temperature and pressure.
+ |  
+ |  standard_int_energies_RT
+ |      Array of nondimensional species standard-state internal energies at the
+ |      current temperature and pressure.
+ |  
+ |  state
+ |      Get/Set the full thermodynamic state as a single array, arranged as
+ |      [temperature, density, mass fractions] for most phases. Useful mainly
+ |      in cases where it is desired to store many states in a multidimensional
+ |      array.
+ |  
+ |  state_size
+ |      Return size of vector defining internal state of the phase.
+ |  
+ |  thermal_expansion_coeff
+ |      Thermal expansion coefficient [1/K].
+ |  
+ |  thermo_model
+ |      Return thermodynamic model describing phase.
+ |  
+ |  u
+ |      Internal energy in [J/kg or J/kmol].
+ |  
+ |  v
+ |      Specific volume [m^3/kg or m^3/kmol] depending on `basis`.
+ |  
+ |  volume_mass
+ |      Specific volume [m^3/kg].
+ |  
+ |  volume_mole
+ |      Molar volume [m^3/kmol].
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes inherited from cantera.thermo.ThermoPhase:
+ |  
+ |  __pyx_vtable__ = &lt;capsule object NULL&gt;
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from cantera.solutionbase._SolutionBase:
+ |  
+ |  __copy__(self)
+ |  
+ |  __del__(...)
+ |  
+ |  __getitem__(self, key, /)
+ |      Return self[key].
+ |  
+ |  __getstate__(self)
+ |      Save complete information of the current phase for pickling.
+ |  
+ |  __setstate__(self, pkl)
+ |      Restore Solution from pickled information.
+ |  
+ |  clear_user_data(self)
+ |      Clear all saved input data, so that the data given by `input_data` or
+ |      `write_yaml` will only include values generated by Cantera based on the
+ |      current object state.
+ |  
+ |  clear_user_header(self)
+ |      Clear all saved header data, so that the data given by `input_header` or
+ |      `write_yaml` will only include values generated by Cantera based on the
+ |      current object state.
+ |  
+ |  update_user_data(self, data)
+ |      Add the contents of the provided `dict` as additional fields when generating
+ |      YAML phase definition files with `write_yaml` or in the data returned by
+ |      `input_data`. Existing keys with matching names are overwritten.
+ |  
+ |  update_user_header(self, data)
+ |      Add the contents of the provided `dict` as additional top-level YAML fields
+ |      when generating files with `write_yaml` or in the data returned by
+ |      `input_header`. Existing keys with matching names are overwritten.
+ |  
+ |  write_chemkin(self, mechanism_path=None, thermo_path=None, transport_path=None, sort_species=None, sort_elements=None, overwrite=False, quiet=False)
+ |      Write this `~cantera.Solution` instance to one or more Chemkin-format files.
+ |      See the documentation for `cantera.yaml2ck.convert` for information about the
+ |      arguments to this function.
+ |  
+ |  write_yaml(self, filename=None, phases=None, units=None, precision=None, skip_user_defined=None, header=True)
+ |      Write the definition for this phase, any additional phases specified,
+ |      and their species and reactions to the specified file.
+ |      
+ |      :param filename:
+ |          The name of the output file; if ``None``, a YAML string is returned
+ |      :param phases:
+ |          Additional ThermoPhase / Solution objects to be included in the
+ |          output file
+ |      :param units:
+ |          A `UnitSystem` object or dictionary of the units to be used for
+ |          each dimension.
+ |          See `YamlWriter.output_units &lt;cantera.YamlWriter.output_units&gt;`.
+ |      :param precision:
+ |          For output floating point values, the maximum number of digits to
+ |          the right of the decimal point. The default is 15 digits.
+ |      :param skip_user_defined:
+ |          If `True`, user-defined fields which are not used by Cantera will
+ |          be stripped from the output. These additional contents can also be
+ |          controlled using the `update_user_data` and `clear_user_data` functions.
+ |      :param header:
+ |          If `True`, fields of the `input_header` will be added to the YAML header;
+ |          note that fields name ``generator``, ``cantera-version``, ``git-commit``
+ |          and ``date`` are reserved, which means that any existing data are
+ |          replaced by automatically generated content when the file is written.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from cantera.solutionbase._SolutionBase:
+ |  
+ |  composite
+ |      Returns tuple of thermo/kinetics/transport models associated with
+ |      this SolutionBase object.
+ |  
+ |  input_data
+ |      Get input data corresponding to the current state of this Solution,
+ |      along with any user-specified data provided with its input (YAML)
+ |      definition.
+ |  
+ |  input_header
+ |      Retrieve input header data not associated with the current state of this
+ |      Solution, which corresponds to fields at the root level of the YAML input
+ |      that are not required for the instantiation of Cantera objects.
+ |  
+ |  name
+ |      The name assigned to this object. The default value corresponds
+ |      to the YAML input file phase entry.
+ |  
+ |  selected_species
+ |      Get/set the set of species that are included when returning results that have
+ |      a value for each species, such as `species_names &lt;cantera.ThermoPhase.species_names&gt;`,
+ |      `partial_molar_enthalpies &lt;cantera.ThermoPhase.partial_molar_enthalpies&gt;`, or
+ |      `net_production_rates &lt;cantera.Kinetics.net_production_rates&gt;`. The list of
+ |      selected species can be set by name or index. This property returns the
+ |      species by index.::
+ |      
+ |         &gt;&gt;&gt; gas.selected_species = [&quot;H2&quot;, &quot;O2&quot;]
+ |         &gt;&gt;&gt; print(gas.molecular_weights)
+ |         [ 2.016 31.998]
+ |      
+ |      This method is often used implicitly by using an indexing expression on a
+ |      `Solution` object::
+ |      
+ |         &gt;&gt;&gt; print(gas[&quot;H2&quot;, &quot;O2&quot;].molecular_weights)
+ |         [ 2.016 31.998]
+ |  
+ |  source
+ |      The source of this object (such as a file name).
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>For a simple list of the properties and methods of this object:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;CK_mode&#39;,
+ &#39;DP&#39;,
+ &#39;DPX&#39;,
+ &#39;DPY&#39;,
+ &#39;HP&#39;,
+ &#39;HPX&#39;,
+ &#39;HPY&#39;,
+ &#39;P&#39;,
+ &#39;P_sat&#39;,
+ &#39;Pe&#39;,
+ &#39;SP&#39;,
+ &#39;SPX&#39;,
+ &#39;SPY&#39;,
+ &#39;SV&#39;,
+ &#39;SVX&#39;,
+ &#39;SVY&#39;,
+ &#39;T&#39;,
+ &#39;TD&#39;,
+ &#39;TDX&#39;,
+ &#39;TDY&#39;,
+ &#39;TP&#39;,
+ &#39;TPX&#39;,
+ &#39;TPY&#39;,
+ &#39;T_sat&#39;,
+ &#39;Te&#39;,
+ &#39;UV&#39;,
+ &#39;UVX&#39;,
+ &#39;UVY&#39;,
+ &#39;X&#39;,
+ &#39;Y&#39;,
+ &#39;_ThermoPhase__composition_to_array&#39;,
+ &#39;__call__&#39;,
+ &#39;__class__&#39;,
+ &#39;__copy__&#39;,
+ &#39;__del__&#39;,
+ &#39;__delattr__&#39;,
+ &#39;__dir__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__eq__&#39;,
+ &#39;__format__&#39;,
+ &#39;__ge__&#39;,
+ &#39;__getattribute__&#39;,
+ &#39;__getitem__&#39;,
+ &#39;__getstate__&#39;,
+ &#39;__gt__&#39;,
+ &#39;__hash__&#39;,
+ &#39;__init__&#39;,
+ &#39;__init_subclass__&#39;,
+ &#39;__le__&#39;,
+ &#39;__lt__&#39;,
+ &#39;__module__&#39;,
+ &#39;__ne__&#39;,
+ &#39;__new__&#39;,
+ &#39;__pyx_vtable__&#39;,
+ &#39;__reduce__&#39;,
+ &#39;__reduce_cython__&#39;,
+ &#39;__reduce_ex__&#39;,
+ &#39;__repr__&#39;,
+ &#39;__setattr__&#39;,
+ &#39;__setstate__&#39;,
+ &#39;__setstate_cython__&#39;,
+ &#39;__sizeof__&#39;,
+ &#39;__slots__&#39;,
+ &#39;__str__&#39;,
+ &#39;__subclasshook__&#39;,
+ &#39;_check_kinetics_species_index&#39;,
+ &#39;_check_phase_index&#39;,
+ &#39;_check_reaction_index&#39;,
+ &#39;_cinit&#39;,
+ &#39;_custom_rates&#39;,
+ &#39;_enable_plasma&#39;,
+ &#39;_full_states&#39;,
+ &#39;_init_parts&#39;,
+ &#39;_init_yaml&#39;,
+ &#39;_native_mode&#39;,
+ &#39;_native_state&#39;,
+ &#39;_partial_states&#39;,
+ &#39;_references&#39;,
+ &#39;activities&#39;,
+ &#39;activity_coefficients&#39;,
+ &#39;add_reaction&#39;,
+ &#39;add_species&#39;,
+ &#39;add_species_alias&#39;,
+ &#39;atomic_weight&#39;,
+ &#39;atomic_weights&#39;,
+ &#39;auxiliary_data&#39;,
+ &#39;basis&#39;,
+ &#39;binary_diff_coeffs&#39;,
+ &#39;case_sensitive_species_names&#39;,
+ &#39;charges&#39;,
+ &#39;chemical_potentials&#39;,
+ &#39;clear_user_data&#39;,
+ &#39;clear_user_header&#39;,
+ &#39;composite&#39;,
+ &#39;concentrations&#39;,
+ &#39;cp&#39;,
+ &#39;cp_mass&#39;,
+ &#39;cp_mole&#39;,
+ &#39;creation_rates&#39;,
+ &#39;creation_rates_ddC&#39;,
+ &#39;creation_rates_ddCi&#39;,
+ &#39;creation_rates_ddP&#39;,
+ &#39;creation_rates_ddT&#39;,
+ &#39;creation_rates_ddX&#39;,
+ &#39;critical_density&#39;,
+ &#39;critical_pressure&#39;,
+ &#39;critical_temperature&#39;,
+ &#39;cv&#39;,
+ &#39;cv_mass&#39;,
+ &#39;cv_mole&#39;,
+ &#39;delta_enthalpy&#39;,
+ &#39;delta_entropy&#39;,
+ &#39;delta_gibbs&#39;,
+ &#39;delta_standard_enthalpy&#39;,
+ &#39;delta_standard_entropy&#39;,
+ &#39;delta_standard_gibbs&#39;,
+ &#39;density&#39;,
+ &#39;density_mass&#39;,
+ &#39;density_mole&#39;,
+ &#39;derivative_settings&#39;,
+ &#39;destruction_rates&#39;,
+ &#39;destruction_rates_ddC&#39;,
+ &#39;destruction_rates_ddCi&#39;,
+ &#39;destruction_rates_ddP&#39;,
+ &#39;destruction_rates_ddT&#39;,
+ &#39;destruction_rates_ddX&#39;,
+ &#39;electric_potential&#39;,
+ &#39;electrical_conductivity&#39;,
+ &#39;electrochemical_potentials&#39;,
+ &#39;electron_energy_distribution&#39;,
+ &#39;electron_energy_distribution_type&#39;,
+ &#39;electron_energy_levels&#39;,
+ &#39;electron_species_name&#39;,
+ &#39;element_index&#39;,
+ &#39;element_name&#39;,
+ &#39;element_names&#39;,
+ &#39;elemental_mass_fraction&#39;,
+ &#39;elemental_mole_fraction&#39;,
+ &#39;enthalpy_mass&#39;,
+ &#39;enthalpy_mole&#39;,
+ &#39;entropy_mass&#39;,
+ &#39;entropy_mole&#39;,
+ &#39;equilibrate&#39;,
+ &#39;equilibrium_constants&#39;,
+ &#39;equivalence_ratio&#39;,
+ &#39;find_isomers&#39;,
+ &#39;forward_rate_constants&#39;,
+ &#39;forward_rate_constants_ddC&#39;,
+ &#39;forward_rate_constants_ddP&#39;,
+ &#39;forward_rate_constants_ddT&#39;,
+ &#39;forward_rates_of_progress&#39;,
+ &#39;forward_rates_of_progress_ddC&#39;,
+ &#39;forward_rates_of_progress_ddCi&#39;,
+ &#39;forward_rates_of_progress_ddP&#39;,
+ &#39;forward_rates_of_progress_ddT&#39;,
+ &#39;forward_rates_of_progress_ddX&#39;,
+ &#39;g&#39;,
+ &#39;get_binary_diff_coeffs_polynomial&#39;,
+ &#39;get_collision_integral_polynomials&#39;,
+ &#39;get_thermal_conductivity_polynomial&#39;,
+ &#39;get_viscosity_polynomial&#39;,
+ &#39;gibbs_mass&#39;,
+ &#39;gibbs_mole&#39;,
+ &#39;h&#39;,
+ &#39;has_phase_transition&#39;,
+ &#39;heat_production_rates&#39;,
+ &#39;heat_release_rate&#39;,
+ &#39;input_data&#39;,
+ &#39;input_header&#39;,
+ &#39;int_energy_mass&#39;,
+ &#39;int_energy_mole&#39;,
+ &#39;is_compressible&#39;,
+ &#39;is_pure&#39;,
+ &#39;isothermal_compressibility&#39;,
+ &#39;isotropic_shape_factor&#39;,
+ &#39;kinetics_model&#39;,
+ &#39;kinetics_species_index&#39;,
+ &#39;kinetics_species_name&#39;,
+ &#39;kinetics_species_names&#39;,
+ &#39;mass_fraction_dict&#39;,
+ &#39;max_temp&#39;,
+ &#39;mean_electron_energy&#39;,
+ &#39;mean_molecular_weight&#39;,
+ &#39;min_temp&#39;,
+ &#39;mix_diff_coeffs&#39;,
+ &#39;mix_diff_coeffs_mass&#39;,
+ &#39;mix_diff_coeffs_mole&#39;,
+ &#39;mixture_fraction&#39;,
+ &#39;mobilities&#39;,
+ &#39;modify_reaction&#39;,
+ &#39;modify_species&#39;,
+ &#39;mole_fraction_dict&#39;,
+ &#39;molecular_weights&#39;,
+ &#39;multi_diff_coeffs&#39;,
+ &#39;multiplier&#39;,
+ &#39;n_atoms&#39;,
+ &#39;n_electron_energy_levels&#39;,
+ &#39;n_elements&#39;,
+ &#39;n_phases&#39;,
+ &#39;n_reactions&#39;,
+ &#39;n_selected_species&#39;,
+ &#39;n_species&#39;,
+ &#39;n_total_species&#39;,
+ &#39;name&#39;,
+ &#39;net_production_rates&#39;,
+ &#39;net_production_rates_ddC&#39;,
+ &#39;net_production_rates_ddCi&#39;,
+ &#39;net_production_rates_ddP&#39;,
+ &#39;net_production_rates_ddT&#39;,
+ &#39;net_production_rates_ddX&#39;,
+ &#39;net_rates_of_progress&#39;,
+ &#39;net_rates_of_progress_ddC&#39;,
+ &#39;net_rates_of_progress_ddCi&#39;,
+ &#39;net_rates_of_progress_ddP&#39;,
+ &#39;net_rates_of_progress_ddT&#39;,
+ &#39;net_rates_of_progress_ddX&#39;,
+ &#39;normalize_electron_energy_distribution_enabled&#39;,
+ &#39;partial_molar_cp&#39;,
+ &#39;partial_molar_enthalpies&#39;,
+ &#39;partial_molar_entropies&#39;,
+ &#39;partial_molar_int_energies&#39;,
+ &#39;partial_molar_volumes&#39;,
+ &#39;phase_of_matter&#39;,
+ &#39;product_stoich_coeff&#39;,
+ &#39;product_stoich_coeffs&#39;,
+ &#39;product_stoich_coeffs_reversible&#39;,
+ &#39;quadrature_method&#39;,
+ &#39;reactant_stoich_coeff&#39;,
+ &#39;reactant_stoich_coeffs&#39;,
+ &#39;reaction&#39;,
+ &#39;reaction_equations&#39;,
+ &#39;reaction_phase_index&#39;,
+ &#39;reactions&#39;,
+ &#39;reference_pressure&#39;,
+ &#39;report&#39;,
+ &#39;reverse_rate_constants&#39;,
+ &#39;reverse_rates_of_progress&#39;,
+ &#39;reverse_rates_of_progress_ddC&#39;,
+ &#39;reverse_rates_of_progress_ddCi&#39;,
+ &#39;reverse_rates_of_progress_ddP&#39;,
+ &#39;reverse_rates_of_progress_ddT&#39;,
+ &#39;reverse_rates_of_progress_ddX&#39;,
+ &#39;s&#39;,
+ &#39;selected_species&#39;,
+ &#39;set_binary_diff_coeffs_polynomial&#39;,
+ &#39;set_collision_integral_polynomial&#39;,
+ &#39;set_discretized_electron_energy_distribution&#39;,
+ &#39;set_equivalence_ratio&#39;,
+ &#39;set_mixture_fraction&#39;,
+ &#39;set_multiplier&#39;,
+ &#39;set_thermal_conductivity_polynomial&#39;,
+ &#39;set_unnormalized_mass_fractions&#39;,
+ &#39;set_unnormalized_mole_fractions&#39;,
+ &#39;set_viscosity_polynomial&#39;,
+ &#39;sound_speed&#39;,
+ &#39;source&#39;,
+ &#39;species&#39;,
+ &#39;species_index&#39;,
+ &#39;species_name&#39;,
+ &#39;species_names&#39;,
+ &#39;species_viscosities&#39;,
+ &#39;standard_concentration_units&#39;,
+ &#39;standard_cp_R&#39;,
+ &#39;standard_enthalpies_RT&#39;,
+ &#39;standard_entropies_R&#39;,
+ &#39;standard_gibbs_RT&#39;,
+ &#39;standard_int_energies_RT&#39;,
+ &#39;state&#39;,
+ &#39;state_size&#39;,
+ &#39;stoich_air_fuel_ratio&#39;,
+ &#39;thermal_conductivity&#39;,
+ &#39;thermal_diff_coeffs&#39;,
+ &#39;thermal_expansion_coeff&#39;,
+ &#39;thermo_model&#39;,
+ &#39;third_body_concentrations&#39;,
+ &#39;transport_fitting_errors&#39;,
+ &#39;transport_model&#39;,
+ &#39;u&#39;,
+ &#39;update_user_data&#39;,
+ &#39;update_user_header&#39;,
+ &#39;v&#39;,
+ &#39;viscosity&#39;,
+ &#39;volume_mass&#39;,
+ &#39;volume_mole&#39;,
+ &#39;write_chemkin&#39;,
+ &#39;write_yaml&#39;]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>To get help on a specific method, such as the <code class="docutils literal notranslate"><span class="pre">species_index</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">species_index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on method species_index in module cantera.thermo:
+
+species_index(species) method of cantera.composite.Solution instance
+    The index of species ``species``, which may be specified as a string or
+    an integer. In the latter case, the index is checked for validity and
+    returned. If no such species is present, an exception is thrown.
+</pre></div>
+</div>
+</div>
+</div>
+<p>For properties, getting the documentation is slightly trickier, as the usual method will
+give you the help for the <em>result</em>. For example:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on float object:
+
+class float(object)
+ |  float(x=0, /)
+ |  
+ |  Convert a string or number to a floating point number, if possible.
+ |  
+ |  Methods defined here:
+ |  
+ |  __abs__(self, /)
+ |      abs(self)
+ |  
+ |  __add__(self, value, /)
+ |      Return self+value.
+ |  
+ |  __bool__(self, /)
+ |      True if self else False
+ |  
+ |  __ceil__(self, /)
+ |      Return the ceiling as an Integral.
+ |  
+ |  __divmod__(self, value, /)
+ |      Return divmod(self, value).
+ |  
+ |  __eq__(self, value, /)
+ |      Return self==value.
+ |  
+ |  __float__(self, /)
+ |      float(self)
+ |  
+ |  __floor__(self, /)
+ |      Return the floor as an Integral.
+ |  
+ |  __floordiv__(self, value, /)
+ |      Return self//value.
+ |  
+ |  __format__(self, format_spec, /)
+ |      Formats the float according to format_spec.
+ |  
+ |  __ge__(self, value, /)
+ |      Return self&gt;=value.
+ |  
+ |  __getattribute__(self, name, /)
+ |      Return getattr(self, name).
+ |  
+ |  __getnewargs__(self, /)
+ |  
+ |  __gt__(self, value, /)
+ |      Return self&gt;value.
+ |  
+ |  __hash__(self, /)
+ |      Return hash(self).
+ |  
+ |  __int__(self, /)
+ |      int(self)
+ |  
+ |  __le__(self, value, /)
+ |      Return self&lt;=value.
+ |  
+ |  __lt__(self, value, /)
+ |      Return self&lt;value.
+ |  
+ |  __mod__(self, value, /)
+ |      Return self%value.
+ |  
+ |  __mul__(self, value, /)
+ |      Return self*value.
+ |  
+ |  __ne__(self, value, /)
+ |      Return self!=value.
+ |  
+ |  __neg__(self, /)
+ |      -self
+ |  
+ |  __pos__(self, /)
+ |      +self
+ |  
+ |  __pow__(self, value, mod=None, /)
+ |      Return pow(self, value, mod).
+ |  
+ |  __radd__(self, value, /)
+ |      Return value+self.
+ |  
+ |  __rdivmod__(self, value, /)
+ |      Return divmod(value, self).
+ |  
+ |  __repr__(self, /)
+ |      Return repr(self).
+ |  
+ |  __rfloordiv__(self, value, /)
+ |      Return value//self.
+ |  
+ |  __rmod__(self, value, /)
+ |      Return value%self.
+ |  
+ |  __rmul__(self, value, /)
+ |      Return value*self.
+ |  
+ |  __round__(self, ndigits=None, /)
+ |      Return the Integral closest to x, rounding half toward even.
+ |      
+ |      When an argument is passed, work like built-in round(x, ndigits).
+ |  
+ |  __rpow__(self, value, mod=None, /)
+ |      Return pow(value, self, mod).
+ |  
+ |  __rsub__(self, value, /)
+ |      Return value-self.
+ |  
+ |  __rtruediv__(self, value, /)
+ |      Return value/self.
+ |  
+ |  __sub__(self, value, /)
+ |      Return self-value.
+ |  
+ |  __truediv__(self, value, /)
+ |      Return self/value.
+ |  
+ |  __trunc__(self, /)
+ |      Return the Integral closest to x between 0 and x.
+ |  
+ |  as_integer_ratio(self, /)
+ |      Return integer ratio.
+ |      
+ |      Return a pair of integers, whose ratio is exactly equal to the original float
+ |      and with a positive denominator.
+ |      
+ |      Raise OverflowError on infinities and a ValueError on NaNs.
+ |      
+ |      &gt;&gt;&gt; (10.0).as_integer_ratio()
+ |      (10, 1)
+ |      &gt;&gt;&gt; (0.0).as_integer_ratio()
+ |      (0, 1)
+ |      &gt;&gt;&gt; (-.25).as_integer_ratio()
+ |      (-1, 4)
+ |  
+ |  conjugate(self, /)
+ |      Return self, the complex conjugate of any float.
+ |  
+ |  hex(self, /)
+ |      Return a hexadecimal representation of a floating-point number.
+ |      
+ |      &gt;&gt;&gt; (-0.1).hex()
+ |      &#39;-0x1.999999999999ap-4&#39;
+ |      &gt;&gt;&gt; 3.14159.hex()
+ |      &#39;0x1.921f9f01b866ep+1&#39;
+ |  
+ |  is_integer(self, /)
+ |      Return True if the float is an integer.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |  
+ |  __getformat__(typestr, /)
+ |      You probably don&#39;t want to use this function.
+ |      
+ |        typestr
+ |          Must be &#39;double&#39; or &#39;float&#39;.
+ |      
+ |      It exists mainly to be used in Python&#39;s test suite.
+ |      
+ |      This function returns whichever of &#39;unknown&#39;, &#39;IEEE, big-endian&#39; or &#39;IEEE,
+ |      little-endian&#39; best describes the format of floating point numbers used by the
+ |      C type named by typestr.
+ |  
+ |  fromhex(string, /)
+ |      Create a floating-point number from a hexadecimal string.
+ |      
+ |      &gt;&gt;&gt; float.fromhex(&#39;0x1.ffffp10&#39;)
+ |      2047.984375
+ |      &gt;&gt;&gt; float.fromhex(&#39;-0x1p-1074&#39;)
+ |      -5e-324
+ |  
+ |  ----------------------------------------------------------------------
+ |  Static methods defined here:
+ |  
+ |  __new__(*args, **kwargs)
+ |      Create and return a new object.  See help(type) for accurate signature.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  imag
+ |      the imaginary part of a complex number
+ |  
+ |  real
+ |      the real part of a complex number
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>will provide help on Python’s <code class="docutils literal notranslate"><span class="pre">float</span></code> class. To get the help for the temperature
+property, ask for the attribute of the class object itself:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on getset descriptor cantera.thermo.ThermoPhase.T:
+
+T
+    Temperature [K].
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are using the IPython shell, help can also be obtained using the <code class="docutils literal notranslate"><span class="pre">?</span></code> syntax:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> g.species_index<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="chemical-equilibrium">
+<h2>Chemical Equilibrium<a class="headerlink" href="#chemical-equilibrium" title="Link to this heading">#</a></h2>
+<p>To set a gas mixture to a state of chemical equilibrium, use the
+<a class="reference internal" href="../python/thermo.html#cantera.ThermoPhase.equilibrate" title="cantera.ThermoPhase.equilibrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ThermoPhase.equilibrate()</span></code></a> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cantera</span> <span class="k">as</span> <span class="nn">ct</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s1">&#39;gri30.yaml&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">TPX</span> <span class="o">=</span> <span class="mf">300.0</span><span class="p">,</span> <span class="n">ct</span><span class="o">.</span><span class="n">one_atm</span><span class="p">,</span> <span class="s1">&#39;CH4:0.95,O2:2,N2:7.52&#39;</span>
+<span class="n">g</span><span class="o">.</span><span class="n">equilibrate</span><span class="p">(</span><span class="s1">&#39;TP&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The above statement sets the state of object <code class="docutils literal notranslate"><span class="pre">g</span></code> to the state of chemical equilibrium
+holding temperature and pressure fixed. Alternatively, the specific enthalpy and
+pressure can be held fixed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">TPX</span> <span class="o">=</span> <span class="mf">300.0</span><span class="p">,</span> <span class="n">ct</span><span class="o">.</span><span class="n">one_atm</span><span class="p">,</span> <span class="s1">&#39;CH4:0.95,O2:2,N2:7.52&#39;</span>
+<span class="n">g</span><span class="o">.</span><span class="n">equilibrate</span><span class="p">(</span><span class="s1">&#39;HP&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Other options are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">UV</span></code>: fixed specific internal energy and specific volume</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SV</span></code>: fixed specific entropy and specific volume</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SP</span></code>: fixed specific entropy and pressure</p></li>
+</ul>
+<p>How can you tell if <code class="docutils literal notranslate"><span class="pre">equilibrate</span></code> has correctly found the chemical equilibrium state?
+One way is verify that the net rates of progress of all reversible reactions are zero.
+Here is the code to do this:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">TPX</span> <span class="o">=</span> <span class="mf">300.0</span><span class="p">,</span> <span class="n">ct</span><span class="o">.</span><span class="n">one_atm</span><span class="p">,</span> <span class="s1">&#39;CH4:0.95,O2:2,N2:7.52&#39;</span>
+<span class="n">g</span><span class="o">.</span><span class="n">equilibrate</span><span class="p">(</span><span class="s1">&#39;HP&#39;</span><span class="p">)</span>
+
+<span class="n">rf</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">forward_rates_of_progress</span>
+<span class="n">rr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">reverse_rates_of_progress</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">n_reactions</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">reaction</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">reversible</span> <span class="ow">and</span> <span class="n">rf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%4i</span><span class="s1">  </span><span class="si">%10.4g</span><span class="s1">  &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">rf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">rr</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">rf</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    0   -2.29e-15  
+    1  -4.258e-15  
+    2  -5.904e-16  
+    3  -7.085e-15  
+    4  -1.704e-15  
+    5  -2.005e-15  
+    6  -1.557e-15  
+    7   7.241e-15  
+    8  -5.229e-15  
+    9   5.394e-15  
+   10  -6.057e-15  
+   11   1.081e-15  
+   12   6.451e-15  
+   13   1.204e-14  
+   14  -9.876e-15  
+   15           0  
+   16   -4.01e-15  
+   17  -1.977e-15  
+   18  -4.893e-15  
+   19   6.935e-15  
+   20   2.514e-15  
+   21   2.274e-15  
+   22   8.803e-15  
+   23  -5.378e-15  
+   24  -1.055e-14  
+   25   1.417e-14  
+   26  -2.044e-14  
+   27    1.44e-14  
+   28   7.865e-15  
+   29    4.98e-15  
+   30    8.63e-15  
+   31  -1.649e-14  
+   32   2.115e-15  
+   33   2.185e-15  
+   34   2.174e-15  
+   35   2.345e-15  
+   37  -1.599e-15  
+   38  -2.419e-15  
+   39  -2.401e-15  
+   40  -2.288e-15  
+   41  -2.278e-15  
+   42  -4.106e-16  
+   43  -1.752e-15  
+   44  -5.578e-15  
+   45  -7.357e-15  
+   46  -6.814e-16  
+   47   -5.47e-15  
+   48   1.188e-15  
+   49   2.958e-15  
+   50   1.036e-15  
+   51   4.917e-15  
+   52  -1.193e-14  
+   53   6.418e-15  
+   54   8.648e-15  
+   55  -4.126e-15  
+   56  -1.255e-15  
+   57   -9.76e-15  
+   58   3.095e-15  
+   59   1.786e-15  
+   60   1.671e-15  
+   61  -2.782e-16  
+   62  -7.197e-16  
+   63  -3.763e-15  
+   64  -1.795e-15  
+   65  -1.995e-15  
+   66  -3.997e-15  
+   67  -7.087e-15  
+   68   -3.89e-15  
+   69  -7.468e-15  
+   70   2.105e-15  
+   71  -6.747e-16  
+   72  -8.855e-15  
+   73  -1.076e-14  
+   74  -8.609e-16  
+   75   1.691e-14  
+   76   6.938e-15  
+   77  -2.018e-14  
+   78   5.177e-15  
+   79    1.92e-15  
+   80   1.386e-14  
+   81  -4.283e-15  
+   82  -2.222e-15  
+   83   4.796e-15  
+   84   5.001e-15  
+   85   5.275e-15  
+   86   5.485e-15  
+   87   3.648e-15  
+   88   3.597e-15  
+   89  -1.717e-15  
+   90  -5.261e-15  
+   91   5.473e-15  
+   92   6.188e-15  
+   93   5.695e-15  
+   94    1.48e-15  
+   95  -1.168e-15  
+   96  -2.141e-15  
+   97  -1.516e-16  
+   98   3.689e-15  
+   99   1.408e-14  
+  100   1.851e-15  
+  101   2.396e-16  
+  102   3.492e-15  
+  103    3.48e-15  
+  104   5.837e-16  
+  105   1.711e-16  
+  106  -2.309e-15  
+  107   1.666e-15  
+  108   4.212e-15  
+  109   1.211e-14  
+  110   7.202e-15  
+  111  -2.252e-15  
+  112  -1.506e-14  
+  113   6.644e-15  
+  114  -1.163e-14  
+  115  -1.156e-14  
+  116  -3.718e-15  
+  117  -7.063e-15  
+  118  -6.112e-15  
+  119   1.762e-15  
+  120  -1.519e-14  
+  121  -2.128e-16  
+  122   1.643e-15  
+  123  -8.823e-15  
+  124   -6.83e-15  
+  125  -3.366e-15  
+  126  -1.772e-15  
+  127  -5.006e-15  
+  128  -1.721e-15  
+  129  -9.139e-15  
+  130   -8.23e-15  
+  131  -1.757e-14  
+  132  -1.076e-14  
+  133           0  
+  135   5.946e-15  
+  136  -3.371e-15  
+  137   5.457e-15  
+  138  -5.999e-15  
+  139  -1.193e-14  
+  140   3.349e-15  
+  141  -5.667e-15  
+  143   4.048e-15  
+  144   1.063e-14  
+  145   3.513e-15  
+  146   4.974e-15  
+  147   1.054e-15  
+  148    1.86e-15  
+  149  -4.468e-15  
+  150   1.049e-15  
+  151  -5.841e-15  
+  152   2.003e-15  
+  153  -1.928e-14  
+  154   7.424e-15  
+  155   3.544e-15  
+  156   4.552e-15  
+  157   8.055e-15  
+  158  -8.903e-15  
+  159   1.938e-14  
+  160  -1.092e-14  
+  161  -8.707e-15  
+  162   1.224e-15  
+  163  -1.968e-15  
+  164   -1.47e-14  
+  165   1.194e-14  
+  166   1.176e-14  
+  167   1.399e-14  
+  168   7.048e-15  
+  169   9.553e-15  
+  170  -3.585e-15  
+  171   -2.77e-15  
+  172   1.166e-16  
+  173  -9.062e-15  
+  174   1.267e-14  
+  175    8.99e-15  
+  176   5.754e-15  
+  177   3.589e-15  
+  178  -1.763e-15  
+  179  -1.661e-15  
+  180  -3.608e-15  
+  181   -1.09e-14  
+  182  -5.431e-15  
+  183    2.94e-15  
+  184   2.399e-15  
+  185     5.9e-15  
+  186    1.01e-14  
+  187   -1.26e-14  
+  188    -1.4e-14  
+  189  -3.366e-15  
+  190   -8.31e-16  
+  191  -1.116e-15  
+  192    2.92e-15  
+  193   3.986e-15  
+  194   -5.27e-15  
+  195   -5.06e-15  
+  196   7.608e-16  
+  197  -7.174e-15  
+  198  -1.844e-16  
+  199  -1.694e-16  
+  200  -1.876e-15  
+  201   2.691e-16  
+  202   1.644e-15  
+  203  -3.947e-15  
+  204  -3.794e-15  
+  205  -1.487e-15  
+  206  -7.142e-15  
+  207  -1.737e-15  
+  208  -1.739e-15  
+  209  -3.411e-15  
+  210   3.846e-15  
+  211   1.982e-15  
+  212  -8.913e-15  
+  213  -1.779e-15  
+  214   1.836e-15  
+  215  -2.783e-15  
+  216   6.675e-15  
+  217   2.958e-15  
+  218  -1.508e-15  
+  219   1.645e-15  
+  220   3.304e-15  
+  221    3.61e-15  
+  222   8.731e-15  
+  223   1.535e-15  
+  224    3.45e-15  
+  225  -3.065e-16  
+  226   6.175e-15  
+  227   1.477e-15  
+  228   6.907e-15  
+  229   6.043e-16  
+  230  -4.015e-16  
+  231   8.641e-15  
+  232   -3.65e-15  
+  233     2.4e-16  
+  234  -4.893e-15  
+  235   1.153e-14  
+  236   3.923e-15  
+  237  -1.043e-14  
+  238  -3.719e-15  
+  239           0  
+  240   3.323e-15  
+  241   4.294e-15  
+  242  -1.678e-15  
+  243  -3.566e-15  
+  244   3.364e-15  
+  245  -1.777e-15  
+  246   -3.46e-15  
+  247   -5.24e-15  
+  248  -5.466e-15  
+  249  -1.725e-15  
+  250  -3.992e-15  
+  251  -5.411e-15  
+  252           0  
+  253  -3.263e-15  
+  254  -1.078e-14  
+  255           0  
+  256  -3.222e-15  
+  257  -1.083e-14  
+  258  -1.027e-15  
+  259   -6.46e-15  
+  260  -5.587e-15  
+  261   9.237e-15  
+  262   1.206e-14  
+  263   1.129e-14  
+  264   1.693e-14  
+  265   5.216e-15  
+  266   2.324e-14  
+  267   2.042e-14  
+  268   1.655e-14  
+  269  -1.793e-15  
+  270    1.83e-15  
+  271   1.241e-14  
+  272  -5.578e-15  
+  273  -1.098e-14  
+  274   2.738e-15  
+  275  -3.436e-15  
+  276  -1.167e-14  
+  277  -3.749e-16  
+  278  -5.866e-15  
+  279   1.942e-15  
+  280  -3.612e-15  
+  281  -3.642e-15  
+  282  -5.086e-15  
+  284   8.946e-15  
+  285   9.013e-15  
+  286   5.444e-15  
+  288  -2.259e-15  
+  290   1.091e-14  
+  293   8.899e-15  
+  294   1.381e-16  
+  295   5.871e-16  
+  298   8.202e-15  
+  303   1.525e-14  
+  307  -1.867e-14  
+  308  -1.788e-14  
+  309   1.751e-16  
+  310  -7.401e-15  
+  311     2.7e-14  
+  312  -8.127e-15  
+  313  -7.048e-15  
+  314   3.644e-15  
+  315  -1.718e-16  
+  316   4.174e-15  
+  317   1.313e-14  
+  318  -1.792e-14  
+  319  -2.517e-15  
+  320  -2.972e-14  
+  321  -2.495e-14  
+  322   1.786e-15  
+  324  -3.831e-14  
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>If the magnitudes of the numbers in this list are all very small, then each reversible
+reaction is very nearly equilibrated, which only occurs if the gas is in chemical
+equilibrium.</p>
+<p>You might be wondering how <code class="docutils literal notranslate"><span class="pre">equilibrate</span></code> works. (Then again, you might not). Method
+<code class="docutils literal notranslate"><span class="pre">equilibrate</span></code> invokes Cantera’s chemical equilibrium solver, which uses an element
+potential method. The element potential method is one of a class of equivalent
+<em>nonstoichiometric</em> methods that all have the characteristic that the problem reduces to
+solving a set of <span class="math notranslate nohighlight">\(M\)</span> nonlinear algebraic equations, where <span class="math notranslate nohighlight">\(M\)</span> is the number of elements
+(not species). The so-called <em>stoichiometric</em> methods, on the other hand, (including
+Gibbs minimization), require solving <span class="math notranslate nohighlight">\(K\)</span> nonlinear equations, where <span class="math notranslate nohighlight">\(K\)</span> is the number of
+species (usually <span class="math notranslate nohighlight">\(K &gt;&gt; M\)</span>). See <span id="id2">Smith and Missen [<a class="reference internal" href="../reference/bibliography.html#id46" title="W. R. Smith and R. W. Missen. Chemical Reaction Equilibrium Analysis: Theory and Algorithms. Wiley, New York, 1982. ISBN 978-0471093473.">1982</a>]</span> for more information on the various
+algorithms and their characteristics.</p>
+<p>Cantera uses a damped Newton method to solve these equations, and does a few other
+things to generate a good starting guess and to produce a reasonably robust algorithm.
+If you want to know more about the details, look at the C++ class <a class="reference external" href="../cxx/da/d0e/classCantera_1_1ChemEquil.html">ChemEquil</a>.</p>
+</section>
+<section id="chemical-kinetics">
+<h2>Chemical Kinetics<a class="headerlink" href="#chemical-kinetics" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="../python/importing.html#cantera.Solution" title="cantera.Solution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Solution</span></code></a> objects are also <a class="reference internal" href="../python/kinetics.html#cantera.Kinetics" title="cantera.Kinetics"><code class="xref py py-class docutils literal notranslate"><span class="pre">Kinetics</span></code></a> objects, and provide all of
+the methods necessary to compute the thermodynamic quantities associated with each
+reaction, reaction rates, and species creation and destruction rates. They also provide
+methods to inspect the quantities that define each reaction such as the rate constants
+and the stoichiometric coefficients. The rate calculation functions are used extensively
+within Cantera’s <a class="reference internal" href="../python/zerodim.html"><span class="doc std std-doc">reactor network model</span></a> and <a class="reference internal" href="../python/onedim.html"><span class="doc std std-doc">1D flame
+model</span></a>.</p>
+<p>Information about individual reactions that is independent of the thermodynamic state
+can be obtained by accessing <a class="reference internal" href="../python/kinetics.html#cantera.Reaction" title="cantera.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects with the
+<a class="reference internal" href="../python/kinetics.html#cantera.Kinetics.reaction" title="cantera.Kinetics.reaction"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Kinetics.reaction()</span></code></a> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s1">&#39;gri30.yaml&#39;</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">reaction</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># get a Reaction object</span>
+<span class="n">r</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H2 + O &lt;=&gt; H + OH    &lt;Arrhenius&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="o">.</span><span class="n">reactants</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;H2&#39;: 1.0, &#39;O&#39;: 1.0}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="o">.</span><span class="n">products</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;H&#39;: 1.0, &#39;OH&#39;: 1.0}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Information about specific reaction rate parameterizations should be queried using the
+<code class="docutils literal notranslate"><span class="pre">input_data</span></code> property, which returns a YAML-compatible dictionary that represents input
+data needed to create the corresponding rate object:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="o">.</span><span class="n">rate</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ArrheniusRate at 7fb50ab546f0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="o">.</span><span class="n">rate</span><span class="o">.</span><span class="n">input_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;type&#39;: &#39;Arrhenius&#39;, &#39;rate-constant&#39;: {&#39;A&#39;: 38.7, &#39;b&#39;: 2.7, &#39;Ea&#39;: 26191840.0}}
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we are interested in only certain types of reactions, we can use this information to
+filter the full list of reactions to find the just the ones of interest. For example,
+here we find the indices of just those reactions which convert <code class="docutils literal notranslate"><span class="pre">CO</span></code> into <code class="docutils literal notranslate"><span class="pre">CO2</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">II</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">reactions</span><span class="p">())</span>
+      <span class="k">if</span> <span class="s1">&#39;CO&#39;</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">reactants</span> <span class="ow">and</span> <span class="s1">&#39;CO2&#39;</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">products</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">II</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">reaction</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">equation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CO + O (+M) &lt;=&gt; CO2 (+M)
+CO + O2 &lt;=&gt; CO2 + O
+CO + OH &lt;=&gt; CO2 + H
+CO + HO2 &lt;=&gt; CO2 + OH
+</pre></div>
+</div>
+</div>
+</div>
+<p>(Actually, we should also include reactions where the reaction is written such that
+<code class="docutils literal notranslate"><span class="pre">CO2</span></code> is a reactant and <code class="docutils literal notranslate"><span class="pre">CO</span></code> is a product, but for this example, we’ll just stick to
+this smaller set of reactions.) Now, let’s set the composition to an interesting
+equilibrium state:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">TPX</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">101325</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;CH4&#39;</span><span class="p">:</span><span class="mf">0.6</span><span class="p">,</span> <span class="s1">&#39;O2&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;N2&#39;</span><span class="p">:</span><span class="mf">3.76</span><span class="p">}</span>
+<span class="n">g</span><span class="o">.</span><span class="n">equilibrate</span><span class="p">(</span><span class="s1">&#39;HP&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can verify that this is an equilibrium state by seeing that the net reaction rates
+are essentially zero:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">net_rates_of_progress</span><span class="p">[</span><span class="n">II</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([4.06575815e-20, 1.90582413e-21, 2.99760217e-15, 4.99749439e-20])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s see what happens if we decrease the temperature of the mixture:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">TP</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">T</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="kc">None</span>
+<span class="n">g</span><span class="o">.</span><span class="n">net_rates_of_progress</span><span class="p">[</span><span class="n">II</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([3.18644907e-05, 5.00489883e-08, 1.05964910e-01, 2.89502678e-06])
+</pre></div>
+</div>
+</div>
+</div>
+<p>All of the reaction rates are positive, favoring the formation of <code class="docutils literal notranslate"><span class="pre">CO2</span></code> from <code class="docutils literal notranslate"><span class="pre">CO</span></code>, with
+the third reaction, <code class="docutils literal notranslate"><span class="pre">CO</span> <span class="pre">+</span> <span class="pre">OH</span> <span class="pre">&lt;=&gt;</span> <span class="pre">CO2</span> <span class="pre">+</span> <span class="pre">H</span></code> proceeding the fastest. If we look at the
+enthalpy change associated with each of these reactions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">delta_enthalpy</span><span class="p">[</span><span class="n">II</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-5.33034690e+08, -2.23248529e+07, -8.76650141e+07, -2.49169644e+08])
+</pre></div>
+</div>
+</div>
+</div>
+<p>we see that the change is negative in each case, indicating a net release of thermal
+energy. The total heat release rate can be computed either from the reaction rates:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">net_rates_of_progress</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">delta_enthalpy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-58013369.59815668)
+</pre></div>
+</div>
+</div>
+</div>
+<p>or from the species production rates:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">net_production_rates</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">partial_molar_enthalpies</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-58013369.59815668)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The contribution from just the selected reactions is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">net_rates_of_progress</span><span class="p">[</span><span class="n">II</span><span class="p">],</span> <span class="n">g</span><span class="o">.</span><span class="n">delta_enthalpy</span><span class="p">[</span><span class="n">II</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-9307122.692794196)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or about 16% of the total heat release rate.</p>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<p>Congratulations! You have finished the Cantera Python tutorial. You should now be ready
+to begin using Cantera on your own. Please see additional sections of the <a class="reference internal" href="index.html"><span class="doc std std-doc">Cantera User
+Guide</span></a> for assistance with intermediate and advanced Cantera
+functionality. You can also take a look at our <a class="reference internal" href="../examples/python/index.html"><span class="doc std std-doc">Example Gallery</span></a>
+for ideas on how you can use Cantera. Here are a few examples that may be of particular
+interest:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="flame-temperature.html"><span class="doc std std-doc">Calculating Adiabatic Flame Temperature</span></a></p></li>
+<li><p><a class="reference internal" href="heating-value.html"><span class="doc std std-doc">Calculating Heating Value of a Fuel</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/python/thermo/equations_of_state.html"><span class="doc std std-doc">Non-ideal equations of state</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/python/kinetics/lithium_ion_battery.html"><span class="doc std std-doc">Lithium Ion Battery Discharge Curve</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/python/reactors/continuous_reactor.html"><span class="doc std std-doc">Continuously Stirred Tank Reactor</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/python/reactors/NonIdealShockTube.html"><span class="doc std std-doc">Ignition delay time using the Redlich-Kwong real gas model</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/python/onedim/flamespeed_sensitivity.html"><span class="doc std std-doc">Laminar flame speed sensitivity analysis</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/python/onedim/premixed_counterflow_twin_flame.html"><span class="doc std std-doc">Symmetric premixed twin flame</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-the-state">Setting the State</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-a-subset-of-species">Working with a Subset of Species</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-mechanism-files">Working With Mechanism Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-ck-format-files">Converting CK-format files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting Help</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-equilibrium">Chemical Equilibrium</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-kinetics">Chemical Kinetics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/userguide/python-tutorial.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

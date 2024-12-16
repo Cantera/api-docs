@@ -1,0 +1,808 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Python Module Documentation &#8212; Cantera 3.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=dd1205ac"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python/index';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Objects Representing Phases" href="importing.html" />
+    <link rel="prev" title="Reference" href="../reference/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Python Module Documentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transport.html">Transport Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zerodim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="scripts.html">Mechanism Conversion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yaml_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lxcat_conversion.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="units.html">Python Interface With Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html">Physical Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html">Utilities</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../yaml/index.html">YAML Input File Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/general.html">General Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/phases.html">Phase Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/species.html">Species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/reactions.html">Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/yaml2ck.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/lxcat2yaml.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/releasenotes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.1.html">Cantera 3.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.0.html">Cantera 3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.6.html">Cantera 2.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.5.html">Cantera 2.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.4.html">Cantera 2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.3.html">Cantera 2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.2.html">Cantera 2.2.1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.1.html">Cantera 2.1.2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.0.html">Cantera 2.0.2</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Science Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/thermo/index.html">Thermodynamic Properties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/thermo/species-thermo.html">Species Thermodynamic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/thermo/phase-thermo.html">Phase Thermodynamic Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/kinetics/index.html">Chemical Reactions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/kinetics/reaction-rates.html">Reaction Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/kinetics/rate-constants.html">Rate Constant Parameterizations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/transport/index.html">Transport Properties</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/reactors/index.html">Reactors and Reactor Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/controlreactor.html">Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/constant-pressure-reactor.html">Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-reactor.html">Ideal Gas Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-reactor.html">Ideal Gas Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/mole-reactor.html">Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/constant-pressure-mole-reactor.html">Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-mole-reactor.html">Ideal Gas Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-mole-reactor.html">Ideal Gas Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/interactions.html">Reactor Interactions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/onedim/index.html">One-dimensional Flames</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/governing-equations.html">Governing Equations for One-dimensional Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/discretization.html">Discretization of 1D Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/nonlinear-solver.html">Nonlinear Solver for One-dimensional Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/grid-refinement.html">Grid Refinement for One-dimensional Flows</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../reference/index.html" class="nav-link">Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Python...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="python-module-documentation">
+<span id="sec-python-documentation"></span><h1>Python Module Documentation<a class="headerlink" href="#python-module-documentation" title="Link to this heading">#</a></h1>
+<section id="objects-representing-phases">
+<h2><a class="reference internal" href="importing.html"><span class="doc std std-doc">Objects Representing Phases</span></a><a class="headerlink" href="#objects-representing-phases" title="Link to this heading">#</a></h2>
+<p>The most frequently used class in Cantera is the <a class="reference internal" href="importing.html#cantera.Solution" title="cantera.Solution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Solution</span></code></a>. It can represent
+a mixture of gases, a liquid solution, or a solid solution and provides access to the
+solution’s thermodynamic, kinetic, and transport properties. The <a class="reference internal" href="importing.html#cantera.Interface" title="cantera.Interface"><code class="xref py py-class docutils literal notranslate"><span class="pre">Interface</span></code></a>
+class represents surfaces formed by two adjacent phases or edges where three phases
+meet. Several <a class="reference internal" href="importing.html#sec-python-purefluid"><span class="std std-ref">special constructors</span></a> are provided to instantiate
+<a class="reference internal" href="importing.html#cantera.Solution" title="cantera.Solution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Solution</span></code></a> objects that implement pure fluid equations of state for certain
+substances.</p>
+<p>The <a class="reference internal" href="importing.html#cantera.Quantity" title="cantera.Quantity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Quantity</span></code></a> class represents a specific quantity (mass) of a
+<a class="reference internal" href="importing.html#cantera.Solution" title="cantera.Solution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Solution</span></code></a>. It provides methods for accessing the extensive properties of the
+quantity and computing the state resulting from mixing two substances.</p>
+<p>The <a class="reference internal" href="importing.html#cantera.SolutionArray" title="cantera.SolutionArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">SolutionArray</span></code></a> class provides a convenient interface for representing a
+multidimensional array of states and accessing properties of those states as arrays.</p>
+</section>
+<section id="thermodynamic-properties">
+<h2><a class="reference internal" href="thermo.html"><span class="doc std std-doc">Thermodynamic Properties</span></a><a class="headerlink" href="#thermodynamic-properties" title="Link to this heading">#</a></h2>
+<p>Class <a class="reference internal" href="thermo.html#cantera.ThermoPhase" title="cantera.ThermoPhase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThermoPhase</span></code></a> is one of the base classes for <a class="reference internal" href="importing.html#cantera.Solution" title="cantera.Solution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Solution</span></code></a>
+objects. It represents the intensive thermodynamic state using one of the <a class="reference internal" href="../reference/thermo/phase-thermo.html"><span class="doc std std-doc">phase
+thermodynamic models</span></a> implemented by Cantera and
+provides methods for computing thermodynamic properties.</p>
+<p>A phase is composed of a number of <a class="reference internal" href="thermo.html#cantera.Species" title="cantera.Species"><code class="xref py py-class docutils literal notranslate"><span class="pre">Species</span></code></a> objects. Each species has a
+<a class="reference internal" href="thermo.html#cantera.SpeciesThermo" title="cantera.SpeciesThermo"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeciesThermo</span></code></a> object that implements a particular <a class="reference internal" href="../reference/thermo/species-thermo.html"><span class="doc std std-doc">species thermodynamic
+model</span></a>. <a class="reference internal" href="thermo.html#cantera.Element" title="cantera.Element"><code class="xref py py-class docutils literal notranslate"><span class="pre">Element</span></code></a> objects can be used to
+access information about the elements comprising each species or to define custom
+isotopes.</p>
+<p>The <a class="reference internal" href="thermo.html#cantera.Mixture" title="cantera.Mixture"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mixture</span></code></a> class provides an interface for computing equilibrium properties
+of mixtures composed of multiple phases.</p>
+</section>
+<section id="chemical-kinetics">
+<h2><a class="reference internal" href="kinetics.html"><span class="doc std std-doc">Chemical Kinetics</span></a><a class="headerlink" href="#chemical-kinetics" title="Link to this heading">#</a></h2>
+<p>Class <a class="reference internal" href="kinetics.html#cantera.Kinetics" title="cantera.Kinetics"><code class="xref py py-class docutils literal notranslate"><span class="pre">Kinetics</span></code></a> is a base class of <a class="reference internal" href="importing.html#cantera.Solution" title="cantera.Solution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Solution</span></code></a> that provides access
+to <a class="reference internal" href="../reference/kinetics/reaction-rates.html"><span class="doc std std-doc">reaction rates</span></a> of progress, species production
+rates, and other quantities pertaining to a reaction mechanism.
+<a class="reference internal" href="kinetics.html#cantera.InterfaceKinetics" title="cantera.InterfaceKinetics"><code class="xref py py-class docutils literal notranslate"><span class="pre">InterfaceKinetics</span></code></a> provides this information for <a class="reference internal" href="importing.html#cantera.Interface" title="cantera.Interface"><code class="xref py py-class docutils literal notranslate"><span class="pre">Interface</span></code></a>
+objects.</p>
+<p>A reaction mechanism consists of a set of <a class="reference internal" href="kinetics.html#cantera.Reaction" title="cantera.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects. The
+<a class="reference internal" href="kinetics.html#cantera.Reaction" title="cantera.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object specifies the reactants and products of the reaction and
+has a <a class="reference internal" href="kinetics.html#cantera.ReactionRate" title="cantera.ReactionRate"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReactionRate</span></code></a> object that handles the evaluation of the rate constant
+as a function of the mixture composition, using one of the <a class="reference internal" href="../reference/kinetics/rate-constants.html"><span class="doc std std-doc">rate
+parameterizations</span></a> implemented by Cantera or a
+user-defined rate implemented using the <a class="reference internal" href="kinetics.html#cantera.ExtensibleRate" title="cantera.ExtensibleRate"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensibleRate</span></code></a> class.</p>
+<p>The <a class="reference internal" href="kinetics.html#cantera.ReactionPathDiagram" title="cantera.ReactionPathDiagram"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReactionPathDiagram</span></code></a> class can be used to analyze reaction pathways.</p>
+</section>
+<section id="transport-properties">
+<h2><a class="reference internal" href="transport.html"><span class="doc std std-doc">Transport Properties</span></a><a class="headerlink" href="#transport-properties" title="Link to this heading">#</a></h2>
+<p>Class <a class="reference internal" href="transport.html#cantera.Transport" title="cantera.Transport"><code class="xref py py-class docutils literal notranslate"><span class="pre">Transport</span></code></a> is a base class of <a class="reference internal" href="importing.html#cantera.Solution" title="cantera.Solution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Solution</span></code></a> that provides access
+to transport properties such as viscosity and species diffusivities, using one of the
+available <a class="reference internal" href="../reference/transport/index.html#sec-phase-transport-models"><span class="std std-ref">transport models</span></a>. The
+<a class="reference internal" href="transport.html#cantera.DustyGasTransport" title="cantera.DustyGasTransport"><code class="xref py py-class docutils literal notranslate"><span class="pre">DustyGasTransport</span></code></a> provides a special transport model applicable to porous
+media. Species properties needed to compute transport properties are handled by the
+<a class="reference internal" href="transport.html#cantera.GasTransportData" title="cantera.GasTransportData"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasTransportData</span></code></a> class.</p>
+</section>
+<section id="zero-dimensional-reactor-networks">
+<h2><a class="reference internal" href="zerodim.html"><span class="doc std std-doc">Zero-Dimensional Reactor Networks</span></a><a class="headerlink" href="#zero-dimensional-reactor-networks" title="Link to this heading">#</a></h2>
+<p>A reactor network consists of one or more interconnected reactors. Several reactor types
+are implemented by <a class="reference internal" href="zerodim.html#sec-python-reactors"><span class="std std-ref">classes derived from <code class="docutils literal notranslate"><span class="pre">Reactor</span></code></span></a>, each with its
+own set of <a class="reference internal" href="../reference/reactors/index.html#sec-homogenous-reactor-types"><span class="std std-ref">governing equations</span></a>.</p>
+<p>Reactors can be connected to each other and upstream or downstream
+<a class="reference internal" href="zerodim.html#cantera.Reservoir" title="cantera.Reservoir"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reservoir</span></code></a>s using <a class="reference internal" href="zerodim.html#cantera.Valve" title="cantera.Valve"><code class="xref py py-class docutils literal notranslate"><span class="pre">Valve</span></code></a>s, <a class="reference internal" href="zerodim.html#cantera.MassFlowController" title="cantera.MassFlowController"><code class="xref py py-class docutils literal notranslate"><span class="pre">MassFlowController</span></code></a>s,
+<a class="reference internal" href="zerodim.html#cantera.PressureController" title="cantera.PressureController"><code class="xref py py-class docutils literal notranslate"><span class="pre">PressureController</span></code></a>s, and <a class="reference internal" href="zerodim.html#cantera.Wall" title="cantera.Wall"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wall</span></code></a>s, which introduce <a class="reference internal" href="../reference/reactors/index.html#sec-reactor-interactions"><span class="std std-ref">additional
+terms to the governing equations</span></a>. Heterogeneous reactions are
+handled by <a class="reference internal" href="zerodim.html#cantera.ReactorSurface" title="cantera.ReactorSurface"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReactorSurface</span></code></a>. User-defined reactor governing equations can be
+implemented using the <a class="reference internal" href="zerodim.html#cantera.ExtensibleReactor" title="cantera.ExtensibleReactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensibleReactor</span></code></a> class or any of the classes derived
+from it.</p>
+<p>Time integration of reactor networks is handled by the <a class="reference internal" href="zerodim.html#cantera.ReactorNet" title="cantera.ReactorNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReactorNet</span></code></a> class. For
+<a class="reference internal" href="../reference/reactors/index.html#sec-reactor-preconditioning"><span class="std std-ref">certain types of networks</span></a>, integration can be accelerated
+by using the <a class="reference internal" href="zerodim.html#cantera.AdaptivePreconditioner" title="cantera.AdaptivePreconditioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdaptivePreconditioner</span></code></a> class.</p>
+</section>
+<section id="one-dimensional-reacting-flows">
+<h2><a class="reference internal" href="onedim.html"><span class="doc std std-doc">One-dimensional Reacting Flows</span></a><a class="headerlink" href="#one-dimensional-reacting-flows" title="Link to this heading">#</a></h2>
+<p>The main way of setting up a <a class="reference internal" href="../reference/onedim/index.html"><span class="doc std std-doc">1D simulation</span></a> in Cantera is
+through one of the specializations of the <a class="reference internal" href="onedim.html#cantera.FlameBase" title="cantera.FlameBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlameBase</span></code></a> class:
+<a class="reference internal" href="onedim.html#cantera.FreeFlame" title="cantera.FreeFlame"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreeFlame</span></code></a>, <a class="reference internal" href="onedim.html#cantera.BurnerFlame" title="cantera.BurnerFlame"><code class="xref py py-class docutils literal notranslate"><span class="pre">BurnerFlame</span></code></a>, <a class="reference internal" href="onedim.html#cantera.CounterflowDiffusionFlame" title="cantera.CounterflowDiffusionFlame"><code class="xref py py-class docutils literal notranslate"><span class="pre">CounterflowDiffusionFlame</span></code></a>,
+<a class="reference internal" href="onedim.html#cantera.CounterflowPremixedFlame" title="cantera.CounterflowPremixedFlame"><code class="xref py py-class docutils literal notranslate"><span class="pre">CounterflowPremixedFlame</span></code></a>, <a class="reference internal" href="onedim.html#cantera.CounterflowTwinPremixedFlame" title="cantera.CounterflowTwinPremixedFlame"><code class="xref py py-class docutils literal notranslate"><span class="pre">CounterflowTwinPremixedFlame</span></code></a>, or
+<a class="reference internal" href="onedim.html#cantera.ImpingingJet" title="cantera.ImpingingJet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImpingingJet</span></code></a>. These classes all consist of a <a class="reference internal" href="onedim.html#sec-python-flow-domains"><span class="std std-ref">flow
+domain</span></a> with two <a class="reference internal" href="onedim.html#sec-python-boundary-domains"><span class="std std-ref">boundaries</span></a>
+defining inlet/outlet boundary conditions.</p>
+</section>
+<section id="mechanism-conversion">
+<h2><a class="reference internal" href="scripts.html"><span class="doc std std-doc">Mechanism Conversion</span></a><a class="headerlink" href="#mechanism-conversion" title="Link to this heading">#</a></h2>
+<p>Cantera includes modules implementing conversion of mechanisms between the YAML and
+Chemkin formats, conversion from the LXCat format, and conversion from the legacy CTI
+and CTML (XML) formats that were used prior to Cantera 3.0. The preferred interfaces for
+these conversions are the executable scripts <a class="reference internal" href="../yaml/ck2yaml.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">ck2yaml</span></code></span></a>,
+<a class="reference internal" href="../yaml/yaml2ck.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">yaml2ck</span></code></span></a>, <a class="reference internal" href="../yaml/lxcat2yaml.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">lxcat2yaml</span></code></span></a>,
+<a class="reference internal" href="../yaml/cti2yaml.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">cti2yaml</span></code></span></a>, and <a class="reference internal" href="../yaml/ctml2yaml.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">ctml2yaml</span></code></span></a>.</p>
+</section>
+<section id="python-interface-with-units">
+<h2><a class="reference internal" href="units.html"><span class="std std-doc">Python Interface With Units</span></a><a class="headerlink" href="#python-interface-with-units" title="Link to this heading">#</a></h2>
+<p>This subpackage provides an alternative interface to thermodynamic properties where
+physical units are associated with all values, using the
+<a class="reference external" href="https://pint.readthedocs.io/en/stable/">pint</a> library. This capability is implemented by the <a class="reference internal" href="units.html#cantera.with_units.Solution" title="cantera.with_units.Solution"><code class="xref py py-class docutils literal notranslate"><span class="pre">with_units.Solution</span></code></a> and <a class="reference internal" href="units.html#cantera.with_units.PureFluid" title="cantera.with_units.PureFluid"><code class="xref py py-class docutils literal notranslate"><span class="pre">with_units.PureFluid</span></code></a> classes.</p>
+</section>
+<section id="physical-constants">
+<h2><a class="reference internal" href="constants.html"><span class="std std-doc">Physical Constants</span></a><a class="headerlink" href="#physical-constants" title="Link to this heading">#</a></h2>
+<p>Cantera provides definitions for a number of frequently used physical constants. The
+values are consistent with the 2018 CODATA recommendations.</p>
+</section>
+<section id="utilities">
+<h2><a class="reference internal" href="utilities.html"><span class="std std-doc">Utilities</span></a><a class="headerlink" href="#utilities" title="Link to this heading">#</a></h2>
+<p>Classes <a class="reference internal" href="utilities.html#cantera.AnyMap" title="cantera.AnyMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">AnyMap</span></code></a> and <a class="reference internal" href="utilities.html#cantera.YamlWriter" title="cantera.YamlWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">YamlWriter</span></code></a> provide functionality for
+interacting with input data defined using Cantera’s <a class="reference internal" href="../yaml/index.html"><span class="doc std std-doc">YAML input format</span></a>.
+Classes <a class="reference internal" href="utilities.html#cantera.UnitSystem" title="cantera.UnitSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnitSystem</span></code></a> and <a class="reference internal" href="utilities.html#cantera.Units" title="cantera.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a> are used for expressing dimensional
+quantities in input files.</p>
+<p>A number of <a class="reference internal" href="utilities.html#sec-python-global-funcs"><span class="std std-ref">global functions</span></a> are provided for managing
+locations where Cantera looks for data files, for setting how Cantera handles warnings
+and errors, and how some transitional/legacy features are handled.</p>
+<p>The <a class="reference internal" href="utilities.html#cantera.extension" title="cantera.extension"><code class="xref py py-func docutils literal notranslate"><span class="pre">extension()</span></code></a> function is used as a decorator for implementations of
+<a class="reference internal" href="kinetics.html#cantera.ExtensibleRate" title="cantera.ExtensibleRate"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensibleRate</span></code></a> to allow user-defined rate types to be specified from YAML
+input files.</p>
+<p>Classes <a class="reference internal" href="utilities.html#cantera.CanteraError" title="cantera.CanteraError"><code class="xref py py-class docutils literal notranslate"><span class="pre">CanteraError</span></code></a> and <a class="reference internal" href="utilities.html#cantera.ThermoModelMethodError" title="cantera.ThermoModelMethodError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThermoModelMethodError</span></code></a> are raised for
+types of errors that are not mapped onto a built-in Python exception type.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objects-representing-phases"><span class="xref myst">Objects Representing Phases</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-properties"><span class="xref myst">Thermodynamic Properties</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-kinetics"><span class="xref myst">Chemical Kinetics</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transport-properties"><span class="xref myst">Transport Properties</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-dimensional-reactor-networks"><span class="xref myst">Zero-Dimensional Reactor Networks</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-dimensional-reacting-flows"><span class="xref myst">One-dimensional Reacting Flows</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mechanism-conversion"><span class="xref myst">Mechanism Conversion</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-interface-with-units"><span class="xref myst">Python Interface With Units</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-constants"><span class="xref myst">Physical Constants</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utilities"><span class="xref myst">Utilities</span></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/python/index.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

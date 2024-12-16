@@ -1,0 +1,1596 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Phase Definitions &#8212; Cantera 3.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=dd1205ac"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'yaml/phases';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Elements" href="elements.html" />
+    <link rel="prev" title="General Structure" href="general.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/index.html">Python Module Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/transport.html">Transport Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/zerodim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python/scripts.html">Mechanism Conversion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python/ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/yaml_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/lxcat_conversion.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/units.html">Python Interface With Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/constants.html">Physical Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/utilities.html">Utilities</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">YAML Input File Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="general.html">General Structure</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Phase Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="species.html">Species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reactions.html">Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml2ck.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lxcat2yaml.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/releasenotes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.1.html">Cantera 3.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.0.html">Cantera 3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.6.html">Cantera 2.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.5.html">Cantera 2.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.4.html">Cantera 2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.3.html">Cantera 2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.2.html">Cantera 2.2.1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.1.html">Cantera 2.1.2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.0.html">Cantera 2.0.2</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Science Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/thermo/index.html">Thermodynamic Properties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/thermo/species-thermo.html">Species Thermodynamic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/thermo/phase-thermo.html">Phase Thermodynamic Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/kinetics/index.html">Chemical Reactions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/kinetics/reaction-rates.html">Reaction Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/kinetics/rate-constants.html">Rate Constant Parameterizations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/transport/index.html">Transport Properties</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/reactors/index.html">Reactors and Reactor Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/controlreactor.html">Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/constant-pressure-reactor.html">Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-reactor.html">Ideal Gas Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-reactor.html">Ideal Gas Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/mole-reactor.html">Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/constant-pressure-mole-reactor.html">Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-mole-reactor.html">Ideal Gas Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-mole-reactor.html">Ideal Gas Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/interactions.html">Reactor Interactions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/onedim/index.html">One-dimensional Flames</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/governing-equations.html">Governing Equations for One-dimensional Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/discretization.html">Discretization of 1D Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/nonlinear-solver.html">Nonlinear Solver for One-dimensional Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/grid-refinement.html">Grid Refinement for One-dimensional Flows</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../reference/index.html" class="nav-link">Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">YAML Input File Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Phase Definitions</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="phase-definitions">
+<span id="sec-yaml-phases"></span><h1>Phase Definitions<a class="headerlink" href="#phase-definitions" title="Link to this heading">#</a></h1>
+<p>A <code class="docutils literal notranslate"><span class="pre">phase</span></code> is a mapping that contains definitions for the elements, species, and
+optionally reactions that can take place in that phase. The fields of a <code class="docutils literal notranslate"><span class="pre">phase</span></code> entry
+are:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code></dt><dd><p>String identifier used for the phase. Required.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">elements</span></code></dt><dd><p>Specification for the elements present in the phase. This can be:</p>
+<ul class="simple">
+<li><p>Omitted, in which case the standard elements will be added as needed by the species
+included in the phase.</p></li>
+<li><p>A list of element symbols, which can be either defined in the <code class="docutils literal notranslate"><span class="pre">elements</span></code> section of
+the file or taken from the standard elements.</p></li>
+<li><p>A list of single-key mappings of section names to lists of element symbols. These
+sections can be in the same file as the phase definition, or from another file if
+written as <code class="docutils literal notranslate"><span class="pre">file-path/sectionname</span></code>. If a relative path is specified, the directory
+containing the current file is searched first, followed by the Cantera data path.
+Standard elements can be included by referencing the fictitious section <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple myst" id="sec-yaml-phase-species">
+<dt><code class="docutils literal notranslate"><span class="pre">species</span></code></dt><dd><p>Specification for the species present in the phase. This can be:</p>
+<ul class="simple">
+<li><p>a list of species that appear in the <code class="docutils literal notranslate"><span class="pre">species</span></code> section of the file.</p></li>
+<li><p>The string <code class="docutils literal notranslate"><span class="pre">all</span></code>, to indicate that all species in the <code class="docutils literal notranslate"><span class="pre">species</span></code> section should be
+included. This is the default if no <code class="docutils literal notranslate"><span class="pre">species</span></code> entry is present.</p></li>
+<li><p>A list of single-key mappings of section names to either the string <code class="docutils literal notranslate"><span class="pre">all</span></code> or a list
+of species names. These sections can be in the same file as the phase definition, or
+from another file if written as <code class="docutils literal notranslate"><span class="pre">file-path/sectionname</span></code>. If a relative path is
+specified, the directory containing the current file is searched first, followed by
+the Cantera data path.</p></li>
+</ul>
+<p>Species may be skipped depending on the setting of the <code class="docutils literal notranslate"><span class="pre">skip-undeclared-elements</span></code>
+option.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">skip-undeclared-elements</span></code></dt><dd><p>If set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, do not add species that contain elements that are not explicitly
+included in the phase. The default is <code class="docutils literal notranslate"><span class="pre">false</span></code>, where the presence of such species is
+considered an error. Filtering of reactions is controlled by the <code class="docutils literal notranslate"><span class="pre">declared-species</span></code>
+option in the <a class="reference internal" href="#sec-yaml-phase-reactions"><span class="std std-ref">reactions</span></a> entry and the
+<code class="docutils literal notranslate"><span class="pre">skip-undeclared-third-bodies</span></code> flag.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">skip-undeclared-third-bodies</span></code></dt><dd><p>If set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, ignore third body efficiencies for species that are not defined in
+the phase. The default is <code class="docutils literal notranslate"><span class="pre">false</span></code>, where the presence of such third body
+specifications is considered an error.</p>
+</dd>
+</dl>
+<dl class="simple myst" id="sec-yaml-phase-explicit-third-body-duplicates">
+<dt><code class="docutils literal notranslate"><span class="pre">explicit-third-body-duplicates</span></code></dt><dd><p>Specifies how to handle three body reactions with an explicit collider that are
+duplicates of a three body reaction with the default collider <code class="docutils literal notranslate"><span class="pre">M</span></code>. This can be:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">warn</span></code>: Issue a warning about such reactions. This is the default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">error</span></code>: Raise an exception if such reactions are found.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mark-duplicate</span></code>: Mark the reactions as duplicates. Species production and
+consumption rates will reflect the sum of the rates. This option may correspond to
+the behavior of software packages that do not check for this kind of duplicate
+reaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">modify-efficiency</span></code>: Set the efficiency of the explicit third body to zero for the
+reaction that gives the rate for the default collider. This option is the most
+self-consistent but may not correspond to the intent of the mechanism’s authors.</p></li>
+</ul>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.1.</span></p>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">state</span></code></dt><dd><p>A mapping specifying the thermodynamic state. See <a class="reference internal" href="#sec-yaml-setting-state"><span class="std std-ref">Setting the state</span></a>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">adjacent-phases</span></code></dt><dd><p>For interface phases, specification of adjacent phases that participate in reactions
+on the interface. This can be:</p>
+<ul class="simple">
+<li><p>a list of phase names that appear in the <code class="docutils literal notranslate"><span class="pre">phases</span></code> section of the file.</p></li>
+<li><p>A list of single-key mappings of section names to a list of phase names. These
+sections can be in the same file as the current phase definition, or from another
+file if written as <code class="docutils literal notranslate"><span class="pre">file-path/section-name</span></code>. If a relative path is specified, the
+directory containing the current file is searched first, followed by the Cantera
+data path.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple myst" id="sec-yaml-phase-thermo">
+<dt><code class="docutils literal notranslate"><span class="pre">thermo</span></code></dt><dd><p>String specifying the phase thermodynamic model to be used. Supported model strings
+are:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#sec-yaml-binary-solution-tabulated"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">binary-solution-tabulated</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-compound-lattice"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">compound-lattice</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-coverage-dependent-surface"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">coverage-dependent-surface</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-debye-huckel"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Debye-Huckel</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-edge"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">edge</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-electron-cloud"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">electron-cloud</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-fixed-stoichiometry"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">fixed-stoichiometry</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-hmw-electrolyte"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">HMW-electrolyte</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-ideal-gas"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ideal-gas</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-ideal-molal-solution"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ideal-molal-solution</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-ideal-condensed"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ideal-condensed</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-ideal-solution-vpss"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ideal-solution-VPSS</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-ideal-surface"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ideal-surface</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-lattice"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">lattice</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-liquid-water-iapws95"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">liquid-water-IAPWS95</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-margules"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Margules</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-peng-robinson"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Peng-Robinson</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-plasma"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">plasma</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-pure-fluid"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">pure-fluid</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-redlich-kister"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Redlich-Kister</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#sec-yaml-redlich-kwong"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Redlich-Kwong</span></code></span></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple myst" id="sec-yaml-phase-kinetics">
+<dt><code class="docutils literal notranslate"><span class="pre">kinetics</span></code></dt><dd><p>String specifying the kinetics model to be used. Supported model strings are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">none</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bulk</span></code> (<a class="reference external" href="../cxx/d5/d0f/classCantera_1_1BulkKinetics.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gas</span></code> (alias for <code class="docutils literal notranslate"><span class="pre">bulk</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">surface</span></code> (<a class="reference external" href="../cxx/d1/d72/classCantera_1_1InterfaceKinetics.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edge</span></code> (<a class="reference external" href="../cxx/d0/df0/classCantera_1_1EdgeKinetics.html">details</a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple myst" id="sec-yaml-phase-reactions">
+<dt><code class="docutils literal notranslate"><span class="pre">reactions</span></code></dt><dd><p>Source of reactions to include in the phase, if a kinetics model has been specified.
+This can be:</p>
+<ul class="simple">
+<li><p>The string <code class="docutils literal notranslate"><span class="pre">all</span></code>, which indicates that all reactions from the <code class="docutils literal notranslate"><span class="pre">reactions</span></code> section of
+the file should be included. This is the default if no <code class="docutils literal notranslate"><span class="pre">reactions</span></code> entry is present.</p></li>
+<li><p>The string <code class="docutils literal notranslate"><span class="pre">declared-species</span></code>, which indicates that all reactions from the
+<code class="docutils literal notranslate"><span class="pre">reactions</span></code> section involving only species present in the phase should be included.</p></li>
+<li><p>The string <code class="docutils literal notranslate"><span class="pre">none</span></code>, which indicates that no reactions should be added. This can be
+used if reactions will be added programmatically after the phase is constructed.</p></li>
+<li><p>A list of sections from which to include reactions. These sections can be in the
+same file as the phase definition, or from another file if written as
+<code class="docutils literal notranslate"><span class="pre">file-path/sectionname</span></code>. If a relative path is specified, the directory containing
+the current file is searched first, followed by the Cantera data path.</p></li>
+<li><p>A list of single-key mappings of section names to rules for adding reactions, where
+for each section name, that rule is either <code class="docutils literal notranslate"><span class="pre">all</span></code> or <code class="docutils literal notranslate"><span class="pre">declared-species</span></code> and is
+applied as described above.</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Motz-Wise</span></code></dt><dd><p>Boolean indicating whether the Motz-Wise correction should be applied to sticking
+reactions. Applicable only to interface phases. The default is <code class="docutils literal notranslate"><span class="pre">false</span></code>. The value set
+at the phase level may be overridden on individual reactions.</p>
+</dd>
+</dl>
+<dl class="simple myst" id="sec-yaml-phase-transport">
+<dt><code class="docutils literal notranslate"><span class="pre">transport</span></code></dt><dd><p>String specifying the transport model to be used. Supported model strings are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">none</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">high-pressure</span></code>: A model for high-pressure gas transport properties based on a
+method of corresponding states (<a class="reference external" href="../cxx/d9/d63/classCantera_1_1HighPressureGasTransport.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ionized-gas</span></code>: A model implementing the Stockmayer-(n,6,4) model for transport of
+ions in a gas (<a class="reference external" href="../cxx/d4/d65/classCantera_1_1IonGasTransport.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mixture-averaged</span></code>: The mixture-averaged transport model for ideal gases
+(<a class="reference external" href="../cxx/d9/d17/classCantera_1_1MixTransport.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mixture-averaged-CK</span></code>: The mixture-averaged transport model for ideal gases,
+using polynomial fits corresponding to Chemkin-II (<a class="reference external" href="../cxx/d9/d17/classCantera_1_1MixTransport.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multicomponent</span></code>: The multicomponent transport model for ideal gases
+(<a class="reference external" href="../cxx/df/d7c/classCantera_1_1MultiTransport.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multicomponent-CK</span></code>: The multicomponent transport model for ideal gases, using
+polynomial fits corresponding to Chemkin-II (<a class="reference external" href="../cxx/df/d7c/classCantera_1_1MultiTransport.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unity-Lewis-number</span></code>: A transport model for ideal gases, where diffusion
+coefficients for all species are set so that the Lewis number is 1
+(<a class="reference external" href="../cxx/d3/dd6/classCantera_1_1UnityLewisTransport.html">details</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">water</span></code>: A transport model for pure water applicable in both liquid and vapor
+phases (<a class="reference external" href="../cxx/df/d1f/classCantera_1_1WaterTransport.html">details</a>)</p></li>
+</ul>
+</dd>
+</dl>
+<section id="setting-the-state">
+<span id="sec-yaml-setting-state"></span><h2>Setting the state<a class="headerlink" href="#setting-the-state" title="Link to this heading">#</a></h2>
+<p>The state of a <code class="docutils literal notranslate"><span class="pre">phase</span></code> can be set using two properties to set the thermodynamic state,
+plus the composition.</p>
+<p>The composition can be set using one of the following fields, depending on the phase
+type. The composition is specified as a mapping of species names to values. Where
+necessary, the values will be automatically normalized.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mass-fractions</span></code> or <code class="docutils literal notranslate"><span class="pre">Y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mole-fractions</span></code> or <code class="docutils literal notranslate"><span class="pre">X</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coverages</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">molalities</span></code> or <code class="docutils literal notranslate"><span class="pre">M</span></code></p></li>
+</ul>
+<p>The thermodynamic state can be set using the following property pairs, with some
+exceptions for phases where setting that property pair is not implemented. All
+properties are on a per unit mass basis where relevant:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> and <code class="docutils literal notranslate"><span class="pre">P</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> and <code class="docutils literal notranslate"><span class="pre">D</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> and <code class="docutils literal notranslate"><span class="pre">V</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">H</span></code> and <code class="docutils literal notranslate"><span class="pre">P</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">U</span></code> and <code class="docutils literal notranslate"><span class="pre">V</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">S</span></code> and <code class="docutils literal notranslate"><span class="pre">V</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">S</span></code> and <code class="docutils literal notranslate"><span class="pre">P</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">S</span></code> and <code class="docutils literal notranslate"><span class="pre">T</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">V</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">U</span></code> and <code class="docutils literal notranslate"><span class="pre">P</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">V</span></code> and <code class="docutils literal notranslate"><span class="pre">H</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> and <code class="docutils literal notranslate"><span class="pre">H</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">S</span></code> and <code class="docutils literal notranslate"><span class="pre">H</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">D</span></code> and <code class="docutils literal notranslate"><span class="pre">P</span></code></p></li>
+</ul>
+<p>The following synonyms are also implemented for use in any of the pairs:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">temperature</span></code>, <code class="docutils literal notranslate"><span class="pre">T</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pressure</span></code>, <code class="docutils literal notranslate"><span class="pre">P</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enthalpy</span></code>, <code class="docutils literal notranslate"><span class="pre">H</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entropy</span></code>, <code class="docutils literal notranslate"><span class="pre">S</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int-energy</span></code>, <code class="docutils literal notranslate"><span class="pre">internal-energy</span></code>, <code class="docutils literal notranslate"><span class="pre">U</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">specific-volume</span></code>, <code class="docutils literal notranslate"><span class="pre">V</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">density</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code></p></li>
+</ul>
+</section>
+<section id="phase-thermodynamic-models">
+<span id="sec-yaml-phase-thermo-models"></span><h2>Phase thermodynamic models<a class="headerlink" href="#phase-thermodynamic-models" title="Link to this heading">#</a></h2>
+<section id="binary-solution-tabulated">
+<span id="sec-yaml-binary-solution-tabulated"></span><h3><code class="docutils literal notranslate"><span class="pre">binary-solution-tabulated</span></code><a class="headerlink" href="#binary-solution-tabulated" title="Link to this heading">#</a></h3>
+<p>A phase representing a binary solution where the excess enthalpy and entropy are
+interpolated between tabulated values as a function of mole fraction, as
+<a class="reference external" href="../cxx/de/ddf/classCantera_1_1BinarySolutionTabulatedThermo.html">described here</a>.</p>
+<p>Includes the fields of <a class="reference internal" href="#sec-yaml-ideal-condensed"><span class="std std-ref">ideal-condensed</span></a>, plus:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">tabulated-species</span></code></dt><dd><p>The name of the species to which the tabulated enthalpy and entropy is added.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tabulated-thermo</span></code></dt><dd><p>A mapping containing three (optionally four) lists of equal lengths:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">mole-fractions</span></code></dt><dd><p>A list of mole fraction values for the tabulated species.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">enthalpy</span></code></dt><dd><p>The extra molar enthalpy to be added to the tabulated species at these mole
+fractions.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">entropy</span></code></dt><dd><p>The extra molar entropy to be added to the tabulated species at these mole
+fractions.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">molar-volume</span></code></dt><dd><p>The molar volume of the phase at these mole fractions. This input is optional.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">graphite-anode</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">binary-solution-tabulated</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;Li[anode]&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;V[anode]&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">standard-concentration-basis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unity</span>
+<span class="w">  </span><span class="nt">tabulated-species</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Li[anode]</span>
+<span class="w">  </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">energy</span><span class="p">:</span><span class="w"> </span><span class="nv">J</span><span class="p p-Indicator">,</span><span class="nt"> quantity</span><span class="p">:</span><span class="w"> </span><span class="nv">mol</span><span class="p p-Indicator">,</span><span class="nt"> pressure</span><span class="p">:</span><span class="w"> </span><span class="nv">atm</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">tabulated-thermo</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">mole-fractions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5.75000E-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.25841E-01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.45932E-01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.66023E-01</span><span class="p p-Indicator">,</span>
+<span class="w">      </span><span class="nv">4.86114E-01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.06205E-01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">7.26295E-01</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">enthalpy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-6.40692E+04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-9.69664E+03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-8.31339E+03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-7.69063E+03</span><span class="p p-Indicator">,</span>
+<span class="w">      </span><span class="nv">-3.94568E+03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-2.01329E+03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.59649E+03</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">entropy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">3.05724E+01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.53501E+01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.27000E+01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.21865E+01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.70474E+01</span><span class="p p-Indicator">,</span>
+<span class="w">      </span><span class="nv">1.92980E+01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.92885E+01</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="nv">300</span><span class="p p-Indicator">,</span><span class="nt"> P</span><span class="p">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="nt"> X</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="s">&quot;Li[anode]&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">0.3</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;V[anode]&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">0.7</span><span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 2.5.</span></p>
+</div>
+</section>
+<section id="compound-lattice">
+<span id="sec-yaml-compound-lattice"></span><h3><code class="docutils literal notranslate"><span class="pre">compound-lattice</span></code><a class="headerlink" href="#compound-lattice" title="Link to this heading">#</a></h3>
+<p>A phase that is comprised of a fixed additive combination of other lattice phases, as
+<a class="reference external" href="../cxx/de/de1/classCantera_1_1LatticeSolidPhase.html">described here</a>.</p>
+<p>Additional fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">composition</span></code></dt><dd><p>A mapping of component phase names to their relative stoichiometries.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Li7Si3_and_Interstitials(S)</span>
+<span class="w">  </span><span class="nt">elements</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Li</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Si</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">compound-lattice</span>
+<span class="w">  </span><span class="nt">composition</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">Li7Si3(s)</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> Li7Si3-interstitial</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+</section>
+<section id="coverage-dependent-surface">
+<span id="sec-yaml-coverage-dependent-surface"></span><h3><code class="docutils literal notranslate"><span class="pre">coverage-dependent-surface</span></code><a class="headerlink" href="#coverage-dependent-surface" title="Link to this heading">#</a></h3>
+<p>A coverage-dependent surface phase. That is, a surface phase where the enthalpy,
+entropy, and heat capacity of each species may depend on its coverage and the
+coverage of other species in the phase. Full details are
+<a class="reference external" href="../cxx/db/d25/classCantera_1_1CoverageDependentSurfPhase.html">described here</a>. The majority of coverage dependency
+parameters are provided in the species entry as
+<a class="reference internal" href="species.html#sec-yaml-species-coverage"><span class="std std-ref">described here</span></a>.</p>
+<p>Additional fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">site-density</span></code></dt><dd><p>The molar density of surface sites.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">reference-state-coverage</span></code></dt><dd><p>The reference state coverage denoting the low-coverage limit (ideal-surface)
+thermodynamic properties.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">covdep</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coverage-dependent-surface</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OC_Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CO2_Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">C_Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O_Pt</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500.0</span>
+<span class="w">    </span><span class="nt">P</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.01325e+05</span>
+<span class="w">    </span><span class="nt">coverages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="nt"> OC_Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="nt"> CO2_Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> C_Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> O_Pt</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">site-density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.72e-09</span>
+<span class="w">  </span><span class="nt">reference-state-coverage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.22</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.0.</span></p>
+</div>
+</section>
+<section id="debye-huckel">
+<span id="sec-yaml-debye-huckel"></span><h3><code class="docutils literal notranslate"><span class="pre">Debye-Huckel</span></code><a class="headerlink" href="#debye-huckel" title="Link to this heading">#</a></h3>
+<p>A dilute liquid electrolyte which obeys the Debye-Hückel formulation for nonideality as
+<a class="reference external" href="../cxx/d8/d9a/classCantera_1_1DebyeHuckel.html">described here</a>. Additional parameters for this model are contained
+in the <code class="docutils literal notranslate"><span class="pre">activity-data</span></code> field:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">activity-data</span></code></dt><dd><p>The activity data field contains the following fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">model</span></code></dt><dd><p>One of <code class="docutils literal notranslate"><span class="pre">dilute-limit</span></code>, <code class="docutils literal notranslate"><span class="pre">B-dot-with-variable-a</span></code>,
+<code class="docutils literal notranslate"><span class="pre">B-dot-with-common-a</span></code>, <code class="docutils literal notranslate"><span class="pre">beta_ij</span></code>, or <code class="docutils literal notranslate"><span class="pre">Pitzer-with-beta_ij</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">A_Debye</span></code></dt><dd><p>The value of the Debye “A” parameter, or the string <code class="docutils literal notranslate"><span class="pre">variable</span></code> to use a calculation
+based on the water equation of state. Defaults to the constant value of 1.172576
+kg^0.5/gmol^0.5, a nominal value for water at 298 K and 1 atm.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">B_Debye</span></code></dt><dd><p>The Debye “B” parameter. Defaults to 3.2864e+09 kg^0.5/gmol^0.5/m, a nominal
+value for water.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">max-ionic-strength</span></code></dt><dd><p>The maximum ionic strength</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">use-Helgeson-fixed-form</span></code></dt><dd><p>Boolean, <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">default-ionic-radius</span></code></dt><dd><p>Ionic radius to use for species where the ionic radius has not been specified.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">B-dot</span></code></dt><dd><p>The value of B-dot.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">beta</span></code></dt><dd><p>List of mappings providing values of <span class="math notranslate nohighlight">\(\beta_{ij}\)</span> for different species pairs. Each
+mapping contains a <code class="docutils literal notranslate"><span class="pre">species</span></code> key that contains a list of two species names, and a
+<code class="docutils literal notranslate"><span class="pre">beta</span></code> key that contains the corresponding value of <span class="math notranslate nohighlight">\(\beta_{ij}\)</span>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debye-huckel-pitzer-beta_ij-IAPWS</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">water_IAPWS</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">H2O(L)</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species_waterSolution</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">NaCl(aq)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">NaOH(aq)</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Debye-Huckel</span>
+<span class="w">  </span><span class="nt">activity-data</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pitzer-with-beta_ij</span>
+<span class="w">    </span><span class="nt">A_Debye</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable</span>
+<span class="w">    </span><span class="nt">B_Debye</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.28640E9 kg^0.5/gmol^0.5/m</span>
+<span class="w">    </span><span class="nt">default-ionic-radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.042843 angstrom</span>
+<span class="w">    </span><span class="nt">max-ionic-strength</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0</span>
+<span class="w">    </span><span class="nt">beta</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">H+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">beta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.27</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">beta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.15</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">beta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.06</span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300.0 K</span>
+<span class="w">    </span><span class="nt">P</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.01325e+05 Pa</span>
+<span class="w">    </span><span class="nt">molalities</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">Na+</span><span class="p">:</span><span class="w"> </span><span class="nv">3.0</span><span class="p p-Indicator">,</span><span class="nt"> Cl-</span><span class="p">:</span><span class="w"> </span><span class="nv">3.0</span><span class="p p-Indicator">,</span><span class="nt"> H+</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0499e-08</span><span class="p p-Indicator">,</span><span class="nt"> OH-</span><span class="p">:</span><span class="w"> </span><span class="nv">1.3765e-06</span><span class="p p-Indicator">,</span>
+<span class="nt">                 NaCl(aq)</span><span class="p">:</span><span class="w"> </span><span class="nv">0.98492</span><span class="p p-Indicator">,</span><span class="nt"> NaOH(aq)</span><span class="p">:</span><span class="w"> </span><span class="nv">3.8836e-06</span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+<p>In addition, the Debye-Hückel model uses several species-specific properties which may
+be defined in the <code class="docutils literal notranslate"><span class="pre">Debye-Huckel</span></code> field of the <em>species</em> entry. These properties are:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">ionic-radius</span></code></dt><dd><p>Size of the species.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">electrolyte-species-type</span></code></dt><dd><p>One of <code class="docutils literal notranslate"><span class="pre">solvent</span></code>, <code class="docutils literal notranslate"><span class="pre">charged-species</span></code>, <code class="docutils literal notranslate"><span class="pre">weak-acid-associated</span></code>, <code class="docutils literal notranslate"><span class="pre">strong-acid-associated</span></code>,
+<code class="docutils literal notranslate"><span class="pre">polar-neutral</span></code>, or <code class="docutils literal notranslate"><span class="pre">nonpolar-neutral</span></code>. The type <code class="docutils literal notranslate"><span class="pre">solvent</span></code> is the default for the
+first species in the phase. The type <code class="docutils literal notranslate"><span class="pre">charged-species</span></code> is the default for species with
+a net charge. Otherwise, the default is and <code class="docutils literal notranslate"><span class="pre">nonpolar-neutral</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">weak-acid-charge</span></code></dt><dd><p>Charge to use for species that can break apart into charged species.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">species</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NaCl(aq)</span>
+<span class="w">  </span><span class="nt">composition</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">Na</span><span class="p">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="nt"> Cl</span><span class="p">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">piecewise-Gibbs</span>
+<span class="w">    </span><span class="nt">h0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-96.03E3 cal/mol</span>
+<span class="w">    </span><span class="nt">dimensionless</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">298.15</span><span class="p">:</span><span class="w"> </span><span class="nv">-174.5057463</span><span class="p p-Indicator">,</span><span class="nt"> 333.15</span><span class="p">:</span><span class="w"> </span><span class="nv">-174.5057463</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">equation-of-state</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">constant-volume</span>
+<span class="w">    </span><span class="nt">molar-volume</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.3</span>
+<span class="w">  </span><span class="nt">Debye-Huckel</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">ionic-radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4 angstrom</span>
+<span class="w">    </span><span class="nt">electrolyte-species-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">weak-acid-associated</span>
+<span class="w">    </span><span class="nt">weak-acid-charge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1.0</span>
+</pre></div>
+</div>
+</section>
+<section id="edge">
+<span id="sec-yaml-edge"></span><h3><code class="docutils literal notranslate"><span class="pre">edge</span></code><a class="headerlink" href="#edge" title="Link to this heading">#</a></h3>
+<p>A one-dimensional edge between two surfaces, as <a class="reference external" href="../cxx/d9/d17/classCantera_1_1EdgePhase.html">described here</a>.</p>
+<p>Additional fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">site-density</span></code></dt><dd><p>The molar density of sites per unit length along the edge</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tpb</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">edge</span>
+<span class="w">  </span><span class="nt">adjacent-phases</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">metal</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">metal_surface</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">oxide_surface</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">elements</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">H</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">(tpb)</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">edge</span>
+<span class="w">  </span><span class="nt">reactions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">tpb-reactions</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="nv">1073.15</span><span class="p p-Indicator">,</span><span class="nt"> coverages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">(tpb)</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">}}</span>
+<span class="w">  </span><span class="nt">site-density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0e-17 mol/cm</span>
+</pre></div>
+</div>
+</section>
+<section id="electron-cloud">
+<span id="sec-yaml-electron-cloud"></span><h3><code class="docutils literal notranslate"><span class="pre">electron-cloud</span></code><a class="headerlink" href="#electron-cloud" title="Link to this heading">#</a></h3>
+<p>A phase representing an electron cloud, such as conduction electrons in a metal,
+as <a class="reference external" href="../cxx/d9/d13/classCantera_1_1MetalPhase.html">described here</a>.</p>
+<p>Additional fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">density</span></code></dt><dd><p>The density of the bulk metal</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">metal</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">electron-cloud</span>
+<span class="w">  </span><span class="nt">elements</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">E</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">electron</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1073.15</span>
+<span class="w">    </span><span class="nt">X</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">electron</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9 g/cm^3</span>
+</pre></div>
+</div>
+</section>
+<section id="fixed-stoichiometry">
+<span id="sec-yaml-fixed-stoichiometry"></span><h3><code class="docutils literal notranslate"><span class="pre">fixed-stoichiometry</span></code><a class="headerlink" href="#fixed-stoichiometry" title="Link to this heading">#</a></h3>
+<p>An incompressible phase with fixed composition, as <a class="reference external" href="../cxx/d3/d50/classCantera_1_1StoichSubstance.html">described here</a>.</p>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">diamond</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fixed-stoichiometry</span>
+<span class="w">  </span><span class="nt">elements</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">C</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">C(d)</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</section>
+<section id="hmw-electrolyte">
+<span id="sec-yaml-hmw-electrolyte"></span><h3><code class="docutils literal notranslate"><span class="pre">HMW-electrolyte</span></code><a class="headerlink" href="#hmw-electrolyte" title="Link to this heading">#</a></h3>
+<p>A dilute or concentrated liquid electrolyte phase that obeys the Pitzer formulation for
+nonideality, as <a class="reference external" href="../cxx/de/d1d/classCantera_1_1HMWSoln.html">described here</a>.</p>
+<p>Additional parameters for this model are contained in the <code class="docutils literal notranslate"><span class="pre">activity-data</span></code> field:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">activity-data</span></code></dt><dd><p>The activity data field contains the following fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">temperature-model</span></code></dt><dd><p>The form of the Pitzer temperature model. One of <code class="docutils literal notranslate"><span class="pre">constant</span></code>, <code class="docutils literal notranslate"><span class="pre">linear</span></code> or <code class="docutils literal notranslate"><span class="pre">complex</span></code>.
+The default is <code class="docutils literal notranslate"><span class="pre">constant</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">A_Debye</span></code></dt><dd><p>The value of the Debye “A” parameter, or the string <code class="docutils literal notranslate"><span class="pre">variable</span></code> to use a calculation
+based on the water equation of state. The default is 1.172576 kg^0.5/gmol^0.5, a
+nominal value for water at 298 K and 1 atm.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">max-ionic-strength</span></code></dt><dd><p>The maximum ionic strength</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">interactions</span></code></dt><dd><p>A list of mappings, where each mapping describes a binary or ternary interaction
+among species. Fields of this mapping include:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">species</span></code></dt><dd><p>A list of one to three species names</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">beta0</span></code></dt><dd><p>The <span class="math notranslate nohighlight">\(\beta^{(0)}\)</span> parameters for an cation/anion interaction.
+1, 2, or 5 values depending on the value of <code class="docutils literal notranslate"><span class="pre">temperature-model</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">beta1</span></code></dt><dd><p>The <span class="math notranslate nohighlight">\(\beta^{(1)}\)</span> parameters for an cation/anion interaction.
+1, 2, or 5 values depending on the value of <code class="docutils literal notranslate"><span class="pre">temperature-model</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">beta2</span></code></dt><dd><p>The <span class="math notranslate nohighlight">\(\beta^{(2)}\)</span> parameters for an cation/anion interaction.
+1, 2, or 5 values depending on the value of <code class="docutils literal notranslate"><span class="pre">temperature-model</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Cphi</span></code></dt><dd><p>The <span class="math notranslate nohighlight">\(C^\phi\)</span> parameters for an cation/anion interaction.
+1, 2, or 5 values depending on the value of <code class="docutils literal notranslate"><span class="pre">temperature-model</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">alpha1</span></code></dt><dd><p>The <span class="math notranslate nohighlight">\(\alpha^{(1)}\)</span> parameter for an cation/anion interaction.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">alpha2</span></code></dt><dd><p>The <span class="math notranslate nohighlight">\(\alpha^{(2)}\)</span> parameter for an cation/anion interaction.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">theta</span></code></dt><dd><p>The <span class="math notranslate nohighlight">\(\theta\)</span> parameters for a like-charged binary interaction.
+1, 2, or 5 values depending on the value of <code class="docutils literal notranslate"><span class="pre">temperature-model</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">lambda</span></code></dt><dd><p>The <span class="math notranslate nohighlight">\(\lambda\)</span> parameters for binary interactions involving at least one neutral
+species. 1, 2, or 5 values depending on the value of <code class="docutils literal notranslate"><span class="pre">temperature-model</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">psi</span></code></dt><dd><p>The <span class="math notranslate nohighlight">\(\Psi\)</span> parameters for ternary interactions involving three charged species.
+1, 2, or 5 values depending on the value of <code class="docutils literal notranslate"><span class="pre">temperature-model</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">zeta</span></code></dt><dd><p>The <span class="math notranslate nohighlight">\(\zeta\)</span> parameters for ternary interactions involving one neutral species. 1,
+2, or 5 values depending on the value of <code class="docutils literal notranslate"><span class="pre">temperature-model</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mu</span></code></dt><dd><p>The <span class="math notranslate nohighlight">\(\mu\)</span> parameters for a neutral species self-interaction.
+1, 2, or 5 values depending on the value of <code class="docutils literal notranslate"><span class="pre">temperature-model</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cropping-coefficients</span></code></dt><dd><p>Parameters in the molality exponential cutoff treatment</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">ln_gamma_k_min</span></code></dt><dd><p>Default -5.0.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ln_gamma_k_max</span></code></dt><dd><p>Default 15.0.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ln_gamma_o_min</span></code></dt><dd><p>Default -6.0.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ln_gamma_o_max</span></code></dt><dd><p>Default 3.0.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NaCl_electrolyte</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HMW-electrolyte</span>
+<span class="w">  </span><span class="nt">activity-data</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">temperature-model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">complex</span>
+<span class="w">    </span><span class="nt">A_Debye</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.175930 kg^0.5/gmol^0.5</span>
+<span class="w">    </span><span class="nt">interactions</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">beta0</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0765</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.008946</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.3158E-6</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-777.03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-4.4706</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">beta1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.2664</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.1608E-5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0715E-6</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">beta2</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">Cphi</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.00127</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-4.655E-5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">33.317</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.09421</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">alpha1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">H+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">beta0</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.1775</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">beta1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.2945</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">beta2</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">Cphi</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0008</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">alpha1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">beta0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0864</span>
+<span class="w">      </span><span class="nt">beta1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.253</span>
+<span class="w">      </span><span class="nt">beta2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">      </span><span class="nt">Cphi</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0044</span>
+<span class="w">      </span><span class="nt">alpha1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="w">      </span><span class="nt">alpha2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Cl-</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">],</span><span class="nt"> theta</span><span class="p">:</span><span class="w"> </span><span class="nv">-0.05</span><span class="p p-Indicator">}</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">],</span><span class="nt"> psi</span><span class="p">:</span><span class="w"> </span><span class="nv">-0.006</span><span class="p p-Indicator">}</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H+</span><span class="p p-Indicator">],</span><span class="nt"> theta</span><span class="p">:</span><span class="w"> </span><span class="nv">0.036</span><span class="p p-Indicator">}</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Cl-</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H+</span><span class="p p-Indicator">],</span><span class="nt"> psi</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-0.004</span><span class="p p-Indicator">]}</span>
+</pre></div>
+</div>
+</section>
+<section id="sec-yaml-ideal-gas">
+<span id="ideal-gas"></span><h3><code class="docutils literal notranslate"><span class="pre">ideal-gas</span></code><a class="headerlink" href="#sec-yaml-ideal-gas" title="Link to this heading">#</a></h3>
+<p>A mixture which obeys the ideal gas law, as <a class="reference external" href="../cxx/d7/dfa/classCantera_1_1IdealGasPhase.html">described here</a>.</p>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ohmech</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ideal-gas</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">H2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H2O</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">HO2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H2O2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">AR</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">N2</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gas</span>
+<span class="w">  </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mixture-averaged</span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="nv">300.0</span><span class="p p-Indicator">,</span><span class="nt"> P</span><span class="p">:</span><span class="w"> </span><span class="nv">1 atm</span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+</section>
+<section id="sec-yaml-ideal-molal-solution">
+<span id="ideal-molal-solution"></span><h3><code class="docutils literal notranslate"><span class="pre">ideal-molal-solution</span></code><a class="headerlink" href="#sec-yaml-ideal-molal-solution" title="Link to this heading">#</a></h3>
+<p>An ideal solution based on the mixing-rule assumption that all molality-based activity
+coefficients are equal to one, as <a class="reference external" href="../cxx/da/d5c/classCantera_1_1IdealMolalSoln.html">described here</a>.</p>
+<p>Additional fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">standard-concentration-basis</span></code></dt><dd><p>A string specifying the basis for the standard concentration. One of <code class="docutils literal notranslate"><span class="pre">unity</span></code>,
+<code class="docutils literal notranslate"><span class="pre">species-molar-volume</span></code>, or <code class="docutils literal notranslate"><span class="pre">solvent-molar-volume</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cutoff</span></code></dt><dd><p>Parameters for cutoff treatments of activity coefficients</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">model</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">poly</span></code> or <code class="docutils literal notranslate"><span class="pre">polyExp</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">gamma_o</span></code></dt><dd><p>gamma_o value for the cutoff process at the zero solvent point</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">gamma_k</span></code></dt><dd><p>gamma_k minimum for the cutoff process at the zero solvent point</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">X_o</span></code></dt><dd><p>value of the solute mole fraction that centers the cutoff polynomials
+for the cutoff = 1 process</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">c_0</span></code></dt><dd><p>Parameter in the polyExp cutoff treatment having to do with rate of
+exponential decay</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">slope_f</span></code></dt><dd><p>Parameter in the <code class="docutils literal notranslate"><span class="pre">polyExp</span></code> cutoff treatment</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">slope_g</span></code></dt><dd><p>Parameter in the <code class="docutils literal notranslate"><span class="pre">polyExp</span></code> cutoff treatment</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NaCl_electrolyte</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">H2O(L)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ideal-molal-solution</span>
+<span class="w">  </span><span class="nt">standard-concentration-basis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solvent-molar-volume</span>
+<span class="w">  </span><span class="nt">cutoff</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">polyexp</span>
+<span class="w">    </span><span class="nt">gamma_o</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0001</span>
+<span class="w">    </span><span class="nt">gamma_k</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
+<span class="w">    </span><span class="nt">X_o</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span>
+<span class="w">    </span><span class="nt">c_0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<span class="w">    </span><span class="nt">slope_f</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span>
+<span class="w">    </span><span class="nt">slope_g</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="nv">298.15 K</span><span class="p p-Indicator">,</span><span class="nt"> P</span><span class="p">:</span><span class="w"> </span><span class="nv">1.01325e+05 Pa</span><span class="p p-Indicator">,</span>
+<span class="nt">          molalities</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">Na+</span><span class="p">:</span><span class="w"> </span><span class="nv">6.0954</span><span class="p p-Indicator">,</span><span class="nt"> Cl-</span><span class="p">:</span><span class="w"> </span><span class="nv">6.0954</span><span class="p p-Indicator">,</span><span class="nt"> H+</span><span class="p">:</span><span class="w"> </span><span class="nv">2.1628e-09</span><span class="p p-Indicator">,</span><span class="nt"> OH-</span><span class="p">:</span><span class="w"> </span><span class="nv">1.3977e-06</span><span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
+</section>
+<section id="sec-yaml-ideal-condensed">
+<span id="ideal-condensed"></span><h3><code class="docutils literal notranslate"><span class="pre">ideal-condensed</span></code><a class="headerlink" href="#sec-yaml-ideal-condensed" title="Link to this heading">#</a></h3>
+<p>An ideal liquid or solid solution as <a class="reference external" href="../cxx/d3/d4c/classCantera_1_1IdealSolidSolnPhase.html">described here</a>.</p>
+<p>Additional fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">standard-concentration-basis</span></code></dt><dd><p>A string specifying the basis for the standard concentration. One of
+<code class="docutils literal notranslate"><span class="pre">unity</span></code>, <code class="docutils literal notranslate"><span class="pre">species-molar-volume</span></code>, or <code class="docutils literal notranslate"><span class="pre">solvent-molar-volume</span></code>.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">electrolyte</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ideal-condensed</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;C3H4O3[elyt]&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;C4H6O3[elyt]&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Li+[elyt]&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;PF6-[elyt]&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">X</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="s">&#39;C3H4O3[elyt]&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">0.47901</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;C4H6O3[elyt]&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">0.37563</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Li+[elyt]&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">0.07268</span><span class="p p-Indicator">,</span>
+<span class="w">        </span><span class="s">&#39;PF6-[elyt]&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">0.07268</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">standard-concentration-basis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unity</span>
+</pre></div>
+</div>
+</section>
+<section id="sec-yaml-ideal-solution-vpss">
+<span id="ideal-solution-vpss"></span><h3><code class="docutils literal notranslate"><span class="pre">ideal-solution-VPSS</span></code><a class="headerlink" href="#sec-yaml-ideal-solution-vpss" title="Link to this heading">#</a></h3>
+<p>An ideal solution model using variable pressure standard state methods as
+<a class="reference external" href="../cxx/dc/ddb/classCantera_1_1IdealSolnGasVPSS.html">described here</a>.</p>
+<p>Additional fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">standard-concentration-basis</span></code></dt><dd><p>A string specifying the basis for the standard concentration. One of
+<code class="docutils literal notranslate"><span class="pre">unity</span></code>, <code class="docutils literal notranslate"><span class="pre">species-molar-volume</span></code>, or <code class="docutils literal notranslate"><span class="pre">solvent-molar-volume</span></code>.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NaCl_electrolyte</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">H2O(L)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Na+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Cl-</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H+</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH-</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ideal-solution-VPSS</span>
+<span class="w">  </span><span class="nt">standard-concentration-basis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solvent-molar-volume</span>
+</pre></div>
+</div>
+</section>
+<section id="sec-yaml-ideal-surface">
+<span id="ideal-surface"></span><h3><code class="docutils literal notranslate"><span class="pre">ideal-surface</span></code><a class="headerlink" href="#sec-yaml-ideal-surface" title="Link to this heading">#</a></h3>
+<p>An ideal surface between two bulk phases, as <a class="reference external" href="../cxx/d2/d95/classCantera_1_1SurfPhase.html">described here</a>.</p>
+<p>Additional fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">site-density</span></code></dt><dd><p>The molar density of surface sites</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pt_surf</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ideal-surface</span>
+<span class="w">  </span><span class="nt">adjacent-phases</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">gas</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">elements</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Pt</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">C</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">PT(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H2O(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">OH(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CO(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CO2(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CH3(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CH2(S)s</span><span class="p p-Indicator">,</span>
+<span class="w">    </span><span class="nv">CH(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">C(S)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O(S)</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">surface</span>
+<span class="w">  </span><span class="nt">reactions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">900.0</span>
+<span class="w">    </span><span class="nt">coverages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">O(S)</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> PT(S)</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="nt"> H(S)</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">site-density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.7063e-09</span>
+</pre></div>
+</div>
+</section>
+<section id="lattice">
+<span id="sec-yaml-lattice"></span><h3><code class="docutils literal notranslate"><span class="pre">lattice</span></code><a class="headerlink" href="#lattice" title="Link to this heading">#</a></h3>
+<p>A simple thermodynamic model for a bulk phase, assuming an incompressible lattice of
+solid atoms, as <a class="reference external" href="../cxx/d1/da0/classCantera_1_1LatticePhase.html">described here</a>.</p>
+<p>Additional fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">site-density</span></code></dt><dd><p>The molar density of lattice sites</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oxide_bulk</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lattice</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Ox</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">VO**</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="nv">1073.15</span><span class="p p-Indicator">,</span><span class="nt"> P</span><span class="p">:</span><span class="w"> </span><span class="nv">1.01325e+05</span><span class="p p-Indicator">,</span><span class="nt"> X</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">Ox</span><span class="p">:</span><span class="w"> </span><span class="nv">0.95</span><span class="p p-Indicator">,</span><span class="nt"> VO**</span><span class="p">:</span><span class="w"> </span><span class="nv">0.05</span><span class="p p-Indicator">}}</span>
+<span class="w">  </span><span class="nt">site-density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0176 mol/cm^3</span>
+</pre></div>
+</div>
+</section>
+<section id="liquid-water-iapws95">
+<span id="sec-yaml-liquid-water-iapws95"></span><h3><code class="docutils literal notranslate"><span class="pre">liquid-water-IAPWS95</span></code><a class="headerlink" href="#liquid-water-iapws95" title="Link to this heading">#</a></h3>
+<p>An implementation of the IAPWS95 equation of state for water <span id="id1">[<a class="reference internal" href="../reference/bibliography.html#id55" title="W. Wagner and A. Pruß. The IAPWS formulation 1995 for the thermodynamic properties of ordinary water substance for general and scientific use. Journal of Physical and Chemical Reference Data, 31(2):387–535, 2002. URL: https://dx.doi.org/10.1063/1.1461829, doi:10.1063/1.1461829.">Wagner and Pruß, 2002</a>]</span>, for
+the liquid region only as <a class="reference external" href="../cxx/dc/d86/classCantera_1_1WaterSSTP.html">described here</a>.</p>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">liquid-water-IAPWS95</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">H2O</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">liquid-water-IAPWS95</span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="nv">300.0</span><span class="p p-Indicator">,</span><span class="nt"> P</span><span class="p">:</span><span class="w"> </span><span class="nv">1.01325e+05</span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+</section>
+<section id="margules">
+<span id="sec-yaml-margules"></span><h3><code class="docutils literal notranslate"><span class="pre">Margules</span></code><a class="headerlink" href="#margules" title="Link to this heading">#</a></h3>
+<p>A phase employing the Margules approximation for the excess Gibbs free energy, as
+<a class="reference external" href="../cxx/d7/dfe/classCantera_1_1MargulesVPSSTP.html">described here</a>.</p>
+<p>Additional fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">interactions</span></code></dt><dd><p>A list of mappings, where each mapping has the following fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">species</span></code></dt><dd><p>A list of two species names</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">excess-enthalpy</span></code></dt><dd><p>A list of two values specifying the first and second excess enthalpy coefficients
+for the interaction of the specified species. Defaults to [0, 0].</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">excess-entropy</span></code></dt><dd><p>A list of two values specifying the first and second excess entropy coefficients for
+the interaction of the specified species. Defaults to [0, 0].</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">excess-volume-enthalpy</span></code></dt><dd><p>A list of two values specifying the first and second enthalpy coefficients for the
+excess volume interaction of the specified species. Defaults to [0, 0].</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">excess-volume-entropy</span></code></dt><dd><p>A list of two values specifying the first and second entropy coefficients for the
+excess volume interaction of the specified species. Defaults to [0, 0].</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MoltenSalt_electrolyte</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">LiCl(L)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">KCl(L)</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Margules</span>
+<span class="w">  </span><span class="nt">interactions</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">KCl(L)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">LiCl(L)</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">excess-enthalpy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-17570. J/gmol</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-377 J/gmol</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">excess-entropy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-7.627 J/gmol/K</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.958 J/gmol/K</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</section>
+<section id="peng-robinson">
+<span id="sec-yaml-peng-robinson"></span><h3><code class="docutils literal notranslate"><span class="pre">Peng-Robinson</span></code><a class="headerlink" href="#peng-robinson" title="Link to this heading">#</a></h3>
+<p>A multi-species real gas following the Peng-Robinson equation of state, as
+<a class="reference external" href="../cxx/d3/ddc/classCantera_1_1PengRobinson.html">described here</a>.</p>
+<p>The parameters for each species are contained in the corresponding species
+entries. See <a class="reference internal" href="species.html#sec-yaml-eos-peng-robinson"><span class="std std-ref">Peng-Robinson species equation of state</span></a>.</p>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CO2-PR</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">CO2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H2O</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">H2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CO</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">CH4</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">O2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">N2</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Peng-Robinson</span>
+<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bulk</span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="nv">300</span><span class="p p-Indicator">,</span><span class="nt"> P</span><span class="p">:</span><span class="w"> </span><span class="nv">1 atm</span><span class="p p-Indicator">,</span><span class="nt"> mole-fractions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">CO2</span><span class="p">:</span><span class="w"> </span><span class="nv">0.99</span><span class="p p-Indicator">,</span><span class="nt"> H2</span><span class="p">:</span><span class="w"> </span><span class="nv">0.01</span><span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.0.</span></p>
+</div>
+</section>
+<section id="plasma">
+<span id="sec-yaml-plasma"></span><h3><code class="docutils literal notranslate"><span class="pre">plasma</span></code><a class="headerlink" href="#plasma" title="Link to this heading">#</a></h3>
+<p>A phase for plasma. This phase handles plasma properties such as the electron energy
+distribution and electron temperature with different models as
+<a class="reference external" href="../cxx/d5/dd7/classCantera_1_1PlasmaPhase.html">described here</a>.</p>
+<p>Additional fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">electron-energy-distribution</span></code></dt><dd><p>A mapping with the following fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">type</span></code></dt><dd><p>String specifying the type of the electron energy distribution to be used.
+Supported model strings are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">isotropic</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">discretized</span></code></p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">shape-factor</span></code></dt><dd><p>A constant in the isotropic distribution, which is shown as x in the detailed
+description of this class. The value needs to be a positive number. This field is
+only used with <code class="docutils literal notranslate"><span class="pre">isotropic</span></code>. Defaults to 2.0.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mean-electron-energy</span></code></dt><dd><p>Mean electron energy of the isotropic distribution. The default sets the electron
+temperature equal gas temperature and uses the corresponding electron energy as mean
+electron energy. This field is only used with <code class="docutils literal notranslate"><span class="pre">isotropic</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">energy-levels</span></code></dt><dd><p>A list of values specifying the electron energy levels. The default uses 1001 equal
+spaced points from 0 to 1 eV.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">distribution</span></code></dt><dd><p>A list of values specifying the discretized electron energy distribution. This field
+is only used with <code class="docutils literal notranslate"><span class="pre">discretized</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">normalize</span></code></dt><dd><p>A flag specifying whether normalizing the discretized electron energy distribution
+or not. This field is only used with <code class="docutils literal notranslate"><span class="pre">discretized</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Examples:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isotropic-electron-energy-plasma</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plasma</span>
+<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gas</span>
+<span class="w">  </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ionized-gas</span>
+<span class="w">  </span><span class="nt">electron-energy-distribution</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isotropic</span>
+<span class="w">    </span><span class="nt">shape-factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="w">    </span><span class="nt">mean-electron-energy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0 eV</span>
+<span class="w">    </span><span class="nt">energy-levels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">]</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">discretized-electron-energy-plasma</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plasma</span>
+<span class="w">  </span><span class="nt">kinetics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gas</span>
+<span class="w">  </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ionized-gas</span>
+<span class="w">  </span><span class="nt">electron-energy-distribution</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">discretized</span>
+<span class="w">    </span><span class="nt">energy-levels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">distribution</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.01</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">normalize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 2.6.</span></p>
+</div>
+</section>
+<section id="pure-fluid">
+<span id="sec-yaml-pure-fluid"></span><h3><code class="docutils literal notranslate"><span class="pre">pure-fluid</span></code><a class="headerlink" href="#pure-fluid" title="Link to this heading">#</a></h3>
+<p>A phase representing a pure fluid equation of state for one of several pure substances
+including liquid, vapor, two-phase, and supercritical regions, as
+<a class="reference external" href="../cxx/d1/d29/classCantera_1_1PureFluidPhase.html">described here</a>.</p>
+<p>Additional fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">pure-fluid-name</span></code></dt><dd><p>Name of the pure fluid model to use:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">carbon-dioxide</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">heptane</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HFC-134a</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hydrogen</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">methane</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nitrogen</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">oxygen</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">water</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbon-dioxide</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pure-fluid</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">CO2</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">T</span><span class="p">:</span><span class="w"> </span><span class="nv">280.0</span><span class="p p-Indicator">,</span><span class="nt"> P</span><span class="p">:</span><span class="w"> </span><span class="nv">1.01325e+05</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">pure-fluid-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">carbon-dioxide</span>
+</pre></div>
+</div>
+</section>
+<section id="redlich-kister">
+<span id="sec-yaml-redlich-kister"></span><h3><code class="docutils literal notranslate"><span class="pre">Redlich-Kister</span></code><a class="headerlink" href="#redlich-kister" title="Link to this heading">#</a></h3>
+<p>A phase employing the Redlich-Kister approximation for the excess Gibbs free energy, as
+<a class="reference external" href="../cxx/d0/d23/classCantera_1_1RedlichKisterVPSSTP.html">described here</a>.</p>
+<p>Additional fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">interactions</span></code></dt><dd><p>A list of mappings, where each mapping has the following fields:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">species</span></code></dt><dd><p>A list of two species names</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">excess-enthalpy</span></code></dt><dd><p>A list of polynomial coefficients for the excess enthalpy of the specified binary
+interaction</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">excess-entropy</span></code></dt><dd><p>A list of polynomial coefficients for the excess entropy of the specified binary
+interaction</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LiC6_and_Vacancies</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Redlich-Kister</span>
+<span class="w">  </span><span class="nt">interactions</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">species</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Li(C6)</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">V(C6)</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">excess-enthalpy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-3.268e+06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.955e+06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-4.573e+06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.147e+06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.339e+06</span><span class="p p-Indicator">,</span>
+<span class="w">                      </span><span class="nv">1.117e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.997e+05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-4.866e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.362e+05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.373e+08</span><span class="p p-Indicator">,</span>
+<span class="w">                      </span><span class="nv">-2.129e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.722e+08</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.956e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">9.302e+07</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-3.280e+07</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">excess-entropy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</section>
+<section id="redlich-kwong">
+<span id="sec-yaml-redlich-kwong"></span><h3><code class="docutils literal notranslate"><span class="pre">Redlich-Kwong</span></code><a class="headerlink" href="#redlich-kwong" title="Link to this heading">#</a></h3>
+<p>A multi-species Redlich-Kwong phase as <a class="reference external" href="../cxx/d6/d29/classCantera_1_1RedlichKwongMFTP.html">described here</a>.</p>
+<p>The parameters for each species are contained in the corresponding species
+entries. See <a class="reference internal" href="species.html#sec-yaml-eos-redlich-kwong"><span class="std std-ref">Redlich-Kwong species equation of state</span></a>.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-the-state">Setting the state</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-thermodynamic-models">Phase thermodynamic models</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-solution-tabulated"><code class="docutils literal notranslate"><span class="pre">binary-solution-tabulated</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-lattice"><code class="docutils literal notranslate"><span class="pre">compound-lattice</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coverage-dependent-surface"><code class="docutils literal notranslate"><span class="pre">coverage-dependent-surface</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debye-huckel"><code class="docutils literal notranslate"><span class="pre">Debye-Huckel</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edge"><code class="docutils literal notranslate"><span class="pre">edge</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electron-cloud"><code class="docutils literal notranslate"><span class="pre">electron-cloud</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-stoichiometry"><code class="docutils literal notranslate"><span class="pre">fixed-stoichiometry</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hmw-electrolyte"><code class="docutils literal notranslate"><span class="pre">HMW-electrolyte</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-yaml-ideal-gas"><code class="docutils literal notranslate"><span class="pre">ideal-gas</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-yaml-ideal-molal-solution"><code class="docutils literal notranslate"><span class="pre">ideal-molal-solution</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-yaml-ideal-condensed"><code class="docutils literal notranslate"><span class="pre">ideal-condensed</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-yaml-ideal-solution-vpss"><code class="docutils literal notranslate"><span class="pre">ideal-solution-VPSS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-yaml-ideal-surface"><code class="docutils literal notranslate"><span class="pre">ideal-surface</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lattice"><code class="docutils literal notranslate"><span class="pre">lattice</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#liquid-water-iapws95"><code class="docutils literal notranslate"><span class="pre">liquid-water-IAPWS95</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#margules"><code class="docutils literal notranslate"><span class="pre">Margules</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#peng-robinson"><code class="docutils literal notranslate"><span class="pre">Peng-Robinson</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plasma"><code class="docutils literal notranslate"><span class="pre">plasma</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-fluid"><code class="docutils literal notranslate"><span class="pre">pure-fluid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redlich-kister"><code class="docutils literal notranslate"><span class="pre">Redlich-Kister</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redlich-kwong"><code class="docutils literal notranslate"><span class="pre">Redlich-Kwong</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/yaml/phases.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

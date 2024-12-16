@@ -1,0 +1,711 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Converting Data from NASA ThermoBuild &#8212; Cantera 3.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=dd1205ac"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'userguide/thermobuild';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Handling Errors in Input Files" href="input-errors.html" />
+    <link rel="prev" title="Creating YAML Mechanism Files from Scratch" href="creating-mechanisms.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python-tutorial.html">Python Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input-tutorial.html">Introduction to YAML Input Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reactor-tutorial.html">Using Reactor Networks for Time Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cxx-tutorial.html">Using Cantera from C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling-cxx.html">Compiling Cantera C++ Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ck2yaml-tutorial.html">Converting Chemkin Format Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating-mechanisms.html">Creating YAML Mechanism Files from Scratch</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Converting Data from NASA ThermoBuild</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input-errors.html">Handling Errors in Input Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legacy2yaml-tutorial.html">Converting Legacy CTI and XML Input Files to YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flame-temperature.html">Calculating Adiabatic Flame Temperature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heating-value.html">Calculating Heating Value of a Fuel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/python/kinetics/lithium_ion_battery.html">Lithium Ion Battery Discharge Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensible-reactor.html">Extending Reactor Models with Custom Equations</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Converting...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="converting-data-from-nasa-thermobuild">
+<span id="sec-thermobuild"></span><h1>Converting Data from NASA ThermoBuild<a class="headerlink" href="#converting-data-from-nasa-thermobuild" title="Link to this heading">#</a></h1>
+<p>Thermodynamic data for a range of species can be obtained from the
+<a class="reference external" href="https://cearun.grc.nasa.gov/ThermoBuild/index_ds.html">NASA ThermoBuild</a> tool.
+This thermodynamic data is described using the
+<a class="reference internal" href="../reference/thermo/species-thermo.html#sec-thermo-nasa9"><span class="std std-ref">9-coefficient NASA polynomial</span></a> parameterization, which is implemented
+by Cantera.</p>
+<p>To generate an input file containing thermodynamic data, use the ThermoBuild web
+interface to select the elements you want to include, and click <em>process</em>. Then, select
+the species you want to include in your mechanism and click <em>continue</em>. Select the
+content on the resulting page starting with the line that says <code class="docutils literal notranslate"><span class="pre">thermo</span></code>, and ending with
+the line that says <code class="docutils literal notranslate"><span class="pre">END</span> <span class="pre">REACTANTS</span></code> and save it to a file.</p>
+<p>Next, we need to make a few modifications to this file so it contains all of the
+information needed to be processed by Cantera’s <a class="reference internal" href="../reference/glossary.html#term-CK"><span class="xref std std-term">CK</span></a> file parser. For this
+example, let’s suppose you have selected just the species <code class="docutils literal notranslate"><span class="pre">CO</span></code> and <code class="docutils literal notranslate"><span class="pre">CO2</span></code> from
+ThermoBuild.</p>
+<ul class="simple">
+<li><p>Modify the first line of the file so that it reads <code class="docutils literal notranslate"><span class="pre">thermo</span> <span class="pre">nasa9</span></code>. This is done to
+distinguish this input format from the one used for the 7-coefficient NASA
+polynomials.</p></li>
+<li><p>Replace the last two lines (<code class="docutils literal notranslate"><span class="pre">END</span> <span class="pre">PRODUCTS</span></code> and <code class="docutils literal notranslate"><span class="pre">END</span> <span class="pre">REACTANTS</span></code>) with a single line
+that reads <code class="docutils literal notranslate"><span class="pre">END</span></code>.</p></li>
+</ul>
+<section id="creating-species-definitions-only">
+<h2>Creating species definitions only<a class="headerlink" href="#creating-species-definitions-only" title="Link to this heading">#</a></h2>
+<p>If you only want to generate a species database that can be referenced from other
+Cantera input files, the above modifications are sufficient. The last step is simply to
+convert the input file to the Cantera YAML format using <code class="docutils literal notranslate"><span class="pre">ck2yaml</span></code>. If you named the file
+<code class="docutils literal notranslate"><span class="pre">mythermo.txt</span></code>, then the command to convert it would be:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ck2yaml<span class="w"> </span>--thermo<span class="o">=</span>mythermo.txt
+</pre></div>
+</div>
+<p>This will generate the file <code class="docutils literal notranslate"><span class="pre">mythermo.yaml</span></code>. You can then reference the species
+definitions from this file in phase definitions in other Cantera input files, for
+example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">phases</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gas</span>
+<span class="w">  </span><span class="nt">thermo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ideal-gas</span>
+<span class="w">  </span><span class="nt">species</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">mythermo.yaml/species</span><span class="p">:</span><span class="w"> </span><span class="nv">all</span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-a-complete-phase-definition">
+<h2>Creating a complete phase definition<a class="headerlink" href="#creating-a-complete-phase-definition" title="Link to this heading">#</a></h2>
+<p>To create a complete phase definition, you also need to add two sections to the top of
+the ThermoBuild input file. First, a section declaring all of the elements:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">elements</span>
+<span class="n">C</span> <span class="n">O</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+<p>And second, a section declaring all of the species:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">species</span>
+<span class="n">CO</span> <span class="n">CO2</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+<p>The resulting input file should look like the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">elements</span>
+<span class="n">C</span> <span class="n">O</span>
+<span class="n">end</span>
+
+<span class="n">species</span>
+<span class="n">CO</span> <span class="n">CO2</span>
+<span class="n">end</span>
+
+<span class="n">thermo</span> <span class="n">nasa9</span>
+   <span class="mf">200.000</span>  <span class="mf">1000.000</span>  <span class="mf">6000.000</span> <span class="mf">20000.000</span>   <span class="mi">9</span><span class="o">/</span><span class="mi">09</span><span class="o">/</span><span class="mi">04</span>
+<span class="n">CO</span>                <span class="n">Gurvich</span><span class="p">,</span><span class="mi">1979</span> <span class="n">pt1</span> <span class="n">p25</span> <span class="n">pt2</span> <span class="n">p29</span><span class="o">.</span>
+ <span class="mi">3</span> <span class="n">tpis79</span> <span class="n">C</span>   <span class="mf">1.00</span><span class="n">O</span>   <span class="mf">1.00</span>    <span class="mf">0.00</span>    <span class="mf">0.00</span>    <span class="mf">0.00</span> <span class="mi">0</span>   <span class="mf">28.0101000</span>    <span class="o">-</span><span class="mf">110535.196</span>
+    <span class="mf">200.000</span>   <span class="mf">1000.0007</span> <span class="o">-</span><span class="mf">2.0</span> <span class="o">-</span><span class="mf">1.0</span>  <span class="mf">0.0</span>  <span class="mf">1.0</span>  <span class="mf">2.0</span>  <span class="mf">3.0</span>  <span class="mf">4.0</span>  <span class="mf">0.0</span>         <span class="mf">8671.104</span>
+ <span class="mf">1.489045326</span><span class="n">D</span><span class="o">+</span><span class="mi">04</span><span class="o">-</span><span class="mf">2.922285939</span><span class="n">D</span><span class="o">+</span><span class="mi">02</span> <span class="mf">5.724527170</span><span class="n">D</span><span class="o">+</span><span class="mi">00</span><span class="o">-</span><span class="mf">8.176235030</span><span class="n">D</span><span class="o">-</span><span class="mi">03</span> <span class="mf">1.456903469</span><span class="n">D</span><span class="o">-</span><span class="mi">05</span>
+<span class="o">-</span><span class="mf">1.087746302</span><span class="n">D</span><span class="o">-</span><span class="mi">08</span> <span class="mf">3.027941827</span><span class="n">D</span><span class="o">-</span><span class="mi">12</span>                <span class="o">-</span><span class="mf">1.303131878</span><span class="n">D</span><span class="o">+</span><span class="mi">04</span><span class="o">-</span><span class="mf">7.859241350</span><span class="n">D</span><span class="o">+</span><span class="mi">00</span>
+   <span class="mf">1000.000</span>   <span class="mf">6000.0007</span> <span class="o">-</span><span class="mf">2.0</span> <span class="o">-</span><span class="mf">1.0</span>  <span class="mf">0.0</span>  <span class="mf">1.0</span>  <span class="mf">2.0</span>  <span class="mf">3.0</span>  <span class="mf">4.0</span>  <span class="mf">0.0</span>         <span class="mf">8671.104</span>
+ <span class="mf">4.619197250</span><span class="n">D</span><span class="o">+</span><span class="mi">05</span><span class="o">-</span><span class="mf">1.944704863</span><span class="n">D</span><span class="o">+</span><span class="mi">03</span> <span class="mf">5.916714180</span><span class="n">D</span><span class="o">+</span><span class="mi">00</span><span class="o">-</span><span class="mf">5.664282830</span><span class="n">D</span><span class="o">-</span><span class="mi">04</span> <span class="mf">1.398814540</span><span class="n">D</span><span class="o">-</span><span class="mi">07</span>
+<span class="o">-</span><span class="mf">1.787680361</span><span class="n">D</span><span class="o">-</span><span class="mi">11</span> <span class="mf">9.620935570</span><span class="n">D</span><span class="o">-</span><span class="mi">16</span>                <span class="o">-</span><span class="mf">2.466261084</span><span class="n">D</span><span class="o">+</span><span class="mi">03</span><span class="o">-</span><span class="mf">1.387413108</span><span class="n">D</span><span class="o">+</span><span class="mi">01</span>
+   <span class="mf">6000.000</span>  <span class="mf">20000.0007</span> <span class="o">-</span><span class="mf">2.0</span> <span class="o">-</span><span class="mf">1.0</span>  <span class="mf">0.0</span>  <span class="mf">1.0</span>  <span class="mf">2.0</span>  <span class="mf">3.0</span>  <span class="mf">4.0</span>  <span class="mf">0.0</span>         <span class="mf">8671.104</span>
+ <span class="mf">8.868662960</span><span class="n">D</span><span class="o">+</span><span class="mi">08</span><span class="o">-</span><span class="mf">7.500377840</span><span class="n">D</span><span class="o">+</span><span class="mi">05</span> <span class="mf">2.495474979</span><span class="n">D</span><span class="o">+</span><span class="mi">02</span><span class="o">-</span><span class="mf">3.956351100</span><span class="n">D</span><span class="o">-</span><span class="mi">02</span> <span class="mf">3.297772080</span><span class="n">D</span><span class="o">-</span><span class="mi">06</span>
+<span class="o">-</span><span class="mf">1.318409933</span><span class="n">D</span><span class="o">-</span><span class="mi">10</span> <span class="mf">1.998937948</span><span class="n">D</span><span class="o">-</span><span class="mi">15</span>                 <span class="mf">5.701421130</span><span class="n">D</span><span class="o">+</span><span class="mi">06</span><span class="o">-</span><span class="mf">2.060704786</span><span class="n">D</span><span class="o">+</span><span class="mi">03</span>
+<span class="n">CO2</span>               <span class="n">Gurvich</span><span class="p">,</span><span class="mi">1991</span> <span class="n">pt1</span> <span class="n">p27</span> <span class="n">pt2</span> <span class="n">p24</span><span class="o">.</span>
+ <span class="mi">3</span> <span class="n">g</span> <span class="mi">9</span><span class="o">/</span><span class="mi">99</span> <span class="n">C</span>   <span class="mf">1.00</span><span class="n">O</span>   <span class="mf">2.00</span>    <span class="mf">0.00</span>    <span class="mf">0.00</span>    <span class="mf">0.00</span> <span class="mi">0</span>   <span class="mf">44.0095000</span>    <span class="o">-</span><span class="mf">393510.000</span>
+    <span class="mf">200.000</span>   <span class="mf">1000.0007</span> <span class="o">-</span><span class="mf">2.0</span> <span class="o">-</span><span class="mf">1.0</span>  <span class="mf">0.0</span>  <span class="mf">1.0</span>  <span class="mf">2.0</span>  <span class="mf">3.0</span>  <span class="mf">4.0</span>  <span class="mf">0.0</span>         <span class="mf">9365.469</span>
+ <span class="mf">4.943650540</span><span class="n">D</span><span class="o">+</span><span class="mi">04</span><span class="o">-</span><span class="mf">6.264116010</span><span class="n">D</span><span class="o">+</span><span class="mi">02</span> <span class="mf">5.301725240</span><span class="n">D</span><span class="o">+</span><span class="mi">00</span> <span class="mf">2.503813816</span><span class="n">D</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mf">2.127308728</span><span class="n">D</span><span class="o">-</span><span class="mi">07</span>
+<span class="o">-</span><span class="mf">7.689988780</span><span class="n">D</span><span class="o">-</span><span class="mi">10</span> <span class="mf">2.849677801</span><span class="n">D</span><span class="o">-</span><span class="mi">13</span>                <span class="o">-</span><span class="mf">4.528198460</span><span class="n">D</span><span class="o">+</span><span class="mi">04</span><span class="o">-</span><span class="mf">7.048279440</span><span class="n">D</span><span class="o">+</span><span class="mi">00</span>
+   <span class="mf">1000.000</span>   <span class="mf">6000.0007</span> <span class="o">-</span><span class="mf">2.0</span> <span class="o">-</span><span class="mf">1.0</span>  <span class="mf">0.0</span>  <span class="mf">1.0</span>  <span class="mf">2.0</span>  <span class="mf">3.0</span>  <span class="mf">4.0</span>  <span class="mf">0.0</span>         <span class="mf">9365.469</span>
+ <span class="mf">1.176962419</span><span class="n">D</span><span class="o">+</span><span class="mi">05</span><span class="o">-</span><span class="mf">1.788791477</span><span class="n">D</span><span class="o">+</span><span class="mi">03</span> <span class="mf">8.291523190</span><span class="n">D</span><span class="o">+</span><span class="mi">00</span><span class="o">-</span><span class="mf">9.223156780</span><span class="n">D</span><span class="o">-</span><span class="mi">05</span> <span class="mf">4.863676880</span><span class="n">D</span><span class="o">-</span><span class="mi">09</span>
+<span class="o">-</span><span class="mf">1.891053312</span><span class="n">D</span><span class="o">-</span><span class="mi">12</span> <span class="mf">6.330036590</span><span class="n">D</span><span class="o">-</span><span class="mi">16</span>                <span class="o">-</span><span class="mf">3.908350590</span><span class="n">D</span><span class="o">+</span><span class="mi">04</span><span class="o">-</span><span class="mf">2.652669281</span><span class="n">D</span><span class="o">+</span><span class="mi">01</span>
+   <span class="mf">6000.000</span>  <span class="mf">20000.0007</span> <span class="o">-</span><span class="mf">2.0</span> <span class="o">-</span><span class="mf">1.0</span>  <span class="mf">0.0</span>  <span class="mf">1.0</span>  <span class="mf">2.0</span>  <span class="mf">3.0</span>  <span class="mf">4.0</span>  <span class="mf">0.0</span>         <span class="mf">9365.469</span>
+<span class="o">-</span><span class="mf">1.544423287</span><span class="n">D</span><span class="o">+</span><span class="mi">09</span> <span class="mf">1.016847056</span><span class="n">D</span><span class="o">+</span><span class="mi">06</span><span class="o">-</span><span class="mf">2.561405230</span><span class="n">D</span><span class="o">+</span><span class="mi">02</span> <span class="mf">3.369401080</span><span class="n">D</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mf">2.181184337</span><span class="n">D</span><span class="o">-</span><span class="mi">06</span>
+ <span class="mf">6.991420840</span><span class="n">D</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mf">8.842351500</span><span class="n">D</span><span class="o">-</span><span class="mi">16</span>                <span class="o">-</span><span class="mf">8.043214510</span><span class="n">D</span><span class="o">+</span><span class="mi">06</span> <span class="mf">2.254177493</span><span class="n">D</span><span class="o">+</span><span class="mi">03</span>
+<span class="n">END</span>
+</pre></div>
+</div>
+<p>This file (saved for example as <code class="docutils literal notranslate"><span class="pre">myphase.txt</span></code>) can then be converted to the Cantera YAML
+format using the <a class="reference internal" href="../yaml/ck2yaml.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">ck2yaml</span></code></span></a> utility from a shell:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ck2yaml<span class="w"> </span>--input<span class="o">=</span>myphase.txt
+</pre></div>
+</div>
+<p>This will generate a an input file named <code class="docutils literal notranslate"><span class="pre">myphase.yaml</span></code> with a phase named <code class="docutils literal notranslate"><span class="pre">gas</span></code> that
+can be directly imported in Cantera.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-species-definitions-only">Creating species definitions only</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-complete-phase-definition">Creating a complete phase definition</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/userguide/thermobuild.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

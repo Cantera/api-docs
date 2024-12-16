@@ -1,0 +1,1010 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Nonlinear Solver for One-dimensional Flows &#8212; Cantera 3.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=dd1205ac"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/onedim/nonlinear-solver';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Grid Refinement for One-dimensional Flows" href="grid-refinement.html" />
+    <link rel="prev" title="Discretization of 1D Equations" href="discretization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/index.html">Python Module Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/transport.html">Transport Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/zerodim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../python/scripts.html">Mechanism Conversion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../python/ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/yaml_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../python/lxcat_conversion.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/units.html">Python Interface With Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/constants.html">Physical Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/utilities.html">Utilities</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../yaml/index.html">YAML Input File Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/general.html">General Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/phases.html">Phase Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/species.html">Species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/reactions.html">Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/yaml2ck.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml/lxcat2yaml.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../releasenotes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v3.1.html">Cantera 3.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v3.0.html">Cantera 3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.6.html">Cantera 2.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.5.html">Cantera 2.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.4.html">Cantera 2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.3.html">Cantera 2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.2.html">Cantera 2.2.1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.1.html">Cantera 2.1.2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../releasenotes/v2.0.html">Cantera 2.0.2</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Science Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../thermo/index.html">Thermodynamic Properties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../thermo/species-thermo.html">Species Thermodynamic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../thermo/phase-thermo.html">Phase Thermodynamic Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../kinetics/index.html">Chemical Reactions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/reaction-rates.html">Reaction Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/rate-constants.html">Rate Constant Parameterizations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../transport/index.html">Transport Properties</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reactors/index.html">Reactors and Reactor Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/controlreactor.html">Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/constant-pressure-reactor.html">Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-reactor.html">Ideal Gas Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-constant-pressure-reactor.html">Ideal Gas Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/mole-reactor.html">Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/constant-pressure-mole-reactor.html">Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-mole-reactor.html">Ideal Gas Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/ideal-gas-constant-pressure-mole-reactor.html">Ideal Gas Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactors/interactions.html">Reactor Interactions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">One-dimensional Flames</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="governing-equations.html">Governing Equations for One-dimensional Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="discretization.html">Discretization of 1D Equations</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Nonlinear Solver for One-dimensional Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grid-refinement.html">Grid Refinement for One-dimensional Flows</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">One-dimensional Flames</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Nonlinear...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="nonlinear-solver-for-one-dimensional-flows">
+<h1>Nonlinear Solver for One-dimensional Flows<a class="headerlink" href="#nonlinear-solver-for-one-dimensional-flows" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Cantera uses a hybrid time stepping / steady-state algorithm to solve the discretized
+1-dimensional flame equations. For both the time stepping and steady-state problems,
+a damped Newton’s method solver is used. The general principles of the solver used in
+Cantera are described in <span id="id1">Kee <em>et al.</em> [<a class="reference internal" href="../bibliography.html#id20" title="R. J. Kee, M. E. Coltrin, and P. Glarborg. Chemically Reacting Flow: Theory and Practice. John Wiley &amp; Sons, 2003.">2003</a>]</span>(Chapter 15).</p>
+</section>
+<section id="problem-definition">
+<h2>Problem Definition<a class="headerlink" href="#problem-definition" title="Link to this heading">#</a></h2>
+<p>The solution to the 1-dimensional set of governing equations is expressed in the form
+of a root finding equation for use with a Newton solver. The equation to be solved
+takes the form of <span class="math notranslate nohighlight">\(F(x) = 0\)</span>. The function <span class="math notranslate nohighlight">\(F(x)\)</span> is a vector-value function of the
+solution vector, <span class="math notranslate nohighlight">\(x\)</span>, which is a vector of all solution components at all grid points.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x =
+\begin{pmatrix}
+u_0 \\
+V_0 \\
+T_0 \\
+\Lambda_0 \\
+Y_{1,0} \\
+\vdots \\
+u_1 \\
+V_1 \\
+\vdots \\
+Y_{m,N}
+\end{pmatrix}
+\end{split}\]</div>
+<p>The vector-value function <span class="math notranslate nohighlight">\(F(x)\)</span> is a vector of the residuals for each of the governing
+equations at all of the grid points.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+F(x) =
+\begin{pmatrix}
+F_{u,0}(x) \\
+F_{V,0}(x) \\
+F_{T,0}(x) \\
+F_{\Lambda,0}(x) \\
+F_{Y_1,0}(x) \\
+\vdots \\
+F_{u,1}(x) \\
+F_{V,1}(x) \\
+\vdots \\
+F_{Y_m,N}(x)
+\end{pmatrix}
+\end{split}\]</div>
+<p>Residuals in this context, at interior grid
+points, are the difference between the left-hand side and right-hand side of the
+governing equations. If the perfect solution was obtained, then the difference
+between the left-hand side and right-hand side of the governing equations would be
+zero, and this is what the solver is trying to achieve by examining the residuals
+during each attempt at solving the system of equations.</p>
+<p>One of the key components of the solver is the Jacobian matrix, which is the matrix of
+partial derivatives of the residuals with respect to the solution vector. The Jacobian
+matrix is used to determine the direction of the correction vector that will drive the
+solution towards zero error.</p>
+<div class="math notranslate nohighlight">
+\[
+J(x) =\pxpy{F(x)}{x}
+\]</div>
+<p>For the vector-value residual <span class="math notranslate nohighlight">\(F(x)\)</span>, the Jacobian matrix has elements that are
+partial derivatives of the residuals with respect to each solution component at each
+grid point.</p>
+<div class="math notranslate nohighlight">
+\[
+J_{i,j} = \frac{\partial F_i(x)}{\partial x_j}
+\]</div>
+<p>Moving across a row of the Jacobian matrix encodes how the value of the residual at
+a grid point changes with respect to each solution component. The Jacobian is
+approximated numerically in the 1D solver instead of having analytical
+relations derived for each governing equation.</p>
+<section id="damped-newton-method">
+<h3>Damped Newton Method<a class="headerlink" href="#damped-newton-method" title="Link to this heading">#</a></h3>
+<p>The damped Newton method starts with an initial guess for the solution, <span class="math notranslate nohighlight">\(x^{(0)}\)</span>, and
+performs a series of iterations until the solution converges with the help of a
+damping parameter.</p>
+<p>For each iteration, <span class="math notranslate nohighlight">\(k\)</span>, the solution is updated using the following relation:</p>
+<div class="math notranslate nohighlight">
+\[
+J(x^{(k)}) \left( x^{(k+1)} - x^{(k)} \right) = -\lambda^{(k)} F(x^{(k)})
+  \quad (k = 0, 1, 2, 3, \ldots)
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\( J(x^{(k)}) \)</span> is the Jacobian matrix of <span class="math notranslate nohighlight">\( F(x^{(k)}) \)</span>.</p>
+<p>Another way to looking at the equation is:</p>
+<div class="math notranslate nohighlight">
+\[
+ \left( x^{(k+1)} - x^{(k)} \right) = -\lambda^{(k)} J(x^{(k)})^{-1} F(x^{(k)})
+   = \Delta x^{(k)}
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\( \Delta x^{(k)} \)</span> is a vector that represents a correction to the current
+solution that will take the solution from <span class="math notranslate nohighlight">\( x^{(k)} \)</span> to <span class="math notranslate nohighlight">\( x^{(k+1)} \)</span>. During each
+iteration this correction vector changes and during the iteration process it
+should reduce in size until it becomes zero. This correction vector points in the
+direction that will drive the solution towards a zero error.</p>
+<p>The damping parameter, <span class="math notranslate nohighlight">\(\lambda\)</span> is a value that is between 0 and 1. This damping
+parameter is selected to satisfy two conditions:</p>
+<ol class="arabic simple">
+<li><p>Each component of <span class="math notranslate nohighlight">\(x\)</span> must stay within a trust region, which is the bounds that
+are assigned to each solution component. These are bounds such as limitations on
+the magnitude or sign of the velocity, mass fractions, etc.</p></li>
+<li><p>The norms of succeeding undamped steps decrease in magnitude.</p></li>
+</ol>
+<p>The following image visually illustrates the damped Newton method. In it, the undamped
+Newton step <span class="math notranslate nohighlight">\( \Delta x^{(k)} \)</span> is shown. The second vector is the undamped step
+that would occur if the full initial step were to be taken. The shorter vector
+representing the damped correction <span class="math notranslate nohighlight">\( \lambda^{(k)} \Delta x^{(k)} \)</span> is a trial
+step. The method takes this trial step to get to a new solution at <span class="math notranslate nohighlight">\( x^{(k+1)} \)</span>.
+A new step vector is then computed using the trial solution, which gives
+<span class="math notranslate nohighlight">\( \Delta x^{(k+1)} \)</span>. The length of this vector is compared to the length of the
+original undamped step <span class="math notranslate nohighlight">\( \Delta x^{(k)} \)</span>. If the length of the new step is less
+than the length of the original step, then the trial step is accepted, and the damping
+value is accepted. The step is then taken, and the process is repeated until the
+solution converges.</p>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="../../_images/damped_newton_diagram.svg"><img alt="Representation of the damped Newton method. Adapted from {cite:t}`kee2003`." src="../../_images/damped_newton_diagram.svg" width="75%" /></a>
+<figcaption>
+<p><span class="caption-text">Representation of the damped Newton method. Adapted from <span id="id2">Kee <em>et al.</em> [<a class="reference internal" href="../bibliography.html#id20" title="R. J. Kee, M. E. Coltrin, and P. Glarborg. Chemically Reacting Flow: Theory and Practice. John Wiley &amp; Sons, 2003.">2003</a>]</span>.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>For a more mathematical representation of the damped Newton method, we consider:</p>
+<div class="math notranslate nohighlight">
+\[
+x^{(k+1)} = x^{(k)} + \lambda^{(k)} \Delta x^{(k)}
+\]</div>
+<p>A value of <span class="math notranslate nohighlight">\(\lambda\)</span> needs to be picked that satisfies:</p>
+<div class="math notranslate nohighlight">
+\[
+|\Delta x^{(k+1)}| &lt; |\Delta x^{(k)}|
+\]</div>
+<p>Where:</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta x^{(k)} = J(x^{(k)})^{-1} F(x^{(k)})
+\]</div>
+<p>and,</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta x^{(k+1)} = J(x^{(k)})^{-1} F(x^{(k+1)})
+\]</div>
+<p>During the search for the correct value of <span class="math notranslate nohighlight">\(\lambda\)</span>, the value of <span class="math notranslate nohighlight">\(\lambda\)</span> starts
+at 1, it is adjusted down to a value that keeps the solution within the trust region.
+The process then begins for finding <span class="math notranslate nohighlight">\(\lambda\)</span>, failures result in the damping factor
+being reduced by a constant factor. The current factor in Cantera is the <span class="math notranslate nohighlight">\(\sqrt{2}\)</span>.</p>
+<p>During the damped Newton method, the Jacobian is kept at the <span class="math notranslate nohighlight">\(x^{(k)}\)</span> value. This
+sometimes can cause issues with convergence if the Jacobian becomes out of date
+(due to sensitivity to the solution). In Cantera, the Jacobian is updated if too many
+attempted steps fail to take any damped step. The balance of how long to wait before
+updating the Jacobian is a trade-off between the cost of updating the Jacobian and the
+cost of failing to converge.</p>
+</section>
+<section id="convergence-criteria">
+<h3>Convergence Criteria<a class="headerlink" href="#convergence-criteria" title="Link to this heading">#</a></h3>
+<p>As was discussed earlier, the Newton method is an iterative method, and it’s important
+to assess when the method has reached a point where the iterations can be stopped. This
+point is called convergence. Cantera’s implementation uses a <em>weighted norm</em> of the
+step vector to determine convergence, rather than a simple absolute norm. A damped
+Newton step is considered to be converged when the weighted norm of the correction
+vector is less than 1. During the solution, the process of finding and taking a damped
+Newton step is repeated until the weighted norm of the correction vector is less
+than 1, if it is not, then the process continues.</p>
+<p>In a multivariate system, different variables may have vastly different magnitudes
+and units. A simple absolute norm could either be dominated by large components or fail
+to account for smaller components effectively. By normalizing the step vector
+components using <span class="math notranslate nohighlight">\(w_n\)</span>, the weighted norm ensures that the convergence criterion is
+meaningful across all solution components, regardless of their individual scales.</p>
+<p>This approach provides a more robust and scale-invariant method for assessing
+convergence, making it especially useful in systems with diverse variables.</p>
+<section id="definition-of-the-weighted-norm">
+<h4>Definition of the Weighted Norm<a class="headerlink" href="#definition-of-the-weighted-norm" title="Link to this heading">#</a></h4>
+<p>The weighted norm of the step vector <span class="math notranslate nohighlight">\(\mathbf{s}\)</span> is calculated as:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Weighted Norm} = \sum_{n,j} \left(\frac{\Delta x_{n,j}}{w_n}\right)^2
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Delta x_{n,j}\)</span> is the Newton step vector component for the <span class="math notranslate nohighlight">\(n\)</span>-th solution variable
+at the <span class="math notranslate nohighlight">\(j\)</span>-th grid point.</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_n\)</span> is the error weight for the <span class="math notranslate nohighlight">\(n\)</span>-th solution component, given by:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+w_n = \epsilon_{r,n} \cdot \frac{\sum_j |x_{n,j}|}{J} + \epsilon_{a,n}
+\]</div>
+<p>Here:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\epsilon_{r,n}\)</span> is the relative error tolerance for the <span class="math notranslate nohighlight">\(n\)</span>-th solution component.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{\sum_j |x_{n,j}|}{J}\)</span> is the average magnitude of the <span class="math notranslate nohighlight">\(n\)</span>-th solution
+component over all grid points, and <span class="math notranslate nohighlight">\(J\)</span> is the total number of grid points.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon_{a,n}\)</span> is the absolute error tolerance for the <span class="math notranslate nohighlight">\(n\)</span>-th solution
+component.</p></li>
+</ul>
+</section>
+<section id="interpretation-of-the-weighted-norm">
+<h4>Interpretation of the Weighted Norm<a class="headerlink" href="#interpretation-of-the-weighted-norm" title="Link to this heading">#</a></h4>
+<p>The weighted norm is a relative measure that helps bring all components of the step
+vector into a comparable range, taking into account the scales of the different
+solution components. It can be interpreted as follows:</p>
+<ul class="simple">
+<li><p><strong>Relative Error Term</strong> <span class="math notranslate nohighlight">\((\epsilon_{r,n})\)</span>: Scales the step size relative to the
+average magnitude of the corresponding solution component. This means that larger
+components can tolerate larger steps.</p></li>
+<li><p><strong>Absolute Error Term</strong> <span class="math notranslate nohighlight">\((\epsilon_{a,n})\)</span>: Ensures that even very small solution
+components are considered in the convergence check by providing a minimum threshold.</p></li>
+</ul>
+</section>
+<section id="convergence-criterion">
+<h4>Convergence Criterion<a class="headerlink" href="#convergence-criterion" title="Link to this heading">#</a></h4>
+<p>The Newton iteration is considered converged when the weighted norm is less than 1:</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{n,j} \left(\frac{\Delta x_{n,j}}{w_n}\right)^2 &lt; 1
+\]</div>
+<p>This criterion indicates that each component of the step vector <span class="math notranslate nohighlight">\(\Delta x_{n,j}\)</span> (the
+change in each component) is sufficiently small compared to the relative and absolute
+error tolerances on that component.</p>
+</section>
+</section>
+</section>
+<section id="transient-solution">
+<h2>Transient Solution<a class="headerlink" href="#transient-solution" title="Link to this heading">#</a></h2>
+<p>There will be times when the solution of the steady-state problem can not be found
+using the damped Newton method. In this case, a transient solution is solved and a
+specified number of time steps are taken before the steady-state damped Newton
+method is attempted again.</p>
+<p>The equation that is being solved for the transient case is:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d x}{dt} = F_{ss}(x)
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(F_{ss}(x)\)</span> is the residual vector for the steady-state problem. That is, the
+residual vector that arises when the <span class="math notranslate nohighlight">\(\frac{d x}{dt}\)</span> term is zero in the governing
+equations. The transient solution is solved using the implicit backward Euler method.
+The solution at the next time step is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{x_{n+1} - x_n}{\Delta t} = F_{ss}(x_{n+1})
+\]</div>
+<p>Here the <code class="docutils literal notranslate"><span class="pre">n+1</span></code> is the solution at the next time step, <code class="docutils literal notranslate"><span class="pre">n</span></code> is the solution at the current
+time step.</p>
+<p>We consider a case where each element of the residual vector may not have a
+corresponding time derivative term. These equations without time derivative terms are
+referred to as algebraic equations, and the ones with time derivative terms are
+referred to as differential equations. A general way to express this is by writing the
+equation above in the following form.</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha \frac{x_{n+1} - x_n}{\Delta t} = F_{ss}(x_{n+1})
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\alpha\)</span> is a diagonal matrix with diagonal values that are equal to 1 for
+differential equations and 0 for algebraic equations.</p>
+<p>Moving all terms to the right hand side of the equation, we get our expression for the
+residual equation that we will by solving:</p>
+<div class="math notranslate nohighlight">
+\[
+F(x_n, x_{n+1}) = -\frac{\alpha}{\Delta t}(x_{n+1} - x_n) + F_{ss}(x_{n+1})
+\]</div>
+<p>For the Newton method, we linearize the residual equation about the solution vector at
+the next iteration (not time step) by using a Taylor series expansion. The linearized
+equation is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+F(x_n, x_{n+1}) \approx F(x_n, x_{n+1}^{(k)}) +
+  \frac{\partial F(x_n, x_{n+1}^{(k)})}{\partial x_{n+1}} \Delta x_{n+1}^{(k)}
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(x_{n+1}^{(k)}\)</span> is the solution at the <span class="math notranslate nohighlight">\(k\)</span>-th Newton iteration for the time step
+<span class="math notranslate nohighlight">\(n+1\)</span>. The Jacobian is the derivative term that is multiplying the correction vector
+<span class="math notranslate nohighlight">\(\Delta x_{n+1}^{(k)}\)</span>. The Jacobian is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+J(x_n, x_{n+1}^{(k)}) = \frac{\partial F(x_n, x_{n+1}^{(k)})}{\partial x_{n+1}}
+\]</div>
+<p>Using the expression for the residual equation defined earlier, the Jacobian matrix can
+be written as:</p>
+<div class="math notranslate nohighlight">
+\[
+J(x_n, x_{n+1}^{(k)}) = \frac{\alpha}{\Delta t} +
+  \frac{\partial F_{ss}(x_{n+1}^{(k)})}{\partial x_{n+1}}
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\frac{\partial x_n}{\partial x_{n+1}}\)</span> is zero, and
+<span class="math notranslate nohighlight">\(\frac{\partial x_{n+1}}{\partial x_{n+1}}\)</span> is the identity matrix. Recalling the
+previous definition of the steady-state Jacobian matrix, we can write the transient
+Jacobian matrix as:</p>
+<div class="math notranslate nohighlight">
+\[
+J(x_n, x_{n+1}^{(k)}) = \frac{\alpha}{\Delta t} + J_{ss}(x_{n+1}^{(k)})
+\]</div>
+<p>The linearized equation is set to zero to obtain the equation that will be used to send
+the residual equation to zero. This equation is:</p>
+<div class="math notranslate nohighlight">
+\[
+J(x_{n+1}^{(k)}) \Delta x_{n+1}^{(k)} = -F(x_n, x_{n+1}^{(k)})
+\]</div>
+<p>Taking the full expression for the Jacobian and the residual equation, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\left(-\frac{\alpha}{\Delta t} + J_{ss}(x_{n+1}^{(k)})\right) \Delta x_{n+1}^{(k)} =
+  -\left( -\frac{\alpha}{\Delta t} (x_{n+1}^{(k)} - x_n) + F_{ss}(x_{n+1}^{(k)}) \right)
+\]</div>
+<p>Recall that the original steady-state equation, solved using the damped Newton method
+had the form:</p>
+<div class="math notranslate nohighlight">
+\[
+J_{ss}(x^{(k)}) \Delta x^{(k)} = -\lambda^{(k)} F_{ss}(x^{(k)})
+\]</div>
+<p>The transient equation has the same form as the steady-state equation, and so the same
+damped Newton method can be used to solve the transient problem for a single time step.</p>
+<div class="math notranslate nohighlight">
+\[
+J(x_{n+1}^{(k)}) \Delta x_{n+1}^{(k)} = -\lambda^{(k)} F(x_n, x_{n+1}^{(k)})
+\]</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition">Problem Definition</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#damped-newton-method">Damped Newton Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-criteria">Convergence Criteria</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-the-weighted-norm">Definition of the Weighted Norm</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-weighted-norm">Interpretation of the Weighted Norm</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-criterion">Convergence Criterion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transient-solution">Transient Solution</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/reference/onedim/nonlinear-solver.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

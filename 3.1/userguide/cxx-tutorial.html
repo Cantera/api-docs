@@ -1,0 +1,1038 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Using Cantera from C++ &#8212; Cantera 3.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55ce3b32" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=dd1205ac"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'userguide/cxx-tutorial';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Compiling Cantera C++ Applications" href="compiling-cxx.html" />
+    <link rel="prev" title="Using Reactor Networks for Time Integration" href="reactor-tutorial.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python-tutorial.html">Python Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input-tutorial.html">Introduction to YAML Input Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reactor-tutorial.html">Using Reactor Networks for Time Integration</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Using Cantera from C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compiling-cxx.html">Compiling Cantera C++ Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ck2yaml-tutorial.html">Converting Chemkin Format Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating-mechanisms.html">Creating YAML Mechanism Files from Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermobuild.html">Converting Data from NASA ThermoBuild</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input-errors.html">Handling Errors in Input Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legacy2yaml-tutorial.html">Converting Legacy CTI and XML Input Files to YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flame-temperature.html">Calculating Adiabatic Flame Temperature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heating-value.html">Calculating Heating Value of a Fuel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/python/kinetics/lithium_ion_battery.html">Lithium Ion Battery Discharge Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensible-reactor.html">Extending Reactor Models with Custom Equations</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Using...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="using-cantera-from-c">
+<h1>Using Cantera from C++<a class="headerlink" href="#using-cantera-from-c" title="Link to this heading">#</a></h1>
+<p>One of the main reasons to use the Cantera C++ interface directly is to be able to
+couple it with a higher-level simulation code, where Cantera is used to calculate
+thermodynamic properties, reaction rates, and transport properties for the host code.
+This tutorial demonstrates how to initialize Cantera objects from
+<a class="reference internal" href="input-tutorial.html"><span class="doc std std-doc">YAML input files</span></a> and use those objects to calculate
+properties for mixtures with different thermodynamic states.</p>
+<section id="a-very-simple-c-program">
+<h2>A very simple C++ program<a class="headerlink" href="#a-very-simple-c-program" title="Link to this heading">#</a></h2>
+<p>A short C++ program that uses Cantera is shown below. This program reads in a
+specification of a gas mixture from an input file, and then builds a new object
+representing the mixture. It then sets the thermodynamic state and composition of the
+gas mixture, and prints out a summary of its properties.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;cantera/core.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">Cantera</span><span class="p">;</span>
+
+<span class="c1">// The actual code is put into a function that can be called from the main program.</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">simple_demo</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Create a new Solution object</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">sol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newSolution</span><span class="p">(</span><span class="s">&quot;h2o2.yaml&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">gas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sol</span><span class="o">-&gt;</span><span class="n">thermo</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Set the thermodynamic state by specifying T (500 K) P (2 atm) and the mole</span>
+<span class="w">    </span><span class="c1">// fractions. Note that the mole fractions do not need to sum to 1.0 - they will</span>
+<span class="w">    </span><span class="c1">// be normalized internally. Also, the values for any unspecified species will be</span>
+<span class="w">    </span><span class="c1">// set to zero.</span>
+<span class="w">    </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">setState_TPX</span><span class="p">(</span><span class="mf">500.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="o">*</span><span class="n">OneAtm</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;H2O:1.0, H2:8.0, AR:1.0&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Print a summary report of the state of the gas.</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">report</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// The main program just calls function simple_demo within a &#39;try&#39; block, and catches</span>
+<span class="c1">// CanteraError exceptions that might be thrown.</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">simple_demo</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">CanteraError</span><span class="o">&amp;</span><span class="w"> </span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">err</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Before you can run this program, it first needs to be compiled. On a Linux system using
+the GCC compiler, a typical command line for compiling this program might look like
+this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>g++<span class="w"> </span>combustor.cpp<span class="w"> </span>-o<span class="w"> </span>combustor<span class="w"> </span>-O3<span class="w"> </span><span class="k">$(</span>pkg-config<span class="w"> </span>--cflags<span class="w"> </span>--libs<span class="w"> </span>cantera<span class="k">)</span>
+</pre></div>
+</div>
+<p>This example relies on the <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> tool to determine the appropriate compiler
+flags, such as those specifying the Cantera header and library files. For more advanced
+and flexible methods of compiling programs that use the Cantera C++ library, see
+<a class="reference internal" href="compiling-cxx.html"><span class="doc std std-doc">Compiling Cantera C++ Applications</span></a>.</p>
+</div>
+<p>Running this program produces the output below:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>
+  ohmech:
+
+       temperature   500 K
+          pressure   2.0265e+05 Pa
+           density   0.36118 kg/m^3
+  mean mol. weight   7.4093 kg/kmol
+   phase of matter   gas
+
+                          1 kg             1 kmol     
+                     ---------------   ---------------
+          enthalpy       -2.4772e+06       -1.8354e+07  J
+   internal energy       -3.0382e+06       -2.2511e+07  J
+           entropy             20699        1.5337e+05  J/K
+    Gibbs function       -1.2827e+07       -9.5038e+07  J
+ heat capacity c_p            3919.1             29038  J/K
+ heat capacity c_v              2797             20724  J/K
+
+                      mass frac. Y      mole frac. X     chem. pot. / RT
+                     ---------------   ---------------   ---------------
+                H2           0.21767               0.8           -15.644
+                 H                 0                 0  
+                 O                 0                 0  
+                O2                 0                 0  
+                OH                 0                 0  
+               H2O           0.24314               0.1           -82.953
+               HO2                 0                 0  
+              H2O2                 0                 0  
+                AR           0.53919               0.1           -20.503
+                N2                 0                 0  
+
+</pre></div>
+</div>
+<p>As C++ programs go, this one is quite short. It is the Cantera equivalent of the “Hello,
+World” program most programming textbooks begin with. But it illustrates some important
+points in writing Cantera C++ programs.</p>
+<section id="making-cantera-classes-and-functions-available">
+<h3>Making Cantera classes and functions available<a class="headerlink" href="#making-cantera-classes-and-functions-available" title="Link to this heading">#</a></h3>
+<p>Cantera provides several header files designed for use in C++ application programs.
+These are designed to include those portions of Cantera needed for particular types of
+calculations. The headers and their functions are:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">core.h</span></code></dt><dd><p>Base classes and functions for creating <a class="reference external" href="../cxx/d5/d40/classCantera_1_1Solution.html">Solution</a> and <a class="reference external" href="../cxx/db/dc7/classCantera_1_1Interface.html">Interface</a> objects
+from input files, as well as associated classes accessed through these objects such as
+<a class="reference external" href="../cxx/dc/d38/classCantera_1_1ThermoPhase.html">ThermoPhase</a>, <a class="reference external" href="../cxx/d4/dc4/classCantera_1_1Kinetics.html">Kinetics</a>, and <a class="reference external" href="../cxx/d2/dfb/classCantera_1_1Transport.html">Transport</a>. <em>(New in Cantera 3.0)</em>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">zerodim.h</span></code></dt><dd><p>Zero-dimensional reactor networks.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">onedim.h</span></code></dt><dd><p>One-dimensional reacting flows.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">reactionpaths.h</span></code></dt><dd><p>Reaction path diagrams.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">thermo.h</span></code></dt><dd><p>Base thermodynamic classes and functions for creating <a class="reference external" href="../cxx/dc/d38/classCantera_1_1ThermoPhase.html">ThermoPhase</a> objects from
+input files <em>(Superseded by <code class="docutils literal notranslate"><span class="pre">core.h</span></code> in Cantera 3.0)</em>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kinetics.h</span></code></dt><dd><p>Base kinetics classes and functions for creating <a class="reference external" href="../cxx/d4/dc4/classCantera_1_1Kinetics.html">Kinetics</a> objects from input
+files <em>(Superseded by <code class="docutils literal notranslate"><span class="pre">core.h</span></code> in Cantera 3.0)</em>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">transport.h</span></code></dt><dd><p>Base transport property classes and functions for creating <a class="reference external" href="../cxx/d2/dfb/classCantera_1_1Transport.html">Transport</a> objects
+from input files <em>(Superseded by <code class="docutils literal notranslate"><span class="pre">core.h</span></code> in Cantera 3.0)</em>.</p>
+</dd>
+</dl>
+</section>
+<section id="creating-a-solution-object-from-an-input-file">
+<h3>Creating a <code class="docutils literal notranslate"><span class="pre">Solution</span></code> object from an input file<a class="headerlink" href="#creating-a-solution-object-from-an-input-file" title="Link to this heading">#</a></h3>
+<p>Here, <a class="reference external" href="../cxx/d5/d2a/group__solnGroup.html#gae3e987bbb6a7f50d5d07447bae17aa1c">newSolution()</a> imports all information held by a YAML input file into a Cantera
+<a class="reference external" href="../cxx/d5/d40/classCantera_1_1Solution.html">Solution</a> object, which is accessed by the pointer <code class="docutils literal notranslate"><span class="pre">sol</span></code>. The thermodynamic
+information is accessible via <code class="docutils literal notranslate"><span class="pre">sol-&gt;thermo()</span></code>, which itself returns a pointer to a
+<a class="reference external" href="../cxx/dc/d38/classCantera_1_1ThermoPhase.html">ThermoPhase</a> object.</p>
+<p>Class <a class="reference external" href="../cxx/dc/d38/classCantera_1_1ThermoPhase.html">ThermoPhase</a> is the base class for Cantera classes that represent phases of
+matter. It defines the public interface for all classes that represent phases. For
+example, it specifies that they all have a method <code class="docutils literal notranslate"><span class="pre">temperature()</span></code> that returns the current
+temperature, a method <code class="docutils literal notranslate"><span class="pre">setTemperature(double</span> <span class="pre">T)</span></code> that sets the temperature, a method
+<code class="docutils literal notranslate"><span class="pre">getChemPotentials(double*</span> <span class="pre">mu)</span></code> that writes the species chemical potentials into array
+<code class="docutils literal notranslate"><span class="pre">mu</span></code>, and so on.</p>
+<p><a class="reference external" href="../cxx/dc/d38/classCantera_1_1ThermoPhase.html">ThermoPhase</a> objects can represent the intensive state of any single-phase solution
+of multiple species. The phase may be a bulk, three-dimensional phase (a gas, a liquid,
+or a solid), or it may be a two-dimensional surface phase, or even a one-dimensional
+“edge” phase. Many different <a class="reference internal" href="../reference/thermo/phase-thermo.html"><span class="doc std std-doc">phase thermodynamic models</span></a>
+are implemented as classes derived from <a class="reference external" href="../cxx/dc/d38/classCantera_1_1ThermoPhase.html">ThermoPhase</a>.</p>
+</section>
+<section id="the-report-function">
+<h3>The <code class="docutils literal notranslate"><span class="pre">report</span></code> function<a class="headerlink" href="#the-report-function" title="Link to this heading">#</a></h3>
+<p>The <a class="reference external" href="../cxx/dc/d38/classCantera_1_1ThermoPhase.html#a5ca657cb3a878de3639274af708ddd97">ThermoPhase::report()</a> method generates a nicely-formatted report of the
+properties of a phase, including its composition in both mole (X) and mass (Y) units.
+For each species present, the non-dimensional chemical potential is also printed. This
+is handy particularly when doing equilibrium calculations. This function is very useful
+to see at a glance the state of some phase.</p>
+</section>
+<section id="handling-errors">
+<h3>Handling errors<a class="headerlink" href="#handling-errors" title="Link to this heading">#</a></h3>
+<p>The entire body of the program is put inside a function that is invoked within a <code class="docutils literal notranslate"><span class="pre">try</span></code>
+block in the main program. In this way, exceptions thrown in the function or in any
+procedure it calls may be caught. In this program, a <code class="docutils literal notranslate"><span class="pre">catch</span></code> block is defined for
+exceptions of type <a class="reference external" href="../cxx/db/ddf/classCantera_1_1CanteraError.html">CanteraError</a>. Cantera throws exceptions of this type, so it is
+always a good idea to catch them.</p>
+</section>
+</section>
+<section id="accessing-thermodynamic-properties">
+<h2>Accessing thermodynamic properties<a class="headerlink" href="#accessing-thermodynamic-properties" title="Link to this heading">#</a></h2>
+<p>In the program below, a gas mixture object is created, and a few thermodynamic
+properties are computed and printed out:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;cantera/core.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">Cantera</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">thermo_demo</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">phase</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Create a new Solution object</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">sol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newSolution</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">phase</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">gas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sol</span><span class="o">-&gt;</span><span class="n">thermo</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">setState_TPX</span><span class="p">(</span><span class="mf">1500.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="o">*</span><span class="n">OneAtm</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;O2:1.0, H2:3.0, AR:1.0&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// temperature, pressure, and density</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">temperature</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">pressure</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">density</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// molar thermodynamic properties</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">enthalpy_mole</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">entropy_mole</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// specific (per unit mass) thermodynamic properties</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">enthalpy_mass</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">entropy_mass</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// chemical potentials of the species</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">numSpecies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">nSpecies</span><span class="p">();</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mu</span><span class="p">(</span><span class="n">numSpecies</span><span class="p">);</span>
+<span class="w">    </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">getChemPotentials</span><span class="p">(</span><span class="n">mu</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numSpecies</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">speciesName</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mu</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">thermo_demo</span><span class="p">(</span><span class="s">&quot;h2o2.yaml&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ohmech&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">CanteraError</span><span class="o">&amp;</span><span class="w"> </span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">err</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Methods that compute scalar properties take no input parameters. The properties are
+computed for the state that has been previously set and stored internally within the
+object. Methods that return <em>molar</em> properties have names that end in <code class="docutils literal notranslate"><span class="pre">_mole</span></code>, while
+methods that return properties <em>per unit mass</em> have names that end in <code class="docutils literal notranslate"><span class="pre">_mass</span></code>.</p>
+<p>Methods that compute an array of values have names beginning with <code class="docutils literal notranslate"><span class="pre">get</span></code> and write the
+computed values into an array provided as an input argument. For example, the method
+<code class="docutils literal notranslate"><span class="pre">getChemPotentials(double*</span> <span class="pre">mu)</span></code> writes the species chemical potentials into the output
+array <code class="docutils literal notranslate"><span class="pre">mu</span></code>.</p>
+<p>All thermodynamic property methods are declared in class <a class="reference external" href="../cxx/dc/d38/classCantera_1_1ThermoPhase.html">ThermoPhase</a>, which is the
+base class from which all classes that represent any type of phase of matter derive. See
+the documentation for class <a class="reference external" href="../cxx/dc/d38/classCantera_1_1ThermoPhase.html">ThermoPhase</a> for the full list of available
+thermodynamic properties.</p>
+</section>
+<section id="computing-chemical-equilibrium">
+<h2>Computing chemical equilibrium<a class="headerlink" href="#computing-chemical-equilibrium" title="Link to this heading">#</a></h2>
+<p>In the program below, the <a class="reference external" href="../cxx/d3/d3d/group__equilGroup.html#ga58b60c1d783f22d0e9e9848fd4ef70c0">ThermoPhase::equilibrate()</a> method is called to set a gas
+to a state of chemical equilibrium, holding the temperature and pressure fixed.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;cantera/core.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">Cantera</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">equil_demo</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Create a new Solution object</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">sol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newSolution</span><span class="p">(</span><span class="s">&quot;h2o2.yaml&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">gas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sol</span><span class="o">-&gt;</span><span class="n">thermo</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">setState_TPX</span><span class="p">(</span><span class="mf">1500.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="o">*</span><span class="n">OneAtm</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;O2:1.0, H2:3.0, AR:1.0&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">equilibrate</span><span class="p">(</span><span class="s">&quot;TP&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">report</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">equil_demo</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">CanteraError</span><span class="o">&amp;</span><span class="w"> </span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">err</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The program output is:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>
+  ohmech:
+
+       temperature   1500 K
+          pressure   2.0265e+05 Pa
+           density   0.31683 kg/m^3
+  mean mol. weight   19.499 kg/kmol
+   phase of matter   gas
+
+                          1 kg             1 kmol     
+                     ---------------   ---------------
+          enthalpy       -4.1789e+06       -8.1485e+07  J
+   internal energy       -4.8186e+06       -9.3957e+07  J
+           entropy             11283        2.2001e+05  J/K
+    Gibbs function       -2.1104e+07        -4.115e+08  J
+ heat capacity c_p              1893             36912  J/K
+ heat capacity c_v            1466.6             28597  J/K
+
+                      mass frac. Y      mole frac. X     chem. pot. / RT
+                     ---------------   ---------------   ---------------
+                H2          0.025847              0.25           -19.295
+                 H        3.2181e-07        6.2252e-06           -9.6477
+                 O        6.2927e-12        7.6693e-12           -26.377
+                O2        1.1747e-11        7.1586e-12           -52.753
+                OH        3.0994e-07        3.5535e-07           -36.024
+               H2O           0.46195               0.5           -45.672
+               HO2        1.2362e-14        7.3034e-15           -62.401
+              H2O2         6.904e-13        3.9578e-13           -72.049
+                AR           0.51221              0.25           -21.339
+                N2                 0                 0  
+
+</pre></div>
+</div>
+<p>How can we tell that this is really a state of chemical equilibrium? Well, by applying
+the equation of reaction equilibrium to formation reactions from the elements, it is
+straightforward to show that</p>
+<div class="math notranslate nohighlight">
+\[  \mu_k = \sum_m \lambda_m a_{km}  \]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu_k\)</span> is the chemical potential of species <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(a_{km}\)</span> is the number of atoms
+of element <span class="math notranslate nohighlight">\(m\)</span> in species <span class="math notranslate nohighlight">\(k\)</span>, and <span class="math notranslate nohighlight">\(\lambda_m\)</span> is the chemical potential of the
+elemental species per atom (the so-called “element potential”). In other words, the
+chemical potential of each species in an equilibrium state is a linear sum of
+contributions from each atom. We can see that this is true in the output above—the
+chemical potential of H2 is exactly twice that of H, the chemical potential for OH is
+the sum of the values for H and O, the value for H2O2 is twice as large as the value for
+OH, and so on.</p>
+</section>
+<section id="computing-reaction-rates-and-transport-properties">
+<h2>Computing reaction rates and transport properties<a class="headerlink" href="#computing-reaction-rates-and-transport-properties" title="Link to this heading">#</a></h2>
+<p>The following program demonstrates the typical method for accessing the following object
+types from a <a class="reference external" href="../cxx/d5/d40/classCantera_1_1Solution.html">Solution</a> object:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="../cxx/dc/d38/classCantera_1_1ThermoPhase.html">ThermoPhase</a>: Represents the thermodynamic properties of mixtures containing one
+or more species. Accessed using <a class="reference external" href="../cxx/d5/d40/classCantera_1_1Solution.html#ae05e0774c95893603a102a1fc21d56e1">Solution::thermo()</a> method.</p></li>
+<li><p><a class="reference external" href="../cxx/d4/dc4/classCantera_1_1Kinetics.html">Kinetics</a>: Represents a kinetic mechanism involving one or more phases. Accessed
+using the <a class="reference external" href="../cxx/d5/d40/classCantera_1_1Solution.html#a4e41af3410e07f7a5ee397ca2d1bd397">Solution::kinetics()</a>.</p></li>
+<li><p><a class="reference external" href="../cxx/d2/dfb/classCantera_1_1Transport.html">Transport</a>: Computes transport properties for a phase. Accessed using the
+<a class="reference external" href="../cxx/d5/d40/classCantera_1_1Solution.html#ae0974c3c3c06a1ff83a588096449f62c">Solution::transport()</a> method.</p></li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;cantera/core.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;cantera/kinetics/Reaction.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">Cantera</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">simple_demo2</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">sol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newSolution</span><span class="p">(</span><span class="s">&quot;gri30.yaml&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gri30&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">gas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sol</span><span class="o">-&gt;</span><span class="n">thermo</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Access the Kinetics object. Based on the phase definition in the input file,</span>
+<span class="w">    </span><span class="c1">// this will reference a BulkKinetics object.</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">kin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sol</span><span class="o">-&gt;</span><span class="n">kinetics</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Set an &quot;interesting&quot; state where we will observe non-zero reaction rates.</span>
+<span class="w">    </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">setState_TPX</span><span class="p">(</span><span class="mf">500.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="o">*</span><span class="n">OneAtm</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CH4:1.0, O2:1.0, N2:3.76&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">equilibrate</span><span class="p">(</span><span class="s">&quot;HP&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">setState_TP</span><span class="p">(</span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">temperature</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">pressure</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// Get the net reaction rates.</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">wdot</span><span class="p">(</span><span class="n">kin</span><span class="o">-&gt;</span><span class="n">nReactions</span><span class="p">());</span>
+<span class="w">    </span><span class="n">kin</span><span class="o">-&gt;</span><span class="n">getNetRatesOfProgress</span><span class="p">(</span><span class="n">wdot</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
+
+<span class="w">    </span><span class="n">writelog</span><span class="p">(</span><span class="s">&quot;Net reaction rates for reactions involving CO2</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">kCO2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">speciesIndex</span><span class="p">(</span><span class="s">&quot;CO2&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">kin</span><span class="o">-&gt;</span><span class="n">nReactions</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">kin</span><span class="o">-&gt;</span><span class="n">reactantStoichCoeff</span><span class="p">(</span><span class="n">kCO2</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">kin</span><span class="o">-&gt;</span><span class="n">productStoichCoeff</span><span class="p">(</span><span class="n">kCO2</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">rxn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kin</span><span class="o">-&gt;</span><span class="n">reaction</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">            </span><span class="n">writelog</span><span class="p">(</span><span class="s">&quot;{:3d}  {:30s}  {: .8e}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">rxn</span><span class="o">-&gt;</span><span class="n">equation</span><span class="p">(),</span><span class="w"> </span><span class="n">wdot</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">writelog</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Access the Transport object. Based on the phase definition in the input file,</span>
+<span class="w">    </span><span class="c1">// this will reference a MixTransport object.</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">trans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sol</span><span class="o">-&gt;</span><span class="n">transport</span><span class="p">();</span>
+<span class="w">    </span><span class="n">writelog</span><span class="p">(</span><span class="s">&quot;T        viscosity     thermal conductivity</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">writelog</span><span class="p">(</span><span class="s">&quot;------   -----------   --------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">300</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+<span class="w">        </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">setState_TP</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">gas</span><span class="o">-&gt;</span><span class="n">pressure</span><span class="p">());</span>
+<span class="w">        </span><span class="n">writelog</span><span class="p">(</span><span class="s">&quot;{:.1f}    {:.4e}    {:.4e}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">trans</span><span class="o">-&gt;</span><span class="n">viscosity</span><span class="p">(),</span><span class="w"> </span><span class="n">trans</span><span class="o">-&gt;</span><span class="n">thermalConductivity</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">simple_demo2</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">err</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This program produces the output below:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Net reaction rates for reactions involving CO2
+ 11  CO + O (+M) &lt;=&gt; CO2 (+M)         3.54150687e-08
+ 13  HCO + O &lt;=&gt; CO2 + H              1.95679990e-11
+ 29  CH2CO + O &lt;=&gt; CH2 + CO2          3.45366954e-17
+ 30  CO + O2 &lt;=&gt; CO2 + O              2.70102741e-13
+ 98  CO + OH &lt;=&gt; CO2 + H              6.46935827e-03
+119  CO + HO2 &lt;=&gt; CO2 + OH            1.86807592e-10
+131  CH + CO2 &lt;=&gt; CO + HCO            9.41365868e-14
+151  CH2(S) + CO2 &lt;=&gt; CH2 + CO2       3.11161343e-12
+152  CH2(S) + CO2 &lt;=&gt; CH2O + CO       2.85339294e-11
+225  NCO + O2 &lt;=&gt; CO2 + NO            3.74127381e-19
+228  NCO + NO &lt;=&gt; CO2 + N2            6.25672710e-14
+261  HNCO + O &lt;=&gt; CO2 + NH            6.84524918e-13
+267  HNCO + OH &lt;=&gt; CO2 + NH2          7.78871222e-10
+279  CO2 + NH &lt;=&gt; CO + HNO           -3.30333709e-09
+281  NCO + NO2 &lt;=&gt; CO2 + N2O          2.14286657e-20
+282  CO2 + N &lt;=&gt; CO + NO              6.42658345e-10
+289  CH2 + O2 =&gt; CO2 + 2 H            1.51032305e-18
+304  CH2CHO + O =&gt; CH2 + CO2 + H      1.00331721e-19
+
+T        viscosity     thermal conductivity
+------   -----------   --------------------
+300.0    1.6701e-05    4.2143e-02
+400.0    2.0896e-05    5.2797e-02
+500.0    2.4704e-05    6.2827e-02
+600.0    2.8230e-05    7.2625e-02
+700.0    3.1536e-05    8.2311e-02
+</pre></div>
+</div>
+</section>
+<section id="examples-of-additional-c-functionality">
+<h2>Examples of additional C++ functionality<a class="headerlink" href="#examples-of-additional-c-functionality" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../examples/cxx/combustor.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">combustor.cpp</span></code></span></a>: An example that shows how to set up a
+reactor network model, using classes <a class="reference external" href="../cxx/dc/d5e/classCantera_1_1Reactor.html">Reactor</a>, <a class="reference external" href="../cxx/d7/def/classCantera_1_1ReactorNet.html">ReactorNet</a>, <a class="reference external" href="../cxx/d3/dd9/classCantera_1_1Reservoir.html">Reservoir</a>,
+<a class="reference external" href="../cxx/dc/d9b/classCantera_1_1MassFlowController.html">MassFlowController</a>, and <a class="reference external" href="../cxx/d7/d7d/classCantera_1_1Valve.html">Valve</a>.</p></li>
+<li><p><a class="reference internal" href="../examples/cxx/flamespeed.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">flamespeed.cpp</span></code></span></a>: An example simulating a freely
+propagating laminar flame using the <a class="reference external" href="../cxx/d7/dc9/classCantera_1_1Sim1D.html">Sim1D</a> solver.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-very-simple-c-program">A very simple C++ program</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-cantera-classes-and-functions-available">Making Cantera classes and functions available</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-solution-object-from-an-input-file">Creating a <code class="docutils literal notranslate"><span class="pre">Solution</span></code> object from an input file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-report-function">The <code class="docutils literal notranslate"><span class="pre">report</span></code> function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-errors">Handling errors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-thermodynamic-properties">Accessing thermodynamic properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-chemical-equilibrium">Computing chemical equilibrium</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-reaction-rates-and-transport-properties">Computing reaction rates and transport properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-additional-c-functionality">Examples of additional C++ functionality</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/userguide/cxx-tutorial.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2024, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

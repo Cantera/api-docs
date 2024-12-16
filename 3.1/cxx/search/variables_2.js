@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['cac_5fconvention_5fmolality_0',['cAC_CONVENTION_MOLALITY',['../df/db0/namespaceCantera.html#aef5d8f7985e646cecaefd8bf38d0adee',1,'Cantera']]],
+  ['cac_5fconvention_5fmolar_1',['cAC_CONVENTION_MOLAR',['../df/db0/namespaceCantera.html#a451f2e7bea2dc8d0fcc451b1cfcf2b4a',1,'Cantera']]],
+  ['cest_5fsolvent_2',['cEST_solvent',['../df/db0/namespaceCantera.html#aecd6bfd9eb163aabaac0e004f2f5670c',1,'Cantera']]],
+  ['charge_3',['charge',['../d1/d8c/classCantera_1_1Species.html#ab3eb30b2f3f9c5ff812ea037220be570',1,'Cantera::Species']]],
+  ['charge_4',['Charge',['../d5/d0d/classCantera_1_1vcs__SpeciesProperties.html#afa4699bd482426e10c8b21d0651151ce',1,'Cantera::vcs_SpeciesProperties']]],
+  ['chargeneutralityelement_5',['ChargeNeutralityElement',['../d7/de0/classCantera_1_1vcs__VolPhase.html#a3c537af36e5334a1c2759f0f8d753c36',1,'Cantera::vcs_VolPhase']]],
+  ['clock_5frollovers_6',['clock_rollovers',['../dd/dee/classCantera_1_1clockWC.html#a91e0371427c464d54c80e60792f354dc',1,'Cantera::clockWC']]],
+  ['clock_5fwidth_7',['clock_width',['../dd/dee/classCantera_1_1clockWC.html#af6f092c2c3a1f0614be203d5978d84fa',1,'Cantera::clockWC']]],
+  ['coeff_5fa_8',['coeff_a',['../df/db9/structCantera_1_1CoverageDependentSurfPhase_1_1HeatCapacityDependency.html#a5de6f931691121e27e63ae39d7d27a28',1,'Cantera::CoverageDependentSurfPhase::HeatCapacityDependency']]],
+  ['coeff_5fb_9',['coeff_b',['../df/db9/structCantera_1_1CoverageDependentSurfPhase_1_1HeatCapacityDependency.html#ac05475c93440ae440a2864fd7d3e0c0e',1,'Cantera::CoverageDependentSurfPhase::HeatCapacityDependency']]],
+  ['composition_10',['composition',['../d1/d8c/classCantera_1_1Species.html#a83df1ee3a7a3d26677491e5700870fdb',1,'Cantera::Species']]],
+  ['conc_5f3b_11',['conc_3b',['../d5/d37/structCantera_1_1FalloffData.html#a76c46988ad5d12aa99b1ffaf8a8a2803',1,'Cantera::FalloffData']]],
+  ['contin_12',['contin',['../d3/d27/classCantera_1_1EquilOpt.html#afbe89afbcf133cf604b56eba574817a0',1,'Cantera::EquilOpt']]],
+  ['coverages_13',['coverages',['../db/d06/structCantera_1_1InterfaceData.html#a82c5ef6e11c82edace697a8f02e163c5',1,'Cantera::InterfaceData']]],
+  ['creationglobalrxnnumbers_5f_14',['creationGlobalRxnNumbers_',['../d7/de0/classCantera_1_1vcs__VolPhase.html#ae5ca4f8052e5a68f2ed52d780393c420',1,'Cantera::vcs_VolPhase']]],
+  ['creationmolenumbers_5f_15',['creationMoleNumbers_',['../d7/de0/classCantera_1_1vcs__VolPhase.html#a379f8583cb4b30e15637174f52f3b345',1,'Cantera::vcs_VolPhase']]],
+  ['crop_5fspeciescropped_5f_16',['CROP_speciesCropped_',['../de/d1d/classCantera_1_1HMWSoln.html#a61b39fa2d1d280cc81092f475ec62deb',1,'Cantera::HMWSoln']]],
+  ['css_5fconvention_5fslave_17',['cSS_CONVENTION_SLAVE',['../df/db0/namespaceCantera.html#ab9b8ba28a8ed37ee0bbea110859754ac',1,'Cantera']]],
+  ['css_5fconvention_5ftemperature_18',['cSS_CONVENTION_TEMPERATURE',['../df/db0/namespaceCantera.html#aa0ea25ae1d9344f16340919143530847',1,'Cantera']]],
+  ['css_5fconvention_5fvpss_19',['cSS_CONVENTION_VPSS',['../df/db0/namespaceCantera.html#a3265905962fc12616b0caaeabb889826',1,'Cantera']]],
+  ['cstar_5ftable_20',['cstar_table',['../da/d37/classCantera_1_1MMCollisionInt.html#aa0ba1b214552e6f1158662a4395ed67f',1,'Cantera::MMCollisionInt']]]
+];

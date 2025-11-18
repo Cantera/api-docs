@@ -1,0 +1,1573 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>One-dimensional Reacting Flows &#8212; Cantera 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3c8b230e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'matlab/onedim';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.2';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Physical Constants" href="constants.html" />
+    <link rel="prev" title="Zero-Dimensional Reactor Networks" href="zeroD.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Cantera is community-driven and needs your help! <a href='https://cantera.org/getting-involved.html'>Get involved here</a>.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/index.html">Python Module Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/transport.html">Transport Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/zerodim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python/scripts.html">Mechanism Conversion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python/ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/yaml_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/lxcat_conversion.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/units.html">Python Interface With Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/constants.html">Physical Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/utilities.html">Utilities</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">MATLAB Toolbox Documentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="phases.html">Objects Representing Phases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transport.html">Transport Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeroD.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html">Physical Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html">Utility Functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../clib/index.html">C Interface Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../dotnet/index.html">.NET Interface Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../yaml/index.html">YAML Input File Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/general.html">General Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/phases.html">Phase Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/species.html">Species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/reactions.html">Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/yaml2ck.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/lxcat2yaml.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/releasenotes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.2.html">Cantera 3.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.1.html">Cantera 3.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.0.html">Cantera 3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.6.html">Cantera 2.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.5.html">Cantera 2.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.4.html">Cantera 2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.3.html">Cantera 2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.2.html">Cantera 2.2.1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.1.html">Cantera 2.1.2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.0.html">Cantera 2.0.2</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Science Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/thermo/index.html">Thermodynamic Properties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/thermo/species-thermo.html">Species Thermodynamic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/thermo/phase-thermo.html">Phase Thermodynamic Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/kinetics/index.html">Chemical Reactions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/kinetics/reaction-rates.html">Reaction Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/kinetics/rate-constants.html">Rate Constant Parameterizations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/transport/index.html">Transport Properties</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/reactors/index.html">Reactors and Reactor Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/controlreactor.html">Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/constant-pressure-reactor.html">Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-reactor.html">Ideal Gas Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-reactor.html">Ideal Gas Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/mole-reactor.html">Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/constant-pressure-mole-reactor.html">Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-mole-reactor.html">Ideal Gas Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-mole-reactor.html">Ideal Gas Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/interactions.html">Reactor Interactions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/onedim/index.html">One-dimensional Flames</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/governing-equations.html">Governing Equations for One-dimensional Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/discretization.html">Discretization of 1D Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/nonlinear-solver.html">Nonlinear Solver for One-dimensional Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/grid-refinement.html">Grid Refinement for One-dimensional Flows</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus" style="padding-bottom: 30px;">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../reference/index.html" class="nav-link">Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">MATLAB Toolbox Documentation</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">One-dimensio...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="one-dimensional-reacting-flows">
+<h1>One-dimensional Reacting Flows<a class="headerlink" href="#one-dimensional-reacting-flows" title="Link to this heading">#</a></h1>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The MATLAB toolbox is an experimental part of the Cantera API and may be changed
+without notice. It includes breaking changes from the legacy MATLAB API. While
+almost all features of the legacy MATLAB API are implemented, the toolbox does not
+include all functionality available for the C++ and Python interfaces.</p>
+</div>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#composite-domains" id="id1">Composite Domains</a></p>
+<ul>
+<li><p><a class="reference internal" href="#counterflowdiffusionflame" id="id2">CounterFlowDiffusionFlame</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#flow-domains" id="id3">Flow Domains</a></p>
+<ul>
+<li><p><a class="reference internal" href="#freeflow" id="id4">FreeFlow</a></p></li>
+<li><p><a class="reference internal" href="#unstrainedflow" id="id5">UnstrainedFlow</a></p></li>
+<li><p><a class="reference internal" href="#axisymmetricflow" id="id6">AxisymmetricFlow</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#boundaries" id="id7">Boundaries</a></p>
+<ul>
+<li><p><a class="reference internal" href="#inlet" id="id8">Inlet</a></p></li>
+<li><p><a class="reference internal" href="#outlet" id="id9">Outlet</a></p></li>
+<li><p><a class="reference internal" href="#outletres" id="id10">OutletRes</a></p></li>
+<li><p><a class="reference internal" href="#symmetryplane" id="id11">SymmetryPlane</a></p></li>
+<li><p><a class="reference internal" href="#surface" id="id12">Surface</a></p></li>
+<li><p><a class="reference internal" href="#reactingsurface" id="id13">ReactingSurface</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#base-classes" id="id14">Base Classes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#domain" id="id15">Domain</a></p></li>
+<li><p><a class="reference internal" href="#boundary" id="id16">Boundary</a></p></li>
+<li><p><a class="reference internal" href="#sim1d" id="id17">Sim1D</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="composite-domains">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Composite Domains</a><a class="headerlink" href="#composite-domains" title="Link to this heading">#</a></h2>
+<section id="counterflowdiffusionflame">
+<h3><a class="toc-backref" href="#id2" role="doc-backlink">CounterFlowDiffusionFlame</a><a class="headerlink" href="#counterflowdiffusionflame" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.oneD.CounterFlowDiffusionFlame">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.oneD.</span></span><span class="sig-name descname"><span class="pre">CounterFlowDiffusionFlame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">left</span></em>, <em class="sig-param"><span class="pre">flow</span></em>, <em class="sig-param"><span class="pre">right</span></em>, <em class="sig-param"><span class="pre">oxidizer</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.CounterFlowDiffusionFlame" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.oneD.Sim1D" title="ct.oneD.Sim1D"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Sim1D</span></code></a></p>
+<p>Create a counter flow diffusion flame stack.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">flame</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">oneD</span><span class="o">.</span><span class="n">CounterFlowDiffusionFlame</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">flow</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">oxidizer</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>left</strong> – <a class="reference internal" href="#ct.oneD.Inlet" title="ct.oneD.Inlet"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Inlet</span></code></a> object representing the left (‘fuel’) inlet boundary.</p></li>
+<li><p><strong>flow</strong> – <a class="reference internal" href="#ct.oneD.AxisymmetricFlow" title="ct.oneD.AxisymmetricFlow"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.AxisymmetricFlow</span></code></a> object representing the flow domain.</p></li>
+<li><p><strong>right</strong> – <a class="reference internal" href="#ct.oneD.Inlet" title="ct.oneD.Inlet"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Inlet</span></code></a> object representing the right (‘oxidizer’) inlet
+boundary.</p></li>
+<li><p><strong>oxidizer</strong> – String representing the oxidizer species. Most commonly O2.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="flow-domains">
+<span id="sec-matlab-flow-domains"></span><h2><a class="toc-backref" href="#id3" role="doc-backlink">Flow Domains</a><a class="headerlink" href="#flow-domains" title="Link to this heading">#</a></h2>
+<section id="freeflow">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">FreeFlow</a><a class="headerlink" href="#freeflow" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.oneD.FreeFlow">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.oneD.</span></span><span class="sig-name descname"><span class="pre">FreeFlow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.FreeFlow" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Flow</span></code></p>
+<p>Create a free flow domain.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">oneD</span><span class="o">.</span><span class="n">FreeFlow</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Instance of class <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a>.</p></li>
+<li><p><strong>name</strong> – String, ID of the flow.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="unstrainedflow">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">UnstrainedFlow</a><a class="headerlink" href="#unstrainedflow" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.oneD.UnstrainedFlow">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.oneD.</span></span><span class="sig-name descname"><span class="pre">UnstrainedFlow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.UnstrainedFlow" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Flow</span></code></p>
+<p>Create an unstrained flow domain.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">oneD</span><span class="o">.</span><span class="n">UnstrainedFlow</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Instance of class <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a>.</p></li>
+<li><p><strong>name</strong> – String, ID of the flow.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of class <a class="reference internal" href="#ct.oneD.UnstrainedFlow" title="ct.oneD.UnstrainedFlow"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.UnstrainedFlow</span></code></a>.</p>
+</dd>
+</dl>
+<p>Constructor</p>
+</dd></dl>
+
+</section>
+<section id="axisymmetricflow">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">AxisymmetricFlow</a><a class="headerlink" href="#axisymmetricflow" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.oneD.AxisymmetricFlow">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.oneD.</span></span><span class="sig-name descname"><span class="pre">AxisymmetricFlow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.AxisymmetricFlow" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Flow</span></code></p>
+<p>Create an axisymmetric flow domain.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">oneD</span><span class="o">.</span><span class="n">AxisymmetricFlow</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Instance of class <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a>.</p></li>
+<li><p><strong>name</strong> – String, ID of the flow.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="boundaries">
+<span id="sec-matlab-boundary-domains"></span><h2><a class="toc-backref" href="#id7" role="doc-backlink">Boundaries</a><a class="headerlink" href="#boundaries" title="Link to this heading">#</a></h2>
+<section id="inlet">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Inlet</a><a class="headerlink" href="#inlet" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.oneD.Inlet">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.oneD.</span></span><span class="sig-name descname"><span class="pre">Inlet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Inlet" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.oneD.Boundary" title="ct.oneD.Boundary"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Boundary</span></code></a></p>
+<p>Create an inlet domain.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">oneD</span><span class="o">.</span><span class="n">Inlet</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that an inlet can only be a terminal domain - it must be
+either the leftmost or rightmost domain in a stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Instance of class <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a>.</p></li>
+<li><p><strong>name</strong> – String name of the inlet.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.oneD.Inlet.X">
+<span class="sig-name descname"><span class="pre">X</span></span><a class="headerlink" href="#ct.oneD.Inlet.X" title="Link to this definition">#</a></dt>
+<dd><p>Mole fractions.</p>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+<section id="outlet">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Outlet</a><a class="headerlink" href="#outlet" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.oneD.Outlet">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.oneD.</span></span><span class="sig-name descname"><span class="pre">Outlet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Outlet" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.oneD.Boundary" title="ct.oneD.Boundary"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Boundary</span></code></a></p>
+<p>Create an outlet domain.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">oneD</span><span class="o">.</span><span class="n">Outlet</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Instance of class <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a>.</p></li>
+<li><p><strong>name</strong> – String ID of the outlet.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="outletres">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">OutletRes</a><a class="headerlink" href="#outletres" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.oneD.OutletRes">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.oneD.</span></span><span class="sig-name descname"><span class="pre">OutletRes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.OutletRes" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.oneD.Boundary" title="ct.oneD.Boundary"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Boundary</span></code></a></p>
+<p>Create an outlet reservoir domain.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">oneD</span><span class="o">.</span><span class="n">OutletRes</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Instance of class <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a>.</p></li>
+<li><p><strong>name</strong> – String ID of the outlet reservoir.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="symmetryplane">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">SymmetryPlane</a><a class="headerlink" href="#symmetryplane" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.oneD.SymmetryPlane">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.oneD.</span></span><span class="sig-name descname"><span class="pre">SymmetryPlane</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.SymmetryPlane" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.oneD.Boundary" title="ct.oneD.Boundary"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Boundary</span></code></a></p>
+<p>Create a symmetry plane domain.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">oneD</span><span class="o">.</span><span class="n">SymmetryPlane</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Instance of class <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a>.</p></li>
+<li><p><strong>name</strong> – String ID of the symmetry plane.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of class <a class="reference internal" href="#ct.oneD.SymmetryPlane" title="ct.oneD.SymmetryPlane"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.SymmetryPlane</span></code></a>.</p>
+</dd>
+</dl>
+<p>Constructor</p>
+</dd></dl>
+
+</section>
+<section id="surface">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Surface</a><a class="headerlink" href="#surface" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.oneD.Surface">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.oneD.</span></span><span class="sig-name descname"><span class="pre">Surface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Surface" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.oneD.Boundary" title="ct.oneD.Boundary"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Boundary</span></code></a></p>
+<p>Create a surface domain.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">oneD</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Instance of class <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a>.</p></li>
+<li><p><strong>name</strong> – String ID of surface</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="reactingsurface">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">ReactingSurface</a><a class="headerlink" href="#reactingsurface" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.oneD.ReactingSurface">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.oneD.</span></span><span class="sig-name descname"><span class="pre">ReactingSurface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.ReactingSurface" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.oneD.Boundary" title="ct.oneD.Boundary"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Boundary</span></code></a></p>
+<p>Create a reacting surface domain.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">oneD</span><span class="o">.</span><span class="n">ReactingSurface</span><span class="p">(</span><span class="n">surface_mech</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>surface_mech</strong> – Instance of class <a class="reference internal" href="phases.html#ct.Interface" title="ct.Interface"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Interface</span></code></a> defining
+the surface reaction mechanism to be used.</p></li>
+<li><p><strong>name</strong> – String ID of the reacting surface.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.oneD.ReactingSurface.coverageEnabled">
+<span class="sig-name descname"><span class="pre">coverageEnabled</span></span><a class="headerlink" href="#ct.oneD.ReactingSurface.coverageEnabled" title="Link to this definition">#</a></dt>
+<dd><p>Set bounds on the solution components.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">coverageEnabled</span> <span class="o">=</span> <span class="n">flag</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>flag</strong> – Boolean flag indicating whether coverage equations are enabled.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+</section>
+<section id="base-classes">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">Base Classes</a><a class="headerlink" href="#base-classes" title="Link to this heading">#</a></h2>
+<section id="domain">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">Domain</a><a class="headerlink" href="#domain" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.oneD.Domain">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.oneD.</span></span><span class="sig-name descname"><span class="pre">Domain</span></span><a class="headerlink" href="#ct.oneD.Domain" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">handle</span></code></p>
+<p>Domain Class.</p>
+<p>Base class for objects representing boundaries and flow domains. The constructor
+is called by derived classes and cannot be used directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> – <dl class="simple">
+<dt>String type of domain. Possible values are:</dt><dd><ul>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">axisymmetric-flow</span></code></p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">free-flow</span></code></p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inlet</span></code></p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">outlet</span></code></p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">reacting-surface</span></code></p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">surface</span></code></p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">symmetry-plane</span></code></p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">outlet-reservoir</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>phase</strong> – Instance of <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a> or <a class="reference internal" href="phases.html#ct.Interface" title="ct.Interface"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Interface</span></code></a>.</p></li>
+<li><p><strong>id</strong> – String ID of the domain.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.domainID">
+<span class="sig-name descname"><span class="pre">domainID</span></span><a class="headerlink" href="#ct.oneD.Domain.domainID" title="Link to this definition">#</a></dt>
+<dd><p>ID of the domain</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.domainIndex">
+<span class="sig-name descname"><span class="pre">domainIndex</span></span><a class="headerlink" href="#ct.oneD.Domain.domainIndex" title="Link to this definition">#</a></dt>
+<dd><p>Integer denoting the location of the domain, beginning with 1 at the left.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.domainType">
+<span class="sig-name descname"><span class="pre">domainType</span></span><a class="headerlink" href="#ct.oneD.Domain.domainType" title="Link to this definition">#</a></dt>
+<dd><p>String denoting the domain type.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.nComponents">
+<span class="sig-name descname"><span class="pre">nComponents</span></span><a class="headerlink" href="#ct.oneD.Domain.nComponents" title="Link to this definition">#</a></dt>
+<dd><p>Number of state components at each grid point.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.nPoints">
+<span class="sig-name descname"><span class="pre">nPoints</span></span><a class="headerlink" href="#ct.oneD.Domain.nPoints" title="Link to this definition">#</a></dt>
+<dd><p>Number of grid points in the domain.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.phase">
+<span class="sig-name descname"><span class="pre">phase</span></span><a class="headerlink" href="#ct.oneD.Domain.phase" title="Link to this definition">#</a></dt>
+<dd><p>The Solution object used to represent the contents of this domain.</p>
+</dd></dl>
+
+</dd>
+<dt>Method Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.bounds">
+<span class="sig-name descname"><span class="pre">bounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">component</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Domain.bounds" title="Link to this definition">#</a></dt>
+<dd><p>Get the (lower, upper) bounds for a solution component.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">bounds</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>component</strong> – String name of the component for which the bounds are returned.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="math notranslate nohighlight">\(1\times 2\)</span> vector of the lower and upper bounds.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.componentIndex">
+<span class="sig-name descname"><span class="pre">componentIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Domain.componentIndex" title="Link to this definition">#</a></dt>
+<dd><p>Index of a component given its name.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">componentIndex</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – String name of the component to look up. If a numeric value
+is passed, it will be returned.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Index of the component, or input numeric value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.componentName">
+<span class="sig-name descname"><span class="pre">componentName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">index</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Domain.componentName" title="Link to this definition">#</a></dt>
+<dd><p>Name of a component given its index.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">componentName</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> – Integer or vector of integers of component names to get.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cell array of component names.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Domain.delete" title="Link to this definition">#</a></dt>
+<dd><p>Delete the <a class="reference internal" href="#ct.oneD.Domain" title="ct.oneD.Domain"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Domain</span></code></a> object.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">rows</span></em>, <em class="sig-param"><span class="pre">width</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Domain.info" title="Link to this definition">#</a></dt>
+<dd><p>Print a concise summary of a Domain.</p>
+<blockquote>
+<div><p>&gt;&gt; d.info()</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rows</strong> – Maximum number of rendered rows; defaults to 10.</p></li>
+<li><p><strong>width</strong> – Maximum width of rendered output; default adjusts to terminal width.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.setBounds">
+<span class="sig-name descname"><span class="pre">setBounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">component</span></em>, <em class="sig-param"><span class="pre">lower</span></em>, <em class="sig-param"><span class="pre">upper</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Domain.setBounds" title="Link to this definition">#</a></dt>
+<dd><p>Set bounds on the solution components.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">setBounds</span><span class="p">(</span><span class="n">component</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>component</strong> – String, component to set the bounds on.</p></li>
+<li><p><strong>lower</strong> – Lower bound.</p></li>
+<li><p><strong>upper</strong></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.setSteadyTolerances">
+<span class="sig-name descname"><span class="pre">setSteadyTolerances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">rtol</span></em>, <em class="sig-param"><span class="pre">atol</span></em>, <em class="sig-param"><span class="pre">component</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Domain.setSteadyTolerances" title="Link to this definition">#</a></dt>
+<dd><p>Set the steady-state tolerances.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">d</span><span class="o">.</span><span class="n">setSteadyTolerances</span><span class="p">(</span><span class="n">rtol</span><span class="p">,</span> <span class="n">atol</span><span class="p">,</span> <span class="n">component</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rtol</strong> – Relative tolerance.</p></li>
+<li><p><strong>atol</strong> – Absolute tolerance.</p></li>
+<li><p><strong>component</strong> – String or cell array of strings of component values
+whose tolerances should be set. If <code class="docutils literal notranslate"><span class="pre">'default'</span></code> is
+specified, the tolerance of all components will be set.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.setTransientTolerances">
+<span class="sig-name descname"><span class="pre">setTransientTolerances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">rtol</span></em>, <em class="sig-param"><span class="pre">atol</span></em>, <em class="sig-param"><span class="pre">component</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Domain.setTransientTolerances" title="Link to this definition">#</a></dt>
+<dd><p>Set the transient tolerances.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">setTransientTolerances</span><span class="p">(</span><span class="n">rtol</span><span class="p">,</span> <span class="n">atol</span><span class="p">,</span> <span class="n">component</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rtol</strong> – Relative tolerance.</p></li>
+<li><p><strong>atol</strong> – Absolute tolerance.</p></li>
+<li><p><strong>component</strong> – String or cell array of strings of component values
+whose tolerances should be set. If <code class="docutils literal notranslate"><span class="pre">'default'</span></code> is
+specified, the tolerance of all components will be set.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.tolerances">
+<span class="sig-name descname"><span class="pre">tolerances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">component</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Domain.tolerances" title="Link to this definition">#</a></dt>
+<dd><p>Return the (relative, absolute) error tolerances for a
+solution component.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">tol</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">tolerances</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>component</strong> – String name of the component for which the bounds are returned.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="math notranslate nohighlight">\(1\times 2\)</span> vector of the relative and absolute error tolerances.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Domain.updateState">
+<span class="sig-name descname"><span class="pre">updateState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">loc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Domain.updateState" title="Link to this definition">#</a></dt>
+<dd><p>Set state of associated phase to specified location.</p>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+<section id="boundary">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">Boundary</a><a class="headerlink" href="#boundary" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.oneD.Boundary">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.oneD.</span></span><span class="sig-name descname"><span class="pre">Boundary</span></span><a class="headerlink" href="#ct.oneD.Boundary" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.oneD.Domain" title="ct.oneD.Domain"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Domain</span></code></a></p>
+<p>Boundary Class.</p>
+<p>Base class for objects representing domain boundaries. The constructor is called
+by derived classes and cannot be used directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> – <dl class="simple">
+<dt>String type of Boundary. Possible values are:</dt><dd><ul>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inlet</span></code></p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">outlet</span></code></p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">reacting-surface</span></code></p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">surface</span></code></p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">symmetry-plane</span></code></p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">outlet-reservoir</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>phase</strong> – Instance of class <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a> or <a class="reference internal" href="phases.html#ct.Interface" title="ct.Interface"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Interface</span></code></a>.</p></li>
+<li><p><strong>name</strong> – String, ID of the flow.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.oneD.Boundary.T">
+<span class="sig-name descname"><span class="pre">T</span></span><a class="headerlink" href="#ct.oneD.Boundary.T" title="Link to this definition">#</a></dt>
+<dd><p>Boundary temperature [K].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.oneD.Boundary.massFlux">
+<span class="sig-name descname"><span class="pre">massFlux</span></span><a class="headerlink" href="#ct.oneD.Boundary.massFlux" title="Link to this definition">#</a></dt>
+<dd><p>The mass flux [kg/s/m²] in the domain.</p>
+</dd></dl>
+
+</dd>
+<dt>Method Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Boundary.massFraction">
+<span class="sig-name descname"><span class="pre">massFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Boundary.massFraction" title="Link to this definition">#</a></dt>
+<dd><p>Get the mass fraction of a species given its integer index.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">massFraction</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This method returns the mass fraction of species <code class="docutils literal notranslate"><span class="pre">k</span></code>, where
+k is the integer index of the species in the flow domain
+to which the boundary domain is attached.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>k</strong> – Integer species index.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mass fraction of species.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Boundary.value">
+<span class="sig-name descname"><span class="pre">value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">component</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Boundary.value" title="Link to this definition">#</a></dt>
+<dd><p>Get the value of a component at a boundary.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>component</strong> – String component for which the solution is desired.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value of the component in domain d.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+<section id="sim1d">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">Sim1D</a><a class="headerlink" href="#sim1d" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.oneD.</span></span><span class="sig-name descname"><span class="pre">Sim1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">domains</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Sim1D" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">handle</span></code></p>
+<p>Sim1D Class.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">oneD</span><span class="o">.</span><span class="n">Sim1D</span><span class="p">(</span><span class="n">domains</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A Sim1D object is a container for one-dimensional domains,
+which are instances of <a class="reference internal" href="#ct.oneD.Domain" title="ct.oneD.Domain"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Domain</span></code></a>. The domains are of two
+types - extended domains, and connector domains.</p>
+<p>See also: <a class="reference internal" href="#ct.oneD.Domain" title="ct.oneD.Domain"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Domain</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>domains</strong> – Cell array of instances of <a class="reference internal" href="#ct.oneD.Domain" title="ct.oneD.Domain"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Domain</span></code></a> and its subclasses.</p>
+</dd>
+</dl>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D.domains">
+<span class="sig-name descname"><span class="pre">domains</span></span><a class="headerlink" href="#ct.oneD.Sim1D.domains" title="Link to this definition">#</a></dt>
+<dd><p>Domain instances contained within the <a class="reference internal" href="#ct.oneD.Sim1D" title="ct.oneD.Sim1D"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Sim1D</span></code></a> object.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D.stID">
+<span class="sig-name descname"><span class="pre">stID</span></span><a class="headerlink" href="#ct.oneD.Sim1D.stID" title="Link to this definition">#</a></dt>
+<dd><p>ID of the Sim1D object.</p>
+</dd></dl>
+
+</dd>
+<dt>Method Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Sim1D.delete" title="Link to this definition">#</a></dt>
+<dd><p>Delete the <a class="reference internal" href="#ct.oneD.Sim1D" title="ct.oneD.Sim1D"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.oneD.Sim1D</span></code></a> object.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D.domainIndex">
+<span class="sig-name descname"><span class="pre">domainIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Sim1D.domainIndex" title="Link to this definition">#</a></dt>
+<dd><p>The index of a domain in a Sim1D given its name.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">domainIndex</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – If double, the value is :returned. Otherwise, the name is
+looked up and its index is :returned.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Index of domain.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D.getInitialSoln">
+<span class="sig-name descname"><span class="pre">getInitialSoln</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Sim1D.getInitialSoln" title="Link to this definition">#</a></dt>
+<dd><p>Get the initial solution.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D.restore">
+<span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">fname</span></em>, <em class="sig-param"><span class="pre">id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Sim1D.restore" title="Link to this definition">#</a></dt>
+<dd><p>Restore a previously-saved solution.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This method can be used to provide an initial guess for the solution.</p>
+<p>See also: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">save</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> – File name of an YAML or HDF file containing solution information.</p></li>
+<li><p><strong>id</strong> – ID of the element that should be restored.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">fname</span></em>, <em class="sig-param"><span class="pre">id</span></em>, <em class="sig-param"><span class="pre">desc</span></em>, <em class="sig-param"><span class="pre">overwrite</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Sim1D.save" title="Link to this definition">#</a></dt>
+<dd><p>Save a solution to a file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">desc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output file is in a format that can be used by <code class="xref mat mat-class docutils literal notranslate"><span class="pre">restore</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> – File name where YAML or HDL file should be written.</p></li>
+<li><p><strong>id</strong> – ID to be assigned to the file element when it is written.</p></li>
+<li><p><strong>desc</strong> – Description to be written to the output file.</p></li>
+<li><p><strong>overwrite</strong> – Force overwrite if file/name exists; optional (default=false)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D.setFixedTemperature">
+<span class="sig-name descname"><span class="pre">setFixedTemperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">T</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Sim1D.setFixedTemperature" title="Link to this definition">#</a></dt>
+<dd><p>Set the temperature used to fix the spatial location of a
+freely propagating flame.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">setFixedTemperature</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – Temperature [K] to be set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D.setGridMin">
+<span class="sig-name descname"><span class="pre">setGridMin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">domain</span></em>, <em class="sig-param"><span class="pre">gridmin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Sim1D.setGridMin" title="Link to this definition">#</a></dt>
+<dd><p>Set the minimum grid spacing on domain.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">setGridMin</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">gridmin</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain</strong> – Integer ID of the domain.</p></li>
+<li><p><strong>gridmin</strong> – Minimum grid spacing [m].</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D.setMaxJacAge">
+<span class="sig-name descname"><span class="pre">setMaxJacAge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ss_age</span></em>, <em class="sig-param"><span class="pre">ts_age</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Sim1D.setMaxJacAge" title="Link to this definition">#</a></dt>
+<dd><p>Set the number of times the Jacobian will be used before it
+is recomputed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">setMaxJacAge</span><span class="p">(</span><span class="n">ss_age</span><span class="p">,</span> <span class="n">ts_age</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ss_age</strong> – Maximum age of the Jacobian for steady state analysis.</p></li>
+<li><p><strong>ts_age</strong> – Maximum age of the Jacobian for transient analysis. If not
+specified, defaults to ‘ss_age’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D.setTimeStep">
+<span class="sig-name descname"><span class="pre">setTimeStep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">stepsize</span></em>, <em class="sig-param"><span class="pre">steps</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Sim1D.setTimeStep" title="Link to this definition">#</a></dt>
+<dd><p>Specify a sequence of time steps.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">setTimeStep</span><span class="p">(</span><span class="n">stepsize</span><span class="p">,</span> <span class="n">steps</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stepsize</strong> – Initial step size [s].</p></li>
+<li><p><strong>steps</strong> – Vector of number of steps to take before re-attempting solution
+of steady-state problem.
+For example, steps = [1, 2, 5, 10] would cause one timestep to be
+taken first time the steady-state solution attempted.
+If this failed, two time steps would be taken.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Sim1D.show" title="Link to this definition">#</a></dt>
+<dd><p>Show all domains.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D.solve">
+<span class="sig-name descname"><span class="pre">solve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">loglevel</span></em>, <em class="sig-param"><span class="pre">refineGrid</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Sim1D.solve" title="Link to this definition">#</a></dt>
+<dd><p>Solve the problem.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">loglevel</span><span class="p">,</span> <span class="n">refineGrid</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>loglevel</strong> – Integer flag controlling the amount of diagnostic output.
+Zero suppresses all output, and 5 produces very verbose output.</p></li>
+<li><p><strong>refineGrid</strong> – Integer, 1 to allow grid refinement, 0 to disallow.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.oneD.Sim1D.writeStats">
+<span class="sig-name descname"><span class="pre">writeStats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.oneD.Sim1D.writeStats" title="Link to this definition">#</a></dt>
+<dd><p>Print statistics for the current solution.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">writeStats</span>
+</pre></div>
+</div>
+<p>Prints a summary of the number of function and Jacobian evaluations
+for each grid, and the CPU time spent on each one.</p>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composite-domains">Composite Domains</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counterflowdiffusionflame">CounterFlowDiffusionFlame</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flow-domains">Flow Domains</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#freeflow">FreeFlow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unstrainedflow">UnstrainedFlow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#axisymmetricflow">AxisymmetricFlow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundaries">Boundaries</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inlet">Inlet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outlet">Outlet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outletres">OutletRes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetryplane">SymmetryPlane</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#surface">Surface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactingsurface">ReactingSurface</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-classes">Base Classes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domain">Domain</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary">Boundary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sim1d">Sim1D</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/matlab/onedim.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2025, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+var classCantera_1_1LinearBurkeRate =
+[
+    [ "RateTypes", "d4/d3b/classCantera_1_1LinearBurkeRate.html#a0d3dde735955c7cd908e0feac854144b", null ],
+    [ "DataTypes", "d4/d3b/classCantera_1_1LinearBurkeRate.html#a09fb256f5cf5d701d84f245905cd3198", null ],
+    [ "LinearBurkeRate", "d4/d3b/classCantera_1_1LinearBurkeRate.html#a41724d16e21398c482ddf5005d29507e", null ],
+    [ "newMultiRate", "d4/d3b/classCantera_1_1LinearBurkeRate.html#a150ff9bee5603f17b84967922ef49a09", null ],
+    [ "type", "d4/d3b/classCantera_1_1LinearBurkeRate.html#aca3030461f60cddf5be39a73332f6ea3", null ],
+    [ "setParameters", "d4/d3b/classCantera_1_1LinearBurkeRate.html#a30cea4414ceda6e149e2f89c62315902", null ],
+    [ "getParameters", "d4/d3b/classCantera_1_1LinearBurkeRate.html#a0347e0c3c0b9165b32f71f4dd51829d2", null ],
+    [ "setContext", "d4/d3b/classCantera_1_1LinearBurkeRate.html#a0ed4679ce61a4bf98885ba8dc9040602", null ],
+    [ "validate", "d4/d3b/classCantera_1_1LinearBurkeRate.html#a588735da8857df47f0dec4a083e2631f", null ],
+    [ "evalPlogRate", "d4/d3b/classCantera_1_1LinearBurkeRate.html#ae3f70e94d0b66c5ebf2f6f9cf3a720a8", null ],
+    [ "evalTroeRate", "d4/d3b/classCantera_1_1LinearBurkeRate.html#a0c953729d4fb444ffaf291d96c827861", null ],
+    [ "evalChebyshevRate", "d4/d3b/classCantera_1_1LinearBurkeRate.html#a67717e72188ec68f91986b478c6a2c53", null ],
+    [ "m_colliderNames", "d4/d3b/classCantera_1_1LinearBurkeRate.html#a188d42ac1bc69489c498957fa845ec58", null ],
+    [ "m_colliderIndices", "d4/d3b/classCantera_1_1LinearBurkeRate.html#aba9a905d9755b74a1758115ba776d864", null ],
+    [ "m_hasRateConstant", "d4/d3b/classCantera_1_1LinearBurkeRate.html#ae5d2451ecb0cd2502e281f39c2e88bcb", null ],
+    [ "m_epsObjs1", "d4/d3b/classCantera_1_1LinearBurkeRate.html#ad1df696c87e5f7b5829b2377702ff7e0", null ],
+    [ "m_epsObjs2", "d4/d3b/classCantera_1_1LinearBurkeRate.html#aefc7800b7787b8c1d774eeb992bca579", null ],
+    [ "m_epsObj_M", "d4/d3b/classCantera_1_1LinearBurkeRate.html#aa44db3e5b281c52a739b161e0f32f9b2", null ],
+    [ "m_rateObj_M", "d4/d3b/classCantera_1_1LinearBurkeRate.html#afb49e5bdd36a4e295d092bdc028f8743", null ],
+    [ "m_rateObjs", "d4/d3b/classCantera_1_1LinearBurkeRate.html#a3da119f5606c27f560ad1c62c71aea3d", null ],
+    [ "m_dataObj_M", "d4/d3b/classCantera_1_1LinearBurkeRate.html#a5596e5e7c1d44c55daefc4fe8442fce8", null ],
+    [ "m_dataObjs", "d4/d3b/classCantera_1_1LinearBurkeRate.html#afd1d9e3d48cb9ddd2485c5cecad5d84b", null ]
+];

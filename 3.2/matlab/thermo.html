@@ -1,0 +1,1940 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Thermodynamic Properties &#8212; Cantera 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3c8b230e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'matlab/thermo';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.2';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Chemical Kinetics" href="kinetics.html" />
+    <link rel="prev" title="Objects Representing Phases" href="phases.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Cantera is community-driven and needs your help! <a href='https://cantera.org/getting-involved.html'>Get involved here</a>.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/index.html">Python Module Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/transport.html">Transport Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/zerodim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python/scripts.html">Mechanism Conversion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python/ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/yaml_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/lxcat_conversion.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/units.html">Python Interface With Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/constants.html">Physical Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/utilities.html">Utilities</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">MATLAB Toolbox Documentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="phases.html">Objects Representing Phases</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transport.html">Transport Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeroD.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html">Physical Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html">Utility Functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../clib/index.html">C Interface Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../dotnet/index.html">.NET Interface Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../yaml/index.html">YAML Input File Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/general.html">General Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/phases.html">Phase Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/species.html">Species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/reactions.html">Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/yaml2ck.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/lxcat2yaml.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/releasenotes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.2.html">Cantera 3.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.1.html">Cantera 3.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.0.html">Cantera 3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.6.html">Cantera 2.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.5.html">Cantera 2.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.4.html">Cantera 2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.3.html">Cantera 2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.2.html">Cantera 2.2.1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.1.html">Cantera 2.1.2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.0.html">Cantera 2.0.2</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Science Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/thermo/index.html">Thermodynamic Properties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/thermo/species-thermo.html">Species Thermodynamic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/thermo/phase-thermo.html">Phase Thermodynamic Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/kinetics/index.html">Chemical Reactions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/kinetics/reaction-rates.html">Reaction Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/kinetics/rate-constants.html">Rate Constant Parameterizations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/transport/index.html">Transport Properties</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/reactors/index.html">Reactors and Reactor Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/controlreactor.html">Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/constant-pressure-reactor.html">Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-reactor.html">Ideal Gas Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-reactor.html">Ideal Gas Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/mole-reactor.html">Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/constant-pressure-mole-reactor.html">Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-mole-reactor.html">Ideal Gas Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-mole-reactor.html">Ideal Gas Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/interactions.html">Reactor Interactions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/onedim/index.html">One-dimensional Flames</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/governing-equations.html">Governing Equations for One-dimensional Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/discretization.html">Discretization of 1D Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/nonlinear-solver.html">Nonlinear Solver for One-dimensional Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/grid-refinement.html">Grid Refinement for One-dimensional Flows</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus" style="padding-bottom: 30px;">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../reference/index.html" class="nav-link">Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">MATLAB Toolbox Documentation</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Thermodynami...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="thermodynamic-properties">
+<h1>Thermodynamic Properties<a class="headerlink" href="#thermodynamic-properties" title="Link to this heading">#</a></h1>
+<p>These classes are used to describe the thermodynamic state of a system.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The MATLAB toolbox is an experimental part of the Cantera API and may be changed
+without notice. It includes breaking changes from the legacy MATLAB API. While
+almost all features of the legacy MATLAB API are implemented, the toolbox does not
+include all functionality available for the C++ and Python interfaces.</p>
+</div>
+<section id="phases">
+<h2>Phases<a class="headerlink" href="#phases" title="Link to this heading">#</a></h2>
+<section id="thermophase">
+<h3>ThermoPhase<a class="headerlink" href="#thermophase" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.ThermoPhase">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.</span></span><span class="sig-name descname"><span class="pre">ThermoPhase</span></span><a class="headerlink" href="#ct.ThermoPhase" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">handle</span></code></p>
+<p>ThermoPhase Class.</p>
+<p>Instance of class <a class="reference internal" href="#ct.ThermoPhase" title="ct.ThermoPhase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.ThermoPhase</span></code></a> associated with a
+<a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a> object. The constructor is called whenever a new
+<a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a> is instantiated and cannot be used directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> – Integer ID of the solution holding the <a class="reference internal" href="#ct.ThermoPhase" title="ct.ThermoPhase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.ThermoPhase</span></code></a> object.</p>
+</dd>
+</dl>
+<p>Create a <a class="reference internal" href="#ct.ThermoPhase" title="ct.ThermoPhase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.ThermoPhase</span></code></a> object.</p>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.D">
+<span class="sig-name descname"><span class="pre">D</span></span><a class="headerlink" href="#ct.ThermoPhase.D" title="Link to this definition">#</a></dt>
+<dd><p>Density depending on the basis [kmol/m³ or kg/m³].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.DP">
+<span class="sig-name descname"><span class="pre">DP</span></span><a class="headerlink" href="#ct.ThermoPhase.DP" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set density [kg/m³ or kmol/m³] and pressure [Pa].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.DPQ">
+<span class="sig-name descname"><span class="pre">DPQ</span></span><a class="headerlink" href="#ct.ThermoPhase.DPQ" title="Link to this definition">#</a></dt>
+<dd><p>Get density [kg/m³ or kmol/m³], pressure [Pa], and vapor fraction.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.DPX">
+<span class="sig-name descname"><span class="pre">DPX</span></span><a class="headerlink" href="#ct.ThermoPhase.DPX" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set density [kg/m³ or kmol/m³], pressure [Pa], and mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.DPY">
+<span class="sig-name descname"><span class="pre">DPY</span></span><a class="headerlink" href="#ct.ThermoPhase.DPY" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set density [kg/m³ or kmol/m³], pressure [Pa], and mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.G">
+<span class="sig-name descname"><span class="pre">G</span></span><a class="headerlink" href="#ct.ThermoPhase.G" title="Link to this definition">#</a></dt>
+<dd><p>Gibbs free energy depending on the basis [J/kmol or J/kg].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.H">
+<span class="sig-name descname"><span class="pre">H</span></span><a class="headerlink" href="#ct.ThermoPhase.H" title="Link to this definition">#</a></dt>
+<dd><p>Enthalpy depending on the basis [J/kmol or J/kg].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.HP">
+<span class="sig-name descname"><span class="pre">HP</span></span><a class="headerlink" href="#ct.ThermoPhase.HP" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set enthalpy [J/kg or J/kmol] and pressure [Pa].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.HPQ">
+<span class="sig-name descname"><span class="pre">HPQ</span></span><a class="headerlink" href="#ct.ThermoPhase.HPQ" title="Link to this definition">#</a></dt>
+<dd><p>Get enthalpy [J/kg or J/kmol], pressure [Pa], and vapor fraction.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.HPX">
+<span class="sig-name descname"><span class="pre">HPX</span></span><a class="headerlink" href="#ct.ThermoPhase.HPX" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set enthalpy [J/kg or J/kmol], pressure [Pa], and mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.HPY">
+<span class="sig-name descname"><span class="pre">HPY</span></span><a class="headerlink" href="#ct.ThermoPhase.HPY" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set enthalpy [J/kg or J/kmol], pressure [Pa], and mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.P">
+<span class="sig-name descname"><span class="pre">P</span></span><a class="headerlink" href="#ct.ThermoPhase.P" title="Link to this definition">#</a></dt>
+<dd><p>Pressure [Pa].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.PQ">
+<span class="sig-name descname"><span class="pre">PQ</span></span><a class="headerlink" href="#ct.ThermoPhase.PQ" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set pressure [Pa] and vapor fraction of a two-phase state.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.PV">
+<span class="sig-name descname"><span class="pre">PV</span></span><a class="headerlink" href="#ct.ThermoPhase.PV" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set pressure [Pa] and specific volume [m³/kg or m³/kmol].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.PVX">
+<span class="sig-name descname"><span class="pre">PVX</span></span><a class="headerlink" href="#ct.ThermoPhase.PVX" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set pressure [Pa], specific volume [m³/kg or m³/kmol],
+and mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.PVY">
+<span class="sig-name descname"><span class="pre">PVY</span></span><a class="headerlink" href="#ct.ThermoPhase.PVY" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set pressure [Pa], specific volume [m³/kg or m³/kmol],
+and mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.Q">
+<span class="sig-name descname"><span class="pre">Q</span></span><a class="headerlink" href="#ct.ThermoPhase.Q" title="Link to this definition">#</a></dt>
+<dd><p>Vapor fraction of the phase.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.S">
+<span class="sig-name descname"><span class="pre">S</span></span><a class="headerlink" href="#ct.ThermoPhase.S" title="Link to this definition">#</a></dt>
+<dd><p>Entropy depending on the basis [J/kmol/K or J/kg/K].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.SH">
+<span class="sig-name descname"><span class="pre">SH</span></span><a class="headerlink" href="#ct.ThermoPhase.SH" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K] and enthalpy [J/kg or J/kmol].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.SHX">
+<span class="sig-name descname"><span class="pre">SHX</span></span><a class="headerlink" href="#ct.ThermoPhase.SHX" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K], enthalpy [J/kg or J/kmol],
+and mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.SHY">
+<span class="sig-name descname"><span class="pre">SHY</span></span><a class="headerlink" href="#ct.ThermoPhase.SHY" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K], enthalpy [J/kg or J/kmol],
+and mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.SP">
+<span class="sig-name descname"><span class="pre">SP</span></span><a class="headerlink" href="#ct.ThermoPhase.SP" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K] and pressure [Pa].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.SPQ">
+<span class="sig-name descname"><span class="pre">SPQ</span></span><a class="headerlink" href="#ct.ThermoPhase.SPQ" title="Link to this definition">#</a></dt>
+<dd><p>Get entropy [J/kg/K or J/kmol/K], pressure [Pa], and vapor fraction.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.SPX">
+<span class="sig-name descname"><span class="pre">SPX</span></span><a class="headerlink" href="#ct.ThermoPhase.SPX" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K], pressure [Pa], and mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.SPY">
+<span class="sig-name descname"><span class="pre">SPY</span></span><a class="headerlink" href="#ct.ThermoPhase.SPY" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K], pressure [Pa], and mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.ST">
+<span class="sig-name descname"><span class="pre">ST</span></span><a class="headerlink" href="#ct.ThermoPhase.ST" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K] and temperature [K].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.STX">
+<span class="sig-name descname"><span class="pre">STX</span></span><a class="headerlink" href="#ct.ThermoPhase.STX" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K], temperature [K], and mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.STY">
+<span class="sig-name descname"><span class="pre">STY</span></span><a class="headerlink" href="#ct.ThermoPhase.STY" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K], temperature [K], and mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.SV">
+<span class="sig-name descname"><span class="pre">SV</span></span><a class="headerlink" href="#ct.ThermoPhase.SV" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K] and specific volume [m³/kg or m³/kmol].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.SVQ">
+<span class="sig-name descname"><span class="pre">SVQ</span></span><a class="headerlink" href="#ct.ThermoPhase.SVQ" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K], specific volume [m³/kg or m³/kmol],
+and vapor fraction.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.SVX">
+<span class="sig-name descname"><span class="pre">SVX</span></span><a class="headerlink" href="#ct.ThermoPhase.SVX" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K], specific volume [m³/kg or m³/kmol],
+and mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.SVY">
+<span class="sig-name descname"><span class="pre">SVY</span></span><a class="headerlink" href="#ct.ThermoPhase.SVY" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set entropy [J/kg/K or J/kmol/K], specific volume [m³/kg or m³/kmol],
+and mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.T">
+<span class="sig-name descname"><span class="pre">T</span></span><a class="headerlink" href="#ct.ThermoPhase.T" title="Link to this definition">#</a></dt>
+<dd><p>Temperature [K].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.TD">
+<span class="sig-name descname"><span class="pre">TD</span></span><a class="headerlink" href="#ct.ThermoPhase.TD" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set temperature [K] and density [kg/m³ or kmol/m³].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.TDQ">
+<span class="sig-name descname"><span class="pre">TDQ</span></span><a class="headerlink" href="#ct.ThermoPhase.TDQ" title="Link to this definition">#</a></dt>
+<dd><p>Get temperature [K], density [kg/m³ or kmol/m³], and vapor fraction.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.TDX">
+<span class="sig-name descname"><span class="pre">TDX</span></span><a class="headerlink" href="#ct.ThermoPhase.TDX" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set temperature [K], density [kg/m³ or kmol/m³], and mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.TDY">
+<span class="sig-name descname"><span class="pre">TDY</span></span><a class="headerlink" href="#ct.ThermoPhase.TDY" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set temperature [K], density [kg/m³ or kmol/m³], and mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.TH">
+<span class="sig-name descname"><span class="pre">TH</span></span><a class="headerlink" href="#ct.ThermoPhase.TH" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set temperature [K] and enthalpy [J/kg or J/kmol].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.THX">
+<span class="sig-name descname"><span class="pre">THX</span></span><a class="headerlink" href="#ct.ThermoPhase.THX" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set temperature [K], enthalpy [J/kg or J/kmol], and mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.THY">
+<span class="sig-name descname"><span class="pre">THY</span></span><a class="headerlink" href="#ct.ThermoPhase.THY" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set temperature [K], enthalpy [J/kg or J/kmol], and mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.TP">
+<span class="sig-name descname"><span class="pre">TP</span></span><a class="headerlink" href="#ct.ThermoPhase.TP" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set temperature [K] and pressure [Pa].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.TPQ">
+<span class="sig-name descname"><span class="pre">TPQ</span></span><a class="headerlink" href="#ct.ThermoPhase.TPQ" title="Link to this definition">#</a></dt>
+<dd><p>Get temperature [K], pressure [Pa], and vapor fraction.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.TPX">
+<span class="sig-name descname"><span class="pre">TPX</span></span><a class="headerlink" href="#ct.ThermoPhase.TPX" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set temperature [K], pressure [Pa], and mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.TPY">
+<span class="sig-name descname"><span class="pre">TPY</span></span><a class="headerlink" href="#ct.ThermoPhase.TPY" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set temperature [K], pressure [Pa], and mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.TQ">
+<span class="sig-name descname"><span class="pre">TQ</span></span><a class="headerlink" href="#ct.ThermoPhase.TQ" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set temperature [K] and vapor fraction of a two-phase state.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.TV">
+<span class="sig-name descname"><span class="pre">TV</span></span><a class="headerlink" href="#ct.ThermoPhase.TV" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set temperature [K] and specific volume [m³/kg or m³/kmol].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.TVX">
+<span class="sig-name descname"><span class="pre">TVX</span></span><a class="headerlink" href="#ct.ThermoPhase.TVX" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set temperature [K], specific volume [m³/kg or m³/kmol],
+and mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.TVY">
+<span class="sig-name descname"><span class="pre">TVY</span></span><a class="headerlink" href="#ct.ThermoPhase.TVY" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set temperature [K], specific volume [m³/kg or m³/kmol],
+and mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.U">
+<span class="sig-name descname"><span class="pre">U</span></span><a class="headerlink" href="#ct.ThermoPhase.U" title="Link to this definition">#</a></dt>
+<dd><p>Internal energy depending on the basis [J/kmol or J/kg].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.UP">
+<span class="sig-name descname"><span class="pre">UP</span></span><a class="headerlink" href="#ct.ThermoPhase.UP" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set internal energy [J/kg or J/kmol] and pressure [Pa].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.UPX">
+<span class="sig-name descname"><span class="pre">UPX</span></span><a class="headerlink" href="#ct.ThermoPhase.UPX" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set internal energy [J/kg or J/kmol], pressure [Pa], and mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.UPY">
+<span class="sig-name descname"><span class="pre">UPY</span></span><a class="headerlink" href="#ct.ThermoPhase.UPY" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set internal energy [J/kg or J/kmol], pressure [Pa], and mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.UV">
+<span class="sig-name descname"><span class="pre">UV</span></span><a class="headerlink" href="#ct.ThermoPhase.UV" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set internal energy [J/kg or J/kmol] and specific volume
+[m³/kg or m³/kmol].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.UVQ">
+<span class="sig-name descname"><span class="pre">UVQ</span></span><a class="headerlink" href="#ct.ThermoPhase.UVQ" title="Link to this definition">#</a></dt>
+<dd><p>Get internal energy [J/kg or J/kmol], specific volume
+[m³/kg or m³/kmol], and vapor fraction.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.UVX">
+<span class="sig-name descname"><span class="pre">UVX</span></span><a class="headerlink" href="#ct.ThermoPhase.UVX" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set internal energy [J/kg or J/kmol], specific volume
+[m³/kg or m³/kmol], and mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.UVY">
+<span class="sig-name descname"><span class="pre">UVY</span></span><a class="headerlink" href="#ct.ThermoPhase.UVY" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set internal energy [J/kg or J/kmol], specific volume
+[m³/kg or m³/kmol], and mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.V">
+<span class="sig-name descname"><span class="pre">V</span></span><a class="headerlink" href="#ct.ThermoPhase.V" title="Link to this definition">#</a></dt>
+<dd><p>Basis-dependent specific volume [m³/kmol or m³/kg]</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.VH">
+<span class="sig-name descname"><span class="pre">VH</span></span><a class="headerlink" href="#ct.ThermoPhase.VH" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set volume [m³/kg or m³/kmol] and enthalpy [J/kg or J/kmol].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.VHX">
+<span class="sig-name descname"><span class="pre">VHX</span></span><a class="headerlink" href="#ct.ThermoPhase.VHX" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set specific volume [m³/kg or m³/kmol], enthalpy [J/kg or J/kmol],
+and mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.VHY">
+<span class="sig-name descname"><span class="pre">VHY</span></span><a class="headerlink" href="#ct.ThermoPhase.VHY" title="Link to this definition">#</a></dt>
+<dd><p>Get/Set specific volume [m³/kg or m³/kmol], enthalpy [J/kg or J/kmol],
+and mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.X">
+<span class="sig-name descname"><span class="pre">X</span></span><a class="headerlink" href="#ct.ThermoPhase.X" title="Link to this definition">#</a></dt>
+<dd><p>Mole fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.Y">
+<span class="sig-name descname"><span class="pre">Y</span></span><a class="headerlink" href="#ct.ThermoPhase.Y" title="Link to this definition">#</a></dt>
+<dd><p>Mass fractions.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.atomicWeights">
+<span class="sig-name descname"><span class="pre">atomicWeights</span></span><a class="headerlink" href="#ct.ThermoPhase.atomicWeights" title="Link to this definition">#</a></dt>
+<dd><p>Atomic weights of the elements [kg/kmol].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.basis">
+<span class="sig-name descname"><span class="pre">basis</span></span><a class="headerlink" href="#ct.ThermoPhase.basis" title="Link to this definition">#</a></dt>
+<dd><p>Basis</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">tp</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>Determines whether intensive thermodynamic properties are
+treated on a mass (per kg) or molar (per kmol) basis. This
+affects the values returned by the properties H, U, S, G, V,
+Density, Cv, and Cp, as well as the values used with the
+state-setting properties such as HPX and UV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>b</strong> – String. Can be <code class="docutils literal notranslate"><span class="pre">mole</span></code> / <code class="docutils literal notranslate"><span class="pre">molar</span></code> / <code class="docutils literal notranslate"><span class="pre">Molar</span></code> / <code class="docutils literal notranslate"><span class="pre">Mole</span></code> or
+<code class="docutils literal notranslate"><span class="pre">mass</span></code> / <code class="docutils literal notranslate"><span class="pre">Mass</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.charges">
+<span class="sig-name descname"><span class="pre">charges</span></span><a class="headerlink" href="#ct.ThermoPhase.charges" title="Link to this definition">#</a></dt>
+<dd><p>Species charges in units of the elementary charge.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.chemicalPotentials">
+<span class="sig-name descname"><span class="pre">chemicalPotentials</span></span><a class="headerlink" href="#ct.ThermoPhase.chemicalPotentials" title="Link to this definition">#</a></dt>
+<dd><p>Chemical potentials of the species [J/kmol].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.concentrations">
+<span class="sig-name descname"><span class="pre">concentrations</span></span><a class="headerlink" href="#ct.ThermoPhase.concentrations" title="Link to this definition">#</a></dt>
+<dd><p>Concentrations of the species [kmol/m³ for bulk phases; kmol/m² for surface
+phases].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.cp">
+<span class="sig-name descname"><span class="pre">cp</span></span><a class="headerlink" href="#ct.ThermoPhase.cp" title="Link to this definition">#</a></dt>
+<dd><p>Basis-dependent specific heat at constant pressure and composition
+[J/kmol/K or J/kg/K].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.critDensity">
+<span class="sig-name descname"><span class="pre">critDensity</span></span><a class="headerlink" href="#ct.ThermoPhase.critDensity" title="Link to this definition">#</a></dt>
+<dd><p>Critical density [kg/m³].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.critPressure">
+<span class="sig-name descname"><span class="pre">critPressure</span></span><a class="headerlink" href="#ct.ThermoPhase.critPressure" title="Link to this definition">#</a></dt>
+<dd><p>Critical pressure [Pa].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.critTemperature">
+<span class="sig-name descname"><span class="pre">critTemperature</span></span><a class="headerlink" href="#ct.ThermoPhase.critTemperature" title="Link to this definition">#</a></dt>
+<dd><p>Critical temperature [K].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.cv">
+<span class="sig-name descname"><span class="pre">cv</span></span><a class="headerlink" href="#ct.ThermoPhase.cv" title="Link to this definition">#</a></dt>
+<dd><p>Basis-dependent specific heat at constant volume and composition
+[J/kmol/K or J/kg/K].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.electricPotential">
+<span class="sig-name descname"><span class="pre">electricPotential</span></span><a class="headerlink" href="#ct.ThermoPhase.electricPotential" title="Link to this definition">#</a></dt>
+<dd><p>Electric potential [V].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.electrochemicalPotentials">
+<span class="sig-name descname"><span class="pre">electrochemicalPotentials</span></span><a class="headerlink" href="#ct.ThermoPhase.electrochemicalPotentials" title="Link to this definition">#</a></dt>
+<dd><p>Electrochemical potentials of the species [J/kmol].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.eosType">
+<span class="sig-name descname"><span class="pre">eosType</span></span><a class="headerlink" href="#ct.ThermoPhase.eosType" title="Link to this definition">#</a></dt>
+<dd><p>Type of equation of state.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.isIdealGas">
+<span class="sig-name descname"><span class="pre">isIdealGas</span></span><a class="headerlink" href="#ct.ThermoPhase.isIdealGas" title="Link to this definition">#</a></dt>
+<dd><p>A flag indicating whether the phase is an ideal gas.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.isothermalCompressibility">
+<span class="sig-name descname"><span class="pre">isothermalCompressibility</span></span><a class="headerlink" href="#ct.ThermoPhase.isothermalCompressibility" title="Link to this definition">#</a></dt>
+<dd><p>Isothermal compressibility [1/Pa].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.massDensity">
+<span class="sig-name descname"><span class="pre">massDensity</span></span><a class="headerlink" href="#ct.ThermoPhase.massDensity" title="Link to this definition">#</a></dt>
+<dd><p>Mass basis density [kg/m³].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.maxTemp">
+<span class="sig-name descname"><span class="pre">maxTemp</span></span><a class="headerlink" href="#ct.ThermoPhase.maxTemp" title="Link to this definition">#</a></dt>
+<dd><p>Maximum temperature for which thermodynamic parameter fits are valid
+for all species.</p>
+<p>The parameterizations used to represent the temperature-dependent
+species thermodynamic properties are generally only valid in some
+finite temperature range, which may be different for each species
+in the phase.</p>
+<p>See also: <code class="xref mat mat-meth docutils literal notranslate"><span class="pre">minTemp()</span></code></p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.meanMolecularWeight">
+<span class="sig-name descname"><span class="pre">meanMolecularWeight</span></span><a class="headerlink" href="#ct.ThermoPhase.meanMolecularWeight" title="Link to this definition">#</a></dt>
+<dd><p>Mean molecular weight [kg/kmol] of the mixture</p>
+<p>The mean molecular weight is the mole-fraction-weighted sum of the
+atomic weights of the individual species in the phase.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.minTemp">
+<span class="sig-name descname"><span class="pre">minTemp</span></span><a class="headerlink" href="#ct.ThermoPhase.minTemp" title="Link to this definition">#</a></dt>
+<dd><p>Minimum temperature for which thermodynamic parameter fits are valid
+for all species.</p>
+<p>The parameterizations used to represent the temperature-dependent
+species thermodynamic properties are generally only valid in some
+finite temperature range, which may be different for each species
+in the phase.</p>
+<p>See also: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">maxTemp</span></code></p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.molarDensity">
+<span class="sig-name descname"><span class="pre">molarDensity</span></span><a class="headerlink" href="#ct.ThermoPhase.molarDensity" title="Link to this definition">#</a></dt>
+<dd><p>Molar basis density [kmol/m³].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.molecularWeights">
+<span class="sig-name descname"><span class="pre">molecularWeights</span></span><a class="headerlink" href="#ct.ThermoPhase.molecularWeights" title="Link to this definition">#</a></dt>
+<dd><p>Molecular weights [kg/kmol] of the species.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.nElements">
+<span class="sig-name descname"><span class="pre">nElements</span></span><a class="headerlink" href="#ct.ThermoPhase.nElements" title="Link to this definition">#</a></dt>
+<dd><p>Number of elements in the phase.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.nSpecies">
+<span class="sig-name descname"><span class="pre">nSpecies</span></span><a class="headerlink" href="#ct.ThermoPhase.nSpecies" title="Link to this definition">#</a></dt>
+<dd><p>Number of species in the phase.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#ct.ThermoPhase.name" title="Link to this definition">#</a></dt>
+<dd><p>Name of the phase.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.partialMolarCp">
+<span class="sig-name descname"><span class="pre">partialMolarCp</span></span><a class="headerlink" href="#ct.ThermoPhase.partialMolarCp" title="Link to this definition">#</a></dt>
+<dd><p>Partial molar heat capacities for the species in the mixture [J/kmol/K].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.partialMolarEnthalpies">
+<span class="sig-name descname"><span class="pre">partialMolarEnthalpies</span></span><a class="headerlink" href="#ct.ThermoPhase.partialMolarEnthalpies" title="Link to this definition">#</a></dt>
+<dd><p>Partial molar enthalpies for the species in the mixture [J/kmol].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.partialMolarEntropies">
+<span class="sig-name descname"><span class="pre">partialMolarEntropies</span></span><a class="headerlink" href="#ct.ThermoPhase.partialMolarEntropies" title="Link to this definition">#</a></dt>
+<dd><p>Partial molar entropies for the species in the mixture [J/kmol/K].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.partialMolarIntEnergies">
+<span class="sig-name descname"><span class="pre">partialMolarIntEnergies</span></span><a class="headerlink" href="#ct.ThermoPhase.partialMolarIntEnergies" title="Link to this definition">#</a></dt>
+<dd><p>Partial molar internal energies for the species in the mixture [J/kmol].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.partialMolarVolumes">
+<span class="sig-name descname"><span class="pre">partialMolarVolumes</span></span><a class="headerlink" href="#ct.ThermoPhase.partialMolarVolumes" title="Link to this definition">#</a></dt>
+<dd><p>Partial molar volumes for the species in the mixture [m³/kmol].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.refPressure">
+<span class="sig-name descname"><span class="pre">refPressure</span></span><a class="headerlink" href="#ct.ThermoPhase.refPressure" title="Link to this definition">#</a></dt>
+<dd><p>Reference pressure [Pa] for standard-state.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.satPressure">
+<span class="sig-name descname"><span class="pre">satPressure</span></span><a class="headerlink" href="#ct.ThermoPhase.satPressure" title="Link to this definition">#</a></dt>
+<dd><p>Saturation pressure [Pa] at the current temperature</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.satTemperature">
+<span class="sig-name descname"><span class="pre">satTemperature</span></span><a class="headerlink" href="#ct.ThermoPhase.satTemperature" title="Link to this definition">#</a></dt>
+<dd><p>Saturation temperature [K] at the current pressure</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.soundSpeed">
+<span class="sig-name descname"><span class="pre">soundSpeed</span></span><a class="headerlink" href="#ct.ThermoPhase.soundSpeed" title="Link to this definition">#</a></dt>
+<dd><p>Speed of sound [m/s]</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">soundspeed</span>
+</pre></div>
+</div>
+<p>If the phase is an ideal gas, the speed of sound is calculated by:</p>
+<div class="math notranslate nohighlight">
+\[c = \sqrt{\gamma * R * T}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\gamma\)</span> is the ratio of specific heats, <span class="math notranslate nohighlight">\(R\)</span> is
+the specific gas constant, and <span class="math notranslate nohighlight">\(T\)</span> is the temperature. If the
+phase is not an ideal gas, the speed of sound is calculated by</p>
+<div class="math notranslate nohighlight">
+\[c = \sqrt{\left(\frac{\partial p}{\partial \rho}\right)_s}\]</div>
+<p>where <span class="math notranslate nohighlight">\(p\)</span> is the pressure and <span class="math notranslate nohighlight">\(\rho\)</span> is the density,
+and the subscript <span class="math notranslate nohighlight">\(s\)</span> indicates constant entropy. This is
+approximated by slightly increasing the density at constant entropy
+and computing the change in pressure.</p>
+<div class="math notranslate nohighlight">
+\[c = \sqrt{\frac{p_1 - p_0}{\rho_1-\rho_0}}\]</div>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.speciesNames">
+<span class="sig-name descname"><span class="pre">speciesNames</span></span><a class="headerlink" href="#ct.ThermoPhase.speciesNames" title="Link to this definition">#</a></dt>
+<dd><p>Cell array of species names</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.thermalExpansionCoeff">
+<span class="sig-name descname"><span class="pre">thermalExpansionCoeff</span></span><a class="headerlink" href="#ct.ThermoPhase.thermalExpansionCoeff" title="Link to this definition">#</a></dt>
+<dd><p>Thermal expansion coefficient [1/K].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.tpID">
+<span class="sig-name descname"><span class="pre">tpID</span></span><a class="headerlink" href="#ct.ThermoPhase.tpID" title="Link to this definition">#</a></dt>
+<dd><p>ID of the ThermoPhase object.</p>
+</dd></dl>
+
+</dd>
+<dt>Method Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.display">
+<span class="sig-name descname"><span class="pre">display</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.ThermoPhase.display" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.elementIndex">
+<span class="sig-name descname"><span class="pre">elementIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.ThermoPhase.elementIndex" title="Link to this definition">#</a></dt>
+<dd><p>Index of an element given its name</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">k</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">elementIndex</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The index is an integer assigned to each element in sequence as it
+is read in from the input file.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">name</span></code> is a single string, the return value will be a integer
+containing the corresponding index. If it is an cell array of
+strings, the output will be an array of the same shape
+containing the indices.</p>
+<p>NOTE: In keeping with the conventions used by Matlab, this method
+returns 1 for the first element. In contrast, the corresponding
+method elementIndex in the Cantera C++ and Python interfaces
+returns 0 for the first element, 1 for the second one, etc.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">ic</span> <span class="o">=</span> <span class="n">gas</span><span class="o">.</span><span class="n">elementIndex</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">ih</span> <span class="o">=</span> <span class="n">gas</span><span class="o">.</span><span class="n">elementIndex</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – String or cell array of strings of elements to look up</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Integer or vector of integers of element indices</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.elementalMassFraction">
+<span class="sig-name descname"><span class="pre">elementalMassFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.ThermoPhase.elementalMassFraction" title="Link to this definition">#</a></dt>
+<dd><p>Elemental mass fraction in gas object</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">elMassFrac</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">elementalMassFraction</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The elemental mass fraction in a gas object is calculated using
+the following equation:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[elMassFrac = \sum_{1}^{nSpecies} \frac{nAtoms(k, m)*Mel(m)*Y(k)}{mw(k)}\]</div>
+</div></blockquote>
+<p>where <span class="math notranslate nohighlight">\(nAtoms(k, m)\)</span> is the number of atoms of element <span class="math notranslate nohighlight">\(m\)</span> in
+species <span class="math notranslate nohighlight">\(k\)</span>; <span class="math notranslate nohighlight">\(Mel(m)\)</span> is the atomic weight of
+element <span class="math notranslate nohighlight">\(m\)</span>; <span class="math notranslate nohighlight">\(Y(k)\)</span> is the mass fraction of
+species <span class="math notranslate nohighlight">\(k\)</span>; and <span class="math notranslate nohighlight">\(mw(k)\)</span> is the molecular weight of
+species <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>element</strong> – String representing the element name.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Elemental mass fraction within a gas object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.equilibrate">
+<span class="sig-name descname"><span class="pre">equilibrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">xy</span></em>, <em class="sig-param"><span class="pre">solver</span></em>, <em class="sig-param"><span class="pre">rtol</span></em>, <em class="sig-param"><span class="pre">maxsteps</span></em>, <em class="sig-param"><span class="pre">maxiter</span></em>, <em class="sig-param"><span class="pre">loglevel</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.ThermoPhase.equilibrate" title="Link to this definition">#</a></dt>
+<dd><p>Set the phase to a state of chemical equilibrium</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">tp</span><span class="o">.</span><span class="n">equilibrate</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span> <span class="n">solver</span><span class="p">,</span> <span class="n">rtol</span><span class="p">,</span> <span class="n">maxsteps</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">,</span> <span class="n">loglevel</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>XY</strong> – A two-letter string, which must be one of the set
+<code class="docutils literal notranslate"><span class="pre">['TP','TV','HP','SP','SV','UV','UP']</span></code>,
+indicating which pair of properties should be held constant.
+Not all of the properties to be held constant are available with
+all of the solvers.</p></li>
+<li><p><strong>solver</strong> – Specifies the equilibrium solver to use. Choices are
+‘element_potential’ (fast solver using the element potential method),
+‘gibbs’ (slower but more robust Gibbs minimization solver), ‘vcs’
+(VCS algorithm). For the default ‘auto’ setting, the fast solver
+will be tried first, then if it fails the Gibbs minimization solver
+will be tried.</p></li>
+<li><p><strong>rtol</strong> – The relative error tolerance.</p></li>
+<li><p><strong>maxsteps</strong> – Maximum number of steps in composition to take to find a
+converged solution.</p></li>
+<li><p><strong>maxiter</strong> – For the Gibbs minimization solver only, this specifies the number
+of ‘outer’ iterations on T or P when some property pair other than
+TP is specified.</p></li>
+<li><p><strong>loglevel</strong> – Set to a value &gt; 0 to write diagnostic output. Larger values
+generate more detailed information.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.massFraction">
+<span class="sig-name descname"><span class="pre">massFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">species</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.ThermoPhase.massFraction" title="Link to this definition">#</a></dt>
+<dd><p>Get the mass fraction of one or a list of species</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">massFraction</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>species</strong> – String or cell array of strings of species whose mass
+fraction is desired</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Scalar or vector double mass fractions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.moleFraction">
+<span class="sig-name descname"><span class="pre">moleFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">species</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.ThermoPhase.moleFraction" title="Link to this definition">#</a></dt>
+<dd><p>Get the mole fraction of one or a list of species</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">moleFraction</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>species</strong> – String or cell array of strings of species whose mole
+fraction is desired</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Scalar or vector double mole fractions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.nAtoms">
+<span class="sig-name descname"><span class="pre">nAtoms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">species</span></em>, <em class="sig-param"><span class="pre">element</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.ThermoPhase.nAtoms" title="Link to this definition">#</a></dt>
+<dd><p>Number of atoms of an element in a species</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">nAtoms</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>species</strong> – Species name or index</p></li>
+<li><p><strong>element</strong> – Element name or index</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Number of atoms of the specified element in the species.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.report">
+<span class="sig-name descname"><span class="pre">report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">threshold</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.ThermoPhase.report" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.setEquivalenceRatio">
+<span class="sig-name descname"><span class="pre">setEquivalenceRatio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phi</span></em>, <em class="sig-param"><span class="pre">fuelComp</span></em>, <em class="sig-param"><span class="pre">oxComp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.ThermoPhase.setEquivalenceRatio" title="Link to this definition">#</a></dt>
+<dd><p>Set the mixture composition according to the equivalence ratio.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.speciesIndex">
+<span class="sig-name descname"><span class="pre">speciesIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.ThermoPhase.speciesIndex" title="Link to this definition">#</a></dt>
+<dd><p>Index of a species given the name</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">k</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">speciesIndex</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The index is an integer assigned to each species in sequence as it
+is read in from the input file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">ich4</span> <span class="o">=</span> <span class="n">gas</span><span class="o">.</span><span class="n">speciesIndex</span><span class="p">(</span><span class="s1">&#39;CH4&#39;</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">iho2</span> <span class="o">=</span> <span class="n">gas</span><span class="o">.</span><span class="n">speciesIndex</span><span class="p">(</span><span class="s1">&#39;HO2&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In keeping with the conventions used by Matlab, this method returns 1
+for the first species, 2 for the second, etc. In contrast, the
+corresponding method in the Cantera C++ and Python interfaces returns 0
+for the first species, 1 for the second one, etc.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – If name is a single string, the return value will be a integer
+containing the corresponding index. If it is an cell array of
+strings, the output will be an array of the same shape
+containing the indices.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Scalar or array of integers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.ThermoPhase.speciesName">
+<span class="sig-name descname"><span class="pre">speciesName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.ThermoPhase.speciesName" title="Link to this definition">#</a></dt>
+<dd><p>Name of one or multiple species given the index</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">k</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">speciesName</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>k</strong> – Scalar of array of integers of
+NOTE: In keeping with the conventions used by Matlab, the indices of
+species start with 1 for the first, then 2 for the second, etc.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cell array of strings of species inquired.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+</section>
+<section id="mixture">
+<h2>Mixture<a class="headerlink" href="#mixture" title="Link to this heading">#</a></h2>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.Mixture">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.</span></span><span class="sig-name descname"><span class="pre">Mixture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phases</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Mixture" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">handle</span></code></p>
+<p>Mixture Class</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Mixture</span><span class="p">(</span><span class="n">phases</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Class <a class="reference internal" href="#ct.Mixture" title="ct.Mixture"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Mixture</span></code></a> represents mixtures of one or more phases of matter.
+To construct a mixture, supply a cell array of phases and mole numbers</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">gas</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s1">&#39;gas.yaml&#39;</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">graphite</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s1">&#39;graphite.yaml&#39;</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">mix</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Mixture</span><span class="p">({</span><span class="n">gas</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">;</span> <span class="n">graphite</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">});</span>
+</pre></div>
+</div>
+<p>Phases may also be added later using the addPhase method</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">water</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="s1">&#39;water.yaml&#39;</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">mix</span><span class="o">.</span><span class="n">addPhase</span><span class="p">(</span><span class="n">water</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note that the objects representing each phase compute only the
+intensive state of the phase - they do not store any information
+on the amount of this phase. Mixture objects, on the other hand,
+represent the full extensive state.</p>
+<p>Mixture objects are “lightweight” in the sense that they do not
+store parameters needed to compute thermodynamic or kinetic
+properties of the phases. These are contained in the
+(‘heavyweight’) phase objects. Multiple mixture objects may be
+constructed using the same set of phase objects. Each one stores
+its own state information locally, and synchronizes the phase
+objects whenever it requires phase properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>phases</strong> – Cell array of phases and mole numbers.</p>
+</dd>
+</dl>
+<p>Create a <a class="reference internal" href="#ct.Mixture" title="ct.Mixture"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Mixture</span></code></a> object.</p>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.Mixture.P">
+<span class="sig-name descname"><span class="pre">P</span></span><a class="headerlink" href="#ct.Mixture.P" title="Link to this definition">#</a></dt>
+<dd><p>Pressure [Pa].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.Mixture.T">
+<span class="sig-name descname"><span class="pre">T</span></span><a class="headerlink" href="#ct.Mixture.T" title="Link to this definition">#</a></dt>
+<dd><p>Temperature [K].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.Mixture.chemPotentials">
+<span class="sig-name descname"><span class="pre">chemPotentials</span></span><a class="headerlink" href="#ct.Mixture.chemPotentials" title="Link to this definition">#</a></dt>
+<dd><p>Chemical potentials [J/kmol] of species in the mixture.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.Mixture.mixID">
+<span class="sig-name descname"><span class="pre">mixID</span></span><a class="headerlink" href="#ct.Mixture.mixID" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.Mixture.nElements">
+<span class="sig-name descname"><span class="pre">nElements</span></span><a class="headerlink" href="#ct.Mixture.nElements" title="Link to this definition">#</a></dt>
+<dd><p>Number of elements in a mixture.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.Mixture.nPhases">
+<span class="sig-name descname"><span class="pre">nPhases</span></span><a class="headerlink" href="#ct.Mixture.nPhases" title="Link to this definition">#</a></dt>
+<dd><p>Number of phases in a mixture.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.Mixture.nSpecies">
+<span class="sig-name descname"><span class="pre">nSpecies</span></span><a class="headerlink" href="#ct.Mixture.nSpecies" title="Link to this definition">#</a></dt>
+<dd><p>Number of species in a mixture.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.Mixture.phases">
+<span class="sig-name descname"><span class="pre">phases</span></span><a class="headerlink" href="#ct.Mixture.phases" title="Link to this definition">#</a></dt>
+<dd><p>Phases in the mixture</p>
+</dd></dl>
+
+</dd>
+<dt>Method Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Mixture.addPhase">
+<span class="sig-name descname"><span class="pre">addPhase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase</span></em>, <em class="sig-param"><span class="pre">moles</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Mixture.addPhase" title="Link to this definition">#</a></dt>
+<dd><p>Add a phase to a mixture.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">addPhase</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">moles</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Instance of class <a class="reference internal" href="#ct.ThermoPhase" title="ct.ThermoPhase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.ThermoPhase</span></code></a> which should be added.</p></li>
+<li><p><strong>moles</strong> – Number of moles [kmol] of the <code class="docutils literal notranslate"><span class="pre">phase</span></code> to be added to this mixture.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Mixture.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.Mixture.delete" title="Link to this definition">#</a></dt>
+<dd><p>Delete the <a class="reference internal" href="#ct.Mixture" title="ct.Mixture"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Mixture</span></code></a> object.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Mixture.display">
+<span class="sig-name descname"><span class="pre">display</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.Mixture.display" title="Link to this definition">#</a></dt>
+<dd><p>Display the state of the mixture on the terminal.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Mixture.elementIndex">
+<span class="sig-name descname"><span class="pre">elementIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Mixture.elementIndex" title="Link to this definition">#</a></dt>
+<dd><p>Index of an element.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">elementIndex</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the element whose index is desired.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Index of element with name <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
+</dd>
+</dl>
+<p>Note: In keeping with the conventions used by Matlab, the
+indices start from 1 instead of 0 as in Cantera C++ and
+Python interfaces.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Mixture.elementMoles">
+<span class="sig-name descname"><span class="pre">elementMoles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">e</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Mixture.elementMoles" title="Link to this definition">#</a></dt>
+<dd><p>Number of moles [kmol] of an element in a mixture.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">moles</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">elementMoles</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>e</strong> – Integer element number.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Moles of element number ‘e’. If input ‘e’ is empty, return
+moles of every element in the mixture.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Mixture.equilibrate">
+<span class="sig-name descname"><span class="pre">equilibrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">XY</span></em>, <em class="sig-param"><span class="pre">solver</span></em>, <em class="sig-param"><span class="pre">rtol</span></em>, <em class="sig-param"><span class="pre">maxsteps</span></em>, <em class="sig-param"><span class="pre">maxiter</span></em>, <em class="sig-param"><span class="pre">estimate_equil</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Mixture.equilibrate" title="Link to this definition">#</a></dt>
+<dd><p>Set the mixture to a state of chemical equilibrium.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">equilibrate</span><span class="p">(</span><span class="n">XY</span><span class="p">,</span> <span class="n">solver</span><span class="p">,</span> <span class="n">rtol</span><span class="p">,</span> <span class="n">maxsteps</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">,</span> <span class="n">estimate_equil</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>XY</strong> – Two-letter string specifying the two properties to hold
+fixed.  Currently, <code class="docutils literal notranslate"><span class="pre">'TP'</span></code>, <code class="docutils literal notranslate"><span class="pre">'HP'</span></code>, <code class="docutils literal notranslate"><span class="pre">'TV'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'SP'</span></code> are
+implemented. Default: <code class="docutils literal notranslate"><span class="pre">'TP'</span></code>.</p></li>
+<li><p><strong>solver</strong> – Name of the solver to be used to equilibrate the phase.
+If solver = ‘element_potential’, the ChemEquil element potential
+solver will be used.
+If solver = ‘vcs’, the VCS solver will be used.
+If solver = ‘gibbs’, the MultiPhaseEquil solver will be used.
+If solver = ‘auto’, the solvers will be tried in order if the initial
+solver(s) fail.
+Default: <code class="docutils literal notranslate"><span class="pre">'auto'</span></code>.</p></li>
+<li><p><strong>err</strong> – Error tolerance. Iteration will continue until <span class="math notranslate nohighlight">\(\Delta\mu)/RT\)</span>
+is less than this value for each reaction. Default:
+1.0e-9. Note that this default is very conservative, and good
+equilibrium solutions may be obtained with larger error
+tolerances.</p></li>
+<li><p><strong>maxsteps</strong> – Maximum number of steps to take while solving the
+equilibrium problem for specified T and P. Default: 1000.</p></li>
+<li><p><strong>maxiter</strong> – Maximum number of temperature and/or pressure
+iterations.  This is only relevant if a property pair other
+than (T,P) is specified. Default: 200.</p></li>
+<li><p><strong>estimate_equil</strong> – For MultiPhaseEquil solver, an integer indicating whether the solver
+should estimate its own initial condition.
+If 0, the initial mole fraction vector in the ThermoPhase object
+is used as the initial condition.
+If 1, the initial mole fraction vector is used if the
+element abundances are satisfied.
+If -1, the initial mole fraction vector is thrown out,
+and an estimate is formulated.
+Default: 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The error in the solution.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Mixture.nAtoms">
+<span class="sig-name descname"><span class="pre">nAtoms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">e</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Mixture.nAtoms" title="Link to this definition">#</a></dt>
+<dd><p>Number of atoms of an element in a mixture.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">nAtoms</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>e</strong> – Index of element.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Number of atoms for element e.</p>
+</dd>
+</dl>
+<p>Note: In keeping with the conventions used by Matlab, the
+indices start from 1 instead of 0 as in Cantera C++ and
+Python interfaces.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Mixture.phaseMoles">
+<span class="sig-name descname"><span class="pre">phaseMoles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">n</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Mixture.phaseMoles" title="Link to this definition">#</a></dt>
+<dd><p>Number of moles [kmol] of a phase in a mixture.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">moles</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">phaseMoles</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> – Integer phase number.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Moles of element number ‘n’. If input ‘n’ is empty, return
+moles of every element in the mixture.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Mixture.setPhaseMoles">
+<span class="sig-name descname"><span class="pre">setPhaseMoles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">n</span></em>, <em class="sig-param"><span class="pre">moles</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Mixture.setPhaseMoles" title="Link to this definition">#</a></dt>
+<dd><p>Set the number of moles [kmol] of a phase in a mixture.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">setPhaseMoles</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">moles</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> – Phase number in the input.</p></li>
+<li><p><strong>moles</strong> – Number of moles to add.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Mixture.setSpeciesMoles">
+<span class="sig-name descname"><span class="pre">setSpeciesMoles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">moles</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Mixture.setSpeciesMoles" title="Link to this definition">#</a></dt>
+<dd><p>Set the moles [kmol] of the species.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">setSpeciesMoles</span><span class="p">(</span><span class="n">moles</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Set the moles of multiple species. The moles may be specified either as a
+string, or as an vector. If a vector is used, it must be dimensioned at
+least as large as the total number of species in the mixture. Note that
+the species may belong to any phase, and unspecified species are set to
+zero.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">mix</span><span class="o">.</span><span class="n">setSpeciesMoles</span><span class="p">(</span><span class="s1">&#39;C(s):1.0, CH4:2.0, O2:0.2&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>moles</strong> – Vector or string specifying the moles of species.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Mixture.speciesIndex">
+<span class="sig-name descname"><span class="pre">speciesIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">k</span></em>, <em class="sig-param"><span class="pre">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Mixture.speciesIndex" title="Link to this definition">#</a></dt>
+<dd><p>Index of a species in a mixture.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">speciesIndex</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the species whose index is desired.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Index of species with name <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
+</dd>
+</dl>
+<p>Note: In keeping with the conventions used by Matlab, the
+indices start from 1 instead of 0 as in Cantera C++ and
+Python interfaces.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Mixture.speciesMoles">
+<span class="sig-name descname"><span class="pre">speciesMoles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Mixture.speciesMoles" title="Link to this definition">#</a></dt>
+<dd><p>Number of moles [kmol] of a species in a mixture.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">moles</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">speciesMoles</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>k</strong> – Integer species number.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Moles of species number ‘k’. If input ‘k’ is empty, return
+moles of every species in the mixture</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phases">Phases</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermophase">ThermoPhase</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mixture">Mixture</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/matlab/thermo.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2025, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

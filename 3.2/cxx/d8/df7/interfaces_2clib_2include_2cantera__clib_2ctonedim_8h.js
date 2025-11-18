@@ -1,0 +1,26 @@
+var interfaces_2clib_2include_2cantera__clib_2ctonedim_8h =
+[
+    [ "sim1D_newSim1D", "d6/d8d/group__CAPIctonedim.html#gac237387532117f8f17005dc965bdfe74", null ],
+    [ "sim1D_setValue", "d6/d8d/group__CAPIctonedim.html#ga0faf74997f2fc8bbcabfc04ac87f0bd5", null ],
+    [ "sim1D_setProfile", "d6/d8d/group__CAPIctonedim.html#gaacc7b26e68e87e98e5974bdd160b9663", null ],
+    [ "sim1D_setFlatProfile", "d6/d8d/group__CAPIctonedim.html#gaf1378a5c2c3caf566ee4e0213dda1e01", null ],
+    [ "sim1D_setInitialGuess", "d6/d8d/group__CAPIctonedim.html#ga535ce95c507dcde2d03d05bd97b25271", null ],
+    [ "sim1D_show", "d6/d8d/group__CAPIctonedim.html#gab69ab6e0086b79d244c455aacc39554d", null ],
+    [ "sim1D_setTimeStep", "d6/d8d/group__CAPIctonedim.html#ga095b234d57ee51f7a58cd6f6dfaf2886", null ],
+    [ "sim1D_getInitialSoln", "d6/d8d/group__CAPIctonedim.html#ga16ede4049e54e4315de0d5447a3bd1dd", null ],
+    [ "sim1D_solve", "d6/d8d/group__CAPIctonedim.html#gaf42a15784ed046641d3a1897cffb9f5c", null ],
+    [ "sim1D_refine", "d6/d8d/group__CAPIctonedim.html#gab9c2af1f79079fe984ec9baf65d0c3d0", null ],
+    [ "sim1D_setRefineCriteria", "d6/d8d/group__CAPIctonedim.html#gaacd5a47ccd558272329986368cc95739", null ],
+    [ "sim1D_setGridMin", "d6/d8d/group__CAPIctonedim.html#gab932d53092ee77bcf2e2a47ae3036e2f", null ],
+    [ "sim1D_save", "d6/d8d/group__CAPIctonedim.html#ga42cc8370d187f45f1c20baf190f9e957", null ],
+    [ "sim1D_restore", "d6/d8d/group__CAPIctonedim.html#ga0d786658117414f900e777c5b3590c5f", null ],
+    [ "sim1D_writeStats", "d6/d8d/group__CAPIctonedim.html#ga1d5f25eb46892b7186b0f349a6f3e50b", null ],
+    [ "sim1D_domainIndex", "d6/d8d/group__CAPIctonedim.html#gaf7f096249cd18dd65be5fd8bcb9fd658", null ],
+    [ "sim1D_value", "d6/d8d/group__CAPIctonedim.html#gae766e272c6466eb2f430613b504a4f68", null ],
+    [ "sim1D_workValue", "d6/d8d/group__CAPIctonedim.html#ga24db1d7d69e74c49e98a4058698e4508", null ],
+    [ "sim1D_eval", "d6/d8d/group__CAPIctonedim.html#gaa7dde3db4151d3c542c16344c7c1061a", null ],
+    [ "sim1D_setMaxJacAge", "d6/d8d/group__CAPIctonedim.html#gafac018f3f96e347bb9d459d1e9b8dd47", null ],
+    [ "sim1D_setFixedTemperature", "d6/d8d/group__CAPIctonedim.html#gabde6aa021f7fb5b82dea1480462d1b69", null ],
+    [ "sim1D_del", "d6/d8d/group__CAPIctonedim.html#ga1e429e19641ceeeaf9669abc2e09a20a", null ],
+    [ "sim1D_cabinetSize", "d6/d8d/group__CAPIctonedim.html#ga296cb47b35f4ad4c4ecadd18467f566b", null ]
+];

@@ -1,0 +1,27 @@
+var classCantera_1_1ChungHighPressureGasTransport =
+[
+    [ "ChungHighPressureGasTransport", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#aa3169eb8aabee6de5be797cdfc2c022e", null ],
+    [ "transportModel", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#ab6e282e59b2a823363ca1a9c0e7dc735", null ],
+    [ "init", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#a870555842160e054c1df5599fcdd767b", null ],
+    [ "viscosity", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#aaddc293ac17c2656f575b74cd3c9c546", null ],
+    [ "thermalConductivity", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#a2c7a40f9332540263bb47aa38d5459a6", null ],
+    [ "initializePureFluidProperties", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#a25ebdb49031082bc8d037ef46ad37182", null ],
+    [ "computeMixtureParameters", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#acbc6a1978298b3adcfad8062342a61cc", null ],
+    [ "lowPressureViscosity", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#a8da24b28a72197bea3e93ef721fdaf78", null ],
+    [ "highPressureViscosity", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#ab60fbffde1cb789fecc496ae2626ed92", null ],
+    [ "highPressureThermalConductivity", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#a852197394f225e143599c5db376a057f", null ],
+    [ "m_sigma_i", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#aa0f99bd7e39555684d6775648d445158", null ],
+    [ "m_epsilon_over_k_i", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#a5b662fcc527239821654c87ff96bee48", null ],
+    [ "m_MW_i", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#a1fd208adacf2a56e729f275cbc8ea0ee", null ],
+    [ "m_acentric_factor_i", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#a68696a7d05c8c84b21d521b240e63479", null ],
+    [ "m_kappa_i", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#ab3138711a6ea281ec1673488f2fc7038", null ],
+    [ "m_Vc_mix", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#a9cd948b96f73a84a63703bd64b30a3e3", null ],
+    [ "m_Tc_mix", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#a49899ce5235408864c1002ddae358aa0", null ],
+    [ "m_sigma_mix", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#aae09b6041e79bab59db19c6ff9982a1f", null ],
+    [ "m_epsilon_over_k_mix", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#a4f2b3cb7d1a2a443f693b88cfb23e749", null ],
+    [ "m_MW_mix", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#a39fae85c6d86ea2dc81bbfa5094cf1f6", null ],
+    [ "m_mu_mix", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#aa4a06eac61107df23eb63efc7e0a43d5", null ],
+    [ "m_mu_r_mix", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#a3e37607ccf843c1f943cf6abaa9ffa20", null ],
+    [ "m_acentric_factor_mix", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#aae2058aaa820d2962ca890c26b40ecb7", null ],
+    [ "m_kappa_mix", "dc/dc7/classCantera_1_1ChungHighPressureGasTransport.html#a0720c6eb8f2bc523ea0e267e5bb1d517", null ]
+];

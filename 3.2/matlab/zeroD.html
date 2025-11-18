@@ -1,0 +1,1801 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Zero-Dimensional Reactor Networks &#8212; Cantera 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3c8b230e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"tex": {"macros": {"t": ["\\mathrm{#1}", 1], "pxpy": ["\\frac{\\partial #1}{\\partial #2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'matlab/zeroD';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '/dev/_static/doc-versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.2';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="One-dimensional Reacting Flows" href="onedim.html" />
+    <link rel="prev" title="Transport Properties" href="transport.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Cantera is community-driven and needs your help! <a href='https://cantera.org/getting-involved.html'>Get involved here</a>.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/cantera-logo.png" class="logo__image only-light" alt="Cantera"/>
+    <script>document.write(`<img src="../_static/cantera-logo.png" class="logo__image only-dark" alt="Cantera"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install/index.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../develop/index.html">
+    Develop
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="/community.html">
+    Community
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Cantera/cantera" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/index.html">Python Module Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/importing.html">Objects Representing Phases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/transport.html">Transport Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/zerodim.html">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../python/scripts.html">Mechanism Conversion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python/ck_conversion.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/cti_conversion.html">CTI to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/ctml_conversion.html">CTML to YAML conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/yaml_conversion.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python/lxcat_conversion.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/units.html">Python Interface With Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/constants.html">Physical Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/utilities.html">Utilities</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">MATLAB Toolbox Documentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="phases.html">Objects Representing Phases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thermo.html">Thermodynamic Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinetics.html">Chemical Kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transport.html">Transport Properties</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Zero-Dimensional Reactor Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="onedim.html">One-dimensional Reacting Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html">Physical Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html">Utility Functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../clib/index.html">C Interface Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../dotnet/index.html">.NET Interface Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../yaml/index.html">YAML Input File Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/general.html">General Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/phases.html">Phase Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/species.html">Species</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/reactions.html">Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/ck2yaml.html">Chemkin to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/cti2yaml.html">CTI to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/ctml2yaml.html">CTML to YAML conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/yaml2ck.html">YAML to Chemkin conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/lxcat2yaml.html">LXCat to YAML conversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/releasenotes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.2.html">Cantera 3.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.1.html">Cantera 3.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v3.0.html">Cantera 3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.6.html">Cantera 2.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.5.html">Cantera 2.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.4.html">Cantera 2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.3.html">Cantera 2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.2.html">Cantera 2.2.1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.1.html">Cantera 2.1.2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../reference/releasenotes/v2.0.html">Cantera 2.0.2</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Science Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/thermo/index.html">Thermodynamic Properties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/thermo/species-thermo.html">Species Thermodynamic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/thermo/phase-thermo.html">Phase Thermodynamic Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/kinetics/index.html">Chemical Reactions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/kinetics/reaction-rates.html">Reaction Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/kinetics/rate-constants.html">Rate Constant Parameterizations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/transport/index.html">Transport Properties</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/reactors/index.html">Reactors and Reactor Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/controlreactor.html">Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/constant-pressure-reactor.html">Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-reactor.html">Ideal Gas Control Volume Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-reactor.html">Ideal Gas Constant Pressure Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/mole-reactor.html">Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/constant-pressure-mole-reactor.html">Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-mole-reactor.html">Ideal Gas Control Volume Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/ideal-gas-constant-pressure-mole-reactor.html">Ideal Gas Constant Pressure Mole Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/reactors/interactions.html">Reactor Interactions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/onedim/index.html">One-dimensional Flames</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/governing-equations.html">Governing Equations for One-dimensional Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/discretization.html">Discretization of 1D Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/nonlinear-solver.html">Nonlinear Solver for One-dimensional Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onedim/grid-refinement.html">Grid Refinement for One-dimensional Flows</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item"><div id="numfocus" style="padding-bottom: 30px;">
+<a href="https://numfocus.org/donate-to-cantera"
+   class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference external"
+   type="button">Donate to Cantera</a>
+<a href="https://numfocus.org/"><img src="../_static/images/powered_by_NumFOCUS.svg" border="0" alt="NumFOCUS"/></a>
+</div></div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../reference/index.html" class="nav-link">Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">MATLAB Toolbox Documentation</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Zero-Dimensi...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="zero-dimensional-reactor-networks">
+<h1>Zero-Dimensional Reactor Networks<a class="headerlink" href="#zero-dimensional-reactor-networks" title="Link to this heading">#</a></h1>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The MATLAB toolbox is an experimental part of the Cantera API and may be changed
+without notice. It includes breaking changes from the legacy MATLAB API. While
+almost all features of the legacy MATLAB API are implemented, the toolbox does not
+include all functionality available for the C++ and Python interfaces.</p>
+</div>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#defining-functions" id="id1">Defining Functions</a></p></li>
+<li><p><a class="reference internal" href="#reactor-networks" id="id2">Reactor Networks</a></p></li>
+<li><p><a class="reference internal" href="#reactors" id="id3">Reactors</a></p>
+<ul>
+<li><p><a class="reference internal" href="#reactorbase" id="id4">ReactorBase</a></p></li>
+<li><p><a class="reference internal" href="#reservoir" id="id5">Reservoir</a></p></li>
+<li><p><a class="reference internal" href="#reactor" id="id6">Reactor</a></p></li>
+<li><p><a class="reference internal" href="#idealgasreactor" id="id7">IdealGasReactor</a></p></li>
+<li><p><a class="reference internal" href="#constpressurereactor" id="id8">ConstPressureReactor</a></p></li>
+<li><p><a class="reference internal" href="#idealgasconstpressurereactor" id="id9">IdealGasConstPressureReactor</a></p></li>
+<li><p><a class="reference internal" href="#flowreactor" id="id10">FlowReactor</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#surfaces" id="id11">Surfaces</a></p>
+<ul>
+<li><p><a class="reference internal" href="#reactorsurface" id="id12">ReactorSurface</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#connectors" id="id13">Connectors</a></p>
+<ul>
+<li><p><a class="reference internal" href="#connector" id="id14">Connector</a></p></li>
+<li><p><a class="reference internal" href="#wall" id="id15">Wall</a></p></li>
+<li><p><a class="reference internal" href="#flowdevice" id="id16">FlowDevice</a></p></li>
+<li><p><a class="reference internal" href="#massflowcontroller" id="id17">MassFlowController</a></p></li>
+<li><p><a class="reference internal" href="#valve" id="id18">Valve</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="defining-functions">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Defining Functions</a><a class="headerlink" href="#defining-functions" title="Link to this heading">#</a></h2>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.Func1">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.</span></span><span class="sig-name descname"><span class="pre">Func1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">typ</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Func1" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">handle</span></code></p>
+<p>Func1 Class</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Func1</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">coeff</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A functor is an object that behaves like a function. Cantera
+defines a set of functors to use to create arbitrary functions to
+specify things like heat fluxes, piston speeds, etc., in reactor
+network simulations. Of course, they can be used for other things
+too.</p>
+<p>The main feature of a functor class is that it overloads the <code class="docutils literal notranslate"><span class="pre">()</span></code>
+operator to evaluate the function. For example, suppose object
+<code class="docutils literal notranslate"><span class="pre">f</span></code> is a functor that evaluates the polynomial <span class="math notranslate nohighlight">\(2x^2 - 3x + 1\)</span>.
+Then writing <code class="docutils literal notranslate"><span class="pre">f(2)</span></code> would cause the method that evaluates the
+function to be invoked, and would pass it the argument <code class="docutils literal notranslate"><span class="pre">2</span></code>. The
+return value would of course be 3.</p>
+<p>The types of functors you can create in Cantera are these:</p>
+<blockquote>
+<div><ul>
+<li><p>Basic functors: <code class="docutils literal notranslate"><span class="pre">'sin'</span></code>, <code class="docutils literal notranslate"><span class="pre">'cos'</span></code>, <code class="docutils literal notranslate"><span class="pre">'exp'</span></code>, <code class="docutils literal notranslate"><span class="pre">'log'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'pow'</span></code>, <code class="docutils literal notranslate"><span class="pre">'constant'</span></code>. Use no or scalar parameters, for example</p>
+<p>&gt;&gt; x = ct.Func1(‘cos’)
+&gt;&gt; x = ct.Func1(‘sin’, 2)</p>
+</li>
+<li><p>Advanced functors: <code class="docutils literal notranslate"><span class="pre">'polynomial3'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Fourier'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Gaussian'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'Arrhenius'</span></code>. Use vector parameter, for example</p>
+<p>&gt;&gt; x = ct.Func1(‘polynomial3’, [1 2 3])  % x^2 + 2x + 3</p>
+</li>
+<li><p>Tabulation functors: <code class="docutils literal notranslate"><span class="pre">'tabulated-linear'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'tabulated-previous'</span></code>. Use pair of vector parameters, for example</p>
+<p>&gt;&gt; x = ct.Func1(‘tabulated-linear’, [0 2 4], [1 3 5])</p>
+</li>
+<li><p>Compounding functors: <code class="docutils literal notranslate"><span class="pre">'sum'</span></code>, <code class="docutils literal notranslate"><span class="pre">'diff'</span></code>, <code class="docutils literal notranslate"><span class="pre">'product'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'ratio'</span></code>, <code class="docutils literal notranslate"><span class="pre">'composite'</span></code>. Use two functor parameters or a
+corresponding operator, for example</p>
+<p>&gt;&gt; x = ct.Func1(‘sum’, ct.Func1(‘sin’, 2.), ct.Func1(‘cos’, 3.))
+&gt;&gt; x = ct.Func1(‘sin’, 2.) + ct.Func1(‘cos’, 3.)  % alternative</p>
+</li>
+<li><p>Modifying functors: <code class="docutils literal notranslate"><span class="pre">'times-constant'</span></code>, <code class="docutils literal notranslate"><span class="pre">'plus-constant'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'periodic'</span></code>. Use one functor and one scalar, for example</p>
+<p>&gt;&gt; x = ct.Func1(‘times-constant’, ct.Func1(‘sin’, 2.), 2.)</p>
+</li>
+</ul>
+</div></blockquote>
+<p>Note: this MATLAB class shadows underlying C++ Cantera classes derived
+from “Func1”. See the Cantera C++ documentation for more details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>typ</strong> – String indicating type of functor to create.</p></li>
+<li><p><strong>varargin</strong> – Parameters required for the functor; values depend on definition.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of class <a class="reference internal" href="#ct.Func1" title="ct.Func1"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Func1</span></code></a>.</p>
+</dd>
+</dl>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.Func1.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#ct.Func1.id" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.Func1.type">
+<span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#ct.Func1.type" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd>
+<dt>Method Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Func1.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.Func1.delete" title="Link to this definition">#</a></dt>
+<dd><p>Delete the <a class="reference internal" href="#ct.Func1" title="ct.Func1"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Func1</span></code></a> object.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Func1.display">
+<span class="sig-name descname"><span class="pre">display</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.Func1.display" title="Link to this definition">#</a></dt>
+<dd><p>Display the equation of the input function on the terminal.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Func1.minus">
+<span class="sig-name descname"><span class="pre">minus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Func1.minus" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Func1.mrdivide">
+<span class="sig-name descname"><span class="pre">mrdivide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Func1.mrdivide" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Func1.mtimes">
+<span class="sig-name descname"><span class="pre">mtimes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Func1.mtimes" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Func1.plus">
+<span class="sig-name descname"><span class="pre">plus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Func1.plus" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Func1.subsref">
+<span class="sig-name descname"><span class="pre">subsref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.Func1.subsref" title="Link to this definition">#</a></dt>
+<dd><p>Redefine subscripted references for functors.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">subsref</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – Instance of class <a class="reference internal" href="#ct.Func1" title="ct.Func1"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Func1</span></code></a>.</p></li>
+<li><p><strong>s</strong> – Value at which the function should be evaluated.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the value of the function evaluated at <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.Func1.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.Func1.write" title="Link to this definition">#</a></dt>
+<dd><p>Get the formatted string to display the function.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> – Instance of class <a class="reference internal" href="#ct.Func1" title="ct.Func1"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Func1</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>LaTeX-formatted string displaying the function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+<section id="reactor-networks">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Reactor Networks</a><a class="headerlink" href="#reactor-networks" title="Link to this heading">#</a></h2>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorNet">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.zeroD.</span></span><span class="sig-name descname"><span class="pre">ReactorNet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">reactors</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.ReactorNet" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">handle</span></code></p>
+<p>ReactorNet class</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">zeroD</span><span class="o">.</span><span class="n">ReactorNet</span><span class="p">(</span><span class="n">reactors</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A <a class="reference internal" href="#ct.zeroD.ReactorNet" title="ct.zeroD.ReactorNet"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorNet</span></code></a> object is a container that holds one or more
+<a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a> objects in a network. <a class="reference internal" href="#ct.zeroD.ReactorNet" title="ct.zeroD.ReactorNet"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorNet</span></code></a>
+objects are used to simultaneously advance the state of one or more coupled
+reactors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reactors</strong> – An instance of or a cell array of instances of class
+<a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a>.</p>
+</dd>
+</dl>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorNet.atol">
+<span class="sig-name descname"><span class="pre">atol</span></span><a class="headerlink" href="#ct.zeroD.ReactorNet.atol" title="Link to this definition">#</a></dt>
+<dd><p>Absolute error tolerance.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorNet.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#ct.zeroD.ReactorNet.id" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorNet.maxTimeStep">
+<span class="sig-name descname"><span class="pre">maxTimeStep</span></span><a class="headerlink" href="#ct.zeroD.ReactorNet.maxTimeStep" title="Link to this definition">#</a></dt>
+<dd><p>Max time step [s].</p>
+<p>The integrator chooses a step size based on the desired error
+tolerance and the rate at which the solution is changing.
+In some cases, the solution changes very slowly at first,
+then very rapidly (ignition problems). In such cases, the
+integrator may choose a timestep that is too large, which
+leads to numerical problems later. Use this method to set an
+upper bound on the timestep.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorNet.rtol">
+<span class="sig-name descname"><span class="pre">rtol</span></span><a class="headerlink" href="#ct.zeroD.ReactorNet.rtol" title="Link to this definition">#</a></dt>
+<dd><p>Relative error tolerance.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorNet.time">
+<span class="sig-name descname"><span class="pre">time</span></span><a class="headerlink" href="#ct.zeroD.ReactorNet.time" title="Link to this definition">#</a></dt>
+<dd><p>Current time [s].
+The setter method sets the time at which integration should be
+restarted, using the current state as the initial condition.</p>
+</dd></dl>
+
+</dd>
+<dt>Method Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorNet.advance">
+<span class="sig-name descname"><span class="pre">advance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tout</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.ReactorNet.advance" title="Link to this definition">#</a></dt>
+<dd><p>Advance the state of the reactor network in time.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">n</span><span class="o">.</span><span class="n">advance</span><span class="p">(</span><span class="n">tout</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Method <code class="xref py py-obj docutils literal notranslate"><span class="pre">advance</span></code> integrates the system of ODEs that determine
+the rate of change of the volume, the mass of each species,
+and the total energy for each reactor. The integration is
+carried out from the current time to “tout”. (Note: “tout” is
+an absolute time, not a time interval.) The integrator may
+take many internal timesteps before reaching tout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tout</strong> – End time [s] of the integration.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorNet.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.ReactorNet.delete" title="Link to this definition">#</a></dt>
+<dd><p>Delete the <a class="reference internal" href="#ct.zeroD.ReactorNet" title="ct.zeroD.ReactorNet"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorNet</span></code></a> object object.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorNet.sensitivity">
+<span class="sig-name descname"><span class="pre">sensitivity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">component</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.ReactorNet.sensitivity" title="Link to this definition">#</a></dt>
+<dd><p>Sensitivity of the solution variable <code class="xref py py-obj docutils literal notranslate"><span class="pre">c</span></code> in reactor <code class="xref py py-obj docutils literal notranslate"><span class="pre">r</span></code>
+with respect to the parameter <code class="xref py py-obj docutils literal notranslate"><span class="pre">p</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">sensitivity</span><span class="p">(</span><span class="n">component</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>component</strong> – String name of variable.</p></li>
+<li><p><strong>p</strong> – Integer sensitivity parameter.</p></li>
+<li><p><strong>r</strong> – Instance of class <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorNet.setSensitivityTolerances">
+<span class="sig-name descname"><span class="pre">setSensitivityTolerances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">rerr</span></em>, <em class="sig-param"><span class="pre">aerr</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.ReactorNet.setSensitivityTolerances" title="Link to this definition">#</a></dt>
+<dd><p>Set the error tolerance for sensitivity analysis.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">n</span><span class="o">.</span><span class="n">setSensitivityTOlerances</span><span class="p">(</span><span class="n">nerr</span><span class="p">,</span> <span class="n">aerr</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rerr</strong> – Scalar relative error tolerance.</p></li>
+<li><p><strong>aerr</strong> – Scalar absolute error tolerance.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorNet.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.ReactorNet.step" title="Link to this definition">#</a></dt>
+<dd><p>Take a single internal step.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">n</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The time/distance after taking the step is returned.</p>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+<section id="reactors">
+<span id="sec-matlab-reactors"></span><h2><a class="toc-backref" href="#id3" role="doc-backlink">Reactors</a><a class="headerlink" href="#reactors" title="Link to this heading">#</a></h2>
+<section id="reactorbase">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">ReactorBase</a><a class="headerlink" href="#reactorbase" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.zeroD.</span></span><span class="sig-name descname"><span class="pre">ReactorBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.ReactorBase" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">handle</span></code></p>
+<p>ReactorBase Class.</p>
+<p>Base class for objects representing reactors. The constructor is called
+by derived classes and cannot be used directly.</p>
+<p>ReactorBase Class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> – ID of reactor object instantiated by specialization.</p>
+</dd>
+</dl>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.D">
+<span class="sig-name descname"><span class="pre">D</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.D" title="Link to this definition">#</a></dt>
+<dd><p>Density [kg/m³] of the reactor contents at the end of the last call to
+“advance” or “step”.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.H">
+<span class="sig-name descname"><span class="pre">H</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.H" title="Link to this definition">#</a></dt>
+<dd><p>Mass specific enthalpy [J/kg] of the reactor contents at the end of the last
+call to “advance” or “step”.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.M">
+<span class="sig-name descname"><span class="pre">M</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.M" title="Link to this definition">#</a></dt>
+<dd><p>Mass [kg] of the reactor contents at the end of the last call to
+“advance” or “step”.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.P">
+<span class="sig-name descname"><span class="pre">P</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.P" title="Link to this definition">#</a></dt>
+<dd><p>Pressure [Pa] of the reactor contents at the end of the last call to
+“advance” or “step”.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.T">
+<span class="sig-name descname"><span class="pre">T</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.T" title="Link to this definition">#</a></dt>
+<dd><p>Temperature [K] of the reactor contents at the end of the last call to
+“advance” or “step”.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.U">
+<span class="sig-name descname"><span class="pre">U</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.U" title="Link to this definition">#</a></dt>
+<dd><p>Mass specific internal energy [J/kg] of the reactor contents at the end of the
+last call to “advance” or “step”.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.V">
+<span class="sig-name descname"><span class="pre">V</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.V" title="Link to this definition">#</a></dt>
+<dd><p>Volume [m³] of the reactor contents at the end of the last call to “advance”
+or “step”.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.Y">
+<span class="sig-name descname"><span class="pre">Y</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.Y" title="Link to this definition">#</a></dt>
+<dd><p>Mass fractions of the reactor contents at the end of the last call to
+“advance” or “step”.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.area">
+<span class="sig-name descname"><span class="pre">area</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.area" title="Link to this definition">#</a></dt>
+<dd><p>Area of the reactor [m²].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.chemistryEnabled">
+<span class="sig-name descname"><span class="pre">chemistryEnabled</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.chemistryEnabled" title="Link to this definition">#</a></dt>
+<dd><p>Boolean to enable or disable changing reactor composition by reactions.</p>
+<p>If the chemistry is disabled, no reactions take place. Note that the
+composition can still change due to mass transfer at inlets and outlets.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.energyEnabled">
+<span class="sig-name descname"><span class="pre">energyEnabled</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.energyEnabled" title="Link to this definition">#</a></dt>
+<dd><p>Boolean to enable or disable solving the energy equation.</p>
+<p>If the energy equation is disabled, then the reactor temperature is constant.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.id" title="Link to this definition">#</a></dt>
+<dd><p>ID of reactor.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.name" title="Link to this definition">#</a></dt>
+<dd><p>Name of reactor.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.phase">
+<span class="sig-name descname"><span class="pre">phase</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.phase" title="Link to this definition">#</a></dt>
+<dd><p>The Solution object used to represent the contents of this reactor.
+If the <code class="xref py py-obj docutils literal notranslate"><span class="pre">clone</span></code> parameter of the reactor constructor is true,
+a new instance of <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a> will be created for this reactor.
+Otherwise, the same instance as passed to the constructor will be used.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.type">
+<span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#ct.zeroD.ReactorBase.type" title="Link to this definition">#</a></dt>
+<dd><p>reactor type.</p>
+</dd></dl>
+
+</dd>
+<dt>Method Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.addSensitivityReaction">
+<span class="sig-name descname"><span class="pre">addSensitivityReaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">m</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.ReactorBase.addSensitivityReaction" title="Link to this definition">#</a></dt>
+<dd><p>Specifies that the sensitivity of the state variables with
+respect to reaction m should be computed. The reactor must be
+part of a network first.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">addSensitivityReaction</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>m</strong> – Index number of reaction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.ReactorBase.delete" title="Link to this definition">#</a></dt>
+<dd><p>Delete the <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a> object.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorBase.massFraction">
+<span class="sig-name descname"><span class="pre">massFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">species</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.ReactorBase.massFraction" title="Link to this definition">#</a></dt>
+<dd><p>Get the mass fraction of a species.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>species</strong> – String/Char array name of the species.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+<section id="reservoir">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Reservoir</a><a class="headerlink" href="#reservoir" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.zeroD.Reservoir">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.zeroD.</span></span><span class="sig-name descname"><span class="pre">Reservoir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase[,</span> <span class="pre">name][,</span> <span class="pre">clone=true]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.Reservoir" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a></p>
+<p>Create a <a class="reference internal" href="#ct.zeroD.Reservoir" title="ct.zeroD.Reservoir"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.Reservoir</span></code></a> object.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">zeroD</span><span class="o">.</span><span class="n">Reservoir</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">clone</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A <a class="reference internal" href="#ct.zeroD.Reservoir" title="ct.zeroD.Reservoir"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.Reservoir</span></code></a> is an instance of class <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a>
+configured so that its intensive state is constant in time. A reservoir
+may be thought of as infinite in extent, perfectly mixed,
+and non-reacting, so that fluid may be extracted or added without
+changing the composition or thermodynamic state. Note that even
+if the reaction mechanism associated with the fluid in the
+reactor defines reactions, they are disabled within
+reservoirs. Examples:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ct</span><span class="p">.</span><span class="n">zeroD</span><span class="p">.</span><span class="n">Reservoir</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="w">    </span><span class="c">% a reservoir containing a gas</span>
+</pre></div>
+</div>
+<p>See also: <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Cantera <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a> to be set as the contents of the reactor.</p></li>
+<li><p><strong>name</strong> – Reservoir name (optional; default is <code class="docutils literal notranslate"><span class="pre">(none)</span></code>).</p></li>
+<li><p><strong>clone</strong> – Determines whether to clone <code class="xref py py-obj docutils literal notranslate"><span class="pre">phase</span></code> so that the internal state of
+this reactor is independent of the original Solution object and
+any Solution objects used by other reactors in the network.
+(optional; default is true).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="reactor">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Reactor</a><a class="headerlink" href="#reactor" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.zeroD.Reactor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.zeroD.</span></span><span class="sig-name descname"><span class="pre">Reactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase[,</span> <span class="pre">name][,</span> <span class="pre">clone=true]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.Reactor" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a></p>
+<p>Reactor Class</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">zeroD</span><span class="o">.</span><span class="n">Reactor</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">clone</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A <a class="reference internal" href="#ct.zeroD.Reactor" title="ct.zeroD.Reactor"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.Reactor</span></code></a> object simulates a perfectly-stirred reactor.
+It has a time-dependent state, and may be coupled to other
+reactors through flow lines or through walls that may expand
+or contract and/or conduct heat.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Instance of <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a> representing the contents of
+the reactor.</p></li>
+<li><p><strong>name</strong> – Reactor name (optional; default is <code class="docutils literal notranslate"><span class="pre">(none)</span></code>).</p></li>
+<li><p><strong>clone</strong> – Determines whether to clone <code class="xref py py-obj docutils literal notranslate"><span class="pre">phase</span></code> so that the internal state of
+this reactor is independent of the original Solution object and
+any Solution objects used by other reactors in the network.
+(optional; default is true).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="idealgasreactor">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">IdealGasReactor</a><a class="headerlink" href="#idealgasreactor" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.zeroD.IdealGasReactor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.zeroD.</span></span><span class="sig-name descname"><span class="pre">IdealGasReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase[,</span> <span class="pre">name][,</span> <span class="pre">clone=true]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.IdealGasReactor" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a></p>
+<p>Create a reactor with an ideal gas.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">zeroD</span><span class="o">.</span><span class="n">IdealGasReactor</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">clone</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>An <a class="reference internal" href="#ct.zeroD.IdealGasReactor" title="ct.zeroD.IdealGasReactor"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.IdealGasReactor</span></code></a> is an instance of <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a> where
+the governing equations are specialized for the ideal gas equation of state
+(and do not work correctly with other thermodynamic models). Examples:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ct</span><span class="p">.</span><span class="n">zeroD</span><span class="p">.</span><span class="n">IdealGasReactor</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="w">    </span><span class="c">% a reactor containing a gas</span>
+</pre></div>
+</div>
+<p>See also: <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Cantera <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a> to be set as the contents of the reactor.</p></li>
+<li><p><strong>name</strong> – Reactor name (optional; default is <code class="docutils literal notranslate"><span class="pre">(none)</span></code>).</p></li>
+<li><p><strong>clone</strong> – Determines whether to clone <code class="xref py py-obj docutils literal notranslate"><span class="pre">phase</span></code> so that the internal state of
+this reactor is independent of the original Solution object and
+any Solution objects used by other reactors in the network.
+(optional; default is true).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="constpressurereactor">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">ConstPressureReactor</a><a class="headerlink" href="#constpressurereactor" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.zeroD.ConstPressureReactor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.zeroD.</span></span><span class="sig-name descname"><span class="pre">ConstPressureReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase[,</span> <span class="pre">name][,</span> <span class="pre">clone=true]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.ConstPressureReactor" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a></p>
+<p>Create a constant pressure reactor object.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">zeroD</span><span class="o">.</span><span class="n">ConstPressureReactor</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">clone</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A <a class="reference internal" href="#ct.zeroD.ConstPressureReactor" title="ct.zeroD.ConstPressureReactor"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ConstPressureReactor</span></code></a> is an instance of class
+<a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a> where the pressure is held constant. The volume
+is not a state variable, but instead takes on whatever value is
+consistent with holding the pressure constant. Examples:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ct</span><span class="p">.</span><span class="n">zeroD</span><span class="p">.</span><span class="n">ConstPressureReactor</span><span class="p">(</span><span class="n">phase</span><span class="p">)</span><span class="w">    </span><span class="c">% a reactor containing contents</span>
+</pre></div>
+</div>
+<p>See also: <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Cantera <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a> to be set as the contents of the reactor.</p></li>
+<li><p><strong>name</strong> – Reactor name (optional; default is <code class="docutils literal notranslate"><span class="pre">(none)</span></code>).</p></li>
+<li><p><strong>clone</strong> – Determines whether to clone <code class="xref py py-obj docutils literal notranslate"><span class="pre">phase</span></code> so that the internal state of
+this reactor is independent of the original Solution object and
+any Solution objects used by other reactors in the network.
+(optional; default is true).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="idealgasconstpressurereactor">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">IdealGasConstPressureReactor</a><a class="headerlink" href="#idealgasconstpressurereactor" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.zeroD.IdealGasConstPressureReactor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.zeroD.</span></span><span class="sig-name descname"><span class="pre">IdealGasConstPressureReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase[,</span> <span class="pre">name][,</span> <span class="pre">clone=true]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.IdealGasConstPressureReactor" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a></p>
+<p>Create a constant pressure reactor with an ideal gas.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">zeroD</span><span class="o">.</span><span class="n">IdealGasConstPressureReactor</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">clone</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>An <a class="reference internal" href="#ct.zeroD.IdealGasConstPressureReactor" title="ct.zeroD.IdealGasConstPressureReactor"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.IdealGasConstPressureReactor</span></code></a> is an instance of
+<a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a> where the pressure is held constant.
+The volume is not a state variable, but instead takes on
+whatever value is consistent with holding the pressure constant.
+Additionally, its governing equations are specialized for the
+ideal gas equation of state (and do not work correctly with other
+thermodynamic models). Examples:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ct</span><span class="p">.</span><span class="n">zeroD</span><span class="p">.</span><span class="n">IdealGasConstPressureReactor</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="w"> </span><span class="c">% a reactor containing a gas</span>
+</pre></div>
+</div>
+<p>See also: <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Cantera <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a> to be set as the contents of the reactor.</p></li>
+<li><p><strong>name</strong> – Reactor name (optional; default is <code class="docutils literal notranslate"><span class="pre">(none)</span></code>).</p></li>
+<li><p><strong>clone</strong> – Determines whether to clone <code class="xref py py-obj docutils literal notranslate"><span class="pre">phase</span></code> so that the internal state of
+this reactor is independent of the original Solution object and
+any Solution objects used by other reactors in the network.
+(optional; default is true).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="flowreactor">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">FlowReactor</a><a class="headerlink" href="#flowreactor" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.zeroD.FlowReactor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.zeroD.</span></span><span class="sig-name descname"><span class="pre">FlowReactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">phase[,</span> <span class="pre">name][,</span> <span class="pre">clone=true]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.FlowReactor" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a></p>
+<p>Create a flow reactor object.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">zeroD</span><span class="o">.</span><span class="n">FlowReactor</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">clone</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A reactor representing adiabatic plug flow in a constant-area
+duct. Examples:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">r2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ct</span><span class="p">.</span><span class="n">zeroD</span><span class="p">.</span><span class="n">FlowReactor</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="w">    </span><span class="c">% a reactor containing a gas</span>
+</pre></div>
+</div>
+<p>See also: <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – Cantera <a class="reference internal" href="phases.html#ct.Solution" title="ct.Solution"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Solution</span></code></a> to be set as the contents of the reactor.</p></li>
+<li><p><strong>name</strong> – Reactor name (optional; default is <code class="docutils literal notranslate"><span class="pre">(none)</span></code>).</p></li>
+<li><p><strong>clone</strong> – Determines whether to clone <code class="xref py py-obj docutils literal notranslate"><span class="pre">phase</span></code> so that the internal state of
+this reactor is independent of the original Solution object and
+any Solution objects used by other reactors in the network.
+(optional; default is true).</p></li>
+</ul>
+</dd>
+</dl>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.FlowReactor.massFlowRate">
+<span class="sig-name descname"><span class="pre">massFlowRate</span></span><a class="headerlink" href="#ct.zeroD.FlowReactor.massFlowRate" title="Link to this definition">#</a></dt>
+<dd><p>Mass flow rate [kg/s].</p>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+</section>
+<section id="surfaces">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Surfaces</a><a class="headerlink" href="#surfaces" title="Link to this heading">#</a></h2>
+<section id="reactorsurface">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">ReactorSurface</a><a class="headerlink" href="#reactorsurface" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.zeroD.ReactorSurface">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.zeroD.</span></span><span class="sig-name descname"><span class="pre">ReactorSurface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">surf,</span> <span class="pre">reactors[,</span> <span class="pre">name][,</span> <span class="pre">clone=true]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.ReactorSurface" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a></p>
+<p>ReactorSurface Class</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">zeroD</span><span class="o">.</span><span class="n">ReactorSurface</span><span class="p">(</span><span class="n">surf</span><span class="p">,</span> <span class="n">reactor</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">clone</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A surface on which heterogeneous reactions take place. The
+mechanism object (typically an instance of <a class="reference internal" href="phases.html#ct.Interface" title="ct.Interface"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Interface</span></code></a>)
+must be constructed so that it is properly linked to the
+object representing the fluid in the reactor. The surface
+temperature on each side is taken to be equal to the
+temperature of the reactor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>surf</strong> – Surface reaction mechanisms for the left-facing surface.
+This must bean instance of class <a class="reference internal" href="kinetics.html#ct.Kinetics" title="ct.Kinetics"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Kinetics</span></code></a>, or of a class
+derived from Kinetics, such as <a class="reference internal" href="phases.html#ct.Interface" title="ct.Interface"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Interface</span></code></a>.</p></li>
+<li><p><strong>reactors</strong> – An instance of or a cell array of instances of class
+<a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a>.</p></li>
+<li><p><strong>name</strong> – Reactor surface name (optional; default is <code class="docutils literal notranslate"><span class="pre">(none)</span></code>).</p></li>
+<li><p><strong>clone</strong> – Determines whether to clone <code class="xref py py-obj docutils literal notranslate"><span class="pre">surf</span></code> so that the internal state of
+this reactor is independent of the original Solution object and
+any Solution objects used by other reactors in the network.
+(optional; default is true).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="connectors">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">Connectors</a><a class="headerlink" href="#connectors" title="Link to this heading">#</a></h2>
+<section id="connector">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">Connector</a><a class="headerlink" href="#connector" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.zeroD.Connector">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.zeroD.</span></span><span class="sig-name descname"><span class="pre">Connector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">typ</span></em>, <em class="sig-param"><span class="pre">r1</span></em>, <em class="sig-param"><span class="pre">r2</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.Connector" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">handle</span></code></p>
+<p>Connector Class.</p>
+<p>Base class for walls and flow devices. The constructor is called
+by derived classes and cannot be used directly.</p>
+<p>See also: <a class="reference internal" href="#ct.zeroD.FlowDevice" title="ct.zeroD.FlowDevice"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.FlowDevice</span></code></a>, <a class="reference internal" href="#ct.zeroD.Wall" title="ct.zeroD.Wall"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.Wall</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>typ</strong> – Type of connector.</p></li>
+<li><p><strong>r1</strong> – Reactor one.</p></li>
+<li><p><strong>r2</strong> – Reactor two.</p></li>
+<li><p><strong>name</strong> – Connector name (optional; default is <code class="docutils literal notranslate"><span class="pre">(none)</span></code>).</p></li>
+</ul>
+</dd>
+</dl>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.Connector.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#ct.zeroD.Connector.id" title="Link to this definition">#</a></dt>
+<dd><p>ID of Connector object.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.Connector.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#ct.zeroD.Connector.name" title="Link to this definition">#</a></dt>
+<dd><p>Name of connector.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.Connector.type">
+<span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#ct.zeroD.Connector.type" title="Link to this definition">#</a></dt>
+<dd><p>Name of connector.</p>
+</dd></dl>
+
+</dd>
+<dt>Method Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="ct.zeroD.Connector.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.Connector.delete" title="Link to this definition">#</a></dt>
+<dd><p>Delete the <a class="reference internal" href="#ct.zeroD.Connector" title="ct.zeroD.Connector"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.Connector</span></code></a> object.</p>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+<section id="wall">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">Wall</a><a class="headerlink" href="#wall" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.zeroD.Wall">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.zeroD.</span></span><span class="sig-name descname"><span class="pre">Wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">l</span></em>, <em class="sig-param"><span class="pre">r</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.Wall" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.zeroD.Connector" title="ct.zeroD.Connector"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.Connector</span></code></a></p>
+<p>Wall Class</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">zeroD</span><span class="o">.</span><span class="n">Wall</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A Wall separates two reactors, or a reactor and a reservoir.
+A Wall has a finite area, may conduct heat between the two
+reactors on either side, and may move like a piston.</p>
+<p>Walls are stateless objects in Cantera, meaning that no
+differential equation is integrated to determine any wall
+property. Since it is the wall (piston) velocity that enters
+the energy equation, this means that it is the velocity, not
+the acceleration or displacement, that is specified. The wall
+velocity is computed from:</p>
+<div class="math notranslate nohighlight">
+\[v = K(P_{left} - P_{right}) + v_0(t),\]</div>
+<p>where K is a non-negative constant, and <span class="math notranslate nohighlight">\(v_0\)</span> is a specified
+function of time. The velocity is positive if the wall is
+moving to the right.</p>
+<p>The heat flux through the wall is computed from:</p>
+<div class="math notranslate nohighlight">
+\[q = U(T_{left} - T_{right}) + q_0(t),\]</div>
+<p>where U is the overall heat transfer coefficient for
+conduction/convection, and <span class="math notranslate nohighlight">\(q_0\)</span> is a specified function of
+time. The heat flux is positive when heat flows from the
+reactor on the left to the reactor on the right.</p>
+<p>Note: the Wall class constructor only assign default values
+to various properties. The user could specify those properties
+after initial construction by using the various methods of
+the Wall class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l</strong> – Instance of class <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a> to be used as the bulk phase
+on the left side of the wall.</p></li>
+<li><p><strong>r</strong> – Instance of class <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a> to be used as the bulk phase
+on the right side of the wall.</p></li>
+<li><p><strong>name</strong> – Wall name (optional; default is <code class="docutils literal notranslate"><span class="pre">(none)</span></code>).</p></li>
+</ul>
+</dd>
+</dl>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.Wall.area">
+<span class="sig-name descname"><span class="pre">area</span></span><a class="headerlink" href="#ct.zeroD.Wall.area" title="Link to this definition">#</a></dt>
+<dd><p>Area of the wall [m²].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.Wall.emissivity">
+<span class="sig-name descname"><span class="pre">emissivity</span></span><a class="headerlink" href="#ct.zeroD.Wall.emissivity" title="Link to this definition">#</a></dt>
+<dd><p>Emissivity [-].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.Wall.expansionRate">
+<span class="sig-name descname"><span class="pre">expansionRate</span></span><a class="headerlink" href="#ct.zeroD.Wall.expansionRate" title="Link to this definition">#</a></dt>
+<dd><p>Rate of volumetric change [m³/s] at the current time.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.Wall.expansionRateCoeff">
+<span class="sig-name descname"><span class="pre">expansionRateCoeff</span></span><a class="headerlink" href="#ct.zeroD.Wall.expansionRateCoeff" title="Link to this definition">#</a></dt>
+<dd><p>Expansion rate coefficient [m/s/Pa].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.Wall.heatFlux">
+<span class="sig-name descname"><span class="pre">heatFlux</span></span><a class="headerlink" href="#ct.zeroD.Wall.heatFlux" title="Link to this definition">#</a></dt>
+<dd><p>Heat flux [W/m²].</p>
+<p>Must be set by an instance of <a class="reference internal" href="#ct.Func1" title="ct.Func1"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Func1</span></code></a>, which allows the
+heat flux to be an arbitrary function of time. It is possible
+to specify a constant heat flux by using the polynomial
+functor with only the first term specified.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.Wall.heatRate">
+<span class="sig-name descname"><span class="pre">heatRate</span></span><a class="headerlink" href="#ct.zeroD.Wall.heatRate" title="Link to this definition">#</a></dt>
+<dd><p>Total heat transfer rate [W] through the wall at the current time.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.Wall.heatTransferCoeff">
+<span class="sig-name descname"><span class="pre">heatTransferCoeff</span></span><a class="headerlink" href="#ct.zeroD.Wall.heatTransferCoeff" title="Link to this definition">#</a></dt>
+<dd><p>Heat transfer coefficient [W/m²/K].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.Wall.left">
+<span class="sig-name descname"><span class="pre">left</span></span><a class="headerlink" href="#ct.zeroD.Wall.left" title="Link to this definition">#</a></dt>
+<dd><p>Reactor on the left.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.Wall.right">
+<span class="sig-name descname"><span class="pre">right</span></span><a class="headerlink" href="#ct.zeroD.Wall.right" title="Link to this definition">#</a></dt>
+<dd><p>Reactor on the right.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.Wall.thermalResistance">
+<span class="sig-name descname"><span class="pre">thermalResistance</span></span><a class="headerlink" href="#ct.zeroD.Wall.thermalResistance" title="Link to this definition">#</a></dt>
+<dd><p>Thermal resistance [K·m²/W].</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.Wall.velocity">
+<span class="sig-name descname"><span class="pre">velocity</span></span><a class="headerlink" href="#ct.zeroD.Wall.velocity" title="Link to this definition">#</a></dt>
+<dd><p>Velocity [m/s].</p>
+<p>Must be set by an instance of <a class="reference internal" href="#ct.Func1" title="ct.Func1"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Func1</span></code></a>, which allows the
+velocity to be an arbitrary function of time. It is possible
+to specify a constant velocity by using the polynomial
+functor with only the first term specified.</p>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+<section id="flowdevice">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">FlowDevice</a><a class="headerlink" href="#flowdevice" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.zeroD.FlowDevice">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.zeroD.</span></span><span class="sig-name descname"><span class="pre">FlowDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">typ</span></em>, <em class="sig-param"><span class="pre">upstream</span></em>, <em class="sig-param"><span class="pre">downstream</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.FlowDevice" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.zeroD.Connector" title="ct.zeroD.Connector"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.Connector</span></code></a></p>
+<p>FlowDevice Class.</p>
+<p>Base class for devices that allow flow between reactors. The constructor is called
+by derived classes and cannot be used directly.</p>
+<p><a class="reference internal" href="#ct.zeroD.FlowDevice" title="ct.zeroD.FlowDevice"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.FlowDevice</span></code></a> objects are assumed to be adiabatic,
+non-reactive, and have negligible internal volume, so that they are
+internally always in steady-state even if the upstream and downstream
+reactors are not. The fluid enthalpy, chemical composition, and mass
+flow rate are constant across a <a class="reference internal" href="#ct.zeroD.FlowDevice" title="ct.zeroD.FlowDevice"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.FlowDevice</span></code></a>, and the
+pressure difference equals the difference in pressure between the
+upstream and downstream reactors.</p>
+<p>See also: <a class="reference internal" href="#ct.zeroD.MassFlowController" title="ct.zeroD.MassFlowController"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.MassFlowController</span></code></a>, <a class="reference internal" href="#ct.zeroD.Valve" title="ct.zeroD.Valve"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.Valve</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>typ</strong> – Type of <a class="reference internal" href="#ct.zeroD.FlowDevice" title="ct.zeroD.FlowDevice"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.FlowDevice</span></code></a> to be created. <code class="docutils literal notranslate"><span class="pre">typ='MassFlowController'</span></code>
+for <a class="reference internal" href="#ct.zeroD.MassFlowController" title="ct.zeroD.MassFlowController"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.MassFlowController</span></code></a>,  <code class="docutils literal notranslate"><span class="pre">typ='PressureController'</span></code> for
+<code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.PressureController</span></code>, and <code class="docutils literal notranslate"><span class="pre">typ='Valve'</span></code> for
+<a class="reference internal" href="#ct.zeroD.Valve" title="ct.zeroD.Valve"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.Valve</span></code></a>.</p></li>
+<li><p><strong>upstream</strong> – Upstream reactor or reservoir.</p></li>
+<li><p><strong>downstream</strong> – Downstream Reactor or reservoir.</p></li>
+<li><p><strong>name</strong> – Reactor name (optional; default is <code class="docutils literal notranslate"><span class="pre">(none)</span></code>).</p></li>
+</ul>
+</dd>
+</dl>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.FlowDevice.downstream">
+<span class="sig-name descname"><span class="pre">downstream</span></span><a class="headerlink" href="#ct.zeroD.FlowDevice.downstream" title="Link to this definition">#</a></dt>
+<dd><p>Downstream object of type <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a>.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.FlowDevice.massFlowRate">
+<span class="sig-name descname"><span class="pre">massFlowRate</span></span><a class="headerlink" href="#ct.zeroD.FlowDevice.massFlowRate" title="Link to this definition">#</a></dt>
+<dd><p>The mass flow rate through the <a class="reference internal" href="#ct.zeroD.FlowDevice" title="ct.zeroD.FlowDevice"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.FlowDevice</span></code></a> at the current time.</p>
+<p>The setter method can either take a double value or a function represented by
+an instance of <a class="reference internal" href="#ct.Func1" title="ct.Func1"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.Func1</span></code></a>.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.FlowDevice.upstream">
+<span class="sig-name descname"><span class="pre">upstream</span></span><a class="headerlink" href="#ct.zeroD.FlowDevice.upstream" title="Link to this definition">#</a></dt>
+<dd><p>Upstream object of type <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a>.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ct.zeroD.FlowDevice.valveCoeff">
+<span class="sig-name descname"><span class="pre">valveCoeff</span></span><a class="headerlink" href="#ct.zeroD.FlowDevice.valveCoeff" title="Link to this definition">#</a></dt>
+<dd><p>Valve coefficient in kg/s/Pa.</p>
+<p>The mass flow rate [kg/s] is computed from the expression:</p>
+<div class="math notranslate nohighlight">
+\[\dot{m} = K(P_{upstream} - P_{downstream})\]</div>
+<p>as long as this produces a positive value.  If this expression is
+negative, zero is returned.</p>
+</dd></dl>
+
+</dd>
+<dt>Method Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="ct.zeroD.FlowDevice.setPrimary">
+<span class="sig-name descname"><span class="pre">setPrimary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.FlowDevice.setPrimary" title="Link to this definition">#</a></dt>
+<dd><p>Set the primary flow device used to compute this device’s
+mass flow rate.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">setPrimary</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – Instance of class <a class="reference internal" href="#ct.zeroD.FlowDevice" title="ct.zeroD.FlowDevice"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.FlowDevice</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+<section id="massflowcontroller">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">MassFlowController</a><a class="headerlink" href="#massflowcontroller" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.zeroD.MassFlowController">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.zeroD.</span></span><span class="sig-name descname"><span class="pre">MassFlowController</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">upstream</span></em>, <em class="sig-param"><span class="pre">downstream</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.MassFlowController" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.zeroD.FlowDevice" title="ct.zeroD.FlowDevice"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.FlowDevice</span></code></a></p>
+<p>Create a mass flow controller.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">zeroD</span><span class="o">.</span><span class="n">MassFlowController</span><span class="p">(</span><span class="n">upstream</span><span class="p">,</span> <span class="n">downstream</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Creates an instance of class <a class="reference internal" href="#ct.zeroD.FlowDevice" title="ct.zeroD.FlowDevice"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.FlowDevice</span></code></a> configured to
+simulate a mass flow controller that maintains a constant mass flow
+rate independent of upstream or downstream conditions.</p>
+<p>see also: <a class="reference internal" href="#ct.zeroD.FlowDevice" title="ct.zeroD.FlowDevice"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.FlowDevice</span></code></a>, <a class="reference internal" href="#ct.zeroD.Valve" title="ct.zeroD.Valve"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.Valve</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>upstream</strong> – Upstream <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a>.</p></li>
+<li><p><strong>downstream</strong> – Downstream <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a>.</p></li>
+<li><p><strong>name</strong> – Flow device name (optional; default is <code class="docutils literal notranslate"><span class="pre">(none)</span></code>).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="valve">
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">Valve</a><a class="headerlink" href="#valve" title="Link to this heading">#</a></h3>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ct.zeroD.Valve">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ct.zeroD.</span></span><span class="sig-name descname"><span class="pre">Valve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">upstream</span></em>, <em class="sig-param"><span class="pre">downstream</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ct.zeroD.Valve" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ct.zeroD.FlowDevice" title="ct.zeroD.FlowDevice"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.FlowDevice</span></code></a></p>
+<p>Create a valve.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">zeroD</span><span class="o">.</span><span class="n">Valve</span><span class="p">(</span><span class="n">upstream</span><span class="p">,</span> <span class="n">downstream</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Create an instance of class <a class="reference internal" href="#ct.zeroD.FlowDevice" title="ct.zeroD.FlowDevice"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.FlowDevice</span></code></a> configured to
+simulate a valve that produces a flow rate proportional to the
+pressure difference between the upstream and downstream reactors.</p>
+<p>The mass flow rate [kg/s] is computed from the expression</p>
+<div class="math notranslate nohighlight">
+\[\dot{m} = K(P_{upstream} - P_{downstream})\]</div>
+<p>as long as this produces a positive value.  If this expression is
+negative, zero is returned. Therefore, the <a class="reference internal" href="#ct.zeroD.Valve" title="ct.zeroD.Valve"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.Valve</span></code></a> object
+acts as a check valve - flow is always from the upstream reactor to
+the downstream one.  Note: as currently implemented, the Valve object
+does not model real valve characteristics - in particular, it
+does not model choked flow. The mass flow rate is always assumed
+to be linearly proportional to the pressure difference, no matter how
+large the pressure difference. THIS MAY CHANGE IN A FUTURE RELEASE.</p>
+<p>see also: <a class="reference internal" href="#ct.zeroD.FlowDevice" title="ct.zeroD.FlowDevice"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.FlowDevice</span></code></a>, <a class="reference internal" href="#ct.zeroD.MassFlowController" title="ct.zeroD.MassFlowController"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.MassFlowController</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>upstream</strong> – Upstream <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a>.</p></li>
+<li><p><strong>downstream</strong> – Downstream <a class="reference internal" href="#ct.zeroD.ReactorBase" title="ct.zeroD.ReactorBase"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ct.zeroD.ReactorBase</span></code></a>.</p></li>
+<li><p><strong>name</strong> – Flow device name (optional; default is <code class="docutils literal notranslate"><span class="pre">(none)</span></code>).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-functions">Defining Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reactor-networks">Reactor Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reactors">Reactors</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactorbase">ReactorBase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reservoir">Reservoir</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactor">Reactor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idealgasreactor">IdealGasReactor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constpressurereactor">ConstPressureReactor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idealgasconstpressurereactor">IdealGasConstPressureReactor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowreactor">FlowReactor</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surfaces">Surfaces</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactorsurface">ReactorSurface</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connectors">Connectors</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connector">Connector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wall">Wall</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowdevice">FlowDevice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#massflowcontroller">MassFlowController</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valve">Valve</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/matlab/zeroD.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2001-2025, Cantera Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
